@@ -7,6 +7,9 @@ export default class Firebase {
         this.firebase = null;
         this.firebaseui = null;
         this.elementPlaceholder = options?.elementPlaceholder ?? `#${WALLKIT_FIREBASE_UI_PLACEHOLDER_ID}`;
+        this.onSuccessAuth = options?.onSuccessAuth ?? null;
+        this.onAuthStateChanged = options?.onAuthStateChanged ?? null;
+        this.uiShown = options?.uiShown ?? null
     }
 
     get allowedProviders() {
@@ -82,17 +85,40 @@ export default class Firebase {
         return selectedProviders;
     }
 
-    initFirebase({ config, providers = ['email'], tosUrl = 'wallkit.net', privacyPolicyUrl = 'wallkit.net' }) {
+    #authStateChanged(user) {
+        if (user) {
+            user.getIdToken().then((token) => {
+                if (this.onAuthStateChanged) {
+                    this.onAuthStateChanged(token);
+                }
+            });
+        }
+    }
+
+    initFirebase({ config, providers = ['email', 'google'], tosUrl = 'wallkit.net', privacyPolicyUrl = 'wallkit.net' }) {
         this.firebase.initializeApp(config ?? WALLKIT_FIREBASE_CONFIG);
         const firebaseuiInstance = new this.firebaseui.auth.AuthUI(this.firebase.auth());
         firebaseuiInstance.disableAutoSignIn();
 
         const firebaseUiConfig = {
             callbacks: {
-                signInSuccessWithAuthResult: () => {
+                signInSuccessWithAuthResult: (result) => {
+                    result.user.getIdToken().then((token) => {
+                        const formattedResult = {
+                            user: result.user,
+                            userId: result.user.uid,
+                            token: token
+                        }
 
+                        if (this.onSuccessAuth) {
+                            this.onSuccessAuth(formattedResult, result);
+                        }
+                    });
                 },
                 uiShown: () => {
+                    if (this.uiShown) {
+                        this.uiShown();
+                    }
                 }
             },
             signInFlow: 'popup',
@@ -104,6 +130,8 @@ export default class Firebase {
 
         firebaseuiInstance.start(this.elementPlaceholder, firebaseUiConfig);
         this.firebaseui = firebaseuiInstance;
+
+        this.firebase.auth().onAuthStateChanged(this.#authStateChanged.bind(this));
     }
 
     init() {

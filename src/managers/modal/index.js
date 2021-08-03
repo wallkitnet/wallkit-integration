@@ -51,11 +51,17 @@ export default class Modal {
 
 
     #createWrapper() {
+        let modalClassName = WALLKIT_MODAL_WRAPPER_CLASSNAME;
+
+        if (this.options?.className) {
+            modalClassName += ' ' + this.options?.className;
+        }
+
         this.modalWrapper = this.#createElement('div', 'wrapper', {
             styles: {
                 display: 'none',
             },
-            className: WALLKIT_MODAL_WRAPPER_CLASSNAME
+            className: modalClassName
         });
 
         this.modalWrapper.addEventListener('click', (event) => {
@@ -124,6 +130,12 @@ export default class Modal {
     resize(width, height) {
         if (this.modalFrame) {
             this.modalFrame.resize(width, height);
+        }
+    }
+
+    sendEvent(name, value, params) {
+        if (this.modalFrame) {
+            this.modalFrame.sendEvent(name, value, params);
         }
     }
 

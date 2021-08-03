@@ -1,3 +1,6 @@
+// Popups
+export const WALLKIT_POPUP_URL = 'https://wallkit.net/popups';
+
 // ASSETS
 export const WALLKIT_CDN_URL = 'https://cdn.wallkit.net';
 export const WALLKIT_CDN_ASSETS_URL = WALLKIT_CDN_URL + '/assets';
@@ -18,15 +21,16 @@ export const WALLKIT_MODAL_CONTENT_CLASSNAME = 'wallkit-modal-wrapper__content';
 export const WALLKIT_MODAL_MIN_WIDTH = '500';
 export const WALLKIT_MODAL_MIN_HEIGHT = '250';
 export const WALLKIT_FIREBASE_UI_PLACEHOLDER_ID = 'firebase-ui-placeholder';
+export const WALLKIT_FRAME_ID = 'wk-frame';
 
 // Authentication
 export const WALLKIT_FIREBASE_CONFIG = {
-    apiKey: "AIzaSyDOCAbC123dEf456GhI789jKl01-MnO",
-    authDomain: "myapp-project-123.firebaseapp.com",
-    databaseURL: "https://myapp-project-123.firebaseio.com",
-    projectId: "myapp-project-123",
-    storageBucket: "myapp-project-123.appspot.com",
-    messagingSenderId: "65211879809",
-    appId: "1:65211879909:web:3ae38ef1cdcb2e01fe5f0c",
-    measurementId: "G-8GSGZQ44ST"
+    apiKey: "AIzaSyAoRdxZIlUE0HInqtzDid6rNxluhs5nCqg",
+    authDomain: "wallkit-production.firebaseapp.com",
+    databaseURL: "https://wallkit-production.firebaseio.com",
+    projectId: "wallkit-production",
+    storageBucket: "wallkit-production.appspot.com",
+    messagingSenderId: "779443518820",
+    appId: "1:779443518820:web:ffc6660647590674e20e71",
+    measurementId: "G-GWJ1GC5B30"
 };

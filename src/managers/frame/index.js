@@ -1,10 +1,20 @@
 import { createElement } from "../../utils/DOM";
-import { WALLKIT_MODAL_MIN_WIDTH, WALLKIT_MODAL_MIN_HEIGHT } from "../../configs/constants";
+import { WALLKIT_MODAL_MIN_WIDTH, WALLKIT_MODAL_MIN_HEIGHT, WALLKIT_POPUP_URL, WALLKIT_FRAME_ID } from "../../configs/constants";
+import { FRAME_CREATED, WALLKIT_CHANGE_FRAME } from "../events/events-name";
+import Events from "../events";
 
 export default class Frame {
     constructor(options) {
+        if (!!Frame.instance) {
+            return Frame.instance;
+        }
+
+        Frame.instance = this;
+
         this.options = options;
         this.frameElement = null;
+
+        this.events = new Events();
     }
 
     get element() {
@@ -12,13 +22,13 @@ export default class Frame {
     }
 
     get getFrameURL() {
-        return `https://wallkit.net/popups?PUBLIC_KEY=${this.options.public_key}&version=${this.options.version}`;
+        return `${ WALLKIT_POPUP_URL }?PUBLIC_KEY=${ this.options.public_key }&version=${ this.options.version }`;
     }
 
     createFrame() {
         this.frameElement = createElement('iframe', {
-            id: 'wk-frame',
-            className: 'wk-frame',
+            id: WALLKIT_FRAME_ID,
+            className: WALLKIT_FRAME_ID,
             attributes: {
                 scrolling: 'no',
                 allowtransparency: 'true',
@@ -28,6 +38,8 @@ export default class Frame {
             }
         });
         this.frameElement.setAttribute("src", this.getFrameURL);
+
+        this.events.notify(FRAME_CREATED, true);
 
         return this.frameElement;
     }
@@ -46,6 +58,8 @@ export default class Frame {
         if (this.frameElement && this.frameElement.contentWindow) {
             const frameWindow = this.frameElement.contentWindow;
 
+            this.events.notify(name, value);
+
             frameWindow.postMessage({
                 name: name,
                 value: value,
@@ -55,7 +69,7 @@ export default class Frame {
     }
 
     openFrame(name, params) {
-        this.sendEvent('wk-event-modal', name, params);
+        this.sendEvent(WALLKIT_CHANGE_FRAME, name, params);
     }
 
     init() {

@@ -24,7 +24,7 @@ export const createElement = (tag, options) => {
     }
 
     if (className) {
-        element.classList.add(className);
+        element.setAttribute('class', className);
     }
 
     if (styles && Object.keys(styles) && Object.keys(styles).length) {
