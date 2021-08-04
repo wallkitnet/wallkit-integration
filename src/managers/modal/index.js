@@ -14,8 +14,9 @@ export default class Modal {
         this.content = options ? options.content : null;
         this.modalWrapper = null;
         this.modalContent = null;
-
-        this.init();
+        this.loaderElement = null;
+        this.isLoading = false;
+        this.closeOutside = true;
     }
 
     #getModalName() {
@@ -50,7 +51,6 @@ export default class Modal {
         return element.addEventListener('click', this.hide.bind(this));
     }
 
-
     #createWrapper() {
         let modalClassName = WALLKIT_MODAL_WRAPPER_CLASSNAME;
 
@@ -67,7 +67,9 @@ export default class Modal {
 
         this.modalWrapper.addEventListener('click', (event) => {
             if (event.target.id === this.modalWrapper.id) {
-                this.hide();
+                if (this.closeOutside) {
+                    this.hide();
+                }
             }
         });
 
@@ -95,10 +97,30 @@ export default class Modal {
        }
     }
 
+    toggleLoader(state) {
+        this.isLoading = state;
+        this.loaderElement.style.display = state ? 'flex' : 'none';
+    }
+
+    #createLoader() {
+        this.loaderElement = this.#createElement('div', 'wallkit-modal-spinner', {
+            className: 'wallkit-spinner',
+            styles: {
+                display: this.options?.initialLoader ? 'flex' : 'none',
+            },
+        });
+
+        this.loaderElement.insertAdjacentHTML('beforeend', '<div class="wallkit-spinner__container">' +
+            '<div class="cube1"></div>' +
+            '<div class="cube2"></div>' +
+            '</div>');
+    }
+
     #completeModal() {
         this.#loadAssets();
         this.modalWrapper.appendChild(this.#createCloseBtn());
         this.modalWrapper.appendChild(this.modalContent);
+        this.modalContent.appendChild(this.loaderElement);
 
         if (this.modalFrame) {
             this.insertContent(this.modalFrame.init());
@@ -152,9 +174,17 @@ export default class Modal {
         loadWallkitAsset('css', '1.0', 'spinner');
     }
 
+    onReady() {
+        if (this.options?.onReady) {
+            this.options.onReady(this);
+        }
+    }
+
     init() {
         this.#createWrapper();
         this.#createContent();
+        this.#createLoader();
         this.#completeModal();
+        this.onReady();
     }
 }

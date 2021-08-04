@@ -70,7 +70,13 @@ export default class Frame {
     }
 
     openFrame(name, params) {
-        this.sendEvent(WALLKIT_CHANGE_FRAME, name, params);
+        if (this.ready) {
+            this.sendEvent(WALLKIT_CHANGE_FRAME, name, params);
+        } else {
+            this.events.subscribe(WALLKIT_FRAME_READY, () => {
+                this.sendEvent(WALLKIT_CHANGE_FRAME, name, params);
+            }, { once: true});
+        }
     }
 
     #listeners() {
@@ -83,6 +89,9 @@ export default class Frame {
 
     onFrameReady() {
         this.ready = true;
+        if (this.options?.onReady) {
+            this.options?.onReady();
+        }
     }
 
     init() {

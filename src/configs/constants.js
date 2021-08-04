@@ -35,3 +35,4 @@ export const WALLKIT_FIREBASE_CONFIG = {
     measurementId: "G-GWJ1GC5B30"
 };
 export const WALLKIT_TOKEN_NAME = 'wk-token';
+export const FIREBASE_TOKEN_NAME = 'firebase-token';

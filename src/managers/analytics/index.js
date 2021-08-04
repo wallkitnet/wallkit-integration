@@ -1,5 +1,16 @@
+import SDK from '../sdk';
+import Authentication from "../authentication";
+
 export default class Analytics {
-    constructor() {
+    #options;
+    #sdk;
+    #authentication;
+
+    constructor(options) {
+        this.#options = options;
+        this.#authentication = new Authentication();
+        this.#sdk = new SDK();
+
         this.utmTags = {};
     }
 
@@ -19,10 +30,20 @@ export default class Analytics {
 
         this.utmTags = foundedUTMParams;
 
+        if (this.#authentication.isAuthenticated()) {
+            this.#sdk.methods.updateUser({
+                extra: this.utmTags
+            })
+        }
+
         return foundedUTMParams;
     }
 
     get hasUTMTags() {
         return !!Object.keys(this.utmTags).length;
+    }
+
+    init() {
+        this.parseUTMTags();
     }
 }

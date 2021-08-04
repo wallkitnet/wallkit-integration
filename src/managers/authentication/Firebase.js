@@ -134,6 +134,23 @@ export default class Firebase {
         this.firebase.auth().onAuthStateChanged(this.#authStateChanged.bind(this));
     }
 
+    reset() {
+        if (this.firebaseui) {
+            this.firebaseui.reset();
+            this.firebaseui.start(this.elementPlaceholder);
+        }
+    }
+
+    logout() {
+        return new Promise((resolve) => {
+            if (this.firebase && this.firebase.auth) {
+                this.firebase.auth().signOut().then(() => resolve(true));
+            } else {
+                resolve(false);
+            }
+        });
+    }
+
     init() {
         this.loadFirebase().then(() => {
             this.initFirebase({});

@@ -1,4 +1,3 @@
-
 import Authentication from './managers/authentication';
 import Modal from './managers/modal';
 import Frame from './managers/frame';
@@ -6,56 +5,41 @@ import SDK from './managers/sdk';
 import Events from "./managers/events";
 import Analytics from "./managers/analytics";
 
-import { parseModalHashURL } from './utils/url';
 import { isApplePayAvailable } from './utils/payments';
 
 import { ALLOWED_ORIGINS } from './configs/constants';
-import { SUCCESS_AUTH } from "./managers/events/events-name";
+import { SUCCESS_AUTH, FRAME_MESSAGE } from "./managers/events/events-name";
 
 window.WallkitIntegration = class WallkitIntegration {
     constructor(options) {
         this.config = options;
         if (options.sdk !== false) {
-            this.sdk = new SDK(options);
-        }
-
-        this.frame = new Frame(options);
-        this.modal = new Modal({
-            resourceFrame: this.frame
-        });
-
-        if (options?.auth?.firebase) {
-            this.authentication = new Authentication({
-                firebase: true,
-                onAuth: (token) => {
-                    this.sdk.methods.authenticateWithFirebase(token).then(() => {
-                       this.events.notify(SUCCESS_AUTH, true);
-                    });
-                }
+            this.sdk = new SDK({
+                ...options,
+                onLoaded: () => this.init()
             });
         }
 
-        if (options?.analytics) {
-            this.analytics = new Analytics();
+        this.frame = new Frame({
+            ...options,
+            onReady: () => this.modal.toggleLoader(false)
+        });
 
-            if (options.analytics?.parseUTM) {
-                this.analytics.parseUTMTags();
-
-                if (this.analytics.hasUTMTags) {
-                    this.sdk.awaitLoad().then(() => {
-                        if (this.authentication.isAuthenticated()) {
-                            this.sdk.methods.updateUser({
-                                extra: this.analytics.utmTags
-                            })
-                        }
-                    });
-                }
+        this.modal = new Modal({
+            resourceFrame: this.frame,
+            initialLoader: true,
+            onReady: (modal) => {
+                modal.openByHash();
             }
-        }
+        });
 
+        this.authentication = new Authentication({
+            firebase: options?.auth?.firebase,
+            modalTitle: options.auth?.modal?.title
+        });
+
+        this.analytics = new Analytics(options);
         this.events = new Events();
-
-        this.init();
     }
 
     #eventsListener() {
@@ -65,6 +49,7 @@ window.WallkitIntegration = class WallkitIntegration {
             console.log('name, value', name, value);
 
             this.events.notify(name, value);
+            this.events.notify(FRAME_MESSAGE, { name, value });
 
             try {
                 if (ALLOWED_ORIGINS.includes(origin) && value !== undefined && name) {
@@ -72,13 +57,9 @@ window.WallkitIntegration = class WallkitIntegration {
                         case "wk-event-modals-ready" :
                             if (this.authentication.isAuthenticated()) {
                                 this.frame.sendEvent("wk-event-applepay-ready", isApplePayAvailable());
-                            }
-
-                            if (!this.authentication.isAuthenticated()) {
+                            } else {
                                 this.frame.sendEvent("wk-event-get-token", this.config.public_key);
                             }
-
-                            this.modal.openByHash();
 
                             break;
 
@@ -94,7 +75,7 @@ window.WallkitIntegration = class WallkitIntegration {
                             this.authentication.show();
                             this.events.subscribe(SUCCESS_AUTH, () => {
                                 this.modal.open(redirect);
-                            });
+                            }, { once: true });
                             break;
 
                         case "wk-event-close-modal" :
@@ -114,6 +95,10 @@ window.WallkitIntegration = class WallkitIntegration {
                             }
 
                             break;
+
+                        case "wk-event-close-on-wrapper" :
+                            this.modal.closeOutside = value;
+                            break;
                     }
                 }
             } catch (error) {
@@ -123,6 +108,9 @@ window.WallkitIntegration = class WallkitIntegration {
     }
 
     init() {
+        this.modal.init();
+        this.authentication.init();
+        this.analytics.init();
         this.#eventsListener();
     }
 }
