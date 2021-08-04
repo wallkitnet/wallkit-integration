@@ -34,3 +34,4 @@ export const WALLKIT_FIREBASE_CONFIG = {
     appId: "1:779443518820:web:ffc6660647590674e20e71",
     measurementId: "G-GWJ1GC5B30"
 };
+export const WALLKIT_TOKEN_NAME = 'wk-token';

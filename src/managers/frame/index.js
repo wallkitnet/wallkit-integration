@@ -1,6 +1,6 @@
 import { createElement } from "../../utils/DOM";
 import { WALLKIT_MODAL_MIN_WIDTH, WALLKIT_MODAL_MIN_HEIGHT, WALLKIT_POPUP_URL, WALLKIT_FRAME_ID } from "../../configs/constants";
-import { FRAME_CREATED, WALLKIT_CHANGE_FRAME } from "../events/events-name";
+import { FRAME_CREATED, WALLKIT_CHANGE_FRAME, WALLKIT_FRAME_READY } from "../events/events-name";
 import Events from "../events";
 
 export default class Frame {
@@ -13,6 +13,7 @@ export default class Frame {
 
         this.options = options;
         this.frameElement = null;
+        this.ready = false;
 
         this.events = new Events();
     }
@@ -72,7 +73,21 @@ export default class Frame {
         this.sendEvent(WALLKIT_CHANGE_FRAME, name, params);
     }
 
+    #listeners() {
+        this.events.subscribe(WALLKIT_FRAME_READY, (value) => {
+            if (value === true) {
+                this.onFrameReady();
+            }
+        });
+    }
+
+    onFrameReady() {
+        this.ready = true;
+    }
+
     init() {
+        this.#listeners();
+
         return this.createFrame();
     }
 

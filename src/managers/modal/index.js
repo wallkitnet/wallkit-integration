@@ -5,6 +5,7 @@ import { WALLKIT_MODAL_WRAPPER_CLASSNAME,
          WALLKIT_MODAL_MIN_HEIGHT } from "../../configs/constants";
 import DOM from '../../utils/DOM';
 import { loadWallkitAsset } from "../../utils/loaders";
+import { parseModalHashURL } from "../../utils/url";
 
 export default class Modal {
     constructor(options) {
@@ -136,6 +137,14 @@ export default class Modal {
     sendEvent(name, value, params) {
         if (this.modalFrame) {
             this.modalFrame.sendEvent(name, value, params);
+        }
+    }
+
+    openByHash() {
+        const modal = parseModalHashURL();
+
+        if (modal) {
+            this.open(modal.name, modal.params);
         }
     }
 
