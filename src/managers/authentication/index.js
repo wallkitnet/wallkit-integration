@@ -25,15 +25,27 @@ export default class Authentication {
         this.frame = new Frame();
         this.sdk = new SDK();
 
-        if (options?.firebase) {
+        if (!!options?.firebase) {
             this.modal = this.#createModal();
             this.modal.init();
-            this.firebase = new Firebase({
+
+            let config = {
                 onAuthStateChanged: this.updateFirebaseToken.bind(this),
                 onSuccessAuth: this.onSuccessAuth.bind(this),
                 uiShown: this.onFirebaseInit.bind(this),
                 onAuthFail: this.onFirebaseAuthFail.bind(this)
-            });
+            }
+
+            console.log('options.firebase', options.firebase);
+
+            if (typeof options.firebase === "object") {
+                config = {
+                    ...config,
+                    ...options.firebase
+                }
+            }
+
+            this.firebase = new Firebase(config);
             this.firebase.init();
         }
 

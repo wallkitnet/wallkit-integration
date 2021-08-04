@@ -46,8 +46,6 @@ window.WallkitIntegration = class WallkitIntegration {
         window.addEventListener('message', (event) => {
             const { data: { value, name }, origin } = event;
 
-            console.log('name, value', name, value);
-
             this.events.notify(name, value);
             this.events.notify(FRAME_MESSAGE, { name, value });
 

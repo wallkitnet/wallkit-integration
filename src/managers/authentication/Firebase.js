@@ -4,6 +4,12 @@ import { WALLKIT_FIREBASE_CONFIG, WALLKIT_FIREBASE_UI_PLACEHOLDER_ID } from "../
 
 export default class Firebase {
     constructor(options) {
+
+        this.config = options?.config;
+        this.providers = options?.providers;
+        this.tosURL = options?.tosURL;
+        this.privacyPolicyURL = options?.privacyPolicyURL;
+
         this.firebase = null;
         this.firebaseui = null;
         this.elementPlaceholder = options?.elementPlaceholder ?? `#${WALLKIT_FIREBASE_UI_PLACEHOLDER_ID}`;
@@ -95,7 +101,11 @@ export default class Firebase {
         }
     }
 
-    initFirebase({ config, providers = ['email', 'google'], tosUrl = 'wallkit.net', privacyPolicyUrl = 'wallkit.net' }) {
+    initFirebase({ config,
+                   providers = ['email', 'google'],
+                   tosUrl = 'https://wallkit.net',
+                   privacyPolicyUrl = 'https://wallkit.net' }) {
+
         this.firebase.initializeApp(config ?? WALLKIT_FIREBASE_CONFIG);
         const firebaseuiInstance = new this.firebaseui.auth.AuthUI(this.firebase.auth());
         firebaseuiInstance.disableAutoSignIn();
@@ -153,7 +163,12 @@ export default class Firebase {
 
     init() {
         this.loadFirebase().then(() => {
-            this.initFirebase({});
+            this.initFirebase({
+                config: this.config,
+                providers: this.providers,
+                tosUrl: this.tosURL,
+                privacyPolicyUrl: this.privacyPolicyURL
+            });
         });
     }
 }
