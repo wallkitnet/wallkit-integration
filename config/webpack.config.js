@@ -4,7 +4,7 @@ module.exports = {
     entry: './src/index.js',
     mode: 'production',
     output: {
-        filename: 'main.js',
+        filename: 'wallkit-integration-library.js',
         path: path.resolve('dist'),
     },
     module: {

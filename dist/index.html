@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wallkit Integration Demo</title>
+</head>
+<body>
+    <script src="wallkit-integration-library.js"></script>
+    <script>
+        let WallkitInt = new WallkitIntegration({
+            public_key: 'bc3adcd3-9156-44bd-bc89-8092a58c6ae9',
+            mode: 'prod',
+            version: 'v1',
+            auth: { // default false
+                firebase: {
+                    providers: ['email'],
+                    tosURL: 'https://drive.net',
+                    privacyPolicyURL: 'https://drive.net',
+                },
+                modal: {
+                    title: 'Authorisation',
+                }
+            },
+            analytics: {
+                parseUTM: true // default true
+            }
+        });
+    </script>
+</body>
+</html>

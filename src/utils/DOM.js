@@ -53,6 +53,13 @@ export const injectInBody = (element) => {
     return document.body.appendChild(element);
 }
 
+export const injectInHead = (element) => {
+    if (!isDocumentAvailable()) return Error.handleError('Document is not available', ERRORS_TYPES.DOM_ERROR);
+    if (!element) return Error.checkRequiredArgument(element, 'element');
+
+    return document.head.appendChild(element);
+}
+
 export const loadCSS = (url, id) => {
     if (!isDocumentAvailable()) return Error.handleError('Document is not available', ERRORS_TYPES.DOM_ERROR);
     if (checkIfElementExists('#' + id)) return;

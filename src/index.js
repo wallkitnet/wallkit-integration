@@ -5,6 +5,9 @@ import SDK from './managers/sdk';
 import Events from "./managers/events";
 import Analytics from "./managers/analytics";
 
+import { LIBRARY_STYLES } from './assets/styles';
+
+import { createElement, injectInHead } from "./utils/DOM";
 import { isApplePayAvailable } from './utils/payments';
 
 import { ALLOWED_ORIGINS } from './configs/constants';
@@ -13,12 +16,10 @@ import { SUCCESS_AUTH, FRAME_MESSAGE } from "./managers/events/events-name";
 window.WallkitIntegration = class WallkitIntegration {
     constructor(options) {
         this.config = options;
-        if (options.sdk !== false) {
-            this.sdk = new SDK({
-                ...options,
-                onLoaded: () => this.init()
-            });
-        }
+        this.sdk = new SDK({
+            ...options,
+            onLoaded: () => this.init()
+        });
 
         this.frame = new Frame({
             ...options,
@@ -38,7 +39,7 @@ window.WallkitIntegration = class WallkitIntegration {
             modalTitle: options.auth?.modal?.title
         });
 
-        this.analytics = new Analytics(options);
+        this.analytics = new Analytics(options?.analytics);
         this.events = new Events();
     }
 
@@ -105,7 +106,15 @@ window.WallkitIntegration = class WallkitIntegration {
         });
     }
 
+    #insertStyles () {
+        const styles = createElement('style');
+        styles.innerHTML = LIBRARY_STYLES;
+
+        injectInHead(styles);
+    }
+
     init() {
+        this.#insertStyles();
         this.modal.init();
         this.authentication.init();
         this.analytics.init();

@@ -2,12 +2,14 @@ import SDK from '../sdk';
 import Authentication from "../authentication";
 
 export default class Analytics {
-    #options;
+    #config;
     #sdk;
     #authentication;
 
     constructor(options) {
-        this.#options = options;
+        this.#config = {
+            parseUTM: options?.parseUTM !== undefined ? options.parseUTM : true
+        };
         this.#authentication = new Authentication();
         this.#sdk = new SDK();
 
@@ -44,6 +46,8 @@ export default class Analytics {
     }
 
     init() {
-        this.parseUTMTags();
+        if (this.#config.parseUTM !== false) {
+            this.parseUTMTags();
+        }
     }
 }

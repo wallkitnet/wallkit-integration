@@ -27,7 +27,7 @@ export default class Firebase {
         }
     };
 
-    loadFirebase() {
+    #loadFirebase() {
         return new Promise((resolve, reject) => {
             const onFirebaseAppLoaded = () => {
                 const scripts = [
@@ -162,7 +162,7 @@ export default class Firebase {
     }
 
     init() {
-        this.loadFirebase().then(() => {
+        this.#loadFirebase().then(() => {
             this.initFirebase({
                 config: this.config,
                 providers: this.providers,
