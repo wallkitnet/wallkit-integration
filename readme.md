@@ -1,5 +1,6 @@
 # Wallkit Integration Library
 
+
 Is a library to work with Wallkit Paywall System. It allows you to manage popups, firebase authentication and analytics.
 
 # Usage
@@ -41,23 +42,34 @@ Is a library to work with Wallkit Paywall System. It allows you to manage popups
 
 # Methods
 
+------
+
 ###Authorization
+
 
 ```WallkitIntegration.authentication.show()```
 
 Show authorization modal, with firebase auth.
 
+***
+
 ```WallkitIntegration.authentication.hide()```
 
 Hide authorization modal.
+
+***
 
 ```WallkitIntegration.authentication.isAuthenticated()```
 
 Check authorization state.
 
+***
+
 ```WallkitIntegration.authentication.handleOneTapResponse(oneTapResponse)```
 
 Handles one tap response.
+
+***
 
 ```WallkitIntegration.authentication.firebase.reset()```
 
@@ -70,9 +82,13 @@ Resets firebase UI.
 
 Open frame.
 
+***
+
 ```WallkitIntegration.frame.hide()```
 
 Hides frame.
+
+***
 
 ```WallkitIntegration.frame.sendEvent(name, value, params)```
 
@@ -84,9 +100,13 @@ Sends event to frame.
 
 Open modal.
 
+***
+
 ```WallkitIntegration.modal.hide()```
 
 Hides modal.
+
+***
 
 ```WallkitIntegration.modal.toggleLoader(state)```
 
@@ -127,6 +147,8 @@ Some Wallkit Events (not full list):
 'wk-event-one-tap-sign-in'
 ```
 
+***
+
 ```WallkitIntegration.events.unsubscribe(eventName)```
 
 Unsubscribes on events.
@@ -134,12 +156,16 @@ Unsubscribes on events.
 
 # Develop
 
+------
+
 ```bash
 npm run install
 npm run dev
 ```
 
 # Build
+
+------
 
 ```bash
 npm run install
