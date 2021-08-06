@@ -123,7 +123,7 @@ export default class Authentication {
       this.token.set(token);
     }
 
-    initListeners() {
+    #initListeners() {
         this.events.subscribe(EventsNames.wallkit.WALLKIT_LOGOUT, () => this.logout());
         this.events.subscribe(EventsNames.wallkit.WALLKIT_FIREBASE_TOKEN, (value) => {
             this.firebaseToken.set(value);
@@ -176,6 +176,6 @@ export default class Authentication {
     }
 
     init() {
-        this.initListeners();
+        this.#initListeners();
     }
 }
