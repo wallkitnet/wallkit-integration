@@ -12,12 +12,21 @@ export default class SDK {
             return SDK.instance;
         }
 
+        if (!options) {
+            return new Error('No Options Provided');
+        }
+
         SDK.instance = this;
 
         this.methods = null;
         this.#options = options;
         this.#events = new Events();
-        this.load();
+
+        if (window.Wallkit) {
+            this.onLoad();
+        } else {
+            this.load();
+        }
     }
 
     onLoad() {

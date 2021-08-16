@@ -6,6 +6,9 @@ export const SUCCESS_AUTH = 'success-auth';
 export const SUCCESS_FIREBASE_AUTH = 'success-firebase-auth';
 export const WALLKIT_SDK_LOADED = 'wallkit-js-sdk-loaded';
 export const FRAME_MESSAGE = 'frame-message';
+export const AUTH_MODAL_CLOSED = 'auth-modal-closed';
+export const FRAME_MODAL_CLOSED = 'frame-modal-closed';
+export const MODAL_CLOSED = 'modal-closed';
 
 // Wallkit Events Names
 export const WALLKIT_CHANGE_FRAME = 'wk-event-modal';
@@ -19,6 +22,7 @@ export const WALLKIT_EVENT_AUTH = 'wk-event-auth';
 export const WALLKIT_EVENT_USER = 'wk-event-user';
 export const WALLKIT_EVENT_REGISTRATION = 'wk-event-registration';
 export const WALLKIT_EVENT_ONE_TAP_SIGN_IN = 'wk-event-one-tap-sign-in';
+export const WALLKIT_FRAME_ROUTE_CHANGE = 'wk-event-route-change';
 
 export default {
     local: {
@@ -27,7 +31,10 @@ export default {
         MODAL_CREATED,
         SUCCESS_AUTH,
         SUCCESS_FIREBASE_AUTH,
-        FRAME_MESSAGE
+        FRAME_MESSAGE,
+        AUTH_MODAL_CLOSED,
+        FRAME_MODAL_CLOSED,
+        MODAL_CLOSED
     },
     wallkit: {
         FRAME_CREATED,
@@ -40,6 +47,7 @@ export default {
         WALLKIT_EVENT_AUTH,
         WALLKIT_EVENT_USER,
         WALLKIT_EVENT_REGISTRATION,
-        WALLKIT_EVENT_ONE_TAP_SIGN_IN
+        WALLKIT_EVENT_ONE_TAP_SIGN_IN,
+        WALLKIT_FRAME_ROUTE_CHANGE
     }
 }

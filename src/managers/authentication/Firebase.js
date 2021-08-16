@@ -12,7 +12,7 @@ export default class Firebase {
 
         this.firebase = null;
         this.firebaseui = null;
-        this.elementPlaceholder = options?.elementPlaceholder ?? `#${WALLKIT_FIREBASE_UI_PLACEHOLDER_ID}`;
+        this.elementPlaceholder = options?.elementSelector ?? `#${WALLKIT_FIREBASE_UI_PLACEHOLDER_ID}`;
         this.onSuccessAuth = options?.onSuccessAuth ?? null;
         this.onAuthStateChanged = options?.onAuthStateChanged ?? null;
         this.uiShown = options?.uiShown ?? null
@@ -23,6 +23,7 @@ export default class Firebase {
             'google': this.firebase.auth.GoogleAuthProvider.PROVIDER_ID,
             'email': this.firebase.auth.EmailAuthProvider.PROVIDER_ID,
             'facebook': this.firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+            'apple': 'apple.com',
             'microsoft': 'microsoft.com'
         }
     };
@@ -82,8 +83,17 @@ export default class Firebase {
         let selectedProviders = [];
         if (Array.isArray(providers)) {
             selectedProviders = providers.map((item) => {
-                if (this.allowedProviders[item]) {
-                    return this.allowedProviders[item];
+                if (typeof item === "object") {
+                    if (this.allowedProviders[item.provider]) {
+                        return {
+                            ...item,
+                            provider: this.allowedProviders[item.provider]
+                        }
+                    }
+                } else {
+                    if (this.allowedProviders[item]) {
+                        return this.allowedProviders[item];
+                    }
                 }
             }).filter((item) => !!item);
         }

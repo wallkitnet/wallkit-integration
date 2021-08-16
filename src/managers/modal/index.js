@@ -6,6 +6,8 @@ import { WALLKIT_MODAL_WRAPPER_CLASSNAME,
 import DOM from '../../utils/DOM';
 import { loadWallkitAsset } from "../../utils/loaders";
 import { parseModalHashURL } from "../../utils/url";
+import Events from "../events";
+import { MODAL_CLOSED } from "../events/events-name";
 
 export default class Modal {
     constructor(options) {
@@ -17,6 +19,7 @@ export default class Modal {
         this.loaderElement = null;
         this.isLoading = false;
         this.closeOutside = true;
+        this.onClose = options ? options.onClose : null;
     }
 
     #getModalName() {
@@ -118,9 +121,9 @@ export default class Modal {
 
     #completeModal() {
         this.#loadAssets();
-        this.modalWrapper.appendChild(this.#createCloseBtn());
         this.modalWrapper.appendChild(this.modalContent);
         this.modalContent.appendChild(this.loaderElement);
+        this.modalContent.appendChild(this.#createCloseBtn());
 
         if (this.modalFrame) {
             this.insertContent(this.modalFrame.init());
@@ -147,6 +150,13 @@ export default class Modal {
     }
 
     hide() {
+        const events = new Events();
+        events.notify(MODAL_CLOSED, { name: this.#getModalName() });
+
+        if (this.onClose) {
+            this.onClose();
+        }
+
         this.modalWrapper.style.display = 'none';
     }
 

@@ -3,28 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <title>Wallkit Integration Demo</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+       .wrap-pro-sign-up {
+           font-family: Oxygen, sans-serif;
+           text-align: center;
+           color: #161616;
+       }
+
+       .wrap-pro-sign-up__steps {
+           display: flex;
+           align-items: center;
+           justify-content: space-around;
+       }
+
+       .wrap-pro-sign-up__title {
+           font-weight: 700;
+           font-size: 24px;
+           line-height: 30px;
+       }
+
+       .wrap-pro-sign-up__small-title {
+           font-size: 18px;
+           line-height: 25px;
+           margin-bottom: 20px;
+       }
+
+       ul {
+           padding-left: 0;
+           list-style: none;
+       }
+
+       .wrap-pro-sign-up__step {
+           font-weight: 400;
+           font-size: 16px;
+           line-height: 26px;
+           margin: 0 10px;
+           color: #828282;
+       }
+
+       .wrap-pro-sign-up__step--active {
+           border-bottom: 2px solid #10D765;
+           color: #161616;
+       }
+
+       .wrap-pro-sign-up__btn {
+           background: #161616;
+           border-radius: 5px;
+           width: 100%;
+           padding: 10px 34px;
+           text-align: center;
+           border: none;
+           color: #fff;
+           text-transform: uppercase;
+           margin: 20px 0;
+           display: block;
+       }
+
+       .wrap-pro-sign-up__terms {
+           font-size: 14px;
+           text-align: left;
+       }
+
+       .green-text {
+           color: #10D765;
+           text-decoration: none;
+       }
+
+       .wrap-pro-sign-up .firebaseui-container {
+           box-shadow: none;
+       }
+
+       .wrap-pro-sign-up .firebaseui-card-header {
+           padding-left: 0;
+       }
+
+       .wrap-pro-sign-up .firebaseui-card-content {
+           padding: 0;
+       }
+
+       .wrap-pro-sign-up .firebaseui-container,
+       .wrap-pro-sign-up .firebaseui-idp-button {
+           max-width: 100%;
+           width: 100%;
+       }
+
+       .wrap-pro-sign-up .firebaseui-idp-button {
+           box-shadow: none;
+           border-radius: 0;
+           border: 1px solid #BDBDBD;
+           background: #FFFFFF;
+       }
+
+       .wrap-pro-sign-up .mdl-button--raised.mdl-button--colored,
+       .wrap-pro-sign-up .firebaseui-textfield.mdl-textfield .firebaseui-label::after {
+           background-color: #000;
+       }
+
+       .wrap-pro-sign-up .mdl-button--raised.mdl-button--colored:hover,
+       .wrap-pro-sign-up .mdl-button--raised.mdl-button--colored:focus,
+       .wrap-pro-sign-up .mdl-button--raised.mdl-button--colored:active {
+           background-color: #303030;
+       }
+
+       .wrap-pro-sign-up .mdl-button--primary.mdl-button--primary {
+           color: #000;
+       }
+
+       .wrap-pro-sign-up .firebaseui-list-item:first-child .firebaseui-idp-button {
+           border: none;
+       }
+
+    </style>
 </head>
 <body>
+    <button onclick="openClassicLogin()">
+        Classic
+    </button>
+
+    <button onclick="openJourneyLogin()">
+        Journey
+    </button>
+
+
     <script src="wallkit-integration-library.js"></script>
+
+
+
+
     <script>
+        const modalContent = document.createElement('div');
+        modalContent.classList.add('wrap-pro-sign-up');
+
+        modalContent.insertAdjacentHTML('beforeend', `
+         <div id="classic-login">
+            <h3 class="wrap-pro-sign-up__title">Authorisation</h3>
+         </div>
+         <div id="user-journey-header" style="display: none">
+             <h3 class="wrap-pro-sign-up__title">WrapPRO - 7-Day Free Trial</h3>
+             <ul class="wrap-pro-sign-up__steps">
+               <li class="wrap-pro-sign-up__step wrap-pro-sign-up__step--active">Account</li>
+               <li class="wrap-pro-sign-up__step">Free Trial</li>
+               <li class="wrap-pro-sign-up__step">Newsletters</li>
+               <li class="wrap-pro-sign-up__step">Confirmation</li>
+             </ul>
+             <h4 class="wrap-pro-sign-up__small-title">Let's Get Started</h4>
+         </div>
+
+         <div id="wrap-pro-auth"></div>
+         <p class="wrap-pro-sign-up__terms">By signing up i agree with the <a href="#" class="green-text">Terms & Conditions</a></p>
+        `);
+
+
         let WallkitInt = new WallkitIntegration({
             public_key: 'bc3adcd3-9156-44bd-bc89-8092a58c6ae9',
             mode: 'prod',
             version: 'v1',
             auth: { // default false
                 firebase: {
-                    providers: ['email'],
-                    tosURL: 'https://drive.net',
-                    privacyPolicyURL: 'https://drive.net',
+                    providers: [{
+                        provider: 'email',
+                        buttonColor: '#000',
+                        fullLabel: 'Continue with Email'
+                    },
+                    {
+                        provider: 'google',
+                        fullLabel: 'Continue with Google'
+                    }],
+                    tosURL: '',
+                    privacyPolicyURL: '',
+                    elementSelector: '#wrap-pro-auth'
                 },
                 modal: {
                     title: 'Authorisation',
+                    content: modalContent
                 }
             },
             analytics: {
                 parseUTM: true // default true
             }
         });
+
+        function switchLoginContent(type) {
+            const journeyHeader = document.getElementById('user-journey-header');
+            const classicHeader = document.getElementById('classic-login');
+
+            const authCallback = function () {
+                if (type === 'journey') {
+                    WallkitInt.modal('new-user-journey');
+                } else if (type === 'classic') {
+                    WallkitInt.modal('plans');
+                }
+            };
+
+            WallkitInt.events.unsubscribe('success-auth', authCallback);
+
+            if (type === 'journey') {
+                journeyHeader.style.display = 'block';
+                classicHeader.style.display = 'none';
+            } else if (type === 'classic') {
+                journeyHeader.style.display = 'none';
+                classicHeader.style.display = 'block';
+            }
+
+            WallkitInt.events.subscribe('success-auth', authCallback, { once: true });
+        }
+
+        function openJourneyLogin() {
+            switchLoginContent('journey');
+            WallkitInt.authentication.show();
+        }
+
+        function openClassicLogin() {
+            switchLoginContent('classic');
+            WallkitInt.authentication.show();
+        }
     </script>
 </body>
 </html>

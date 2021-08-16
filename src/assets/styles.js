@@ -27,7 +27,7 @@ export const LIBRARY_STYLES = `
             right: 10px;
             top: 10px;
             cursor: pointer;
-            color: #fff;
+            color: #000;
             font-size: 37px;
             width: 37px;
             height: 37px;

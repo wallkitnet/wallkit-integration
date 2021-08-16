@@ -75,9 +75,9 @@ export default class Authentication {
     authInWallkit(firebaseToken = null) {
         return new Promise((resolve) => {
             if (firebaseToken) {
-                this.sdk.methods.authenticateWithFirebase(firebaseToken).then(({ token }) => {
+                this.sdk.methods.authenticateWithFirebase(firebaseToken).then(({ token, existed }) => {
                     this.setToken(token);
-                    this.events.notify(EventsNames.local.SUCCESS_AUTH, true);
+                    this.events.notify(EventsNames.local.SUCCESS_AUTH, { register: !existed });
                     resolve(true);
                 });
             } else {
@@ -87,12 +87,14 @@ export default class Authentication {
     }
 
     #createModal() {
+        const defaultContentModal = `<div>
+                                        <h2 class="wallkit-auth-modal__title">${this.#options?.modalTitle ?? 'Sign In'}</h2>
+                                        <div id="${WALLKIT_FIREBASE_UI_PLACEHOLDER_ID}"></div>
+                                     </div>`;
+
         return new Modal({
             modalName: 'auth-modal',
-            content: `<div>
-                        <h2 class="wallkit-auth-modal__title">${this.#options?.modalTitle ?? 'Sign In'}</h2>
-                        <div id="${WALLKIT_FIREBASE_UI_PLACEHOLDER_ID}"></div>
-                      </div>`,
+            content: this.#options?.content || defaultContentModal,
             className: 'wallkit-auth-modal',
             initialLoader: true
         });
@@ -168,7 +170,6 @@ export default class Authentication {
 
     onFirebaseAuthFail(error) {
         this.modal.toggleLoader(false);
-        console.log('error', error);
     }
 
     handleOneTapResponse({ credential }) {

@@ -11,36 +11,47 @@ import { createElement, injectInHead } from "./utils/DOM";
 import { isApplePayAvailable } from './utils/payments';
 
 import { ALLOWED_ORIGINS } from './configs/constants';
-import { SUCCESS_AUTH, FRAME_MESSAGE } from "./managers/events/events-name";
+import { SUCCESS_AUTH, FRAME_MESSAGE, FRAME_MODAL_CLOSED } from "./managers/events/events-name";
 
 window.WallkitIntegration = class WallkitIntegration {
     constructor(options) {
         this.config = options;
-        this.sdk = new SDK({
-            ...options,
-            onLoaded: () => this.init()
-        });
+        this.events = new Events();
 
         this.frame = new Frame({
             ...options,
-            onReady: () => this.modal.toggleLoader(false)
+            onReady: () => this.popup.toggleLoader(false)
         });
 
-        this.modal = new Modal({
+        this.popup = new Modal({
             resourceFrame: this.frame,
             initialLoader: true,
             onReady: (modal) => {
                 modal.openByHash();
+            },
+            onClose: () => {
+                this.events.notify(FRAME_MODAL_CLOSED, { name: this.frame.currentFrameName });
             }
         });
 
-        this.authentication = new Authentication({
-            firebase: options?.auth?.firebase,
-            modalTitle: options.auth?.modal?.title
-        });
+        this.sdk = new SDK({
+            ...options,
+            onLoaded: () => {
+                this.authentication = new Authentication({
+                    firebase: options?.auth?.firebase,
+                    modalTitle: options.auth?.modal?.title,
+                    content: options.auth?.modal?.content
+                });
 
-        this.analytics = new Analytics(options?.analytics);
-        this.events = new Events();
+                this.analytics = new Analytics(options?.analytics);
+
+                this.init();
+            }
+        });
+    }
+
+    modal(name, params) {
+        this.popup.open(name, params);
     }
 
     #eventsListener() {
@@ -51,7 +62,7 @@ window.WallkitIntegration = class WallkitIntegration {
             this.events.notify(FRAME_MESSAGE, { name, value });
 
             try {
-                if (ALLOWED_ORIGINS.includes(origin) && value !== undefined && name) {
+                if (ALLOWED_ORIGINS.includes(origin) && name) {
                     switch (name) {
                         case "wk-event-modals-ready" :
                             if (this.authentication.isAuthenticated()) {
@@ -64,7 +75,7 @@ window.WallkitIntegration = class WallkitIntegration {
 
                         case "wk-event-resize" :
                             if (value.width !== 0 && value.height !== 0) {
-                                this.modal.resize(value.width, value.height);
+                                this.popup.resize(value.width, value.height);
                             }
 
                             break;
@@ -73,17 +84,22 @@ window.WallkitIntegration = class WallkitIntegration {
                             const redirect = value;
                             this.authentication.show();
                             this.events.subscribe(SUCCESS_AUTH, () => {
-                                this.modal.open(redirect);
+                                console.log('redirect', redirect);
+                                if (redirect) {
+                                    this.popup.open(redirect);
+                                } else {
+                                    this.popup.hide();
+                                }
                             }, { once: true });
                             break;
 
                         case "wk-event-close-modal" :
-                            this.modal.hide();
+                            this.popup.hide();
 
                             break;
 
                         case "wk-event-reload-page" :
-                            this.modal.hide();
+                            this.popup.hide();
                             location.reload();
 
                             break;
@@ -96,7 +112,7 @@ window.WallkitIntegration = class WallkitIntegration {
                             break;
 
                         case "wk-event-close-on-wrapper" :
-                            this.modal.closeOutside = value;
+                            this.popup.closeOutside = value;
                             break;
                     }
                 }
@@ -115,7 +131,7 @@ window.WallkitIntegration = class WallkitIntegration {
 
     init() {
         this.#insertStyles();
-        this.modal.init();
+        this.popup.init();
         this.authentication.init();
         this.analytics.init();
         this.#eventsListener();
