@@ -20,6 +20,14 @@ export const LIBRARY_STYLES = `
             flex-shrink: 0;
             position: relative;
             box-sizing: border-box;
+            overflow: hidden;
+        }
+        
+        @media screen and (max-width: 500px) {
+            .wallkit-modal-wrapper__content {
+                width: 100%;
+                min-width: auto!important;
+            }
         }
 
         .wallkit-modal-wrapper__close-btn {

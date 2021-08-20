@@ -111,7 +111,7 @@ window.WallkitIntegration = class WallkitIntegration {
 
                             break;
 
-                        case "wk-event-close-on-wrapper" :
+                        case "wk-event-close-on-wrapper":
                             this.popup.closeOutside = value;
                             break;
                     }

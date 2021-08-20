@@ -171,6 +171,22 @@ export default class Firebase {
         });
     }
 
+    authWithCustomToken(token) {
+        return new Promise((resolve) => {
+            if (this.firebase && this.firebase.auth) {
+                this.firebase.auth().signInWithCustomToken(token).then((userCredential) => {
+                    resolve(userCredential);
+                }).catch(() => {
+                    console.log('Custom Token Auth Fail');
+                    resolve(false);
+                });
+            }
+
+            resolve(false);
+        });
+    }
+
+
     init() {
         this.#loadFirebase().then(() => {
             this.initFirebase({

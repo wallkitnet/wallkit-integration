@@ -23,6 +23,7 @@ export const WALLKIT_EVENT_USER = 'wk-event-user';
 export const WALLKIT_EVENT_REGISTRATION = 'wk-event-registration';
 export const WALLKIT_EVENT_ONE_TAP_SIGN_IN = 'wk-event-one-tap-sign-in';
 export const WALLKIT_FRAME_ROUTE_CHANGE = 'wk-event-route-change';
+export const WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN = 'wk-event-firebase-custom-token';
 
 export default {
     local: {
@@ -48,6 +49,7 @@ export default {
         WALLKIT_EVENT_USER,
         WALLKIT_EVENT_REGISTRATION,
         WALLKIT_EVENT_ONE_TAP_SIGN_IN,
-        WALLKIT_FRAME_ROUTE_CHANGE
+        WALLKIT_FRAME_ROUTE_CHANGE,
+        WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN
     }
 }

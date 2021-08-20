@@ -36,8 +36,6 @@ export default class Authentication {
                 onAuthFail: this.onFirebaseAuthFail.bind(this)
             }
 
-            console.log('options.firebase', options.firebase);
-
             if (typeof options.firebase === "object") {
                 config = {
                     ...config,
@@ -126,11 +124,6 @@ export default class Authentication {
     }
 
     #initListeners() {
-        this.events.subscribe(EventsNames.wallkit.WALLKIT_LOGOUT, () => this.logout());
-        this.events.subscribe(EventsNames.wallkit.WALLKIT_FIREBASE_TOKEN, (value) => {
-            this.firebaseToken.set(value);
-            this.sdk.methods.setFirebaseToken(value);
-        });
 
         this.events.subscribe(EventsNames.local.FRAME_MESSAGE, ({ name, value }) => {
             switch (name) {
@@ -142,6 +135,20 @@ export default class Authentication {
                         let token = value.token;
                         this.setToken(token);
                     }
+                    break;
+                case EventsNames.wallkit.WALLKIT_FIREBASE_TOKEN:
+                    this.firebaseToken.set(value);
+                    if (this.sdk) {
+                        this.sdk.methods.setFirebaseToken(value);
+                    }
+                    break;
+                case EventsNames.wallkit.WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN:
+                    if (value) {
+                        this.firebase.authWithCustomToken(value);
+                    }
+                    break;
+                case EventsNames.wallkit.WALLKIT_LOGOUT:
+                    this.logout();
                     break;
             }
         });
