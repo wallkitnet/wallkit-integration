@@ -16,7 +16,7 @@ export default class Events {
 
     unsubscribe(eventName, callback) {
         this.listeners = this.listeners.filter((event) => {
-            return event.name !== eventName && event.callback !== callback;
+            return ((event.name !== eventName) || (event.callback !== callback));
         });
     }
 
