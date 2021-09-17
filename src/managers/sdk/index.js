@@ -19,6 +19,7 @@ export default class SDK {
         SDK.instance = this;
 
         this.methods = null;
+        this.client = null;
         this.#options = options;
         this.#events = new Events();
 
@@ -33,6 +34,7 @@ export default class SDK {
         if (window.Wallkit) {
             window.Wallkit.init({ resource: this.#options.public_key });
             this.methods = window.Wallkit;
+            this.client = window.Wallkit.client;
             this.#events.notify(WALLKIT_SDK_LOADED, window.Wallkit);
 
             if (this.#options?.onLoaded) {

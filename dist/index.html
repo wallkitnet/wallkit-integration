@@ -142,6 +142,7 @@
 
         modalContent.insertAdjacentHTML('beforeend', `
          <div id="classic-login">
+            <div id="authorization-error"></div>
             <h3 class="wrap-pro-sign-up__title">Authorisation</h3>
          </div>
          <div id="user-journey-header" style="display: none">
@@ -158,7 +159,6 @@
          <div id="wrap-pro-auth"></div>
          <p class="wrap-pro-sign-up__terms">By signing up i agree with the <a href="#" class="green-text">Terms & Conditions</a></p>
         `);
-
 
         let WallkitInt = new WallkitIntegration({
             public_key: '00000000-ebb7-42fe-ad2e-f255c73b1061',
@@ -186,6 +186,15 @@
             },
             analytics: {
                 parseUTM: true // default true
+            },
+            onInit: () => {
+                const post = new WallkitInt.content(postInfo);
+
+                post.checkAccess().then((response) => {
+                    console.log('response', response);
+                }).catch((error) => {
+                    console.log('ERROR', error);
+                });
             }
         });
 
@@ -223,6 +232,164 @@
             switchLoginContent('classic');
             WallkitInt.authentication.show();
         }
+
+        WallkitInt.events.subscribe('success-auth', () => {
+           console.log('SUCESS 1');
+        }, {once: true});
+
+        WallkitInt.events.subscribe('success-auth', () => {
+            console.log('SUCESS 2');
+        });
+
+        WallkitInt.events.subscribe('success-auth', () => {
+            console.log('SUCESS 3');
+        }, {once: true});
+
+
+        const postInfo = {
+            "id": 2721008,
+            "title": "Cloud automation provider SkyKick lands $130M",
+            "type": "post",
+            "image": "https://venturebeat.com/wp-content/uploads/2021/03/multi-cloud-e1620815313377.jpg",
+            "taxonomies": {
+            "category": {
+                "label": "Categories",
+                    "items": [
+                    {
+                        "term_id": 666,
+                        "name": "Big Data",
+                        "slug": "big-data"
+                    },
+                    {
+                        "term_id": 358,
+                        "name": "Cloud",
+                        "slug": "cloud"
+                    },
+                    {
+                        "term_id": 426689,
+                        "name": "Data",
+                        "slug": "data"
+                    },
+                    {
+                        "term_id": 339,
+                        "name": "Dev",
+                        "slug": "dev"
+                    },
+                    {
+                        "term_id": 403,
+                        "name": "Enterprise",
+                        "slug": "enterprise"
+                    },
+                    {
+                        "term_id": 301,
+                        "name": "Entrepreneur",
+                        "slug": "entrepreneur"
+                    },
+                    {
+                        "term_id": 525,
+                        "name": "Security",
+                        "slug": "security"
+                    },
+                    {
+                        "term_id": 426829,
+                        "name": "Software",
+                        "slug": "software"
+                    },
+                    {
+                        "term_id": 426054,
+                        "name": "technology",
+                        "slug": "technology"
+                    },
+                    {
+                        "term_id": 2,
+                        "name": "VB Home Page",
+                        "slug": "business"
+                    }
+                ]
+            },
+            "post_tag": {
+                    "label": "Tags",
+                        "items": [
+                        {
+                            "term_id": 25398,
+                            "name": "automation",
+                            "slug": "automation"
+                        },
+                        {
+                            "term_id": 111677,
+                            "name": "category-/Business &amp; Industrial",
+                            "slug": "category-business-industrial"
+                        },
+                        {
+                            "term_id": 111672,
+                            "name": "category-/Computers &amp; Electronics",
+                            "slug": "category-computers-electronics"
+                        },
+                        {
+                            "term_id": 111775,
+                            "name": "category-/Internet &amp; Telecom/Web Services",
+                            "slug": "category-internet-telecom-web-services"
+                        },
+                        {
+                            "term_id": 41985,
+                            "name": "cloud",
+                            "slug": "cloud-2"
+                        },
+                        {
+                            "term_id": 427502,
+                            "name": "cloud automation provider",
+                            "slug": "cloud-automation-provider"
+                        },
+                        {
+                            "term_id": 40676,
+                            "name": "cloud migration",
+                            "slug": "cloud-migration"
+                        },
+                        {
+                            "term_id": 29873,
+                            "name": "enterprise",
+                            "slug": "enterprise-2"
+                        },
+                        {
+                            "term_id": 926,
+                            "name": "funding daily",
+                            "slug": "funding-daily"
+                        },
+                        {
+                            "term_id": 35846,
+                            "name": "skykick",
+                            "slug": "skykick"
+                        },
+                        {
+                            "term_id": 8232,
+                            "name": "SMBs",
+                            "slug": "smbs"
+                        }
+                    ]
+                },
+                "vb_post_designations": {
+                    "label": "Helm Post Designations",
+                        "items": [
+                        {
+                            "term_id": 78655,
+                            "name": "homepage",
+                            "slug": "homepage"
+                        }
+                    ]
+                },
+                "author": {
+                    "label": false,
+                        "items": [
+                        {
+                            "term_id": 111413,
+                            "name": "kylewiggers",
+                            "slug": "cap-kylewiggers"
+                        }
+                    ]
+                }
+            }
+        }
+
     </script>
 </body>
 </html>

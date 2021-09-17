@@ -4,6 +4,7 @@ import Frame from './managers/frame';
 import SDK from './managers/sdk';
 import Events from "./managers/events";
 import Analytics from "./managers/analytics";
+import Content from "./managers/content";
 
 import { LIBRARY_STYLES } from './assets/styles';
 
@@ -33,6 +34,8 @@ window.WallkitIntegration = class WallkitIntegration {
                 this.events.notify(FRAME_MODAL_CLOSED, { name: this.frame.currentFrameName });
             }
         });
+
+        this.content = Content;
 
         this.sdk = new SDK({
             ...options,
@@ -82,15 +85,13 @@ window.WallkitIntegration = class WallkitIntegration {
 
                         case "show-firebase-auth":
                             const redirect = value;
-                            this.authentication.show();
+                            this.popup.hide();
                             this.events.subscribe(SUCCESS_AUTH, () => {
-                                console.log('redirect', redirect);
                                 if (redirect) {
                                     this.popup.open(redirect);
-                                } else {
-                                    this.popup.hide();
                                 }
                             }, { once: true });
+                            this.authentication.show();
                             break;
 
                         case "wk-event-close-modal" :
@@ -135,6 +136,10 @@ window.WallkitIntegration = class WallkitIntegration {
         this.authentication.init();
         this.analytics.init();
         this.#eventsListener();
+
+        if (this.config.onInit) {
+            this.config.onInit();
+        }
     }
 }
 

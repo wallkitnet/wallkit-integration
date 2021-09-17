@@ -65,18 +65,37 @@ export default class Authentication {
         this.authInWallkit(data.token).then((status) => {
             if (status) {
                 this.modal.hide();
-                this.modal.toggleLoader(false);
+            } else {
+                this.firebase.reset();
             }
+
+            this.modal.toggleLoader(false);
         });
     }
 
     authInWallkit(firebaseToken = null) {
+        this.#resetAuthorizationError();
         return new Promise((resolve) => {
             if (firebaseToken) {
                 this.sdk.methods.authenticateWithFirebase(firebaseToken).then(({ token, existed }) => {
                     this.setToken(token);
-                    this.events.notify(EventsNames.local.SUCCESS_AUTH, { register: !existed });
-                    resolve(true);
+
+                    const userGetTimeout = setTimeout(() => {
+                        resolve(false);
+                    }, 10000);
+
+                    const userEventCallback = () => {
+                        clearTimeout(userGetTimeout);
+                        this.sdk.methods.unsubscribeLocalEvent('user', userEventCallback);
+                        this.events.notify(EventsNames.local.SUCCESS_AUTH, { register: !existed });
+                        resolve(true);
+                    };
+
+                    this.sdk.methods.subscribeLocalEvent('user', userEventCallback);
+                }).catch((error) => {
+                    this.#setAuthorizationError(error?.response?.error_description);
+                    this.removeTokens();
+                    resolve(false);
                 });
             } else {
                 resolve(false);
@@ -117,6 +136,11 @@ export default class Authentication {
 
     removeFirebaseToken() {
         this.firebaseToken.remove();
+    }
+
+    removeTokens() {
+        this.removeToken();
+        this.removeFirebaseToken();
     }
 
     setToken(token) {
@@ -161,6 +185,7 @@ export default class Authentication {
                 this.removeFirebaseToken();
             }
         });
+        this.firebase.reset();
     }
 
     dispatchTokens() {
@@ -174,6 +199,18 @@ export default class Authentication {
             }
         }
     }
+
+    #setAuthorizationError(error) {
+        const errorPlaceholder = document.getElementById('authorization-error');
+        if (errorPlaceholder) {
+            errorPlaceholder.innerHTML = error || '';
+        }
+    }
+
+    #resetAuthorizationError() {
+        this.#setAuthorizationError(null);
+    }
+
 
     onFirebaseAuthFail(error) {
         this.modal.toggleLoader(false);

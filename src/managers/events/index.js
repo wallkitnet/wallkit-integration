@@ -21,14 +21,17 @@ export default class Events {
     }
 
     notify(eventName, data) {
+        let onceIndexesToRemove = [];
         this.listeners.forEach((event, index) => {
             if (eventName === event.name) {
                 event.callback(data);
 
                 if (!!event?.options?.once) {
-                    this.listeners.splice(index, 1);
+                    onceIndexesToRemove.push(index);
                 }
             }
         })
+
+        this.listeners = this.listeners.filter((item, index) => !onceIndexesToRemove.includes(index));
     }
 }

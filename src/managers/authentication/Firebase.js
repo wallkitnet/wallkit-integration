@@ -9,6 +9,7 @@ export default class Firebase {
         this.providers = options?.providers;
         this.tosURL = options?.tosURL;
         this.privacyPolicyURL = options?.privacyPolicyURL;
+        this.captchaKey = options?.captchaKey ?? '6LeNZrwbAAAAAKXPTmJj5KMdUwI2GE6XAUbCU6DM';
 
         this.firebase = null;
         this.firebaseui = null;
@@ -55,7 +56,13 @@ export default class Firebase {
                         id: 'firebase-ui',
                         defer: true,
                         onload: () => onScriptLoaded()
-                    }
+                    },
+                    {
+                        url: 'https://www.gstatic.com/firebasejs/8.7.0/firebase-app-check.js',
+                        id: 'firebase-app-check',
+                        defer: true,
+                        onload: () => onScriptLoaded()
+                    },
                 ];
 
                 let loadedCounter = 0;
@@ -117,6 +124,12 @@ export default class Firebase {
                    privacyPolicyUrl = 'https://wallkit.net' }) {
 
         this.firebase.initializeApp(config ?? WALLKIT_FIREBASE_CONFIG);
+
+        if (this.captchaKey) {
+            const appCheck = this.firebase.appCheck();
+            appCheck.activate(this.captchaKey, true);
+        }
+
         const firebaseuiInstance = new this.firebaseui.auth.AuthUI(this.firebase.auth());
         firebaseuiInstance.disableAutoSignIn();
 
