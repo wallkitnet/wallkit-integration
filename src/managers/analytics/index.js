@@ -1,10 +1,13 @@
 import SDK from '../sdk';
 import Authentication from "../authentication";
+import Events from "../events";
+import { SUCCESS_AUTH } from "../events/events-name";
 
 export default class Analytics {
     #config;
     #sdk;
     #authentication;
+    #events;
 
     constructor(options) {
         this.#config = {
@@ -12,6 +15,7 @@ export default class Analytics {
         };
         this.#authentication = new Authentication();
         this.#sdk = new SDK();
+        this.#events = new Events();
 
         this.utmTags = {};
     }
@@ -35,7 +39,13 @@ export default class Analytics {
         if (this.#authentication.isAuthenticated()) {
             this.#sdk.methods.updateUser({
                 extra: this.utmTags
-            })
+            });
+        } else if (this.hasUTMTags) {
+            this.#events.subscribe(SUCCESS_AUTH, () => {
+                this.#sdk.methods.updateUser({
+                    extra: this.utmTags
+                });
+            }, {once: true});
         }
 
         return foundedUTMParams;
