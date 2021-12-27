@@ -6,6 +6,7 @@ import Events from "../events";
 import Frame from "../frame";
 import SDK from "../sdk";
 import Token from "./Token";
+import ReCaptcha from "./ReCaptcha";
 
 export default class Authentication {
     #options;
@@ -30,6 +31,7 @@ export default class Authentication {
             this.modal.init();
 
             let config = {
+                mode: options.mode,
                 onAuthStateChanged: this.updateFirebaseToken.bind(this),
                 onSuccessAuth: this.onSuccessAuth.bind(this),
                 uiShown: this.onFirebaseInit.bind(this),
@@ -47,6 +49,17 @@ export default class Authentication {
             this.firebase.init();
         }
 
+        this.reCaptcha = new ReCaptcha(this, options?.reCaptcha);
+        this.reCaptcha.events.subscribe(EventsNames.local.RECAPTCHA_VALIDATION_FAILED, () => {
+            this.#setAuthorizationError('ReCaptcha Validation Failed! Please try again!');
+        });
+
+        if (!!options?.reCaptcha) {
+            if (!this.isAuthenticated()) {
+                this.reCaptcha.init();
+            }
+        }
+
         this.events = new Events();
     }
 
@@ -60,6 +73,13 @@ export default class Authentication {
 
     onSuccessAuth(data) {
         this.modal.toggleLoader(true);
+
+        const handleAuthError = (error) => {
+            this.firebase.reset();
+            this.modal.toggleLoader(false);
+            this.#setAuthorizationError(error?.message || 'Something went wrong!');
+        }
+
         this.updateFirebaseToken(data.token);
         this.events.notify(EventsNames.local.SUCCESS_FIREBASE_AUTH, data);
         this.authInWallkit(data.token).then((status) => {
@@ -70,7 +90,7 @@ export default class Authentication {
             }
 
             this.modal.toggleLoader(false);
-        });
+        }).catch((error) => handleAuthError(error));
     }
 
     authInWallkit(firebaseToken = null) {
@@ -117,16 +137,25 @@ export default class Authentication {
         });
     }
 
-    show() {
+    async show() {
         this.modal.show();
     }
 
     updateFirebaseToken(token) {
         this.firebaseToken.set(token);
         this.frame.sendEvent(EventsNames.wallkit.WALLKIT_EVENT_FIREBASE_TOKEN, token);
+        this.sdk.methods.setFirebaseToken(token);
     }
 
     onFirebaseInit() {
+        if (this.reCaptcha.enabled && this.reCaptcha.loaded) {
+            this.reCaptcha.initCaptchaProcess();
+        } else if (!this.reCaptcha.loaded) {
+            this.events.subscribe(EventsNames.local.RECAPTCHA_LOADED, () => {
+                this.reCaptcha.initCaptchaProcess();
+            }, { once: true });
+        }
+
         this.modal.toggleLoader(false);
     }
 
@@ -145,6 +174,7 @@ export default class Authentication {
 
     setToken(token) {
       this.token.set(token);
+      this.sdk.methods.setToken(token);
     }
 
     #initListeners() {
@@ -183,9 +213,17 @@ export default class Authentication {
         this.firebase.logout().then((success) => {
             if (success) {
                 this.removeFirebaseToken();
+
+                if (this.reCaptcha.enabled) {
+                    this.reCaptcha.init().then(() => {
+                        this.firebase.reset();
+                    }).catch((error) => {
+                        console.error(error);
+                        this.firebase.reset();
+                    });
+                }
             }
         });
-        this.firebase.reset();
     }
 
     dispatchTokens() {
@@ -200,6 +238,33 @@ export default class Authentication {
         }
     }
 
+    async handleTicketsToken(ticketPassAuthToken) {
+        try {
+            const response = await this.sdk.methods.getAuthTokensByTicketPassToken(ticketPassAuthToken);
+
+            if (response) {
+                const userCredential = await this.firebase.authWithCustomToken(response.firebase_custom_token);
+                const firebaseToken = await userCredential.user.getIdToken();
+
+                this.updateFirebaseToken(firebaseToken);
+                this.setToken(response.token);
+
+                await this.sdk.methods.getUser();
+                this.dispatchTokens();
+
+                this.events.notify(EventsNames.local.SUCCESS_AUTH, true);
+                this.events.notify(EventsNames.local.TICKETS_TOKEN_AUTH_SUCCESS, true);
+
+                return true;
+            }
+
+            return false;
+        } catch (error) {
+            console.error(error);
+            return error;
+        }
+    }
+
     #setAuthorizationError(error) {
         const errorPlaceholder = document.getElementById('authorization-error');
         if (errorPlaceholder) {
@@ -210,7 +275,6 @@ export default class Authentication {
     #resetAuthorizationError() {
         this.#setAuthorizationError(null);
     }
-
 
     onFirebaseAuthFail(error) {
         this.modal.toggleLoader(false);

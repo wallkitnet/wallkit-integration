@@ -6,6 +6,7 @@ import Events from "../events";
 export default class SDK {
     #options;
     #events;
+    #apiUrl;
 
     constructor(options) {
         if (!!SDK.instance) {
@@ -22,6 +23,7 @@ export default class SDK {
         this.client = null;
         this.#options = options;
         this.#events = new Events();
+        this.#apiUrl = options.mode === 'dev' ? 'https://api.dev.wallkit.net/api/v1': undefined
 
         if (window.Wallkit) {
             this.onLoad();
@@ -32,7 +34,7 @@ export default class SDK {
 
     onLoad() {
         if (window.Wallkit) {
-            window.Wallkit.init({ resource: this.#options.public_key });
+            window.Wallkit.init({ resource: this.#options.public_key, api_url: this.#apiUrl });
             this.methods = window.Wallkit;
             this.client = window.Wallkit.client;
             this.#events.notify(WALLKIT_SDK_LOADED, window.Wallkit);
@@ -54,6 +56,6 @@ export default class SDK {
     }
 
     load() {
-        insertScript(`${WALLKIT_CDN_URL}/js/sdk/0.0.41/wallkit.umd.min.js`, 'wallkit-js-sdk', this.onLoad.bind(this));
+        insertScript(`${WALLKIT_CDN_URL}/js/sdk/0.0.44/wallkit.umd.min.js`, 'wallkit-js-sdk', this.onLoad.bind(this));
     }
 }

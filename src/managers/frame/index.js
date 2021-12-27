@@ -1,5 +1,5 @@
 import { createElement } from "../../utils/DOM";
-import { WALLKIT_MODAL_MIN_WIDTH, WALLKIT_MODAL_MIN_HEIGHT, WALLKIT_POPUP_URL, WALLKIT_FRAME_ID } from "../../configs/constants";
+import { WALLKIT_MODAL_MIN_WIDTH, WALLKIT_MODAL_MIN_HEIGHT, WALLKIT_POPUP_URL, WALLKIT_POPUP_DEV_URL, WALLKIT_FRAME_ID } from "../../configs/constants";
 import { FRAME_CREATED, WALLKIT_CHANGE_FRAME, WALLKIT_FRAME_READY, WALLKIT_FRAME_ROUTE_CHANGE } from "../events/events-name";
 import Events from "../events";
 
@@ -24,7 +24,9 @@ export default class Frame {
     }
 
     get getFrameURL() {
-        return `${ WALLKIT_POPUP_URL }?PUBLIC_KEY=${ this.options.public_key }&version=${ this.options.version }`;
+        const host = this.options.mode === 'dev' ? WALLKIT_POPUP_DEV_URL : WALLKIT_POPUP_URL;
+
+        return `${ host }?PUBLIC_KEY=${ this.options.public_key }&version=${ this.options.version }`;
     }
 
     createFrame() {

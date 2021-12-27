@@ -1,10 +1,16 @@
 import { loadScripts } from "../../utils/loaders";
 import { insertScript, loadCSS } from "../../utils/DOM";
-import { WALLKIT_FIREBASE_CONFIG, WALLKIT_FIREBASE_UI_PLACEHOLDER_ID } from "../../configs/constants";
+import {
+    WALLKIT_FIREBASE_CONFIG,
+    WALLKIT_DEV_FIREBASE_CONFIG,
+    WALLKIT_FIREBASE_UI_PLACEHOLDER_ID,
+} from "../../configs/constants";
 
 export default class Firebase {
-    constructor(options) {
+    #mode;
 
+    constructor(options) {
+        this.#mode = options?.mode;
         this.config = options?.config;
         this.providers = options?.providers;
         this.tosURL = options?.tosURL;
@@ -123,12 +129,13 @@ export default class Firebase {
                    tosUrl = 'https://wallkit.net',
                    privacyPolicyUrl = 'https://wallkit.net' }) {
 
-        this.firebase.initializeApp(config ?? WALLKIT_FIREBASE_CONFIG);
+        const defaultConfig = this.#mode === 'dev' ? WALLKIT_DEV_FIREBASE_CONFIG : WALLKIT_FIREBASE_CONFIG;
+        this.firebase.initializeApp(config ?? defaultConfig);
 
-        if (this.captchaKey) {
-            const appCheck = this.firebase.appCheck();
-            appCheck.activate(this.captchaKey, true);
-        }
+        // if (this.captchaKey) {
+        //     const appCheck = this.firebase.appCheck();
+        //     appCheck.activate(this.captchaKey, true);
+        // }
 
         const firebaseuiInstance = new this.firebaseui.auth.AuthUI(this.firebase.auth());
         firebaseuiInstance.disableAutoSignIn();
@@ -184,19 +191,17 @@ export default class Firebase {
         });
     }
 
-    authWithCustomToken(token) {
-        return new Promise((resolve) => {
+    async authWithCustomToken(token) {
+        try {
             if (this.firebase && this.firebase.auth) {
-                this.firebase.auth().signInWithCustomToken(token).then((userCredential) => {
-                    resolve(userCredential);
-                }).catch(() => {
-                    console.log('Custom Token Auth Fail');
-                    resolve(false);
-                });
+                return await this.firebase.auth().signInWithCustomToken(token);
             }
 
-            resolve(false);
-        });
+            return false;
+        } catch (error) {
+            console.error('Custom Token Auth Fail');
+            return false;
+        }
     }
 
 

@@ -1,7 +1,8 @@
 // Popups
 export const WALLKIT_POPUP_URL = 'https://wallkit.net/popups';
+export const WALLKIT_POPUP_DEV_URL = 'https://dev.wallkit.net/popups';
 
-// ASSETS
+// Assets
 export const WALLKIT_CDN_URL = 'https://cdn.wallkit.net';
 export const WALLKIT_CDN_ASSETS_URL = WALLKIT_CDN_URL + '/assets';
 
@@ -33,6 +34,16 @@ export const WALLKIT_FIREBASE_CONFIG = {
     messagingSenderId: "779443518820",
     appId: "1:779443518820:web:ffc6660647590674e20e71",
     measurementId: "G-GWJ1GC5B30"
+};
+export const WALLKIT_DEV_FIREBASE_CONFIG = {
+    apiKey: "AIzaSyCmIluc9x63JOu7I5UMZ8q5M4AbluBeC8o",
+    authDomain: "wallkit-258413.firebaseapp.com",
+    databaseURL: "https://wallkit-258413.firebaseio.com",
+    projectId: "wallkit-258413",
+    storageBucket: "wallkit-258413.appspot.com",
+    messagingSenderId: "767802802956",
+    appId: "1:767802802956:web:e8fc363619c47f7fff7f29",
+    measurementId: "G-ER6R7Z47R3"
 };
 export const WALLKIT_TOKEN_NAME = 'wk-token';
 export const FIREBASE_TOKEN_NAME = 'firebase-token';

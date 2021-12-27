@@ -13,6 +13,7 @@ import { isApplePayAvailable } from './utils/payments';
 
 import { ALLOWED_ORIGINS } from './configs/constants';
 import { SUCCESS_AUTH, FRAME_MESSAGE, FRAME_MODAL_CLOSED } from "./managers/events/events-name";
+import { parseAuthTokenHash, resetHash } from "./utils/url";
 
 window.WallkitIntegration = class WallkitIntegration {
     constructor(options) {
@@ -41,9 +42,11 @@ window.WallkitIntegration = class WallkitIntegration {
             ...options,
             onLoaded: () => {
                 this.authentication = new Authentication({
+                    ...options,
                     firebase: options?.auth?.firebase,
-                    modalTitle: options.auth?.modal?.title,
-                    content: options.auth?.modal?.content
+                    modalTitle: options?.auth?.modal?.title,
+                    content: options?.auth?.modal?.content,
+                    reCaptcha: options?.auth?.reCaptcha,
                 });
 
                 this.analytics = new Analytics(options?.analytics);
@@ -130,15 +133,25 @@ window.WallkitIntegration = class WallkitIntegration {
         injectInHead(styles);
     }
 
+    #recogniseURLIncomeParams () {
+        const ticketPassAuthToken = parseAuthTokenHash();
+        if (ticketPassAuthToken) {
+            this.authentication.handleTicketsToken(ticketPassAuthToken);
+            resetHash();
+        }
+    }
+
+
     init() {
         this.#insertStyles();
         this.popup.init();
         this.authentication.init();
         this.analytics.init();
         this.#eventsListener();
+        this.#recogniseURLIncomeParams();
 
         if (this.config.onInit) {
-            this.config.onInit();
+            this.config.onInit(this);
         }
     }
 }

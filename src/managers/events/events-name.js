@@ -9,6 +9,9 @@ export const FRAME_MESSAGE = 'frame-message';
 export const AUTH_MODAL_CLOSED = 'auth-modal-closed';
 export const FRAME_MODAL_CLOSED = 'frame-modal-closed';
 export const MODAL_CLOSED = 'modal-closed';
+export const RECAPTCHA_LOADED = 'recaptcha-loaded';
+export const RECAPTCHA_VALIDATION_FAILED = 'recaptcha-validation-failed';
+export const TICKETS_TOKEN_AUTH_SUCCESS = 'tickets-token-auth-success';
 
 // Wallkit Events Names
 export const WALLKIT_CHANGE_FRAME = 'wk-event-modal';
@@ -35,7 +38,10 @@ export default {
         FRAME_MESSAGE,
         AUTH_MODAL_CLOSED,
         FRAME_MODAL_CLOSED,
-        MODAL_CLOSED
+        MODAL_CLOSED,
+        RECAPTCHA_LOADED,
+        RECAPTCHA_VALIDATION_FAILED,
+        TICKETS_TOKEN_AUTH_SUCCESS
     },
     wallkit: {
         FRAME_CREATED,

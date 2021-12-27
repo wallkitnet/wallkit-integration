@@ -21,3 +21,24 @@ export const parseModalHashURL = () => {
         }
     }
 }
+
+export const parseAuthTokenHash = () => {
+    const hash = decodeURIComponent(window.location.hash)
+
+    if (hash?.includes('wk-authorize')) {
+        const splitHash = hash.split('=');
+
+        const token = splitHash?.[1];
+        if (token) {
+            return token;
+        }
+    }
+
+    return null;
+}
+
+export const resetHash = () => {
+    window.location.hash = '';
+    const path = window.location.href.replace('#', '');
+    window.history.pushState('', '', path);
+}
