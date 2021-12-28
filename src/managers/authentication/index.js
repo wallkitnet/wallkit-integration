@@ -53,6 +53,9 @@ export default class Authentication {
         this.reCaptcha.events.subscribe(EventsNames.local.RECAPTCHA_VALIDATION_FAILED, () => {
             this.#setAuthorizationError('ReCaptcha Validation Failed! Please try again!');
         });
+        this.reCaptcha.events.subscribe(EventsNames.local.RECAPTCHA_VALIDATION_SUCCESS, () => {
+            this.#resetAuthorizationError();
+        });
 
         if (!!options?.reCaptcha) {
             if (!this.isAuthenticated()) {
@@ -125,6 +128,7 @@ export default class Authentication {
 
     #createModal() {
         const defaultContentModal = `<div>
+                                        <div id="authorization-error"></div>
                                         <h2 class="wallkit-auth-modal__title">${this.#options?.modalTitle ?? 'Sign In'}</h2>
                                         <div id="${WALLKIT_FIREBASE_UI_PLACEHOLDER_ID}"></div>
                                      </div>`;

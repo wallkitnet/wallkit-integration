@@ -82,6 +82,7 @@ export default class ReCaptcha {
 
     #onRecaptchaAuth(token) {
         return this.#sdk.methods.validateReCaptchaToken(token).then(() => {
+            this.events.notify(EventsNames.local.RECAPTCHA_VALIDATION_SUCCESS);
             this.valid = true;
             this.authentication.modal.toggleLoader(false);
         }).catch(() => {

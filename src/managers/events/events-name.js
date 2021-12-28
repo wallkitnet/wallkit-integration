@@ -11,6 +11,7 @@ export const FRAME_MODAL_CLOSED = 'frame-modal-closed';
 export const MODAL_CLOSED = 'modal-closed';
 export const RECAPTCHA_LOADED = 'recaptcha-loaded';
 export const RECAPTCHA_VALIDATION_FAILED = 'recaptcha-validation-failed';
+export const RECAPTCHA_VALIDATION_SUCCESS = 'recaptcha-validation-success';
 export const TICKETS_TOKEN_AUTH_SUCCESS = 'tickets-token-auth-success';
 
 // Wallkit Events Names
@@ -41,6 +42,7 @@ export default {
         MODAL_CLOSED,
         RECAPTCHA_LOADED,
         RECAPTCHA_VALIDATION_FAILED,
+        RECAPTCHA_VALIDATION_SUCCESS,
         TICKETS_TOKEN_AUTH_SUCCESS
     },
     wallkit: {
