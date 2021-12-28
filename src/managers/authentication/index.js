@@ -214,13 +214,19 @@ export default class Authentication {
             if (success) {
                 this.removeFirebaseToken();
 
-                if (this.reCaptcha.enabled) {
+                if (this.reCaptcha.enabled && !this.reCaptcha.loaded) {
                     this.reCaptcha.init().then(() => {
                         this.firebase.reset();
                     }).catch((error) => {
                         console.error(error);
                         this.firebase.reset();
                     });
+                } else if (this.reCaptcha.loaded) {
+                    this.firebase.reset();
+                    this.reCaptcha.grecaptcha.reset();
+                    this.reCaptcha.initCaptchaProcess();
+                } else {
+                    this.firebase.reset();
                 }
             }
         });

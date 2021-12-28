@@ -119,6 +119,7 @@ export default class ReCaptcha {
 
                     this.grecaptcha.ready(() => {
                         this.grecaptcha.execute();
+
                         setTimeout(() => {
                             this.authentication.modal.toggleLoader(false);
                         }, 300);
