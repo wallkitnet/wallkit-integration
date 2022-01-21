@@ -185,10 +185,14 @@ export default class Authentication {
 
         this.events.subscribe(EventsNames.local.FRAME_MESSAGE, ({ name, value }) => {
             switch (name) {
+                case EventsNames.wallkit.WALLKIT_EVENT_TOKEN:
+                    if (value) {
+                        this.setToken(value);
+                    }
+                    break;
                 case EventsNames.wallkit.WALLKIT_EVENT_AUTH:
                 case EventsNames.wallkit.WALLKIT_EVENT_REGISTRATION:
                 case EventsNames.wallkit.WALLKIT_EVENT_GET_TOKEN:
-                case EventsNames.wallkit.WALLKIT_EVENT_TOKEN:
                     if (value) {
                         let token = value.token;
                         this.setToken(token);

@@ -17,7 +17,7 @@ export default class ReCaptcha {
         this.options = options;
         this.loaded = false;
         this.valid = false;
-        this.siteKey = options?.sitekey;
+        this.siteKey = options?.siteKey;
         this.grecaptcha = null;
 
         this.#sdk = new SDK();
@@ -112,46 +112,64 @@ export default class ReCaptcha {
                 }
             }
 
-            const emailBtn = document.querySelector('.firebaseui-idp-button[data-provider-id="password"]');
+            const executeReCaptcha = () => {
+                this.authentication.modal.toggleLoader(true);
+                this.grecaptcha.ready(() => {
+                    this.grecaptcha.execute();
 
-            if (emailBtn) {
-                emailBtn.addEventListener('click', () => {
-                    this.authentication.modal.toggleLoader(true);
+                    setTimeout(() => {
+                        this.authentication.modal.toggleLoader(false);
+                    }, 300);
+                });
+            }
 
-                    this.grecaptcha.ready(() => {
-                        this.grecaptcha.execute();
+            const initTriggers = () => {
+                executeReCaptcha();
 
-                        setTimeout(() => {
-                            this.authentication.modal.toggleLoader(false);
-                        }, 300);
+                const emailField = document.querySelector('.firebaseui-id-email');
+                const submitBtn = document.querySelector('.firebaseui-id-page-sign-in .firebaseui-id-submit');
+                const cancelBtn = document.querySelector('.firebaseui-id-page-sign-in .firebaseui-id-secondary-link');
+
+                if (emailField) {
+                    emailField.addEventListener('input', () => {
+                        handleCaptchaState();
                     });
 
-                    const emailField = document.querySelector('.firebaseui-id-email');
-                    const submitBtn = document.querySelector('.firebaseui-id-page-sign-in .firebaseui-id-submit');
-                    const cancelBtn = document.querySelector('.firebaseui-id-page-sign-in .firebaseui-id-secondary-link');
-
-                    if (emailField) {
-                        emailField.addEventListener('input', () => {
-                            handleCaptchaState();
-                        });
-
-                        emailField.addEventListener('keydown', (event) => {
-                            if (event.code && event.code === 'Enter') {
-                                handleCaptchaState();
-                            }
-                        });
-                    }
-
-                    if (cancelBtn) {
-                        cancelBtn.onclick = () => {
+                    emailField.addEventListener('keydown', (event) => {
+                        if (event.code && event.code === 'Enter') {
                             handleCaptchaState();
                         }
-                    }
+                    });
+                }
 
-                    if (submitBtn) {
-                        submitBtn.onclick = () => {
-                            handleCaptchaState();
-                        }
+                if (cancelBtn) {
+                    cancelBtn.onclick = () => {
+                        handleCaptchaState();
+                    }
+                }
+
+                if (submitBtn) {
+                    submitBtn.onclick = () => {
+                        handleCaptchaState();
+                    }
+                }
+            }
+
+            const emailBtn = document.querySelector('.firebaseui-idp-button[data-provider-id="password"]');
+            const emailField = document.querySelector('.firebaseui-id-email');
+            if (emailBtn) {
+                emailBtn.addEventListener('click', initTriggers.bind(this));
+            } else if (emailField) {
+                const submitBtn = document.querySelector('.firebaseui-id-page-sign-in .firebaseui-id-submit');
+                if (submitBtn) {
+                    submitBtn.onclick = () => {
+                        handleCaptchaState();
+                    }
+                }
+
+                emailField.addEventListener('input', () => {
+                    if (!this.valid) {
+                        executeReCaptcha();
                     }
                 });
             }
