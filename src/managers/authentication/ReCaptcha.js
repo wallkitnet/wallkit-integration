@@ -100,9 +100,21 @@ export default class ReCaptcha {
         injectInHead(style);
     }
 
+    resetProcess() {
+        if (this.grecaptcha) {
+            this.grecaptcha.reset();
+        }
+        this.authentication.firebase.reset();
+        this.authentication.modal.toggleLoader(false);
+    }
+
     async initCaptchaProcess() {
         try {
             this.valid = false;
+
+            if (this.grecaptcha) {
+                this.grecaptcha.reset();
+            }
 
             const handleCaptchaState = () => {
                 if (!this.valid) {
@@ -115,11 +127,11 @@ export default class ReCaptcha {
             const executeReCaptcha = () => {
                 this.authentication.modal.toggleLoader(true);
                 this.grecaptcha.ready(() => {
-                    this.grecaptcha.execute();
-
-                    setTimeout(() => {
-                        this.authentication.modal.toggleLoader(false);
-                    }, 300);
+                    this.grecaptcha.execute().then(() => {
+                        this.events.subscribe(EventsNames.local.MODAL_CLOSED,
+                            () => this.resetProcess(),
+                            { once: true });
+                    }).catch(() => this.resetProcess())
                 });
             }
 
@@ -157,6 +169,7 @@ export default class ReCaptcha {
 
             const emailBtn = document.querySelector('.firebaseui-idp-button[data-provider-id="password"]');
             const emailField = document.querySelector('.firebaseui-id-email');
+
             if (emailBtn) {
                 emailBtn.addEventListener('click', initTriggers.bind(this));
             } else if (emailField) {
@@ -169,6 +182,7 @@ export default class ReCaptcha {
 
                 emailField.addEventListener('input', () => {
                     if (!this.valid) {
+                        emailField.blur();
                         executeReCaptcha();
                     }
                 });
