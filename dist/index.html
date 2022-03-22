@@ -130,8 +130,39 @@
         Journey
     </button>
 
+<!--    <script src="https://www.google.com/recaptcha/api.js?render=6LeNZrwbAAAAAKXPTmJj5KMdUwI2GE6XAUbCU6DM"></script>-->
+<!--    <script src="wallkit.umd.min.js" defer></script>-->
 
-    <script src="wallkit-integration-library.js"></script>
+    <script src="wallkit-integration-library.min.js"></script>
+<!--    <script src="https://cdn.wallkit.net/js/integration/3.0.1/wallkit-integration-library.min.js"></script>-->
+
+    <script
+            src="https://js.sentry-cdn.com/c9f328bbf5ba4793be5a393badc7385f.min.js"
+            crossorigin="anonymous"
+    ></script>
+
+    <script>
+        Sentry.onLoad(function() {
+            Sentry.init({
+                release: "1.0.0 ",
+                environment: "thewrap",
+            });
+            Sentry.configureScope(scope => {
+                scope.setTag('123' );
+            });
+            // etc.
+        });
+
+        try {
+            Wallkit.login({email: 'test@test.com', password: 'test'});
+
+            myUndffef();
+        } catch (e) {
+            Sentry.captureException(e);
+        }
+
+        // myUndeffeoo();
+    </script>
 
 
 
@@ -161,19 +192,16 @@
         `);
 
         let WallkitInt = new WallkitIntegration({
-            public_key: '00000000-ebb7-42fe-ad2e-f255c73b1061',
+            public_key: 'bc3adcd3-9156-44bd-bc89-8092a58c6ae9',
             mode: 'prod',
             version: 'v1',
             auth: { // default false
+                // firebase: false,
                 firebase: {
                     providers: [{
                         provider: 'email',
                         buttonColor: '#000',
                         fullLabel: 'Continue with Email'
-                    },
-                    {
-                        provider: 'google',
-                        fullLabel: 'Continue with Google'
                     }],
                     tosURL: '',
                     privacyPolicyURL: '',
@@ -182,6 +210,9 @@
                 modal: {
                     title: 'Authorisation',
                     content: modalContent
+                },
+                reCaptcha: {
+                    siteKey: '6Lc4GioeAAAAAHo1Qsb6V9mz7NchYe8wAeqtlg__'
                 }
             },
             analytics: {
@@ -190,11 +221,27 @@
             onInit: () => {
                 const post = new WallkitInt.content(postInfo);
 
-                post.checkAccess().then((response) => {
-                    console.log('response', response);
-                }).catch((error) => {
-                    console.log('ERROR', error);
-                });
+                // grecaptcha.ready(function() {
+                //     grecaptcha.execute('6LeNZrwbAAAAAKXPTmJj5KMdUwI2GE6XAUbCU6DM', {action: 'submit'}).then(function(token) {
+                //         // Add your logic to submit to your backend server here.
+                //     });
+                // });
+
+                // post.checkAccess().then((response) => {
+                //     console.log('response', response);
+                // }).catch((error) => {
+                //     console.log('ERROR', error);
+                // });
+                //
+                // try {
+                //     console.log('TEST');
+                //     WallkitInt.sdk.methods.login({email: 'test@test.com', password: 'test'}).catch((error) => {
+                //         Sentry.captureException(error);
+                //     });
+                // } catch (e) {
+                //     console.log('e', e);
+                //     Sentry.captureException(e);
+                // }
             }
         });
 

@@ -1,1 +1,4166 @@
-(()=>{"use strict";var e="https://cdn.wallkit.net",t=e+"/assets",n=[document.location.origin,"http://127.0.0.1:8000","https://wallkit.net","https://dev.wallkit.net","https://demo.wallkit.net"],i="500",o="250",r="firebase-ui-placeholder",a="wk-frame",s={apiKey:"AIzaSyAoRdxZIlUE0HInqtzDid6rNxluhs5nCqg",authDomain:"wallkit-production.firebaseapp.com",databaseURL:"https://wallkit-production.firebaseio.com",projectId:"wallkit-production",storageBucket:"wallkit-production.appspot.com",messagingSenderId:"779443518820",appId:"1:779443518820:web:ffc6660647590674e20e71",measurementId:"G-GWJ1GC5B30"};function l(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}var c={DOM_ERROR:"DOM_ERROR",ARGUMENT_ERROR:"ARGUMENT_ERROR"},u={DOM_ERROR:"DOM Manipulation gone wrong",ARGUMENT_ERROR:"One of the argument were not provided"},h=function(){function e(){!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,e)}var t,n;return t=e,n=[{key:"isErrorRecognisable",value:function(e){return!!c[e]}},{key:"getErrorTypeMessage",value:function(e){var t;return null!==(t=u[e])&&void 0!==t?t:"Unrecognised Error"}},{key:"handleError",value:function(t,n){if(n&&this.isErrorRecognisable(n)){var i=null!=t?t:e.getErrorTypeMessage(n),o="ERROR::".concat(n,"; ").concat(i,";");throw console.log(o),new e(o)}var r="ERROR::".concat(n,";");throw console.log(r),new e(r)}},{key:"checkRequiredArgument",value:function(e,t){void 0===e&&this.handleError("Argument ".concat(t," is not provided"),c.ARGUMENT_ERROR)}}],null&&l(t.prototype,null),n&&l(t,n),e}(),f=function(){return!!document},d=function(e){return f()?!!document.querySelector(e):h.handleError("Document is not available",c.DOM_ERROR)},p=function(e,t){if(!f())return h.handleError("Document is not available",c.DOM_ERROR);if(!e)return h.checkRequiredArgument(e);var n=document.createElement(e),i=null!=t?t:{},o=i.id,r=i.className,a=i.styles,s=i.attributes;if(o&&(n.id=o),r&&n.setAttribute("class",r),a&&Object.keys(a)&&Object.keys(a).length)for(var l in a)a.hasOwnProperty(l)&&(n.style[l]=a[l]);if(s&&Object.keys(s)&&Object.keys(s).length)for(var u in s)s.hasOwnProperty(u)&&(n[u]=s[u]);return n},v=function(e){return f()?e?document.body.appendChild(e):h.checkRequiredArgument(e,"element"):h.handleError("Document is not available",c.DOM_ERROR)},m=function(e,t){if(!f())return h.handleError("Document is not available",c.DOM_ERROR);if(!d("#"+t)){var n=document.querySelector("head"),i=document.createElement("link");return t&&(i.id=t),i.rel="stylesheet",i.type="text/css",i.href=e,i.media="all",n.appendChild(i)}},b=function(e,t,n){if(!f())return h.handleError("Document is not available",c.DOM_ERROR);if(!d("#"+t)){var i=p("script",{id:t,attributes:{src:e}});return n&&i.addEventListener("load",n,{once:!0}),v(i)}};const w=p,y=v,k=d;function g(e){return(g="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function O(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}var E=function(){function e(){return function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,e),e.instance?e.instance:(e.instance=this,this.listeners=[],this)}var t,n;return t=e,(n=[{key:"subscribe",value:function(e,t,n){this.listeners.push({name:e,callback:t,options:n})}},{key:"unsubscribe",value:function(e,t){this.listeners=this.listeners.filter((function(n){return n.name!==e||n.callback!==t}))}},{key:"notify",value:function(e,t){var n=[];this.listeners.forEach((function(i,o){var r;e===i.name&&(i.callback(t),null!=i&&null!==(r=i.options)&&void 0!==r&&r.once&&n.push(o))})),this.listeners=this.listeners.filter((function(e,t){return!n.includes(t)}))}}])&&O(t.prototype,n),e}(),T="frame-created",j="success-auth",R="wallkit-js-sdk-loaded",S="frame-message",P="frame-modal-closed",C="modal-closed",A="wk-event-modal",W="wk-event-modals-ready",L="wk-event-route-change";const I=j,_="success-firebase-auth",x=S,D="wk-event-logout",M="wk-firebase-token",F="wk-event-firebase-token",U="wk-event-token",N="wk-event-get-token",z="wk-event-auth",G="wk-event-registration",H="wk-event-one-tap-sign-in",q="wk-event-firebase-custom-token";function K(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var i=Object.getOwnPropertySymbols(e);t&&(i=i.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,i)}return n}function B(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function V(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}function J(e,t,n){if(!t.has(e))throw new TypeError("attempted to get private field on non-instance");return n}var X=new WeakSet,Y=new WeakSet,Z=new WeakSet,$=new WeakSet,Q=new WeakSet,ee=new WeakSet,te=new WeakSet,ne=new WeakSet,ie=function(){function e(t){!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,e),ne.add(this),te.add(this),ee.add(this),Q.add(this),$.add(this),Z.add(this),Y.add(this),X.add(this),this.options=t,this.modalFrame=t?t.resourceFrame:null,this.content=t?t.content:null,this.modalWrapper=null,this.modalContent=null,this.loaderElement=null,this.isLoading=!1,this.closeOutside=!0,this.onClose=t?t.onClose:null}var t,n;return t=e,(n=[{key:"bindCloseEvent",value:function(e){return e.addEventListener("click",this.hide.bind(this))}},{key:"insertContent",value:function(e){this.modalContent&&e&&("string"==typeof e?this.modalContent.insertAdjacentHTML("beforeend",e):e instanceof HTMLElement&&this.modalContent.appendChild(e))}},{key:"toggleLoader",value:function(e){this.isLoading=e,this.loaderElement.style.display=e?"flex":"none"}},{key:"open",value:function(e,t){this.modalFrame&&(this.modalFrame.openFrame(e,t),this.show())}},{key:"destroy",value:function(){}},{key:"show",value:function(){this.modalWrapper.style.display="flex"}},{key:"hide",value:function(){(new E).notify(C,{name:J(this,X,oe).call(this)}),this.onClose&&this.onClose(),this.modalWrapper.style.display="none"}},{key:"resize",value:function(e,t){this.modalFrame&&this.modalFrame.resize(e,t)}},{key:"sendEvent",value:function(e,t,n){this.modalFrame&&this.modalFrame.sendEvent(e,t,n)}},{key:"openByHash",value:function(){var e=function(){var e=/#WkModal\((.*)\)$/.exec(decodeURIComponent(window.location.hash));if(e&&e[1]){var t=e[1].split(/,(.+)/);if(void 0!==t[1])try{t[1]=JSON.parse(t[1])}catch(e){t[1]={value:t[1].trim()}}return window.location.hash="",{name:t[0],params:"object"===g(t[1])?t[1]:null}}}();e&&this.open(e.name,e.params)}},{key:"onReady",value:function(){var e;null!==(e=this.options)&&void 0!==e&&e.onReady&&this.options.onReady(this)}},{key:"init",value:function(){J(this,$,se).call(this),J(this,Q,le).call(this),J(this,ee,ce).call(this),J(this,te,ue).call(this),this.onReady()}}])&&V(t.prototype,n),e}();function oe(){var e,t;return null!==(e=null===(t=this.options)||void 0===t?void 0:t.modalName)&&void 0!==e?e:"wk-modal"}function re(e,t,n){for(var i=J(this,X,oe).call(this)+"-"+t,o=0,r=i;k("#"+r);)r=i+"-"+ ++o;return w(e,function(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?K(Object(n),!0).forEach((function(t){B(e,t,n[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):K(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))}))}return e}({id:r},n))}function ae(){var e=J(this,Y,re).call(this,"div","close-btn",{className:"wallkit-modal-wrapper__close-btn"});return e.innerHTML="&#xd7;",this.bindCloseEvent(e),e}function se(){var e,t,n=this,i="wallkit-modal-wrapper";return null!==(e=this.options)&&void 0!==e&&e.className&&(i+=" "+(null===(t=this.options)||void 0===t?void 0:t.className)),this.modalWrapper=J(this,Y,re).call(this,"div","wrapper",{styles:{display:"none"},className:i}),this.modalWrapper.addEventListener("click",(function(e){e.target.id===n.modalWrapper.id&&n.closeOutside&&n.hide()})),this.modalWrapper}function le(){return this.modalContent=J(this,Y,re).call(this,"div","content",{className:"wallkit-modal-wrapper__content"}),this.modalContent.style.minWidth="500px",this.modalContent.style.minHeight="250px",this.modalContent}function ce(){var e;this.loaderElement=J(this,Y,re).call(this,"div","wallkit-modal-spinner",{className:"wallkit-spinner",styles:{display:null!==(e=this.options)&&void 0!==e&&e.initialLoader?"flex":"none"}}),this.loaderElement.insertAdjacentHTML("beforeend",'<div class="wallkit-spinner__container"><div class="cube1"></div><div class="cube2"></div></div>')}function ue(){return J(this,ne,he).call(this),this.modalWrapper.appendChild(this.modalContent),this.modalContent.appendChild(this.loaderElement),this.modalContent.appendChild(J(this,Z,ae).call(this)),this.modalFrame?this.insertContent(this.modalFrame.init()):this.modalContent&&this.insertContent(this.content),y(this.modalWrapper)}function he(){!function(e,n,i){var o=!(arguments.length>3&&void 0!==arguments[3])||arguments[3];switch(e){case"css":var r=i;return r+=o?".min.css":".css",void m("".concat(t,"/css/").concat(n,"/").concat(r),"wk-css-".concat(i));default:;}}("css","1.0","spinner")}function fe(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var i=Object.getOwnPropertySymbols(e);t&&(i=i.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,i)}return n}function de(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?fe(Object(n),!0).forEach((function(t){pe(e,t,n[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):fe(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))}))}return e}function pe(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function ve(e){return(ve="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function me(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}function be(e,t,n){if(!t.has(e))throw new TypeError("attempted to get private field on non-instance");return n}var we=new WeakSet,ye=new WeakSet,ke=function(){function e(t){var n,i,o,a,s;!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,e),ye.add(this),we.add(this),this.config=null==t?void 0:t.config,this.providers=null==t?void 0:t.providers,this.tosURL=null==t?void 0:t.tosURL,this.privacyPolicyURL=null==t?void 0:t.privacyPolicyURL,this.captchaKey=null!==(n=null==t?void 0:t.captchaKey)&&void 0!==n?n:"6LeNZrwbAAAAAKXPTmJj5KMdUwI2GE6XAUbCU6DM",this.firebase=null,this.firebaseui=null,this.elementPlaceholder=null!==(i=null==t?void 0:t.elementSelector)&&void 0!==i?i:"#".concat(r),this.onSuccessAuth=null!==(o=null==t?void 0:t.onSuccessAuth)&&void 0!==o?o:null,this.onAuthStateChanged=null!==(a=null==t?void 0:t.onAuthStateChanged)&&void 0!==a?a:null,this.uiShown=null!==(s=null==t?void 0:t.uiShown)&&void 0!==s?s:null}var t,n;return t=e,(n=[{key:"allowedProviders",get:function(){return{google:this.firebase.auth.GoogleAuthProvider.PROVIDER_ID,email:this.firebase.auth.EmailAuthProvider.PROVIDER_ID,facebook:this.firebase.auth.FacebookAuthProvider.PROVIDER_ID,apple:"apple.com",microsoft:"microsoft.com"}}},{key:"formatSelectedProviders",value:function(e){var t=this,n=[];return Array.isArray(e)&&(n=e.map((function(e){if("object"===ve(e)){if(t.allowedProviders[e.provider])return de(de({},e),{},{provider:t.allowedProviders[e.provider]})}else if(t.allowedProviders[e])return t.allowedProviders[e]})).filter((function(e){return!!e}))),n}},{key:"initFirebase",value:function(e){var t=this,n=e.config,i=e.providers,o=void 0===i?["email","google"]:i,r=e.tosUrl,a=void 0===r?"https://wallkit.net":r,l=e.privacyPolicyUrl,c=void 0===l?"https://wallkit.net":l;this.firebase.initializeApp(null!=n?n:s),this.captchaKey&&this.firebase.appCheck().activate(this.captchaKey,!0);var u=new this.firebaseui.auth.AuthUI(this.firebase.auth());u.disableAutoSignIn();var h={callbacks:{signInSuccessWithAuthResult:function(e){e.user.getIdToken().then((function(n){var i={user:e.user,userId:e.user.uid,token:n};t.onSuccessAuth&&t.onSuccessAuth(i,e)}))},uiShown:function(){t.uiShown&&t.uiShown()}},signInFlow:"popup",signInOptions:this.formatSelectedProviders(o),credentialHelper:this.firebaseui.auth.CredentialHelper.GOOGLE_YOLO,tosUrl:a,privacyPolicyUrl:c};u.start(this.elementPlaceholder,h),this.firebaseui=u,this.firebase.auth().onAuthStateChanged(be(this,ye,Oe).bind(this))}},{key:"reset",value:function(){this.firebaseui&&(this.firebaseui.reset(),this.firebaseui.start(this.elementPlaceholder))}},{key:"logout",value:function(){var e=this;return new Promise((function(t){e.firebase&&e.firebase.auth?e.firebase.auth().signOut().then((function(){return t(!0)})):t(!1)}))}},{key:"authWithCustomToken",value:function(e){var t=this;return new Promise((function(n){t.firebase&&t.firebase.auth&&t.firebase.auth().signInWithCustomToken(e).then((function(e){n(e)})).catch((function(){console.log("Custom Token Auth Fail"),n(!1)})),n(!1)}))}},{key:"init",value:function(){var e=this;be(this,we,ge).call(this).then((function(){e.initFirebase({config:e.config,providers:e.providers,tosUrl:e.tosURL,privacyPolicyUrl:e.privacyPolicyURL})}))}}])&&me(t.prototype,n),e}();function ge(){var e=this;return new Promise((function(t,n){b("https://www.gstatic.com/firebasejs/8.7.0/firebase-app.js","firebase-app",(function(){var n=[{url:"https://www.gstatic.com/firebasejs/8.7.0/firebase-analytics.js",id:"firebase-analytics",defer:!0,onload:function(){return o()}},{url:"https://www.gstatic.com/firebasejs/8.7.0/firebase-auth.js",id:"firebase-auth",defer:!0,onload:function(){return o()}},{url:"https://www.gstatic.com/firebasejs/8.7.0/firebase-firestore.js",id:"firebase-firestore",defer:!0,onload:function(){return o()}},{url:"https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.js",id:"firebase-ui",defer:!0,onload:function(){return o()}},{url:"https://www.gstatic.com/firebasejs/8.7.0/firebase-app-check.js",id:"firebase-app-check",defer:!0,onload:function(){return o()}}],i=0,o=function(){++i===n.length&&(e.firebase=window.firebase,e.firebaseui=window.firebaseui,t({firebase:window.firebase,firebaseui:window.firebaseui}))};(function(e){Array.isArray(e)&&e.forEach((function(e){b(e.url,e.id,e.onload)}))})(n),m("https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.css","firebase-ui-styles")}))}))}function Oe(e){var t=this;e&&e.getIdToken().then((function(e){t.onAuthStateChanged&&t.onAuthStateChanged(e)}))}function Ee(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}var Te=new WeakSet,je=function(){function e(t){if(function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,e),Te.add(this),e.instance)return e.instance;e.instance=this,this.currentFrameName="",this.options=t,this.frameElement=null,this.ready=!1,this.events=new E}var t,n;return t=e,(n=[{key:"element",get:function(){return this.frameElement}},{key:"getFrameURL",get:function(){return"".concat("https://wallkit.net/popups","?PUBLIC_KEY=").concat(this.options.public_key,"&version=").concat(this.options.version)}},{key:"createFrame",value:function(){return this.frameElement=p("iframe",{id:a,className:a,attributes:{scrolling:"no",allowtransparency:"true",frameborder:"0",width:i,height:o}}),this.frameElement.setAttribute("src",this.getFrameURL),this.events.notify(T,!0),this.frameElement}},{key:"resize",value:function(e,t){e=e>=i?e:i,t=t>=o?t:o,this.frameElement&&(this.frameElement.width=e,this.frameElement.height=t)}},{key:"sendEvent",value:function(e,t,n){if(this.frameElement&&this.frameElement.contentWindow){var i=this.frameElement.contentWindow;this.events.notify(e,t),i.postMessage({name:e,value:t,params:n},"*")}}},{key:"openFrame",value:function(e,t){var n=this;this.currentFrameName=e,this.ready?this.sendEvent(A,e,t):this.events.subscribe(W,(function(){n.sendEvent(A,e,t)}),{once:!0})}},{key:"onFrameReady",value:function(){var e,t;this.ready=!0,null!==(e=this.options)&&void 0!==e&&e.onReady&&(null===(t=this.options)||void 0===t||t.onReady())}},{key:"init",value:function(){return function(e,t,n){if(!t.has(e))throw new TypeError("attempted to get private field on non-instance");return n}(this,Te,Re).call(this),this.createFrame()}}])&&Ee(t.prototype,n),e}();function Re(){var e=this;this.events.subscribe(L,(function(t){e.currentFrameName=t})),this.events.subscribe(W,(function(t){!0===t&&e.onFrameReady()}))}function Se(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}function Pe(e,t){return function(e,t){return t.get?t.get.call(e):t.value}(e,Ae(e,t,"get"))}function Ce(e,t,n){return function(e,t,n){if(t.set)t.set.call(e,n);else{if(!t.writable)throw new TypeError("attempted to set read only private field");t.value=n}}(e,Ae(e,t,"set"),n),n}function Ae(e,t,n){if(!t.has(e))throw new TypeError("attempted to "+n+" private field on non-instance");return t.get(e)}var We=new WeakMap,Le=new WeakMap,Ie=function(){function t(e){return function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,t),We.set(this,{writable:!0,value:void 0}),Le.set(this,{writable:!0,value:void 0}),t.instance?t.instance:e?(t.instance=this,this.methods=null,this.client=null,Ce(this,We,e),Ce(this,Le,new E),void(window.Wallkit?this.onLoad():this.load())):new Error("No Options Provided")}var n,i;return n=t,(i=[{key:"onLoad",value:function(){var e,t;window.Wallkit&&(window.Wallkit.init({resource:Pe(this,We).public_key}),this.methods=window.Wallkit,this.client=window.Wallkit.client,Pe(this,Le).notify(R,window.Wallkit),null!==(e=Pe(this,We))&&void 0!==e&&e.onLoaded&&(null===(t=Pe(this,We))||void 0===t||t.onLoaded()))}},{key:"awaitLoad",value:function(){var e=this;return new Promise((function(t){e.methods?t(e):Pe(e,Le).subscribe(R,(function(){return t(e)}))}))}},{key:"load",value:function(){b("".concat(e,"/js/sdk/0.0.41/wallkit.umd.min.js"),"wallkit-js-sdk",this.onLoad.bind(this))}}])&&Se(n.prototype,i),t}();const _e={setItem:function(e,t){return this.isAvailable()?window.localStorage.setItem(e,t):null},getItem:function(e){return this.isAvailable()?window.localStorage.getItem(e):null},removeItem:function(e){if(this.isAvailable())return window.localStorage.removeItem(e)},isAvailable:function(){try{return window.localStorage.setItem("",""),window.localStorage.removeItem(""),!0}catch(e){return!1}}};function xe(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}function De(e,t){return function(e,t){return t.get?t.get.call(e):t.value}(e,Me(e,t,"get"))}function Me(e,t,n){if(!t.has(e))throw new TypeError("attempted to "+n+" private field on non-instance");return t.get(e)}var Fe=new WeakMap,Ue=function(){function e(t,n){!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,e),Fe.set(this,{writable:!0,value:void 0}),t&&(function(e,t,n){(function(e,t,n){if(t.set)t.set.call(e,n);else{if(!t.writable)throw new TypeError("attempted to set read only private field");t.value=n}})(e,Me(e,t,"set"),n)}(this,Fe,t),n?this.set(n):this.token=this.getStoredTokenValue()||null)}var t,n;return t=e,(n=[{key:"get",value:function(){return this.token}},{key:"getStoredTokenValue",value:function(){return _e.getItem(De(this,Fe))||null}},{key:"remove",value:function(){var e;this.token=null,e=De(this,Fe),document.cookie="".concat(e,"=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"),_e.removeItem(De(this,Fe))}},{key:"set",value:function(e){this.token=e,function(e,t,n){var i=(n=n||{}).expires;if("number"==typeof i&&i){var o=new Date;o.setTime(o.getTime()+1e3*i),i=n.expires=o}i&&i.toUTCString&&(n.expires=i.toUTCString()),t=encodeURIComponent(t);var r="".concat(e,"=").concat(t);for(var a in n){r+="; "+a;var s=n[a];s&&(r+="="+s)}document.cookie=r}(De(this,Fe),e,{expires:"Fri, 31 Dec 9999 23:59:59 GMT",path:"/"}),_e.setItem(De(this,Fe),e)}}])&&xe(t.prototype,n),e}();function Ne(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var i=Object.getOwnPropertySymbols(e);t&&(i=i.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,i)}return n}function ze(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Ne(Object(n),!0).forEach((function(t){Ge(e,t,n[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Ne(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))}))}return e}function Ge(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function He(e){return(He="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function qe(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}function Ke(e,t){return function(e,t){return t.get?t.get.call(e):t.value}(e,Ve(e,t,"get"))}function Be(e,t,n){if(!t.has(e))throw new TypeError("attempted to get private field on non-instance");return n}function Ve(e,t,n){if(!t.has(e))throw new TypeError("attempted to "+n+" private field on non-instance");return t.get(e)}var Je=new WeakMap,Xe=new WeakSet,Ye=new WeakSet,Ze=new WeakSet,$e=new WeakSet,Qe=function(){function e(t){if(function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,e),$e.add(this),Ze.add(this),Ye.add(this),Xe.add(this),Je.set(this,{writable:!0,value:void 0}),e.instance)return e.instance;if(e.instance=this,o=t,function(e,t,n){if(t.set)t.set.call(e,n);else{if(!t.writable)throw new TypeError("attempted to set read only private field");t.value=n}}(i=this,Ve(i,Je,"set"),o),this.token=new Ue("wk-token"),this.firebaseToken=new Ue("firebase-token"),this.frame=new je,this.sdk=new Ie,null!=t&&t.firebase){this.modal=Be(this,Xe,et).call(this),this.modal.init();var n={onAuthStateChanged:this.updateFirebaseToken.bind(this),onSuccessAuth:this.onSuccessAuth.bind(this),uiShown:this.onFirebaseInit.bind(this),onAuthFail:this.onFirebaseAuthFail.bind(this)};"object"===He(t.firebase)&&(n=ze(ze({},n),t.firebase)),this.firebase=new ke(n),this.firebase.init()}var i,o;this.events=new E}var t,n;return t=e,(n=[{key:"isAuthenticated",value:function(){return this.sdk?this.sdk.methods.isAuthenticated():!!this.token.get()}},{key:"onSuccessAuth",value:function(e){var t=this;this.modal.toggleLoader(!0),this.updateFirebaseToken(e.token),this.events.notify(_,e),this.authInWallkit(e.token).then((function(e){e?t.modal.hide():t.firebase.reset(),t.modal.toggleLoader(!1)}))}},{key:"authInWallkit",value:function(){var e=this,t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:null;return Be(this,$e,it).call(this),new Promise((function(n){t?e.sdk.methods.authenticateWithFirebase(t).then((function(t){var i=t.token,o=t.existed;e.setToken(i);var r=setTimeout((function(){n(!1)}),1e4);e.sdk.methods.subscribeLocalEvent("user",(function t(){clearTimeout(r),e.sdk.methods.unsubscribeLocalEvent("user",t),e.events.notify(I,{register:!o}),n(!0)}))})).catch((function(t){var i;Be(e,Ze,nt).call(e,null==t||null===(i=t.response)||void 0===i?void 0:i.error_description),e.removeTokens(),n(!1)})):n(!1)}))}},{key:"show",value:function(){this.modal.show()}},{key:"updateFirebaseToken",value:function(e){this.firebaseToken.set(e),this.frame.sendEvent(F,e)}},{key:"onFirebaseInit",value:function(){this.modal.toggleLoader(!1)}},{key:"removeToken",value:function(){this.token.remove()}},{key:"removeFirebaseToken",value:function(){this.firebaseToken.remove()}},{key:"removeTokens",value:function(){this.removeToken(),this.removeFirebaseToken()}},{key:"setToken",value:function(e){this.token.set(e)}},{key:"logout",value:function(){var e=this;this.removeToken(),this.firebase.logout().then((function(t){t&&e.removeFirebaseToken()})),this.firebase.reset()}},{key:"dispatchTokens",value:function(){this.isAuthenticated()&&(this.token.get()&&this.frame.sendEvent(U,this.token.get()),this.firebaseToken.get()&&this.frame.sendEvent(F,this.firebaseToken.get()))}},{key:"onFirebaseAuthFail",value:function(e){this.modal.toggleLoader(!1)}},{key:"handleOneTapResponse",value:function(e){var t=e.credential;this.frame.sendEvent(H,t)}},{key:"init",value:function(){Be(this,Ye,tt).call(this)}}])&&qe(t.prototype,n),e}();function et(){var e,t,n,i='<div>\n                                        <h2 class="wallkit-auth-modal__title">'.concat(null!==(e=null===(t=Ke(this,Je))||void 0===t?void 0:t.modalTitle)&&void 0!==e?e:"Sign In",'</h2>\n                                        <div id="').concat(r,'"></div>\n                                     </div>');return new ie({modalName:"auth-modal",content:(null===(n=Ke(this,Je))||void 0===n?void 0:n.content)||i,className:"wallkit-auth-modal",initialLoader:!0})}function tt(){var e=this;this.events.subscribe(x,(function(t){var n=t.name,i=t.value;switch(n){case z:case G:case N:case U:if(i){var o=i.token;e.setToken(o)}break;case M:e.firebaseToken.set(i),e.sdk&&e.sdk.methods.setFirebaseToken(i);break;case q:i&&e.firebase.authWithCustomToken(i);break;case D:e.logout()}}))}function nt(e){var t=document.getElementById("authorization-error");t&&(t.innerHTML=e||"")}function it(){Be(this,Ze,nt).call(this,null)}function ot(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}function rt(e,t){return function(e,t){return t.get?t.get.call(e):t.value}(e,st(e,t,"get"))}function at(e,t,n){return function(e,t,n){if(t.set)t.set.call(e,n);else{if(!t.writable)throw new TypeError("attempted to set read only private field");t.value=n}}(e,st(e,t,"set"),n),n}function st(e,t,n){if(!t.has(e))throw new TypeError("attempted to "+n+" private field on non-instance");return t.get(e)}var lt=new WeakMap,ct=new WeakMap,ut=new WeakMap,ht=new WeakMap,ft=function(){function e(t){!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,e),lt.set(this,{writable:!0,value:void 0}),ct.set(this,{writable:!0,value:void 0}),ut.set(this,{writable:!0,value:void 0}),ht.set(this,{writable:!0,value:void 0}),at(this,lt,{parseUTM:void 0===(null==t?void 0:t.parseUTM)||t.parseUTM}),at(this,ut,new Qe),at(this,ct,new Ie),at(this,ht,new E),this.utmTags={}}var t,n;return t=e,(n=[{key:"parseUTMTags",value:function(){var e=this;if(!window.location.search.includes("utm"))return{};var t=new URLSearchParams(window.location.search),n={};return["utm_source","utm_medium","utm_campaign"].forEach((function(e){t.get(e)&&(n[e]=t.get(e))})),this.utmTags=n,rt(this,ut).isAuthenticated()?rt(this,ct).methods.updateUser({extra:this.utmTags}):this.hasUTMTags&&rt(this,ht).subscribe(j,(function(){rt(e,ct).methods.updateUser({extra:e.utmTags})}),{once:!0}),n}},{key:"hasUTMTags",get:function(){return!!Object.keys(this.utmTags).length}},{key:"init",value:function(){!1!==rt(this,lt).parseUTM&&this.parseUTMTags()}}])&&ot(t.prototype,n),e}();function dt(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}function pt(e,t,n){if(!t.has(e))throw new TypeError("attempted to get private field on non-instance");return n}var vt,mt,bt=new WeakMap,wt=new WeakSet,yt=new WeakSet,kt=function(){function e(t,n){var i,o;!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,e),yt.add(this),wt.add(this),bt.set(this,{writable:!0,value:void 0}),this.content=t,o=n,function(e,t,n){if(t.set)t.set.call(e,n);else{if(!t.writable)throw new TypeError("attempted to set read only private field");t.value=n}}(i=this,function(e,t,n){if(!t.has(e))throw new TypeError("attempted to set private field on non-instance");return t.get(e)}(i,bt),o),this.sdk=new Ie,this.accessCount=0,this.accessCountLimit=0}var t,n;return t=e,(n=[{key:"formatTaxonomies",value:function(e){var t={},n=[],i=[],o=function(o){var r;i.push(o),n.push(e[o].label);var a="term_keys[".concat(o,"]"),s="term_titles[".concat(o,"]"),l=t[a],c=t[s];null!==(r=e[o])&&void 0!==r&&r.items&&e[o].items.forEach((function(e){l?l.push(e.slug):t[a]=[e.slug],c?c.push(e.slug):t[s]=[e.name]})),t[a]=t[a].join(","),t[s]=t[s].join(",")};for(var r in e)o(r);return t.taxonomy_titles=n.join(","),t.taxonomy_keys=i.join(","),t}},{key:"checkContentAccessAndSync",value:function(e){var t=this,n={type:e.type,title:e.title,link:e.link||window.location.href,image:e.image||null};return Object.assign(n,this.formatTaxonomies(e.taxonomies)),this.sdk.client.get({path:pt(this,yt,Ot).call(this,e.id,n)}).then((function(n){return t.sdk.methods.isAuthenticated()&&t.getAccessDetails(e.id),{allowed:n.allow,data:n}})).catch((function(e){return{allowed:!1,error:e}}))}},{key:"checkAccess",value:function(){var e=this;return this.sdk.methods.checkAccess(this.content.id).then((function(t){return e.sdk.methods.isAuthenticated()&&e.getAccessDetails(e.content.id),{allowed:t.allow,data:t}})).catch((function(t){return"incorrect_content_key"===t.error?e.checkContentAccessAndSync(e.content):{allowed:!1,error:t}}))}},{key:"getAccessDetails",value:function(e){var t=this;return this.sdk.client.get({path:"/user/content-access-details/".concat(e)}).then((function(e){if(e){var n=e.content_terms;return t.accessCount=n.usedLimitInPeriod,t.accessCountLimit=n.accessLimit,{accessCount:t.accessCount,accessCountLimit:t.accessCountLimit}}return{accessCount:0,accessCountLimit:0}})).catch((function(e){return e}))}}])&&dt(t.prototype,n),e}();function gt(e){var t=[];for(var n in e)void 0!==e[n]&&t.push("".concat(encodeURIComponent(n),"=").concat(encodeURIComponent(e[n])));return t.join("&")}function Ot(e,t){var n=pt(this,wt,gt).call(this,t);return"/user/content-sync-and-check/".concat(e,"?").concat(n)}function Et(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var i=Object.getOwnPropertySymbols(e);t&&(i=i.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,i)}return n}function Tt(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Et(Object(n),!0).forEach((function(t){jt(e,t,n[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Et(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))}))}return e}function jt(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function Rt(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}function St(e,t,n){if(!t.has(e))throw new TypeError("attempted to get private field on non-instance");return n}function Pt(){var e=this;window.addEventListener("message",(function(t){var i=t.data,o=i.value,r=i.name,a=t.origin;e.events.notify(r,o),e.events.notify(S,{name:r,value:o});try{if(n.includes(a)&&r)switch(r){case"wk-event-modals-ready":e.authentication.isAuthenticated()?e.frame.sendEvent("wk-event-applepay-ready",function(){try{return!!window.ApplePaySession&&window.ApplePaySession.canMakePayments()}catch(e){return console.error("ApplePay Error",e),!1}}()):e.frame.sendEvent("wk-event-get-token",e.config.public_key);break;case"wk-event-resize":0!==o.width&&0!==o.height&&e.popup.resize(o.width,o.height);break;case"show-firebase-auth":var s=o;e.popup.hide(),e.events.subscribe(j,(function(){s&&e.popup.open(s)}),{once:!0}),e.authentication.show();break;case"wk-event-close-modal":e.popup.hide();break;case"wk-event-reload-page":e.popup.hide(),location.reload();break;case"wk-event-storage-available":o||e.authentication.dispatchTokens();break;case"wk-event-close-on-wrapper":e.popup.closeOutside=o}}catch(e){console.log("ERROR",e)}}))}function Ct(){var e,t=p("style");t.innerHTML="\n        .wallkit-modal-wrapper {\n            z-index: 100;\n            position: fixed;\n            top: 0;\n            left: 0;\n            right: 0;\n            bottom: 0;\n            background: rgba(18, 18, 20, 0.9);\n            display: flex;\n            align-items: center;\n            justify-content: flex-start;\n            flex-direction: column;\n            overflow-y: auto;\n            padding: 70px 15px 20px;\n        }\n\n        .wallkit-modal-wrapper__content {\n            background-color: #fff;\n            flex-shrink: 0;\n            position: relative;\n            box-sizing: border-box;\n            overflow: hidden;\n        }\n        \n        @media screen and (max-width: 500px) {\n            .wallkit-modal-wrapper__content {\n                width: 100%;\n                min-width: auto!important;\n            }\n        }\n\n        .wallkit-modal-wrapper__close-btn {\n            position: absolute;\n            right: 10px;\n            top: 10px;\n            cursor: pointer;\n            color: #000;\n            font-size: 37px;\n            width: 37px;\n            height: 37px;\n            text-align: center;\n            line-height: 34px;\n        }\n\n        .wallkit-modal-wrapper .wk-frame {\n            transition: all 0.3s linear 0s;\n            max-width: 100%;\n            border: none;\n        }\n\n        .wallkit-auth-modal {\n            z-index: 999;\n        }\n\n        .wallkit-auth-modal .wallkit-modal-wrapper__content {\n            padding: 20px;\n        }\n\n        .wallkit-auth-modal .wallkit-auth-modal__title {\n            font-family: Roboto, sans-serif;\n            text-align: center;\n        }\n\n        button:focus {\n            background-color: #000;\n        }\n",e=t,f()?e?document.head.appendChild(e):h.checkRequiredArgument(e,"element"):h.handleError("Document is not available",c.DOM_ERROR)}window.WallkitIntegration=(vt=new WeakSet,mt=new WeakSet,function(){function e(t){var n=this;!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,e),mt.add(this),vt.add(this),this.config=t,this.events=new E,this.frame=new je(Tt(Tt({},t),{},{onReady:function(){return n.popup.toggleLoader(!1)}})),this.popup=new ie({resourceFrame:this.frame,initialLoader:!0,onReady:function(e){e.openByHash()},onClose:function(){n.events.notify(P,{name:n.frame.currentFrameName})}}),this.content=kt,this.sdk=new Ie(Tt(Tt({},t),{},{onLoaded:function(){var e,i,o,r,a;n.authentication=new Qe({firebase:null==t||null===(e=t.auth)||void 0===e?void 0:e.firebase,modalTitle:null===(i=t.auth)||void 0===i||null===(o=i.modal)||void 0===o?void 0:o.title,content:null===(r=t.auth)||void 0===r||null===(a=r.modal)||void 0===a?void 0:a.content}),n.analytics=new ft(null==t?void 0:t.analytics),n.init()}}))}var t,n;return t=e,(n=[{key:"modal",value:function(e,t){this.popup.open(e,t)}},{key:"init",value:function(){St(this,mt,Ct).call(this),this.popup.init(),this.authentication.init(),this.analytics.init(),St(this,vt,Pt).call(this),this.config.onInit&&this.config.onInit()}}])&&Rt(t.prototype,n),e}()),WallkitIntegration})();
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ 926:
+/***/ ((module) => {
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+module.exports = _asyncToGenerator;
+module.exports.default = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ 358:
+/***/ ((module) => {
+
+function _classApplyDescriptorGet(receiver, descriptor) {
+  if (descriptor.get) {
+    return descriptor.get.call(receiver);
+  }
+
+  return descriptor.value;
+}
+
+module.exports = _classApplyDescriptorGet;
+module.exports.default = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ 625:
+/***/ ((module) => {
+
+function _classApplyDescriptorSet(receiver, descriptor, value) {
+  if (descriptor.set) {
+    descriptor.set.call(receiver, value);
+  } else {
+    if (!descriptor.writable) {
+      throw new TypeError("attempted to set read only private field");
+    }
+
+    descriptor.value = value;
+  }
+}
+
+module.exports = _classApplyDescriptorSet;
+module.exports.default = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ 575:
+/***/ ((module) => {
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+module.exports = _classCallCheck;
+module.exports.default = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ 486:
+/***/ ((module) => {
+
+function _classExtractFieldDescriptor(receiver, privateMap, action) {
+  if (!privateMap.has(receiver)) {
+    throw new TypeError("attempted to " + action + " private field on non-instance");
+  }
+
+  return privateMap.get(receiver);
+}
+
+module.exports = _classExtractFieldDescriptor;
+module.exports.default = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ 226:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var classApplyDescriptorGet = __webpack_require__(358);
+
+var classExtractFieldDescriptor = __webpack_require__(486);
+
+function _classPrivateFieldGet(receiver, privateMap) {
+  var descriptor = classExtractFieldDescriptor(receiver, privateMap, "get");
+  return classApplyDescriptorGet(receiver, descriptor);
+}
+
+module.exports = _classPrivateFieldGet;
+module.exports.default = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ 962:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var classApplyDescriptorSet = __webpack_require__(625);
+
+var classExtractFieldDescriptor = __webpack_require__(486);
+
+function _classPrivateFieldSet(receiver, privateMap, value) {
+  var descriptor = classExtractFieldDescriptor(receiver, privateMap, "set");
+  classApplyDescriptorSet(receiver, descriptor, value);
+  return value;
+}
+
+module.exports = _classPrivateFieldSet;
+module.exports.default = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ 913:
+/***/ ((module) => {
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+module.exports = _createClass;
+module.exports.default = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ 713:
+/***/ ((module) => {
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+module.exports = _defineProperty;
+module.exports.default = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ 318:
+/***/ ((module) => {
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    "default": obj
+  };
+}
+
+module.exports = _interopRequireDefault;
+module.exports.default = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ 8:
+/***/ ((module) => {
+
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    module.exports = _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+
+    module.exports.default = module.exports, module.exports.__esModule = true;
+  } else {
+    module.exports = _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+
+    module.exports.default = module.exports, module.exports.__esModule = true;
+  }
+
+  return _typeof(obj);
+}
+
+module.exports = _typeof;
+module.exports.default = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ 757:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__(666);
+
+
+/***/ }),
+
+/***/ 639:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.LIBRARY_STYLES = void 0;
+var LIBRARY_STYLES = "\n        .wallkit-modal-wrapper {\n            z-index: 100;\n            position: fixed;\n            top: 0;\n            left: 0;\n            right: 0;\n            bottom: 0;\n            background: rgba(18, 18, 20, 0.9);\n            display: flex;\n            align-items: center;\n            justify-content: flex-start;\n            flex-direction: column;\n            overflow-y: auto;\n            padding: 70px 15px 20px;\n        }\n\n        .wallkit-modal-wrapper__content {\n            background-color: #fff;\n            flex-shrink: 0;\n            position: relative;\n            box-sizing: border-box;\n            overflow: hidden;\n        }\n        \n        @media screen and (max-width: 500px) {\n            .wallkit-modal-wrapper__content {\n                width: 100%;\n                min-width: auto!important;\n            }\n        }\n\n        .wallkit-modal-wrapper__close-btn {\n            position: absolute;\n            right: 10px;\n            top: 10px;\n            cursor: pointer;\n            color: #000;\n            font-size: 37px;\n            width: 37px;\n            height: 37px;\n            text-align: center;\n            line-height: 34px;\n        }\n\n        .wallkit-modal-wrapper .wk-frame {\n            transition: all 0.3s linear 0s;\n            max-width: 100%;\n            border: none;\n        }\n\n        .wallkit-auth-modal {\n            z-index: 999;\n        }\n\n        .wallkit-auth-modal .wallkit-modal-wrapper__content {\n            padding: 20px;\n        }\n\n        .wallkit-auth-modal .wallkit-auth-modal__title {\n            font-family: Roboto, sans-serif;\n            text-align: center;\n        }\n\n        button:focus {\n            background-color: #000;\n        }\n";
+exports.LIBRARY_STYLES = LIBRARY_STYLES;
+
+/***/ }),
+
+/***/ 425:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.FIREBASE_TOKEN_NAME = exports.WALLKIT_TOKEN_NAME = exports.WALLKIT_DEV_FIREBASE_CONFIG = exports.WALLKIT_FIREBASE_CONFIG = exports.WALLKIT_FRAME_ID = exports.WALLKIT_FIREBASE_UI_PLACEHOLDER_ID = exports.WALLKIT_MODAL_MIN_HEIGHT = exports.WALLKIT_MODAL_MIN_WIDTH = exports.WALLKIT_MODAL_CONTENT_CLASSNAME = exports.WALLKIT_MODAL_CLOSE_BTN_CLASSNAME = exports.WALLKIT_MODAL_WRAPPER_CLASSNAME = exports.ALLOWED_ORIGINS = exports.WALLKIT_CDN_ASSETS_URL = exports.WALLKIT_CDN_URL = exports.WALLKIT_POPUP_DEV_URL = exports.WALLKIT_POPUP_URL = void 0;
+// Popups
+var WALLKIT_POPUP_URL = 'https://wallkit.net/popups';
+exports.WALLKIT_POPUP_URL = WALLKIT_POPUP_URL;
+var WALLKIT_POPUP_DEV_URL = 'https://dev.wallkit.net/popups'; // Assets
+
+exports.WALLKIT_POPUP_DEV_URL = WALLKIT_POPUP_DEV_URL;
+var WALLKIT_CDN_URL = 'https://cdn.wallkit.net';
+exports.WALLKIT_CDN_URL = WALLKIT_CDN_URL;
+var WALLKIT_CDN_ASSETS_URL = WALLKIT_CDN_URL + '/assets'; // Safety
+
+exports.WALLKIT_CDN_ASSETS_URL = WALLKIT_CDN_ASSETS_URL;
+var ALLOWED_ORIGINS = [document.location.origin, 'http://127.0.0.1:8000', 'https://wallkit.net', 'https://dev.wallkit.net', 'https://demo.wallkit.net']; // Markup
+
+exports.ALLOWED_ORIGINS = ALLOWED_ORIGINS;
+var WALLKIT_MODAL_WRAPPER_CLASSNAME = 'wallkit-modal-wrapper';
+exports.WALLKIT_MODAL_WRAPPER_CLASSNAME = WALLKIT_MODAL_WRAPPER_CLASSNAME;
+var WALLKIT_MODAL_CLOSE_BTN_CLASSNAME = 'wallkit-modal-wrapper__close-btn';
+exports.WALLKIT_MODAL_CLOSE_BTN_CLASSNAME = WALLKIT_MODAL_CLOSE_BTN_CLASSNAME;
+var WALLKIT_MODAL_CONTENT_CLASSNAME = 'wallkit-modal-wrapper__content';
+exports.WALLKIT_MODAL_CONTENT_CLASSNAME = WALLKIT_MODAL_CONTENT_CLASSNAME;
+var WALLKIT_MODAL_MIN_WIDTH = '500';
+exports.WALLKIT_MODAL_MIN_WIDTH = WALLKIT_MODAL_MIN_WIDTH;
+var WALLKIT_MODAL_MIN_HEIGHT = '250';
+exports.WALLKIT_MODAL_MIN_HEIGHT = WALLKIT_MODAL_MIN_HEIGHT;
+var WALLKIT_FIREBASE_UI_PLACEHOLDER_ID = 'firebase-ui-placeholder';
+exports.WALLKIT_FIREBASE_UI_PLACEHOLDER_ID = WALLKIT_FIREBASE_UI_PLACEHOLDER_ID;
+var WALLKIT_FRAME_ID = 'wk-frame'; // Authentication
+
+exports.WALLKIT_FRAME_ID = WALLKIT_FRAME_ID;
+var WALLKIT_FIREBASE_CONFIG = {
+  apiKey: "AIzaSyAoRdxZIlUE0HInqtzDid6rNxluhs5nCqg",
+  authDomain: "wallkit-production.firebaseapp.com",
+  databaseURL: "https://wallkit-production.firebaseio.com",
+  projectId: "wallkit-production",
+  storageBucket: "wallkit-production.appspot.com",
+  messagingSenderId: "779443518820",
+  appId: "1:779443518820:web:ffc6660647590674e20e71",
+  measurementId: "G-GWJ1GC5B30"
+};
+exports.WALLKIT_FIREBASE_CONFIG = WALLKIT_FIREBASE_CONFIG;
+var WALLKIT_DEV_FIREBASE_CONFIG = {
+  apiKey: "AIzaSyCmIluc9x63JOu7I5UMZ8q5M4AbluBeC8o",
+  authDomain: "wallkit-258413.firebaseapp.com",
+  databaseURL: "https://wallkit-258413.firebaseio.com",
+  projectId: "wallkit-258413",
+  storageBucket: "wallkit-258413.appspot.com",
+  messagingSenderId: "767802802956",
+  appId: "1:767802802956:web:e8fc363619c47f7fff7f29",
+  measurementId: "G-ER6R7Z47R3"
+};
+exports.WALLKIT_DEV_FIREBASE_CONFIG = WALLKIT_DEV_FIREBASE_CONFIG;
+var WALLKIT_TOKEN_NAME = 'wk-token';
+exports.WALLKIT_TOKEN_NAME = WALLKIT_TOKEN_NAME;
+var FIREBASE_TOKEN_NAME = 'firebase-token';
+exports.FIREBASE_TOKEN_NAME = FIREBASE_TOKEN_NAME;
+
+/***/ }),
+
+/***/ 334:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(318);
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = exports.DEFAULT_ERROR_MESSAGES = exports.ERRORS_TYPES = void 0;
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(575));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(913));
+
+var ERRORS_TYPES = {
+  DOM_ERROR: 'DOM_ERROR',
+  ARGUMENT_ERROR: 'ARGUMENT_ERROR'
+};
+exports.ERRORS_TYPES = ERRORS_TYPES;
+var DEFAULT_ERROR_MESSAGES = {
+  DOM_ERROR: 'DOM Manipulation gone wrong',
+  ARGUMENT_ERROR: 'One of the argument were not provided'
+};
+exports.DEFAULT_ERROR_MESSAGES = DEFAULT_ERROR_MESSAGES;
+
+var Error = /*#__PURE__*/function () {
+  function Error() {
+    (0, _classCallCheck2["default"])(this, Error);
+  }
+
+  (0, _createClass2["default"])(Error, null, [{
+    key: "isErrorRecognisable",
+    value: function isErrorRecognisable(error_type) {
+      return !!ERRORS_TYPES[error_type];
+    }
+  }, {
+    key: "getErrorTypeMessage",
+    value: function getErrorTypeMessage(error_type) {
+      var _DEFAULT_ERROR_MESSAG;
+
+      return (_DEFAULT_ERROR_MESSAG = DEFAULT_ERROR_MESSAGES[error_type]) !== null && _DEFAULT_ERROR_MESSAG !== void 0 ? _DEFAULT_ERROR_MESSAG : 'Unrecognised Error';
+    }
+  }, {
+    key: "handleError",
+    value: function handleError(error, error_type) {
+      if (error_type && this.isErrorRecognisable(error_type)) {
+        var message = error !== null && error !== void 0 ? error : Error.getErrorTypeMessage(error_type);
+        var errorMessage = "ERROR::".concat(error_type, "; ").concat(message, ";");
+        console.log(errorMessage);
+        throw new Error(errorMessage);
+      } else {
+        var _errorMessage = "ERROR::".concat(error_type, ";");
+
+        console.log(_errorMessage);
+        throw new Error(_errorMessage);
+      }
+    }
+  }, {
+    key: "checkRequiredArgument",
+    value: function checkRequiredArgument(argument, key) {
+      if (argument === undefined) {
+        this.handleError("Argument ".concat(key, " is not provided"), ERRORS_TYPES.ARGUMENT_ERROR);
+      }
+    }
+  }]);
+  return Error;
+}();
+
+exports.default = Error;
+
+/***/ }),
+
+/***/ 236:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(318);
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = void 0;
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(575));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(913));
+
+var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(226));
+
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(962));
+
+var _sdk2 = _interopRequireDefault(__webpack_require__(375));
+
+var _authentication2 = _interopRequireDefault(__webpack_require__(65));
+
+var _events2 = _interopRequireDefault(__webpack_require__(754));
+
+var _eventsName = __webpack_require__(372);
+
+var _config = /*#__PURE__*/new WeakMap();
+
+var _sdk = /*#__PURE__*/new WeakMap();
+
+var _authentication = /*#__PURE__*/new WeakMap();
+
+var _events = /*#__PURE__*/new WeakMap();
+
+var Analytics = /*#__PURE__*/function () {
+  function Analytics(options) {
+    (0, _classCallCheck2["default"])(this, Analytics);
+
+    _config.set(this, {
+      writable: true,
+      value: void 0
+    });
+
+    _sdk.set(this, {
+      writable: true,
+      value: void 0
+    });
+
+    _authentication.set(this, {
+      writable: true,
+      value: void 0
+    });
+
+    _events.set(this, {
+      writable: true,
+      value: void 0
+    });
+
+    (0, _classPrivateFieldSet2["default"])(this, _config, {
+      parseUTM: (options === null || options === void 0 ? void 0 : options.parseUTM) !== undefined ? options.parseUTM : true
+    });
+    (0, _classPrivateFieldSet2["default"])(this, _authentication, new _authentication2["default"]());
+    (0, _classPrivateFieldSet2["default"])(this, _sdk, new _sdk2["default"]());
+    (0, _classPrivateFieldSet2["default"])(this, _events, new _events2["default"]());
+    this.utmTags = {};
+  }
+
+  (0, _createClass2["default"])(Analytics, [{
+    key: "parseUTMTags",
+    value: function parseUTMTags() {
+      var _this = this;
+
+      if (!window.location.search.includes('utm')) return {};
+      var queryParams = new URLSearchParams(window.location.search);
+      var utmParams = ['utm_source', 'utm_medium', 'utm_campaign'];
+      var foundedUTMParams = {};
+      utmParams.forEach(function (param) {
+        if (queryParams.get(param)) {
+          foundedUTMParams[param] = queryParams.get(param);
+        }
+      });
+      this.utmTags = foundedUTMParams;
+
+      if ((0, _classPrivateFieldGet2["default"])(this, _authentication).isAuthenticated()) {
+        (0, _classPrivateFieldGet2["default"])(this, _sdk).methods.updateUser({
+          extra: this.utmTags
+        });
+      } else if (this.hasUTMTags) {
+        (0, _classPrivateFieldGet2["default"])(this, _events).subscribe(_eventsName.SUCCESS_AUTH, function () {
+          (0, _classPrivateFieldGet2["default"])(_this, _sdk).methods.updateUser({
+            extra: _this.utmTags
+          });
+        }, {
+          once: true
+        });
+      }
+
+      return foundedUTMParams;
+    }
+  }, {
+    key: "hasUTMTags",
+    get: function get() {
+      return !!Object.keys(this.utmTags).length;
+    }
+  }, {
+    key: "init",
+    value: function init() {
+      if ((0, _classPrivateFieldGet2["default"])(this, _config).parseUTM !== false) {
+        this.parseUTMTags();
+      }
+    }
+  }]);
+  return Analytics;
+}();
+
+exports.default = Analytics;
+
+/***/ }),
+
+/***/ 930:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(318);
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = void 0;
+
+var _regenerator = _interopRequireDefault(__webpack_require__(757));
+
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(926));
+
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(713));
+
+var _typeof2 = _interopRequireDefault(__webpack_require__(8));
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(575));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(913));
+
+var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(226));
+
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(962));
+
+var _loaders = __webpack_require__(369);
+
+var _DOM = __webpack_require__(813);
+
+var _constants = __webpack_require__(425);
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
+
+var _mode = /*#__PURE__*/new WeakMap();
+
+var _loadFirebase = /*#__PURE__*/new WeakSet();
+
+var _authStateChanged = /*#__PURE__*/new WeakSet();
+
+var Firebase = /*#__PURE__*/function () {
+  function Firebase(options) {
+    var _options$captchaKey, _options$elementSelec, _options$onSuccessAut, _options$onAuthStateC, _options$uiShown;
+
+    (0, _classCallCheck2["default"])(this, Firebase);
+
+    _authStateChanged.add(this);
+
+    _loadFirebase.add(this);
+
+    _mode.set(this, {
+      writable: true,
+      value: void 0
+    });
+
+    (0, _classPrivateFieldSet2["default"])(this, _mode, options === null || options === void 0 ? void 0 : options.mode);
+    this.config = options === null || options === void 0 ? void 0 : options.config;
+    this.providers = options === null || options === void 0 ? void 0 : options.providers;
+    this.tosURL = options === null || options === void 0 ? void 0 : options.tosURL;
+    this.privacyPolicyURL = options === null || options === void 0 ? void 0 : options.privacyPolicyURL;
+    this.captchaKey = (_options$captchaKey = options === null || options === void 0 ? void 0 : options.captchaKey) !== null && _options$captchaKey !== void 0 ? _options$captchaKey : '6LeNZrwbAAAAAKXPTmJj5KMdUwI2GE6XAUbCU6DM';
+    this.firebase = null;
+    this.firebaseui = null;
+    this.elementPlaceholder = (_options$elementSelec = options === null || options === void 0 ? void 0 : options.elementSelector) !== null && _options$elementSelec !== void 0 ? _options$elementSelec : "#".concat(_constants.WALLKIT_FIREBASE_UI_PLACEHOLDER_ID);
+    this.onSuccessAuth = (_options$onSuccessAut = options === null || options === void 0 ? void 0 : options.onSuccessAuth) !== null && _options$onSuccessAut !== void 0 ? _options$onSuccessAut : null;
+    this.onAuthStateChanged = (_options$onAuthStateC = options === null || options === void 0 ? void 0 : options.onAuthStateChanged) !== null && _options$onAuthStateC !== void 0 ? _options$onAuthStateC : null;
+    this.uiShown = (_options$uiShown = options === null || options === void 0 ? void 0 : options.uiShown) !== null && _options$uiShown !== void 0 ? _options$uiShown : null;
+  }
+
+  (0, _createClass2["default"])(Firebase, [{
+    key: "allowedProviders",
+    get: function get() {
+      return {
+        'google': this.firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        'email': this.firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        'facebook': this.firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+        'apple': 'apple.com',
+        'microsoft': 'microsoft.com'
+      };
+    }
+  }, {
+    key: "formatSelectedProviders",
+    value: function formatSelectedProviders(providers) {
+      var _this = this;
+
+      var selectedProviders = [];
+
+      if (Array.isArray(providers)) {
+        selectedProviders = providers.map(function (item) {
+          if ((0, _typeof2["default"])(item) === "object") {
+            if (_this.allowedProviders[item.provider]) {
+              return _objectSpread(_objectSpread({}, item), {}, {
+                provider: _this.allowedProviders[item.provider]
+              });
+            }
+          } else {
+            if (_this.allowedProviders[item]) {
+              return _this.allowedProviders[item];
+            }
+          }
+        }).filter(function (item) {
+          return !!item;
+        });
+      }
+
+      return selectedProviders;
+    }
+  }, {
+    key: "initFirebase",
+    value: function initFirebase(_ref) {
+      var _this2 = this;
+
+      var config = _ref.config,
+          _ref$providers = _ref.providers,
+          providers = _ref$providers === void 0 ? ['email', 'google'] : _ref$providers,
+          _ref$tosUrl = _ref.tosUrl,
+          tosUrl = _ref$tosUrl === void 0 ? 'https://wallkit.net' : _ref$tosUrl,
+          _ref$privacyPolicyUrl = _ref.privacyPolicyUrl,
+          privacyPolicyUrl = _ref$privacyPolicyUrl === void 0 ? 'https://wallkit.net' : _ref$privacyPolicyUrl;
+      var defaultConfig = (0, _classPrivateFieldGet2["default"])(this, _mode) === 'dev' ? _constants.WALLKIT_DEV_FIREBASE_CONFIG : _constants.WALLKIT_FIREBASE_CONFIG;
+      this.firebase.initializeApp(config !== null && config !== void 0 ? config : defaultConfig); // if (this.captchaKey) {
+      //     const appCheck = this.firebase.appCheck();
+      //     appCheck.activate(this.captchaKey, true);
+      // }
+
+      var firebaseuiInstance = new this.firebaseui.auth.AuthUI(this.firebase.auth());
+      firebaseuiInstance.disableAutoSignIn();
+      var firebaseUiConfig = {
+        callbacks: {
+          signInSuccessWithAuthResult: function signInSuccessWithAuthResult(result) {
+            result.user.getIdToken().then(function (token) {
+              var formattedResult = {
+                user: result.user,
+                userId: result.user.uid,
+                token: token
+              };
+
+              if (_this2.onSuccessAuth) {
+                _this2.onSuccessAuth(formattedResult, result);
+              }
+            });
+          },
+          uiShown: function uiShown() {
+            if (_this2.uiShown) {
+              _this2.uiShown();
+            }
+          }
+        },
+        signInFlow: 'popup',
+        signInOptions: this.formatSelectedProviders(providers),
+        credentialHelper: this.firebaseui.auth.CredentialHelper.GOOGLE_YOLO,
+        tosUrl: tosUrl,
+        privacyPolicyUrl: privacyPolicyUrl
+      };
+      firebaseuiInstance.start(this.elementPlaceholder, firebaseUiConfig);
+      this.firebaseui = firebaseuiInstance;
+      this.firebase.auth().onAuthStateChanged(_classPrivateMethodGet(this, _authStateChanged, _authStateChanged2).bind(this));
+    }
+  }, {
+    key: "reset",
+    value: function reset() {
+      if (this.firebaseui) {
+        this.firebaseui.reset();
+        this.firebaseui.start(this.elementPlaceholder);
+      }
+    }
+  }, {
+    key: "logout",
+    value: function logout() {
+      var _this3 = this;
+
+      return new Promise(function (resolve) {
+        if (_this3.firebase && _this3.firebase.auth) {
+          _this3.firebase.auth().signOut().then(function () {
+            return resolve(true);
+          });
+        } else {
+          resolve(false);
+        }
+      });
+    }
+  }, {
+    key: "authWithCustomToken",
+    value: function () {
+      var _authWithCustomToken = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(token) {
+        return _regenerator["default"].wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+
+                if (!(this.firebase && this.firebase.auth)) {
+                  _context.next = 5;
+                  break;
+                }
+
+                _context.next = 4;
+                return this.firebase.auth().signInWithCustomToken(token);
+
+              case 4:
+                return _context.abrupt("return", _context.sent);
+
+              case 5:
+                return _context.abrupt("return", false);
+
+              case 8:
+                _context.prev = 8;
+                _context.t0 = _context["catch"](0);
+                console.error('Custom Token Auth Fail');
+                return _context.abrupt("return", false);
+
+              case 12:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this, [[0, 8]]);
+      }));
+
+      function authWithCustomToken(_x) {
+        return _authWithCustomToken.apply(this, arguments);
+      }
+
+      return authWithCustomToken;
+    }()
+  }, {
+    key: "init",
+    value: function init() {
+      var _this4 = this;
+
+      _classPrivateMethodGet(this, _loadFirebase, _loadFirebase2).call(this).then(function () {
+        _this4.initFirebase({
+          config: _this4.config,
+          providers: _this4.providers,
+          tosUrl: _this4.tosURL,
+          privacyPolicyUrl: _this4.privacyPolicyURL
+        });
+      });
+    }
+  }]);
+  return Firebase;
+}();
+
+exports.default = Firebase;
+
+function _loadFirebase2() {
+  var _this5 = this;
+
+  return new Promise(function (resolve, reject) {
+    var onFirebaseAppLoaded = function onFirebaseAppLoaded() {
+      var scripts = [{
+        url: 'https://www.gstatic.com/firebasejs/8.7.0/firebase-analytics.js',
+        id: 'firebase-analytics',
+        defer: true,
+        onload: function onload() {
+          return onScriptLoaded();
+        }
+      }, {
+        url: 'https://www.gstatic.com/firebasejs/8.7.0/firebase-auth.js',
+        id: 'firebase-auth',
+        defer: true,
+        onload: function onload() {
+          return onScriptLoaded();
+        }
+      }, {
+        url: 'https://www.gstatic.com/firebasejs/8.7.0/firebase-firestore.js',
+        id: 'firebase-firestore',
+        defer: true,
+        onload: function onload() {
+          return onScriptLoaded();
+        }
+      }, {
+        url: 'https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.js',
+        id: 'firebase-ui',
+        defer: true,
+        onload: function onload() {
+          return onScriptLoaded();
+        }
+      }, {
+        url: 'https://www.gstatic.com/firebasejs/8.7.0/firebase-app-check.js',
+        id: 'firebase-app-check',
+        defer: true,
+        onload: function onload() {
+          return onScriptLoaded();
+        }
+      }];
+      var loadedCounter = 0;
+
+      var onScriptLoaded = function onScriptLoaded() {
+        loadedCounter++;
+
+        if (loadedCounter === scripts.length) {
+          _this5.firebase = window.firebase;
+          _this5.firebaseui = window.firebaseui;
+          resolve({
+            firebase: window.firebase,
+            firebaseui: window.firebaseui
+          });
+        }
+      };
+
+      (0, _loaders.loadScripts)(scripts);
+      (0, _DOM.loadCSS)('https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.css', 'firebase-ui-styles');
+    };
+
+    (0, _DOM.insertScript)('https://www.gstatic.com/firebasejs/8.7.0/firebase-app.js', 'firebase-app', onFirebaseAppLoaded);
+  });
+}
+
+function _authStateChanged2(user) {
+  var _this6 = this;
+
+  if (user) {
+    user.getIdToken().then(function (token) {
+      if (_this6.onAuthStateChanged) {
+        _this6.onAuthStateChanged(token);
+      }
+    });
+  }
+}
+
+/***/ }),
+
+/***/ 697:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(318);
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = void 0;
+
+var _regenerator = _interopRequireDefault(__webpack_require__(757));
+
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(926));
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(575));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(913));
+
+var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(226));
+
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(962));
+
+var _eventsName = _interopRequireDefault(__webpack_require__(372));
+
+var _DOM = __webpack_require__(813);
+
+var _loaders = __webpack_require__(369);
+
+var _sdk2 = _interopRequireDefault(__webpack_require__(375));
+
+var _events = _interopRequireDefault(__webpack_require__(754));
+
+function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
+
+var _sdk = /*#__PURE__*/new WeakMap();
+
+var _initReCaptchaPlaceholder = /*#__PURE__*/new WeakSet();
+
+var _onRecaptchaAuth = /*#__PURE__*/new WeakSet();
+
+var ReCaptcha = /*#__PURE__*/function () {
+  function ReCaptcha(authenticationInstance, options) {
+    (0, _classCallCheck2["default"])(this, ReCaptcha);
+
+    _onRecaptchaAuth.add(this);
+
+    _initReCaptchaPlaceholder.add(this);
+
+    _sdk.set(this, {
+      writable: true,
+      value: void 0
+    });
+
+    if (!authenticationInstance) {
+      throw Error('Authentication Instance is not provided');
+    }
+
+    this.enabled = !!options;
+    this.authentication = authenticationInstance;
+    this.options = options;
+    this.loaded = false;
+    this.valid = false;
+    this.siteKey = options === null || options === void 0 ? void 0 : options.siteKey;
+    this.grecaptcha = null;
+    (0, _classPrivateFieldSet2["default"])(this, _sdk, new _sdk2["default"]());
+    this.events = new _events["default"]();
+  }
+
+  (0, _createClass2["default"])(ReCaptcha, [{
+    key: "setOptions",
+    value: function setOptions(options) {
+      if (options) {
+        this.options = options;
+        this.enabled = true;
+      }
+
+      return this;
+    }
+  }, {
+    key: "load",
+    value: function () {
+      var _load = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
+        var _this = this;
+
+        var recaptchaScripts;
+        return _regenerator["default"].wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+
+                if (this.options) {
+                  _context.next = 3;
+                  break;
+                }
+
+                return _context.abrupt("return", false);
+
+              case 3:
+                if (!this.loaded) {
+                  _context.next = 5;
+                  break;
+                }
+
+                return _context.abrupt("return", true);
+
+              case 5:
+                recaptchaScripts = [{
+                  url: "https://www.google.com/recaptcha/api.js",
+                  id: 'recaptcha-script',
+                  defer: true,
+                  onload: function onload() {
+                    _this.loaded = true;
+                    _this.grecaptcha = window.grecaptcha;
+
+                    _this.events.notify(_eventsName["default"].RECAPTCHA_LOADED, true);
+
+                    Promise.resolve(true);
+                  }
+                }];
+                window.onRecaptchaAuth = _classPrivateMethodGet(this, _onRecaptchaAuth, _onRecaptchaAuth2).bind(this);
+
+                _classPrivateMethodGet(this, _initReCaptchaPlaceholder, _initReCaptchaPlaceholder2).call(this);
+
+                this.hideBadge();
+                (0, _loaders.loadScripts)(recaptchaScripts);
+                _context.next = 16;
+                break;
+
+              case 12:
+                _context.prev = 12;
+                _context.t0 = _context["catch"](0);
+                console.error(_context.t0);
+                return _context.abrupt("return", false);
+
+              case 16:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this, [[0, 12]]);
+      }));
+
+      function load() {
+        return _load.apply(this, arguments);
+      }
+
+      return load;
+    }()
+  }, {
+    key: "hideBadge",
+    value: function hideBadge() {
+      var style = (0, _DOM.createElement)('style');
+      style.innerText = ".grecaptcha-badge {\n                    visibility: hidden;\n                };";
+      (0, _DOM.injectInHead)(style);
+    }
+  }, {
+    key: "resetProcess",
+    value: function resetProcess() {
+      if (this.grecaptcha) {
+        this.grecaptcha.reset();
+      }
+
+      this.authentication.firebase.reset();
+      this.authentication.modal.toggleLoader(false);
+    }
+  }, {
+    key: "initCaptchaProcess",
+    value: function () {
+      var _initCaptchaProcess = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2() {
+        var _this2 = this;
+
+        var handleCaptchaState, executeReCaptcha, initTriggers, emailBtn, emailField, submitBtn;
+        return _regenerator["default"].wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                try {
+                  this.valid = false;
+
+                  if (this.grecaptcha) {
+                    this.grecaptcha.reset();
+                  }
+
+                  handleCaptchaState = function handleCaptchaState() {
+                    if (!_this2.valid) {
+                      _this2.events.notify(_eventsName["default"].local.RECAPTCHA_VALIDATION_FAILED);
+
+                      _this2.authentication.firebase.reset();
+
+                      _this2.authentication.modal.toggleLoader(true);
+                    }
+                  };
+
+                  executeReCaptcha = function executeReCaptcha() {
+                    _this2.authentication.modal.toggleLoader(true);
+
+                    _this2.grecaptcha.ready(function () {
+                      _this2.grecaptcha.execute().then(function () {
+                        _this2.events.subscribe(_eventsName["default"].local.MODAL_CLOSED, function () {
+                          return _this2.resetProcess();
+                        }, {
+                          once: true
+                        });
+                      })["catch"](function () {
+                        return _this2.resetProcess();
+                      });
+                    });
+                  };
+
+                  initTriggers = function initTriggers() {
+                    executeReCaptcha();
+                    var emailField = document.querySelector('.firebaseui-id-email');
+                    var submitBtn = document.querySelector('.firebaseui-id-page-sign-in .firebaseui-id-submit');
+                    var cancelBtn = document.querySelector('.firebaseui-id-page-sign-in .firebaseui-id-secondary-link');
+
+                    if (emailField) {
+                      emailField.addEventListener('input', function () {
+                        handleCaptchaState();
+                      });
+                      emailField.addEventListener('keydown', function (event) {
+                        if (event.code && event.code === 'Enter') {
+                          handleCaptchaState();
+                        }
+                      });
+                    }
+
+                    if (cancelBtn) {
+                      cancelBtn.onclick = function () {
+                        handleCaptchaState();
+                      };
+                    }
+
+                    if (submitBtn) {
+                      submitBtn.onclick = function () {
+                        handleCaptchaState();
+                      };
+                    }
+                  };
+
+                  emailBtn = document.querySelector('.firebaseui-idp-button[data-provider-id="password"]');
+                  emailField = document.querySelector('.firebaseui-id-email');
+
+                  if (emailBtn) {
+                    emailBtn.addEventListener('click', initTriggers.bind(this));
+                  } else if (emailField) {
+                    submitBtn = document.querySelector('.firebaseui-id-page-sign-in .firebaseui-id-submit');
+
+                    if (submitBtn) {
+                      submitBtn.onclick = function () {
+                        handleCaptchaState();
+                      };
+                    }
+
+                    emailField.addEventListener('input', function () {
+                      if (!_this2.valid) {
+                        emailField.blur();
+                        executeReCaptcha();
+                      }
+                    });
+                  }
+                } catch (error) {
+                  this.authentication.firebase.reset();
+                  console.error('error', error);
+                }
+
+              case 1:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function initCaptchaProcess() {
+        return _initCaptchaProcess.apply(this, arguments);
+      }
+
+      return initCaptchaProcess;
+    }()
+  }, {
+    key: "init",
+    value: function () {
+      var _init = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3() {
+        var response;
+        return _regenerator["default"].wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+
+                if (!(!this.options || this.loaded)) {
+                  _context3.next = 3;
+                  break;
+                }
+
+                return _context3.abrupt("return", false);
+
+              case 3:
+                if (!(this.options === true)) {
+                  _context3.next = 12;
+                  break;
+                }
+
+                _context3.next = 6;
+                return (0, _classPrivateFieldGet2["default"])(this, _sdk).methods.getReCaptchaSettings();
+
+              case 6:
+                response = _context3.sent;
+
+                if (!(response && response.active)) {
+                  _context3.next = 10;
+                  break;
+                }
+
+                this.siteKey = response.recaptcha_public_key;
+                return _context3.abrupt("return", this.load());
+
+              case 10:
+                _context3.next = 13;
+                break;
+
+              case 12:
+                return _context3.abrupt("return", this.load());
+
+              case 13:
+                return _context3.abrupt("return", false);
+
+              case 16:
+                _context3.prev = 16;
+                _context3.t0 = _context3["catch"](0);
+                console.error(_context3.t0);
+                return _context3.abrupt("return", false);
+
+              case 20:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this, [[0, 16]]);
+      }));
+
+      function init() {
+        return _init.apply(this, arguments);
+      }
+
+      return init;
+    }()
+  }]);
+  return ReCaptcha;
+}();
+
+exports.default = ReCaptcha;
+
+function _initReCaptchaPlaceholder2() {
+  var reCaptchaPlaceholder = (0, _DOM.createElement)('div');
+  reCaptchaPlaceholder.classList.add('g-recaptcha');
+  reCaptchaPlaceholder.dataset.sitekey = this.siteKey;
+  reCaptchaPlaceholder.dataset.size = 'invisible';
+  reCaptchaPlaceholder.dataset.callback = 'onRecaptchaAuth';
+  this.authentication.modal.modalContent.appendChild(reCaptchaPlaceholder); // injectInBody(reCaptchaPlaceholder);
+}
+
+function _onRecaptchaAuth2(token) {
+  var _this3 = this;
+
+  return (0, _classPrivateFieldGet2["default"])(this, _sdk).methods.validateReCaptchaToken(token).then(function () {
+    _this3.events.notify(_eventsName["default"].local.RECAPTCHA_VALIDATION_SUCCESS);
+
+    _this3.valid = true;
+
+    _this3.authentication.modal.toggleLoader(false);
+  })["catch"](function () {
+    _this3.valid = false;
+  })["finally"](function () {
+    _this3.authentication.modal.toggleLoader(false);
+  });
+}
+
+/***/ }),
+
+/***/ 109:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(318);
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = void 0;
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(575));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(913));
+
+var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(226));
+
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(962));
+
+var _localStorage = _interopRequireDefault(__webpack_require__(797));
+
+var _cookie = __webpack_require__(98);
+
+var _slug = /*#__PURE__*/new WeakMap();
+
+var Token = /*#__PURE__*/function () {
+  function Token(slug, value) {
+    (0, _classCallCheck2["default"])(this, Token);
+
+    _slug.set(this, {
+      writable: true,
+      value: void 0
+    });
+
+    if (slug) {
+      (0, _classPrivateFieldSet2["default"])(this, _slug, slug);
+
+      if (value) {
+        this.set(value);
+      } else {
+        this.token = this.getStoredTokenValue() || null;
+      }
+    }
+  }
+
+  (0, _createClass2["default"])(Token, [{
+    key: "get",
+    value: function get() {
+      return this.token;
+    }
+  }, {
+    key: "getStoredTokenValue",
+    value: function getStoredTokenValue() {
+      return _localStorage["default"].getItem((0, _classPrivateFieldGet2["default"])(this, _slug)) || null;
+    }
+  }, {
+    key: "remove",
+    value: function remove() {
+      this.token = null;
+      (0, _cookie.removeCookie)((0, _classPrivateFieldGet2["default"])(this, _slug));
+
+      _localStorage["default"].removeItem((0, _classPrivateFieldGet2["default"])(this, _slug));
+    }
+  }, {
+    key: "set",
+    value: function set(value) {
+      this.token = value;
+      (0, _cookie.setCookie)((0, _classPrivateFieldGet2["default"])(this, _slug), value, {
+        expires: 'Fri, 31 Dec 9999 23:59:59 GMT',
+        path: "/"
+      });
+
+      _localStorage["default"].setItem((0, _classPrivateFieldGet2["default"])(this, _slug), value);
+    }
+  }]);
+  return Token;
+}();
+
+exports.default = Token;
+
+/***/ }),
+
+/***/ 65:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(318);
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = void 0;
+
+var _regenerator = _interopRequireDefault(__webpack_require__(757));
+
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(926));
+
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(713));
+
+var _typeof2 = _interopRequireDefault(__webpack_require__(8));
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(575));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(913));
+
+var _classPrivateFieldGet5 = _interopRequireDefault(__webpack_require__(226));
+
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(962));
+
+var _modal = _interopRequireDefault(__webpack_require__(852));
+
+var _Firebase = _interopRequireDefault(__webpack_require__(930));
+
+var _constants = __webpack_require__(425);
+
+var _eventsName = _interopRequireDefault(__webpack_require__(372));
+
+var _events = _interopRequireDefault(__webpack_require__(754));
+
+var _frame = _interopRequireDefault(__webpack_require__(408));
+
+var _sdk = _interopRequireDefault(__webpack_require__(375));
+
+var _Token = _interopRequireDefault(__webpack_require__(109));
+
+var _ReCaptcha = _interopRequireDefault(__webpack_require__(697));
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
+
+var _options = /*#__PURE__*/new WeakMap();
+
+var _createModal = /*#__PURE__*/new WeakSet();
+
+var _initListeners = /*#__PURE__*/new WeakSet();
+
+var _setAuthorizationError = /*#__PURE__*/new WeakSet();
+
+var _resetAuthorizationError = /*#__PURE__*/new WeakSet();
+
+var Authentication = /*#__PURE__*/function () {
+  function Authentication(options) {
+    var _this = this;
+
+    (0, _classCallCheck2["default"])(this, Authentication);
+
+    _resetAuthorizationError.add(this);
+
+    _setAuthorizationError.add(this);
+
+    _initListeners.add(this);
+
+    _createModal.add(this);
+
+    _options.set(this, {
+      writable: true,
+      value: void 0
+    });
+
+    if (!!Authentication.instance) {
+      return Authentication.instance;
+    }
+
+    Authentication.instance = this;
+    (0, _classPrivateFieldSet2["default"])(this, _options, options);
+    this.token = new _Token["default"](_constants.WALLKIT_TOKEN_NAME);
+    this.firebaseToken = new _Token["default"](_constants.FIREBASE_TOKEN_NAME);
+    this.frame = new _frame["default"]();
+    this.sdk = new _sdk["default"]();
+
+    if (!!(options !== null && options !== void 0 && options.firebase)) {
+      this.modal = _classPrivateMethodGet(this, _createModal, _createModal2).call(this);
+      this.modal.init();
+      var config = {
+        mode: options.mode,
+        onAuthStateChanged: this.updateFirebaseToken.bind(this),
+        onSuccessAuth: this.onSuccessAuth.bind(this),
+        uiShown: this.onFirebaseInit.bind(this),
+        onAuthFail: this.onFirebaseAuthFail.bind(this)
+      };
+
+      if ((0, _typeof2["default"])(options.firebase) === "object") {
+        config = _objectSpread(_objectSpread({}, config), options.firebase);
+      }
+
+      this.firebase = new _Firebase["default"](config);
+      this.firebase.init();
+    }
+
+    this.reCaptcha = new _ReCaptcha["default"](this, options === null || options === void 0 ? void 0 : options.reCaptcha);
+    this.reCaptcha.events.subscribe(_eventsName["default"].local.RECAPTCHA_VALIDATION_FAILED, function () {
+      _classPrivateMethodGet(_this, _setAuthorizationError, _setAuthorizationError2).call(_this, 'ReCaptcha Validation Failed! Please try again!');
+    });
+    this.reCaptcha.events.subscribe(_eventsName["default"].local.RECAPTCHA_VALIDATION_SUCCESS, function () {
+      _classPrivateMethodGet(_this, _resetAuthorizationError, _resetAuthorizationError2).call(_this);
+    });
+
+    if (!!(options !== null && options !== void 0 && options.reCaptcha)) {
+      if (!this.isAuthenticated()) {
+        this.reCaptcha.init();
+      }
+    }
+
+    this.events = new _events["default"]();
+  }
+
+  (0, _createClass2["default"])(Authentication, [{
+    key: "isAuthenticated",
+    value: function isAuthenticated() {
+      if (this.sdk) {
+        return this.sdk.methods.isAuthenticated();
+      } else {
+        return !!this.token.get();
+      }
+    }
+  }, {
+    key: "onSuccessAuth",
+    value: function onSuccessAuth(data) {
+      var _this2 = this;
+
+      this.modal.toggleLoader(true);
+
+      var handleAuthError = function handleAuthError(error) {
+        _this2.firebase.reset();
+
+        _this2.modal.toggleLoader(false);
+
+        _classPrivateMethodGet(_this2, _setAuthorizationError, _setAuthorizationError2).call(_this2, (error === null || error === void 0 ? void 0 : error.message) || 'Something went wrong!');
+      };
+
+      this.updateFirebaseToken(data.token);
+      this.events.notify(_eventsName["default"].local.SUCCESS_FIREBASE_AUTH, data);
+      this.authInWallkit(data.token).then(function (status) {
+        if (status) {
+          _this2.modal.hide();
+        } else {
+          _this2.firebase.reset();
+        }
+
+        _this2.modal.toggleLoader(false);
+      })["catch"](function (error) {
+        return handleAuthError(error);
+      });
+    }
+  }, {
+    key: "authInWallkit",
+    value: function authInWallkit() {
+      var _this3 = this;
+
+      var firebaseToken = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      _classPrivateMethodGet(this, _resetAuthorizationError, _resetAuthorizationError2).call(this);
+
+      return new Promise(function (resolve) {
+        if (firebaseToken) {
+          _this3.sdk.methods.authenticateWithFirebase(firebaseToken).then(function (_ref) {
+            var token = _ref.token,
+                existed = _ref.existed;
+
+            _this3.setToken(token);
+
+            var userGetTimeout = setTimeout(function () {
+              resolve(false);
+            }, 10000);
+
+            var userEventCallback = function userEventCallback() {
+              clearTimeout(userGetTimeout);
+
+              _this3.sdk.methods.unsubscribeLocalEvent('user', userEventCallback);
+
+              _this3.events.notify(_eventsName["default"].local.SUCCESS_AUTH, {
+                register: !existed
+              });
+
+              resolve(true);
+            };
+
+            _this3.sdk.methods.subscribeLocalEvent('user', userEventCallback);
+          })["catch"](function (error) {
+            var _error$response;
+
+            _classPrivateMethodGet(_this3, _setAuthorizationError, _setAuthorizationError2).call(_this3, error === null || error === void 0 ? void 0 : (_error$response = error.response) === null || _error$response === void 0 ? void 0 : _error$response.error_description);
+
+            _this3.removeTokens();
+
+            resolve(false);
+          });
+        } else {
+          resolve(false);
+        }
+      });
+    }
+  }, {
+    key: "show",
+    value: function () {
+      var _show = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
+        return _regenerator["default"].wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                this.modal.show();
+
+              case 1:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function show() {
+        return _show.apply(this, arguments);
+      }
+
+      return show;
+    }()
+  }, {
+    key: "updateFirebaseToken",
+    value: function updateFirebaseToken(token) {
+      this.firebaseToken.set(token);
+      this.frame.sendEvent(_eventsName["default"].wallkit.WALLKIT_EVENT_FIREBASE_TOKEN, token);
+      this.sdk.methods.setFirebaseToken(token);
+    }
+  }, {
+    key: "onFirebaseInit",
+    value: function onFirebaseInit() {
+      var _this4 = this;
+
+      if (this.reCaptcha.enabled && this.reCaptcha.loaded) {
+        this.reCaptcha.initCaptchaProcess();
+      } else if (!this.reCaptcha.loaded) {
+        this.events.subscribe(_eventsName["default"].local.RECAPTCHA_LOADED, function () {
+          _this4.reCaptcha.initCaptchaProcess();
+        }, {
+          once: true
+        });
+      }
+
+      this.modal.toggleLoader(false);
+    }
+  }, {
+    key: "removeToken",
+    value: function removeToken() {
+      this.token.remove();
+    }
+  }, {
+    key: "removeFirebaseToken",
+    value: function removeFirebaseToken() {
+      this.firebaseToken.remove();
+    }
+  }, {
+    key: "removeTokens",
+    value: function removeTokens() {
+      this.removeToken();
+      this.removeFirebaseToken();
+    }
+  }, {
+    key: "setToken",
+    value: function setToken(token) {
+      this.token.set(token);
+      this.sdk.methods.setToken(token);
+    }
+  }, {
+    key: "logout",
+    value: function logout() {
+      var _this5 = this;
+
+      this.removeToken();
+      this.firebase.logout().then(function (success) {
+        if (success) {
+          _this5.removeFirebaseToken();
+
+          if (_this5.reCaptcha.enabled && !_this5.reCaptcha.loaded) {
+            _this5.reCaptcha.init().then(function () {
+              _this5.firebase.reset();
+            })["catch"](function (error) {
+              console.error(error);
+
+              _this5.firebase.reset();
+            });
+          } else if (_this5.reCaptcha.loaded) {
+            _this5.firebase.reset();
+
+            _this5.reCaptcha.grecaptcha.reset();
+
+            _this5.reCaptcha.initCaptchaProcess();
+          } else {
+            _this5.firebase.reset();
+          }
+        }
+      });
+    }
+  }, {
+    key: "dispatchTokens",
+    value: function dispatchTokens() {
+      if (this.isAuthenticated()) {
+        if (this.token.get()) {
+          this.frame.sendEvent(_eventsName["default"].wallkit.WALLKIT_EVENT_TOKEN, this.token.get());
+        }
+
+        if (this.firebaseToken.get()) {
+          this.frame.sendEvent(_eventsName["default"].wallkit.WALLKIT_EVENT_FIREBASE_TOKEN, this.firebaseToken.get());
+        }
+      }
+    }
+  }, {
+    key: "handleTicketsToken",
+    value: function () {
+      var _handleTicketsToken = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(ticketPassAuthToken) {
+        var response, userCredential, firebaseToken;
+        return _regenerator["default"].wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return this.sdk.methods.getAuthTokensByTicketPassToken(ticketPassAuthToken);
+
+              case 3:
+                response = _context2.sent;
+
+                if (!response) {
+                  _context2.next = 19;
+                  break;
+                }
+
+                _context2.next = 7;
+                return this.firebase.authWithCustomToken(response.firebase_custom_token);
+
+              case 7:
+                userCredential = _context2.sent;
+                _context2.next = 10;
+                return userCredential.user.getIdToken();
+
+              case 10:
+                firebaseToken = _context2.sent;
+                this.updateFirebaseToken(firebaseToken);
+                this.setToken(response.token);
+                _context2.next = 15;
+                return this.sdk.methods.getUser();
+
+              case 15:
+                this.dispatchTokens();
+                this.events.notify(_eventsName["default"].local.SUCCESS_AUTH, true);
+                this.events.notify(_eventsName["default"].local.TICKETS_TOKEN_AUTH_SUCCESS, true);
+                return _context2.abrupt("return", true);
+
+              case 19:
+                return _context2.abrupt("return", false);
+
+              case 22:
+                _context2.prev = 22;
+                _context2.t0 = _context2["catch"](0);
+                console.error(_context2.t0);
+                return _context2.abrupt("return", _context2.t0);
+
+              case 26:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this, [[0, 22]]);
+      }));
+
+      function handleTicketsToken(_x) {
+        return _handleTicketsToken.apply(this, arguments);
+      }
+
+      return handleTicketsToken;
+    }()
+  }, {
+    key: "onFirebaseAuthFail",
+    value: function onFirebaseAuthFail(error) {
+      this.modal.toggleLoader(false);
+    }
+  }, {
+    key: "handleOneTapResponse",
+    value: function handleOneTapResponse(_ref2) {
+      var credential = _ref2.credential;
+      this.frame.sendEvent(_eventsName["default"].wallkit.WALLKIT_EVENT_ONE_TAP_SIGN_IN, credential);
+    }
+  }, {
+    key: "init",
+    value: function init() {
+      _classPrivateMethodGet(this, _initListeners, _initListeners2).call(this);
+    }
+  }]);
+  return Authentication;
+}();
+
+exports.default = Authentication;
+
+function _createModal2() {
+  var _classPrivateFieldGet2, _classPrivateFieldGet3, _classPrivateFieldGet4;
+
+  var defaultContentModal = "<div>\n                                        <div id=\"authorization-error\"></div>\n                                        <h2 class=\"wallkit-auth-modal__title\">".concat((_classPrivateFieldGet2 = (_classPrivateFieldGet3 = (0, _classPrivateFieldGet5["default"])(this, _options)) === null || _classPrivateFieldGet3 === void 0 ? void 0 : _classPrivateFieldGet3.modalTitle) !== null && _classPrivateFieldGet2 !== void 0 ? _classPrivateFieldGet2 : 'Sign In', "</h2>\n                                        <div id=\"").concat(_constants.WALLKIT_FIREBASE_UI_PLACEHOLDER_ID, "\"></div>\n                                     </div>");
+  return new _modal["default"]({
+    modalName: 'auth-modal',
+    content: ((_classPrivateFieldGet4 = (0, _classPrivateFieldGet5["default"])(this, _options)) === null || _classPrivateFieldGet4 === void 0 ? void 0 : _classPrivateFieldGet4.content) || defaultContentModal,
+    className: 'wallkit-auth-modal',
+    initialLoader: true
+  });
+}
+
+function _initListeners2() {
+  var _this6 = this;
+
+  this.events.subscribe(_eventsName["default"].local.FRAME_MESSAGE, function (_ref3) {
+    var name = _ref3.name,
+        value = _ref3.value;
+
+    switch (name) {
+      case _eventsName["default"].wallkit.WALLKIT_EVENT_TOKEN:
+        if (value) {
+          _this6.setToken(value);
+        }
+
+        break;
+
+      case _eventsName["default"].wallkit.WALLKIT_EVENT_AUTH:
+      case _eventsName["default"].wallkit.WALLKIT_EVENT_REGISTRATION:
+      case _eventsName["default"].wallkit.WALLKIT_EVENT_GET_TOKEN:
+        if (value) {
+          var token = value.token;
+
+          _this6.setToken(token);
+        }
+
+        break;
+
+      case _eventsName["default"].wallkit.WALLKIT_FIREBASE_TOKEN:
+        _this6.firebaseToken.set(value);
+
+        if (_this6.sdk) {
+          _this6.sdk.methods.setFirebaseToken(value);
+        }
+
+        break;
+
+      case _eventsName["default"].wallkit.WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN:
+        if (value) {
+          _this6.firebase.authWithCustomToken(value);
+        }
+
+        break;
+
+      case _eventsName["default"].wallkit.WALLKIT_LOGOUT:
+        _this6.logout();
+
+        break;
+    }
+  });
+}
+
+function _setAuthorizationError2(error) {
+  var errorPlaceholder = document.getElementById('authorization-error');
+
+  if (errorPlaceholder) {
+    errorPlaceholder.innerHTML = error || '';
+  }
+}
+
+function _resetAuthorizationError2() {
+  _classPrivateMethodGet(this, _setAuthorizationError, _setAuthorizationError2).call(this, null);
+}
+
+/***/ }),
+
+/***/ 189:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(318);
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = void 0;
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(575));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(913));
+
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(962));
+
+var _sdk = _interopRequireDefault(__webpack_require__(375));
+
+function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
+
+var _options = /*#__PURE__*/new WeakMap();
+
+var _encodeQueryData = /*#__PURE__*/new WeakSet();
+
+var _formatCheckAccessRequestPath = /*#__PURE__*/new WeakSet();
+
+var Content = /*#__PURE__*/function () {
+  function Content(content, options) {
+    (0, _classCallCheck2["default"])(this, Content);
+
+    _formatCheckAccessRequestPath.add(this);
+
+    _encodeQueryData.add(this);
+
+    _options.set(this, {
+      writable: true,
+      value: void 0
+    });
+
+    this.content = content;
+    (0, _classPrivateFieldSet2["default"])(this, _options, options);
+    this.sdk = new _sdk["default"]();
+    this.accessCount = 0;
+    this.accessCountLimit = 0;
+  }
+
+  (0, _createClass2["default"])(Content, [{
+    key: "formatTaxonomies",
+    value: function formatTaxonomies(taxonomies) {
+      var formatted = {};
+      var taxonimiesTitles = [];
+      var taxonimiesKeys = [];
+
+      var _loop = function _loop(taxKey) {
+        var _taxonomies$taxKey;
+
+        taxonimiesKeys.push(taxKey);
+        taxonimiesTitles.push(taxonomies[taxKey].label);
+        var termKeysKey = "term_keys[".concat(taxKey, "]");
+        var termTitleKey = "term_titles[".concat(taxKey, "]");
+        var targetTermKeys = formatted[termKeysKey];
+        var targetTermTitles = formatted[termTitleKey];
+
+        if ((_taxonomies$taxKey = taxonomies[taxKey]) !== null && _taxonomies$taxKey !== void 0 && _taxonomies$taxKey.items) {
+          taxonomies[taxKey].items.forEach(function (item) {
+            if (targetTermKeys) {
+              targetTermKeys.push(item.slug);
+            } else {
+              formatted[termKeysKey] = [item.slug];
+            }
+
+            if (targetTermTitles) {
+              targetTermTitles.push(item.slug);
+            } else {
+              formatted[termTitleKey] = [item.name];
+            }
+          });
+        }
+
+        formatted[termKeysKey] = formatted[termKeysKey].join(',');
+        formatted[termTitleKey] = formatted[termTitleKey].join(',');
+      };
+
+      for (var taxKey in taxonomies) {
+        _loop(taxKey);
+      }
+
+      formatted.taxonomy_titles = taxonimiesTitles.join(',');
+      formatted.taxonomy_keys = taxonimiesKeys.join(',');
+      return formatted;
+    }
+  }, {
+    key: "checkContentAccessAndSync",
+    value: function checkContentAccessAndSync(content) {
+      var _this = this;
+
+      var queryParams = {
+        type: content.type,
+        title: content.title,
+        link: content.link || window.location.href,
+        image: content.image || null
+      };
+      Object.assign(queryParams, this.formatTaxonomies(content.taxonomies));
+      return this.sdk.client.get({
+        path: _classPrivateMethodGet(this, _formatCheckAccessRequestPath, _formatCheckAccessRequestPath2).call(this, content.id, queryParams)
+      }).then(function (response) {
+        if (_this.sdk.methods.isAuthenticated()) {
+          _this.getAccessDetails(content.id);
+        }
+
+        return {
+          allowed: response.allow,
+          data: response
+        };
+      })["catch"](function (error) {
+        return {
+          allowed: false,
+          error: error
+        };
+      });
+    }
+  }, {
+    key: "checkAccess",
+    value: function checkAccess() {
+      var _this2 = this;
+
+      return this.sdk.methods.checkAccess(this.content.id).then(function (response) {
+        if (_this2.sdk.methods.isAuthenticated()) {
+          _this2.getAccessDetails(_this2.content.id);
+        }
+
+        return {
+          allowed: response.allow,
+          data: response
+        };
+      })["catch"](function (error) {
+        if (error.error === 'incorrect_content_key') {
+          return _this2.checkContentAccessAndSync(_this2.content);
+        }
+
+        return {
+          allowed: false,
+          error: error
+        };
+      });
+    }
+  }, {
+    key: "getAccessDetails",
+    value: function getAccessDetails(contentId) {
+      var _this3 = this;
+
+      return this.sdk.client.get({
+        path: "/user/content-access-details/".concat(contentId)
+      }).then(function (response) {
+        if (response) {
+          var terms = response.content_terms;
+          _this3.accessCount = terms.usedLimitInPeriod;
+          _this3.accessCountLimit = terms.accessLimit;
+          return {
+            accessCount: _this3.accessCount,
+            accessCountLimit: _this3.accessCountLimit
+          };
+        }
+
+        return {
+          accessCount: 0,
+          accessCountLimit: 0
+        };
+      })["catch"](function (error) {
+        return error;
+      });
+    }
+  }]);
+  return Content;
+}();
+
+exports.default = Content;
+
+function _encodeQueryData2(data) {
+  var ret = [];
+
+  for (var d in data) {
+    if (data[d] !== undefined) {
+      ret.push("".concat(encodeURIComponent(d), "=").concat(encodeURIComponent(data[d])));
+    }
+  }
+
+  return ret.join('&');
+}
+
+function _formatCheckAccessRequestPath2(id, params) {
+  var query = _classPrivateMethodGet(this, _encodeQueryData, _encodeQueryData2).call(this, params);
+
+  return "/user/content-sync-and-check/".concat(id, "?").concat(query);
+}
+
+/***/ }),
+
+/***/ 372:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = exports.WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN = exports.WALLKIT_FRAME_ROUTE_CHANGE = exports.WALLKIT_EVENT_ONE_TAP_SIGN_IN = exports.WALLKIT_EVENT_REGISTRATION = exports.WALLKIT_EVENT_USER = exports.WALLKIT_EVENT_AUTH = exports.WALLKIT_EVENT_GET_TOKEN = exports.WALLKIT_FRAME_READY = exports.WALLKIT_EVENT_TOKEN = exports.WALLKIT_EVENT_FIREBASE_TOKEN = exports.WALLKIT_FIREBASE_TOKEN = exports.WALLKIT_LOGOUT = exports.WALLKIT_CHANGE_FRAME = exports.TICKETS_TOKEN_AUTH_SUCCESS = exports.RECAPTCHA_VALIDATION_SUCCESS = exports.RECAPTCHA_VALIDATION_FAILED = exports.RECAPTCHA_LOADED = exports.MODAL_CLOSED = exports.FRAME_MODAL_CLOSED = exports.AUTH_MODAL_CLOSED = exports.FRAME_MESSAGE = exports.WALLKIT_SDK_LOADED = exports.SUCCESS_FIREBASE_AUTH = exports.SUCCESS_AUTH = exports.MODAL_CREATED = exports.FRAME_MOUNTED = exports.FRAME_CREATED = void 0;
+// Local Events Names
+var FRAME_CREATED = 'frame-created';
+exports.FRAME_CREATED = FRAME_CREATED;
+var FRAME_MOUNTED = 'frame-mounted';
+exports.FRAME_MOUNTED = FRAME_MOUNTED;
+var MODAL_CREATED = 'modal-created';
+exports.MODAL_CREATED = MODAL_CREATED;
+var SUCCESS_AUTH = 'success-auth';
+exports.SUCCESS_AUTH = SUCCESS_AUTH;
+var SUCCESS_FIREBASE_AUTH = 'success-firebase-auth';
+exports.SUCCESS_FIREBASE_AUTH = SUCCESS_FIREBASE_AUTH;
+var WALLKIT_SDK_LOADED = 'wallkit-js-sdk-loaded';
+exports.WALLKIT_SDK_LOADED = WALLKIT_SDK_LOADED;
+var FRAME_MESSAGE = 'frame-message';
+exports.FRAME_MESSAGE = FRAME_MESSAGE;
+var AUTH_MODAL_CLOSED = 'auth-modal-closed';
+exports.AUTH_MODAL_CLOSED = AUTH_MODAL_CLOSED;
+var FRAME_MODAL_CLOSED = 'frame-modal-closed';
+exports.FRAME_MODAL_CLOSED = FRAME_MODAL_CLOSED;
+var MODAL_CLOSED = 'modal-closed';
+exports.MODAL_CLOSED = MODAL_CLOSED;
+var RECAPTCHA_LOADED = 'recaptcha-loaded';
+exports.RECAPTCHA_LOADED = RECAPTCHA_LOADED;
+var RECAPTCHA_VALIDATION_FAILED = 'recaptcha-validation-failed';
+exports.RECAPTCHA_VALIDATION_FAILED = RECAPTCHA_VALIDATION_FAILED;
+var RECAPTCHA_VALIDATION_SUCCESS = 'recaptcha-validation-success';
+exports.RECAPTCHA_VALIDATION_SUCCESS = RECAPTCHA_VALIDATION_SUCCESS;
+var TICKETS_TOKEN_AUTH_SUCCESS = 'tickets-token-auth-success'; // Wallkit Events Names
+
+exports.TICKETS_TOKEN_AUTH_SUCCESS = TICKETS_TOKEN_AUTH_SUCCESS;
+var WALLKIT_CHANGE_FRAME = 'wk-event-modal';
+exports.WALLKIT_CHANGE_FRAME = WALLKIT_CHANGE_FRAME;
+var WALLKIT_LOGOUT = 'wk-event-logout';
+exports.WALLKIT_LOGOUT = WALLKIT_LOGOUT;
+var WALLKIT_FIREBASE_TOKEN = 'wk-firebase-token';
+exports.WALLKIT_FIREBASE_TOKEN = WALLKIT_FIREBASE_TOKEN;
+var WALLKIT_EVENT_FIREBASE_TOKEN = 'wk-event-firebase-token';
+exports.WALLKIT_EVENT_FIREBASE_TOKEN = WALLKIT_EVENT_FIREBASE_TOKEN;
+var WALLKIT_EVENT_TOKEN = 'wk-event-token';
+exports.WALLKIT_EVENT_TOKEN = WALLKIT_EVENT_TOKEN;
+var WALLKIT_FRAME_READY = 'wk-event-modals-ready';
+exports.WALLKIT_FRAME_READY = WALLKIT_FRAME_READY;
+var WALLKIT_EVENT_GET_TOKEN = 'wk-event-get-token';
+exports.WALLKIT_EVENT_GET_TOKEN = WALLKIT_EVENT_GET_TOKEN;
+var WALLKIT_EVENT_AUTH = 'wk-event-auth';
+exports.WALLKIT_EVENT_AUTH = WALLKIT_EVENT_AUTH;
+var WALLKIT_EVENT_USER = 'wk-event-user';
+exports.WALLKIT_EVENT_USER = WALLKIT_EVENT_USER;
+var WALLKIT_EVENT_REGISTRATION = 'wk-event-registration';
+exports.WALLKIT_EVENT_REGISTRATION = WALLKIT_EVENT_REGISTRATION;
+var WALLKIT_EVENT_ONE_TAP_SIGN_IN = 'wk-event-one-tap-sign-in';
+exports.WALLKIT_EVENT_ONE_TAP_SIGN_IN = WALLKIT_EVENT_ONE_TAP_SIGN_IN;
+var WALLKIT_FRAME_ROUTE_CHANGE = 'wk-event-route-change';
+exports.WALLKIT_FRAME_ROUTE_CHANGE = WALLKIT_FRAME_ROUTE_CHANGE;
+var WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN = 'wk-event-firebase-custom-token';
+exports.WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN = WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN;
+var _default = {
+  local: {
+    FRAME_CREATED: FRAME_CREATED,
+    FRAME_MOUNTED: FRAME_MOUNTED,
+    MODAL_CREATED: MODAL_CREATED,
+    SUCCESS_AUTH: SUCCESS_AUTH,
+    SUCCESS_FIREBASE_AUTH: SUCCESS_FIREBASE_AUTH,
+    FRAME_MESSAGE: FRAME_MESSAGE,
+    AUTH_MODAL_CLOSED: AUTH_MODAL_CLOSED,
+    FRAME_MODAL_CLOSED: FRAME_MODAL_CLOSED,
+    MODAL_CLOSED: MODAL_CLOSED,
+    RECAPTCHA_LOADED: RECAPTCHA_LOADED,
+    RECAPTCHA_VALIDATION_FAILED: RECAPTCHA_VALIDATION_FAILED,
+    RECAPTCHA_VALIDATION_SUCCESS: RECAPTCHA_VALIDATION_SUCCESS,
+    TICKETS_TOKEN_AUTH_SUCCESS: TICKETS_TOKEN_AUTH_SUCCESS
+  },
+  wallkit: {
+    FRAME_CREATED: FRAME_CREATED,
+    WALLKIT_LOGOUT: WALLKIT_LOGOUT,
+    WALLKIT_FIREBASE_TOKEN: WALLKIT_FIREBASE_TOKEN,
+    WALLKIT_EVENT_FIREBASE_TOKEN: WALLKIT_EVENT_FIREBASE_TOKEN,
+    WALLKIT_EVENT_TOKEN: WALLKIT_EVENT_TOKEN,
+    WALLKIT_FRAME_READY: WALLKIT_FRAME_READY,
+    WALLKIT_EVENT_GET_TOKEN: WALLKIT_EVENT_GET_TOKEN,
+    WALLKIT_EVENT_AUTH: WALLKIT_EVENT_AUTH,
+    WALLKIT_EVENT_USER: WALLKIT_EVENT_USER,
+    WALLKIT_EVENT_REGISTRATION: WALLKIT_EVENT_REGISTRATION,
+    WALLKIT_EVENT_ONE_TAP_SIGN_IN: WALLKIT_EVENT_ONE_TAP_SIGN_IN,
+    WALLKIT_FRAME_ROUTE_CHANGE: WALLKIT_FRAME_ROUTE_CHANGE,
+    WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN: WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN
+  }
+};
+exports.default = _default;
+
+/***/ }),
+
+/***/ 754:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(318);
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = void 0;
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(575));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(913));
+
+var Events = /*#__PURE__*/function () {
+  function Events() {
+    (0, _classCallCheck2["default"])(this, Events);
+
+    if (!!Events.instance) {
+      return Events.instance;
+    }
+
+    Events.instance = this;
+    this.listeners = [];
+    return this;
+  }
+
+  (0, _createClass2["default"])(Events, [{
+    key: "subscribe",
+    value: function subscribe(eventName, callback, options) {
+      this.listeners.push({
+        name: eventName,
+        callback: callback,
+        options: options
+      });
+    }
+  }, {
+    key: "unsubscribe",
+    value: function unsubscribe(eventName, callback) {
+      this.listeners = this.listeners.filter(function (event) {
+        return event.name !== eventName || event.callback !== callback;
+      });
+    }
+  }, {
+    key: "notify",
+    value: function notify(eventName, data) {
+      var onceIndexesToRemove = [];
+      this.listeners.forEach(function (event, index) {
+        if (eventName === event.name) {
+          var _event$options;
+
+          event.callback(data);
+
+          if (!!(event !== null && event !== void 0 && (_event$options = event.options) !== null && _event$options !== void 0 && _event$options.once)) {
+            onceIndexesToRemove.push(index);
+          }
+        }
+      });
+      this.listeners = this.listeners.filter(function (item, index) {
+        return !onceIndexesToRemove.includes(index);
+      });
+    }
+  }]);
+  return Events;
+}();
+
+exports.default = Events;
+
+/***/ }),
+
+/***/ 408:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(318);
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = void 0;
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(575));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(913));
+
+var _DOM = __webpack_require__(813);
+
+var _constants = __webpack_require__(425);
+
+var _eventsName = __webpack_require__(372);
+
+var _events = _interopRequireDefault(__webpack_require__(754));
+
+function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
+
+var _listeners = /*#__PURE__*/new WeakSet();
+
+var Frame = /*#__PURE__*/function () {
+  function Frame(options) {
+    (0, _classCallCheck2["default"])(this, Frame);
+
+    _listeners.add(this);
+
+    if (!!Frame.instance) {
+      return Frame.instance;
+    }
+
+    Frame.instance = this;
+    this.currentFrameName = '';
+    this.options = options;
+    this.frameElement = null;
+    this.ready = false;
+    this.events = new _events["default"]();
+  }
+
+  (0, _createClass2["default"])(Frame, [{
+    key: "element",
+    get: function get() {
+      return this.frameElement;
+    }
+  }, {
+    key: "getFrameURL",
+    get: function get() {
+      var host = this.options.mode === 'dev' ? _constants.WALLKIT_POPUP_DEV_URL : _constants.WALLKIT_POPUP_URL;
+      return "".concat(host, "?PUBLIC_KEY=").concat(this.options.public_key, "&version=").concat(this.options.version);
+    }
+  }, {
+    key: "createFrame",
+    value: function createFrame() {
+      this.frameElement = (0, _DOM.createElement)('iframe', {
+        id: _constants.WALLKIT_FRAME_ID,
+        className: _constants.WALLKIT_FRAME_ID,
+        attributes: {
+          scrolling: 'no',
+          allowtransparency: 'true',
+          frameborder: '0',
+          width: _constants.WALLKIT_MODAL_MIN_WIDTH,
+          height: _constants.WALLKIT_MODAL_MIN_HEIGHT
+        }
+      });
+      this.frameElement.setAttribute("src", this.getFrameURL);
+      this.events.notify(_eventsName.FRAME_CREATED, true);
+      return this.frameElement;
+    }
+  }, {
+    key: "resize",
+    value: function resize(width, height) {
+      width = width >= _constants.WALLKIT_MODAL_MIN_WIDTH ? width : _constants.WALLKIT_MODAL_MIN_WIDTH;
+      height = height >= _constants.WALLKIT_MODAL_MIN_HEIGHT ? height : _constants.WALLKIT_MODAL_MIN_HEIGHT;
+
+      if (this.frameElement) {
+        this.frameElement.width = width;
+        this.frameElement.height = height;
+      }
+    }
+  }, {
+    key: "sendEvent",
+    value: function sendEvent(name, value, params) {
+      if (this.frameElement && this.frameElement.contentWindow) {
+        var frameWindow = this.frameElement.contentWindow;
+        this.events.notify(name, value);
+        frameWindow.postMessage({
+          name: name,
+          value: value,
+          params: params
+        }, '*');
+      }
+    }
+  }, {
+    key: "openFrame",
+    value: function openFrame(name, params) {
+      var _this = this;
+
+      this.currentFrameName = name;
+
+      if (this.ready) {
+        this.sendEvent(_eventsName.WALLKIT_CHANGE_FRAME, name, params);
+      } else {
+        this.events.subscribe(_eventsName.WALLKIT_FRAME_READY, function () {
+          _this.sendEvent(_eventsName.WALLKIT_CHANGE_FRAME, name, params);
+        }, {
+          once: true
+        });
+      }
+    }
+  }, {
+    key: "onFrameReady",
+    value: function onFrameReady() {
+      var _this$options;
+
+      this.ready = true;
+
+      if ((_this$options = this.options) !== null && _this$options !== void 0 && _this$options.onReady) {
+        var _this$options2;
+
+        (_this$options2 = this.options) === null || _this$options2 === void 0 ? void 0 : _this$options2.onReady();
+      }
+    }
+  }, {
+    key: "init",
+    value: function init() {
+      _classPrivateMethodGet(this, _listeners, _listeners2).call(this);
+
+      return this.createFrame();
+    }
+  }]);
+  return Frame;
+}();
+
+exports.default = Frame;
+
+function _listeners2() {
+  var _this2 = this;
+
+  this.events.subscribe(_eventsName.WALLKIT_FRAME_ROUTE_CHANGE, function (value) {
+    _this2.currentFrameName = value;
+  });
+  this.events.subscribe(_eventsName.WALLKIT_FRAME_READY, function (value) {
+    if (value === true) {
+      _this2.onFrameReady();
+    }
+  });
+}
+
+/***/ }),
+
+/***/ 852:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(318);
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = void 0;
+
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(713));
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(575));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(913));
+
+var _constants = __webpack_require__(425);
+
+var _DOM = _interopRequireDefault(__webpack_require__(813));
+
+var _loaders = __webpack_require__(369);
+
+var _url = __webpack_require__(37);
+
+var _events = _interopRequireDefault(__webpack_require__(754));
+
+var _eventsName = __webpack_require__(372);
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
+
+var _getModalName = /*#__PURE__*/new WeakSet();
+
+var _createElement = /*#__PURE__*/new WeakSet();
+
+var _createCloseBtn = /*#__PURE__*/new WeakSet();
+
+var _createWrapper = /*#__PURE__*/new WeakSet();
+
+var _createContent = /*#__PURE__*/new WeakSet();
+
+var _createLoader = /*#__PURE__*/new WeakSet();
+
+var _completeModal = /*#__PURE__*/new WeakSet();
+
+var _loadAssets = /*#__PURE__*/new WeakSet();
+
+var Modal = /*#__PURE__*/function () {
+  function Modal(_options) {
+    (0, _classCallCheck2["default"])(this, Modal);
+
+    _loadAssets.add(this);
+
+    _completeModal.add(this);
+
+    _createLoader.add(this);
+
+    _createContent.add(this);
+
+    _createWrapper.add(this);
+
+    _createCloseBtn.add(this);
+
+    _createElement.add(this);
+
+    _getModalName.add(this);
+
+    this.options = _options;
+    this.modalFrame = _options ? _options.resourceFrame : null;
+    this.content = _options ? _options.content : null;
+    this.modalWrapper = null;
+    this.modalContent = null;
+    this.loaderElement = null;
+    this.isLoading = false;
+    this.closeOutside = true;
+    this.onClose = _options ? _options.onClose : null;
+  }
+
+  (0, _createClass2["default"])(Modal, [{
+    key: "bindCloseEvent",
+    value: function bindCloseEvent(element) {
+      return element.addEventListener('click', this.hide.bind(this));
+    }
+  }, {
+    key: "insertContent",
+    value: function insertContent(element) {
+      if (this.modalContent && element) {
+        if (typeof element === "string") {
+          this.modalContent.insertAdjacentHTML('beforeend', element);
+        } else if (element instanceof HTMLElement) {
+          this.modalContent.appendChild(element);
+        }
+      }
+    }
+  }, {
+    key: "toggleLoader",
+    value: function toggleLoader(state) {
+      this.isLoading = state;
+      this.loaderElement.style.display = state ? 'flex' : 'none';
+    }
+  }, {
+    key: "open",
+    value: function open(name, params) {
+      if (this.modalFrame) {
+        this.modalFrame.openFrame(name, params);
+        this.show();
+      }
+    }
+  }, {
+    key: "destroy",
+    value: function destroy() {}
+  }, {
+    key: "show",
+    value: function show() {
+      this.modalWrapper.style.display = 'flex';
+    }
+  }, {
+    key: "hide",
+    value: function hide() {
+      var events = new _events["default"]();
+      events.notify(_eventsName.MODAL_CLOSED, {
+        name: _classPrivateMethodGet(this, _getModalName, _getModalName2).call(this)
+      });
+
+      if (this.onClose) {
+        this.onClose();
+      }
+
+      this.modalWrapper.style.display = 'none';
+    }
+  }, {
+    key: "resize",
+    value: function resize(width, height) {
+      if (this.modalFrame) {
+        this.modalFrame.resize(width, height);
+      }
+    }
+  }, {
+    key: "sendEvent",
+    value: function sendEvent(name, value, params) {
+      if (this.modalFrame) {
+        this.modalFrame.sendEvent(name, value, params);
+      }
+    }
+  }, {
+    key: "openByHash",
+    value: function openByHash() {
+      var modal = (0, _url.parseModalHashURL)();
+
+      if (modal) {
+        this.open(modal.name, modal.params);
+      }
+    }
+  }, {
+    key: "onReady",
+    value: function onReady() {
+      var _this$options;
+
+      if ((_this$options = this.options) !== null && _this$options !== void 0 && _this$options.onReady) {
+        this.options.onReady(this);
+      }
+    }
+  }, {
+    key: "init",
+    value: function init() {
+      _classPrivateMethodGet(this, _createWrapper, _createWrapper2).call(this);
+
+      _classPrivateMethodGet(this, _createContent, _createContent2).call(this);
+
+      _classPrivateMethodGet(this, _createLoader, _createLoader2).call(this);
+
+      _classPrivateMethodGet(this, _completeModal, _completeModal2).call(this);
+
+      this.onReady();
+    }
+  }]);
+  return Modal;
+}();
+
+exports.default = Modal;
+
+function _getModalName2() {
+  var _this$options$modalNa, _this$options2;
+
+  return (_this$options$modalNa = (_this$options2 = this.options) === null || _this$options2 === void 0 ? void 0 : _this$options2.modalName) !== null && _this$options$modalNa !== void 0 ? _this$options$modalNa : 'wk-modal';
+}
+
+function _createElement2(elementTag, elementName, options) {
+  var elementIdName = _classPrivateMethodGet(this, _getModalName, _getModalName2).call(this) + '-' + elementName;
+  var elementIndex = 0;
+  var elementId = elementIdName;
+
+  while (_DOM["default"].checkIfElementExists('#' + elementId)) {
+    ++elementIndex;
+    elementId = elementIdName + '-' + elementIndex;
+  }
+
+  return _DOM["default"].createElement(elementTag, _objectSpread({
+    id: elementId
+  }, options));
+}
+
+function _createCloseBtn2() {
+  var closeBtn = _classPrivateMethodGet(this, _createElement, _createElement2).call(this, 'div', 'close-btn', {
+    className: _constants.WALLKIT_MODAL_CLOSE_BTN_CLASSNAME
+  });
+
+  closeBtn.innerHTML = '&#xd7;'; // Plus Symbol
+
+  this.bindCloseEvent(closeBtn);
+  return closeBtn;
+}
+
+function _createWrapper2() {
+  var _this$options3,
+      _this = this;
+
+  var modalClassName = _constants.WALLKIT_MODAL_WRAPPER_CLASSNAME;
+
+  if ((_this$options3 = this.options) !== null && _this$options3 !== void 0 && _this$options3.className) {
+    var _this$options4;
+
+    modalClassName += ' ' + ((_this$options4 = this.options) === null || _this$options4 === void 0 ? void 0 : _this$options4.className);
+  }
+
+  this.modalWrapper = _classPrivateMethodGet(this, _createElement, _createElement2).call(this, 'div', 'wrapper', {
+    styles: {
+      display: 'none'
+    },
+    className: modalClassName
+  });
+  this.modalWrapper.addEventListener('click', function (event) {
+    if (event.target.id === _this.modalWrapper.id) {
+      if (_this.closeOutside) {
+        _this.hide();
+      }
+    }
+  });
+  return this.modalWrapper;
+}
+
+function _createContent2() {
+  this.modalContent = _classPrivateMethodGet(this, _createElement, _createElement2).call(this, 'div', 'content', {
+    className: _constants.WALLKIT_MODAL_CONTENT_CLASSNAME
+  });
+  this.modalContent.style.minWidth = _constants.WALLKIT_MODAL_MIN_WIDTH + 'px';
+  this.modalContent.style.minHeight = _constants.WALLKIT_MODAL_MIN_HEIGHT + 'px';
+  return this.modalContent;
+}
+
+function _createLoader2() {
+  var _this$options5;
+
+  this.loaderElement = _classPrivateMethodGet(this, _createElement, _createElement2).call(this, 'div', 'wallkit-modal-spinner', {
+    className: 'wallkit-spinner',
+    styles: {
+      display: (_this$options5 = this.options) !== null && _this$options5 !== void 0 && _this$options5.initialLoader ? 'flex' : 'none'
+    }
+  });
+  this.loaderElement.insertAdjacentHTML('beforeend', '<div class="wallkit-spinner__container">' + '<div class="cube1"></div>' + '<div class="cube2"></div>' + '</div>');
+}
+
+function _completeModal2() {
+  _classPrivateMethodGet(this, _loadAssets, _loadAssets2).call(this);
+
+  this.modalWrapper.appendChild(this.modalContent);
+  this.modalContent.appendChild(this.loaderElement);
+  this.modalContent.appendChild(_classPrivateMethodGet(this, _createCloseBtn, _createCloseBtn2).call(this));
+
+  if (this.modalFrame) {
+    this.insertContent(this.modalFrame.init());
+  } else if (this.modalContent) {
+    this.insertContent(this.content);
+  }
+
+  return _DOM["default"].injectInBody(this.modalWrapper);
+}
+
+function _loadAssets2() {
+  (0, _loaders.loadWallkitAsset)('css', '1.0', 'spinner');
+}
+
+/***/ }),
+
+/***/ 375:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(318);
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = void 0;
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(575));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(913));
+
+var _classPrivateFieldGet4 = _interopRequireDefault(__webpack_require__(226));
+
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(962));
+
+var _DOM = __webpack_require__(813);
+
+var _constants = __webpack_require__(425);
+
+var _eventsName = __webpack_require__(372);
+
+var _events2 = _interopRequireDefault(__webpack_require__(754));
+
+var _options = /*#__PURE__*/new WeakMap();
+
+var _events = /*#__PURE__*/new WeakMap();
+
+var _apiUrl = /*#__PURE__*/new WeakMap();
+
+var SDK = /*#__PURE__*/function () {
+  function SDK(options) {
+    (0, _classCallCheck2["default"])(this, SDK);
+
+    _options.set(this, {
+      writable: true,
+      value: void 0
+    });
+
+    _events.set(this, {
+      writable: true,
+      value: void 0
+    });
+
+    _apiUrl.set(this, {
+      writable: true,
+      value: void 0
+    });
+
+    if (!!SDK.instance) {
+      return SDK.instance;
+    }
+
+    if (!options) {
+      return new Error('No Options Provided');
+    }
+
+    SDK.instance = this;
+    this.methods = null;
+    this.client = null;
+    (0, _classPrivateFieldSet2["default"])(this, _options, options);
+    (0, _classPrivateFieldSet2["default"])(this, _events, new _events2["default"]());
+    (0, _classPrivateFieldSet2["default"])(this, _apiUrl, options.mode === 'dev' ? 'https://api.dev.wallkit.net/api/v1' : undefined);
+
+    if (window.Wallkit) {
+      this.onLoad();
+    } else {
+      this.load();
+    }
+  }
+
+  (0, _createClass2["default"])(SDK, [{
+    key: "onLoad",
+    value: function onLoad() {
+      if (window.Wallkit) {
+        var _classPrivateFieldGet2;
+
+        window.Wallkit.init({
+          resource: (0, _classPrivateFieldGet4["default"])(this, _options).public_key,
+          api_url: (0, _classPrivateFieldGet4["default"])(this, _apiUrl)
+        });
+        this.methods = window.Wallkit;
+        this.client = window.Wallkit.client;
+        (0, _classPrivateFieldGet4["default"])(this, _events).notify(_eventsName.WALLKIT_SDK_LOADED, window.Wallkit);
+
+        if ((_classPrivateFieldGet2 = (0, _classPrivateFieldGet4["default"])(this, _options)) !== null && _classPrivateFieldGet2 !== void 0 && _classPrivateFieldGet2.onLoaded) {
+          var _classPrivateFieldGet3;
+
+          (_classPrivateFieldGet3 = (0, _classPrivateFieldGet4["default"])(this, _options)) === null || _classPrivateFieldGet3 === void 0 ? void 0 : _classPrivateFieldGet3.onLoaded();
+        }
+      }
+    }
+  }, {
+    key: "awaitLoad",
+    value: function awaitLoad() {
+      var _this = this;
+
+      return new Promise(function (resolve) {
+        if (!_this.methods) {
+          (0, _classPrivateFieldGet4["default"])(_this, _events).subscribe(_eventsName.WALLKIT_SDK_LOADED, function () {
+            return resolve(_this);
+          });
+        } else {
+          resolve(_this);
+        }
+      });
+    }
+  }, {
+    key: "load",
+    value: function load() {
+      (0, _DOM.insertScript)("".concat(_constants.WALLKIT_CDN_URL, "/js/sdk/0.0.45/wallkit.umd.min.js"), 'wallkit-js-sdk', this.onLoad.bind(this));
+    }
+  }]);
+  return SDK;
+}();
+
+exports.default = SDK;
+
+/***/ }),
+
+/***/ 813:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _typeof = __webpack_require__(8);
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = exports.insertScript = exports.loadCSS = exports.injectInHead = exports.injectInBody = exports.createElement = exports.checkIfElementExists = exports.isDocumentAvailable = void 0;
+
+var _Error = _interopRequireWildcard(__webpack_require__(334));
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+var isDocumentAvailable = function isDocumentAvailable() {
+  return !!document;
+};
+
+exports.isDocumentAvailable = isDocumentAvailable;
+
+var checkIfElementExists = function checkIfElementExists(elementSelector) {
+  if (!isDocumentAvailable()) return _Error["default"].handleError('Document is not available', _Error.ERRORS_TYPES.DOM_ERROR);
+  return !!document.querySelector(elementSelector);
+};
+
+exports.checkIfElementExists = checkIfElementExists;
+
+var createElement = function createElement(tag, options) {
+  if (!isDocumentAvailable()) return _Error["default"].handleError('Document is not available', _Error.ERRORS_TYPES.DOM_ERROR);
+  if (!tag) return _Error["default"].checkRequiredArgument(tag);
+  var element = document.createElement(tag);
+
+  var _ref = options !== null && options !== void 0 ? options : {},
+      id = _ref.id,
+      className = _ref.className,
+      styles = _ref.styles,
+      attributes = _ref.attributes; // Options Arguments
+
+
+  if (id) {
+    element.id = id;
+  }
+
+  if (className) {
+    element.setAttribute('class', className);
+  }
+
+  if (styles && Object.keys(styles) && Object.keys(styles).length) {
+    for (var prop in styles) {
+      if (styles.hasOwnProperty(prop)) {
+        element.style[prop] = styles[prop];
+      }
+    }
+  }
+
+  if (attributes && Object.keys(attributes) && Object.keys(attributes).length) {
+    for (var _prop in attributes) {
+      if (attributes.hasOwnProperty(_prop)) {
+        element[_prop] = attributes[_prop];
+      }
+    }
+  }
+
+  return element;
+};
+
+exports.createElement = createElement;
+
+var injectInBody = function injectInBody(element) {
+  if (!isDocumentAvailable()) return _Error["default"].handleError('Document is not available', _Error.ERRORS_TYPES.DOM_ERROR);
+  if (!element) return _Error["default"].checkRequiredArgument(element, 'element');
+  return document.body.appendChild(element);
+};
+
+exports.injectInBody = injectInBody;
+
+var injectInHead = function injectInHead(element) {
+  if (!isDocumentAvailable()) return _Error["default"].handleError('Document is not available', _Error.ERRORS_TYPES.DOM_ERROR);
+  if (!element) return _Error["default"].checkRequiredArgument(element, 'element');
+  return document.head.appendChild(element);
+};
+
+exports.injectInHead = injectInHead;
+
+var loadCSS = function loadCSS(url, id) {
+  if (!isDocumentAvailable()) return _Error["default"].handleError('Document is not available', _Error.ERRORS_TYPES.DOM_ERROR);
+  if (checkIfElementExists('#' + id)) return;
+  var head = document.querySelector('head');
+  var link = document.createElement('link');
+
+  if (id) {
+    link.id = id;
+  }
+
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = url;
+  link.media = 'all';
+  return head.appendChild(link);
+};
+
+exports.loadCSS = loadCSS;
+
+var insertScript = function insertScript(url, id, onload) {
+  if (!isDocumentAvailable()) return _Error["default"].handleError('Document is not available', _Error.ERRORS_TYPES.DOM_ERROR);
+  if (checkIfElementExists('#' + id)) return;
+  var scriptElement = createElement('script', {
+    id: id,
+    attributes: {
+      src: url
+    }
+  });
+
+  if (onload) {
+    scriptElement.addEventListener('load', onload, {
+      once: true
+    });
+  }
+
+  return injectInBody(scriptElement);
+};
+
+exports.insertScript = insertScript;
+var _default = {
+  createElement: createElement,
+  injectInBody: injectInBody,
+  checkIfElementExists: checkIfElementExists,
+  loadCSS: loadCSS,
+  insertScript: insertScript
+};
+exports.default = _default;
+
+/***/ }),
+
+/***/ 98:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = exports.removeCookie = exports.setCookie = void 0;
+
+var setCookie = function setCookie(name, value, options) {
+  options = options || {};
+  var _options = options,
+      expires = _options.expires;
+
+  if (typeof expires === "number" && expires) {
+    var date = new Date();
+    date.setTime(date.getTime() + expires * 1000);
+    expires = options.expires = date;
+  }
+
+  if (expires && expires.toUTCString) {
+    options.expires = expires.toUTCString();
+  }
+
+  value = encodeURIComponent(value);
+  var updatedCookie = "".concat(name, "=").concat(value);
+
+  for (var propName in options) {
+    updatedCookie += "; " + propName;
+    var propValue = options[propName];
+
+    if (propValue) {
+      updatedCookie += "=" + propValue;
+    }
+  }
+
+  document.cookie = updatedCookie;
+};
+
+exports.setCookie = setCookie;
+
+var removeCookie = function removeCookie(name) {
+  document.cookie = "".concat(name, "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;");
+};
+
+exports.removeCookie = removeCookie;
+var _default = {
+  setCookie: setCookie,
+  removeCookie: removeCookie
+};
+exports.default = _default;
+
+/***/ }),
+
+/***/ 369:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = exports.loadScripts = exports.loadWallkitAsset = void 0;
+
+var _DOM = __webpack_require__(813);
+
+var _constants = __webpack_require__(425);
+
+var loadWallkitAsset = function loadWallkitAsset(type, version, name) {
+  var min = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+
+  switch (type) {
+    case 'css':
+      var assetName = name;
+
+      if (min) {
+        assetName += '.min.css';
+      } else {
+        assetName += '.css';
+      }
+
+      (0, _DOM.loadCSS)("".concat(_constants.WALLKIT_CDN_ASSETS_URL, "/css/").concat(version, "/").concat(assetName), "wk-css-".concat(name));
+      return;
+
+    default:
+      return;
+  }
+};
+
+exports.loadWallkitAsset = loadWallkitAsset;
+
+var loadScripts = function loadScripts(scripts) {
+  if (Array.isArray(scripts)) {
+    scripts.forEach(function (script) {
+      (0, _DOM.insertScript)(script.url, script.id, script.onload);
+    });
+  }
+};
+
+exports.loadScripts = loadScripts;
+var _default = {
+  loadWallkitAsset: loadWallkitAsset,
+  loadScripts: loadScripts
+};
+exports.default = _default;
+
+/***/ }),
+
+/***/ 797:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = void 0;
+var _default = {
+  setItem: function setItem(key, value) {
+    if (!this.isAvailable()) return null;
+    return window.localStorage.setItem(key, value);
+  },
+  getItem: function getItem(key) {
+    if (!this.isAvailable()) return null;
+    return window.localStorage.getItem(key);
+  },
+  removeItem: function removeItem(key) {
+    if (!this.isAvailable()) return;
+    return window.localStorage.removeItem(key);
+  },
+  isAvailable: function isAvailable() {
+    try {
+      window.localStorage.setItem('', '');
+      window.localStorage.removeItem('');
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+};
+exports.default = _default;
+
+/***/ }),
+
+/***/ 900:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.isApplePayAvailable = void 0;
+
+var isApplePayAvailable = function isApplePayAvailable() {
+  try {
+    if (window.ApplePaySession) {
+      return window.ApplePaySession.canMakePayments();
+    } else {
+      return false;
+    }
+  } catch (e) {
+    console.error("ApplePay Error", e);
+    return false;
+  }
+};
+
+exports.isApplePayAvailable = isApplePayAvailable;
+
+/***/ }),
+
+/***/ 37:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(318);
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.resetHash = exports.parseAuthTokenHash = exports.parseModalHashURL = void 0;
+
+var _typeof2 = _interopRequireDefault(__webpack_require__(8));
+
+var parseModalHashURL = function parseModalHashURL() {
+  var UryModal = /#WkModal\((.*)\)$/.exec(decodeURIComponent(window.location.hash));
+
+  if (UryModal && UryModal[1]) {
+    var par = UryModal[1].split(/,(.+)/);
+
+    if (typeof par[1] !== "undefined") {
+      try {
+        par[1] = JSON.parse(par[1]);
+      } catch (_) {
+        par[1] = {
+          value: par[1].trim()
+        };
+      }
+    }
+
+    window.location.hash = "";
+    return {
+      name: par[0],
+      params: (0, _typeof2["default"])(par[1]) === "object" ? par[1] : null
+    };
+  }
+};
+
+exports.parseModalHashURL = parseModalHashURL;
+
+var parseAuthTokenHash = function parseAuthTokenHash() {
+  var hash = decodeURIComponent(window.location.hash);
+
+  if (hash !== null && hash !== void 0 && hash.includes('wk-authorize')) {
+    var splitHash = hash.split('=');
+    var token = splitHash === null || splitHash === void 0 ? void 0 : splitHash[1];
+
+    if (token) {
+      return token;
+    }
+  }
+
+  return null;
+};
+
+exports.parseAuthTokenHash = parseAuthTokenHash;
+
+var resetHash = function resetHash() {
+  window.location.hash = '';
+  var path = window.location.href.replace('#', '');
+  window.history.pushState('', '', path);
+};
+
+exports.resetHash = resetHash;
+
+/***/ }),
+
+/***/ 666:
+/***/ ((module) => {
+
+/**
+ * Copyright (c) 2014-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var runtime = (function (exports) {
+  "use strict";
+
+  var Op = Object.prototype;
+  var hasOwn = Op.hasOwnProperty;
+  var undefined; // More compressible than void 0.
+  var $Symbol = typeof Symbol === "function" ? Symbol : {};
+  var iteratorSymbol = $Symbol.iterator || "@@iterator";
+  var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
+  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+
+  function define(obj, key, value) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+    return obj[key];
+  }
+  try {
+    // IE 8 has a broken Object.defineProperty that only works on DOM objects.
+    define({}, "");
+  } catch (err) {
+    define = function(obj, key, value) {
+      return obj[key] = value;
+    };
+  }
+
+  function wrap(innerFn, outerFn, self, tryLocsList) {
+    // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
+    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
+    var generator = Object.create(protoGenerator.prototype);
+    var context = new Context(tryLocsList || []);
+
+    // The ._invoke method unifies the implementations of the .next,
+    // .throw, and .return methods.
+    generator._invoke = makeInvokeMethod(innerFn, self, context);
+
+    return generator;
+  }
+  exports.wrap = wrap;
+
+  // Try/catch helper to minimize deoptimizations. Returns a completion
+  // record like context.tryEntries[i].completion. This interface could
+  // have been (and was previously) designed to take a closure to be
+  // invoked without arguments, but in all the cases we care about we
+  // already have an existing method we want to call, so there's no need
+  // to create a new function object. We can even get away with assuming
+  // the method takes exactly one argument, since that happens to be true
+  // in every case, so we don't have to touch the arguments object. The
+  // only additional allocation required is the completion record, which
+  // has a stable shape and so hopefully should be cheap to allocate.
+  function tryCatch(fn, obj, arg) {
+    try {
+      return { type: "normal", arg: fn.call(obj, arg) };
+    } catch (err) {
+      return { type: "throw", arg: err };
+    }
+  }
+
+  var GenStateSuspendedStart = "suspendedStart";
+  var GenStateSuspendedYield = "suspendedYield";
+  var GenStateExecuting = "executing";
+  var GenStateCompleted = "completed";
+
+  // Returning this object from the innerFn has the same effect as
+  // breaking out of the dispatch switch statement.
+  var ContinueSentinel = {};
+
+  // Dummy constructor functions that we use as the .constructor and
+  // .constructor.prototype properties for functions that return Generator
+  // objects. For full spec compliance, you may wish to configure your
+  // minifier not to mangle the names of these two functions.
+  function Generator() {}
+  function GeneratorFunction() {}
+  function GeneratorFunctionPrototype() {}
+
+  // This is a polyfill for %IteratorPrototype% for environments that
+  // don't natively support it.
+  var IteratorPrototype = {};
+  define(IteratorPrototype, iteratorSymbol, function () {
+    return this;
+  });
+
+  var getProto = Object.getPrototypeOf;
+  var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+  if (NativeIteratorPrototype &&
+      NativeIteratorPrototype !== Op &&
+      hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
+    // This environment has a native %IteratorPrototype%; use it instead
+    // of the polyfill.
+    IteratorPrototype = NativeIteratorPrototype;
+  }
+
+  var Gp = GeneratorFunctionPrototype.prototype =
+    Generator.prototype = Object.create(IteratorPrototype);
+  GeneratorFunction.prototype = GeneratorFunctionPrototype;
+  define(Gp, "constructor", GeneratorFunctionPrototype);
+  define(GeneratorFunctionPrototype, "constructor", GeneratorFunction);
+  GeneratorFunction.displayName = define(
+    GeneratorFunctionPrototype,
+    toStringTagSymbol,
+    "GeneratorFunction"
+  );
+
+  // Helper for defining the .next, .throw, and .return methods of the
+  // Iterator interface in terms of a single ._invoke method.
+  function defineIteratorMethods(prototype) {
+    ["next", "throw", "return"].forEach(function(method) {
+      define(prototype, method, function(arg) {
+        return this._invoke(method, arg);
+      });
+    });
+  }
+
+  exports.isGeneratorFunction = function(genFun) {
+    var ctor = typeof genFun === "function" && genFun.constructor;
+    return ctor
+      ? ctor === GeneratorFunction ||
+        // For the native GeneratorFunction constructor, the best we can
+        // do is to check its .name property.
+        (ctor.displayName || ctor.name) === "GeneratorFunction"
+      : false;
+  };
+
+  exports.mark = function(genFun) {
+    if (Object.setPrototypeOf) {
+      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
+    } else {
+      genFun.__proto__ = GeneratorFunctionPrototype;
+      define(genFun, toStringTagSymbol, "GeneratorFunction");
+    }
+    genFun.prototype = Object.create(Gp);
+    return genFun;
+  };
+
+  // Within the body of any async function, `await x` is transformed to
+  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
+  // `hasOwn.call(value, "__await")` to determine if the yielded value is
+  // meant to be awaited.
+  exports.awrap = function(arg) {
+    return { __await: arg };
+  };
+
+  function AsyncIterator(generator, PromiseImpl) {
+    function invoke(method, arg, resolve, reject) {
+      var record = tryCatch(generator[method], generator, arg);
+      if (record.type === "throw") {
+        reject(record.arg);
+      } else {
+        var result = record.arg;
+        var value = result.value;
+        if (value &&
+            typeof value === "object" &&
+            hasOwn.call(value, "__await")) {
+          return PromiseImpl.resolve(value.__await).then(function(value) {
+            invoke("next", value, resolve, reject);
+          }, function(err) {
+            invoke("throw", err, resolve, reject);
+          });
+        }
+
+        return PromiseImpl.resolve(value).then(function(unwrapped) {
+          // When a yielded Promise is resolved, its final value becomes
+          // the .value of the Promise<{value,done}> result for the
+          // current iteration.
+          result.value = unwrapped;
+          resolve(result);
+        }, function(error) {
+          // If a rejected Promise was yielded, throw the rejection back
+          // into the async generator function so it can be handled there.
+          return invoke("throw", error, resolve, reject);
+        });
+      }
+    }
+
+    var previousPromise;
+
+    function enqueue(method, arg) {
+      function callInvokeWithMethodAndArg() {
+        return new PromiseImpl(function(resolve, reject) {
+          invoke(method, arg, resolve, reject);
+        });
+      }
+
+      return previousPromise =
+        // If enqueue has been called before, then we want to wait until
+        // all previous Promises have been resolved before calling invoke,
+        // so that results are always delivered in the correct order. If
+        // enqueue has not been called before, then it is important to
+        // call invoke immediately, without waiting on a callback to fire,
+        // so that the async generator function has the opportunity to do
+        // any necessary setup in a predictable way. This predictability
+        // is why the Promise constructor synchronously invokes its
+        // executor callback, and why async functions synchronously
+        // execute code before the first await. Since we implement simple
+        // async functions in terms of async generators, it is especially
+        // important to get this right, even though it requires care.
+        previousPromise ? previousPromise.then(
+          callInvokeWithMethodAndArg,
+          // Avoid propagating failures to Promises returned by later
+          // invocations of the iterator.
+          callInvokeWithMethodAndArg
+        ) : callInvokeWithMethodAndArg();
+    }
+
+    // Define the unified helper method that is used to implement .next,
+    // .throw, and .return (see defineIteratorMethods).
+    this._invoke = enqueue;
+  }
+
+  defineIteratorMethods(AsyncIterator.prototype);
+  define(AsyncIterator.prototype, asyncIteratorSymbol, function () {
+    return this;
+  });
+  exports.AsyncIterator = AsyncIterator;
+
+  // Note that simple async functions are implemented on top of
+  // AsyncIterator objects; they just return a Promise for the value of
+  // the final result produced by the iterator.
+  exports.async = function(innerFn, outerFn, self, tryLocsList, PromiseImpl) {
+    if (PromiseImpl === void 0) PromiseImpl = Promise;
+
+    var iter = new AsyncIterator(
+      wrap(innerFn, outerFn, self, tryLocsList),
+      PromiseImpl
+    );
+
+    return exports.isGeneratorFunction(outerFn)
+      ? iter // If outerFn is a generator, return the full iterator.
+      : iter.next().then(function(result) {
+          return result.done ? result.value : iter.next();
+        });
+  };
+
+  function makeInvokeMethod(innerFn, self, context) {
+    var state = GenStateSuspendedStart;
+
+    return function invoke(method, arg) {
+      if (state === GenStateExecuting) {
+        throw new Error("Generator is already running");
+      }
+
+      if (state === GenStateCompleted) {
+        if (method === "throw") {
+          throw arg;
+        }
+
+        // Be forgiving, per 25.3.3.3.3 of the spec:
+        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
+        return doneResult();
+      }
+
+      context.method = method;
+      context.arg = arg;
+
+      while (true) {
+        var delegate = context.delegate;
+        if (delegate) {
+          var delegateResult = maybeInvokeDelegate(delegate, context);
+          if (delegateResult) {
+            if (delegateResult === ContinueSentinel) continue;
+            return delegateResult;
+          }
+        }
+
+        if (context.method === "next") {
+          // Setting context._sent for legacy support of Babel's
+          // function.sent implementation.
+          context.sent = context._sent = context.arg;
+
+        } else if (context.method === "throw") {
+          if (state === GenStateSuspendedStart) {
+            state = GenStateCompleted;
+            throw context.arg;
+          }
+
+          context.dispatchException(context.arg);
+
+        } else if (context.method === "return") {
+          context.abrupt("return", context.arg);
+        }
+
+        state = GenStateExecuting;
+
+        var record = tryCatch(innerFn, self, context);
+        if (record.type === "normal") {
+          // If an exception is thrown from innerFn, we leave state ===
+          // GenStateExecuting and loop back for another invocation.
+          state = context.done
+            ? GenStateCompleted
+            : GenStateSuspendedYield;
+
+          if (record.arg === ContinueSentinel) {
+            continue;
+          }
+
+          return {
+            value: record.arg,
+            done: context.done
+          };
+
+        } else if (record.type === "throw") {
+          state = GenStateCompleted;
+          // Dispatch the exception by looping back around to the
+          // context.dispatchException(context.arg) call above.
+          context.method = "throw";
+          context.arg = record.arg;
+        }
+      }
+    };
+  }
+
+  // Call delegate.iterator[context.method](context.arg) and handle the
+  // result, either by returning a { value, done } result from the
+  // delegate iterator, or by modifying context.method and context.arg,
+  // setting context.delegate to null, and returning the ContinueSentinel.
+  function maybeInvokeDelegate(delegate, context) {
+    var method = delegate.iterator[context.method];
+    if (method === undefined) {
+      // A .throw or .return when the delegate iterator has no .throw
+      // method always terminates the yield* loop.
+      context.delegate = null;
+
+      if (context.method === "throw") {
+        // Note: ["return"] must be used for ES3 parsing compatibility.
+        if (delegate.iterator["return"]) {
+          // If the delegate iterator has a return method, give it a
+          // chance to clean up.
+          context.method = "return";
+          context.arg = undefined;
+          maybeInvokeDelegate(delegate, context);
+
+          if (context.method === "throw") {
+            // If maybeInvokeDelegate(context) changed context.method from
+            // "return" to "throw", let that override the TypeError below.
+            return ContinueSentinel;
+          }
+        }
+
+        context.method = "throw";
+        context.arg = new TypeError(
+          "The iterator does not provide a 'throw' method");
+      }
+
+      return ContinueSentinel;
+    }
+
+    var record = tryCatch(method, delegate.iterator, context.arg);
+
+    if (record.type === "throw") {
+      context.method = "throw";
+      context.arg = record.arg;
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    var info = record.arg;
+
+    if (! info) {
+      context.method = "throw";
+      context.arg = new TypeError("iterator result is not an object");
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    if (info.done) {
+      // Assign the result of the finished delegate to the temporary
+      // variable specified by delegate.resultName (see delegateYield).
+      context[delegate.resultName] = info.value;
+
+      // Resume execution at the desired location (see delegateYield).
+      context.next = delegate.nextLoc;
+
+      // If context.method was "throw" but the delegate handled the
+      // exception, let the outer generator proceed normally. If
+      // context.method was "next", forget context.arg since it has been
+      // "consumed" by the delegate iterator. If context.method was
+      // "return", allow the original .return call to continue in the
+      // outer generator.
+      if (context.method !== "return") {
+        context.method = "next";
+        context.arg = undefined;
+      }
+
+    } else {
+      // Re-yield the result returned by the delegate method.
+      return info;
+    }
+
+    // The delegate iterator is finished, so forget it and continue with
+    // the outer generator.
+    context.delegate = null;
+    return ContinueSentinel;
+  }
+
+  // Define Generator.prototype.{next,throw,return} in terms of the
+  // unified ._invoke helper method.
+  defineIteratorMethods(Gp);
+
+  define(Gp, toStringTagSymbol, "Generator");
+
+  // A Generator should always return itself as the iterator object when the
+  // @@iterator function is called on it. Some browsers' implementations of the
+  // iterator prototype chain incorrectly implement this, causing the Generator
+  // object to not be returned from this call. This ensures that doesn't happen.
+  // See https://github.com/facebook/regenerator/issues/274 for more details.
+  define(Gp, iteratorSymbol, function() {
+    return this;
+  });
+
+  define(Gp, "toString", function() {
+    return "[object Generator]";
+  });
+
+  function pushTryEntry(locs) {
+    var entry = { tryLoc: locs[0] };
+
+    if (1 in locs) {
+      entry.catchLoc = locs[1];
+    }
+
+    if (2 in locs) {
+      entry.finallyLoc = locs[2];
+      entry.afterLoc = locs[3];
+    }
+
+    this.tryEntries.push(entry);
+  }
+
+  function resetTryEntry(entry) {
+    var record = entry.completion || {};
+    record.type = "normal";
+    delete record.arg;
+    entry.completion = record;
+  }
+
+  function Context(tryLocsList) {
+    // The root entry object (effectively a try statement without a catch
+    // or a finally block) gives us a place to store values thrown from
+    // locations where there is no enclosing try statement.
+    this.tryEntries = [{ tryLoc: "root" }];
+    tryLocsList.forEach(pushTryEntry, this);
+    this.reset(true);
+  }
+
+  exports.keys = function(object) {
+    var keys = [];
+    for (var key in object) {
+      keys.push(key);
+    }
+    keys.reverse();
+
+    // Rather than returning an object with a next method, we keep
+    // things simple and return the next function itself.
+    return function next() {
+      while (keys.length) {
+        var key = keys.pop();
+        if (key in object) {
+          next.value = key;
+          next.done = false;
+          return next;
+        }
+      }
+
+      // To avoid creating an additional object, we just hang the .value
+      // and .done properties off the next function object itself. This
+      // also ensures that the minifier will not anonymize the function.
+      next.done = true;
+      return next;
+    };
+  };
+
+  function values(iterable) {
+    if (iterable) {
+      var iteratorMethod = iterable[iteratorSymbol];
+      if (iteratorMethod) {
+        return iteratorMethod.call(iterable);
+      }
+
+      if (typeof iterable.next === "function") {
+        return iterable;
+      }
+
+      if (!isNaN(iterable.length)) {
+        var i = -1, next = function next() {
+          while (++i < iterable.length) {
+            if (hasOwn.call(iterable, i)) {
+              next.value = iterable[i];
+              next.done = false;
+              return next;
+            }
+          }
+
+          next.value = undefined;
+          next.done = true;
+
+          return next;
+        };
+
+        return next.next = next;
+      }
+    }
+
+    // Return an iterator with no values.
+    return { next: doneResult };
+  }
+  exports.values = values;
+
+  function doneResult() {
+    return { value: undefined, done: true };
+  }
+
+  Context.prototype = {
+    constructor: Context,
+
+    reset: function(skipTempReset) {
+      this.prev = 0;
+      this.next = 0;
+      // Resetting context._sent for legacy support of Babel's
+      // function.sent implementation.
+      this.sent = this._sent = undefined;
+      this.done = false;
+      this.delegate = null;
+
+      this.method = "next";
+      this.arg = undefined;
+
+      this.tryEntries.forEach(resetTryEntry);
+
+      if (!skipTempReset) {
+        for (var name in this) {
+          // Not sure about the optimal order of these conditions:
+          if (name.charAt(0) === "t" &&
+              hasOwn.call(this, name) &&
+              !isNaN(+name.slice(1))) {
+            this[name] = undefined;
+          }
+        }
+      }
+    },
+
+    stop: function() {
+      this.done = true;
+
+      var rootEntry = this.tryEntries[0];
+      var rootRecord = rootEntry.completion;
+      if (rootRecord.type === "throw") {
+        throw rootRecord.arg;
+      }
+
+      return this.rval;
+    },
+
+    dispatchException: function(exception) {
+      if (this.done) {
+        throw exception;
+      }
+
+      var context = this;
+      function handle(loc, caught) {
+        record.type = "throw";
+        record.arg = exception;
+        context.next = loc;
+
+        if (caught) {
+          // If the dispatched exception was caught by a catch block,
+          // then let that catch block handle the exception normally.
+          context.method = "next";
+          context.arg = undefined;
+        }
+
+        return !! caught;
+      }
+
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        var record = entry.completion;
+
+        if (entry.tryLoc === "root") {
+          // Exception thrown outside of any try block that could handle
+          // it, so set the completion value of the entire function to
+          // throw the exception.
+          return handle("end");
+        }
+
+        if (entry.tryLoc <= this.prev) {
+          var hasCatch = hasOwn.call(entry, "catchLoc");
+          var hasFinally = hasOwn.call(entry, "finallyLoc");
+
+          if (hasCatch && hasFinally) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            } else if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else if (hasCatch) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            }
+
+          } else if (hasFinally) {
+            if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else {
+            throw new Error("try statement without catch or finally");
+          }
+        }
+      }
+    },
+
+    abrupt: function(type, arg) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc <= this.prev &&
+            hasOwn.call(entry, "finallyLoc") &&
+            this.prev < entry.finallyLoc) {
+          var finallyEntry = entry;
+          break;
+        }
+      }
+
+      if (finallyEntry &&
+          (type === "break" ||
+           type === "continue") &&
+          finallyEntry.tryLoc <= arg &&
+          arg <= finallyEntry.finallyLoc) {
+        // Ignore the finally entry if control is not jumping to a
+        // location outside the try/catch block.
+        finallyEntry = null;
+      }
+
+      var record = finallyEntry ? finallyEntry.completion : {};
+      record.type = type;
+      record.arg = arg;
+
+      if (finallyEntry) {
+        this.method = "next";
+        this.next = finallyEntry.finallyLoc;
+        return ContinueSentinel;
+      }
+
+      return this.complete(record);
+    },
+
+    complete: function(record, afterLoc) {
+      if (record.type === "throw") {
+        throw record.arg;
+      }
+
+      if (record.type === "break" ||
+          record.type === "continue") {
+        this.next = record.arg;
+      } else if (record.type === "return") {
+        this.rval = this.arg = record.arg;
+        this.method = "return";
+        this.next = "end";
+      } else if (record.type === "normal" && afterLoc) {
+        this.next = afterLoc;
+      }
+
+      return ContinueSentinel;
+    },
+
+    finish: function(finallyLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.finallyLoc === finallyLoc) {
+          this.complete(entry.completion, entry.afterLoc);
+          resetTryEntry(entry);
+          return ContinueSentinel;
+        }
+      }
+    },
+
+    "catch": function(tryLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc === tryLoc) {
+          var record = entry.completion;
+          if (record.type === "throw") {
+            var thrown = record.arg;
+            resetTryEntry(entry);
+          }
+          return thrown;
+        }
+      }
+
+      // The context.catch method must only be called with a location
+      // argument that corresponds to a known catch block.
+      throw new Error("illegal catch attempt");
+    },
+
+    delegateYield: function(iterable, resultName, nextLoc) {
+      this.delegate = {
+        iterator: values(iterable),
+        resultName: resultName,
+        nextLoc: nextLoc
+      };
+
+      if (this.method === "next") {
+        // Deliberately forget the last sent value so that we don't
+        // accidentally pass it on to the delegate.
+        this.arg = undefined;
+      }
+
+      return ContinueSentinel;
+    }
+  };
+
+  // Regardless of whether this script is executing as a CommonJS module
+  // or not, return the runtime object so that we can declare the variable
+  // regeneratorRuntime in the outer scope, which allows this module to be
+  // injected easily by `bin/regenerator --include-runtime script.js`.
+  return exports;
+
+}(
+  // If this script is executing as a CommonJS module, use module.exports
+  // as the regeneratorRuntime namespace. Otherwise create a new empty
+  // object. Either way, the resulting object will be used to initialize
+  // the regeneratorRuntime variable at the top of this file.
+   true ? module.exports : 0
+));
+
+try {
+  regeneratorRuntime = runtime;
+} catch (accidentalStrictMode) {
+  // This module should not be running in strict mode, so the above
+  // assignment should always work unless something is misconfigured. Just
+  // in case runtime.js accidentally runs in strict mode, in modern engines
+  // we can explicitly access globalThis. In older engines we can escape
+  // strict mode using a global Function call. This could conceivably fail
+  // if a Content Security Policy forbids using Function, but in that case
+  // the proper solution is to fix the accidental strict mode problem. If
+  // you've misconfigured your bundler to force strict mode and applied a
+  // CSP to forbid Function, and you're not willing to fix either of those
+  // problems, please detail your unique predicament in a GitHub issue.
+  if (typeof globalThis === "object") {
+    globalThis.regeneratorRuntime = runtime;
+  } else {
+    Function("r", "regeneratorRuntime = r")(runtime);
+  }
+}
+
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+(() => {
+"use strict";
+var exports = __webpack_exports__;
+var __webpack_unused_export__;
+
+
+var _interopRequireDefault = __webpack_require__(318);
+
+__webpack_unused_export__ = ({
+  value: true
+});
+__webpack_unused_export__ = void 0;
+
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(713));
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(575));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(913));
+
+var _authentication = _interopRequireDefault(__webpack_require__(65));
+
+var _modal = _interopRequireDefault(__webpack_require__(852));
+
+var _frame = _interopRequireDefault(__webpack_require__(408));
+
+var _sdk = _interopRequireDefault(__webpack_require__(375));
+
+var _events = _interopRequireDefault(__webpack_require__(754));
+
+var _analytics = _interopRequireDefault(__webpack_require__(236));
+
+var _content = _interopRequireDefault(__webpack_require__(189));
+
+var _styles = __webpack_require__(639);
+
+var _DOM = __webpack_require__(813);
+
+var _payments = __webpack_require__(900);
+
+var _constants = __webpack_require__(425);
+
+var _eventsName = __webpack_require__(372);
+
+var _url = __webpack_require__(37);
+
+var _eventsListener, _insertStyles, _recogniseURLIncomeParams;
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
+
+window.WallkitIntegration = (_eventsListener = /*#__PURE__*/new WeakSet(), _insertStyles = /*#__PURE__*/new WeakSet(), _recogniseURLIncomeParams = /*#__PURE__*/new WeakSet(), /*#__PURE__*/function () {
+  function WallkitIntegration(options) {
+    var _this = this;
+
+    (0, _classCallCheck2["default"])(this, WallkitIntegration);
+
+    _recogniseURLIncomeParams.add(this);
+
+    _insertStyles.add(this);
+
+    _eventsListener.add(this);
+
+    this.config = options;
+    this.events = new _events["default"]();
+    this.frame = new _frame["default"](_objectSpread(_objectSpread({}, options), {}, {
+      onReady: function onReady() {
+        return _this.popup.toggleLoader(false);
+      }
+    }));
+    this.popup = new _modal["default"]({
+      resourceFrame: this.frame,
+      initialLoader: true,
+      onReady: function onReady(modal) {
+        modal.openByHash();
+      },
+      onClose: function onClose() {
+        _this.events.notify(_eventsName.FRAME_MODAL_CLOSED, {
+          name: _this.frame.currentFrameName
+        });
+      }
+    });
+    this.content = _content["default"];
+    this.sdk = new _sdk["default"](_objectSpread(_objectSpread({}, options), {}, {
+      onLoaded: function onLoaded() {
+        var _options$auth, _options$auth2, _options$auth2$modal, _options$auth3, _options$auth3$modal, _options$auth4;
+
+        _this.authentication = new _authentication["default"](_objectSpread(_objectSpread({}, options), {}, {
+          firebase: options === null || options === void 0 ? void 0 : (_options$auth = options.auth) === null || _options$auth === void 0 ? void 0 : _options$auth.firebase,
+          modalTitle: options === null || options === void 0 ? void 0 : (_options$auth2 = options.auth) === null || _options$auth2 === void 0 ? void 0 : (_options$auth2$modal = _options$auth2.modal) === null || _options$auth2$modal === void 0 ? void 0 : _options$auth2$modal.title,
+          content: options === null || options === void 0 ? void 0 : (_options$auth3 = options.auth) === null || _options$auth3 === void 0 ? void 0 : (_options$auth3$modal = _options$auth3.modal) === null || _options$auth3$modal === void 0 ? void 0 : _options$auth3$modal.content,
+          reCaptcha: options === null || options === void 0 ? void 0 : (_options$auth4 = options.auth) === null || _options$auth4 === void 0 ? void 0 : _options$auth4.reCaptcha
+        }));
+        _this.analytics = new _analytics["default"](options === null || options === void 0 ? void 0 : options.analytics);
+
+        _this.init();
+      }
+    }));
+  }
+
+  (0, _createClass2["default"])(WallkitIntegration, [{
+    key: "modal",
+    value: function modal(name, params) {
+      this.popup.open(name, params);
+    }
+  }, {
+    key: "init",
+    value: function init() {
+      _classPrivateMethodGet(this, _insertStyles, _insertStyles2).call(this);
+
+      this.popup.init();
+      this.authentication.init();
+      this.analytics.init();
+
+      _classPrivateMethodGet(this, _eventsListener, _eventsListener2).call(this);
+
+      _classPrivateMethodGet(this, _recogniseURLIncomeParams, _recogniseURLIncomeParams2).call(this);
+
+      if (this.config.onInit) {
+        this.config.onInit(this);
+      }
+    }
+  }]);
+  return WallkitIntegration;
+}());
+
+function _eventsListener2() {
+  var _this2 = this;
+
+  window.addEventListener('message', function (event) {
+    var _event$data = event.data,
+        value = _event$data.value,
+        name = _event$data.name,
+        origin = event.origin;
+
+    _this2.events.notify(name, value);
+
+    _this2.events.notify(_eventsName.FRAME_MESSAGE, {
+      name: name,
+      value: value
+    });
+
+    try {
+      if (_constants.ALLOWED_ORIGINS.includes(origin) && name) {
+        switch (name) {
+          case "wk-event-modals-ready":
+            if (_this2.authentication.isAuthenticated()) {
+              _this2.frame.sendEvent("wk-event-applepay-ready", (0, _payments.isApplePayAvailable)());
+            } else {
+              _this2.frame.sendEvent("wk-event-get-token", _this2.config.public_key);
+            }
+
+            break;
+
+          case "wk-event-resize":
+            if (value.width !== 0 && value.height !== 0) {
+              _this2.popup.resize(value.width, value.height);
+            }
+
+            break;
+
+          case "show-firebase-auth":
+            var redirect = value;
+
+            _this2.popup.hide();
+
+            _this2.events.subscribe(_eventsName.SUCCESS_AUTH, function () {
+              if (redirect) {
+                _this2.popup.open(redirect);
+              }
+            }, {
+              once: true
+            });
+
+            _this2.authentication.show();
+
+            break;
+
+          case "wk-event-close-modal":
+            _this2.popup.hide();
+
+            break;
+
+          case "wk-event-reload-page":
+            _this2.popup.hide();
+
+            location.reload();
+            break;
+
+          case "wk-event-storage-available":
+            if (!value) {
+              _this2.authentication.dispatchTokens();
+            }
+
+            break;
+
+          case "wk-event-close-on-wrapper":
+            _this2.popup.closeOutside = value;
+            break;
+        }
+      }
+    } catch (error) {
+      console.log('ERROR', error);
+    }
+  });
+}
+
+function _insertStyles2() {
+  var styles = (0, _DOM.createElement)('style');
+  styles.innerHTML = _styles.LIBRARY_STYLES;
+  (0, _DOM.injectInHead)(styles);
+}
+
+function _recogniseURLIncomeParams2() {
+  var ticketPassAuthToken = (0, _url.parseAuthTokenHash)();
+
+  if (ticketPassAuthToken) {
+    this.authentication.handleTicketsToken(ticketPassAuthToken);
+    (0, _url.resetHash)();
+  }
+}
+
+var _default = WallkitIntegration;
+__webpack_unused_export__ = _default;
+})();
+
+/******/ })()
+;
