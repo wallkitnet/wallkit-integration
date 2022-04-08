@@ -57,7 +57,7 @@ export default class Authentication {
             this.#resetAuthorizationError();
         });
 
-        if (!!options?.reCaptcha) {
+        if (this.reCaptcha.enabled) {
             if (!this.isAuthenticated()) {
                 this.reCaptcha.init();
             }

@@ -1,5 +1,5 @@
 import EventsNames from "../events/events-name";
-import { createElement, injectInBody, injectInHead } from "../../utils/DOM";
+import { createElement, injectInBody, injectInHead, isMobile } from "../../utils/DOM";
 import { loadScripts } from "../../utils/loaders";
 import SDK from "../sdk";
 import Events from "../events";
@@ -12,7 +12,7 @@ export default class ReCaptcha {
             throw Error('Authentication Instance is not provided');
         }
 
-        this.enabled = !!options;
+        this.enabled = this.isEnabled(options);
         this.authentication = authenticationInstance;
         this.options = options;
         this.loaded = false;
@@ -22,6 +22,14 @@ export default class ReCaptcha {
 
         this.#sdk = new SDK();
         this.events = new Events();
+    }
+
+    isEnabled (options) {
+        if (isMobile()) {
+            return !!options && options?.mobile !== false;
+        } else {
+            return !!options;
+        }
     }
 
     setOptions(options) {

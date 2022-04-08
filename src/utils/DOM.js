@@ -97,10 +97,19 @@ export const insertScript = (url, id, onload) => {
     return injectInBody(scriptElement);
 }
 
+export const isMobile = () => {
+    if (typeof window !== 'undefined') {
+        return window.innerWidth < 800;
+    } else {
+        return false;
+    }
+};
+
 export default {
     createElement,
     injectInBody,
     checkIfElementExists,
     loadCSS,
-    insertScript
+    insertScript,
+    isMobile
 }

@@ -723,7 +723,7 @@ var ReCaptcha = /*#__PURE__*/function () {
       throw Error('Authentication Instance is not provided');
     }
 
-    this.enabled = !!options;
+    this.enabled = this.isEnabled(options);
     this.authentication = authenticationInstance;
     this.options = options;
     this.loaded = false;
@@ -735,6 +735,17 @@ var ReCaptcha = /*#__PURE__*/function () {
   }
 
   (0, _createClass2["default"])(ReCaptcha, [{
+    key: "isEnabled",
+    value: function isEnabled(options) {
+      console.log('isMobile()', (0, _DOM.isMobile)());
+
+      if ((0, _DOM.isMobile)()) {
+        return !!options && (options === null || options === void 0 ? void 0 : options.mobile) !== false;
+      } else {
+        return !!options;
+      }
+    }
+  }, {
     key: "setOptions",
     value: function setOptions(options) {
       if (options) {
@@ -1257,7 +1268,7 @@ var Authentication = /*#__PURE__*/function () {
       _classPrivateMethodGet(_this, _resetAuthorizationError, _resetAuthorizationError2).call(_this);
     });
 
-    if (!!(options !== null && options !== void 0 && options.reCaptcha)) {
+    if (this.reCaptcha.enabled) {
       if (!this.isAuthenticated()) {
         this.reCaptcha.init();
       }
@@ -2638,7 +2649,7 @@ var _typeof = __webpack_require__(630);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.default = exports.insertScript = exports.loadCSS = exports.injectInHead = exports.injectInBody = exports.createElement = exports.checkIfElementExists = exports.isDocumentAvailable = void 0;
+exports.default = exports.isMobile = exports.insertScript = exports.loadCSS = exports.injectInHead = exports.injectInBody = exports.createElement = exports.checkIfElementExists = exports.isDocumentAvailable = void 0;
 
 var _Error = _interopRequireWildcard(__webpack_require__(542));
 
@@ -2755,12 +2766,23 @@ var insertScript = function insertScript(url, id, onload) {
 };
 
 exports.insertScript = insertScript;
+
+var isMobile = function isMobile() {
+  if (typeof window !== 'undefined') {
+    return window.innerWidth < 800;
+  } else {
+    return false;
+  }
+};
+
+exports.isMobile = isMobile;
 var _default = {
   createElement: createElement,
   injectInBody: injectInBody,
   checkIfElementExists: checkIfElementExists,
   loadCSS: loadCSS,
-  insertScript: insertScript
+  insertScript: insertScript,
+  isMobile: isMobile
 };
 exports.default = _default;
 
