@@ -13,6 +13,9 @@ export const RECAPTCHA_LOADED = 'recaptcha-loaded';
 export const RECAPTCHA_VALIDATION_FAILED = 'recaptcha-validation-failed';
 export const RECAPTCHA_VALIDATION_SUCCESS = 'recaptcha-validation-success';
 export const TICKETS_TOKEN_AUTH_SUCCESS = 'tickets-token-auth-success';
+export const FIREBASE_LOADED = 'firebase-loaded';
+export const FIREBASE_INIT = 'firebase-init';
+export const FIREBASE_UI_SHOWN = 'firebase-init';
 
 // Wallkit Events Names
 export const WALLKIT_CHANGE_FRAME = 'wk-event-modal';

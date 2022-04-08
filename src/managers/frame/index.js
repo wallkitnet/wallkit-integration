@@ -75,9 +75,12 @@ export default class Frame {
     openFrame(name, params) {
         this.currentFrameName = name;
         if (this.ready) {
+            console.log('test');
             this.sendEvent(WALLKIT_CHANGE_FRAME, name, params);
         } else {
+            console.log('test2');
             this.events.subscribe(WALLKIT_FRAME_READY, () => {
+                console.log('123145');
                 this.sendEvent(WALLKIT_CHANGE_FRAME, name, params);
             }, { once: true});
         }

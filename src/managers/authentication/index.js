@@ -1,7 +1,7 @@
 import Modal from '../modal';
 import Firebase from "./Firebase";
 import { WALLKIT_FIREBASE_UI_PLACEHOLDER_ID, WALLKIT_TOKEN_NAME, FIREBASE_TOKEN_NAME } from "../../configs/constants";
-import EventsNames from "../events/events-name";
+import EventsNames, {FIREBASE_INIT, FIREBASE_LOADED, FIREBASE_UI_SHOWN} from "../events/events-name";
 import Events from "../events";
 import Frame from "../frame";
 import SDK from "../sdk";
@@ -143,6 +143,34 @@ export default class Authentication {
 
     async show() {
         this.modal.show();
+
+        if (!this.firebase.isUiShown) {
+            this.checkFirebaseInit();
+        }
+    }
+
+    checkFirebaseInit() {
+        if (!this.firebase.loaded) {
+            this.firebase.events.subscribe(FIREBASE_LOADED, () => this.checkFirebaseInit(), { once: true });
+        } else {
+            if (!this.firebase.initialized) {
+                this.firebase.events.subscribe(FIREBASE_INIT, () => this.checkFirebaseInit(), { once: true });
+            } else {
+                let shownTimeout = null;
+                if (!this.firebase.isUiShown) {
+                    shownTimeout = setTimeout(() => {
+                        this.firebase.startFirebaseUi();
+                        this.checkFirebaseInit();
+                    }, 2000);
+
+                    this.firebase.events.subscribe(FIREBASE_UI_SHOWN, () => {
+                        if (shownTimeout) {
+                            clearTimeout(shownTimeout);
+                        }
+                    });
+                }
+            }
+        }
     }
 
     updateFirebaseToken(token) {

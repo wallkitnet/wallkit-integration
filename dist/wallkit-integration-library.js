@@ -1,249 +1,7 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 926:
-/***/ ((module) => {
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
-module.exports = _asyncToGenerator;
-module.exports.default = module.exports, module.exports.__esModule = true;
-
-/***/ }),
-
-/***/ 358:
-/***/ ((module) => {
-
-function _classApplyDescriptorGet(receiver, descriptor) {
-  if (descriptor.get) {
-    return descriptor.get.call(receiver);
-  }
-
-  return descriptor.value;
-}
-
-module.exports = _classApplyDescriptorGet;
-module.exports.default = module.exports, module.exports.__esModule = true;
-
-/***/ }),
-
-/***/ 625:
-/***/ ((module) => {
-
-function _classApplyDescriptorSet(receiver, descriptor, value) {
-  if (descriptor.set) {
-    descriptor.set.call(receiver, value);
-  } else {
-    if (!descriptor.writable) {
-      throw new TypeError("attempted to set read only private field");
-    }
-
-    descriptor.value = value;
-  }
-}
-
-module.exports = _classApplyDescriptorSet;
-module.exports.default = module.exports, module.exports.__esModule = true;
-
-/***/ }),
-
-/***/ 575:
-/***/ ((module) => {
-
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-
-module.exports = _classCallCheck;
-module.exports.default = module.exports, module.exports.__esModule = true;
-
-/***/ }),
-
-/***/ 486:
-/***/ ((module) => {
-
-function _classExtractFieldDescriptor(receiver, privateMap, action) {
-  if (!privateMap.has(receiver)) {
-    throw new TypeError("attempted to " + action + " private field on non-instance");
-  }
-
-  return privateMap.get(receiver);
-}
-
-module.exports = _classExtractFieldDescriptor;
-module.exports.default = module.exports, module.exports.__esModule = true;
-
-/***/ }),
-
-/***/ 226:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var classApplyDescriptorGet = __webpack_require__(358);
-
-var classExtractFieldDescriptor = __webpack_require__(486);
-
-function _classPrivateFieldGet(receiver, privateMap) {
-  var descriptor = classExtractFieldDescriptor(receiver, privateMap, "get");
-  return classApplyDescriptorGet(receiver, descriptor);
-}
-
-module.exports = _classPrivateFieldGet;
-module.exports.default = module.exports, module.exports.__esModule = true;
-
-/***/ }),
-
-/***/ 962:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var classApplyDescriptorSet = __webpack_require__(625);
-
-var classExtractFieldDescriptor = __webpack_require__(486);
-
-function _classPrivateFieldSet(receiver, privateMap, value) {
-  var descriptor = classExtractFieldDescriptor(receiver, privateMap, "set");
-  classApplyDescriptorSet(receiver, descriptor, value);
-  return value;
-}
-
-module.exports = _classPrivateFieldSet;
-module.exports.default = module.exports, module.exports.__esModule = true;
-
-/***/ }),
-
-/***/ 913:
-/***/ ((module) => {
-
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
-  }
-}
-
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  return Constructor;
-}
-
-module.exports = _createClass;
-module.exports.default = module.exports, module.exports.__esModule = true;
-
-/***/ }),
-
-/***/ 713:
-/***/ ((module) => {
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-
-module.exports = _defineProperty;
-module.exports.default = module.exports, module.exports.__esModule = true;
-
-/***/ }),
-
-/***/ 318:
-/***/ ((module) => {
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {
-    "default": obj
-  };
-}
-
-module.exports = _interopRequireDefault;
-module.exports.default = module.exports, module.exports.__esModule = true;
-
-/***/ }),
-
-/***/ 8:
-/***/ ((module) => {
-
-function _typeof(obj) {
-  "@babel/helpers - typeof";
-
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    module.exports = _typeof = function _typeof(obj) {
-      return typeof obj;
-    };
-
-    module.exports.default = module.exports, module.exports.__esModule = true;
-  } else {
-    module.exports = _typeof = function _typeof(obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-
-    module.exports.default = module.exports, module.exports.__esModule = true;
-  }
-
-  return _typeof(obj);
-}
-
-module.exports = _typeof;
-module.exports.default = module.exports, module.exports.__esModule = true;
-
-/***/ }),
-
-/***/ 757:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__(666);
-
-
-/***/ }),
-
-/***/ 639:
+/***/ 350:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -258,7 +16,7 @@ exports.LIBRARY_STYLES = LIBRARY_STYLES;
 
 /***/ }),
 
-/***/ 425:
+/***/ 66:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -326,22 +84,22 @@ exports.FIREBASE_TOKEN_NAME = FIREBASE_TOKEN_NAME;
 
 /***/ }),
 
-/***/ 334:
+/***/ 542:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(318);
+var _interopRequireDefault = __webpack_require__(736);
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.default = exports.DEFAULT_ERROR_MESSAGES = exports.ERRORS_TYPES = void 0;
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(575));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(913));
+var _createClass2 = _interopRequireDefault(__webpack_require__(884));
 
 var ERRORS_TYPES = {
   DOM_ERROR: 'DOM_ERROR',
@@ -401,34 +159,34 @@ exports.default = Error;
 
 /***/ }),
 
-/***/ 236:
+/***/ 343:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(318);
+var _interopRequireDefault = __webpack_require__(736);
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.default = void 0;
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(575));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(913));
+var _createClass2 = _interopRequireDefault(__webpack_require__(884));
 
-var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(226));
+var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(704));
 
-var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(962));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(401));
 
-var _sdk2 = _interopRequireDefault(__webpack_require__(375));
+var _sdk2 = _interopRequireDefault(__webpack_require__(850));
 
-var _authentication2 = _interopRequireDefault(__webpack_require__(65));
+var _authentication2 = _interopRequireDefault(__webpack_require__(484));
 
-var _events2 = _interopRequireDefault(__webpack_require__(754));
+var _events2 = _interopRequireDefault(__webpack_require__(889));
 
-var _eventsName = __webpack_require__(372);
+var _eventsName = __webpack_require__(73);
 
 var _config = /*#__PURE__*/new WeakMap();
 
@@ -523,40 +281,44 @@ exports.default = Analytics;
 
 /***/ }),
 
-/***/ 930:
+/***/ 753:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(318);
+var _interopRequireDefault = __webpack_require__(736);
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.default = void 0;
 
-var _regenerator = _interopRequireDefault(__webpack_require__(757));
+var _regenerator = _interopRequireDefault(__webpack_require__(107));
 
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(926));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(756));
 
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(713));
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(239));
 
-var _typeof2 = _interopRequireDefault(__webpack_require__(8));
+var _typeof2 = _interopRequireDefault(__webpack_require__(630));
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(575));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(913));
+var _createClass2 = _interopRequireDefault(__webpack_require__(884));
 
-var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(226));
+var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(704));
 
-var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(962));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(401));
 
-var _loaders = __webpack_require__(369);
+var _loaders = __webpack_require__(758);
 
-var _DOM = __webpack_require__(813);
+var _DOM = __webpack_require__(909);
 
-var _constants = __webpack_require__(425);
+var _constants = __webpack_require__(66);
+
+var _events = _interopRequireDefault(__webpack_require__(889));
+
+var _eventsName = __webpack_require__(73);
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
@@ -570,11 +332,15 @@ var _loadFirebase = /*#__PURE__*/new WeakSet();
 
 var _authStateChanged = /*#__PURE__*/new WeakSet();
 
+var _firebaseInitApp = /*#__PURE__*/new WeakSet();
+
 var Firebase = /*#__PURE__*/function () {
   function Firebase(options) {
     var _options$captchaKey, _options$elementSelec, _options$onSuccessAut, _options$onAuthStateC, _options$uiShown;
 
     (0, _classCallCheck2["default"])(this, Firebase);
+
+    _firebaseInitApp.add(this);
 
     _authStateChanged.add(this);
 
@@ -585,6 +351,8 @@ var Firebase = /*#__PURE__*/function () {
       value: void 0
     });
 
+    this.events = new _events["default"]();
+    this.firebaseUiConfig = null;
     (0, _classPrivateFieldSet2["default"])(this, _mode, options === null || options === void 0 ? void 0 : options.mode);
     this.config = options === null || options === void 0 ? void 0 : options.config;
     this.providers = options === null || options === void 0 ? void 0 : options.providers;
@@ -597,6 +365,9 @@ var Firebase = /*#__PURE__*/function () {
     this.onSuccessAuth = (_options$onSuccessAut = options === null || options === void 0 ? void 0 : options.onSuccessAuth) !== null && _options$onSuccessAut !== void 0 ? _options$onSuccessAut : null;
     this.onAuthStateChanged = (_options$onAuthStateC = options === null || options === void 0 ? void 0 : options.onAuthStateChanged) !== null && _options$onAuthStateC !== void 0 ? _options$onAuthStateC : null;
     this.uiShown = (_options$uiShown = options === null || options === void 0 ? void 0 : options.uiShown) !== null && _options$uiShown !== void 0 ? _options$uiShown : null;
+    this.isUiShown = false;
+    this.initialized = false;
+    this.loaded = false;
   }
 
   (0, _createClass2["default"])(Firebase, [{
@@ -639,55 +410,71 @@ var Firebase = /*#__PURE__*/function () {
     }
   }, {
     key: "initFirebase",
-    value: function initFirebase(_ref) {
-      var _this2 = this;
+    value: function () {
+      var _initFirebase = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_ref) {
+        var _this2 = this;
 
-      var config = _ref.config,
-          _ref$providers = _ref.providers,
-          providers = _ref$providers === void 0 ? ['email', 'google'] : _ref$providers,
-          _ref$tosUrl = _ref.tosUrl,
-          tosUrl = _ref$tosUrl === void 0 ? 'https://wallkit.net' : _ref$tosUrl,
-          _ref$privacyPolicyUrl = _ref.privacyPolicyUrl,
-          privacyPolicyUrl = _ref$privacyPolicyUrl === void 0 ? 'https://wallkit.net' : _ref$privacyPolicyUrl;
-      var defaultConfig = (0, _classPrivateFieldGet2["default"])(this, _mode) === 'dev' ? _constants.WALLKIT_DEV_FIREBASE_CONFIG : _constants.WALLKIT_FIREBASE_CONFIG;
-      this.firebase.initializeApp(config !== null && config !== void 0 ? config : defaultConfig); // if (this.captchaKey) {
-      //     const appCheck = this.firebase.appCheck();
-      //     appCheck.activate(this.captchaKey, true);
-      // }
+        var config, _ref$providers, providers, _ref$tosUrl, tosUrl, _ref$privacyPolicyUrl, privacyPolicyUrl, firebaseuiInstance;
 
-      var firebaseuiInstance = new this.firebaseui.auth.AuthUI(this.firebase.auth());
-      firebaseuiInstance.disableAutoSignIn();
-      var firebaseUiConfig = {
-        callbacks: {
-          signInSuccessWithAuthResult: function signInSuccessWithAuthResult(result) {
-            result.user.getIdToken().then(function (token) {
-              var formattedResult = {
-                user: result.user,
-                userId: result.user.uid,
-                token: token
-              };
+        return _regenerator["default"].wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                config = _ref.config, _ref$providers = _ref.providers, providers = _ref$providers === void 0 ? ['email', 'google'] : _ref$providers, _ref$tosUrl = _ref.tosUrl, tosUrl = _ref$tosUrl === void 0 ? 'https://wallkit.net' : _ref$tosUrl, _ref$privacyPolicyUrl = _ref.privacyPolicyUrl, privacyPolicyUrl = _ref$privacyPolicyUrl === void 0 ? 'https://wallkit.net' : _ref$privacyPolicyUrl;
 
-              if (_this2.onSuccessAuth) {
-                _this2.onSuccessAuth(formattedResult, result);
-              }
-            });
-          },
-          uiShown: function uiShown() {
-            if (_this2.uiShown) {
-              _this2.uiShown();
+                _classPrivateMethodGet(this, _firebaseInitApp, _firebaseInitApp2).call(this, config);
+
+                firebaseuiInstance = new this.firebaseui.auth.AuthUI(this.firebase.auth());
+                firebaseuiInstance.disableAutoSignIn();
+                this.firebaseUiConfig = {
+                  callbacks: {
+                    signInSuccessWithAuthResult: function signInSuccessWithAuthResult(result) {
+                      result.user.getIdToken().then(function (token) {
+                        var formattedResult = {
+                          user: result.user,
+                          userId: result.user.uid,
+                          token: token
+                        };
+
+                        if (_this2.onSuccessAuth) {
+                          _this2.onSuccessAuth(formattedResult, result);
+                        }
+                      });
+                    },
+                    uiShown: function uiShown() {
+                      if (_this2.uiShown) {
+                        _this2.uiShown();
+                      }
+
+                      _this2.isUiShown = true;
+                      console.log('isUiShown');
+                    }
+                  },
+                  signInFlow: 'popup',
+                  signInOptions: this.formatSelectedProviders(providers),
+                  credentialHelper: this.firebaseui.auth.CredentialHelper.GOOGLE_YOLO,
+                  tosUrl: tosUrl,
+                  privacyPolicyUrl: privacyPolicyUrl
+                };
+                this.firebaseui = firebaseuiInstance;
+                this.startFirebaseUi(this.elementPlaceholder, this.firebaseUiConfig);
+                this.firebase.auth().onAuthStateChanged(_classPrivateMethodGet(this, _authStateChanged, _authStateChanged2).bind(this));
+                return _context.abrupt("return", true);
+
+              case 9:
+              case "end":
+                return _context.stop();
             }
           }
-        },
-        signInFlow: 'popup',
-        signInOptions: this.formatSelectedProviders(providers),
-        credentialHelper: this.firebaseui.auth.CredentialHelper.GOOGLE_YOLO,
-        tosUrl: tosUrl,
-        privacyPolicyUrl: privacyPolicyUrl
-      };
-      firebaseuiInstance.start(this.elementPlaceholder, firebaseUiConfig);
-      this.firebaseui = firebaseuiInstance;
-      this.firebase.auth().onAuthStateChanged(_classPrivateMethodGet(this, _authStateChanged, _authStateChanged2).bind(this));
-    }
+        }, _callee, this);
+      }));
+
+      function initFirebase(_x) {
+        return _initFirebase.apply(this, arguments);
+      }
+
+      return initFirebase;
+    }()
   }, {
     key: "reset",
     value: function reset() {
@@ -695,6 +482,11 @@ var Firebase = /*#__PURE__*/function () {
         this.firebaseui.reset();
         this.firebaseui.start(this.elementPlaceholder);
       }
+    }
+  }, {
+    key: "startFirebaseUi",
+    value: function startFirebaseUi(elementPlaceholder, uiConfig) {
+      this.firebaseui.start(elementPlaceholder || this.elementPlaceholder, uiConfig || this.firebaseUiConfig);
     }
   }, {
     key: "logout",
@@ -714,42 +506,42 @@ var Firebase = /*#__PURE__*/function () {
   }, {
     key: "authWithCustomToken",
     value: function () {
-      var _authWithCustomToken = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(token) {
-        return _regenerator["default"].wrap(function _callee$(_context) {
+      var _authWithCustomToken = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(token) {
+        return _regenerator["default"].wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
-                _context.prev = 0;
+                _context2.prev = 0;
 
                 if (!(this.firebase && this.firebase.auth)) {
-                  _context.next = 5;
+                  _context2.next = 5;
                   break;
                 }
 
-                _context.next = 4;
+                _context2.next = 4;
                 return this.firebase.auth().signInWithCustomToken(token);
 
               case 4:
-                return _context.abrupt("return", _context.sent);
+                return _context2.abrupt("return", _context2.sent);
 
               case 5:
-                return _context.abrupt("return", false);
+                return _context2.abrupt("return", false);
 
               case 8:
-                _context.prev = 8;
-                _context.t0 = _context["catch"](0);
+                _context2.prev = 8;
+                _context2.t0 = _context2["catch"](0);
                 console.error('Custom Token Auth Fail');
-                return _context.abrupt("return", false);
+                return _context2.abrupt("return", false);
 
               case 12:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee, this, [[0, 8]]);
+        }, _callee2, this, [[0, 8]]);
       }));
 
-      function authWithCustomToken(_x) {
+      function authWithCustomToken(_x2) {
         return _authWithCustomToken.apply(this, arguments);
       }
 
@@ -761,11 +553,17 @@ var Firebase = /*#__PURE__*/function () {
       var _this4 = this;
 
       _classPrivateMethodGet(this, _loadFirebase, _loadFirebase2).call(this).then(function () {
+        _this4.events.notify(_eventsName.FIREBASE_LOADED, true);
+
         _this4.initFirebase({
           config: _this4.config,
           providers: _this4.providers,
           tosUrl: _this4.tosURL,
           privacyPolicyUrl: _this4.privacyPolicyURL
+        }).then(function () {
+          _this4.initialized = true;
+
+          _this4.events.notify(_eventsName.FIREBASE_INIT, true);
         });
       });
     }
@@ -779,6 +577,8 @@ function _loadFirebase2() {
   var _this5 = this;
 
   return new Promise(function (resolve, reject) {
+    _this5.loading = true;
+
     var onFirebaseAppLoaded = function onFirebaseAppLoaded() {
       var scripts = [{
         url: 'https://www.gstatic.com/firebasejs/8.7.0/firebase-analytics.js',
@@ -824,6 +624,7 @@ function _loadFirebase2() {
         if (loadedCounter === scripts.length) {
           _this5.firebase = window.firebase;
           _this5.firebaseui = window.firebaseui;
+          _this5.loaded = true;
           resolve({
             firebase: window.firebase,
             firebaseui: window.firebaseui
@@ -851,42 +652,51 @@ function _authStateChanged2(user) {
   }
 }
 
+function _firebaseInitApp2(config) {
+  if (this.firebase.apps.length === 0) {
+    var defaultConfig = (0, _classPrivateFieldGet2["default"])(this, _mode) === 'dev' ? _constants.WALLKIT_DEV_FIREBASE_CONFIG : _constants.WALLKIT_FIREBASE_CONFIG;
+    this.firebase.initializeApp(config !== null && config !== void 0 ? config : defaultConfig);
+  }
+
+  return this.firebase;
+}
+
 /***/ }),
 
-/***/ 697:
+/***/ 378:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(318);
+var _interopRequireDefault = __webpack_require__(736);
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.default = void 0;
 
-var _regenerator = _interopRequireDefault(__webpack_require__(757));
+var _regenerator = _interopRequireDefault(__webpack_require__(107));
 
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(926));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(756));
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(575));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(913));
+var _createClass2 = _interopRequireDefault(__webpack_require__(884));
 
-var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(226));
+var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(704));
 
-var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(962));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(401));
 
-var _eventsName = _interopRequireDefault(__webpack_require__(372));
+var _eventsName = _interopRequireDefault(__webpack_require__(73));
 
-var _DOM = __webpack_require__(813);
+var _DOM = __webpack_require__(909);
 
-var _loaders = __webpack_require__(369);
+var _loaders = __webpack_require__(758);
 
-var _sdk2 = _interopRequireDefault(__webpack_require__(375));
+var _sdk2 = _interopRequireDefault(__webpack_require__(850));
 
-var _events = _interopRequireDefault(__webpack_require__(754));
+var _events = _interopRequireDefault(__webpack_require__(889));
 
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
 
@@ -1237,30 +1047,30 @@ function _onRecaptchaAuth2(token) {
 
 /***/ }),
 
-/***/ 109:
+/***/ 526:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(318);
+var _interopRequireDefault = __webpack_require__(736);
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.default = void 0;
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(575));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(913));
+var _createClass2 = _interopRequireDefault(__webpack_require__(884));
 
-var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(226));
+var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(704));
 
-var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(962));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(401));
 
-var _localStorage = _interopRequireDefault(__webpack_require__(797));
+var _localStorage = _interopRequireDefault(__webpack_require__(347));
 
-var _cookie = __webpack_require__(98);
+var _cookie = __webpack_require__(48);
 
 var _slug = /*#__PURE__*/new WeakMap();
 
@@ -1321,52 +1131,58 @@ exports.default = Token;
 
 /***/ }),
 
-/***/ 65:
+/***/ 484:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(318);
+var _interopRequireDefault = __webpack_require__(736);
+
+var _typeof3 = __webpack_require__(630);
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.default = void 0;
 
-var _regenerator = _interopRequireDefault(__webpack_require__(757));
+var _regenerator = _interopRequireDefault(__webpack_require__(107));
 
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(926));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(756));
 
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(713));
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(239));
 
-var _typeof2 = _interopRequireDefault(__webpack_require__(8));
+var _typeof2 = _interopRequireDefault(__webpack_require__(630));
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(575));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(913));
+var _createClass2 = _interopRequireDefault(__webpack_require__(884));
 
-var _classPrivateFieldGet5 = _interopRequireDefault(__webpack_require__(226));
+var _classPrivateFieldGet5 = _interopRequireDefault(__webpack_require__(704));
 
-var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(962));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(401));
 
-var _modal = _interopRequireDefault(__webpack_require__(852));
+var _modal = _interopRequireDefault(__webpack_require__(269));
 
-var _Firebase = _interopRequireDefault(__webpack_require__(930));
+var _Firebase = _interopRequireDefault(__webpack_require__(753));
 
-var _constants = __webpack_require__(425);
+var _constants = __webpack_require__(66);
 
-var _eventsName = _interopRequireDefault(__webpack_require__(372));
+var _eventsName = _interopRequireWildcard(__webpack_require__(73));
 
-var _events = _interopRequireDefault(__webpack_require__(754));
+var _events = _interopRequireDefault(__webpack_require__(889));
 
-var _frame = _interopRequireDefault(__webpack_require__(408));
+var _frame = _interopRequireDefault(__webpack_require__(967));
 
-var _sdk = _interopRequireDefault(__webpack_require__(375));
+var _sdk = _interopRequireDefault(__webpack_require__(850));
 
-var _Token = _interopRequireDefault(__webpack_require__(109));
+var _Token = _interopRequireDefault(__webpack_require__(526));
 
-var _ReCaptcha = _interopRequireDefault(__webpack_require__(697));
+var _ReCaptcha = _interopRequireDefault(__webpack_require__(378));
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof3(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
@@ -1546,7 +1362,11 @@ var Authentication = /*#__PURE__*/function () {
               case 0:
                 this.modal.show();
 
-              case 1:
+                if (!this.firebase.isUiShown) {
+                  this.checkFirebaseInit();
+                }
+
+              case 2:
               case "end":
                 return _context.stop();
             }
@@ -1561,6 +1381,42 @@ var Authentication = /*#__PURE__*/function () {
       return show;
     }()
   }, {
+    key: "checkFirebaseInit",
+    value: function checkFirebaseInit() {
+      var _this4 = this;
+
+      if (!this.firebase.loaded) {
+        this.firebase.events.subscribe(_eventsName.FIREBASE_LOADED, function () {
+          return _this4.checkFirebaseInit();
+        }, {
+          once: true
+        });
+      } else {
+        if (!this.firebase.initialized) {
+          this.firebase.events.subscribe(_eventsName.FIREBASE_INIT, function () {
+            return _this4.checkFirebaseInit();
+          }, {
+            once: true
+          });
+        } else {
+          var shownTimeout = null;
+
+          if (!this.firebase.isUiShown) {
+            shownTimeout = setTimeout(function () {
+              _this4.firebase.startFirebaseUi();
+
+              _this4.checkFirebaseInit();
+            }, 2000);
+            this.firebase.events.subscribe(_eventsName.FIREBASE_UI_SHOWN, function () {
+              if (shownTimeout) {
+                clearTimeout(shownTimeout);
+              }
+            });
+          }
+        }
+      }
+    }
+  }, {
     key: "updateFirebaseToken",
     value: function updateFirebaseToken(token) {
       this.firebaseToken.set(token);
@@ -1570,13 +1426,13 @@ var Authentication = /*#__PURE__*/function () {
   }, {
     key: "onFirebaseInit",
     value: function onFirebaseInit() {
-      var _this4 = this;
+      var _this5 = this;
 
       if (this.reCaptcha.enabled && this.reCaptcha.loaded) {
         this.reCaptcha.initCaptchaProcess();
       } else if (!this.reCaptcha.loaded) {
         this.events.subscribe(_eventsName["default"].local.RECAPTCHA_LOADED, function () {
-          _this4.reCaptcha.initCaptchaProcess();
+          _this5.reCaptcha.initCaptchaProcess();
         }, {
           once: true
         });
@@ -1609,29 +1465,29 @@ var Authentication = /*#__PURE__*/function () {
   }, {
     key: "logout",
     value: function logout() {
-      var _this5 = this;
+      var _this6 = this;
 
       this.removeToken();
       this.firebase.logout().then(function (success) {
         if (success) {
-          _this5.removeFirebaseToken();
+          _this6.removeFirebaseToken();
 
-          if (_this5.reCaptcha.enabled && !_this5.reCaptcha.loaded) {
-            _this5.reCaptcha.init().then(function () {
-              _this5.firebase.reset();
+          if (_this6.reCaptcha.enabled && !_this6.reCaptcha.loaded) {
+            _this6.reCaptcha.init().then(function () {
+              _this6.firebase.reset();
             })["catch"](function (error) {
               console.error(error);
 
-              _this5.firebase.reset();
+              _this6.firebase.reset();
             });
-          } else if (_this5.reCaptcha.loaded) {
-            _this5.firebase.reset();
+          } else if (_this6.reCaptcha.loaded) {
+            _this6.firebase.reset();
 
-            _this5.reCaptcha.grecaptcha.reset();
+            _this6.reCaptcha.grecaptcha.reset();
 
-            _this5.reCaptcha.initCaptchaProcess();
+            _this6.reCaptcha.initCaptchaProcess();
           } else {
-            _this5.firebase.reset();
+            _this6.firebase.reset();
           }
         }
       });
@@ -1749,7 +1605,7 @@ function _createModal2() {
 }
 
 function _initListeners2() {
-  var _this6 = this;
+  var _this7 = this;
 
   this.events.subscribe(_eventsName["default"].local.FRAME_MESSAGE, function (_ref3) {
     var name = _ref3.name,
@@ -1758,7 +1614,7 @@ function _initListeners2() {
     switch (name) {
       case _eventsName["default"].wallkit.WALLKIT_EVENT_TOKEN:
         if (value) {
-          _this6.setToken(value);
+          _this7.setToken(value);
         }
 
         break;
@@ -1769,29 +1625,29 @@ function _initListeners2() {
         if (value) {
           var token = value.token;
 
-          _this6.setToken(token);
+          _this7.setToken(token);
         }
 
         break;
 
       case _eventsName["default"].wallkit.WALLKIT_FIREBASE_TOKEN:
-        _this6.firebaseToken.set(value);
+        _this7.firebaseToken.set(value);
 
-        if (_this6.sdk) {
-          _this6.sdk.methods.setFirebaseToken(value);
+        if (_this7.sdk) {
+          _this7.sdk.methods.setFirebaseToken(value);
         }
 
         break;
 
       case _eventsName["default"].wallkit.WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN:
         if (value) {
-          _this6.firebase.authWithCustomToken(value);
+          _this7.firebase.authWithCustomToken(value);
         }
 
         break;
 
       case _eventsName["default"].wallkit.WALLKIT_LOGOUT:
-        _this6.logout();
+        _this7.logout();
 
         break;
     }
@@ -1812,26 +1668,26 @@ function _resetAuthorizationError2() {
 
 /***/ }),
 
-/***/ 189:
+/***/ 958:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(318);
+var _interopRequireDefault = __webpack_require__(736);
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.default = void 0;
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(575));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(913));
+var _createClass2 = _interopRequireDefault(__webpack_require__(884));
 
-var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(962));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(401));
 
-var _sdk = _interopRequireDefault(__webpack_require__(375));
+var _sdk = _interopRequireDefault(__webpack_require__(850));
 
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
 
@@ -2013,7 +1869,7 @@ function _formatCheckAccessRequestPath2(id, params) {
 
 /***/ }),
 
-/***/ 372:
+/***/ 73:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -2022,7 +1878,7 @@ function _formatCheckAccessRequestPath2(id, params) {
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.default = exports.WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN = exports.WALLKIT_FRAME_ROUTE_CHANGE = exports.WALLKIT_EVENT_ONE_TAP_SIGN_IN = exports.WALLKIT_EVENT_REGISTRATION = exports.WALLKIT_EVENT_USER = exports.WALLKIT_EVENT_AUTH = exports.WALLKIT_EVENT_GET_TOKEN = exports.WALLKIT_FRAME_READY = exports.WALLKIT_EVENT_TOKEN = exports.WALLKIT_EVENT_FIREBASE_TOKEN = exports.WALLKIT_FIREBASE_TOKEN = exports.WALLKIT_LOGOUT = exports.WALLKIT_CHANGE_FRAME = exports.TICKETS_TOKEN_AUTH_SUCCESS = exports.RECAPTCHA_VALIDATION_SUCCESS = exports.RECAPTCHA_VALIDATION_FAILED = exports.RECAPTCHA_LOADED = exports.MODAL_CLOSED = exports.FRAME_MODAL_CLOSED = exports.AUTH_MODAL_CLOSED = exports.FRAME_MESSAGE = exports.WALLKIT_SDK_LOADED = exports.SUCCESS_FIREBASE_AUTH = exports.SUCCESS_AUTH = exports.MODAL_CREATED = exports.FRAME_MOUNTED = exports.FRAME_CREATED = void 0;
+exports.default = exports.WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN = exports.WALLKIT_FRAME_ROUTE_CHANGE = exports.WALLKIT_EVENT_ONE_TAP_SIGN_IN = exports.WALLKIT_EVENT_REGISTRATION = exports.WALLKIT_EVENT_USER = exports.WALLKIT_EVENT_AUTH = exports.WALLKIT_EVENT_GET_TOKEN = exports.WALLKIT_FRAME_READY = exports.WALLKIT_EVENT_TOKEN = exports.WALLKIT_EVENT_FIREBASE_TOKEN = exports.WALLKIT_FIREBASE_TOKEN = exports.WALLKIT_LOGOUT = exports.WALLKIT_CHANGE_FRAME = exports.FIREBASE_UI_SHOWN = exports.FIREBASE_INIT = exports.FIREBASE_LOADED = exports.TICKETS_TOKEN_AUTH_SUCCESS = exports.RECAPTCHA_VALIDATION_SUCCESS = exports.RECAPTCHA_VALIDATION_FAILED = exports.RECAPTCHA_LOADED = exports.MODAL_CLOSED = exports.FRAME_MODAL_CLOSED = exports.AUTH_MODAL_CLOSED = exports.FRAME_MESSAGE = exports.WALLKIT_SDK_LOADED = exports.SUCCESS_FIREBASE_AUTH = exports.SUCCESS_AUTH = exports.MODAL_CREATED = exports.FRAME_MOUNTED = exports.FRAME_CREATED = void 0;
 // Local Events Names
 var FRAME_CREATED = 'frame-created';
 exports.FRAME_CREATED = FRAME_CREATED;
@@ -2050,9 +1906,15 @@ var RECAPTCHA_VALIDATION_FAILED = 'recaptcha-validation-failed';
 exports.RECAPTCHA_VALIDATION_FAILED = RECAPTCHA_VALIDATION_FAILED;
 var RECAPTCHA_VALIDATION_SUCCESS = 'recaptcha-validation-success';
 exports.RECAPTCHA_VALIDATION_SUCCESS = RECAPTCHA_VALIDATION_SUCCESS;
-var TICKETS_TOKEN_AUTH_SUCCESS = 'tickets-token-auth-success'; // Wallkit Events Names
-
+var TICKETS_TOKEN_AUTH_SUCCESS = 'tickets-token-auth-success';
 exports.TICKETS_TOKEN_AUTH_SUCCESS = TICKETS_TOKEN_AUTH_SUCCESS;
+var FIREBASE_LOADED = 'firebase-loaded';
+exports.FIREBASE_LOADED = FIREBASE_LOADED;
+var FIREBASE_INIT = 'firebase-init';
+exports.FIREBASE_INIT = FIREBASE_INIT;
+var FIREBASE_UI_SHOWN = 'firebase-init'; // Wallkit Events Names
+
+exports.FIREBASE_UI_SHOWN = FIREBASE_UI_SHOWN;
 var WALLKIT_CHANGE_FRAME = 'wk-event-modal';
 exports.WALLKIT_CHANGE_FRAME = WALLKIT_CHANGE_FRAME;
 var WALLKIT_LOGOUT = 'wk-event-logout';
@@ -2115,22 +1977,22 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 754:
+/***/ 889:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(318);
+var _interopRequireDefault = __webpack_require__(736);
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.default = void 0;
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(575));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(913));
+var _createClass2 = _interopRequireDefault(__webpack_require__(884));
 
 var Events = /*#__PURE__*/function () {
   function Events() {
@@ -2188,30 +2050,30 @@ exports.default = Events;
 
 /***/ }),
 
-/***/ 408:
+/***/ 967:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(318);
+var _interopRequireDefault = __webpack_require__(736);
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.default = void 0;
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(575));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(913));
+var _createClass2 = _interopRequireDefault(__webpack_require__(884));
 
-var _DOM = __webpack_require__(813);
+var _DOM = __webpack_require__(909);
 
-var _constants = __webpack_require__(425);
+var _constants = __webpack_require__(66);
 
-var _eventsName = __webpack_require__(372);
+var _eventsName = __webpack_require__(73);
 
-var _events = _interopRequireDefault(__webpack_require__(754));
+var _events = _interopRequireDefault(__webpack_require__(889));
 
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
 
@@ -2296,9 +2158,13 @@ var Frame = /*#__PURE__*/function () {
       this.currentFrameName = name;
 
       if (this.ready) {
+        console.log('test');
         this.sendEvent(_eventsName.WALLKIT_CHANGE_FRAME, name, params);
       } else {
+        console.log('test2');
         this.events.subscribe(_eventsName.WALLKIT_FRAME_READY, function () {
+          console.log('123145');
+
           _this.sendEvent(_eventsName.WALLKIT_CHANGE_FRAME, name, params);
         }, {
           once: true
@@ -2346,36 +2212,36 @@ function _listeners2() {
 
 /***/ }),
 
-/***/ 852:
+/***/ 269:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(318);
+var _interopRequireDefault = __webpack_require__(736);
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.default = void 0;
 
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(713));
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(239));
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(575));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(913));
+var _createClass2 = _interopRequireDefault(__webpack_require__(884));
 
-var _constants = __webpack_require__(425);
+var _constants = __webpack_require__(66);
 
-var _DOM = _interopRequireDefault(__webpack_require__(813));
+var _DOM = _interopRequireDefault(__webpack_require__(909));
 
-var _loaders = __webpack_require__(369);
+var _loaders = __webpack_require__(758);
 
-var _url = __webpack_require__(37);
+var _url = __webpack_require__(234);
 
-var _events = _interopRequireDefault(__webpack_require__(754));
+var _events = _interopRequireDefault(__webpack_require__(889));
 
-var _eventsName = __webpack_require__(372);
+var _eventsName = __webpack_require__(73);
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
@@ -2636,34 +2502,34 @@ function _loadAssets2() {
 
 /***/ }),
 
-/***/ 375:
+/***/ 850:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(318);
+var _interopRequireDefault = __webpack_require__(736);
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.default = void 0;
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(575));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(913));
+var _createClass2 = _interopRequireDefault(__webpack_require__(884));
 
-var _classPrivateFieldGet4 = _interopRequireDefault(__webpack_require__(226));
+var _classPrivateFieldGet4 = _interopRequireDefault(__webpack_require__(704));
 
-var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(962));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(401));
 
-var _DOM = __webpack_require__(813);
+var _DOM = __webpack_require__(909);
 
-var _constants = __webpack_require__(425);
+var _constants = __webpack_require__(66);
 
-var _eventsName = __webpack_require__(372);
+var _eventsName = __webpack_require__(73);
 
-var _events2 = _interopRequireDefault(__webpack_require__(754));
+var _events2 = _interopRequireDefault(__webpack_require__(889));
 
 var _options = /*#__PURE__*/new WeakMap();
 
@@ -2761,20 +2627,20 @@ exports.default = SDK;
 
 /***/ }),
 
-/***/ 813:
+/***/ 909:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _typeof = __webpack_require__(8);
+var _typeof = __webpack_require__(630);
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.default = exports.insertScript = exports.loadCSS = exports.injectInHead = exports.injectInBody = exports.createElement = exports.checkIfElementExists = exports.isDocumentAvailable = void 0;
 
-var _Error = _interopRequireWildcard(__webpack_require__(334));
+var _Error = _interopRequireWildcard(__webpack_require__(542));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -2900,7 +2766,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 98:
+/***/ 48:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -2956,7 +2822,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 369:
+/***/ 758:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -2967,9 +2833,9 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.default = exports.loadScripts = exports.loadWallkitAsset = void 0;
 
-var _DOM = __webpack_require__(813);
+var _DOM = __webpack_require__(909);
 
-var _constants = __webpack_require__(425);
+var _constants = __webpack_require__(66);
 
 var loadWallkitAsset = function loadWallkitAsset(type, version, name) {
   var min = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
@@ -3011,7 +2877,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 797:
+/***/ 347:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -3048,7 +2914,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 900:
+/***/ 672:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -3076,20 +2942,20 @@ exports.isApplePayAvailable = isApplePayAvailable;
 
 /***/ }),
 
-/***/ 37:
+/***/ 234:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(318);
+var _interopRequireDefault = __webpack_require__(736);
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.resetHash = exports.parseAuthTokenHash = exports.parseModalHashURL = void 0;
 
-var _typeof2 = _interopRequireDefault(__webpack_require__(8));
+var _typeof2 = _interopRequireDefault(__webpack_require__(630));
 
 var parseModalHashURL = function parseModalHashURL() {
   var UryModal = /#WkModal\((.*)\)$/.exec(decodeURIComponent(window.location.hash));
@@ -3144,7 +3010,249 @@ exports.resetHash = resetHash;
 
 /***/ }),
 
-/***/ 666:
+/***/ 756:
+/***/ ((module) => {
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+module.exports = _asyncToGenerator;
+module.exports.default = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ 461:
+/***/ ((module) => {
+
+function _classApplyDescriptorGet(receiver, descriptor) {
+  if (descriptor.get) {
+    return descriptor.get.call(receiver);
+  }
+
+  return descriptor.value;
+}
+
+module.exports = _classApplyDescriptorGet;
+module.exports.default = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ 838:
+/***/ ((module) => {
+
+function _classApplyDescriptorSet(receiver, descriptor, value) {
+  if (descriptor.set) {
+    descriptor.set.call(receiver, value);
+  } else {
+    if (!descriptor.writable) {
+      throw new TypeError("attempted to set read only private field");
+    }
+
+    descriptor.value = value;
+  }
+}
+
+module.exports = _classApplyDescriptorSet;
+module.exports.default = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ 972:
+/***/ ((module) => {
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+module.exports = _classCallCheck;
+module.exports.default = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ 641:
+/***/ ((module) => {
+
+function _classExtractFieldDescriptor(receiver, privateMap, action) {
+  if (!privateMap.has(receiver)) {
+    throw new TypeError("attempted to " + action + " private field on non-instance");
+  }
+
+  return privateMap.get(receiver);
+}
+
+module.exports = _classExtractFieldDescriptor;
+module.exports.default = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ 704:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var classApplyDescriptorGet = __webpack_require__(461);
+
+var classExtractFieldDescriptor = __webpack_require__(641);
+
+function _classPrivateFieldGet(receiver, privateMap) {
+  var descriptor = classExtractFieldDescriptor(receiver, privateMap, "get");
+  return classApplyDescriptorGet(receiver, descriptor);
+}
+
+module.exports = _classPrivateFieldGet;
+module.exports.default = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ 401:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var classApplyDescriptorSet = __webpack_require__(838);
+
+var classExtractFieldDescriptor = __webpack_require__(641);
+
+function _classPrivateFieldSet(receiver, privateMap, value) {
+  var descriptor = classExtractFieldDescriptor(receiver, privateMap, "set");
+  classApplyDescriptorSet(receiver, descriptor, value);
+  return value;
+}
+
+module.exports = _classPrivateFieldSet;
+module.exports.default = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ 884:
+/***/ ((module) => {
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+module.exports = _createClass;
+module.exports.default = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ 239:
+/***/ ((module) => {
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+module.exports = _defineProperty;
+module.exports.default = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ 736:
+/***/ ((module) => {
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    "default": obj
+  };
+}
+
+module.exports = _interopRequireDefault;
+module.exports.default = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ 630:
+/***/ ((module) => {
+
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    module.exports = _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+
+    module.exports.default = module.exports, module.exports.__esModule = true;
+  } else {
+    module.exports = _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+
+    module.exports.default = module.exports, module.exports.__esModule = true;
+  }
+
+  return _typeof(obj);
+}
+
+module.exports = _typeof;
+module.exports.default = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ 107:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__(390);
+
+
+/***/ }),
+
+/***/ 390:
 /***/ ((module) => {
 
 /**
@@ -3940,44 +4048,44 @@ var exports = __webpack_exports__;
 var __webpack_unused_export__;
 
 
-var _interopRequireDefault = __webpack_require__(318);
+var _interopRequireDefault = __webpack_require__(736);
 
 __webpack_unused_export__ = ({
   value: true
 });
 __webpack_unused_export__ = void 0;
 
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(713));
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(239));
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(575));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(913));
+var _createClass2 = _interopRequireDefault(__webpack_require__(884));
 
-var _authentication = _interopRequireDefault(__webpack_require__(65));
+var _authentication = _interopRequireDefault(__webpack_require__(484));
 
-var _modal = _interopRequireDefault(__webpack_require__(852));
+var _modal = _interopRequireDefault(__webpack_require__(269));
 
-var _frame = _interopRequireDefault(__webpack_require__(408));
+var _frame = _interopRequireDefault(__webpack_require__(967));
 
-var _sdk = _interopRequireDefault(__webpack_require__(375));
+var _sdk = _interopRequireDefault(__webpack_require__(850));
 
-var _events = _interopRequireDefault(__webpack_require__(754));
+var _events = _interopRequireDefault(__webpack_require__(889));
 
-var _analytics = _interopRequireDefault(__webpack_require__(236));
+var _analytics = _interopRequireDefault(__webpack_require__(343));
 
-var _content = _interopRequireDefault(__webpack_require__(189));
+var _content = _interopRequireDefault(__webpack_require__(958));
 
-var _styles = __webpack_require__(639);
+var _styles = __webpack_require__(350);
 
-var _DOM = __webpack_require__(813);
+var _DOM = __webpack_require__(909);
 
-var _payments = __webpack_require__(900);
+var _payments = __webpack_require__(672);
 
-var _constants = __webpack_require__(425);
+var _constants = __webpack_require__(66);
 
-var _eventsName = __webpack_require__(372);
+var _eventsName = __webpack_require__(73);
 
-var _url = __webpack_require__(37);
+var _url = __webpack_require__(234);
 
 var _eventsListener, _insertStyles, _recogniseURLIncomeParams;
 
@@ -4164,3 +4272,4 @@ __webpack_unused_export__ = _default;
 
 /******/ })()
 ;
+//# sourceMappingURL=wallkit-integration-library.js.map

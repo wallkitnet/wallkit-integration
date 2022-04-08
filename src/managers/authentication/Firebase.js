@@ -5,11 +5,20 @@ import {
     WALLKIT_DEV_FIREBASE_CONFIG,
     WALLKIT_FIREBASE_UI_PLACEHOLDER_ID,
 } from "../../configs/constants";
+import Events from "../events";
+import {
+    FIREBASE_INIT,
+    FIREBASE_LOADED,
+    FIREBASE_UI_SHOWN
+} from "../events/events-name";
 
 export default class Firebase {
     #mode;
 
     constructor(options) {
+        this.events = new Events();
+
+        this.firebaseUiConfig = null;
         this.#mode = options?.mode;
         this.config = options?.config;
         this.providers = options?.providers;
@@ -22,7 +31,11 @@ export default class Firebase {
         this.elementPlaceholder = options?.elementSelector ?? `#${WALLKIT_FIREBASE_UI_PLACEHOLDER_ID}`;
         this.onSuccessAuth = options?.onSuccessAuth ?? null;
         this.onAuthStateChanged = options?.onAuthStateChanged ?? null;
-        this.uiShown = options?.uiShown ?? null
+        this.uiShown = options?.uiShown ?? null;
+
+        this.isUiShown = false;
+        this.initialized = false;
+        this.loaded = false;
     }
 
     get allowedProviders() {
@@ -37,6 +50,7 @@ export default class Firebase {
 
     #loadFirebase() {
         return new Promise((resolve, reject) => {
+            this.loading = true;
             const onFirebaseAppLoaded = () => {
                 const scripts = [
                     {
@@ -79,6 +93,7 @@ export default class Firebase {
                         this.firebase = window.firebase;
                         this.firebaseui = window.firebaseui;
 
+                        this.loaded = true;
                         resolve({ firebase: window.firebase, firebaseui: window.firebaseui } )
                     }
                 };
@@ -124,23 +139,26 @@ export default class Firebase {
         }
     }
 
-    initFirebase({ config,
+    #firebaseInitApp(config) {
+        if (this.firebase.apps.length === 0) {
+            const defaultConfig = this.#mode === 'dev' ? WALLKIT_DEV_FIREBASE_CONFIG : WALLKIT_FIREBASE_CONFIG;
+            this.firebase.initializeApp(config ?? defaultConfig);
+        }
+
+        return this.firebase;
+    }
+
+    async initFirebase({ config,
                    providers = ['email', 'google'],
                    tosUrl = 'https://wallkit.net',
                    privacyPolicyUrl = 'https://wallkit.net' }) {
 
-        const defaultConfig = this.#mode === 'dev' ? WALLKIT_DEV_FIREBASE_CONFIG : WALLKIT_FIREBASE_CONFIG;
-        this.firebase.initializeApp(config ?? defaultConfig);
-
-        // if (this.captchaKey) {
-        //     const appCheck = this.firebase.appCheck();
-        //     appCheck.activate(this.captchaKey, true);
-        // }
+        this.#firebaseInitApp(config);
 
         const firebaseuiInstance = new this.firebaseui.auth.AuthUI(this.firebase.auth());
         firebaseuiInstance.disableAutoSignIn();
 
-        const firebaseUiConfig = {
+        this.firebaseUiConfig = {
             callbacks: {
                 signInSuccessWithAuthResult: (result) => {
                     result.user.getIdToken().then((token) => {
@@ -159,6 +177,8 @@ export default class Firebase {
                     if (this.uiShown) {
                         this.uiShown();
                     }
+                    this.isUiShown = true;
+                    console.log('isUiShown');
                 }
             },
             signInFlow: 'popup',
@@ -168,10 +188,12 @@ export default class Firebase {
             privacyPolicyUrl
         };
 
-        firebaseuiInstance.start(this.elementPlaceholder, firebaseUiConfig);
         this.firebaseui = firebaseuiInstance;
+        this.startFirebaseUi(this.elementPlaceholder, this.firebaseUiConfig);
 
         this.firebase.auth().onAuthStateChanged(this.#authStateChanged.bind(this));
+
+        return true;
     }
 
     reset() {
@@ -179,6 +201,10 @@ export default class Firebase {
             this.firebaseui.reset();
             this.firebaseui.start(this.elementPlaceholder);
         }
+    }
+
+    startFirebaseUi(elementPlaceholder, uiConfig) {
+        this.firebaseui.start(elementPlaceholder || this.elementPlaceholder, uiConfig || this.firebaseUiConfig);
     }
 
     logout() {
@@ -207,11 +233,16 @@ export default class Firebase {
 
     init() {
         this.#loadFirebase().then(() => {
+            this.events.notify(FIREBASE_LOADED, true)
+
             this.initFirebase({
                 config: this.config,
                 providers: this.providers,
                 tosUrl: this.tosURL,
                 privacyPolicyUrl: this.privacyPolicyURL
+            }).then(() => {
+                this.initialized = true;
+                this.events.notify(FIREBASE_INIT, true)
             });
         });
     }

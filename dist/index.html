@@ -133,13 +133,22 @@
 <!--    <script src="https://www.google.com/recaptcha/api.js?render=6LeNZrwbAAAAAKXPTmJj5KMdUwI2GE6XAUbCU6DM"></script>-->
 <!--    <script src="wallkit.umd.min.js" defer></script>-->
 
-    <script src="wallkit-integration-library.min.js"></script>
+    <script src="wallkit-integration-library.js"></script>
 <!--    <script src="https://cdn.wallkit.net/js/integration/3.0.1/wallkit-integration-library.min.js"></script>-->
 
     <script
             src="https://js.sentry-cdn.com/c9f328bbf5ba4793be5a393badc7385f.min.js"
             crossorigin="anonymous"
     ></script>
+
+    <script>
+        window.geoip = (data) => {
+            console.log('data', data);
+        }
+    </script>
+
+    <script src="https://get.geojs.io/v1/ip/geo.js"></script>
+
 
     <script>
         Sentry.onLoad(function() {
