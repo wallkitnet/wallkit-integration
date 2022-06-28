@@ -22,6 +22,7 @@ export const WALLKIT_MODAL_CONTENT_CLASSNAME = 'wallkit-modal-wrapper__content';
 export const WALLKIT_MODAL_MIN_WIDTH = '500';
 export const WALLKIT_MODAL_MIN_HEIGHT = '250';
 export const WALLKIT_FIREBASE_UI_PLACEHOLDER_ID = 'firebase-ui-placeholder';
+export const WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID = 'wk-email-auth-form';
 export const WALLKIT_FRAME_ID = 'wk-frame';
 
 // Authentication

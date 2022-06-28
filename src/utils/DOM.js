@@ -17,10 +17,18 @@ export const createElement = (tag, options) => {
 
     const element = document.createElement(tag);
 
-    const { id, className, styles, attributes } = options ?? {}; // Options Arguments
+    const { id, className, styles, attributes, innerText, innerHTML } = options ?? {}; // Options Arguments
 
     if (id) {
         element.id = id;
+    }
+
+    if (innerText) {
+        element.innerText = innerText;
+    }
+
+    if (innerHTML) {
+        element.innerHTML = innerHTML;
     }
 
     if (className) {

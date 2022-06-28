@@ -1,12 +1,18 @@
 import Modal from '../modal';
 import Firebase from "./Firebase";
-import { WALLKIT_FIREBASE_UI_PLACEHOLDER_ID, WALLKIT_TOKEN_NAME, FIREBASE_TOKEN_NAME } from "../../configs/constants";
-import EventsNames, {FIREBASE_INIT, FIREBASE_LOADED, FIREBASE_UI_SHOWN} from "../events/events-name";
+import {
+    WALLKIT_FIREBASE_UI_PLACEHOLDER_ID,
+    WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID,
+    WALLKIT_TOKEN_NAME,
+    FIREBASE_TOKEN_NAME
+} from "../../configs/constants";
+import EventsNames, { FIREBASE_INIT, FIREBASE_LOADED, FIREBASE_UI_SHOWN } from "../events/events-name";
 import Events from "../events";
 import Frame from "../frame";
 import SDK from "../sdk";
 import Token from "./Token";
 import ReCaptcha from "./ReCaptcha";
+import { AuthForm } from "./AuthForm";
 
 export default class Authentication {
     #options;
@@ -47,6 +53,45 @@ export default class Authentication {
 
             this.firebase = new Firebase(config);
             this.firebase.init();
+
+            if (options.firebase.genuineForm === false) {
+                this.authForm = new AuthForm(`#${WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID}`, {
+                    onLogin: (data) => {
+                        this.firebase.signIn(data.email, data.password).then(() => {
+                            this.authForm.hide();
+                        }).catch((error) => {
+                            if (error.message) {
+                                this.authForm.signUpForm.setFormError(error.message);
+                            }
+                        });
+                    },
+                    onSignUp: (data) => {
+                        this.firebase.signUp(data.email, data.password).then(() => {
+                            this.authForm.hide();
+                        }).catch((error) => {
+                            if (error.message) {
+                                this.authForm.signUpForm.setFormError(error.message);
+                            }
+                        });
+                    },
+                    onPasswordReset: (data) => {
+                        this.firebase.sendPasswordResetEmail(data.email).then(() => {
+                            this.authForm.showSuccessPasswordReset();
+                        }).catch((error) => {
+                            if (error.message) {
+                                this.authForm.forgotPasswordForm.setFormError(error.message);
+                            }
+                        });
+                    },
+                    onAuthFormShow: () => {
+                        this.firebase.hideAuthForm();
+                    },
+                    onCancel: () => {
+                        this.firebase.showAuthForm();
+                        this.authForm.toggle();
+                    }
+                });
+            }
         }
 
         this.reCaptcha = new ReCaptcha(this, options?.reCaptcha);
@@ -130,6 +175,7 @@ export default class Authentication {
         const defaultContentModal = `<div>
                                         <div id="authorization-error"></div>
                                         <h2 class="wallkit-auth-modal__title">${this.#options?.modalTitle ?? 'Sign In'}</h2>
+                                        <div id="${WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID}"></div>
                                         <div id="${WALLKIT_FIREBASE_UI_PLACEHOLDER_ID}"></div>
                                      </div>`;
 

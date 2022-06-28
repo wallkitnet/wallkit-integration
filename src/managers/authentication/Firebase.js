@@ -25,6 +25,7 @@ export default class Firebase {
         this.tosURL = options?.tosURL;
         this.privacyPolicyURL = options?.privacyPolicyURL;
         this.captchaKey = options?.captchaKey ?? '6LeNZrwbAAAAAKXPTmJj5KMdUwI2GE6XAUbCU6DM';
+        this.genuineForm = options?.genuineForm ?? true;
 
         this.firebase = null;
         this.firebaseui = null;
@@ -47,6 +48,22 @@ export default class Firebase {
             'microsoft': 'microsoft.com'
         }
     };
+
+    hideAuthForm () {
+        const element = document.querySelector(this.elementPlaceholder);
+
+        if (element) {
+            element.style.display = 'none';
+        }
+    }
+
+    showAuthForm () {
+        const element = document.querySelector(this.elementPlaceholder);
+
+        if (element) {
+            element.style.display = 'block';
+        }
+    }
 
     #loadFirebase() {
         return new Promise((resolve, reject) => {
@@ -72,7 +89,7 @@ export default class Firebase {
                         onload: () => onScriptLoaded()
                     },
                     {
-                        url: 'https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.js',
+                        url: 'https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js',
                         id: 'firebase-ui',
                         defer: true,
                         onload: () => onScriptLoaded()
@@ -111,6 +128,10 @@ export default class Firebase {
         let selectedProviders = [];
         if (Array.isArray(providers)) {
             selectedProviders = providers.map((item) => {
+                if ((item === 'email' || item.provider === 'email') && this.genuineForm === false) {
+                    return false;
+                }
+
                 if (typeof item === "object") {
                     if (this.allowedProviders[item.provider]) {
                         return {
@@ -178,7 +199,6 @@ export default class Firebase {
                         this.uiShown();
                     }
                     this.isUiShown = true;
-                    console.log('isUiShown');
                 }
             },
             signInFlow: 'popup',
@@ -217,6 +237,48 @@ export default class Firebase {
         });
     }
 
+    signIn (email, password) {
+        return this.firebase.auth().signInWithEmailAndPassword(email, password)
+            .then((result) => {
+                if (result) {
+                    result.user.getIdToken().then((token) => {
+                        const formattedResult = {
+                            user: result.user,
+                            userId: result.user.uid,
+                            token: token
+                        }
+
+                        if (this.onSuccessAuth) {
+                            this.onSuccessAuth(formattedResult, result);
+                        }
+                    });
+                }
+            });
+    }
+
+    signUp (email, password) {
+        return this.firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then((result) => {
+                if (result) {
+                    result.user.getIdToken().then((token) => {
+                        const formattedResult = {
+                            user: result.user,
+                            userId: result.user.uid,
+                            token: token
+                        }
+
+                        if (this.onSuccessAuth) {
+                            this.onSuccessAuth(formattedResult, result);
+                        }
+                    });
+                }
+            });
+    }
+
+    sendPasswordResetEmail(email) {
+        return this.firebase.auth().sendPasswordResetEmail(email);
+    }
+
     async authWithCustomToken(token) {
         try {
             if (this.firebase && this.firebase.auth) {
@@ -229,7 +291,6 @@ export default class Firebase {
             return false;
         }
     }
-
 
     init() {
         this.#loadFirebase().then(() => {

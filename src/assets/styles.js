@@ -65,4 +65,155 @@ export const LIBRARY_STYLES = `
         button:focus {
             background-color: #000;
         }
+        
+          .wk-auth-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .wk-form-field {
+            display: flex;
+            flex-direction: column;
+            font-family: Oxygen, sans-serif;
+            margin-bottom: 10px;
+        }
+
+        .wk-form-field .wk-form-field__label {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .wk-form-field .wk-form-field__input {
+            margin-bottom: 5px;
+            border-radius: 0;
+            border: 1px solid #ccc;
+            padding: 5px;
+            box-sizing: content-box;
+        }
+
+        .wk-form-field .wk-form-field__input:focus {
+            border: 1px solid #0000;
+            box-shadow: 0px 0px 0px 2px #000 inset;
+            outline: none;
+        }
+
+        .wk-form-field .wk-form-field__message {
+            font-size: 12px;
+        }
+
+        .wk-auth-form-button {
+            background-color: #db4437;
+            direction: ltr;
+            font-weight: 500;
+            height: auto;
+            line-height: normal;
+            max-width: 220px;
+            min-height: 40px;
+            padding: 8px 16px;
+            text-align: left;
+            width: 100%;
+            box-sizing: border-box;
+            box-shadow: 0 2px 2px 0 rgba(0,0,0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.20), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+            border-radius: 2px;
+            font-family: "Roboto","Helvetica","Arial",sans-serif;
+            margin: 0 auto;
+            cursor: pointer;
+        }
+
+        .wk-form-field.wk-form-field--invalid .wk-form-field__input {
+            border: 1px solid #dd2c00;
+        }
+
+        .wk-form-field.wk-form-field--valid .wk-form-field__input {
+            border: 1px solid green;
+        }
+
+        .wk-form-field.wk-form-field--invalid .wk-form-field__message {
+            color: #dd2c00;
+        }
+
+        .wk-form-field.wk-form-field--valid .wk-form-field__message {
+            color: green;
+        }
+
+        .wk-form .wk-form__link {
+            font-size: 14px;
+            color: #3170f3;
+            text-decoration: underline;
+        }
+
+        .wk-form {
+            font-family: Oxygen, sans-serif;
+        }
+
+        .wk-form .wk-form__footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .wk-form .wk-form__sub-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .wk-form__reset-password {
+            text-align: right;
+        }
+
+        .wk-form-result {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wk-form-button {
+            border: none;
+            border-radius: 2px;
+            background-color: black;
+            color: #fff;
+            position: relative;
+            height: 36px;
+            margin: 0;
+            min-width: 64px;
+            padding: 0 16px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(0.4, 0, 1, 1),background-color .2s cubic-bezier(0.4, 0, 0.2, 1),color .2s cubic-bezier(0.4, 0, 0.2, 1);
+            outline: none;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            line-height: 36px;
+            vertical-align: middle;
+        }
+
+        .wk-form__error {
+            margin-bottom: 10px;
+        }
+
+        .wk-form__error.wk-form__error--show {
+            margin-bottom: 17px;
+            background-color: #ff5b5b;
+            padding: 10px;
+            color: #fff;
+            border-radius: 8px;
+        }
+
+        .wk-form-button.wk-form-button--cancel {
+            color: #000;
+            background: none;
+        }
+
+        .wk-form-button.wk-form-button--cancel:hover {
+            background-color: hsla(0,0%,62%,.2);
+        }
 `;

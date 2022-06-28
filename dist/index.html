@@ -8,172 +8,82 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet">
-
-    <style>
-       .wrap-pro-sign-up {
-           font-family: Oxygen, sans-serif;
-           text-align: center;
-           color: #161616;
-       }
-
-       .wrap-pro-sign-up__steps {
-           display: flex;
-           align-items: center;
-           justify-content: space-around;
-       }
-
-       .wrap-pro-sign-up__title {
-           font-weight: 700;
-           font-size: 24px;
-           line-height: 30px;
-       }
-
-       .wrap-pro-sign-up__small-title {
-           font-size: 18px;
-           line-height: 25px;
-           margin-bottom: 20px;
-       }
-
-       ul {
-           padding-left: 0;
-           list-style: none;
-       }
-
-       .wrap-pro-sign-up__step {
-           font-weight: 400;
-           font-size: 16px;
-           line-height: 26px;
-           margin: 0 10px;
-           color: #828282;
-       }
-
-       .wrap-pro-sign-up__step--active {
-           border-bottom: 2px solid #10D765;
-           color: #161616;
-       }
-
-       .wrap-pro-sign-up__btn {
-           background: #161616;
-           border-radius: 5px;
-           width: 100%;
-           padding: 10px 34px;
-           text-align: center;
-           border: none;
-           color: #fff;
-           text-transform: uppercase;
-           margin: 20px 0;
-           display: block;
-       }
-
-       .wrap-pro-sign-up__terms {
-           font-size: 14px;
-           text-align: left;
-       }
-
-       .green-text {
-           color: #10D765;
-           text-decoration: none;
-       }
-
-       .wrap-pro-sign-up .firebaseui-container {
-           box-shadow: none;
-       }
-
-       .wrap-pro-sign-up .firebaseui-card-header {
-           padding-left: 0;
-       }
-
-       .wrap-pro-sign-up .firebaseui-card-content {
-           padding: 0;
-       }
-
-       .wrap-pro-sign-up .firebaseui-container,
-       .wrap-pro-sign-up .firebaseui-idp-button {
-           max-width: 100%;
-           width: 100%;
-       }
-
-       .wrap-pro-sign-up .firebaseui-idp-button {
-           box-shadow: none;
-           border-radius: 0;
-           border: 1px solid #BDBDBD;
-           background: #FFFFFF;
-       }
-
-       .wrap-pro-sign-up .mdl-button--raised.mdl-button--colored,
-       .wrap-pro-sign-up .firebaseui-textfield.mdl-textfield .firebaseui-label::after {
-           background-color: #000;
-       }
-
-       .wrap-pro-sign-up .mdl-button--raised.mdl-button--colored:hover,
-       .wrap-pro-sign-up .mdl-button--raised.mdl-button--colored:focus,
-       .wrap-pro-sign-up .mdl-button--raised.mdl-button--colored:active {
-           background-color: #303030;
-       }
-
-       .wrap-pro-sign-up .mdl-button--primary.mdl-button--primary {
-           color: #000;
-       }
-
-       .wrap-pro-sign-up .firebaseui-list-item:first-child .firebaseui-idp-button {
-           border: none;
-       }
-
-    </style>
 </head>
 <body>
-    <button onclick="openClassicLogin()">
-        Classic
+    <button onclick="WallkitInt.authentication.show()">
+        Login
     </button>
 
-    <button onclick="openJourneyLogin()">
-        Journey
-    </button>
+<!--    <div class="wk-auth-form">-->
+<!--        <div class="wk-form-field wk-form-field&#45;&#45;valid">-->
+<!--            <label for="email" class="wk-form-field__label">Email</label>-->
+<!--            <input type="email"-->
+<!--                   id="email"-->
+<!--                   name="email"-->
+<!--                   class="wk-form-field__input">-->
+<!--            <span class="wk-form-field__message">Email is invalid</span>-->
+<!--        </div>-->
+
+<!--        <div class="wk-form-field wk-form-field&#45;&#45;invalid">-->
+<!--            <label for="password" class="wk-form-field__label">Password</label>-->
+<!--            <input type="password"-->
+<!--                   id="password"-->
+<!--                   name="password"-->
+<!--                   class="wk-form-field__input">-->
+<!--            <span class="wk-form-field__message">Password is invalid</span>-->
+<!--        </div>-->
+
+<!--        <button type="submit" id="submit" class="wk-form-button">Submit</button>-->
+<!--    </div>-->
 
 <!--    <script src="https://www.google.com/recaptcha/api.js?render=6LeNZrwbAAAAAKXPTmJj5KMdUwI2GE6XAUbCU6DM"></script>-->
-<!--    <script src="wallkit.umd.min.js" defer></script>-->
+    <script src="wallkit.umd.min.js" defer></script>
 
-    <script src="wallkit-integration-library.js"></script>
+    <script src="wallkit-integration-library.js" defer></script>
 <!--    <script src="https://cdn.wallkit.net/js/integration/3.0.1/wallkit-integration-library.min.js"></script>-->
 
-    <script
-            src="https://js.sentry-cdn.com/c9f328bbf5ba4793be5a393badc7385f.min.js"
-            crossorigin="anonymous"
-    ></script>
-
-    <script>
-        window.geoip = (data) => {
-            console.log('data', data);
-        }
-    </script>
-
-    <script src="https://get.geojs.io/v1/ip/geo.js"></script>
+<!--    <script src="https://js.sentry-cdn.com/c9f328bbf5ba4793be5a393badc7385f.min.js"-->
+<!--            crossorigin="anonymous"></script>-->
 
 
-    <script>
-        Sentry.onLoad(function() {
-            Sentry.init({
-                release: "1.0.0 ",
-                environment: "thewrap",
-            });
-            Sentry.configureScope(scope => {
-                scope.setTag('123' );
-            });
-            // etc.
-        });
+<!--    <script>-->
 
-        try {
-            Wallkit.login({email: 'test@test.com', password: 'test'});
+<!--        const submit = document.querySelector('#submit');-->
 
-            myUndffef();
-        } catch (e) {
-            Sentry.captureException(e);
-        }
+<!--        submit.addEventListener('click', () => {-->
+<!--            const email = document.querySelector('#email').value;-->
+<!--            const password = document.querySelector('#password').value;-->
 
-        // myUndeffeoo();
-    </script>
+<!--            console.log('email', email);-->
+<!--            console.log('password', password);-->
 
+<!--            firebase.auth().createUserWithEmailAndPassword(email, password)-->
+<!--                .then((userCredential) => {-->
+<!--                    console.log('userCredential', userCredential);-->
+<!--                });-->
+<!--        });-->
 
+<!--        Sentry.onLoad(function() {-->
+<!--            Sentry.init({-->
+<!--                release: "1.0.0 ",-->
+<!--                environment: "thewrap",-->
+<!--            });-->
+<!--            Sentry.configureScope(scope => {-->
+<!--                scope.setTag('123' );-->
+<!--            });-->
+<!--            // etc.-->
+<!--        });-->
+
+<!--        try {-->
+<!--            Wallkit.login({email: 'test@test.com', password: 'test'});-->
+
+<!--            myUndffef();-->
+<!--        } catch (e) {-->
+<!--            Sentry.captureException(e);-->
+<!--        }-->
+
+<!--        // myUndeffeoo();-->
+<!--    </script>-->
 
 
     <script>
@@ -196,256 +106,264 @@
              <h4 class="wrap-pro-sign-up__small-title">Let's Get Started</h4>
          </div>
 
+
+         <div id="wk-auth-form"></div>
          <div id="wrap-pro-auth"></div>
+
          <p class="wrap-pro-sign-up__terms">By signing up i agree with the <a href="#" class="green-text">Terms & Conditions</a></p>
         `);
 
-        let WallkitInt = new WallkitIntegration({
-            public_key: 'bc3adcd3-9156-44bd-bc89-8092a58c6ae9',
-            mode: 'prod',
-            version: 'v1',
-            auth: { // default false
-                // firebase: false,
-                firebase: {
-                    providers: [{
-                        provider: 'email',
-                        buttonColor: '#000',
-                        fullLabel: 'Continue with Email'
-                    }],
-                    tosURL: '',
-                    privacyPolicyURL: '',
-                    elementSelector: '#wrap-pro-auth'
+        window.addEventListener('load', () => {
+            window.WallkitInt = new WallkitIntegration({
+                public_key: '35D02754-9A51-2C23-A5F7-79970C4',
+                mode: 'dev',
+                version: 'v1',
+                auth: { // default false
+                    // firebase: false,
+                    firebase: {
+                        providers: [
+                            {
+                                provider: 'email',
+                                buttonColor: '#000',
+                                fullLabel: 'Continue with Email',
+                                requireDisplayName: false
+                            },
+                            {
+                                provider: 'google'
+                            }
+                        ],
+                        genuineForm: false,
+                        tosURL: '',
+                        privacyPolicyURL: '',
+                        // elementSelector: '#wrap-pro-auth'
+                    },
+                    modal: {
+                        title: 'Authorisation',
+                        // content: modalContent
+                    },
+                    // reCaptcha: {
+                    //     mobile: false,
+                    //     siteKey: '6Lc4GioeAAAAAHo1Qsb6V9mz7NchYe8wAeqtlg__'
+                    // }
                 },
-                modal: {
-                    title: 'Authorisation',
-                    content: modalContent
+                analytics: {
+                    parseUTM: true // default true
                 },
-                reCaptcha: {
-                    mobile: false,
-                    siteKey: '6Lc4GioeAAAAAHo1Qsb6V9mz7NchYe8wAeqtlg__'
+                onInit: () => {
+                    // const post = new WallkitInt.content(postInfo);
+
+                    // console.log('post', post);
+
+                    // grecaptcha.ready(function() {
+                    //     grecaptcha.execute('6LeNZrwbAAAAAKXPTmJj5KMdUwI2GE6XAUbCU6DM', {action: 'submit'}).then(function(token) {
+                    //         // Add your logic to submit to your backend server here.
+                    //     });
+                    // });
+
+                    // post.checkAccess().then((response) => {
+                    //     console.log('response', response);
+                    // }).catch((error) => {
+                    //     console.log('ERROR', error);
+                    // });
+                    //
+                    // try {
+                    //     console.log('TEST');
+                    //     WallkitInt.sdk.methods.login({email: 'test@test.com', password: 'test'}).catch((error) => {
+                    //         Sentry.captureException(error);
+                    //     });
+                    // } catch (e) {
+                    //     console.log('e', e);
+                    //     Sentry.captureException(e);
+                    // }
                 }
-            },
-            analytics: {
-                parseUTM: true // default true
-            },
-            onInit: () => {
-                const post = new WallkitInt.content(postInfo);
+            });
 
-                // grecaptcha.ready(function() {
-                //     grecaptcha.execute('6LeNZrwbAAAAAKXPTmJj5KMdUwI2GE6XAUbCU6DM', {action: 'submit'}).then(function(token) {
-                //         // Add your logic to submit to your backend server here.
-                //     });
-                // });
+            function switchLoginContent(type) {
+                const journeyHeader = document.getElementById('user-journey-header');
+                const classicHeader = document.getElementById('classic-login');
 
-                // post.checkAccess().then((response) => {
-                //     console.log('response', response);
-                // }).catch((error) => {
-                //     console.log('ERROR', error);
-                // });
-                //
-                // try {
-                //     console.log('TEST');
-                //     WallkitInt.sdk.methods.login({email: 'test@test.com', password: 'test'}).catch((error) => {
-                //         Sentry.captureException(error);
-                //     });
-                // } catch (e) {
-                //     console.log('e', e);
-                //     Sentry.captureException(e);
-                // }
-            }
-        });
-
-        function switchLoginContent(type) {
-            const journeyHeader = document.getElementById('user-journey-header');
-            const classicHeader = document.getElementById('classic-login');
-
-            const authCallback = function () {
-                if (type === 'journey') {
-                    WallkitInt.modal('new-user-journey');
-                } else if (type === 'classic') {
-                    WallkitInt.modal('plans');
-                }
-            };
-
-            WallkitInt.events.unsubscribe('success-auth', authCallback);
-
-            if (type === 'journey') {
-                journeyHeader.style.display = 'block';
-                classicHeader.style.display = 'none';
-            } else if (type === 'classic') {
-                journeyHeader.style.display = 'none';
-                classicHeader.style.display = 'block';
-            }
-
-            WallkitInt.events.subscribe('success-auth', authCallback, { once: true });
-        }
-
-        function openJourneyLogin() {
-            switchLoginContent('journey');
-            WallkitInt.authentication.show();
-        }
-
-        function openClassicLogin() {
-            switchLoginContent('classic');
-            WallkitInt.authentication.show();
-        }
-
-        WallkitInt.events.subscribe('success-auth', () => {
-           console.log('SUCESS 1');
-        }, {once: true});
-
-        WallkitInt.events.subscribe('success-auth', () => {
-            console.log('SUCESS 2');
-        });
-
-        WallkitInt.events.subscribe('success-auth', () => {
-            console.log('SUCESS 3');
-        }, {once: true});
-
-
-        const postInfo = {
-            "id": 2721008,
-            "title": "Cloud automation provider SkyKick lands $130M",
-            "type": "post",
-            "image": "https://venturebeat.com/wp-content/uploads/2021/03/multi-cloud-e1620815313377.jpg",
-            "taxonomies": {
-            "category": {
-                "label": "Categories",
-                    "items": [
-                    {
-                        "term_id": 666,
-                        "name": "Big Data",
-                        "slug": "big-data"
-                    },
-                    {
-                        "term_id": 358,
-                        "name": "Cloud",
-                        "slug": "cloud"
-                    },
-                    {
-                        "term_id": 426689,
-                        "name": "Data",
-                        "slug": "data"
-                    },
-                    {
-                        "term_id": 339,
-                        "name": "Dev",
-                        "slug": "dev"
-                    },
-                    {
-                        "term_id": 403,
-                        "name": "Enterprise",
-                        "slug": "enterprise"
-                    },
-                    {
-                        "term_id": 301,
-                        "name": "Entrepreneur",
-                        "slug": "entrepreneur"
-                    },
-                    {
-                        "term_id": 525,
-                        "name": "Security",
-                        "slug": "security"
-                    },
-                    {
-                        "term_id": 426829,
-                        "name": "Software",
-                        "slug": "software"
-                    },
-                    {
-                        "term_id": 426054,
-                        "name": "technology",
-                        "slug": "technology"
-                    },
-                    {
-                        "term_id": 2,
-                        "name": "VB Home Page",
-                        "slug": "business"
+                const authCallback = function () {
+                    if (type === 'journey') {
+                        WallkitInt.modal('new-user-journey');
+                    } else if (type === 'classic') {
+                        WallkitInt.modal('plans');
                     }
-                ]
-            },
-            "post_tag": {
-                    "label": "Tags",
+                };
+
+                WallkitInt.events.unsubscribe('success-auth', authCallback);
+
+                if (type === 'journey') {
+                    journeyHeader.style.display = 'block';
+                    classicHeader.style.display = 'none';
+                } else if (type === 'classic') {
+                    journeyHeader.style.display = 'none';
+                    classicHeader.style.display = 'block';
+                }
+
+                WallkitInt.events.subscribe('success-auth', authCallback, { once: true });
+            }
+
+            function openJourneyLogin() {
+                switchLoginContent('journey');
+                WallkitInt.authentication.show();
+            }
+
+            window.openJourneyLogin = openJourneyLogin;
+
+            function openClassicLogin() {
+                switchLoginContent('classic');
+                WallkitInt.authentication.show();
+            }
+
+            console.log('openClassicLogin', openClassicLogin);
+            window.openClassicLogin = openClassicLogin;
+
+            console.log('window.openClassicLogin', window.openClassicLogin);
+
+            const postInfo = {
+                "id": 'wk_2721008',
+                "title": "Cloud automation provider SkyKick lands $130M",
+                "type": "post",
+                "image": "https://venturebeat.com/wp-content/uploads/2021/03/multi-cloud-e1620815313377.jpg",
+                "taxonomies": {
+                    "category": {
+                        "label": "Categories",
                         "items": [
-                        {
-                            "term_id": 25398,
-                            "name": "automation",
-                            "slug": "automation"
-                        },
-                        {
-                            "term_id": 111677,
-                            "name": "category-/Business &amp; Industrial",
-                            "slug": "category-business-industrial"
-                        },
-                        {
-                            "term_id": 111672,
-                            "name": "category-/Computers &amp; Electronics",
-                            "slug": "category-computers-electronics"
-                        },
-                        {
-                            "term_id": 111775,
-                            "name": "category-/Internet &amp; Telecom/Web Services",
-                            "slug": "category-internet-telecom-web-services"
-                        },
-                        {
-                            "term_id": 41985,
-                            "name": "cloud",
-                            "slug": "cloud-2"
-                        },
-                        {
-                            "term_id": 427502,
-                            "name": "cloud automation provider",
-                            "slug": "cloud-automation-provider"
-                        },
-                        {
-                            "term_id": 40676,
-                            "name": "cloud migration",
-                            "slug": "cloud-migration"
-                        },
-                        {
-                            "term_id": 29873,
-                            "name": "enterprise",
-                            "slug": "enterprise-2"
-                        },
-                        {
-                            "term_id": 926,
-                            "name": "funding daily",
-                            "slug": "funding-daily"
-                        },
-                        {
-                            "term_id": 35846,
-                            "name": "skykick",
-                            "slug": "skykick"
-                        },
-                        {
-                            "term_id": 8232,
-                            "name": "SMBs",
-                            "slug": "smbs"
-                        }
-                    ]
-                },
-                "vb_post_designations": {
-                    "label": "Helm Post Designations",
+                            {
+                                "term_id": 666,
+                                "name": "Big Data",
+                                "slug": "big-data"
+                            },
+                            {
+                                "term_id": 358,
+                                "name": "Cloud",
+                                "slug": "cloud"
+                            },
+                            {
+                                "term_id": 426689,
+                                "name": "Data",
+                                "slug": "data"
+                            },
+                            {
+                                "term_id": 339,
+                                "name": "Dev",
+                                "slug": "dev"
+                            },
+                            {
+                                "term_id": 403,
+                                "name": "Enterprise",
+                                "slug": "enterprise"
+                            },
+                            {
+                                "term_id": 301,
+                                "name": "Entrepreneur",
+                                "slug": "entrepreneur"
+                            },
+                            {
+                                "term_id": 525,
+                                "name": "Security",
+                                "slug": "security"
+                            },
+                            {
+                                "term_id": 426829,
+                                "name": "Software",
+                                "slug": "software"
+                            },
+                            {
+                                "term_id": 426054,
+                                "name": "technology",
+                                "slug": "technology"
+                            },
+                            {
+                                "term_id": 2,
+                                "name": "VB Home Page",
+                                "slug": "business"
+                            }
+                        ]
+                    },
+                    "post_tag": {
+                        "label": "Tags",
                         "items": [
-                        {
-                            "term_id": 78655,
-                            "name": "homepage",
-                            "slug": "homepage"
-                        }
-                    ]
-                },
-                "author": {
-                    "label": false,
+                            {
+                                "term_id": 25398,
+                                "name": "automation",
+                                "slug": "automation"
+                            },
+                            {
+                                "term_id": 111677,
+                                "name": "category-/Business &amp; Industrial",
+                                "slug": "category-business-industrial"
+                            },
+                            {
+                                "term_id": 111672,
+                                "name": "category-/Computers &amp; Electronics",
+                                "slug": "category-computers-electronics"
+                            },
+                            {
+                                "term_id": 111775,
+                                "name": "category-/Internet &amp; Telecom/Web Services",
+                                "slug": "category-internet-telecom-web-services"
+                            },
+                            {
+                                "term_id": 41985,
+                                "name": "cloud",
+                                "slug": "cloud-2"
+                            },
+                            {
+                                "term_id": 427502,
+                                "name": "cloud automation provider",
+                                "slug": "cloud-automation-provider"
+                            },
+                            {
+                                "term_id": 40676,
+                                "name": "cloud migration",
+                                "slug": "cloud-migration"
+                            },
+                            {
+                                "term_id": 29873,
+                                "name": "enterprise",
+                                "slug": "enterprise-2"
+                            },
+                            {
+                                "term_id": 926,
+                                "name": "funding daily",
+                                "slug": "funding-daily"
+                            },
+                            {
+                                "term_id": 35846,
+                                "name": "skykick",
+                                "slug": "skykick"
+                            },
+                            {
+                                "term_id": 8232,
+                                "name": "SMBs",
+                                "slug": "smbs"
+                            }
+                        ]
+                    },
+                    "vb_post_designations": {
+                        "label": "Helm Post Designations",
                         "items": [
-                        {
-                            "term_id": 111413,
-                            "name": "kylewiggers",
-                            "slug": "cap-kylewiggers"
-                        }
-                    ]
+                            {
+                                "term_id": 78655,
+                                "name": "homepage",
+                                "slug": "homepage"
+                            }
+                        ]
+                    },
+                    "author": {
+                        "label": false,
+                        "items": [
+                            {
+                                "term_id": 111413,
+                                "name": "kylewiggers",
+                                "slug": "cap-kylewiggers"
+                            }
+                        ]
+                    }
                 }
             }
-        }
+        });
 
     </script>
 </body>

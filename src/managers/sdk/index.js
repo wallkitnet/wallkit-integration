@@ -23,7 +23,7 @@ export default class SDK {
         this.client = null;
         this.#options = options;
         this.#events = new Events();
-        this.#apiUrl = options.mode === 'dev' ? 'https://api.dev.wallkit.net/api/v1': undefined
+        this.#apiUrl = options.mode === 'dev' ? 'https://api.dev.wallkit.net/api/v1': undefined;
 
         if (window.Wallkit) {
             this.onLoad();
