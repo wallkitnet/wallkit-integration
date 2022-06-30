@@ -61,12 +61,8 @@ export const LIBRARY_STYLES = `
             font-family: Roboto, sans-serif;
             text-align: center;
         }
-
-        button:focus {
-            background-color: #000;
-        }
         
-          .wk-auth-form {
+        .wk-auth-form {
             display: flex;
             flex-direction: column;
         }
@@ -80,20 +76,27 @@ export const LIBRARY_STYLES = `
 
         .wk-form-field .wk-form-field__label {
             font-weight: 500;
+            color: #333;
             margin-bottom: 5px;
         }
 
         .wk-form-field .wk-form-field__input {
             margin-bottom: 5px;
             border-radius: 0;
-            border: 1px solid #ccc;
+            border: 0;
+            border-bottom: 1px solid #ccc;
             padding: 5px;
             box-sizing: content-box;
         }
+        
+        .wk-field-list {
+            list-style-type: circle;
+            padding-left: 12px;
+            margin-top: 1px;
+        }
 
         .wk-form-field .wk-form-field__input:focus {
-            border: 1px solid #0000;
-            box-shadow: 0px 0px 0px 2px #000 inset;
+            border-bottom: 1px solid #3f51b5;
             outline: none;
         }
 
@@ -119,13 +122,18 @@ export const LIBRARY_STYLES = `
             margin: 0 auto;
             cursor: pointer;
         }
+        
+        .wk-auth-form-button:focus,
+        .wk-auth-form-button:active,{
+            background-color: #5b6abe;
+        }
 
         .wk-form-field.wk-form-field--invalid .wk-form-field__input {
-            border: 1px solid #dd2c00;
+            border-bottom: 1px solid #dd2c00;
         }
 
         .wk-form-field.wk-form-field--valid .wk-form-field__input {
-            border: 1px solid green;
+            border-bottom: 1px solid green;
         }
 
         .wk-form-field.wk-form-field--invalid .wk-form-field__message {
@@ -172,7 +180,7 @@ export const LIBRARY_STYLES = `
         .wk-form-button {
             border: none;
             border-radius: 2px;
-            background-color: black;
+            background-color: #3f51b5;
             color: #fff;
             position: relative;
             height: 36px;
@@ -209,11 +217,17 @@ export const LIBRARY_STYLES = `
         }
 
         .wk-form-button.wk-form-button--cancel {
-            color: #000;
+            color: #3f51b5;
             background: none;
         }
 
         .wk-form-button.wk-form-button--cancel:hover {
             background-color: hsla(0,0%,62%,.2);
         }
+        
+        .wk-password-reset-success .wk-form-button {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
 `;

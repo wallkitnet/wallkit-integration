@@ -167,10 +167,19 @@ export class Form {
         }
     }
 
-    init () {
+    reRender () {
+        this.formWrapper.innerHTML = '';
+        this.insertFormElements();
+    }
+
+    insertFormElements () {
         this.insertHeader();
         this.insertFields();
         this.insertFooter();
+    }
+
+    init () {
+        this.insertFormElements();
 
         this.submitBtn.addEventListener('click', this.submitForm.bind(this));
 
@@ -248,6 +257,7 @@ export class AuthForm {
                 this.forgotPasswordForm.hide();
                 this.forgotPasswordForm.resetForm();
                 this.loginForm.show();
+                this.forgotPasswordForm.reRender();
             }
         });
 
@@ -288,10 +298,13 @@ export class AuthForm {
     }
 
     showSuccessPasswordReset () {
+        const email = this.forgotPasswordForm.emailField.getValue();
+
         this.forgotPasswordForm.showFormResult(`
-            <div>
+            <div class="wk-password-reset-success">
                 <h2>Check your email!</h2>
-                <p>Follow the instructions sent to test@ya.ru to recover your password</p>
+                <p>Follow the instructions sent to ${email} to recover your password</p>
+                <button id="back-to-login" class="wk-form-button wk-form-button--cancel">Back to login</button>
             </div>
         `);
     }
@@ -353,9 +366,10 @@ export class LoginForm extends Form {
             onChange: () => {},
             onInput: () => {}
         });
-        this.passwordField = new FormField({
+        this.passwordField = new PasswordField({
             dataSlug: 'password',
             name: 'wk-fb-password',
+            testStrength: false,
             label: 'Password',
             type: 'password',
             onChange: () => {},
@@ -439,9 +453,10 @@ export class SignupForm extends Form {
             onChange: () => {},
             onInput: () => {}
         });
-        this.passwordField = new FormField({
+        this.passwordField = new PasswordField({
             dataSlug: 'password',
             name: 'wk-fb-password',
+            testStrength: true,
             label: 'Password',
             type: 'password',
             onChange: () => {},
@@ -506,7 +521,7 @@ export class FormField {
         return this.wrapper;
     }
 
-    getValue() {
+    getValue () {
         return this.input.value;
     }
 
@@ -526,16 +541,6 @@ export class FormField {
                 return false;
             } else if (!value.length > 4 || !value.includes('@') || !value.includes('.')) {
                 this.setError('This email address isn\'t correct!');
-
-                return false;
-            }
-        } else if (this.type === 'password') {
-            if (!value) {
-                this.setError('Enter your password to continue!');
-
-                return false;
-            } else if (!value.length >= 6) {
-                this.setError('Password doesn\'t match requirements!');
 
                 return false;
             }
@@ -580,7 +585,7 @@ export class FormField {
             className: `wk-form-field__message`,
         });
 
-        messageElement.innerText = message;
+        messageElement.innerHTML = message;
 
         return messageElement;
     }
@@ -591,7 +596,7 @@ export class FormField {
             this.message = this.createMessage(message, false);
             this.wrapper.appendChild(this.message);
         } else if (this.message) {
-            this.message.innerText = message;
+            this.message.innerHTML = message;
         }
     }
 
@@ -606,8 +611,10 @@ export class FormField {
         this.isValid = valid;
         if (!valid) {
             this.wrapper.classList.add('wk-form-field--invalid');
+            this.wrapper.classList.remove('wk-form-field--valid');
         } else {
             this.wrapper.classList.add('wk-form-field--valid');
+            this.wrapper.classList.remove('wk-form-field--invalid');
         }
     }
 
@@ -620,6 +627,49 @@ export class FormField {
         this.input.value = '';
         this.resetValidation()
     }
+}
+
+export class PasswordField extends FormField {
+    constructor(options) {
+        super(options);
+
+        this.testStrength = options.testStrength ?? false;
+    }
+
+    #testPassword (password) {
+        const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+
+        return passwordRegex.test(password);
+    }
+
+    validate () {
+        const value = this.getValue();
+
+        if (!value) {
+            this.setError('Enter your password to continue!');
+
+            return false;
+        } else if (this.testStrength && !this.#testPassword(value)) {
+            this.setError(`<div>
+                    <span>Password doesn't match requirements:</span>
+                    <ul class="wk-field-list">
+                        <li>at least 1 uppercase character (A-Z)</li>
+                        <li>at least 1 lowercase character (a-z)</li>
+                        <li>at least 1 digit (0-9)</li>
+                        <li>at least 1 special character (punctuation)</li>
+                        <li>at least 8 characters length</li>
+                    </ul>
+                </div>`);
+
+            return false;
+        }
+
+        this.resetValidation();
+        this.setFieldValidationState(true);
+
+        return true;
+    }
+
 }
 
 export class AuthButton {

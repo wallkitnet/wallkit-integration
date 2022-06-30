@@ -61,7 +61,7 @@ export default class Authentication {
                             this.authForm.hide();
                         }).catch((error) => {
                             if (error.message) {
-                                this.authForm.signUpForm.setFormError(error.message);
+                                this.authForm.loginForm.setFormError(error.message);
                             }
                         });
                     },
