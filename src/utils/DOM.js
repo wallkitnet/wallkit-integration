@@ -10,6 +10,10 @@ export const checkIfElementExists = (elementSelector) => {
     return !!document.querySelector(elementSelector);
 }
 
+export const insertAfter = (newNode, referenceNode) => {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+}
+
 export const createElement = (tag, options) => {
     if (!isDocumentAvailable()) return Error.handleError('Document is not available', ERRORS_TYPES.DOM_ERROR);
 

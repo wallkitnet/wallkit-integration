@@ -1,4 +1,4 @@
-import { createElement } from "../../utils/DOM";
+import {createElement, insertAfter} from "../../utils/DOM";
 
 export class Form {
     constructor(options) {
@@ -457,6 +457,7 @@ export class SignupForm extends Form {
             dataSlug: 'password',
             name: 'wk-fb-password',
             testStrength: true,
+            passwordHint: true,
             label: 'Password',
             type: 'password',
             onChange: () => {},
@@ -505,8 +506,18 @@ export class FormField {
         this.required = options.required || false;
         this.slug = options.dataSlug;
 
+        this.inputWrapper = this.createInputWrapper();
         this.wrapper.appendChild(this.createLabel(options.label, options.name));
-        this.wrapper.appendChild(this.input);
+        this.inputWrapper.appendChild(this.input);
+        this.wrapper.appendChild(this.inputWrapper);
+
+        if (options.affix) {
+            this.insertAffix(options.affix.content, options.affix.onClick);
+        }
+
+        if (options.description) {
+            this.insertDescription(options.description);
+        }
 
         if (options.onChange) {
             this.input.addEventListener('change', options.onChange.bind(this));
@@ -558,6 +569,31 @@ export class FormField {
         });
     }
 
+    createInputWrapper () {
+        return createElement('div', {
+            className: 'wk-form-field__input-wrapper',
+        });
+    }
+
+    insertAffix (content, onClick) {
+        const affixElement = createElement('div', {
+            className: 'wk-form-field__field-affix',
+            innerHTML: content
+        });
+
+        affixElement.addEventListener('click', onClick);
+        this.inputWrapper.appendChild(affixElement);
+    }
+
+    insertDescription (description) {
+        const descriptionElement = createElement('div', {
+            className: 'wk-form-field__field-description',
+            innerHTML: description
+        });
+
+        this.wrapper.appendChild(descriptionElement);
+    }
+
     createInput (options) {
         return createElement('input', {
             className: 'wk-form-field__input',
@@ -594,7 +630,7 @@ export class FormField {
         if (!this.message) {
             this.setFieldValidationState(false);
             this.message = this.createMessage(message, false);
-            this.wrapper.appendChild(this.message);
+            insertAfter(this.message, this.inputWrapper);
         } else if (this.message) {
             this.message.innerHTML = message;
         }
@@ -633,7 +669,43 @@ export class PasswordField extends FormField {
     constructor(options) {
         super(options);
 
+        this.insertAffix(`<div id="show-password-toggle" class="wk-eye-toggle"></div>`, this.togglePasswordVisibility.bind(this))
+
+        if (options.passwordHint) {
+            this.insertDescription(`<div>
+            <span>Password should match requirements:</span>
+            <ul class="wk-field-list">
+                <li>at least 1 uppercase character (A-Z)</li>
+                <li>at least 1 lowercase character (a-z)</li>
+                <li>at least 1 digit (0-9)</li>
+                <li>at least 1 special character (punctuation)</li>
+                <li>at least 8 characters length</li>
+            </ul>
+        </div>`);
+        }
+
         this.testStrength = options.testStrength ?? false;
+    }
+
+    togglePasswordVisibility () {
+        const targetElement = document.querySelector('#show-password-toggle');
+        const TOGGLE_CLASSNAME = 'wk-eye-toggled';
+
+        if (targetElement) {
+            if (targetElement.classList.contains(TOGGLE_CLASSNAME)) {
+                targetElement.classList.remove(TOGGLE_CLASSNAME);
+                this.switchPasswordInputType('password');
+            } else {
+                targetElement.classList.add(TOGGLE_CLASSNAME);
+                this.switchPasswordInputType('text');
+            }
+        }
+    }
+
+    switchPasswordInputType (type) {
+        if (this.input) {
+            this.input.type = type || 'password';
+        }
     }
 
     #testPassword (password) {
@@ -651,14 +723,7 @@ export class PasswordField extends FormField {
             return false;
         } else if (this.testStrength && !this.#testPassword(value)) {
             this.setError(`<div>
-                    <span>Password doesn't match requirements:</span>
-                    <ul class="wk-field-list">
-                        <li>at least 1 uppercase character (A-Z)</li>
-                        <li>at least 1 lowercase character (a-z)</li>
-                        <li>at least 1 digit (0-9)</li>
-                        <li>at least 1 special character (punctuation)</li>
-                        <li>at least 8 characters length</li>
-                    </ul>
+                    <span>Password doesn't match requirements!</span>
                 </div>`);
 
             return false;

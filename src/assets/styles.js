@@ -80,13 +80,40 @@ export const LIBRARY_STYLES = `
             margin-bottom: 5px;
         }
 
-        .wk-form-field .wk-form-field__input {
+        .wk-form-field .wk-form-field__input-wrapper {
             margin-bottom: 5px;
+            position: relative;
+        }
+        
+        .wk-eye-toggle {
+            background: url(https://www.gstatic.com/images/icons/material/system/1x/visibility_black_24dp.png);
+            width: 24px;
+            height: 24px;
+        }
+        
+        .wk-form-field__field-description {
+            font-size: 11px;
+            color: #989898;
+        }
+        
+        .wk-eye-toggle.wk-eye-toggled {
+            background: url(https://www.gstatic.com/images/icons/material/system/1x/visibility_off_black_24dp.png);
+        }
+        
+        .wk-form-field__field-affix {
+            position: absolute;
+            right: 5px;
+            top: 0;
+            bottom: 0;
+        }
+        
+        .wk-form-field .wk-form-field__input {
             border-radius: 0;
             border: 0;
             border-bottom: 1px solid #ccc;
             padding: 5px;
-            box-sizing: content-box;
+            box-sizing: border-box;
+            width: 100%;
         }
         
         .wk-field-list {
