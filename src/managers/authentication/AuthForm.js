@@ -688,7 +688,7 @@ export class PasswordField extends FormField {
     }
 
     togglePasswordVisibility () {
-        const targetElement = document.querySelector('#show-password-toggle');
+        const targetElement = this.wrapper.querySelector('#show-password-toggle');
         const TOGGLE_CLASSNAME = 'wk-eye-toggled';
 
         if (targetElement) {

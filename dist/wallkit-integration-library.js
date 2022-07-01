@@ -1056,7 +1056,7 @@ var PasswordField = /*#__PURE__*/function (_FormField) {
   (0, _createClass2["default"])(PasswordField, [{
     key: "togglePasswordVisibility",
     value: function togglePasswordVisibility() {
-      var targetElement = document.querySelector('#show-password-toggle');
+      var targetElement = this.wrapper.querySelector('#show-password-toggle');
       var TOGGLE_CLASSNAME = 'wk-eye-toggled';
 
       if (targetElement) {
