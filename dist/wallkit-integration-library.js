@@ -84,6 +84,21 @@ exports.FIREBASE_TOKEN_NAME = FIREBASE_TOKEN_NAME;
 
 /***/ }),
 
+/***/ 6:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.FB_AVAILABLE_LANGUAGES = void 0;
+var FB_AVAILABLE_LANGUAGES = ['ar', 'bg', 'ca', 'zh_cn', 'zh_tw', 'hr', 'cs', 'da', 'nl', 'en', 'en_gb', 'fa', 'fil', 'fi', 'fr', 'de', 'el', 'iw', 'hi', 'hu', 'id', 'it', 'ja', 'ko', 'lv', 'lt', 'no', 'pl', 'pt_pt', 'ro', 'ru', 'sr', 'sk', 'sl', 'es', 'sv', 'th', 'tr', 'uk', 'vi'];
+exports.FB_AVAILABLE_LANGUAGES = FB_AVAILABLE_LANGUAGES;
+
+/***/ }),
+
 /***/ 542:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
@@ -316,6 +331,8 @@ var _DOM = __webpack_require__(909);
 
 var _constants = __webpack_require__(66);
 
+var _localization = __webpack_require__(761);
+
 var _events = _interopRequireDefault(__webpack_require__(889));
 
 var _eventsName = __webpack_require__(73);
@@ -354,6 +371,7 @@ var Firebase = /*#__PURE__*/function () {
     this.events = new _events["default"]();
     this.firebaseUiConfig = null;
     (0, _classPrivateFieldSet2["default"])(this, _mode, options === null || options === void 0 ? void 0 : options.mode);
+    this.lang = _localization.Localization.assembleLanguage(options.lang || 'en');
     this.config = options === null || options === void 0 ? void 0 : options.config;
     this.providers = options === null || options === void 0 ? void 0 : options.providers;
     this.tosURL = options === null || options === void 0 ? void 0 : options.tosURL;
@@ -602,7 +620,7 @@ function _loadFirebase2() {
           return onScriptLoaded();
         }
       }, {
-        url: 'https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.js',
+        url: "https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth__".concat(_this5.lang, ".js"),
         id: 'firebase-ui',
         defer: true,
         onload: function onload() {
@@ -737,8 +755,6 @@ var ReCaptcha = /*#__PURE__*/function () {
   (0, _createClass2["default"])(ReCaptcha, [{
     key: "isEnabled",
     value: function isEnabled(options) {
-      console.log('isMobile()', (0, _DOM.isMobile)());
-
       if ((0, _DOM.isMobile)()) {
         return !!options && (options === null || options === void 0 ? void 0 : options.mobile) !== false;
       } else {
@@ -1245,6 +1261,7 @@ var Authentication = /*#__PURE__*/function () {
       this.modal = _classPrivateMethodGet(this, _createModal, _createModal2).call(this);
       this.modal.init();
       var config = {
+        lang: options.lang || 'en',
         mode: options.mode,
         onAuthStateChanged: this.updateFirebaseToken.bind(this),
         onSuccessAuth: this.onSuccessAuth.bind(this),
@@ -2220,6 +2237,51 @@ function _listeners2() {
     }
   });
 }
+
+/***/ }),
+
+/***/ 761:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(736);
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.Localization = void 0;
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(884));
+
+var _languages = __webpack_require__(6);
+
+var Localization = /*#__PURE__*/function () {
+  function Localization() {
+    (0, _classCallCheck2["default"])(this, Localization);
+  }
+
+  (0, _createClass2["default"])(Localization, null, [{
+    key: "assembleLanguage",
+    value: function assembleLanguage() {
+      var language = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'en';
+
+      if (typeof language === "string") {
+        if (_languages.FB_AVAILABLE_LANGUAGES.includes(language.toLowerCase())) {
+          return language;
+        }
+      }
+
+      return 'en';
+    }
+  }]);
+  return Localization;
+}();
+
+exports.Localization = Localization;
 
 /***/ }),
 

@@ -5,6 +5,7 @@ import {
     WALLKIT_DEV_FIREBASE_CONFIG,
     WALLKIT_FIREBASE_UI_PLACEHOLDER_ID,
 } from "../../configs/constants";
+import { Localization } from "../localization";
 import Events from "../events";
 import {
     FIREBASE_INIT,
@@ -20,6 +21,7 @@ export default class Firebase {
 
         this.firebaseUiConfig = null;
         this.#mode = options?.mode;
+        this.lang = Localization.assembleLanguage(options.lang || 'en');
         this.config = options?.config;
         this.providers = options?.providers;
         this.tosURL = options?.tosURL;
@@ -72,7 +74,7 @@ export default class Firebase {
                         onload: () => onScriptLoaded()
                     },
                     {
-                        url: 'https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.js',
+                        url: `https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth__${this.lang}.js`,
                         id: 'firebase-ui',
                         defer: true,
                         onload: () => onScriptLoaded()

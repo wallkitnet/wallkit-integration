@@ -31,6 +31,7 @@ export default class Authentication {
             this.modal.init();
 
             let config = {
+                lang: options.lang || 'en',
                 mode: options.mode,
                 onAuthStateChanged: this.updateFirebaseToken.bind(this),
                 onSuccessAuth: this.onSuccessAuth.bind(this),
