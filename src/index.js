@@ -45,7 +45,7 @@ window.WallkitIntegration = class WallkitIntegration {
                     ...options,
                     firebase: options?.auth?.firebase,
                     modalTitle: options?.auth?.modal?.title,
-                    content: options?.auth?.modal?.content,
+                    content: options?.auth?.content || options?.auth?.modal?.content,
                     reCaptcha: options?.auth?.reCaptcha,
                 });
 
@@ -58,6 +58,18 @@ window.WallkitIntegration = class WallkitIntegration {
 
     modal(name, params) {
         this.popup.open(name, params);
+    }
+
+    on (eventName, callback, options) {
+        this.events.subscribe(eventName, callback, options);
+    }
+
+    off (eventName, callback, options) {
+        this.events.unsubscribe(eventName, callback, options);
+    }
+
+    sendEvent (name, value, params) {
+        this.frame.sendEvent(name, value, params);
     }
 
     #eventsListener() {
@@ -145,7 +157,11 @@ window.WallkitIntegration = class WallkitIntegration {
     init() {
         this.#insertStyles();
         this.popup.init();
-        this.authentication.init();
+
+        if (this.config.auth.defaultInit !== false) {
+            this.authentication.init();
+        }
+
         this.analytics.init();
         this.#eventsListener();
         this.#recogniseURLIncomeParams();
@@ -155,5 +171,8 @@ window.WallkitIntegration = class WallkitIntegration {
         }
     }
 }
+
+export * from './managers/events/events-name';
+export * from './configs/constants';
 
 export default WallkitIntegration;

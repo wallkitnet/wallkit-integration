@@ -1,7 +1,9 @@
 import {createElement, insertAfter} from "../../utils/DOM";
 
 export class Form {
-    constructor(options) {
+    constructor(targetElementSelector, options) {
+        this.targetElementSelector = targetElementSelector;
+
         this.formWrapper = createElement('div', {
             className: 'wk-form'
         });
@@ -24,7 +26,7 @@ export class Form {
 
     render (selector) {
         try {
-            const placeholderElement = document.querySelector(selector);
+            const placeholderElement = document.querySelector(selector || this.targetElementSelector);
             if (placeholderElement) {
                 placeholderElement.appendChild(this.getFormElement());
             }
@@ -194,6 +196,7 @@ export class AuthForm {
         });
 
         this.loginForm = new LoginForm(selector, {
+            signUp: options.signUp ?? true,
             onSubmit: (data) => {
                 if (options.onLogin) {
                     options.onLogin(data);
@@ -206,7 +209,6 @@ export class AuthForm {
                 }
             }
         });
-
         this.loginForm.formWrapper.addEventListener('click', (event) => {
             if (event.target.id === 'auth-signup-link') {
                 event.preventDefault();
@@ -222,25 +224,25 @@ export class AuthForm {
                 this.forgotPasswordForm.show();
             }
         });
-
         this.loginForm.hide();
 
-        this.signUpForm = new SignupForm(selector, {
-            onSubmit: (data) => {
-                if (options.onSignUp) {
-                    options.onSignUp(data);
+        if (options.signUp === true) {
+            this.signUpForm = new SignupForm(selector, {
+                onSubmit: (data) => {
+                    if (options.onSignUp) {
+                        options.onSignUp(data);
+                    }
                 }
-            }
-        });
-        this.signUpForm.formWrapper.addEventListener('click', (event) => {
-            if (event.target.id === 'auth-signin-link') {
-                this.loginForm.show();
-                this.signUpForm.hide();
-                this.signUpForm.resetForm();
-            }
-        });
-
-        this.signUpForm.hide();
+            });
+            this.signUpForm.formWrapper.addEventListener('click', (event) => {
+                if (event.target.id === 'auth-signin-link') {
+                    this.loginForm.show();
+                    this.signUpForm.hide();
+                    this.signUpForm.resetForm();
+                }
+            });
+            this.signUpForm.hide();
+        }
 
         this.forgotPasswordForm = new ForgotPasswordForm(selector, {
             onSubmit: (data) => {
@@ -249,7 +251,6 @@ export class AuthForm {
                 }
             }
         });
-
         this.forgotPasswordForm.formWrapper.addEventListener('click', (event) => {
             if (event.target.id === 'back-to-login') {
                 event.preventDefault();
@@ -260,7 +261,6 @@ export class AuthForm {
                 this.forgotPasswordForm.reRender();
             }
         });
-
         this.forgotPasswordForm.hide();
 
         this.authButton = new AuthButton(selector, {
@@ -272,7 +272,6 @@ export class AuthForm {
                 }
             }
         });
-        this.authButton.render();
     }
 
     toggle () {
@@ -281,14 +280,20 @@ export class AuthForm {
     }
 
     hide () {
-        this.loginForm.hide();
-        this.loginForm.resetForm();
+        if (this.loginForm) {
+            this.loginForm.hide();
+            this.loginForm.resetForm();
+        }
 
-        this.signUpForm.hide();
-        this.signUpForm.resetForm();
+        if (this.signUpForm) {
+            this.signUpForm.hide();
+            this.signUpForm.resetForm();
+        }
 
-        this.forgotPasswordForm.hide();
-        this.forgotPasswordForm.resetForm();
+        if (this.forgotPasswordForm) {
+            this.forgotPasswordForm.hide();
+            this.forgotPasswordForm.resetForm();
+        }
     }
 
     showSuccessLogin () {
@@ -308,11 +313,29 @@ export class AuthForm {
             </div>
         `);
     }
+
+    render () {
+        if (this.loginForm) {
+            this.loginForm.render();
+        }
+
+        if (this.signUpForm) {
+            this.signUpForm.render();
+        }
+
+        if (this.forgotPasswordForm) {
+            this.forgotPasswordForm.render();
+        }
+
+        if (this.authButton) {
+            this.authButton.render()
+        }
+    }
 }
 
 export class ForgotPasswordForm extends Form {
     constructor(targetElementSelector, options) {
-        super({});
+        super(targetElementSelector, options);
 
         this.options = options;
         this.options.title = 'Reset Password' || options.title;
@@ -332,7 +355,6 @@ export class ForgotPasswordForm extends Form {
         ];
 
         this.init();
-        this.render(targetElementSelector);
     }
 
     getFormFooter () {
@@ -351,7 +373,7 @@ export class ForgotPasswordForm extends Form {
 
 export class LoginForm extends Form {
     constructor(targetElementSelector, options) {
-        super({});
+        super(targetElementSelector, options);
 
         this.options = options;
 
@@ -382,7 +404,6 @@ export class LoginForm extends Form {
         ];
 
         this.init();
-        this.render(targetElementSelector);
 
         if (options.onCancel) {
             this.cancelBtn.addEventListener('click', options.onCancel.bind(this));
@@ -396,14 +417,16 @@ export class LoginForm extends Form {
             className: 'wk-form__sub-footer',
         });
 
-        subFooter.appendChild(createElement('a', {
-            id: 'auth-signup-link',
-            className: 'wk-form__link',
-            innerText: 'Sign Up',
-            attributes: {
-                href: '#'
-            }
-        }));
+        if (this.options.signUp === true) {
+            subFooter.appendChild(createElement('a', {
+                id: 'auth-signup-link',
+                className: 'wk-form__link',
+                innerText: 'Sign Up',
+                attributes: {
+                    href: '#'
+                }
+            }));
+        }
 
         subFooter.appendChild(createElement('a', {
             className: 'wk-form__link wk-form__reset-password',
@@ -431,7 +454,7 @@ export class LoginForm extends Form {
 
 export class SignupForm extends Form {
     constructor(targetElementSelector, options) {
-        super();
+        super(targetElementSelector, options);
 
         this.options = options;
         this.options.title = 'Sign Up' || options.title;
@@ -471,7 +494,6 @@ export class SignupForm extends Form {
         ];
 
         this.init();
-        this.render(targetElementSelector);
     }
 
     getFormFooter () {

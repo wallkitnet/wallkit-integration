@@ -198,6 +198,7 @@ export default class Firebase {
                     if (this.uiShown) {
                         this.uiShown();
                     }
+                    this.events.notify(FIREBASE_UI_SHOWN, true);
                     this.isUiShown = true;
                 }
             },

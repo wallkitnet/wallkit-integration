@@ -201,7 +201,6 @@ export default class ReCaptcha {
         }
     }
 
-
     async init () {
         try {
             if (!this.options || this.loaded) {

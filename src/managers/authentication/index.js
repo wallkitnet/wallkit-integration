@@ -33,9 +33,6 @@ export default class Authentication {
         this.sdk = new SDK();
 
         if (!!options?.firebase) {
-            this.modal = this.#createModal();
-            this.modal.init();
-
             let config = {
                 mode: options.mode,
                 onAuthStateChanged: this.updateFirebaseToken.bind(this),
@@ -52,45 +49,9 @@ export default class Authentication {
             }
 
             this.firebase = new Firebase(config);
-            this.firebase.init();
 
             if (options.firebase.genuineForm === false) {
-                this.authForm = new AuthForm(`#${WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID}`, {
-                    onLogin: (data) => {
-                        this.firebase.signIn(data.email, data.password).then(() => {
-                            this.authForm.hide();
-                        }).catch((error) => {
-                            if (error.message) {
-                                this.authForm.loginForm.setFormError(error.message);
-                            }
-                        });
-                    },
-                    onSignUp: (data) => {
-                        this.firebase.signUp(data.email, data.password).then(() => {
-                            this.authForm.hide();
-                        }).catch((error) => {
-                            if (error.message) {
-                                this.authForm.signUpForm.setFormError(error.message);
-                            }
-                        });
-                    },
-                    onPasswordReset: (data) => {
-                        this.firebase.sendPasswordResetEmail(data.email).then(() => {
-                            this.authForm.showSuccessPasswordReset();
-                        }).catch((error) => {
-                            if (error.message) {
-                                this.authForm.forgotPasswordForm.setFormError(error.message);
-                            }
-                        });
-                    },
-                    onAuthFormShow: () => {
-                        this.firebase.hideAuthForm();
-                    },
-                    onCancel: () => {
-                        this.firebase.showAuthForm();
-                        this.authForm.toggle();
-                    }
-                });
+                this.initAuthForm();
             }
         }
 
@@ -119,12 +80,58 @@ export default class Authentication {
         }
     }
 
+    toggleFormLoader(state) {
+        if (this.modal) {
+            this.modal.toggleLoader(state);
+        }
+    }
+
+    initAuthForm () {
+        this.authForm = new AuthForm(`#${WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID}`, {
+            signUp: this.#options.auth.signUp ?? true,
+            onLogin: (data) => {
+                this.firebase.signIn(data.email, data.password).then(() => {
+                    this.authForm.hide();
+                }).catch((error) => {
+                    if (error.message) {
+                        this.authForm.loginForm.setFormError(error.message);
+                    }
+                });
+            },
+            onSignUp: (data) => {
+                this.firebase.signUp(data.email, data.password).then(() => {
+                    this.authForm.hide();
+                }).catch((error) => {
+                    if (error.message) {
+                        this.authForm.signUpForm.setFormError(error.message);
+                    }
+                });
+            },
+            onPasswordReset: (data) => {
+                this.firebase.sendPasswordResetEmail(data.email).then(() => {
+                    this.authForm.showSuccessPasswordReset();
+                }).catch((error) => {
+                    if (error.message) {
+                        this.authForm.forgotPasswordForm.setFormError(error.message);
+                    }
+                });
+            },
+            onAuthFormShow: () => {
+                this.firebase.hideAuthForm();
+            },
+            onCancel: () => {
+                this.firebase.showAuthForm();
+                this.authForm.toggle();
+            }
+        });
+    }
+
     onSuccessAuth(data) {
-        this.modal.toggleLoader(true);
+        this.toggleFormLoader(true);
 
         const handleAuthError = (error) => {
             this.firebase.reset();
-            this.modal.toggleLoader(false);
+            this.toggleFormLoader(false);
             this.#setAuthorizationError(error?.message || 'Something went wrong!');
         }
 
@@ -137,7 +144,7 @@ export default class Authentication {
                 this.firebase.reset();
             }
 
-            this.modal.toggleLoader(false);
+            this.toggleFormLoader(false);
         }).catch((error) => handleAuthError(error));
     }
 
@@ -171,17 +178,32 @@ export default class Authentication {
         });
     }
 
-    #createModal() {
-        const defaultContentModal = `<div>
-                                        <div id="authorization-error"></div>
-                                        <h2 class="wallkit-auth-modal__title">${this.#options?.modalTitle ?? 'Sign In'}</h2>
-                                        <div id="${WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID}"></div>
-                                        <div id="${WALLKIT_FIREBASE_UI_PLACEHOLDER_ID}"></div>
-                                     </div>`;
+    getDefaultAuthenticationFormContent () {
+        return `<div>
+                    <div id="authorization-error"></div>
+                    <h2 class="wallkit-auth-modal__title">${this.#options?.modalTitle ?? 'Sign In'}</h2>
+                    <div id="${WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID}"></div>
+                    <div id="${WALLKIT_FIREBASE_UI_PLACEHOLDER_ID}"></div>
+                </div>`;
+    }
 
+    render () {
+        if (this.#options.auth.renderType === 'selector') {
+            const placeholder = document.querySelector(this.#options.auth.selector);
+
+            if (placeholder) {
+                placeholder.insertAdjacentHTML('beforeend', this.#options?.content || this.getDefaultAuthenticationFormContent());
+            }
+        } else {
+            this.modal = this.#createModal();
+            this.modal.init();
+        }
+    }
+
+    #createModal() {
         return new Modal({
             modalName: 'auth-modal',
-            content: this.#options?.content || defaultContentModal,
+            content: this.#options?.content || this.getDefaultAuthenticationFormContent(),
             className: 'wallkit-auth-modal',
             initialLoader: true
         });
@@ -234,7 +256,7 @@ export default class Authentication {
             }, { once: true });
         }
 
-        this.modal.toggleLoader(false);
+        this.toggleFormLoader(false);
     }
 
     removeToken() {
@@ -365,7 +387,7 @@ export default class Authentication {
     }
 
     onFirebaseAuthFail(error) {
-        this.modal.toggleLoader(false);
+        this.toggleFormLoader(false);
     }
 
     handleOneTapResponse({ credential }) {
@@ -373,6 +395,11 @@ export default class Authentication {
     }
 
     init() {
+        if (!!this.#options?.firebase) {
+            this.render();
+            this.firebase.init();
+            this.authForm.render();
+        }
         this.#initListeners();
     }
 }

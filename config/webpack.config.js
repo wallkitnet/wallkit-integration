@@ -21,6 +21,7 @@ module.exports = {
     },
     mode: 'production',
     output: {
+        libraryTarget: 'umd',
         filename: (pathData) => {
             return pathData.chunk.name === 'mini' ?
                 'wallkit-integration-library.min.js' :
