@@ -115,12 +115,21 @@
 
         window.addEventListener('load', () => {
             window.WallkitInt = new WallkitIntegration({
-                public_key: '35D02754-9A51-2C23-A5F7-79970C4',
+                public_key: 'beea9eaf-27fe-482f-bf74-e028ac14dd24',
+                // public_key: '3535',
                 mode: 'dev',
                 version: 'v1',
                 auth: { // default false
                     // firebase: false,
                     firebase: {
+                        config: {
+                            apiKey: "AIzaSyDyO_7L0V96n03axCJm8vubMDPhIoJfQK0",
+                            authDomain: "arkansas-cannabiz-staging.firebaseapp.com",
+                            projectId: "arkansas-cannabiz-staging",
+                            storageBucket: "arkansas-cannabiz-staging.appspot.com",
+                            messagingSenderId: "29665529234",
+                            appId: "1:29665529234:web:c04243681192a87373054b"
+                        },
                         providers: [
                             {
                                 provider: 'email',
@@ -150,6 +159,7 @@
                     parseUTM: true // default true
                 },
                 onInit: () => {
+                    console.log('TEST??');
                     // const post = new WallkitInt.content(postInfo);
 
                     // console.log('post', post);

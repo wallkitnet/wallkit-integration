@@ -180,6 +180,10 @@ export const LIBRARY_STYLES = `
         .wk-form {
             font-family: Oxygen, sans-serif;
         }
+        
+        .wk-form-header {
+            margin-bottom: 10px;
+        }
 
         .wk-form .wk-form__footer {
             display: flex;
@@ -232,15 +236,18 @@ export const LIBRARY_STYLES = `
         }
 
         .wk-form__error {
-            margin-bottom: 10px;
+            display: none;
+            margin: 10px 0;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            color: #721c24;
+            background-color: #f8d7da;
+            line-height: 21px;
+            padding: 10px;
         }
 
         .wk-form__error.wk-form__error--show {
-            margin-bottom: 17px;
-            background-color: #ff5b5b;
-            padding: 10px;
-            color: #fff;
-            border-radius: 8px;
+            display: block;
         }
 
         .wk-form-button.wk-form-button--cancel {
@@ -248,6 +255,22 @@ export const LIBRARY_STYLES = `
             margin-right: 10px;
             color: #3f51b5;
             background: none;
+        }
+        
+        .wk-success-message {
+        }
+        
+        .wk-success-message__title {
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .wk-success-message__description {
+            margin-bottom: 10px;
+        }
+        
+        .wk-success-message__description b {
+            font-weight: 500;
         }
 
         .wk-form-button.wk-form-button--cancel:hover {

@@ -1,16 +1,16 @@
-import { loadScripts } from "../../utils/loaders";
-import { insertScript, loadCSS } from "../../utils/DOM";
+import { loadScripts } from "../../../utils/loaders";
+import { insertScript, loadCSS } from "../../../utils/DOM";
 import {
     WALLKIT_FIREBASE_CONFIG,
     WALLKIT_DEV_FIREBASE_CONFIG,
     WALLKIT_FIREBASE_UI_PLACEHOLDER_ID,
-} from "../../configs/constants";
-import Events from "../events";
+} from "../../../configs/constants";
+import Events from "../../events";
 import {
     FIREBASE_INIT,
     FIREBASE_LOADED,
     FIREBASE_UI_SHOWN
-} from "../events/events-name";
+} from "../../events/events-name";
 
 export default class Firebase {
     #mode;
@@ -240,40 +240,33 @@ export default class Firebase {
 
     signIn (email, password) {
         return this.firebase.auth().signInWithEmailAndPassword(email, password)
-            .then((result) => {
-                if (result) {
-                    result.user.getIdToken().then((token) => {
-                        const formattedResult = {
-                            user: result.user,
-                            userId: result.user.uid,
-                            token: token
-                        }
-
-                        if (this.onSuccessAuth) {
-                            this.onSuccessAuth(formattedResult, result);
-                        }
-                    });
-                }
-            });
+            .then((result) => this.handleSuccessAuth(result));
     }
 
     signUp (email, password) {
         return this.firebase.auth().createUserWithEmailAndPassword(email, password)
-            .then((result) => {
-                if (result) {
-                    result.user.getIdToken().then((token) => {
-                        const formattedResult = {
-                            user: result.user,
-                            userId: result.user.uid,
-                            token: token
-                        }
+            .then((result) => this.handleSuccessAuth(result));
+    }
 
-                        if (this.onSuccessAuth) {
-                            this.onSuccessAuth(formattedResult, result);
-                        }
-                    });
+    async handleSuccessAuth (result) {
+        try {
+            if (result) {
+                const token = await result.user.getIdToken();
+
+                const formattedResult = {
+                    operationType: result.operationType,
+                    user: result.user,
+                    userId: result.user.uid,
+                    token: token
                 }
-            });
+
+                if (this.onSuccessAuth) {
+                    this.onSuccessAuth(formattedResult, result);
+                }
+            }
+        } catch (e) {
+            console.log('ERROR:', e);
+        }
     }
 
     sendPasswordResetEmail(email) {

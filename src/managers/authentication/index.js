@@ -1,5 +1,5 @@
 import Modal from '../modal';
-import Firebase from "./Firebase";
+import Firebase from "./firebase/Firebase";
 import {
     WALLKIT_FIREBASE_UI_PLACEHOLDER_ID,
     WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID,
@@ -12,7 +12,7 @@ import Frame from "../frame";
 import SDK from "../sdk";
 import Token from "./Token";
 import ReCaptcha from "./ReCaptcha";
-import { AuthForm } from "./AuthForm";
+import { AuthForm } from "../form/forms/AuthForm";
 
 export default class Authentication {
     #options;
@@ -137,15 +137,17 @@ export default class Authentication {
 
         this.updateFirebaseToken(data.token);
         this.events.notify(EventsNames.local.SUCCESS_FIREBASE_AUTH, data);
-        this.authInWallkit(data.token).then((status) => {
-            if (status) {
-                this.modal.hide();
-            } else {
-                this.firebase.reset();
-            }
+        this.authInWallkit(data.token)
+            .then((status) => {
+                console.log('status', status);
+                if (status) {
+                    this.modal.hide();
+                } else {
+                    this.firebase.reset();
+                }
 
-            this.toggleFormLoader(false);
-        }).catch((error) => handleAuthError(error));
+                this.toggleFormLoader(false);
+            }).catch((error) => handleAuthError(error));
     }
 
     authInWallkit(firebaseToken = null) {
@@ -168,6 +170,7 @@ export default class Authentication {
 
                     this.sdk.methods.subscribeLocalEvent('user', userEventCallback);
                 }).catch((error) => {
+                    console.log('error', error);
                     this.#setAuthorizationError(error?.response?.error_description);
                     this.removeTokens();
                     resolve(false);
@@ -338,13 +341,22 @@ export default class Authentication {
 
     dispatchTokens() {
         if (this.isAuthenticated()) {
-            if (this.token.get()) {
-                this.frame.sendEvent(EventsNames.wallkit.WALLKIT_EVENT_TOKEN, this.token.get());
-            }
+           this.dispatchWallkitToken();
+           this.dispatchFirebaseToken();
+        }
+    }
 
-            if (this.firebaseToken.get()) {
-                this.frame.sendEvent(EventsNames.wallkit.WALLKIT_EVENT_FIREBASE_TOKEN, this.firebaseToken.get());
-            }
+    dispatchWallkitToken() {
+        const token = this.token.get();
+        if (token) {
+            this.frame.sendEvent(EventsNames.wallkit.WALLKIT_EVENT_TOKEN, token);
+        }
+    }
+
+    dispatchFirebaseToken() {
+        const token = this.firebaseToken.get();
+        if (token) {
+            this.frame.sendEvent(EventsNames.wallkit.WALLKIT_EVENT_FIREBASE_TOKEN, token);
         }
     }
 
@@ -378,7 +390,11 @@ export default class Authentication {
     #setAuthorizationError(error) {
         const errorPlaceholder = document.getElementById('authorization-error');
         if (errorPlaceholder) {
-            errorPlaceholder.innerHTML = error || '';
+            if (error === null) {
+                errorPlaceholder.innerHTML = '';
+            } else {
+                errorPlaceholder.innerHTML = error || 'Something went wrong!';
+            }
         }
     }
 
