@@ -1,5 +1,6 @@
 // Popups
 export const WALLKIT_POPUP_URL = 'https://wallkit.net/popups';
+// export const WALLKIT_POPUP_URL = 'http://127.0.0.1:8000/popups';
 export const WALLKIT_POPUP_DEV_URL = 'https://dev.wallkit.net/popups';
 
 // Assets

@@ -180,7 +180,6 @@ export default class Firebase {
                         this.uiShown();
                     }
                     this.isUiShown = true;
-                    console.log('isUiShown');
                 }
             },
             signInFlow: 'popup',

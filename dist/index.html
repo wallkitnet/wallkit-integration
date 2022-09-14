@@ -131,7 +131,7 @@
     </button>
 
 <!--    <script src="https://www.google.com/recaptcha/api.js?render=6LeNZrwbAAAAAKXPTmJj5KMdUwI2GE6XAUbCU6DM"></script>-->
-<!--    <script src="wallkit.umd.min.js" defer></script>-->
+    <script src="wallkit.umd.min.js" defer></script>
 
     <script src="wallkit-integration-library.js"></script>
 <!--    <script src="https://cdn.wallkit.net/js/integration/3.0.1/wallkit-integration-library.min.js"></script>-->
@@ -202,7 +202,6 @@
 
         let WallkitInt = new WallkitIntegration({
             public_key: 'bc3adcd3-9156-44bd-bc89-8092a58c6ae9',
-            mode: 'prod',
             lang: 'en',
             version: 'v1',
             auth: { // default false
@@ -221,10 +220,11 @@
                     title: 'Authorisation',
                     content: modalContent
                 },
-                reCaptcha: {
-                    mobile: false,
-                    siteKey: '6Lc4GioeAAAAAHo1Qsb6V9mz7NchYe8wAeqtlg__'
-                }
+                reCaptcha: false
+                // reCaptcha: {
+                //     mobile: false,
+                //     siteKey: '6Lc4GioeAAAAAHo1Qsb6V9mz7NchYe8wAeqtlg__'
+                // }
             },
             analytics: {
                 parseUTM: true // default true

@@ -27,7 +27,8 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.FIREBASE_TOKEN_NAME = exports.WALLKIT_TOKEN_NAME = exports.WALLKIT_DEV_FIREBASE_CONFIG = exports.WALLKIT_FIREBASE_CONFIG = exports.WALLKIT_FRAME_ID = exports.WALLKIT_FIREBASE_UI_PLACEHOLDER_ID = exports.WALLKIT_MODAL_MIN_HEIGHT = exports.WALLKIT_MODAL_MIN_WIDTH = exports.WALLKIT_MODAL_CONTENT_CLASSNAME = exports.WALLKIT_MODAL_CLOSE_BTN_CLASSNAME = exports.WALLKIT_MODAL_WRAPPER_CLASSNAME = exports.ALLOWED_ORIGINS = exports.WALLKIT_CDN_ASSETS_URL = exports.WALLKIT_CDN_URL = exports.WALLKIT_POPUP_DEV_URL = exports.WALLKIT_POPUP_URL = void 0;
 // Popups
-var WALLKIT_POPUP_URL = 'https://wallkit.net/popups';
+var WALLKIT_POPUP_URL = 'https://wallkit.net/popups'; // export const WALLKIT_POPUP_URL = 'http://127.0.0.1:8000/popups';
+
 exports.WALLKIT_POPUP_URL = WALLKIT_POPUP_URL;
 var WALLKIT_POPUP_DEV_URL = 'https://dev.wallkit.net/popups'; // Assets
 
@@ -465,7 +466,6 @@ var Firebase = /*#__PURE__*/function () {
                       }
 
                       _this2.isUiShown = true;
-                      console.log('isUiShown');
                     }
                   },
                   signInFlow: 'popup',
@@ -877,7 +877,7 @@ var ReCaptcha = /*#__PURE__*/function () {
                     this.grecaptcha.reset();
                   }
 
-                  handleCaptchaState = function handleCaptchaState() {
+                  handleCaptchaState = function handleCaptchaState(value) {
                     if (!_this2.valid) {
                       _this2.events.notify(_eventsName["default"].local.RECAPTCHA_VALIDATION_FAILED);
 
@@ -911,7 +911,9 @@ var ReCaptcha = /*#__PURE__*/function () {
 
                     if (emailField) {
                       emailField.addEventListener('input', function () {
-                        handleCaptchaState();
+                        try {
+                          handleCaptchaState();
+                        } catch (e) {}
                       });
                       emailField.addEventListener('keydown', function (event) {
                         if (event.code && event.code === 'Enter') {
@@ -1101,8 +1103,10 @@ var _cookie = __webpack_require__(48);
 
 var _slug = /*#__PURE__*/new WeakMap();
 
+var _resource = /*#__PURE__*/new WeakMap();
+
 var Token = /*#__PURE__*/function () {
-  function Token(slug, value) {
+  function Token(slug, value, resource) {
     (0, _classCallCheck2["default"])(this, Token);
 
     _slug.set(this, {
@@ -1110,8 +1114,14 @@ var Token = /*#__PURE__*/function () {
       value: void 0
     });
 
-    if (slug) {
-      (0, _classPrivateFieldSet2["default"])(this, _slug, slug);
+    _resource.set(this, {
+      writable: true,
+      value: void 0
+    });
+
+    if (slug && resource) {
+      (0, _classPrivateFieldSet2["default"])(this, _resource, resource);
+      (0, _classPrivateFieldSet2["default"])(this, _slug, this.createTokenSlug(slug, resource));
 
       if (value) {
         this.set(value);
@@ -1122,6 +1132,11 @@ var Token = /*#__PURE__*/function () {
   }
 
   (0, _createClass2["default"])(Token, [{
+    key: "createTokenSlug",
+    value: function createTokenSlug(slug, resource) {
+      return "".concat(slug, "_").concat(resource);
+    }
+  }, {
     key: "get",
     value: function get() {
       return this.token;
@@ -1252,8 +1267,8 @@ var Authentication = /*#__PURE__*/function () {
 
     Authentication.instance = this;
     (0, _classPrivateFieldSet2["default"])(this, _options, options);
-    this.token = new _Token["default"](_constants.WALLKIT_TOKEN_NAME);
-    this.firebaseToken = new _Token["default"](_constants.FIREBASE_TOKEN_NAME);
+    this.token = new _Token["default"](_constants.WALLKIT_TOKEN_NAME, null, options.public_key);
+    this.firebaseToken = new _Token["default"](_constants.FIREBASE_TOKEN_NAME, null, options.public_key);
     this.frame = new _frame["default"]();
     this.sdk = new _sdk["default"]();
 
@@ -1456,17 +1471,21 @@ var Authentication = /*#__PURE__*/function () {
     value: function onFirebaseInit() {
       var _this5 = this;
 
-      if (this.reCaptcha.enabled && this.reCaptcha.loaded) {
-        this.reCaptcha.initCaptchaProcess();
-      } else if (!this.reCaptcha.loaded) {
-        this.events.subscribe(_eventsName["default"].local.RECAPTCHA_LOADED, function () {
-          _this5.reCaptcha.initCaptchaProcess();
-        }, {
-          once: true
-        });
-      }
+      try {
+        if (this.reCaptcha.enabled && this.reCaptcha.loaded) {
+          this.reCaptcha.initCaptchaProcess();
+        } else if (!this.reCaptcha.loaded) {
+          this.events.subscribe(_eventsName["default"].local.RECAPTCHA_LOADED, function () {
+            _this5.reCaptcha.initCaptchaProcess();
+          }, {
+            once: true
+          });
+        }
 
-      this.modal.toggleLoader(false);
+        this.modal.toggleLoader(false);
+      } catch (e) {
+        console.log('e', e);
+      }
     }
   }, {
     key: "removeToken",
@@ -2168,32 +2187,40 @@ var Frame = /*#__PURE__*/function () {
   }, {
     key: "sendEvent",
     value: function sendEvent(name, value, params) {
-      if (this.frameElement && this.frameElement.contentWindow) {
-        var frameWindow = this.frameElement.contentWindow;
-        this.events.notify(name, value);
-        frameWindow.postMessage({
-          name: name,
-          value: value,
-          params: params
-        }, '*');
+      var _this = this;
+
+      var event = function event() {
+        if (_this.frameElement && _this.frameElement.contentWindow) {
+          var frameWindow = _this.frameElement.contentWindow;
+
+          _this.events.notify(name, value);
+
+          frameWindow.postMessage({
+            name: name,
+            value: value,
+            params: params
+          }, '*');
+        }
+      };
+
+      if (this.ready) {
+        event();
+      } else {
+        this.events.subscribe(_eventsName.WALLKIT_FRAME_READY, event.bind(this));
       }
     }
   }, {
     key: "openFrame",
     value: function openFrame(name, params) {
-      var _this = this;
+      var _this2 = this;
 
       this.currentFrameName = name;
 
       if (this.ready) {
-        console.log('test');
         this.sendEvent(_eventsName.WALLKIT_CHANGE_FRAME, name, params);
       } else {
-        console.log('test2');
         this.events.subscribe(_eventsName.WALLKIT_FRAME_READY, function () {
-          console.log('123145');
-
-          _this.sendEvent(_eventsName.WALLKIT_CHANGE_FRAME, name, params);
+          _this2.sendEvent(_eventsName.WALLKIT_CHANGE_FRAME, name, params);
         }, {
           once: true
         });
@@ -2226,14 +2253,14 @@ var Frame = /*#__PURE__*/function () {
 exports.default = Frame;
 
 function _listeners2() {
-  var _this2 = this;
+  var _this3 = this;
 
   this.events.subscribe(_eventsName.WALLKIT_FRAME_ROUTE_CHANGE, function (value) {
-    _this2.currentFrameName = value;
+    _this3.currentFrameName = value;
   });
   this.events.subscribe(_eventsName.WALLKIT_FRAME_READY, function (value) {
     if (value === true) {
-      _this2.onFrameReady();
+      _this3.onFrameReady();
     }
   });
 }
