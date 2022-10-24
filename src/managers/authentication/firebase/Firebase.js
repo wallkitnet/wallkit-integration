@@ -4,8 +4,9 @@ import {
     WALLKIT_FIREBASE_CONFIG,
     WALLKIT_DEV_FIREBASE_CONFIG,
     WALLKIT_FIREBASE_UI_PLACEHOLDER_ID,
-} from "../../../configs/constants";
-import Events from "../../events";
+} from "../../configs/constants";
+import { Localization } from "../localization";
+import Events from "../events";
 import {
     FIREBASE_INIT,
     FIREBASE_LOADED,
@@ -20,6 +21,7 @@ export default class Firebase {
 
         this.firebaseUiConfig = null;
         this.#mode = options?.mode;
+        this.lang = Localization.assembleLanguage(options.lang || 'en');
         this.config = options?.config;
         this.providers = options?.providers;
         this.tosURL = options?.tosURL;
@@ -89,7 +91,7 @@ export default class Firebase {
                         onload: () => onScriptLoaded()
                     },
                     {
-                        url: 'https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js',
+                        url: `https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth__${this.lang}.js`,
                         id: 'firebase-ui',
                         defer: true,
                         onload: () => onScriptLoaded()
@@ -283,6 +285,33 @@ export default class Firebase {
         } catch (error) {
             console.error('Custom Token Auth Fail');
             return false;
+        }
+    }
+
+    attachEmailListener (callback) {
+        const emailBtn = document.querySelector('.firebaseui-idp-button[data-provider-id="password"]');
+
+        const attachListener = () => {
+            console.log('attach');
+            const emailField = document.querySelector('.firebaseui-id-email');
+
+            if (emailField) {
+                emailField.addEventListener('blur', (event) => {
+                    callback(event);
+                });
+            }
+        }
+
+        console.log('emailBtn', emailBtn);
+        if (emailBtn) {
+            emailBtn.addEventListener('click', () => {
+                console.log('lclick');
+                setTimeout(() => {
+                    attachListener();
+                });
+            })
+        } else {
+            attachListener();
         }
     }
 

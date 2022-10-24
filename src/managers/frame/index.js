@@ -59,28 +59,33 @@ export default class Frame {
     }
 
     sendEvent(name, value, params) {
-        if (this.frameElement && this.frameElement.contentWindow) {
-            const frameWindow = this.frameElement.contentWindow;
+        const event = () => {
+            if (this.frameElement && this.frameElement.contentWindow) {
+                const frameWindow = this.frameElement.contentWindow;
 
-            this.events.notify(name, value);
+                this.events.notify(name, value);
 
-            frameWindow.postMessage({
-                name: name,
-                value: value,
-                params: params
-            }, '*');
+                frameWindow.postMessage({
+                    name: name,
+                    value: value,
+                    params: params
+                }, '*');
+            }
+        }
+
+        if (this.ready) {
+            event();
+        } else {
+            this.events.subscribe(WALLKIT_FRAME_READY, event.bind(this));
         }
     }
 
     openFrame(name, params) {
         this.currentFrameName = name;
         if (this.ready) {
-            console.log('test');
             this.sendEvent(WALLKIT_CHANGE_FRAME, name, params);
         } else {
-            console.log('test2');
             this.events.subscribe(WALLKIT_FRAME_READY, () => {
-                console.log('123145');
                 this.sendEvent(WALLKIT_CHANGE_FRAME, name, params);
             }, { once: true});
         }

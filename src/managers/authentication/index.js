@@ -26,14 +26,15 @@ export default class Authentication {
 
         this.#options = options;
 
-        this.token = new Token(WALLKIT_TOKEN_NAME);
-        this.firebaseToken = new Token(FIREBASE_TOKEN_NAME);
+        this.token = new Token(WALLKIT_TOKEN_NAME, null, options.public_key);
+        this.firebaseToken = new Token(FIREBASE_TOKEN_NAME, null, options.public_key);
 
         this.frame = new Frame();
         this.sdk = new SDK();
 
         if (!!options?.firebase) {
             let config = {
+                lang: options.lang || 'en',
                 mode: options.mode,
                 onAuthStateChanged: this.updateFirebaseToken.bind(this),
                 onSuccessAuth: this.onSuccessAuth.bind(this),
@@ -251,13 +252,14 @@ export default class Authentication {
     }
 
     onFirebaseInit() {
-        if (this.reCaptcha.enabled && this.reCaptcha.loaded) {
-            this.reCaptcha.initCaptchaProcess();
-        } else if (!this.reCaptcha.loaded) {
-            this.events.subscribe(EventsNames.local.RECAPTCHA_LOADED, () => {
+        try {
+            if (this.reCaptcha.enabled && this.reCaptcha.loaded) {
                 this.reCaptcha.initCaptchaProcess();
-            }, { once: true });
-        }
+            } else if (!this.reCaptcha.loaded) {
+                this.events.subscribe(EventsNames.local.RECAPTCHA_LOADED, () => {
+                    this.reCaptcha.initCaptchaProcess();
+                }, { once: true });
+            }
 
         this.toggleFormLoader(false);
     }

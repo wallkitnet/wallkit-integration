@@ -4,10 +4,12 @@ import localStorage from "../../utils/local-storage";
 
 export default class Token {
     #slug;
+    #resource;
 
-    constructor(slug, value) {
-        if (slug) {
-            this.#slug = slug;
+    constructor(slug, value, resource) {
+        if (slug && resource) {
+            this.#resource = resource;
+            this.#slug = this.createTokenSlug(slug, resource);
 
             if (value) {
                 this.set(value);
@@ -15,6 +17,10 @@ export default class Token {
                 this.token = this.getStoredTokenValue() || null;
             }
         }
+    }
+
+    createTokenSlug (slug, resource) {
+        return `${slug}_${resource}`;
     }
 
     get() {

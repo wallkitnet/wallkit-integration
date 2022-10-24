@@ -8,10 +8,131 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+       .wrap-pro-sign-up {
+           font-family: Oxygen, sans-serif;
+           text-align: center;
+           color: #161616;
+       }
+
+       .wrap-pro-sign-up__steps {
+           display: flex;
+           align-items: center;
+           justify-content: space-around;
+       }
+
+       .wrap-pro-sign-up__title {
+           font-weight: 700;
+           font-size: 24px;
+           line-height: 30px;
+       }
+
+       .wrap-pro-sign-up__small-title {
+           font-size: 18px;
+           line-height: 25px;
+           margin-bottom: 20px;
+       }
+
+       ul {
+           padding-left: 0;
+           list-style: none;
+       }
+
+       .wrap-pro-sign-up__step {
+           font-weight: 400;
+           font-size: 16px;
+           line-height: 26px;
+           margin: 0 10px;
+           color: #828282;
+       }
+
+       .wrap-pro-sign-up__step--active {
+           border-bottom: 2px solid #10D765;
+           color: #161616;
+       }
+
+       .wrap-pro-sign-up__btn {
+           background: #161616;
+           border-radius: 5px;
+           width: 100%;
+           padding: 10px 34px;
+           text-align: center;
+           border: none;
+           color: #fff;
+           text-transform: uppercase;
+           margin: 20px 0;
+           display: block;
+       }
+
+       .wrap-pro-sign-up__terms {
+           font-size: 14px;
+           text-align: left;
+       }
+
+       .green-text {
+           color: #10D765;
+           text-decoration: none;
+       }
+
+       .wrap-pro-sign-up .firebaseui-container {
+           box-shadow: none;
+       }
+
+       .wrap-pro-sign-up .firebaseui-card-header {
+           padding-left: 0;
+       }
+
+       .wrap-pro-sign-up .firebaseui-card-content {
+           padding: 0;
+       }
+
+       .wrap-pro-sign-up .firebaseui-container,
+       .wrap-pro-sign-up .firebaseui-idp-button {
+           max-width: 100%;
+           width: 100%;
+       }
+
+       .wrap-pro-sign-up .firebaseui-idp-button {
+           box-shadow: none;
+           border-radius: 0;
+           border: 1px solid #BDBDBD;
+           background: #FFFFFF;
+       }
+
+       .wrap-pro-sign-up .mdl-button--raised.mdl-button--colored,
+       .wrap-pro-sign-up .firebaseui-textfield.mdl-textfield .firebaseui-label::after {
+           background-color: #000;
+       }
+
+       .wrap-pro-sign-up .mdl-button--raised.mdl-button--colored:hover,
+       .wrap-pro-sign-up .mdl-button--raised.mdl-button--colored:focus,
+       .wrap-pro-sign-up .mdl-button--raised.mdl-button--colored:active {
+           background-color: #303030;
+       }
+
+       .wrap-pro-sign-up .mdl-button--primary.mdl-button--primary {
+           color: #000;
+       }
+
+       .wrap-pro-sign-up .firebaseui-list-item:first-child .firebaseui-idp-button {
+           border: none;
+       }
+
+    </style>
+    <script>window.config = {"api_url":"https:\/\/api.dev.wallkit.net\/api\/v1"};</script>
 </head>
 <body>
     <button onclick="WallkitInt.authentication.show()">
         Login
+
+
+    <button onclick="openClassicLogin()">
+        Classic
+    </button>
+
+    <button onclick="openJourneyLogin()">
+        Journey
     </button>
 
 <!--    <div class="wk-auth-form">-->
@@ -39,51 +160,47 @@
 <!--    <script src="https://www.google.com/recaptcha/api.js?render=6LeNZrwbAAAAAKXPTmJj5KMdUwI2GE6XAUbCU6DM"></script>-->
     <script src="wallkit.umd.min.js" defer></script>
 
-    <script src="wallkit-integration-library.js" defer></script>
+    <script src="wallkit-integration-library.js"></script>
 <!--    <script src="https://cdn.wallkit.net/js/integration/3.0.1/wallkit-integration-library.min.js"></script>-->
 
-<!--    <script src="https://js.sentry-cdn.com/c9f328bbf5ba4793be5a393badc7385f.min.js"-->
-<!--            crossorigin="anonymous"></script>-->
+    <script
+            src="https://js.sentry-cdn.com/c9f328bbf5ba4793be5a393badc7385f.min.js"
+            crossorigin="anonymous"
+    ></script>
+
+    <script>
+        window.geoip = (data) => {
+            console.log('data', data);
+        }
+    </script>
+
+    <script src="https://get.geojs.io/v1/ip/geo.js"></script>
 
 
-<!--    <script>-->
+    <script>
+        Sentry.onLoad(function() {
+            Sentry.init({
+                release: "1.0.0 ",
+                environment: "thewrap",
+            });
+            Sentry.configureScope(scope => {
+                scope.setTag('123' );
+            });
+            // etc.
+        });
 
-<!--        const submit = document.querySelector('#submit');-->
+        try {
+            Wallkit.login({email: 'test@test.com', password: 'test'});
 
-<!--        submit.addEventListener('click', () => {-->
-<!--            const email = document.querySelector('#email').value;-->
-<!--            const password = document.querySelector('#password').value;-->
+            myUndffef();
+        } catch (e) {
+            Sentry.captureException(e);
+        }
 
-<!--            console.log('email', email);-->
-<!--            console.log('password', password);-->
+        // myUndeffeoo();
+    </script>
 
-<!--            firebase.auth().createUserWithEmailAndPassword(email, password)-->
-<!--                .then((userCredential) => {-->
-<!--                    console.log('userCredential', userCredential);-->
-<!--                });-->
-<!--        });-->
 
-<!--        Sentry.onLoad(function() {-->
-<!--            Sentry.init({-->
-<!--                release: "1.0.0 ",-->
-<!--                environment: "thewrap",-->
-<!--            });-->
-<!--            Sentry.configureScope(scope => {-->
-<!--                scope.setTag('123' );-->
-<!--            });-->
-<!--            // etc.-->
-<!--        });-->
-
-<!--        try {-->
-<!--            Wallkit.login({email: 'test@test.com', password: 'test'});-->
-
-<!--            myUndffef();-->
-<!--        } catch (e) {-->
-<!--            Sentry.captureException(e);-->
-<!--        }-->
-
-<!--        // myUndeffeoo();-->
-<!--    </script>-->
 
 
     <script>
@@ -375,6 +492,40 @@
             }
         });
 
+        window.WallkitInt.events.subscribe('firebase-ui-shown', () => {
+            window.WallkitInt.authentication.firebase.attachEmailListener((event) => {
+                if (event) {
+                    setTimeout(() => {
+                        const passwordFieldElement = document.querySelector('.firebaseui-id-password');
+
+                        if (passwordFieldElement) {
+                            const email = event.target.value;
+
+                            Wallkit.checkUserFirebaseRelation(email, [WallkitInt.config.public_key])
+                                .then(({ has_firebase_relation }) => {
+                                    if (has_firebase_relation) {
+                                        setTimeout(() => {
+                                            const firebaseUiTitle = document.querySelector('.firebaseui-title');
+
+                                            if (firebaseUiTitle) {
+                                                firebaseUiTitle.innerHTML = `Great! We see you’re a subscriber.<br>Please set up a password to continue.`
+                                            }
+                                        });
+                                    }
+                                })
+                                .catch((error) => {
+                                    console.log('error', error);
+                                })
+                        }
+                    });
+                }
+            });
+        });
+
     </script>
+
+    <script src="https://cdn.wallkit.net/js/integration/3.0.2/wallkit-integration-library.min.js" onload="window.onLoad()"></script>
+
+<!--    <script src="https://www.thewrap.com/wp-content/themes/thewrap-canvas/js/wallkit-integration-library.js?ver=1.15.85" onload="window.onLoad()"></script>-->
 </body>
 </html>
