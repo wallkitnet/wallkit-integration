@@ -180,6 +180,7 @@ export default class Firebase {
                         this.uiShown();
                     }
                     this.isUiShown = true;
+                    this.events.notify(FIREBASE_UI_SHOWN, true);
                 }
             },
             signInFlow: 'popup',
@@ -231,6 +232,32 @@ export default class Firebase {
         }
     }
 
+    attachEmailListener (callback) {
+        const emailBtn = document.querySelector('.firebaseui-idp-button[data-provider-id="password"]');
+
+        const attachListener = () => {
+            console.log('attach');
+            const emailField = document.querySelector('.firebaseui-id-email');
+
+            if (emailField) {
+                emailField.addEventListener('blur', (event) => {
+                    callback(event);
+                });
+            }
+        }
+
+        console.log('emailBtn', emailBtn);
+        if (emailBtn) {
+            emailBtn.addEventListener('click', () => {
+                console.log('lclick');
+                setTimeout(() => {
+                    attachListener();
+                });
+            })
+        } else {
+            attachListener();
+        }
+    }
 
     init() {
         this.#loadFirebase().then(() => {

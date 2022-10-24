@@ -120,8 +120,11 @@
        }
 
     </style>
+    <script>window.config = {"api_url":"https:\/\/api.dev.wallkit.net\/api\/v1"};</script>
 </head>
 <body>
+
+
     <button onclick="openClassicLogin()">
         Classic
     </button>
@@ -134,7 +137,7 @@
     <script src="wallkit.umd.min.js" defer></script>
 
     <script src="wallkit-integration-library.js"></script>
-<!--    <script src="https://cdn.wallkit.net/js/integration/3.0.1/wallkit-integration-library.min.js"></script>-->
+<!--    <script src="https://cdn.wallkit.net/js/sdk/0.0.45/wallkit.umd.min.js?ver=1.15.85"></script>-->
 
     <script
             src="https://js.sentry-cdn.com/c9f328bbf5ba4793be5a393badc7385f.min.js"
@@ -163,7 +166,7 @@
         });
 
         try {
-            Wallkit.login({email: 'test@test.com', password: 'test'});
+            // Wallkit.login({email: 'test@test.com', password: 'test'});
 
             myUndffef();
         } catch (e) {
@@ -200,18 +203,32 @@
          <p class="wrap-pro-sign-up__terms">By signing up i agree with the <a href="#" class="green-text">Terms & Conditions</a></p>
         `);
 
-        let WallkitInt = new WallkitIntegration({
-            public_key: 'bc3adcd3-9156-44bd-bc89-8092a58c6ae9',
+        window.WallkitInt = new WallkitIntegration({
+            public_key: 'st3adcd3-9156-44bd-bc89-8092a58c6ae9',
+            mode: 'dev',
             lang: 'en',
             version: 'v1',
             auth: { // default false
                 // firebase: false,
                 firebase: {
+                    config: {
+                        apiKey: "AIzaSyAKQEAiQaym9LVebwS6gewt8YprTTKTjGw",
+                        authDomain: "wallkit-dev-custom-resource.firebaseapp.com",
+                        projectId: "wallkit-dev-custom-resource",
+                        storageBucket: "wallkit-dev-custom-resource.appspot.com",
+                        messagingSenderId: "292496295360",
+                        appId: "1:292496295360:web:0094869eb2c833b7dbf425"
+                    },
                     providers: [{
                         provider: 'email',
                         buttonColor: '#000',
                         fullLabel: 'Continue with Email'
-                    }],
+                    },
+                        {
+                            provider: 'google',
+                            buttonColor: '#000',
+                        }
+                    ],
                     tosURL: '',
                     privacyPolicyURL: '',
                     elementSelector: '#wrap-pro-auth'
@@ -230,7 +247,7 @@
                 parseUTM: true // default true
             },
             onInit: () => {
-                const post = new WallkitInt.content(postInfo);
+                // const post = new window.WallkitInt.content(postInfo);
 
                 // grecaptcha.ready(function() {
                 //     grecaptcha.execute('6LeNZrwbAAAAAKXPTmJj5KMdUwI2GE6XAUbCU6DM', {action: 'submit'}).then(function(token) {
@@ -256,19 +273,22 @@
             }
         });
 
+        console.log('window.WallkitInt', window.WallkitInt);
+
+
         function switchLoginContent(type) {
             const journeyHeader = document.getElementById('user-journey-header');
             const classicHeader = document.getElementById('classic-login');
 
             const authCallback = function () {
                 if (type === 'journey') {
-                    WallkitInt.modal('new-user-journey');
+                    window.WallkitInt.modal('new-user-journey');
                 } else if (type === 'classic') {
-                    WallkitInt.modal('plans');
+                    window.WallkitInt.modal('plans');
                 }
             };
 
-            WallkitInt.events.unsubscribe('success-auth', authCallback);
+            window.WallkitInt.events.unsubscribe('success-auth', authCallback);
 
             if (type === 'journey') {
                 journeyHeader.style.display = 'block';
@@ -278,28 +298,28 @@
                 classicHeader.style.display = 'block';
             }
 
-            WallkitInt.events.subscribe('success-auth', authCallback, { once: true });
+            window.WallkitInt.events.subscribe('success-auth', authCallback, { once: true });
         }
 
         function openJourneyLogin() {
             switchLoginContent('journey');
-            WallkitInt.authentication.show();
+            window.WallkitInt.authentication.show();
         }
 
         function openClassicLogin() {
             switchLoginContent('classic');
-            WallkitInt.authentication.show();
+            window.WallkitInt.authentication.show();
         }
 
-        WallkitInt.events.subscribe('success-auth', () => {
-           console.log('SUCESS 1');
+        window.WallkitInt.events.subscribe('success-auth', () => {
+            console.log('SUCESS 1');
         }, {once: true});
 
-        WallkitInt.events.subscribe('success-auth', () => {
+        window.WallkitInt.events.subscribe('success-auth', () => {
             console.log('SUCESS 2');
         });
 
-        WallkitInt.events.subscribe('success-auth', () => {
+        window.WallkitInt.events.subscribe('success-auth', () => {
             console.log('SUCESS 3');
         }, {once: true});
 
@@ -310,64 +330,64 @@
             "type": "post",
             "image": "https://venturebeat.com/wp-content/uploads/2021/03/multi-cloud-e1620815313377.jpg",
             "taxonomies": {
-            "category": {
-                "label": "Categories",
+                "category": {
+                    "label": "Categories",
                     "items": [
-                    {
-                        "term_id": 666,
-                        "name": "Big Data",
-                        "slug": "big-data"
-                    },
-                    {
-                        "term_id": 358,
-                        "name": "Cloud",
-                        "slug": "cloud"
-                    },
-                    {
-                        "term_id": 426689,
-                        "name": "Data",
-                        "slug": "data"
-                    },
-                    {
-                        "term_id": 339,
-                        "name": "Dev",
-                        "slug": "dev"
-                    },
-                    {
-                        "term_id": 403,
-                        "name": "Enterprise",
-                        "slug": "enterprise"
-                    },
-                    {
-                        "term_id": 301,
-                        "name": "Entrepreneur",
-                        "slug": "entrepreneur"
-                    },
-                    {
-                        "term_id": 525,
-                        "name": "Security",
-                        "slug": "security"
-                    },
-                    {
-                        "term_id": 426829,
-                        "name": "Software",
-                        "slug": "software"
-                    },
-                    {
-                        "term_id": 426054,
-                        "name": "technology",
-                        "slug": "technology"
-                    },
-                    {
-                        "term_id": 2,
-                        "name": "VB Home Page",
-                        "slug": "business"
-                    }
-                ]
-            },
-            "post_tag": {
+                        {
+                            "term_id": 666,
+                            "name": "Big Data",
+                            "slug": "big-data"
+                        },
+                        {
+                            "term_id": 358,
+                            "name": "Cloud",
+                            "slug": "cloud"
+                        },
+                        {
+                            "term_id": 426689,
+                            "name": "Data",
+                            "slug": "data"
+                        },
+                        {
+                            "term_id": 339,
+                            "name": "Dev",
+                            "slug": "dev"
+                        },
+                        {
+                            "term_id": 403,
+                            "name": "Enterprise",
+                            "slug": "enterprise"
+                        },
+                        {
+                            "term_id": 301,
+                            "name": "Entrepreneur",
+                            "slug": "entrepreneur"
+                        },
+                        {
+                            "term_id": 525,
+                            "name": "Security",
+                            "slug": "security"
+                        },
+                        {
+                            "term_id": 426829,
+                            "name": "Software",
+                            "slug": "software"
+                        },
+                        {
+                            "term_id": 426054,
+                            "name": "technology",
+                            "slug": "technology"
+                        },
+                        {
+                            "term_id": 2,
+                            "name": "VB Home Page",
+                            "slug": "business"
+                        }
+                    ]
+                },
+                "post_tag": {
                     "label": "Tags",
-                        "items": [
+                    "items": [
                         {
                             "term_id": 25398,
                             "name": "automation",
@@ -427,7 +447,7 @@
                 },
                 "vb_post_designations": {
                     "label": "Helm Post Designations",
-                        "items": [
+                    "items": [
                         {
                             "term_id": 78655,
                             "name": "homepage",
@@ -437,7 +457,7 @@
                 },
                 "author": {
                     "label": false,
-                        "items": [
+                    "items": [
                         {
                             "term_id": 111413,
                             "name": "kylewiggers",
@@ -448,6 +468,40 @@
             }
         }
 
+        window.WallkitInt.events.subscribe('firebase-ui-shown', () => {
+            window.WallkitInt.authentication.firebase.attachEmailListener((event) => {
+                if (event) {
+                    setTimeout(() => {
+                        const passwordFieldElement = document.querySelector('.firebaseui-id-password');
+
+                        if (passwordFieldElement) {
+                            const email = event.target.value;
+
+                            Wallkit.checkUserFirebaseRelation(email, [WallkitInt.config.public_key])
+                                .then(({ has_firebase_relation }) => {
+                                    if (has_firebase_relation) {
+                                        setTimeout(() => {
+                                            const firebaseUiTitle = document.querySelector('.firebaseui-title');
+
+                                            if (firebaseUiTitle) {
+                                                firebaseUiTitle.innerHTML = `Great! We see you’re a subscriber.<br>Please set up a password to continue.`
+                                            }
+                                        });
+                                    }
+                                })
+                                .catch((error) => {
+                                    console.log('error', error);
+                                })
+                        }
+                    });
+                }
+            });
+        });
+
     </script>
+
+    <script src="https://cdn.wallkit.net/js/integration/3.0.2/wallkit-integration-library.min.js" onload="window.onLoad()"></script>
+
+<!--    <script src="https://www.thewrap.com/wp-content/themes/thewrap-canvas/js/wallkit-integration-library.js?ver=1.15.85" onload="window.onLoad()"></script>-->
 </body>
 </html>

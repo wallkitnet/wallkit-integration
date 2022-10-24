@@ -466,6 +466,8 @@ var Firebase = /*#__PURE__*/function () {
                       }
 
                       _this2.isUiShown = true;
+
+                      _this2.events.notify(_eventsName.FIREBASE_UI_SHOWN, true);
                     }
                   },
                   signInFlow: 'popup',
@@ -565,6 +567,35 @@ var Firebase = /*#__PURE__*/function () {
 
       return authWithCustomToken;
     }()
+  }, {
+    key: "attachEmailListener",
+    value: function attachEmailListener(callback) {
+      var emailBtn = document.querySelector('.firebaseui-idp-button[data-provider-id="password"]');
+
+      var attachListener = function attachListener() {
+        console.log('attach');
+        var emailField = document.querySelector('.firebaseui-id-email');
+
+        if (emailField) {
+          emailField.addEventListener('blur', function (event) {
+            callback(event);
+          });
+        }
+      };
+
+      console.log('emailBtn', emailBtn);
+
+      if (emailBtn) {
+        emailBtn.addEventListener('click', function () {
+          console.log('lclick');
+          setTimeout(function () {
+            attachListener();
+          });
+        });
+      } else {
+        attachListener();
+      }
+    }
   }, {
     key: "init",
     value: function init() {
@@ -877,7 +908,7 @@ var ReCaptcha = /*#__PURE__*/function () {
                     this.grecaptcha.reset();
                   }
 
-                  handleCaptchaState = function handleCaptchaState(value) {
+                  handleCaptchaState = function handleCaptchaState() {
                     if (!_this2.valid) {
                       _this2.events.notify(_eventsName["default"].local.RECAPTCHA_VALIDATION_FAILED);
 
@@ -911,9 +942,7 @@ var ReCaptcha = /*#__PURE__*/function () {
 
                     if (emailField) {
                       emailField.addEventListener('input', function () {
-                        try {
-                          handleCaptchaState();
-                        } catch (e) {}
+                        handleCaptchaState();
                       });
                       emailField.addEventListener('keydown', function (event) {
                         if (event.code && event.code === 'Enter') {
@@ -1959,7 +1988,7 @@ var FIREBASE_LOADED = 'firebase-loaded';
 exports.FIREBASE_LOADED = FIREBASE_LOADED;
 var FIREBASE_INIT = 'firebase-init';
 exports.FIREBASE_INIT = FIREBASE_INIT;
-var FIREBASE_UI_SHOWN = 'firebase-init'; // Wallkit Events Names
+var FIREBASE_UI_SHOWN = 'firebase-ui-shown'; // Wallkit Events Names
 
 exports.FIREBASE_UI_SHOWN = FIREBASE_UI_SHOWN;
 var WALLKIT_CHANGE_FRAME = 'wk-event-modal';
@@ -2717,7 +2746,7 @@ var SDK = /*#__PURE__*/function () {
   }, {
     key: "load",
     value: function load() {
-      (0, _DOM.insertScript)("".concat(_constants.WALLKIT_CDN_URL, "/js/sdk/0.0.45/wallkit.umd.min.js"), 'wallkit-js-sdk', this.onLoad.bind(this));
+      (0, _DOM.insertScript)("".concat(_constants.WALLKIT_CDN_URL, "/js/sdk/0.0.46/wallkit.umd.min.js"), 'wallkit-js-sdk', this.onLoad.bind(this));
     }
   }]);
   return SDK;
