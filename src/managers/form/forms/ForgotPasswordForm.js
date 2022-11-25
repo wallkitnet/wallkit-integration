@@ -16,8 +16,9 @@ export class ForgotPasswordForm extends Form {
             dataSlug: 'email',
             label: 'Email',
             type: 'email',
-            onChange: () => {},
-            onInput: () => {}
+            onEnter: () => {
+              this.submitForm();
+            }
         });
 
         this.fields = [

@@ -1,10 +1,10 @@
 import Modal from '../modal';
 import Firebase from "./firebase/Firebase";
 import {
-    WALLKIT_FIREBASE_UI_PLACEHOLDER_ID,
-    WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID,
-    WALLKIT_TOKEN_NAME,
-    FIREBASE_TOKEN_NAME
+  WALLKIT_FIREBASE_UI_PLACEHOLDER_ID,
+  WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID,
+  WALLKIT_TOKEN_NAME,
+  FIREBASE_TOKEN_NAME, WALLKIT_AUTH_FORM_PLACEHOLDER_ID
 } from "../../configs/constants";
 import EventsNames, { FIREBASE_INIT, FIREBASE_LOADED, FIREBASE_UI_SHOWN } from "../events/events-name";
 import Events from "../events";
@@ -64,12 +64,6 @@ export default class Authentication {
             this.#resetAuthorizationError();
         });
 
-        if (this.reCaptcha.enabled) {
-            if (!this.isAuthenticated()) {
-                this.reCaptcha.init();
-            }
-        }
-
         this.events = new Events();
     }
 
@@ -87,26 +81,64 @@ export default class Authentication {
         }
     }
 
+    handleLogin (data) {
+      this.firebase.signIn(data.email, data.password).then(() => {
+        this.authForm.hide();
+      }).catch((error) => {
+        if (error.message) {
+          this.authForm.loginForm.setFormError(error.message);
+        }
+        this.reCaptcha.grecaptcha.reset();
+      });
+    }
+
+    handleSignUp (data) {
+      this.firebase.signUp(data.email, data.password).then(() => {
+        this.authForm.hide();
+      }).catch((error) => {
+        if (error.message) {
+          this.authForm.signUpForm.setFormError(error.message);
+        }
+      });
+    }
+
+    executeRecaptcha () {
+      this.reCaptcha.grecaptcha.ready(() => {
+        this.reCaptcha.grecaptcha.execute().then(() => {
+          this.modal.toggleLoader(true);
+        });
+      })
+    }
+
     initAuthForm () {
         this.authForm = new AuthForm(`#${WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID}`, {
+            triggerButton: this.firebase.providers.length > 1,
             signUp: this.#options.auth.signUp ?? true,
             onLogin: (data) => {
-                this.firebase.signIn(data.email, data.password).then(() => {
-                    this.authForm.hide();
-                }).catch((error) => {
-                    if (error.message) {
-                        this.authForm.loginForm.setFormError(error.message);
-                    }
-                });
+              if (this.reCaptcha.enabled) {
+                this.executeRecaptcha();
+
+                this.reCaptcha.events.subscribe(
+                  EventsNames.local.RECAPTCHA_VALIDATION_SUCCESS,
+                  this.handleLogin.bind(this, data),
+                  { once: true }
+                );
+              } else {
+                this.handleLogin(data);
+              }
             },
             onSignUp: (data) => {
-                this.firebase.signUp(data.email, data.password).then(() => {
-                    this.authForm.hide();
-                }).catch((error) => {
-                    if (error.message) {
-                        this.authForm.signUpForm.setFormError(error.message);
-                    }
-                });
+              if (this.reCaptcha.enabled) {
+                this.executeRecaptcha();
+
+                this.reCaptcha.events.subscribe(
+                  EventsNames.local.RECAPTCHA_VALIDATION_SUCCESS,
+                  this.handleSignUp.bind(this, data),
+                  { once: true }
+                );
+              } else {
+                this.handleSignUp(data);
+              }
             },
             onPasswordReset: (data) => {
                 this.firebase.sendPasswordResetEmail(data.email).then(() => {
@@ -122,7 +154,7 @@ export default class Authentication {
             },
             onCancel: () => {
                 this.firebase.showAuthForm();
-                this.authForm.toggle();
+                this.authForm.reset();
             }
         });
     }
@@ -131,7 +163,7 @@ export default class Authentication {
         this.toggleFormLoader(true);
 
         const handleAuthError = (error) => {
-            this.firebase.reset();
+            this.resetAuthProcess();
             this.toggleFormLoader(false);
             this.#setAuthorizationError(error?.message || 'Something went wrong!');
         }
@@ -140,11 +172,10 @@ export default class Authentication {
         this.events.notify(EventsNames.local.SUCCESS_FIREBASE_AUTH, data);
         this.authInWallkit(data.token)
             .then((status) => {
-                console.log('status', status);
                 if (status) {
                     this.modal.hide();
                 } else {
-                    this.firebase.reset();
+                    this.resetAuthProcess();
                 }
 
                 this.toggleFormLoader(false);
@@ -186,9 +217,19 @@ export default class Authentication {
         return `<div>
                     <div id="authorization-error"></div>
                     <h2 class="wallkit-auth-modal__title">${this.#options?.modalTitle ?? 'Sign In'}</h2>
-                    <div id="${WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID}"></div>
-                    <div id="${WALLKIT_FIREBASE_UI_PLACEHOLDER_ID}"></div>
+                    <div id="${WALLKIT_AUTH_FORM_PLACEHOLDER_ID}"></div>
                 </div>`;
+    }
+
+    attachFormPlaceholders (selector = WALLKIT_AUTH_FORM_PLACEHOLDER_ID) {
+      const placeholders = `<div id="${WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID}"></div>
+                            <div id="${WALLKIT_FIREBASE_UI_PLACEHOLDER_ID}"></div>`
+
+      const targetElement = document.getElementById(selector);
+
+      if (targetElement) {
+        targetElement.innerHTML = placeholders;
+      }
     }
 
     render () {
@@ -202,6 +243,8 @@ export default class Authentication {
             this.modal = this.#createModal();
             this.modal.init();
         }
+
+        this.attachFormPlaceholders();
     }
 
     #createModal() {
@@ -253,15 +296,20 @@ export default class Authentication {
 
     onFirebaseInit() {
         try {
+          if (this.#options.firebase.genuineForm !== false) {
             if (this.reCaptcha.enabled && this.reCaptcha.loaded) {
-                this.reCaptcha.initCaptchaProcess();
+              this.reCaptcha.initCaptchaProcess();
             } else if (!this.reCaptcha.loaded) {
-                this.events.subscribe(EventsNames.local.RECAPTCHA_LOADED, () => {
-                    this.reCaptcha.initCaptchaProcess();
-                }, { once: true });
+              this.events.subscribe(EventsNames.local.RECAPTCHA_LOADED, () => {
+                this.reCaptcha.initCaptchaProcess();
+              }, {once: true});
             }
+          }
 
-        this.toggleFormLoader(false);
+          this.toggleFormLoader(false);
+        } catch (e) {
+          this.toggleFormLoader(false);
+        }
     }
 
     removeToken() {
@@ -317,28 +365,40 @@ export default class Authentication {
         });
     }
 
-    logout() {
-        this.removeToken()
-        this.firebase.logout().then((success) => {
-            if (success) {
-                this.removeFirebaseToken();
+    resetAuthProcess () {
+      this.firebase.reset();
+      this.firebase.showAuthForm();
 
-                if (this.reCaptcha.enabled && !this.reCaptcha.loaded) {
-                    this.reCaptcha.init().then(() => {
-                        this.firebase.reset();
-                    }).catch((error) => {
-                        console.error(error);
-                        this.firebase.reset();
-                    });
-                } else if (this.reCaptcha.loaded) {
-                    this.firebase.reset();
-                    this.reCaptcha.grecaptcha.reset();
-                    this.reCaptcha.initCaptchaProcess();
-                } else {
-                    this.firebase.reset();
-                }
+      if (this.firebase.genuineForm === false) {
+        this.authForm.reset();
+      }
+    }
+
+    async logout() {
+      try {
+        this.removeToken()
+        const success = await this.firebase.logout();
+
+        if (success) {
+          this.removeFirebaseToken();
+
+          if (this.reCaptcha.enabled && !this.reCaptcha.loaded) {
+            await this.reCaptcha.init();
+          } else if (this.reCaptcha.loaded) {
+            this.resetAuthProcess();
+            this.reCaptcha.grecaptcha.reset();
+
+            if (this.#options.firebase.genuineForm !== false) {
+              this.reCaptcha.initCaptchaProcess();
             }
-        });
+          }
+        }
+
+        this.resetAuthProcess();
+      } catch (e) {
+        console.log('ERROR:', e);
+        this.resetAuthProcess();
+      }
     }
 
     dispatchTokens() {
@@ -414,9 +474,22 @@ export default class Authentication {
 
     init() {
         if (!!this.#options?.firebase) {
+            // Render recaptcha before the firebase init if not custom FB form
+            if (this.#options.firebase.genuineForm !== false) {
+              if (this.reCaptcha.enabled) {
+                if (!this.isAuthenticated()) {
+                  this.reCaptcha.init();
+                }
+              }
+            }
+
             this.render();
             this.firebase.init();
-            this.authForm.render();
+
+            if (this.authForm) {
+              this.authForm.render();
+              this.reCaptcha.init();
+            }
         }
         this.#initListeners();
     }

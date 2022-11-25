@@ -190,6 +190,10 @@ export const LIBRARY_STYLES = `
             justify-content: space-between;
             align-items: center;
         }
+        
+        .wk-form .wk-form__footer.wk-form__footer--right {
+            justify-content: flex-end;
+        }
 
         .wk-form .wk-form__sub-footer {
             display: flex;

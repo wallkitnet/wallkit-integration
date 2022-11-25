@@ -34,6 +34,14 @@ export class FormField {
         if (options.onInput) {
             this.input.addEventListener('input', options.onInput.bind(this));
         }
+
+        if (options.onEnter) {
+          this.input.addEventListener('keydown', (event) => {
+            if (event.keyCode === 13) {
+              options.onEnter();
+            }
+          });
+        }
     }
 
     getElement () {
@@ -170,5 +178,9 @@ export class FormField {
     resetField () {
         this.input.value = '';
         this.resetValidation()
+    }
+
+    focus () {
+      this.input.focus();
     }
 }

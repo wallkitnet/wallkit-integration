@@ -17,16 +17,18 @@ export class SignupForm extends Form {
             name: 'wk-fb-email',
             label: 'Email',
             type: 'email',
-            onChange: () => {},
-            onInput: () => {}
+            onEnter: () => {
+              this.nameField.focus();
+            }
         });
         this.nameField = new FormField({
             dataSlug: 'name',
             name: 'wk-fb-name',
             label: 'Name',
             type: 'text',
-            onChange: () => {},
-            onInput: () => {}
+            onEnter: () => {
+              this.passwordField.focus();
+            }
         });
         this.passwordField = new PasswordField({
             dataSlug: 'password',
@@ -35,8 +37,9 @@ export class SignupForm extends Form {
             passwordHint: true,
             label: 'Password',
             type: 'password',
-            onChange: () => {},
-            onInput: () => {}
+            onEnter: () => {
+              this.submitForm();
+            }
         });
 
         this.fields = [

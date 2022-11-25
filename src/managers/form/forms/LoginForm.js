@@ -18,17 +18,20 @@ export class LoginForm extends Form {
             name: 'wk-fb-email',
             label: 'Email',
             type: 'email',
-            onChange: () => {},
-            onInput: () => {}
+            onEnter: () => {
+              this.passwordField.focus();
+            }
         });
+
         this.passwordField = new PasswordField({
             dataSlug: 'password',
             name: 'wk-fb-password',
             testStrength: false,
             label: 'Password',
             type: 'password',
-            onChange: () => {},
-            onInput: () => {}
+            onEnter: () => {
+              this.submitForm();
+            }
         });
 
         this.fields = [
@@ -71,12 +74,14 @@ export class LoginForm extends Form {
         }));
 
         const formFooter = createElement('div', {
-            className: 'wk-form__footer'
+            className: 'wk-form__footer wk-form__footer--right'
         });
 
         footerWrapper.appendChild(subFooter);
 
-        formFooter.appendChild(this.cancelBtn);
+        if (this.options.cancelBtn !== false) {
+          formFooter.appendChild(this.cancelBtn);
+        }
         formFooter.appendChild(this.submitBtn);
 
         footerWrapper.appendChild(formFooter);

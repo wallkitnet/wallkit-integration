@@ -24,9 +24,11 @@ export const WALLKIT_MODAL_WRAPPER_CLASSNAME = 'wallkit-modal-wrapper';
 export const WALLKIT_MODAL_CLOSE_BTN_CLASSNAME = 'wallkit-modal-wrapper__close-btn';
 export const WALLKIT_MODAL_CONTENT_CLASSNAME = 'wallkit-modal-wrapper__content';
 export const WALLKIT_MODAL_MIN_WIDTH = '500';
+export const WALLKIT_MODAL_MAX_WIDTH = '500';
 export const WALLKIT_MODAL_MIN_HEIGHT = '250';
 export const WALLKIT_FIREBASE_UI_PLACEHOLDER_ID = 'firebase-ui-placeholder';
 export const WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID = 'wk-email-auth-form';
+export const WALLKIT_AUTH_FORM_PLACEHOLDER_ID = 'wk-auth-form';
 export const WALLKIT_FRAME_ID = 'wk-frame';
 
 // Authentication

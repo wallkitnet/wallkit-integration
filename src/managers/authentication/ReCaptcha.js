@@ -4,7 +4,7 @@ import { loadScripts } from "../../utils/loaders";
 import SDK from "../sdk";
 import Events from "../events";
 
-export default class ReCaptcha {
+export default class ReCaptchaFirebase {
     #sdk;
 
     constructor(authenticationInstance, options) {
@@ -84,8 +84,10 @@ export default class ReCaptcha {
         reCaptchaPlaceholder.dataset.sitekey = this.siteKey;
         reCaptchaPlaceholder.dataset.size = 'invisible';
         reCaptchaPlaceholder.dataset.callback = 'onRecaptchaAuth';
-        this.authentication.modal.modalContent.appendChild(reCaptchaPlaceholder);
-        // injectInBody(reCaptchaPlaceholder);
+
+        if (this.authentication.modal) {
+          this.authentication.modal.modalContent.appendChild(reCaptchaPlaceholder);
+        }
     }
 
     #onRecaptchaAuth(token) {

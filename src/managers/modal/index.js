@@ -1,8 +1,10 @@
-import { WALLKIT_MODAL_WRAPPER_CLASSNAME,
-         WALLKIT_MODAL_CLOSE_BTN_CLASSNAME,
-         WALLKIT_MODAL_CONTENT_CLASSNAME,
-         WALLKIT_MODAL_MIN_WIDTH,
-         WALLKIT_MODAL_MIN_HEIGHT } from "../../configs/constants";
+import {
+  WALLKIT_MODAL_WRAPPER_CLASSNAME,
+  WALLKIT_MODAL_CLOSE_BTN_CLASSNAME,
+  WALLKIT_MODAL_CONTENT_CLASSNAME,
+  WALLKIT_MODAL_MIN_WIDTH,
+  WALLKIT_MODAL_MIN_HEIGHT, WALLKIT_MODAL_MAX_WIDTH
+} from "../../configs/constants";
 import DOM from '../../utils/DOM';
 import { loadWallkitAsset } from "../../utils/loaders";
 import { parseModalHashURL } from "../../utils/url";
@@ -86,6 +88,7 @@ export default class Modal {
 
         this.modalContent.style.minWidth = WALLKIT_MODAL_MIN_WIDTH + 'px';
         this.modalContent.style.minHeight = WALLKIT_MODAL_MIN_HEIGHT + 'px';
+        this.modalContent.style.maxWidth = WALLKIT_MODAL_MAX_WIDTH + 'px';
 
         return this.modalContent;
     }

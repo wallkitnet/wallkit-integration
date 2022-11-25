@@ -1,6 +1,6 @@
 import { createElement } from "../../../utils/DOM";
 
-import { AuthButton } from "../buttons/AuthButton";
+import { TriggerButton } from "../buttons/TriggerButton";
 import { LoginForm } from "./LoginForm";
 import { SignupForm } from "./SignUpForm";
 import { ForgotPasswordForm } from "./ForgotPasswordForm";
@@ -12,6 +12,7 @@ export class AuthForm {
         });
 
         this.loginForm = new LoginForm(selector, {
+            cancelBtn: options.triggerButton !== false,
             signUp: options.signUp ?? true,
             onSubmit: (data) => {
                 if (options.onLogin) {
@@ -67,6 +68,7 @@ export class AuthForm {
                 }
             }
         });
+
         this.forgotPasswordForm.formWrapper.addEventListener('click', (event) => {
             if (event.target.id === 'back-to-login') {
                 event.preventDefault();
@@ -79,20 +81,27 @@ export class AuthForm {
         });
         this.forgotPasswordForm.hide();
 
-        this.authButton = new AuthButton(selector, {
+        if (options.triggerButton !== false) {
+          this.triggerButton = new TriggerButton(selector, {
             onClick: () => {
-                this.loginForm.show();
-                this.authButton.hide();
-                if (options.onAuthFormShow) {
-                    options.onAuthFormShow();
-                }
+              this.loginForm.show();
+              this.triggerButton.hide();
+              if (options.onAuthFormShow) {
+                options.onAuthFormShow();
+              }
             }
-        });
+          });
+        }
     }
 
-    toggle () {
+    reset () {
         this.hide();
-        this.authButton.show();
+
+        if (this.triggerButton) {
+          this.triggerButton.show();
+        } else {
+          this.loginForm.show();
+        }
     }
 
     hide () {
@@ -143,8 +152,12 @@ export class AuthForm {
             this.forgotPasswordForm.render();
         }
 
-        if (this.authButton) {
-            this.authButton.render()
+        if (this.triggerButton) {
+            this.triggerButton.render()
+        } else {
+          if (this.loginForm) {
+            this.loginForm.show();
+          }
         }
     }
 }

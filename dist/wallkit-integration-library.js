@@ -21,7 +21,7 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.LIBRARY_STYLES = void 0;
-var LIBRARY_STYLES = "\n        .wallkit-modal-wrapper {\n            z-index: 100;\n            position: fixed;\n            top: 0;\n            left: 0;\n            right: 0;\n            bottom: 0;\n            background: rgba(18, 18, 20, 0.9);\n            display: flex;\n            align-items: center;\n            justify-content: flex-start;\n            flex-direction: column;\n            overflow-y: auto;\n            padding: 70px 15px 20px;\n        }\n\n        .wallkit-modal-wrapper__content {\n            background-color: #fff;\n            flex-shrink: 0;\n            position: relative;\n            box-sizing: border-box;\n            overflow: hidden;\n        }\n        \n        @media screen and (max-width: 500px) {\n            .wallkit-modal-wrapper__content {\n                width: 100%;\n                min-width: auto!important;\n            }\n        }\n\n        .wallkit-modal-wrapper__close-btn {\n            position: absolute;\n            right: 10px;\n            top: 10px;\n            cursor: pointer;\n            color: #000;\n            font-size: 37px;\n            width: 37px;\n            height: 37px;\n            text-align: center;\n            line-height: 34px;\n        }\n\n        .wallkit-modal-wrapper .wk-frame {\n            transition: all 0.3s linear 0s;\n            max-width: 100%;\n            border: none;\n        }\n\n        .wallkit-auth-modal {\n            z-index: 999;\n        }\n\n        .wallkit-auth-modal .wallkit-modal-wrapper__content {\n            padding: 20px;\n        }\n\n        .wallkit-auth-modal .wallkit-auth-modal__title {\n            font-family: Roboto, sans-serif;\n            text-align: center;\n        }\n        \n        .wk-auth-form {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .wk-form-field {\n            display: flex;\n            flex-direction: column;\n            font-family: Oxygen, sans-serif;\n            margin-bottom: 10px;\n        }\n\n        .wk-form-field .wk-form-field__label {\n            font-weight: 500;\n            color: #333;\n            margin-bottom: 5px;\n        }\n\n        .wk-form-field .wk-form-field__input-wrapper {\n            margin-bottom: 5px;\n            position: relative;\n        }\n        \n        .wk-eye-toggle {\n            background: url(https://www.gstatic.com/images/icons/material/system/1x/visibility_black_24dp.png);\n            width: 24px;\n            height: 24px;\n        }\n        \n        .wk-form-field__field-description {\n            font-size: 11px;\n            color: #989898;\n        }\n        \n        .wk-eye-toggle.wk-eye-toggled {\n            background: url(https://www.gstatic.com/images/icons/material/system/1x/visibility_off_black_24dp.png);\n        }\n        \n        .wk-form-field__field-affix {\n            position: absolute;\n            right: 5px;\n            top: 0;\n            bottom: 0;\n        }\n        \n        .wk-form-field .wk-form-field__input {\n            border-radius: 0;\n            border: 0;\n            border-bottom: 1px solid #ccc;\n            padding: 5px;\n            box-sizing: border-box;\n            width: 100%;\n        }\n        \n        .wk-field-list {\n            list-style-type: circle;\n            padding-left: 12px;\n            margin-top: 1px;\n        }\n\n        .wk-form-field .wk-form-field__input:focus {\n            border-bottom: 1px solid #3f51b5;\n            outline: none;\n        }\n\n        .wk-form-field .wk-form-field__message {\n            font-size: 12px;\n        }\n\n        .wk-auth-form-button {\n            background-color: #db4437;\n            direction: ltr;\n            font-weight: 500;\n            height: auto;\n            line-height: normal;\n            max-width: 220px;\n            min-height: 40px;\n            padding: 8px 16px;\n            text-align: left;\n            width: 100%;\n            box-sizing: border-box;\n            box-shadow: 0 2px 2px 0 rgba(0,0,0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.20), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n            border-radius: 2px;\n            font-family: \"Roboto\",\"Helvetica\",\"Arial\",sans-serif;\n            margin: 0 auto 15px;\n            cursor: pointer;\n        }\n        \n        .wk-auth-form-button:focus,\n        .wk-auth-form-button:active,{\n            background-color: #5b6abe;\n        }\n\n        .wk-form-field.wk-form-field--invalid .wk-form-field__input {\n            border-bottom: 1px solid #dd2c00;\n        }\n\n        .wk-form-field.wk-form-field--valid .wk-form-field__input {\n            border-bottom: 1px solid green;\n        }\n\n        .wk-form-field.wk-form-field--invalid .wk-form-field__message {\n            color: #dd2c00;\n        }\n\n        .wk-form-field.wk-form-field--valid .wk-form-field__message {\n            color: green;\n        }\n\n        .wk-form .wk-form__link {\n            font-size: 14px;\n            color: #3170f3;\n            text-decoration: underline;\n        }\n\n        .wk-form {\n            font-family: Oxygen, sans-serif;\n        }\n        \n        .wk-form-header {\n            margin-bottom: 10px;\n        }\n\n        .wk-form .wk-form__footer {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n        }\n\n        .wk-form .wk-form__sub-footer {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            margin-bottom: 20px;\n        }\n\n        .wk-form__reset-password {\n            text-align: right;\n        }\n\n        .wk-form-result {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n        }\n\n        .wk-form-button {\n            border: none;\n            border-radius: 2px;\n            background-color: #3f51b5;\n            color: #fff;\n            position: relative;\n            height: 36px;\n            margin: 0;\n            min-width: 64px;\n            padding: 0 16px;\n            display: inline-block;\n            font-family: \"Roboto\", \"Helvetica\", \"Arial\", sans-serif;\n            font-size: 14px;\n            font-weight: 500;\n            text-transform: uppercase;\n            letter-spacing: 0;\n            overflow: hidden;\n            will-change: box-shadow;\n            transition: box-shadow .2s cubic-bezier(0.4, 0, 1, 1),background-color .2s cubic-bezier(0.4, 0, 0.2, 1),color .2s cubic-bezier(0.4, 0, 0.2, 1);\n            outline: none;\n            cursor: pointer;\n            text-decoration: none;\n            text-align: center;\n            line-height: 36px;\n            vertical-align: middle;\n        }\n\n        .wk-form__error {\n            display: none;\n            margin: 10px 0;\n            border: 1px solid #f5c6cb;\n            border-radius: 5px;\n            color: #721c24;\n            background-color: #f8d7da;\n            line-height: 21px;\n            padding: 10px;\n        }\n\n        .wk-form__error.wk-form__error--show {\n            display: block;\n        }\n\n        .wk-form-button.wk-form-button--cancel {\n            margin-left: auto;\n            margin-right: 10px;\n            color: #3f51b5;\n            background: none;\n        }\n        \n        .wk-success-message {\n        }\n        \n        .wk-success-message__title {\n            font-weight: 500;\n            margin-bottom: 10px;\n        }\n        \n        .wk-success-message__description {\n            margin-bottom: 10px;\n        }\n        \n        .wk-success-message__description b {\n            font-weight: 500;\n        }\n\n        .wk-form-button.wk-form-button--cancel:hover {\n            background-color: hsla(0,0%,62%,.2);\n        }\n        \n        .wk-password-reset-success .wk-form-button {\n            left: 50%;\n            transform: translateX(-50%);\n        }\n        \n";
+var LIBRARY_STYLES = "\n        .wallkit-modal-wrapper {\n            z-index: 100;\n            position: fixed;\n            top: 0;\n            left: 0;\n            right: 0;\n            bottom: 0;\n            background: rgba(18, 18, 20, 0.9);\n            display: flex;\n            align-items: center;\n            justify-content: flex-start;\n            flex-direction: column;\n            overflow-y: auto;\n            padding: 70px 15px 20px;\n        }\n\n        .wallkit-modal-wrapper__content {\n            background-color: #fff;\n            flex-shrink: 0;\n            position: relative;\n            box-sizing: border-box;\n            overflow: hidden;\n        }\n        \n        @media screen and (max-width: 500px) {\n            .wallkit-modal-wrapper__content {\n                width: 100%;\n                min-width: auto!important;\n            }\n        }\n\n        .wallkit-modal-wrapper__close-btn {\n            position: absolute;\n            right: 10px;\n            top: 10px;\n            cursor: pointer;\n            color: #000;\n            font-size: 37px;\n            width: 37px;\n            height: 37px;\n            text-align: center;\n            line-height: 34px;\n        }\n\n        .wallkit-modal-wrapper .wk-frame {\n            transition: all 0.3s linear 0s;\n            max-width: 100%;\n            border: none;\n        }\n\n        .wallkit-auth-modal {\n            z-index: 999;\n        }\n\n        .wallkit-auth-modal .wallkit-modal-wrapper__content {\n            padding: 20px;\n        }\n\n        .wallkit-auth-modal .wallkit-auth-modal__title {\n            font-family: Roboto, sans-serif;\n            text-align: center;\n        }\n        \n        .wk-auth-form {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .wk-form-field {\n            display: flex;\n            flex-direction: column;\n            font-family: Oxygen, sans-serif;\n            margin-bottom: 10px;\n        }\n\n        .wk-form-field .wk-form-field__label {\n            font-weight: 500;\n            color: #333;\n            margin-bottom: 5px;\n        }\n\n        .wk-form-field .wk-form-field__input-wrapper {\n            margin-bottom: 5px;\n            position: relative;\n        }\n        \n        .wk-eye-toggle {\n            background: url(https://www.gstatic.com/images/icons/material/system/1x/visibility_black_24dp.png);\n            width: 24px;\n            height: 24px;\n        }\n        \n        .wk-form-field__field-description {\n            font-size: 11px;\n            color: #989898;\n        }\n        \n        .wk-eye-toggle.wk-eye-toggled {\n            background: url(https://www.gstatic.com/images/icons/material/system/1x/visibility_off_black_24dp.png);\n        }\n        \n        .wk-form-field__field-affix {\n            position: absolute;\n            right: 5px;\n            top: 0;\n            bottom: 0;\n        }\n        \n        .wk-form-field .wk-form-field__input {\n            border-radius: 0;\n            border: 0;\n            border-bottom: 1px solid #ccc;\n            padding: 5px;\n            box-sizing: border-box;\n            width: 100%;\n        }\n        \n        .wk-field-list {\n            list-style-type: circle;\n            padding-left: 12px;\n            margin-top: 1px;\n        }\n\n        .wk-form-field .wk-form-field__input:focus {\n            border-bottom: 1px solid #3f51b5;\n            outline: none;\n        }\n\n        .wk-form-field .wk-form-field__message {\n            font-size: 12px;\n        }\n\n        .wk-auth-form-button {\n            background-color: #db4437;\n            direction: ltr;\n            font-weight: 500;\n            height: auto;\n            line-height: normal;\n            max-width: 220px;\n            min-height: 40px;\n            padding: 8px 16px;\n            text-align: left;\n            width: 100%;\n            box-sizing: border-box;\n            box-shadow: 0 2px 2px 0 rgba(0,0,0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.20), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n            border-radius: 2px;\n            font-family: \"Roboto\",\"Helvetica\",\"Arial\",sans-serif;\n            margin: 0 auto 15px;\n            cursor: pointer;\n        }\n        \n        .wk-auth-form-button:focus,\n        .wk-auth-form-button:active,{\n            background-color: #5b6abe;\n        }\n\n        .wk-form-field.wk-form-field--invalid .wk-form-field__input {\n            border-bottom: 1px solid #dd2c00;\n        }\n\n        .wk-form-field.wk-form-field--valid .wk-form-field__input {\n            border-bottom: 1px solid green;\n        }\n\n        .wk-form-field.wk-form-field--invalid .wk-form-field__message {\n            color: #dd2c00;\n        }\n\n        .wk-form-field.wk-form-field--valid .wk-form-field__message {\n            color: green;\n        }\n\n        .wk-form .wk-form__link {\n            font-size: 14px;\n            color: #3170f3;\n            text-decoration: underline;\n        }\n\n        .wk-form {\n            font-family: Oxygen, sans-serif;\n        }\n        \n        .wk-form-header {\n            margin-bottom: 10px;\n        }\n\n        .wk-form .wk-form__footer {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n        }\n        \n        .wk-form .wk-form__footer.wk-form__footer--right {\n            justify-content: flex-end;\n        }\n\n        .wk-form .wk-form__sub-footer {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            margin-bottom: 20px;\n        }\n\n        .wk-form__reset-password {\n            text-align: right;\n        }\n\n        .wk-form-result {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n        }\n\n        .wk-form-button {\n            border: none;\n            border-radius: 2px;\n            background-color: #3f51b5;\n            color: #fff;\n            position: relative;\n            height: 36px;\n            margin: 0;\n            min-width: 64px;\n            padding: 0 16px;\n            display: inline-block;\n            font-family: \"Roboto\", \"Helvetica\", \"Arial\", sans-serif;\n            font-size: 14px;\n            font-weight: 500;\n            text-transform: uppercase;\n            letter-spacing: 0;\n            overflow: hidden;\n            will-change: box-shadow;\n            transition: box-shadow .2s cubic-bezier(0.4, 0, 1, 1),background-color .2s cubic-bezier(0.4, 0, 0.2, 1),color .2s cubic-bezier(0.4, 0, 0.2, 1);\n            outline: none;\n            cursor: pointer;\n            text-decoration: none;\n            text-align: center;\n            line-height: 36px;\n            vertical-align: middle;\n        }\n\n        .wk-form__error {\n            display: none;\n            margin: 10px 0;\n            border: 1px solid #f5c6cb;\n            border-radius: 5px;\n            color: #721c24;\n            background-color: #f8d7da;\n            line-height: 21px;\n            padding: 10px;\n        }\n\n        .wk-form__error.wk-form__error--show {\n            display: block;\n        }\n\n        .wk-form-button.wk-form-button--cancel {\n            margin-left: auto;\n            margin-right: 10px;\n            color: #3f51b5;\n            background: none;\n        }\n        \n        .wk-success-message {\n        }\n        \n        .wk-success-message__title {\n            font-weight: 500;\n            margin-bottom: 10px;\n        }\n        \n        .wk-success-message__description {\n            margin-bottom: 10px;\n        }\n        \n        .wk-success-message__description b {\n            font-weight: 500;\n        }\n\n        .wk-form-button.wk-form-button--cancel:hover {\n            background-color: hsla(0,0%,62%,.2);\n        }\n        \n        .wk-password-reset-success .wk-form-button {\n            left: 50%;\n            transform: translateX(-50%);\n        }\n        \n";
 exports.LIBRARY_STYLES = LIBRARY_STYLES;
 
 /***/ }),
@@ -35,12 +35,13 @@ exports.LIBRARY_STYLES = LIBRARY_STYLES;
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.FIREBASE_TOKEN_NAME = exports.WALLKIT_TOKEN_NAME = exports.WALLKIT_DEV_FIREBASE_CONFIG = exports.WALLKIT_FIREBASE_CONFIG = exports.WALLKIT_FRAME_ID = exports.WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID = exports.WALLKIT_FIREBASE_UI_PLACEHOLDER_ID = exports.WALLKIT_MODAL_MIN_HEIGHT = exports.WALLKIT_MODAL_MIN_WIDTH = exports.WALLKIT_MODAL_CONTENT_CLASSNAME = exports.WALLKIT_MODAL_CLOSE_BTN_CLASSNAME = exports.WALLKIT_MODAL_WRAPPER_CLASSNAME = exports.ALLOWED_ORIGINS = exports.WALLKIT_CDN_ASSETS_URL = exports.WALLKIT_CDN_URL = exports.WALLKIT_POPUP_DEV_URL = exports.WALLKIT_POPUP_URL = void 0;
+exports.FIREBASE_TOKEN_NAME = exports.WALLKIT_TOKEN_NAME = exports.WALLKIT_DEV_FIREBASE_CONFIG = exports.WALLKIT_FIREBASE_CONFIG = exports.WALLKIT_FRAME_ID = exports.WALLKIT_AUTH_FORM_PLACEHOLDER_ID = exports.WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID = exports.WALLKIT_FIREBASE_UI_PLACEHOLDER_ID = exports.WALLKIT_MODAL_MIN_HEIGHT = exports.WALLKIT_MODAL_MAX_WIDTH = exports.WALLKIT_MODAL_MIN_WIDTH = exports.WALLKIT_MODAL_CONTENT_CLASSNAME = exports.WALLKIT_MODAL_CLOSE_BTN_CLASSNAME = exports.WALLKIT_MODAL_WRAPPER_CLASSNAME = exports.ALLOWED_ORIGINS = exports.WALLKIT_CDN_ASSETS_URL = exports.WALLKIT_CDN_URL = exports.WALLKIT_POPUP_DEV_URL = exports.WALLKIT_POPUP_URL = void 0;
 // Popups
-var WALLKIT_POPUP_URL = 'https://wallkit.net/popups'; // export const WALLKIT_POPUP_DEV_URL = 'https://dev.wallkit.net/popups';
+var WALLKIT_POPUP_URL = 'https://wallkit.net/popups'; // export const WALLKIT_POPUP_URL = 'http://127.0.0.1:8000/popups';
 
 exports.WALLKIT_POPUP_URL = WALLKIT_POPUP_URL;
-var WALLKIT_POPUP_DEV_URL = 'https://wallkit-landing.com/popups'; // export const WALLKIT_POPUP_DEV_URL = 'http://127.0.0.1:8000/popups';
+var WALLKIT_POPUP_DEV_URL = 'https://dev.wallkit.net/popups'; // export const WALLKIT_POPUP_DEV_URL = 'https://wallkit-landing.com/popups';
+// export const WALLKIT_POPUP_DEV_URL = 'http://127.0.0.1:8000/popups';
 // Assets
 
 exports.WALLKIT_POPUP_DEV_URL = WALLKIT_POPUP_DEV_URL;
@@ -60,12 +61,16 @@ var WALLKIT_MODAL_CONTENT_CLASSNAME = 'wallkit-modal-wrapper__content';
 exports.WALLKIT_MODAL_CONTENT_CLASSNAME = WALLKIT_MODAL_CONTENT_CLASSNAME;
 var WALLKIT_MODAL_MIN_WIDTH = '500';
 exports.WALLKIT_MODAL_MIN_WIDTH = WALLKIT_MODAL_MIN_WIDTH;
+var WALLKIT_MODAL_MAX_WIDTH = '500';
+exports.WALLKIT_MODAL_MAX_WIDTH = WALLKIT_MODAL_MAX_WIDTH;
 var WALLKIT_MODAL_MIN_HEIGHT = '250';
 exports.WALLKIT_MODAL_MIN_HEIGHT = WALLKIT_MODAL_MIN_HEIGHT;
 var WALLKIT_FIREBASE_UI_PLACEHOLDER_ID = 'firebase-ui-placeholder';
 exports.WALLKIT_FIREBASE_UI_PLACEHOLDER_ID = WALLKIT_FIREBASE_UI_PLACEHOLDER_ID;
 var WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID = 'wk-email-auth-form';
 exports.WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID = WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID;
+var WALLKIT_AUTH_FORM_PLACEHOLDER_ID = 'wk-auth-form';
+exports.WALLKIT_AUTH_FORM_PLACEHOLDER_ID = WALLKIT_AUTH_FORM_PLACEHOLDER_ID;
 var WALLKIT_FRAME_ID = 'wk-frame'; // Authentication
 
 exports.WALLKIT_FRAME_ID = WALLKIT_FRAME_ID;
@@ -95,6 +100,21 @@ var WALLKIT_TOKEN_NAME = 'wk-token';
 exports.WALLKIT_TOKEN_NAME = WALLKIT_TOKEN_NAME;
 var FIREBASE_TOKEN_NAME = 'firebase-token';
 exports.FIREBASE_TOKEN_NAME = FIREBASE_TOKEN_NAME;
+
+/***/ }),
+
+/***/ 6:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.FB_AVAILABLE_LANGUAGES = void 0;
+var FB_AVAILABLE_LANGUAGES = ['ar', 'bg', 'ca', 'zh_cn', 'zh_tw', 'hr', 'cs', 'da', 'nl', 'en', 'en_gb', 'fa', 'fil', 'fi', 'fr', 'de', 'el', 'iw', 'hi', 'hu', 'id', 'it', 'ja', 'ko', 'lv', 'lt', 'no', 'pl', 'pt_pt', 'ro', 'ru', 'sr', 'sk', 'sl', 'es', 'sv', 'th', 'tr', 'uk', 'vi'];
+exports.FB_AVAILABLE_LANGUAGES = FB_AVAILABLE_LANGUAGES;
 
 /***/ }),
 
@@ -611,9 +631,9 @@ var _initReCaptchaPlaceholder = /*#__PURE__*/new WeakSet();
 
 var _onRecaptchaAuth = /*#__PURE__*/new WeakSet();
 
-var ReCaptcha = /*#__PURE__*/function () {
-  function ReCaptcha(authenticationInstance, options) {
-    (0, _classCallCheck2["default"])(this, ReCaptcha);
+var ReCaptchaFirebase = /*#__PURE__*/function () {
+  function ReCaptchaFirebase(authenticationInstance, options) {
+    (0, _classCallCheck2["default"])(this, ReCaptchaFirebase);
 
     _onRecaptchaAuth.add(this);
 
@@ -639,7 +659,7 @@ var ReCaptcha = /*#__PURE__*/function () {
     this.events = new _events["default"]();
   }
 
-  (0, _createClass2["default"])(ReCaptcha, [{
+  (0, _createClass2["default"])(ReCaptchaFirebase, [{
     key: "isEnabled",
     value: function isEnabled(options) {
       if ((0, _DOM.isMobile)()) {
@@ -929,10 +949,10 @@ var ReCaptcha = /*#__PURE__*/function () {
       return init;
     }()
   }]);
-  return ReCaptcha;
+  return ReCaptchaFirebase;
 }();
 
-exports.default = ReCaptcha;
+exports.default = ReCaptchaFirebase;
 
 function _initReCaptchaPlaceholder2() {
   var reCaptchaPlaceholder = (0, _DOM.createElement)('div');
@@ -940,7 +960,10 @@ function _initReCaptchaPlaceholder2() {
   reCaptchaPlaceholder.dataset.sitekey = this.siteKey;
   reCaptchaPlaceholder.dataset.size = 'invisible';
   reCaptchaPlaceholder.dataset.callback = 'onRecaptchaAuth';
-  this.authentication.modal.modalContent.appendChild(reCaptchaPlaceholder); // injectInBody(reCaptchaPlaceholder);
+
+  if (this.authentication.modal) {
+    this.authentication.modal.modalContent.appendChild(reCaptchaPlaceholder);
+  }
 }
 
 function _onRecaptchaAuth2(token) {
@@ -988,8 +1011,10 @@ var _cookie = __webpack_require__(48);
 
 var _slug = /*#__PURE__*/new WeakMap();
 
+var _resource = /*#__PURE__*/new WeakMap();
+
 var Token = /*#__PURE__*/function () {
-  function Token(slug, value) {
+  function Token(slug, value, resource) {
     (0, _classCallCheck2["default"])(this, Token);
 
     _slug.set(this, {
@@ -997,8 +1022,14 @@ var Token = /*#__PURE__*/function () {
       value: void 0
     });
 
-    if (slug) {
-      (0, _classPrivateFieldSet2["default"])(this, _slug, slug);
+    _resource.set(this, {
+      writable: true,
+      value: void 0
+    });
+
+    if (slug && resource) {
+      (0, _classPrivateFieldSet2["default"])(this, _resource, resource);
+      (0, _classPrivateFieldSet2["default"])(this, _slug, this.createTokenSlug(slug, resource));
 
       if (value) {
         this.set(value);
@@ -1009,6 +1040,11 @@ var Token = /*#__PURE__*/function () {
   }
 
   (0, _createClass2["default"])(Token, [{
+    key: "createTokenSlug",
+    value: function createTokenSlug(slug, resource) {
+      return "".concat(slug, "_").concat(resource);
+    }
+  }, {
     key: "get",
     value: function get() {
       return this.token;
@@ -1080,6 +1116,8 @@ var _DOM = __webpack_require__(909);
 
 var _constants = __webpack_require__(66);
 
+var _localization = __webpack_require__(761);
+
 var _events = _interopRequireDefault(__webpack_require__(889));
 
 var _eventsName = __webpack_require__(73);
@@ -1092,6 +1130,8 @@ function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(
 
 var _mode = /*#__PURE__*/new WeakMap();
 
+var _getElementPlaceholder = /*#__PURE__*/new WeakSet();
+
 var _loadFirebase = /*#__PURE__*/new WeakSet();
 
 var _authStateChanged = /*#__PURE__*/new WeakSet();
@@ -1099,8 +1139,8 @@ var _authStateChanged = /*#__PURE__*/new WeakSet();
 var _firebaseInitApp = /*#__PURE__*/new WeakSet();
 
 var Firebase = /*#__PURE__*/function () {
-  function Firebase(options) {
-    var _options$captchaKey, _options$genuineForm, _options$elementSelec, _options$onSuccessAut, _options$onAuthStateC, _options$uiShown;
+  function Firebase(_options) {
+    var _options$captchaKey, _options$genuineForm, _options$onSuccessAut, _options$onAuthStateC, _options$uiShown;
 
     (0, _classCallCheck2["default"])(this, Firebase);
 
@@ -1110,6 +1150,8 @@ var Firebase = /*#__PURE__*/function () {
 
     _loadFirebase.add(this);
 
+    _getElementPlaceholder.add(this);
+
     _mode.set(this, {
       writable: true,
       value: void 0
@@ -1117,19 +1159,20 @@ var Firebase = /*#__PURE__*/function () {
 
     this.events = new _events["default"]();
     this.firebaseUiConfig = null;
-    (0, _classPrivateFieldSet2["default"])(this, _mode, options === null || options === void 0 ? void 0 : options.mode);
-    this.config = options === null || options === void 0 ? void 0 : options.config;
-    this.providers = options === null || options === void 0 ? void 0 : options.providers;
-    this.tosURL = options === null || options === void 0 ? void 0 : options.tosURL;
-    this.privacyPolicyURL = options === null || options === void 0 ? void 0 : options.privacyPolicyURL;
-    this.captchaKey = (_options$captchaKey = options === null || options === void 0 ? void 0 : options.captchaKey) !== null && _options$captchaKey !== void 0 ? _options$captchaKey : '6LeNZrwbAAAAAKXPTmJj5KMdUwI2GE6XAUbCU6DM';
-    this.genuineForm = (_options$genuineForm = options === null || options === void 0 ? void 0 : options.genuineForm) !== null && _options$genuineForm !== void 0 ? _options$genuineForm : true;
+    (0, _classPrivateFieldSet2["default"])(this, _mode, _options === null || _options === void 0 ? void 0 : _options.mode);
+    this.lang = _localization.Localization.assembleLanguage(_options.lang || 'en');
+    this.config = _options === null || _options === void 0 ? void 0 : _options.config;
+    this.providers = _options === null || _options === void 0 ? void 0 : _options.providers;
+    this.tosURL = _options === null || _options === void 0 ? void 0 : _options.tosURL;
+    this.privacyPolicyURL = _options === null || _options === void 0 ? void 0 : _options.privacyPolicyURL;
+    this.captchaKey = (_options$captchaKey = _options === null || _options === void 0 ? void 0 : _options.captchaKey) !== null && _options$captchaKey !== void 0 ? _options$captchaKey : '6LeNZrwbAAAAAKXPTmJj5KMdUwI2GE6XAUbCU6DM';
+    this.genuineForm = (_options$genuineForm = _options === null || _options === void 0 ? void 0 : _options.genuineForm) !== null && _options$genuineForm !== void 0 ? _options$genuineForm : true;
     this.firebase = null;
     this.firebaseui = null;
-    this.elementPlaceholder = (_options$elementSelec = options === null || options === void 0 ? void 0 : options.elementSelector) !== null && _options$elementSelec !== void 0 ? _options$elementSelec : "#".concat(_constants.WALLKIT_FIREBASE_UI_PLACEHOLDER_ID);
-    this.onSuccessAuth = (_options$onSuccessAut = options === null || options === void 0 ? void 0 : options.onSuccessAuth) !== null && _options$onSuccessAut !== void 0 ? _options$onSuccessAut : null;
-    this.onAuthStateChanged = (_options$onAuthStateC = options === null || options === void 0 ? void 0 : options.onAuthStateChanged) !== null && _options$onAuthStateC !== void 0 ? _options$onAuthStateC : null;
-    this.uiShown = (_options$uiShown = options === null || options === void 0 ? void 0 : options.uiShown) !== null && _options$uiShown !== void 0 ? _options$uiShown : null;
+    this.elementPlaceholder = _classPrivateMethodGet(this, _getElementPlaceholder, _getElementPlaceholder2).call(this, _options);
+    this.onSuccessAuth = (_options$onSuccessAut = _options === null || _options === void 0 ? void 0 : _options.onSuccessAuth) !== null && _options$onSuccessAut !== void 0 ? _options$onSuccessAut : null;
+    this.onAuthStateChanged = (_options$onAuthStateC = _options === null || _options === void 0 ? void 0 : _options.onAuthStateChanged) !== null && _options$onAuthStateC !== void 0 ? _options$onAuthStateC : null;
+    this.uiShown = (_options$uiShown = _options === null || _options === void 0 ? void 0 : _options.uiShown) !== null && _options$uiShown !== void 0 ? _options$uiShown : null;
     this.isUiShown = false;
     this.initialized = false;
     this.loaded = false;
@@ -1414,6 +1457,31 @@ var Firebase = /*#__PURE__*/function () {
       return authWithCustomToken;
     }()
   }, {
+    key: "attachEmailListener",
+    value: function attachEmailListener(callback) {
+      var emailBtn = document.querySelector('.firebaseui-idp-button[data-provider-id="password"]');
+
+      var attachListener = function attachListener() {
+        var emailField = document.querySelector('.firebaseui-id-email');
+
+        if (emailField) {
+          emailField.addEventListener('blur', function (event) {
+            callback(event);
+          });
+        }
+      };
+
+      if (emailBtn) {
+        emailBtn.addEventListener('click', function () {
+          setTimeout(function () {
+            attachListener();
+          });
+        });
+      } else {
+        attachListener();
+      }
+    }
+  }, {
     key: "init",
     value: function init() {
       var _this6 = this;
@@ -1438,6 +1506,18 @@ var Firebase = /*#__PURE__*/function () {
 }();
 
 exports.default = Firebase;
+
+function _getElementPlaceholder2(options) {
+  var defaultPlaceholder = "#".concat(_constants.WALLKIT_FIREBASE_UI_PLACEHOLDER_ID);
+
+  if (this.genuineForm) {
+    var _options$elementSelec;
+
+    return (_options$elementSelec = options === null || options === void 0 ? void 0 : options.elementSelector) !== null && _options$elementSelec !== void 0 ? _options$elementSelec : defaultPlaceholder;
+  }
+
+  return defaultPlaceholder;
+}
 
 function _loadFirebase2() {
   var _this7 = this;
@@ -1468,7 +1548,7 @@ function _loadFirebase2() {
           return onScriptLoaded();
         }
       }, {
-        url: 'https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js',
+        url: "https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth__".concat(_this7.lang, ".js"),
         id: 'firebase-ui',
         defer: true,
         onload: function onload() {
@@ -1625,13 +1705,14 @@ var Authentication = /*#__PURE__*/function () {
 
     Authentication.instance = this;
     (0, _classPrivateFieldSet2["default"])(this, _options, options);
-    this.token = new _Token["default"](_constants.WALLKIT_TOKEN_NAME);
-    this.firebaseToken = new _Token["default"](_constants.FIREBASE_TOKEN_NAME);
+    this.token = new _Token["default"](_constants.WALLKIT_TOKEN_NAME, null, options.public_key);
+    this.firebaseToken = new _Token["default"](_constants.FIREBASE_TOKEN_NAME, null, options.public_key);
     this.frame = new _frame["default"]();
     this.sdk = new _sdk["default"]();
 
     if (!!(options !== null && options !== void 0 && options.firebase)) {
       var config = {
+        lang: options.lang || 'en',
         mode: options.mode,
         onAuthStateChanged: this.updateFirebaseToken.bind(this),
         onSuccessAuth: this.onSuccessAuth.bind(this),
@@ -1657,13 +1738,6 @@ var Authentication = /*#__PURE__*/function () {
     this.reCaptcha.events.subscribe(_eventsName["default"].local.RECAPTCHA_VALIDATION_SUCCESS, function () {
       _classPrivateMethodGet(_this, _resetAuthorizationError, _resetAuthorizationError2).call(_this);
     });
-
-    if (this.reCaptcha.enabled) {
-      if (!this.isAuthenticated()) {
-        this.reCaptcha.init();
-      }
-    }
-
     this.events = new _events["default"]();
   }
 
@@ -1684,77 +1758,119 @@ var Authentication = /*#__PURE__*/function () {
       }
     }
   }, {
+    key: "handleLogin",
+    value: function handleLogin(data) {
+      var _this2 = this;
+
+      this.firebase.signIn(data.email, data.password).then(function () {
+        _this2.authForm.hide();
+      })["catch"](function (error) {
+        if (error.message) {
+          _this2.authForm.loginForm.setFormError(error.message);
+        }
+
+        _this2.reCaptcha.grecaptcha.reset();
+      });
+    }
+  }, {
+    key: "handleSignUp",
+    value: function handleSignUp(data) {
+      var _this3 = this;
+
+      this.firebase.signUp(data.email, data.password).then(function () {
+        _this3.authForm.hide();
+      })["catch"](function (error) {
+        if (error.message) {
+          _this3.authForm.signUpForm.setFormError(error.message);
+        }
+      });
+    }
+  }, {
+    key: "executeRecaptcha",
+    value: function executeRecaptcha() {
+      var _this4 = this;
+
+      this.reCaptcha.grecaptcha.ready(function () {
+        _this4.reCaptcha.grecaptcha.execute().then(function () {
+          _this4.modal.toggleLoader(true);
+        });
+      });
+    }
+  }, {
     key: "initAuthForm",
     value: function initAuthForm() {
       var _classPrivateFieldGet2,
-          _this2 = this;
+          _this5 = this;
 
       this.authForm = new _AuthForm.AuthForm("#".concat(_constants.WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID), {
+        triggerButton: this.firebase.providers.length > 1,
         signUp: (_classPrivateFieldGet2 = (0, _classPrivateFieldGet8["default"])(this, _options).auth.signUp) !== null && _classPrivateFieldGet2 !== void 0 ? _classPrivateFieldGet2 : true,
         onLogin: function onLogin(data) {
-          _this2.firebase.signIn(data.email, data.password).then(function () {
-            _this2.authForm.hide();
-          })["catch"](function (error) {
-            if (error.message) {
-              _this2.authForm.loginForm.setFormError(error.message);
-            }
-          });
+          if (_this5.reCaptcha.enabled) {
+            _this5.executeRecaptcha();
+
+            _this5.reCaptcha.events.subscribe(_eventsName["default"].local.RECAPTCHA_VALIDATION_SUCCESS, _this5.handleLogin.bind(_this5, data), {
+              once: true
+            });
+          } else {
+            _this5.handleLogin(data);
+          }
         },
         onSignUp: function onSignUp(data) {
-          _this2.firebase.signUp(data.email, data.password).then(function () {
-            _this2.authForm.hide();
-          })["catch"](function (error) {
-            if (error.message) {
-              _this2.authForm.signUpForm.setFormError(error.message);
-            }
-          });
+          if (_this5.reCaptcha.enabled) {
+            _this5.executeRecaptcha();
+
+            _this5.reCaptcha.events.subscribe(_eventsName["default"].local.RECAPTCHA_VALIDATION_SUCCESS, _this5.handleSignUp.bind(_this5, data), {
+              once: true
+            });
+          } else {
+            _this5.handleSignUp(data);
+          }
         },
         onPasswordReset: function onPasswordReset(data) {
-          _this2.firebase.sendPasswordResetEmail(data.email).then(function () {
-            _this2.authForm.showSuccessPasswordReset();
+          _this5.firebase.sendPasswordResetEmail(data.email).then(function () {
+            _this5.authForm.showSuccessPasswordReset();
           })["catch"](function (error) {
             if (error.message) {
-              _this2.authForm.forgotPasswordForm.setFormError(error.message);
+              _this5.authForm.forgotPasswordForm.setFormError(error.message);
             }
           });
         },
         onAuthFormShow: function onAuthFormShow() {
-          _this2.firebase.hideAuthForm();
+          _this5.firebase.hideAuthForm();
         },
         onCancel: function onCancel() {
-          _this2.firebase.showAuthForm();
+          _this5.firebase.showAuthForm();
 
-          _this2.authForm.toggle();
+          _this5.authForm.reset();
         }
       });
     }
   }, {
     key: "onSuccessAuth",
     value: function onSuccessAuth(data) {
-      var _this3 = this;
+      var _this6 = this;
 
       this.toggleFormLoader(true);
 
       var handleAuthError = function handleAuthError(error) {
-        _this3.firebase.reset();
+        _this6.resetAuthProcess();
 
-        _this3.toggleFormLoader(false);
+        _this6.toggleFormLoader(false);
 
-        _classPrivateMethodGet(_this3, _setAuthorizationError, _setAuthorizationError2).call(_this3, (error === null || error === void 0 ? void 0 : error.message) || 'Something went wrong!');
+        _classPrivateMethodGet(_this6, _setAuthorizationError, _setAuthorizationError2).call(_this6, (error === null || error === void 0 ? void 0 : error.message) || 'Something went wrong!');
       };
 
       this.updateFirebaseToken(data.token);
       this.events.notify(_eventsName["default"].local.SUCCESS_FIREBASE_AUTH, data);
       this.authInWallkit(data.token).then(function (status) {
-        console.log('status', status);
-
         if (status) {
-          _this3.modal.hide();
+          _this6.modal.hide();
         } else {
-          _this3.firebase.reset();
+          _this6.resetAuthProcess();
         }
 
-        _this3.toggleFormLoader(false);
+        _this6.toggleFormLoader(false);
       })["catch"](function (error) {
         return handleAuthError(error);
       });
@@ -1762,7 +1878,7 @@ var Authentication = /*#__PURE__*/function () {
   }, {
     key: "authInWallkit",
     value: function authInWallkit() {
-      var _this4 = this;
+      var _this7 = this;
 
       var firebaseToken = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
@@ -1770,11 +1886,11 @@ var Authentication = /*#__PURE__*/function () {
 
       return new Promise(function (resolve) {
         if (firebaseToken) {
-          _this4.sdk.methods.authenticateWithFirebase(firebaseToken).then(function (_ref) {
+          _this7.sdk.methods.authenticateWithFirebase(firebaseToken).then(function (_ref) {
             var token = _ref.token,
                 existed = _ref.existed;
 
-            _this4.setToken(token);
+            _this7.setToken(token);
 
             var userGetTimeout = setTimeout(function () {
               resolve(false);
@@ -1783,24 +1899,24 @@ var Authentication = /*#__PURE__*/function () {
             var userEventCallback = function userEventCallback() {
               clearTimeout(userGetTimeout);
 
-              _this4.sdk.methods.unsubscribeLocalEvent('user', userEventCallback);
+              _this7.sdk.methods.unsubscribeLocalEvent('user', userEventCallback);
 
-              _this4.events.notify(_eventsName["default"].local.SUCCESS_AUTH, {
+              _this7.events.notify(_eventsName["default"].local.SUCCESS_AUTH, {
                 register: !existed
               });
 
               resolve(true);
             };
 
-            _this4.sdk.methods.subscribeLocalEvent('user', userEventCallback);
+            _this7.sdk.methods.subscribeLocalEvent('user', userEventCallback);
           })["catch"](function (error) {
             var _error$response;
 
             console.log('error', error);
 
-            _classPrivateMethodGet(_this4, _setAuthorizationError, _setAuthorizationError2).call(_this4, error === null || error === void 0 ? void 0 : (_error$response = error.response) === null || _error$response === void 0 ? void 0 : _error$response.error_description);
+            _classPrivateMethodGet(_this7, _setAuthorizationError, _setAuthorizationError2).call(_this7, error === null || error === void 0 ? void 0 : (_error$response = error.response) === null || _error$response === void 0 ? void 0 : _error$response.error_description);
 
-            _this4.removeTokens();
+            _this7.removeTokens();
 
             resolve(false);
           });
@@ -1814,7 +1930,18 @@ var Authentication = /*#__PURE__*/function () {
     value: function getDefaultAuthenticationFormContent() {
       var _classPrivateFieldGet3, _classPrivateFieldGet4;
 
-      return "<div>\n                    <div id=\"authorization-error\"></div>\n                    <h2 class=\"wallkit-auth-modal__title\">".concat((_classPrivateFieldGet3 = (_classPrivateFieldGet4 = (0, _classPrivateFieldGet8["default"])(this, _options)) === null || _classPrivateFieldGet4 === void 0 ? void 0 : _classPrivateFieldGet4.modalTitle) !== null && _classPrivateFieldGet3 !== void 0 ? _classPrivateFieldGet3 : 'Sign In', "</h2>\n                    <div id=\"").concat(_constants.WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID, "\"></div>\n                    <div id=\"").concat(_constants.WALLKIT_FIREBASE_UI_PLACEHOLDER_ID, "\"></div>\n                </div>");
+      return "<div>\n                    <div id=\"authorization-error\"></div>\n                    <h2 class=\"wallkit-auth-modal__title\">".concat((_classPrivateFieldGet3 = (_classPrivateFieldGet4 = (0, _classPrivateFieldGet8["default"])(this, _options)) === null || _classPrivateFieldGet4 === void 0 ? void 0 : _classPrivateFieldGet4.modalTitle) !== null && _classPrivateFieldGet3 !== void 0 ? _classPrivateFieldGet3 : 'Sign In', "</h2>\n                    <div id=\"").concat(_constants.WALLKIT_AUTH_FORM_PLACEHOLDER_ID, "\"></div>\n                </div>");
+    }
+  }, {
+    key: "attachFormPlaceholders",
+    value: function attachFormPlaceholders() {
+      var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _constants.WALLKIT_AUTH_FORM_PLACEHOLDER_ID;
+      var placeholders = "<div id=\"".concat(_constants.WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID, "\"></div>\n                            <div id=\"").concat(_constants.WALLKIT_FIREBASE_UI_PLACEHOLDER_ID, "\"></div>");
+      var targetElement = document.getElementById(selector);
+
+      if (targetElement) {
+        targetElement.innerHTML = placeholders;
+      }
     }
   }, {
     key: "render",
@@ -1831,6 +1958,8 @@ var Authentication = /*#__PURE__*/function () {
         this.modal = _classPrivateMethodGet(this, _createModal, _createModal2).call(this);
         this.modal.init();
       }
+
+      this.attachFormPlaceholders();
     }
   }, {
     key: "show",
@@ -1863,18 +1992,18 @@ var Authentication = /*#__PURE__*/function () {
   }, {
     key: "checkFirebaseInit",
     value: function checkFirebaseInit() {
-      var _this5 = this;
+      var _this8 = this;
 
       if (!this.firebase.loaded) {
         this.firebase.events.subscribe(_eventsName.FIREBASE_LOADED, function () {
-          return _this5.checkFirebaseInit();
+          return _this8.checkFirebaseInit();
         }, {
           once: true
         });
       } else {
         if (!this.firebase.initialized) {
           this.firebase.events.subscribe(_eventsName.FIREBASE_INIT, function () {
-            return _this5.checkFirebaseInit();
+            return _this8.checkFirebaseInit();
           }, {
             once: true
           });
@@ -1883,9 +2012,9 @@ var Authentication = /*#__PURE__*/function () {
 
           if (!this.firebase.isUiShown) {
             shownTimeout = setTimeout(function () {
-              _this5.firebase.startFirebaseUi();
+              _this8.firebase.startFirebaseUi();
 
-              _this5.checkFirebaseInit();
+              _this8.checkFirebaseInit();
             }, 2000);
             this.firebase.events.subscribe(_eventsName.FIREBASE_UI_SHOWN, function () {
               if (shownTimeout) {
@@ -1906,19 +2035,25 @@ var Authentication = /*#__PURE__*/function () {
   }, {
     key: "onFirebaseInit",
     value: function onFirebaseInit() {
-      var _this6 = this;
+      var _this9 = this;
 
-      if (this.reCaptcha.enabled && this.reCaptcha.loaded) {
-        this.reCaptcha.initCaptchaProcess();
-      } else if (!this.reCaptcha.loaded) {
-        this.events.subscribe(_eventsName["default"].local.RECAPTCHA_LOADED, function () {
-          _this6.reCaptcha.initCaptchaProcess();
-        }, {
-          once: true
-        });
+      try {
+        if ((0, _classPrivateFieldGet8["default"])(this, _options).firebase.genuineForm !== false) {
+          if (this.reCaptcha.enabled && this.reCaptcha.loaded) {
+            this.reCaptcha.initCaptchaProcess();
+          } else if (!this.reCaptcha.loaded) {
+            this.events.subscribe(_eventsName["default"].local.RECAPTCHA_LOADED, function () {
+              _this9.reCaptcha.initCaptchaProcess();
+            }, {
+              once: true
+            });
+          }
+        }
+
+        this.toggleFormLoader(false);
+      } catch (e) {
+        this.toggleFormLoader(false);
       }
-
-      this.toggleFormLoader(false);
     }
   }, {
     key: "removeToken",
@@ -1943,35 +2078,86 @@ var Authentication = /*#__PURE__*/function () {
       this.sdk.methods.setToken(token);
     }
   }, {
-    key: "logout",
-    value: function logout() {
-      var _this7 = this;
+    key: "resetAuthProcess",
+    value: function resetAuthProcess() {
+      this.firebase.reset();
+      this.firebase.showAuthForm();
 
-      this.removeToken();
-      this.firebase.logout().then(function (success) {
-        if (success) {
-          _this7.removeFirebaseToken();
-
-          if (_this7.reCaptcha.enabled && !_this7.reCaptcha.loaded) {
-            _this7.reCaptcha.init().then(function () {
-              _this7.firebase.reset();
-            })["catch"](function (error) {
-              console.error(error);
-
-              _this7.firebase.reset();
-            });
-          } else if (_this7.reCaptcha.loaded) {
-            _this7.firebase.reset();
-
-            _this7.reCaptcha.grecaptcha.reset();
-
-            _this7.reCaptcha.initCaptchaProcess();
-          } else {
-            _this7.firebase.reset();
-          }
-        }
-      });
+      if (this.firebase.genuineForm === false) {
+        this.authForm.reset();
+      }
     }
+  }, {
+    key: "logout",
+    value: function () {
+      var _logout = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2() {
+        var success;
+        return _regenerator["default"].wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                this.removeToken();
+                _context2.next = 4;
+                return this.firebase.logout();
+
+              case 4:
+                success = _context2.sent;
+
+                if (!success) {
+                  _context2.next = 13;
+                  break;
+                }
+
+                this.removeFirebaseToken();
+
+                if (!(this.reCaptcha.enabled && !this.reCaptcha.loaded)) {
+                  _context2.next = 12;
+                  break;
+                }
+
+                _context2.next = 10;
+                return this.reCaptcha.init();
+
+              case 10:
+                _context2.next = 13;
+                break;
+
+              case 12:
+                if (this.reCaptcha.loaded) {
+                  this.resetAuthProcess();
+                  this.reCaptcha.grecaptcha.reset();
+
+                  if ((0, _classPrivateFieldGet8["default"])(this, _options).firebase.genuineForm !== false) {
+                    this.reCaptcha.initCaptchaProcess();
+                  }
+                }
+
+              case 13:
+                this.resetAuthProcess();
+                _context2.next = 20;
+                break;
+
+              case 16:
+                _context2.prev = 16;
+                _context2.t0 = _context2["catch"](0);
+                console.log('ERROR:', _context2.t0);
+                this.resetAuthProcess();
+
+              case 20:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this, [[0, 16]]);
+      }));
+
+      function logout() {
+        return _logout.apply(this, arguments);
+      }
+
+      return logout;
+    }()
   }, {
     key: "dispatchTokens",
     value: function dispatchTokens() {
@@ -2001,60 +2187,60 @@ var Authentication = /*#__PURE__*/function () {
   }, {
     key: "handleTicketsToken",
     value: function () {
-      var _handleTicketsToken = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(ticketPassAuthToken) {
+      var _handleTicketsToken = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(ticketPassAuthToken) {
         var response, userCredential, firebaseToken;
-        return _regenerator["default"].wrap(function _callee2$(_context2) {
+        return _regenerator["default"].wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                _context2.prev = 0;
-                _context2.next = 3;
+                _context3.prev = 0;
+                _context3.next = 3;
                 return this.sdk.methods.getAuthTokensByTicketPassToken(ticketPassAuthToken);
 
               case 3:
-                response = _context2.sent;
+                response = _context3.sent;
 
                 if (!response) {
-                  _context2.next = 19;
+                  _context3.next = 19;
                   break;
                 }
 
-                _context2.next = 7;
+                _context3.next = 7;
                 return this.firebase.authWithCustomToken(response.firebase_custom_token);
 
               case 7:
-                userCredential = _context2.sent;
-                _context2.next = 10;
+                userCredential = _context3.sent;
+                _context3.next = 10;
                 return userCredential.user.getIdToken();
 
               case 10:
-                firebaseToken = _context2.sent;
+                firebaseToken = _context3.sent;
                 this.updateFirebaseToken(firebaseToken);
                 this.setToken(response.token);
-                _context2.next = 15;
+                _context3.next = 15;
                 return this.sdk.methods.getUser();
 
               case 15:
                 this.dispatchTokens();
                 this.events.notify(_eventsName["default"].local.SUCCESS_AUTH, true);
                 this.events.notify(_eventsName["default"].local.TICKETS_TOKEN_AUTH_SUCCESS, true);
-                return _context2.abrupt("return", true);
+                return _context3.abrupt("return", true);
 
               case 19:
-                return _context2.abrupt("return", false);
+                return _context3.abrupt("return", false);
 
               case 22:
-                _context2.prev = 22;
-                _context2.t0 = _context2["catch"](0);
-                console.error(_context2.t0);
-                return _context2.abrupt("return", _context2.t0);
+                _context3.prev = 22;
+                _context3.t0 = _context3["catch"](0);
+                console.error(_context3.t0);
+                return _context3.abrupt("return", _context3.t0);
 
               case 26:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, this, [[0, 22]]);
+        }, _callee3, this, [[0, 22]]);
       }));
 
       function handleTicketsToken(_x) {
@@ -2080,9 +2266,22 @@ var Authentication = /*#__PURE__*/function () {
       var _classPrivateFieldGet6;
 
       if (!!((_classPrivateFieldGet6 = (0, _classPrivateFieldGet8["default"])(this, _options)) !== null && _classPrivateFieldGet6 !== void 0 && _classPrivateFieldGet6.firebase)) {
+        // Render recaptcha before the firebase init if not custom FB form
+        if ((0, _classPrivateFieldGet8["default"])(this, _options).firebase.genuineForm !== false) {
+          if (this.reCaptcha.enabled) {
+            if (!this.isAuthenticated()) {
+              this.reCaptcha.init();
+            }
+          }
+        }
+
         this.render();
         this.firebase.init();
-        this.authForm.render();
+
+        if (this.authForm) {
+          this.authForm.render();
+          this.reCaptcha.init();
+        }
       }
 
       _classPrivateMethodGet(this, _initListeners, _initListeners2).call(this);
@@ -2105,7 +2304,7 @@ function _createModal2() {
 }
 
 function _initListeners2() {
-  var _this8 = this;
+  var _this10 = this;
 
   this.events.subscribe(_eventsName["default"].local.FRAME_MESSAGE, function (_ref3) {
     var name = _ref3.name,
@@ -2114,7 +2313,7 @@ function _initListeners2() {
     switch (name) {
       case _eventsName["default"].wallkit.WALLKIT_EVENT_TOKEN:
         if (value) {
-          _this8.setToken(value);
+          _this10.setToken(value);
         }
 
         break;
@@ -2125,29 +2324,29 @@ function _initListeners2() {
         if (value) {
           var token = value.token;
 
-          _this8.setToken(token);
+          _this10.setToken(token);
         }
 
         break;
 
       case _eventsName["default"].wallkit.WALLKIT_FIREBASE_TOKEN:
-        _this8.firebaseToken.set(value);
+        _this10.firebaseToken.set(value);
 
-        if (_this8.sdk) {
-          _this8.sdk.methods.setFirebaseToken(value);
+        if (_this10.sdk) {
+          _this10.sdk.methods.setFirebaseToken(value);
         }
 
         break;
 
       case _eventsName["default"].wallkit.WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN:
         if (value) {
-          _this8.firebase.authWithCustomToken(value);
+          _this10.firebase.authWithCustomToken(value);
         }
 
         break;
 
       case _eventsName["default"].wallkit.WALLKIT_LOGOUT:
-        _this8.logout();
+        _this10.logout();
 
         break;
     }
@@ -2416,7 +2615,7 @@ var FIREBASE_LOADED = 'firebase-loaded';
 exports.FIREBASE_LOADED = FIREBASE_LOADED;
 var FIREBASE_INIT = 'firebase-init';
 exports.FIREBASE_INIT = FIREBASE_INIT;
-var FIREBASE_UI_SHOWN = 'firebase-ui-init'; // Wallkit Events Names
+var FIREBASE_UI_SHOWN = 'firebase-ui-shown'; // Wallkit Events Names
 
 exports.FIREBASE_UI_SHOWN = FIREBASE_UI_SHOWN;
 var WALLKIT_CHANGE_FRAME = 'wk-event-modal';
@@ -2554,7 +2753,7 @@ exports.default = Events;
 
 /***/ }),
 
-/***/ 601:
+/***/ 447:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -2565,7 +2764,7 @@ var _interopRequireDefault = __webpack_require__(736);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.AuthButton = void 0;
+exports.TriggerButton = void 0;
 
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
 
@@ -2573,9 +2772,9 @@ var _createClass2 = _interopRequireDefault(__webpack_require__(884));
 
 var _DOM = __webpack_require__(909);
 
-var AuthButton = /*#__PURE__*/function () {
-  function AuthButton(selector, options) {
-    (0, _classCallCheck2["default"])(this, AuthButton);
+var TriggerButton = /*#__PURE__*/function () {
+  function TriggerButton(selector, options) {
+    (0, _classCallCheck2["default"])(this, TriggerButton);
     this.selector = selector;
     this.element = this.createElement(options);
 
@@ -2584,7 +2783,7 @@ var AuthButton = /*#__PURE__*/function () {
     }
   }
 
-  (0, _createClass2["default"])(AuthButton, [{
+  (0, _createClass2["default"])(TriggerButton, [{
     key: "createElement",
     value: function createElement(options) {
       var className = 'wk-auth-form-button';
@@ -2620,10 +2819,10 @@ var AuthButton = /*#__PURE__*/function () {
       }
     }
   }]);
-  return AuthButton;
+  return TriggerButton;
 }();
 
-exports.AuthButton = AuthButton;
+exports.TriggerButton = TriggerButton;
 
 /***/ }),
 
@@ -2660,6 +2859,8 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
 
+var _testPasswordRule = /*#__PURE__*/new WeakSet();
+
 var _testPassword = /*#__PURE__*/new WeakSet();
 
 var PasswordField = /*#__PURE__*/function (_FormField) {
@@ -2676,6 +2877,8 @@ var PasswordField = /*#__PURE__*/function (_FormField) {
     _this = _super.call(this, options);
 
     _testPassword.add((0, _assertThisInitialized2["default"])(_this));
+
+    _testPasswordRule.add((0, _assertThisInitialized2["default"])(_this));
 
     _this.insertAffix("<div id=\"show-password-toggle\" class=\"wk-eye-toggle\"></div>", _this.togglePasswordVisibility.bind((0, _assertThisInitialized2["default"])(_this)));
 
@@ -2715,11 +2918,10 @@ var PasswordField = /*#__PURE__*/function (_FormField) {
     value: function validate() {
       var value = this.getValue();
 
-      if (!value) {
-        this.setError('Enter your password to continue!');
-        return false;
-      } else if (this.testStrength && !_classPrivateMethodGet(this, _testPassword, _testPassword2).call(this, value)) {
-        this.setError("<div>\n                    <span>Password doesn't match requirements!</span>\n                </div>");
+      var passwordValidation = _classPrivateMethodGet(this, _testPassword, _testPassword2).call(this, value);
+
+      if (!passwordValidation.valid) {
+        this.setError("<div>\n                <span>Password should be: ".concat(passwordValidation.message, "</span>\n            </div>"));
         return false;
       }
 
@@ -2733,9 +2935,59 @@ var PasswordField = /*#__PURE__*/function (_FormField) {
 
 exports.PasswordField = PasswordField;
 
+function _testPasswordRule2(value, regex, errorMessage) {
+  var uppercaseRegex = new RegExp(regex);
+  var uppercaseValid = uppercaseRegex.test(value);
+
+  if (!uppercaseValid) {
+    return {
+      message: errorMessage,
+      valid: false
+    };
+  }
+
+  return {
+    valid: true
+  };
+}
+
 function _testPassword2(password) {
-  var passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
-  return passwordRegex.test(password);
+  if (!this.testStrength) {
+    return {
+      valid: true
+    };
+  }
+
+  var rules = [{
+    regex: "^(?=.{8,})",
+    message: "At least 8 characters length"
+  }, {
+    regex: "^(?=.*[A-Z])",
+    message: "At least 1 uppercase character (A-Z)"
+  }, {
+    regex: "^(?=.*[a-z])",
+    message: "At least 1 lowercase character (a-z)"
+  }, {
+    regex: "^(?=.*[0-9])",
+    message: "At least 1 digit (0-9)"
+  }, {
+    regex: "^(?=.*[`~!@#$%^&*()+={}\/|:;'<>,.?_-])",
+    message: "At least 1 special character (punctuation)"
+  }];
+
+  for (var _i = 0, _rules = rules; _i < _rules.length; _i++) {
+    var rule = _rules[_i];
+
+    var validateRule = _classPrivateMethodGet(this, _testPasswordRule, _testPasswordRule2).call(this, password, rule.regex, rule.message);
+
+    if (!validateRule.valid) {
+      return validateRule;
+    }
+  }
+
+  return {
+    valid: true
+  };
 }
 
 /***/ }),
@@ -2793,6 +3045,14 @@ var FormField = /*#__PURE__*/function () {
 
     if (options.onInput) {
       this.input.addEventListener('input', options.onInput.bind(this));
+    }
+
+    if (options.onEnter) {
+      this.input.addEventListener('keydown', function (event) {
+        if (event.keyCode === 13) {
+          options.onEnter();
+        }
+      });
     }
   }
 
@@ -2940,6 +3200,11 @@ var FormField = /*#__PURE__*/function () {
       this.input.value = '';
       this.resetValidation();
     }
+  }, {
+    key: "focus",
+    value: function focus() {
+      this.input.focus();
+    }
   }]);
   return FormField;
 }();
@@ -2967,7 +3232,7 @@ var _createClass2 = _interopRequireDefault(__webpack_require__(884));
 
 var _DOM = __webpack_require__(909);
 
-var _AuthButton = __webpack_require__(601);
+var _TriggerButton = __webpack_require__(447);
 
 var _LoginForm = __webpack_require__(138);
 
@@ -2985,6 +3250,7 @@ var AuthForm = /*#__PURE__*/function () {
       id: 'wk-auth-form'
     });
     this.loginForm = new _LoginForm.LoginForm(selector, {
+      cancelBtn: options.triggerButton !== false,
       signUp: (_options$signUp = options.signUp) !== null && _options$signUp !== void 0 ? _options$signUp : true,
       onSubmit: function onSubmit(data) {
         if (options.onLogin) {
@@ -3061,24 +3327,32 @@ var AuthForm = /*#__PURE__*/function () {
       }
     });
     this.forgotPasswordForm.hide();
-    this.authButton = new _AuthButton.AuthButton(selector, {
-      onClick: function onClick() {
-        _this.loginForm.show();
 
-        _this.authButton.hide();
+    if (options.triggerButton !== false) {
+      this.triggerButton = new _TriggerButton.TriggerButton(selector, {
+        onClick: function onClick() {
+          _this.loginForm.show();
 
-        if (options.onAuthFormShow) {
-          options.onAuthFormShow();
+          _this.triggerButton.hide();
+
+          if (options.onAuthFormShow) {
+            options.onAuthFormShow();
+          }
         }
-      }
-    });
+      });
+    }
   }
 
   (0, _createClass2["default"])(AuthForm, [{
-    key: "toggle",
-    value: function toggle() {
+    key: "reset",
+    value: function reset() {
       this.hide();
-      this.authButton.show();
+
+      if (this.triggerButton) {
+        this.triggerButton.show();
+      } else {
+        this.loginForm.show();
+      }
     }
   }, {
     key: "hide",
@@ -3125,8 +3399,12 @@ var AuthForm = /*#__PURE__*/function () {
         this.forgotPasswordForm.render();
       }
 
-      if (this.authButton) {
-        this.authButton.render();
+      if (this.triggerButton) {
+        this.triggerButton.render();
+      } else {
+        if (this.loginForm) {
+          this.loginForm.show();
+        }
       }
     }
   }]);
@@ -3188,8 +3466,9 @@ var ForgotPasswordForm = /*#__PURE__*/function (_Form) {
       dataSlug: 'email',
       label: 'Email',
       type: 'email',
-      onChange: function onChange() {},
-      onInput: function onInput() {}
+      onEnter: function onEnter() {
+        _this.submitForm();
+      }
     });
     _this.fields = [_this.emailField];
 
@@ -3272,8 +3551,9 @@ var LoginForm = /*#__PURE__*/function (_Form) {
       name: 'wk-fb-email',
       label: 'Email',
       type: 'email',
-      onChange: function onChange() {},
-      onInput: function onInput() {}
+      onEnter: function onEnter() {
+        _this.passwordField.focus();
+      }
     });
     _this.passwordField = new _PasswordField.PasswordField({
       dataSlug: 'password',
@@ -3281,8 +3561,9 @@ var LoginForm = /*#__PURE__*/function (_Form) {
       testStrength: false,
       label: 'Password',
       type: 'password',
-      onChange: function onChange() {},
-      onInput: function onInput() {}
+      onEnter: function onEnter() {
+        _this.submitForm();
+      }
     });
     _this.fields = [_this.emailField, _this.passwordField];
 
@@ -3323,10 +3604,14 @@ var LoginForm = /*#__PURE__*/function (_Form) {
         }
       }));
       var formFooter = (0, _DOM.createElement)('div', {
-        className: 'wk-form__footer'
+        className: 'wk-form__footer wk-form__footer--right'
       });
       footerWrapper.appendChild(subFooter);
-      formFooter.appendChild(this.cancelBtn);
+
+      if (this.options.cancelBtn !== false) {
+        formFooter.appendChild(this.cancelBtn);
+      }
+
       formFooter.appendChild(this.submitBtn);
       footerWrapper.appendChild(formFooter);
       return footerWrapper;
@@ -3392,16 +3677,18 @@ var SignupForm = /*#__PURE__*/function (_Form) {
       name: 'wk-fb-email',
       label: 'Email',
       type: 'email',
-      onChange: function onChange() {},
-      onInput: function onInput() {}
+      onEnter: function onEnter() {
+        _this.nameField.focus();
+      }
     });
     _this.nameField = new _field.FormField({
       dataSlug: 'name',
       name: 'wk-fb-name',
       label: 'Name',
       type: 'text',
-      onChange: function onChange() {},
-      onInput: function onInput() {}
+      onEnter: function onEnter() {
+        _this.passwordField.focus();
+      }
     });
     _this.passwordField = new _PasswordField.PasswordField({
       dataSlug: 'password',
@@ -3410,8 +3697,9 @@ var SignupForm = /*#__PURE__*/function (_Form) {
       passwordHint: true,
       label: 'Password',
       type: 'password',
-      onChange: function onChange() {},
-      onInput: function onInput() {}
+      onEnter: function onEnter() {
+        _this.submitForm();
+      }
     });
     _this.fields = [_this.emailField, _this.nameField, _this.passwordField];
 
@@ -3753,32 +4041,40 @@ var Frame = /*#__PURE__*/function () {
   }, {
     key: "sendEvent",
     value: function sendEvent(name, value, params) {
-      if (this.frameElement && this.frameElement.contentWindow) {
-        var frameWindow = this.frameElement.contentWindow;
-        this.events.notify(name, value);
-        frameWindow.postMessage({
-          name: name,
-          value: value,
-          params: params
-        }, '*');
+      var _this = this;
+
+      var event = function event() {
+        if (_this.frameElement && _this.frameElement.contentWindow) {
+          var frameWindow = _this.frameElement.contentWindow;
+
+          _this.events.notify(name, value);
+
+          frameWindow.postMessage({
+            name: name,
+            value: value,
+            params: params
+          }, '*');
+        }
+      };
+
+      if (this.ready) {
+        event();
+      } else {
+        this.events.subscribe(_eventsName.WALLKIT_FRAME_READY, event.bind(this));
       }
     }
   }, {
     key: "openFrame",
     value: function openFrame(name, params) {
-      var _this = this;
+      var _this2 = this;
 
       this.currentFrameName = name;
 
       if (this.ready) {
-        console.log('test');
         this.sendEvent(_eventsName.WALLKIT_CHANGE_FRAME, name, params);
       } else {
-        console.log('test2');
         this.events.subscribe(_eventsName.WALLKIT_FRAME_READY, function () {
-          console.log('123145');
-
-          _this.sendEvent(_eventsName.WALLKIT_CHANGE_FRAME, name, params);
+          _this2.sendEvent(_eventsName.WALLKIT_CHANGE_FRAME, name, params);
         }, {
           once: true
         });
@@ -3811,17 +4107,62 @@ var Frame = /*#__PURE__*/function () {
 exports.default = Frame;
 
 function _listeners2() {
-  var _this2 = this;
+  var _this3 = this;
 
   this.events.subscribe(_eventsName.WALLKIT_FRAME_ROUTE_CHANGE, function (value) {
-    _this2.currentFrameName = value;
+    _this3.currentFrameName = value;
   });
   this.events.subscribe(_eventsName.WALLKIT_FRAME_READY, function (value) {
     if (value === true) {
-      _this2.onFrameReady();
+      _this3.onFrameReady();
     }
   });
 }
+
+/***/ }),
+
+/***/ 761:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(736);
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.Localization = void 0;
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(884));
+
+var _languages = __webpack_require__(6);
+
+var Localization = /*#__PURE__*/function () {
+  function Localization() {
+    (0, _classCallCheck2["default"])(this, Localization);
+  }
+
+  (0, _createClass2["default"])(Localization, null, [{
+    key: "assembleLanguage",
+    value: function assembleLanguage() {
+      var language = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'en';
+
+      if (typeof language === "string") {
+        if (_languages.FB_AVAILABLE_LANGUAGES.includes(language.toLowerCase())) {
+          return language;
+        }
+      }
+
+      return 'en';
+    }
+  }]);
+  return Localization;
+}();
+
+exports.Localization = Localization;
 
 /***/ }),
 
@@ -4078,6 +4419,7 @@ function _createContent2() {
   });
   this.modalContent.style.minWidth = _constants.WALLKIT_MODAL_MIN_WIDTH + 'px';
   this.modalContent.style.minHeight = _constants.WALLKIT_MODAL_MIN_HEIGHT + 'px';
+  this.modalContent.style.maxWidth = _constants.WALLKIT_MODAL_MAX_WIDTH + 'px';
   return this.modalContent;
 }
 
@@ -4181,7 +4523,8 @@ var SDK = /*#__PURE__*/function () {
     this.methods = null;
     this.client = null;
     (0, _classPrivateFieldSet2["default"])(this, _options, options);
-    (0, _classPrivateFieldSet2["default"])(this, _events, new _events2["default"]()); // this.#apiUrl = options.mode === 'dev' ? 'https://api.dev.wallkit.net/api/v1': undefined;
+    (0, _classPrivateFieldSet2["default"])(this, _events, new _events2["default"]());
+    (0, _classPrivateFieldSet2["default"])(this, _apiUrl, options.mode === 'dev' ? 'https://api.dev.wallkit.net/api/v1' : undefined);
 
     if (window.Wallkit) {
       this.onLoad();
@@ -4229,7 +4572,7 @@ var SDK = /*#__PURE__*/function () {
   }, {
     key: "load",
     value: function load() {
-      (0, _DOM.insertScript)("".concat(_constants.WALLKIT_CDN_URL, "/js/sdk/0.0.45/wallkit.umd.min.js"), 'wallkit-js-sdk', this.onLoad.bind(this));
+      (0, _DOM.insertScript)("".concat(_constants.WALLKIT_CDN_URL, "/js/sdk/0.0.46/wallkit.umd.min.js"), 'wallkit-js-sdk', this.onLoad.bind(this));
     }
   }]);
   return SDK;

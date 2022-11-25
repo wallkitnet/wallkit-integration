@@ -1,6 +1,6 @@
 import { createElement } from "../../../utils/DOM";
 
-export class AuthButton {
+export class TriggerButton {
     constructor(selector, options) {
         this.selector = selector;
         this.element = this.createElement(options);

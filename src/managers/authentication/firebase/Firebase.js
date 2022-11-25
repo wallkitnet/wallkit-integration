@@ -4,9 +4,9 @@ import {
     WALLKIT_FIREBASE_CONFIG,
     WALLKIT_DEV_FIREBASE_CONFIG,
     WALLKIT_FIREBASE_UI_PLACEHOLDER_ID,
-} from "../../configs/constants";
-import { Localization } from "../localization";
-import Events from "../events";
+} from "../../../configs/constants";
+import { Localization } from "../../localization";
+import Events from "../../events";
 import {
     FIREBASE_INIT,
     FIREBASE_LOADED,
@@ -31,7 +31,7 @@ export default class Firebase {
 
         this.firebase = null;
         this.firebaseui = null;
-        this.elementPlaceholder = options?.elementSelector ?? `#${WALLKIT_FIREBASE_UI_PLACEHOLDER_ID}`;
+        this.elementPlaceholder = this.#getElementPlaceholder(options);
         this.onSuccessAuth = options?.onSuccessAuth ?? null;
         this.onAuthStateChanged = options?.onAuthStateChanged ?? null;
         this.uiShown = options?.uiShown ?? null;
@@ -39,6 +39,16 @@ export default class Firebase {
         this.isUiShown = false;
         this.initialized = false;
         this.loaded = false;
+    }
+
+    #getElementPlaceholder(options) {
+      const defaultPlaceholder = `#${WALLKIT_FIREBASE_UI_PLACEHOLDER_ID}`;
+
+      if (this.genuineForm) {
+        return options?.elementSelector ?? defaultPlaceholder;
+      }
+
+      return defaultPlaceholder;
     }
 
     get allowedProviders() {
@@ -171,10 +181,12 @@ export default class Firebase {
         return this.firebase;
     }
 
-    async initFirebase({ config,
-                   providers = ['email', 'google'],
-                   tosUrl = 'https://wallkit.net',
-                   privacyPolicyUrl = 'https://wallkit.net' }) {
+    async initFirebase({
+       config,
+       providers = ['email', 'google'],
+       tosUrl = 'https://wallkit.net',
+       privacyPolicyUrl = 'https://wallkit.net'
+    }) {
 
         this.#firebaseInitApp(config);
 
@@ -292,7 +304,6 @@ export default class Firebase {
         const emailBtn = document.querySelector('.firebaseui-idp-button[data-provider-id="password"]');
 
         const attachListener = () => {
-            console.log('attach');
             const emailField = document.querySelector('.firebaseui-id-email');
 
             if (emailField) {
@@ -302,10 +313,8 @@ export default class Firebase {
             }
         }
 
-        console.log('emailBtn', emailBtn);
         if (emailBtn) {
             emailBtn.addEventListener('click', () => {
-                console.log('lclick');
                 setTimeout(() => {
                     attachListener();
                 });

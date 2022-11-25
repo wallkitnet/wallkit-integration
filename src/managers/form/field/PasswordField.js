@@ -43,31 +43,81 @@ export class PasswordField extends FormField {
         }
     }
 
-    #testPassword (password) {
-        const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+    #testPasswordRule (value, regex, errorMessage) {
+      const uppercaseRegex = new RegExp(regex);
+      const uppercaseValid = uppercaseRegex.test(value);
 
-        return passwordRegex.test(password);
+      if (!uppercaseValid) {
+        return {
+          message: errorMessage,
+          valid: false
+        };
+      }
+
+      return {
+        valid: true
+      }
+    }
+
+    #testPassword (password) {
+        if (!this.testStrength) {
+          return {
+            valid: true
+          };
+        }
+
+        const rules = [
+          {
+            regex: "^(?=.{8,})",
+            message: "At least 8 characters length"
+          },
+          {
+            regex: "^(?=.*[A-Z])",
+            message: "At least 1 uppercase character (A-Z)"
+          },
+          {
+            regex: "^(?=.*[a-z])",
+            message: "At least 1 lowercase character (a-z)"
+          },
+          {
+            regex: "^(?=.*[0-9])",
+            message: "At least 1 digit (0-9)"
+          },
+          {
+            regex: "^(?=.*[`~!@#$%^&*()+={}\/|:;'<>,.?_-])",
+            message: "At least 1 special character (punctuation)"
+          },
+        ];
+
+        for (let rule of rules) {
+          const validateRule = this.#testPasswordRule(password, rule.regex, rule.message);
+
+          if (!validateRule.valid) {
+            return validateRule;
+          }
+        }
+
+        return {
+          valid: true
+        };
     }
 
     validate () {
-        const value = this.getValue();
+      const value = this.getValue();
+      const passwordValidation = this.#testPassword(value);
 
-        if (!value) {
-            this.setError('Enter your password to continue!');
+      if (!passwordValidation.valid) {
+        this.setError(`<div>
+                <span>Password should be: ${passwordValidation.message}</span>
+            </div>`);
 
-            return false;
-        } else if (this.testStrength && !this.#testPassword(value)) {
-            this.setError(`<div>
-                    <span>Password doesn't match requirements!</span>
-                </div>`);
+        return false;
+      }
 
-            return false;
-        }
+      this.resetValidation();
+      this.setFieldValidationState(true);
 
-        this.resetValidation();
-        this.setFieldValidationState(true);
-
-        return true;
+      return true;
     }
 
 }
