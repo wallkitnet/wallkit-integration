@@ -94,11 +94,13 @@ export default class Authentication {
 
     handleSignUp (data) {
       this.firebase.signUp(data.email, data.password).then(() => {
+        this.firebase.updateName(data.name);
         this.authForm.hide();
       }).catch((error) => {
         if (error.message) {
           this.authForm.signUpForm.setFormError(error.message);
         }
+        this.reCaptcha.grecaptcha.reset();
       });
     }
 
@@ -106,6 +108,8 @@ export default class Authentication {
       this.reCaptcha.grecaptcha.ready(() => {
         this.reCaptcha.grecaptcha.execute().then(() => {
           this.modal.toggleLoader(true);
+        }).catch((error) => {
+          console.log('EXECUTE RECAPTCHA ERROR:', error);
         });
       })
     }
@@ -371,6 +375,10 @@ export default class Authentication {
 
       if (this.firebase.genuineForm === false) {
         this.authForm.reset();
+      }
+
+      if (this.reCaptcha.enabled) {
+        this.reCaptcha.grecaptcha.reset();
       }
     }
 

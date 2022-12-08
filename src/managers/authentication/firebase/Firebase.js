@@ -262,6 +262,18 @@ export default class Firebase {
             .then((result) => this.handleSuccessAuth(result));
     }
 
+    updateName (name) {
+      if (name) {
+        const user = this.firebase.auth().currentUser;
+
+        if (user) {
+          user.updateProfile({
+            displayName: name
+          });
+        }
+      }
+    }
+
     async handleSuccessAuth (result) {
         try {
             if (result) {

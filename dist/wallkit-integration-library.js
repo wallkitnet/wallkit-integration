@@ -1353,6 +1353,19 @@ var Firebase = /*#__PURE__*/function () {
       });
     }
   }, {
+    key: "updateName",
+    value: function updateName(name) {
+      if (name) {
+        var user = this.firebase.auth().currentUser;
+
+        if (user) {
+          user.updateProfile({
+            displayName: name
+          });
+        }
+      }
+    }
+  }, {
     key: "handleSuccessAuth",
     value: function () {
       var _handleSuccessAuth = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(result) {
@@ -1778,11 +1791,15 @@ var Authentication = /*#__PURE__*/function () {
       var _this3 = this;
 
       this.firebase.signUp(data.email, data.password).then(function () {
+        _this3.firebase.updateName(data.name);
+
         _this3.authForm.hide();
       })["catch"](function (error) {
         if (error.message) {
           _this3.authForm.signUpForm.setFormError(error.message);
         }
+
+        _this3.reCaptcha.grecaptcha.reset();
       });
     }
   }, {
@@ -1793,6 +1810,8 @@ var Authentication = /*#__PURE__*/function () {
       this.reCaptcha.grecaptcha.ready(function () {
         _this4.reCaptcha.grecaptcha.execute().then(function () {
           _this4.modal.toggleLoader(true);
+        })["catch"](function (error) {
+          console.log('EXECUTE RECAPTCHA ERROR:', error);
         });
       });
     }
@@ -2085,6 +2104,10 @@ var Authentication = /*#__PURE__*/function () {
 
       if (this.firebase.genuineForm === false) {
         this.authForm.reset();
+      }
+
+      if (this.reCaptcha.enabled) {
+        this.reCaptcha.grecaptcha.reset();
       }
     }
   }, {

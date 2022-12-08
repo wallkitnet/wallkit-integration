@@ -231,9 +231,8 @@
 
         window.addEventListener('load', () => {
             window.WallkitInt = new WallkitIntegration({
-                public_key: 'st3adcd3-9156-44bd-bc89-8092a58c6ae9',
+                public_key: '00000000-ebb7-42fe-ad2e-f255c73b1061',
                 // public_key: '3535',
-                mode: 'dev',
                 version: 'v1',
                 auth: { // default false
                     // firebase: false,
@@ -266,10 +265,10 @@
                         title: 'Authorisation',
                         content: modalContent
                     },
-                    // reCaptcha: {
-                    //     mobile: false,
-                    //     siteKey: '6Lc4GioeAAAAAHo1Qsb6V9mz7NchYe8wAeqtlg__'
-                    // }
+                    reCaptcha: {
+                        mobile: false,
+                        siteKey: '6LfKdSkeAAAAAEIPXZE2cBG-_f2hL9mVr2SOcARH'
+                    }
                 },
                 analytics: {
                     parseUTM: true // default true
