@@ -144,14 +144,32 @@ export default class Authentication {
                 this.handleSignUp(data);
               }
             },
-            onPasswordReset: (data) => {
-                this.firebase.sendPasswordResetEmail(data.email).then(() => {
-                    this.authForm.showSuccessPasswordReset();
-                }).catch((error) => {
-                    if (error.message) {
-                        this.authForm.forgotPasswordForm.setFormError(error.message);
-                    }
-                });
+            onPasswordReset: async (data) => {
+              try {
+                this.toggleFormLoader(true);
+
+                let success;
+                if (this.#options.firebase.genuinePasswordReset === false) {
+                  const { result } = await this.sdk.methods.firebasePasswordReset(data.email);
+                  success = result;
+                } else {
+                  await this.firebase.sendPasswordResetEmail(data.email);
+                  success = true;
+                }
+
+                if (success) {
+                  this.authForm.showSuccessPasswordReset();
+                } else {
+                  throw new Error('Something went wrong');
+                }
+
+                this.toggleFormLoader(false);
+              } catch (error) {
+                if (error.message) {
+                    this.authForm.forgotPasswordForm.setFormError(error.message);
+                }
+                this.toggleFormLoader(false);
+              }
             },
             onAuthFormShow: () => {
                 this.firebase.hideAuthForm();

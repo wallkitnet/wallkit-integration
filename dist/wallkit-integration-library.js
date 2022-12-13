@@ -1846,15 +1846,84 @@ var Authentication = /*#__PURE__*/function () {
             _this5.handleSignUp(data);
           }
         },
-        onPasswordReset: function onPasswordReset(data) {
-          _this5.firebase.sendPasswordResetEmail(data.email).then(function () {
-            _this5.authForm.showSuccessPasswordReset();
-          })["catch"](function (error) {
-            if (error.message) {
-              _this5.authForm.forgotPasswordForm.setFormError(error.message);
-            }
-          });
-        },
+        onPasswordReset: function () {
+          var _onPasswordReset = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(data) {
+            var success, _yield$_this5$sdk$met, result;
+
+            return _regenerator["default"].wrap(function _callee$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    _context.prev = 0;
+
+                    _this5.toggleFormLoader(true);
+
+                    if (!((0, _classPrivateFieldGet8["default"])(_this5, _options).firebase.genuinePasswordReset === false)) {
+                      _context.next = 10;
+                      break;
+                    }
+
+                    _context.next = 5;
+                    return _this5.sdk.methods.firebasePasswordReset(data.email);
+
+                  case 5:
+                    _yield$_this5$sdk$met = _context.sent;
+                    result = _yield$_this5$sdk$met.result;
+                    success = result;
+                    _context.next = 13;
+                    break;
+
+                  case 10:
+                    _context.next = 12;
+                    return _this5.firebase.sendPasswordResetEmail(data.email);
+
+                  case 12:
+                    success = true;
+
+                  case 13:
+                    if (!success) {
+                      _context.next = 17;
+                      break;
+                    }
+
+                    _this5.authForm.showSuccessPasswordReset();
+
+                    _context.next = 18;
+                    break;
+
+                  case 17:
+                    throw new Error('Something went wrong');
+
+                  case 18:
+                    _this5.toggleFormLoader(false);
+
+                    _context.next = 25;
+                    break;
+
+                  case 21:
+                    _context.prev = 21;
+                    _context.t0 = _context["catch"](0);
+
+                    if (_context.t0.message) {
+                      _this5.authForm.forgotPasswordForm.setFormError(_context.t0.message);
+                    }
+
+                    _this5.toggleFormLoader(false);
+
+                  case 25:
+                  case "end":
+                    return _context.stop();
+                }
+              }
+            }, _callee, null, [[0, 21]]);
+          }));
+
+          function onPasswordReset(_x) {
+            return _onPasswordReset.apply(this, arguments);
+          }
+
+          return onPasswordReset;
+        }(),
         onAuthFormShow: function onAuthFormShow() {
           _this5.firebase.hideAuthForm();
         },
@@ -1983,10 +2052,10 @@ var Authentication = /*#__PURE__*/function () {
   }, {
     key: "show",
     value: function () {
-      var _show = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
-        return _regenerator["default"].wrap(function _callee$(_context) {
+      var _show = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2() {
+        return _regenerator["default"].wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
                 this.modal.show();
 
@@ -1996,10 +2065,10 @@ var Authentication = /*#__PURE__*/function () {
 
               case 2:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee, this);
+        }, _callee2, this);
       }));
 
       function show() {
@@ -2113,37 +2182,37 @@ var Authentication = /*#__PURE__*/function () {
   }, {
     key: "logout",
     value: function () {
-      var _logout = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2() {
+      var _logout = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3() {
         var success;
-        return _regenerator["default"].wrap(function _callee2$(_context2) {
+        return _regenerator["default"].wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                _context2.prev = 0;
+                _context3.prev = 0;
                 this.removeToken();
-                _context2.next = 4;
+                _context3.next = 4;
                 return this.firebase.logout();
 
               case 4:
-                success = _context2.sent;
+                success = _context3.sent;
 
                 if (!success) {
-                  _context2.next = 13;
+                  _context3.next = 13;
                   break;
                 }
 
                 this.removeFirebaseToken();
 
                 if (!(this.reCaptcha.enabled && !this.reCaptcha.loaded)) {
-                  _context2.next = 12;
+                  _context3.next = 12;
                   break;
                 }
 
-                _context2.next = 10;
+                _context3.next = 10;
                 return this.reCaptcha.init();
 
               case 10:
-                _context2.next = 13;
+                _context3.next = 13;
                 break;
 
               case 12:
@@ -2158,21 +2227,21 @@ var Authentication = /*#__PURE__*/function () {
 
               case 13:
                 this.resetAuthProcess();
-                _context2.next = 20;
+                _context3.next = 20;
                 break;
 
               case 16:
-                _context2.prev = 16;
-                _context2.t0 = _context2["catch"](0);
-                console.log('ERROR:', _context2.t0);
+                _context3.prev = 16;
+                _context3.t0 = _context3["catch"](0);
+                console.log('ERROR:', _context3.t0);
                 this.resetAuthProcess();
 
               case 20:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, this, [[0, 16]]);
+        }, _callee3, this, [[0, 16]]);
       }));
 
       function logout() {
@@ -2210,63 +2279,63 @@ var Authentication = /*#__PURE__*/function () {
   }, {
     key: "handleTicketsToken",
     value: function () {
-      var _handleTicketsToken = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(ticketPassAuthToken) {
+      var _handleTicketsToken = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(ticketPassAuthToken) {
         var response, userCredential, firebaseToken;
-        return _regenerator["default"].wrap(function _callee3$(_context3) {
+        return _regenerator["default"].wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
-                _context3.prev = 0;
-                _context3.next = 3;
+                _context4.prev = 0;
+                _context4.next = 3;
                 return this.sdk.methods.getAuthTokensByTicketPassToken(ticketPassAuthToken);
 
               case 3:
-                response = _context3.sent;
+                response = _context4.sent;
 
                 if (!response) {
-                  _context3.next = 19;
+                  _context4.next = 19;
                   break;
                 }
 
-                _context3.next = 7;
+                _context4.next = 7;
                 return this.firebase.authWithCustomToken(response.firebase_custom_token);
 
               case 7:
-                userCredential = _context3.sent;
-                _context3.next = 10;
+                userCredential = _context4.sent;
+                _context4.next = 10;
                 return userCredential.user.getIdToken();
 
               case 10:
-                firebaseToken = _context3.sent;
+                firebaseToken = _context4.sent;
                 this.updateFirebaseToken(firebaseToken);
                 this.setToken(response.token);
-                _context3.next = 15;
+                _context4.next = 15;
                 return this.sdk.methods.getUser();
 
               case 15:
                 this.dispatchTokens();
                 this.events.notify(_eventsName["default"].local.SUCCESS_AUTH, true);
                 this.events.notify(_eventsName["default"].local.TICKETS_TOKEN_AUTH_SUCCESS, true);
-                return _context3.abrupt("return", true);
+                return _context4.abrupt("return", true);
 
               case 19:
-                return _context3.abrupt("return", false);
+                return _context4.abrupt("return", false);
 
               case 22:
-                _context3.prev = 22;
-                _context3.t0 = _context3["catch"](0);
-                console.error(_context3.t0);
-                return _context3.abrupt("return", _context3.t0);
+                _context4.prev = 22;
+                _context4.t0 = _context4["catch"](0);
+                console.error(_context4.t0);
+                return _context4.abrupt("return", _context4.t0);
 
               case 26:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3, this, [[0, 22]]);
+        }, _callee4, this, [[0, 22]]);
       }));
 
-      function handleTicketsToken(_x) {
+      function handleTicketsToken(_x2) {
         return _handleTicketsToken.apply(this, arguments);
       }
 

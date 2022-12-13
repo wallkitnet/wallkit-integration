@@ -231,19 +231,22 @@
 
         window.addEventListener('load', () => {
             window.WallkitInt = new WallkitIntegration({
-                public_key: '00000000-ebb7-42fe-ad2e-f255c73b1061',
+                public_key: 'st3adcd3-9156-44bd-bc89-8092a58c6ae9',
                 // public_key: '3535',
+                mode: 'dev',
                 version: 'v1',
                 auth: { // default false
                     // firebase: false,
                     firebase: {
                         config: {
-                            apiKey: "AIzaSyDyO_7L0V96n03axCJm8vubMDPhIoJfQK0",
-                            authDomain: "arkansas-cannabiz-staging.firebaseapp.com",
-                            projectId: "arkansas-cannabiz-staging",
-                            storageBucket: "arkansas-cannabiz-staging.appspot.com",
-                            messagingSenderId: "29665529234",
-                            appId: "1:29665529234:web:c04243681192a87373054b"
+                            apiKey: "AIzaSyCmIluc9x63JOu7I5UMZ8q5M4AbluBeC8o",
+                            authDomain: "wallkit-258413.firebaseapp.com",
+                            databaseURL: "https://wallkit-258413.firebaseio.com",
+                            projectId: "wallkit-258413",
+                            storageBucket: "wallkit-258413.appspot.com",
+                            messagingSenderId: "767802802956",
+                            appId: "1:767802802956:web:e8fc363619c47f7fff7f29",
+                            measurementId: "G-ER6R7Z47R3"
                         },
                         providers: [
                             {
@@ -265,10 +268,7 @@
                         title: 'Authorisation',
                         content: modalContent
                     },
-                    reCaptcha: {
-                        mobile: false,
-                        siteKey: '6LfKdSkeAAAAAEIPXZE2cBG-_f2hL9mVr2SOcARH'
-                    }
+                    reCaptcha: false,
                 },
                 analytics: {
                     parseUTM: true // default true
