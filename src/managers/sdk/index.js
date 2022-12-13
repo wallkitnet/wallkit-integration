@@ -56,6 +56,6 @@ export default class SDK {
     }
 
     load() {
-        insertScript(`${WALLKIT_CDN_URL}/js/sdk/0.0.46/wallkit.umd.min.js`, 'wallkit-js-sdk', this.onLoad.bind(this));
+        insertScript(`${WALLKIT_CDN_URL}/js/sdk/0.0.47/wallkit.umd.min.js`, 'wallkit-js-sdk', this.onLoad.bind(this));
     }
 }
