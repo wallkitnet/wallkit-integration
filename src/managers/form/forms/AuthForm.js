@@ -5,8 +5,14 @@ import { LoginForm } from "./LoginForm";
 import { SignupForm } from "./SignUpForm";
 import { ForgotPasswordForm } from "./ForgotPasswordForm";
 
+export const SIGN_UP_FORM_SLUG = 'sign-up';
+export const SIGN_IN_FORM_SLUG = 'sign-in';
+export const RESET_PASSWORD_FORM_SLUG = 'reset-password';
+
 export class AuthForm {
     constructor(selector, options) {
+        this.defaultFormSlug = options?.defaultForm || SIGN_UP_FORM_SLUG;
+
         this.wrapper = createElement('div', {
             id: 'wk-auth-form'
         });
@@ -45,6 +51,7 @@ export class AuthForm {
 
         if (options.signUp === true) {
             this.signUpForm = new SignupForm(selector, {
+                termsOfService: options.termsOfService,
                 onSubmit: (data) => {
                     if (options.onSignUp) {
                         options.onSignUp(data);
@@ -92,6 +99,24 @@ export class AuthForm {
             }
           });
         }
+
+      this.forms = {
+        [RESET_PASSWORD_FORM_SLUG]: this.forgotPasswordForm,
+        [SIGN_IN_FORM_SLUG]: this.loginForm,
+        [SIGN_UP_FORM_SLUG]: this.signUpForm
+      };
+    }
+
+    get defaultForm () {
+      return this.forms[this.defaultFormSlug];
+    }
+
+    showDefaultForm () {
+      const form = this.defaultForm;
+
+      if (form) {
+        form.show();
+      }
     }
 
     reset () {
@@ -100,31 +125,17 @@ export class AuthForm {
         if (this.triggerButton) {
           this.triggerButton.show();
         } else {
-          this.loginForm.show();
+          this.showDefaultForm();
         }
     }
 
     hide () {
-        if (this.loginForm) {
-            this.loginForm.hide();
-            this.loginForm.resetForm();
-        }
-
-        if (this.signUpForm) {
-            this.signUpForm.hide();
-            this.signUpForm.resetForm();
-        }
-
-        if (this.forgotPasswordForm) {
-            this.forgotPasswordForm.hide();
-            this.forgotPasswordForm.resetForm();
-        }
-    }
-
-    showSuccessLogin () {
-    }
-
-    showSuccessSignUp () {
+        this.forms.forEach((form) => {
+          if (form) {
+            form.hide();
+            form.resetForm();
+          }
+        });
     }
 
     showSuccessPasswordReset () {
@@ -155,9 +166,7 @@ export class AuthForm {
         if (this.triggerButton) {
             this.triggerButton.render()
         } else {
-          if (this.loginForm) {
-            this.loginForm.show();
-          }
+            this.showDefaultForm();
         }
     }
 }

@@ -158,6 +158,10 @@ export const LIBRARY_STYLES = `
         .wk-form-field.wk-form-field--invalid .wk-form-field__input {
             border-bottom: 1px solid #dd2c00;
         }
+        
+        .wk-form-field.wk-form-field--checkbox.wk-form-field--invalid .wk-form-field__checkmark {
+            border-color: #dd2c00;
+        }
 
         .wk-form-field.wk-form-field--valid .wk-form-field__input {
             border-bottom: 1px solid green;
@@ -286,4 +290,57 @@ export const LIBRARY_STYLES = `
             transform: translateX(-50%);
         }
         
+        .wk-form-field.wk-form-field--checkbox .wk-form-field__label {
+            position: relative;
+            padding-left: 30px;     
+            line-height: 20px;
+            font-size: 14px;     
+        } 
+        
+        .wk-form-field.wk-form-field--checkbox input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+        
+        .wk-form-field .wk-form-field__checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 18px;
+            width: 18px;
+            background-color: none;
+            border: 2px solid #333;
+            box-sizing: border-box;
+            border-radius: 2px;
+        }
+        
+        .wk-form-field.wk-form-field--checkbox input:checked ~ .wk-form-field__checkmark {
+            background-color: #3f51b5;
+            border-color: #3f51b5;
+        }
+        
+        .wk-form-field__checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+        
+        .wk-form-field input:checked ~ .wk-form-field__checkmark:after {
+            display: block;
+        }
+        
+        .wk-form-field .wk-form-field__checkmark:after {
+            left: 5px;
+            top: 2px;
+            width: 3px;
+            height: 7px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
 `;

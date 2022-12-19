@@ -47,6 +47,11 @@ export default class Authentication {
                     ...config,
                     ...options.firebase
                 }
+
+                if (options.firebase.genuineForm === false) {
+                    config.tosURL = '';
+                    config.privacyPolicyURL = '';
+                }
             }
 
             this.firebase = new Firebase(config);
@@ -115,9 +120,12 @@ export default class Authentication {
     }
 
     initAuthForm () {
+        const { tosURL, privacyPolicyURL, termsOfService } = this.#options.firebase;
+
         this.authForm = new AuthForm(`#${WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID}`, {
             triggerButton: this.firebase.providers.length > 1,
             signUp: this.#options.auth.signUp ?? true,
+            termsOfService: termsOfService ?? { tosURL, privacyPolicyURL },
             onLogin: (data) => {
               if (this.reCaptcha.enabled) {
                 this.executeRecaptcha();

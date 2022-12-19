@@ -6,7 +6,7 @@ export class FormField {
             throw new Error('No Options Provided');
         }
 
-        this.wrapper = this.createWrapper();
+        this.wrapper = this.createWrapper(options);
         this.input = this.createInput(options);
         this.type = options.type || 'text';
         this.message = null;
@@ -14,10 +14,7 @@ export class FormField {
         this.required = options.required || false;
         this.slug = options.dataSlug;
 
-        this.inputWrapper = this.createInputWrapper();
-        this.wrapper.appendChild(this.createLabel(options.label, options.name));
-        this.inputWrapper.appendChild(this.input);
-        this.wrapper.appendChild(this.inputWrapper);
+        this.render(options);
 
         if (options.affix) {
             this.insertAffix(options.affix.content, options.affix.onClick);
@@ -34,6 +31,8 @@ export class FormField {
         if (options.onInput) {
             this.input.addEventListener('input', options.onInput.bind(this));
         }
+
+        this.input.addEventListener('blur', this.validate.bind(this));
 
         if (options.onEnter) {
           this.input.addEventListener('keydown', (event) => {
@@ -128,7 +127,7 @@ export class FormField {
             attributes: {
                 for: forRef
             },
-            innerText: text
+            innerHTML: text
         });
     }
 
@@ -182,5 +181,12 @@ export class FormField {
 
     focus () {
       this.input.focus();
+    }
+
+    render (options) {
+      this.inputWrapper = this.createInputWrapper();
+      this.wrapper.appendChild(this.createLabel(options.label, options.name));
+      this.inputWrapper.appendChild(this.input);
+      this.wrapper.appendChild(this.inputWrapper);
     }
 }
