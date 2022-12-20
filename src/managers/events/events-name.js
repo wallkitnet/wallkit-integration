@@ -16,6 +16,7 @@ export const TICKETS_TOKEN_AUTH_SUCCESS = 'tickets-token-auth-success';
 export const FIREBASE_LOADED = 'firebase-loaded';
 export const FIREBASE_INIT = 'firebase-init';
 export const FIREBASE_UI_SHOWN = 'firebase-ui-shown';
+export const CHECK_USER_ACCESS = 'check-user-access';
 
 // Wallkit Events Names
 export const WALLKIT_CHANGE_FRAME = 'wk-event-modal';
@@ -46,7 +47,8 @@ export default {
         RECAPTCHA_LOADED,
         RECAPTCHA_VALIDATION_FAILED,
         RECAPTCHA_VALIDATION_SUCCESS,
-        TICKETS_TOKEN_AUTH_SUCCESS
+        TICKETS_TOKEN_AUTH_SUCCESS,
+        CHECK_USER_ACCESS
     },
     wallkit: {
         FRAME_CREATED,

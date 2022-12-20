@@ -5,6 +5,7 @@ import SDK from './managers/sdk';
 import Events from "./managers/events";
 import Analytics from "./managers/analytics";
 import Content from "./managers/content";
+import Call from "./managers/call";
 
 import { LIBRARY_STYLES } from './assets/styles';
 
@@ -50,6 +51,7 @@ window.WallkitIntegration = class WallkitIntegration {
                 });
 
                 this.analytics = new Analytics(options?.analytics);
+                this.call = new Call(this.popup, this.config);
 
                 this.init();
             }
@@ -153,7 +155,6 @@ window.WallkitIntegration = class WallkitIntegration {
         }
     }
 
-
     init() {
         this.#insertStyles();
         this.popup.init();
@@ -169,6 +170,11 @@ window.WallkitIntegration = class WallkitIntegration {
         if (this.config.onInit) {
             this.config.onInit(this);
         }
+
+        if(this.config?.call?.use){
+            this.call.init();
+        }
+
     }
 }
 
