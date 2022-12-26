@@ -87,26 +87,27 @@ export default class Authentication {
     }
 
     handleLogin (data) {
-      this.firebase.signIn(data.email, data.password).then(() => {
-        this.authForm.hide();
-      }).catch((error) => {
-        if (error.message) {
-          this.authForm.loginForm.setFormError(error.message);
-        }
-        this.reCaptcha.grecaptcha.reset();
-      });
+      this.firebase.signIn(data.email, data.password)
+        .then(() => {})
+        .catch((error) => {
+          if (error.message) {
+            this.authForm.loginForm.setFormError(error.message);
+          }
+          this.reCaptcha.grecaptcha.reset();
+        });
     }
 
     handleSignUp (data) {
-      this.firebase.signUp(data.email, data.password).then(() => {
-        this.firebase.updateName(data.name);
-        this.authForm.hide();
-      }).catch((error) => {
-        if (error.message) {
-          this.authForm.signUpForm.setFormError(error.message);
-        }
-        this.reCaptcha.grecaptcha.reset();
-      });
+      this.firebase.signUp(data.email, data.password)
+        .then(() => {
+          this.firebase.updateName(data.name);
+        })
+        .catch((error) => {
+          if (error.message) {
+            this.authForm.signUpForm.setFormError(error.message);
+          }
+          this.reCaptcha.grecaptcha.reset();
+        });
     }
 
     executeRecaptcha () {
@@ -206,6 +207,10 @@ export default class Authentication {
                     this.modal.hide();
                 } else {
                     this.resetAuthProcess();
+                }
+
+                if (this.authForm) {
+                  this.authForm.hide();
                 }
 
                 this.toggleFormLoader(false);

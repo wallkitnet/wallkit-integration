@@ -1780,9 +1780,7 @@ var Authentication = /*#__PURE__*/function () {
     value: function handleLogin(data) {
       var _this2 = this;
 
-      this.firebase.signIn(data.email, data.password).then(function () {
-        _this2.authForm.hide();
-      })["catch"](function (error) {
+      this.firebase.signIn(data.email, data.password).then(function () {})["catch"](function (error) {
         if (error.message) {
           _this2.authForm.loginForm.setFormError(error.message);
         }
@@ -1797,8 +1795,6 @@ var Authentication = /*#__PURE__*/function () {
 
       this.firebase.signUp(data.email, data.password).then(function () {
         _this3.firebase.updateName(data.name);
-
-        _this3.authForm.hide();
       })["catch"](function (error) {
         if (error.message) {
           _this3.authForm.signUpForm.setFormError(error.message);
@@ -1969,6 +1965,10 @@ var Authentication = /*#__PURE__*/function () {
           _this6.modal.hide();
         } else {
           _this6.resetAuthProcess();
+        }
+
+        if (_this6.authForm) {
+          _this6.authForm.hide();
         }
 
         _this6.toggleFormLoader(false);
@@ -3584,12 +3584,16 @@ var AuthForm = /*#__PURE__*/function () {
   }, {
     key: "hide",
     value: function hide() {
-      this.forms.forEach(function (form) {
-        if (form) {
-          form.hide();
-          form.resetForm();
+      if (!!this.forms) {
+        for (var formKey in this.forms) {
+          var form = this.forms[formKey];
+
+          if (form) {
+            form.hide();
+            form.resetForm();
+          }
         }
-      });
+      }
     }
   }, {
     key: "showSuccessPasswordReset",

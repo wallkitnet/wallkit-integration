@@ -130,12 +130,16 @@ export class AuthForm {
     }
 
     hide () {
-        this.forms.forEach((form) => {
+      if (!!this.forms) {
+        for (let formKey in this.forms) {
+          const form = this.forms[formKey];
+
           if (form) {
             form.hide();
             form.resetForm();
           }
-        });
+        }
+      }
     }
 
     showSuccessPasswordReset () {
