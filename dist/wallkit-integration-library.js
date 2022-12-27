@@ -415,6 +415,8 @@ function _eventsListener2() {
 
             _this2.authentication.show();
 
+            _this2.frame.openFrame('');
+
             break;
 
           case "wk-event-close-modal":

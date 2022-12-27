@@ -56,7 +56,7 @@ window.WallkitIntegration = class WallkitIntegration {
         });
     }
 
-    modal(name, params) {
+    modal (name, params) {
         this.popup.open(name, params);
     }
 
@@ -107,6 +107,7 @@ window.WallkitIntegration = class WallkitIntegration {
                                 }
                             }, { once: true });
                             this.authentication.show();
+                            this.frame.openFrame('');
                             break;
 
                         case "wk-event-close-modal" :
