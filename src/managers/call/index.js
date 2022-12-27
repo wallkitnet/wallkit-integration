@@ -92,6 +92,7 @@ export default class Call {
                             console.log('Open popup without params. Only with slug: ', popupSlug);
                         }
                         this.#popup.open(popupSlug);
+                        e.preventDefault();
                         return;
                     }
 
@@ -122,6 +123,7 @@ export default class Call {
                         }
 
                         this.#popup.open(path);
+                        e.preventDefault();
                     }
                 } catch (error) {
                     console.log('WK Call ERROR:', error);

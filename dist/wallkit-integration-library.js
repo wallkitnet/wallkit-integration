@@ -2196,7 +2196,7 @@ var Call = /*#__PURE__*/function () {
     value: function init() {
       if (_classPrivateMethodGet(this, _isDebug, _isDebug2).call(this)) {
         var _classPrivateFieldGet2;
-        console.log('Init Wallkit Reactions with config: ', (_classPrivateFieldGet2 = (0, _classPrivateFieldGet5["default"])(this, _config)) === null || _classPrivateFieldGet2 === void 0 ? void 0 : _classPrivateFieldGet2.reactions);
+        console.log('Init Wallkit Call with config: ', (_classPrivateFieldGet2 = (0, _classPrivateFieldGet5["default"])(this, _config)) === null || _classPrivateFieldGet2 === void 0 ? void 0 : _classPrivateFieldGet2.call);
         _classPrivateMethodGet(this, _debugUserStatus, _debugUserStatus2).call(this);
         _classPrivateMethodGet(this, _debugElementsClickingOnWhichOpensPopups, _debugElementsClickingOnWhichOpensPopups2).call(this);
         _classPrivateMethodGet(this, _debugElementsThatReactToTheUsersStatus, _debugElementsThatReactToTheUsersStatus2).call(this);
@@ -2223,7 +2223,7 @@ function _initWkListeners2() {
   var _this = this;
   (0, _classPrivateFieldGet5["default"])(this, _events).subscribe(_eventsName["default"].local.FRAME_MESSAGE, function (_ref3) {
     var name = _ref3.name,
-      value = _ref3.value;
+      _ = _ref3._;
     switch (name) {
       case _eventsName["default"].wallkit.WALLKIT_LOGOUT:
         _this.setAllDataWkStatusesInDOMElements();
@@ -2277,6 +2277,7 @@ function _initUIListeners2() {
           console.log('Open popup without params. Only with slug: ', popupSlug);
         }
         (0, _classPrivateFieldGet5["default"])(_this2, _popup).open(popupSlug);
+        e.preventDefault();
         return;
       }
 
@@ -2306,9 +2307,10 @@ function _initUIListeners2() {
           console.log('Open popup with params: ', path);
         }
         (0, _classPrivateFieldGet5["default"])(_this2, _popup).open(path);
+        e.preventDefault();
       }
     } catch (error) {
-      console.log('Reactions ERROR:', error);
+      console.log('WK Call ERROR:', error);
     }
   });
 }
@@ -2326,7 +2328,7 @@ function _getWallkitUserData2() {
     console.log(response);
     _this3.setAllDataWkStatusesInDOMElements(response);
   })["catch"](function (error) {
-    console.log('Reactions ERROR:', error);
+    console.log('WK Call ERROR:', error);
     _this3.setAllDataWkStatusesInDOMElements();
   });
 }
