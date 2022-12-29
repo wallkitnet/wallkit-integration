@@ -3,6 +3,7 @@ import { Form } from "../index";
 
 import { FormField } from "../field";
 import { PasswordField } from "../field/PasswordField.js";
+import { CheckBoxField } from "../field/CheckBoxField.js";
 
 export class SignupForm extends Form {
     constructor(targetElementSelector, options) {
@@ -42,11 +43,25 @@ export class SignupForm extends Form {
             }
         });
 
+        if (this.#isTosEnabled(options)) {
+          this.tosField = new CheckBoxField({
+            dataSlug: 'agreement',
+            name: 'wk-fb-agreement',
+            required: true,
+            label: this.getTosAcceptLabel(options.termsOfService),
+            type: 'checkbox',
+          });
+        }
+
         this.fields = [
             this.emailField,
             this.nameField,
-            this.passwordField
+            this.passwordField,
         ];
+
+        if (this.tosField) {
+          this.fields.push(this.tosField);
+        }
 
         this.init();
     }
@@ -66,5 +81,41 @@ export class SignupForm extends Form {
         formFooter.appendChild(this.submitBtn);
 
         return formFooter;
+    }
+
+    #isTosEnabled (options) {
+      if (!options.termsOfService) {
+        return false;
+      }
+
+      return !!options.termsOfService ||
+        !!options.termsOfService.tosURL ||
+        !!options.termsOfService.privacyPolicyURL;
+    }
+
+    getTosAcceptLabel (termsOptions) {
+      if (!termsOptions) {
+        return '';
+      }
+
+      if (typeof termsOptions !== "object") {
+        return termsOptions;
+      }
+
+      let defaultLabel = `By signing up i agree with the`;
+
+      if (termsOptions.tosURL) {
+        defaultLabel += ` <a href="${termsOptions.tosURL}" target="_blank">Terms & Conditions</a>`
+      }
+
+      if (termsOptions.tosURL && termsOptions.privacyPolicyURL) {
+        defaultLabel += ` and `
+      }
+
+      if (termsOptions.privacyPolicyURL) {
+        defaultLabel += ` <a href="${termsOptions.privacyPolicyURL}" target="_blank">Privacy Policy</a>`
+      }
+
+      return defaultLabel;
     }
 }

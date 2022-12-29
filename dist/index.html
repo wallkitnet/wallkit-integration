@@ -233,17 +233,18 @@
             window.WallkitInt = new WallkitIntegration({
                 public_key: '00000000-ebb7-42fe-ad2e-f255c73b1061',
                 // public_key: '3535',
+                // mode: 'dev',
                 version: 'v1',
                 auth: { // default false
                     // firebase: false,
                     firebase: {
                         config: {
-                            apiKey: "AIzaSyDyO_7L0V96n03axCJm8vubMDPhIoJfQK0",
-                            authDomain: "arkansas-cannabiz-staging.firebaseapp.com",
-                            projectId: "arkansas-cannabiz-staging",
-                            storageBucket: "arkansas-cannabiz-staging.appspot.com",
-                            messagingSenderId: "29665529234",
-                            appId: "1:29665529234:web:c04243681192a87373054b"
+                            apiKey: "AIzaSyASGesPhX4SX_eTPFYgPwOHc4KNnyBiu_4",
+                            authDomain: "thewrap-staging.firebaseapp.com",
+                            projectId: "thewrap-staging",
+                            storageBucket: "thewrap-staging.appspot.com",
+                            messagingSenderId: "848284570995",
+                            appId: "1:848284570995:web:5427daa2d02bfbc71f6106"
                         },
                         providers: [
                             {
@@ -257,18 +258,16 @@
                             // }
                         ],
                         genuineForm: false,
-                        tosURL: '',
-                        privacyPolicyURL: '',
+                        termsOfService: null,
+                        tosURL: 'https://wallkit.net/terms',
+                        privacyPolicyURL: 'https://wallkit.net/terms',
                         elementSelector: '#wrap-pro-auth'
                     },
                     modal: {
                         title: 'Authorisation',
                         content: modalContent
                     },
-                    reCaptcha: {
-                        mobile: false,
-                        siteKey: '6LfKdSkeAAAAAEIPXZE2cBG-_f2hL9mVr2SOcARH'
-                    }
+                    reCaptcha: false,
                 },
                 analytics: {
                     parseUTM: true // default true

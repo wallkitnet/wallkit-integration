@@ -50,7 +50,7 @@ export const createElement = (tag, options) => {
     if (attributes && Object.keys(attributes) && Object.keys(attributes).length) {
         for (let prop in attributes) {
             if (attributes.hasOwnProperty(prop)) {
-                element[prop] = attributes[prop];
+                element.setAttribute(prop,  attributes[prop]);
             }
         }
     }

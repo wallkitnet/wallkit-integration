@@ -47,6 +47,11 @@ export default class Authentication {
                     ...config,
                     ...options.firebase
                 }
+
+                if (options.firebase.genuineForm === false) {
+                    config.tosURL = '';
+                    config.privacyPolicyURL = '';
+                }
             }
 
             this.firebase = new Firebase(config);
@@ -82,26 +87,27 @@ export default class Authentication {
     }
 
     handleLogin (data) {
-      this.firebase.signIn(data.email, data.password).then(() => {
-        this.authForm.hide();
-      }).catch((error) => {
-        if (error.message) {
-          this.authForm.loginForm.setFormError(error.message);
-        }
-        this.reCaptcha.grecaptcha.reset();
-      });
+      this.firebase.signIn(data.email, data.password)
+        .then(() => {})
+        .catch((error) => {
+          if (error.message) {
+            this.authForm.loginForm.setFormError(error.message);
+          }
+          this.reCaptcha.grecaptcha.reset();
+        });
     }
 
     handleSignUp (data) {
-      this.firebase.signUp(data.email, data.password).then(() => {
-        this.firebase.updateName(data.name);
-        this.authForm.hide();
-      }).catch((error) => {
-        if (error.message) {
-          this.authForm.signUpForm.setFormError(error.message);
-        }
-        this.reCaptcha.grecaptcha.reset();
-      });
+      this.firebase.signUp(data.email, data.password)
+        .then(() => {
+          this.firebase.updateName(data.name);
+        })
+        .catch((error) => {
+          if (error.message) {
+            this.authForm.signUpForm.setFormError(error.message);
+          }
+          this.reCaptcha.grecaptcha.reset();
+        });
     }
 
     executeRecaptcha () {
@@ -115,9 +121,12 @@ export default class Authentication {
     }
 
     initAuthForm () {
+        const { tosURL, privacyPolicyURL, termsOfService } = this.#options.firebase;
+
         this.authForm = new AuthForm(`#${WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID}`, {
             triggerButton: this.firebase.providers.length > 1,
             signUp: this.#options.auth.signUp ?? true,
+            termsOfService: termsOfService ?? { tosURL, privacyPolicyURL },
             onLogin: (data) => {
               if (this.reCaptcha.enabled) {
                 this.executeRecaptcha();
@@ -144,14 +153,32 @@ export default class Authentication {
                 this.handleSignUp(data);
               }
             },
-            onPasswordReset: (data) => {
-                this.firebase.sendPasswordResetEmail(data.email).then(() => {
-                    this.authForm.showSuccessPasswordReset();
-                }).catch((error) => {
-                    if (error.message) {
-                        this.authForm.forgotPasswordForm.setFormError(error.message);
-                    }
-                });
+            onPasswordReset: async (data) => {
+              try {
+                this.toggleFormLoader(true);
+
+                let success;
+                if (this.#options.firebase.genuinePasswordReset === false) {
+                  const { result } = await this.sdk.methods.firebasePasswordReset(data.email);
+                  success = result;
+                } else {
+                  await this.firebase.sendPasswordResetEmail(data.email);
+                  success = true;
+                }
+
+                if (success) {
+                  this.authForm.showSuccessPasswordReset();
+                } else {
+                  throw new Error('Something went wrong');
+                }
+
+                this.toggleFormLoader(false);
+              } catch (error) {
+                if (error.message) {
+                    this.authForm.forgotPasswordForm.setFormError(error.message);
+                }
+                this.toggleFormLoader(false);
+              }
             },
             onAuthFormShow: () => {
                 this.firebase.hideAuthForm();
@@ -180,6 +207,10 @@ export default class Authentication {
                     this.modal.hide();
                 } else {
                     this.resetAuthProcess();
+                }
+
+                if (this.authForm) {
+                  this.authForm.hide();
                 }
 
                 this.toggleFormLoader(false);
