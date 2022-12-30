@@ -1,4 +1,4 @@
-name: Build and deploy Wallkit Integration Library dev version
+name: Build and deploy dev version Wallkit Integration Library
 
 on:
   push:
