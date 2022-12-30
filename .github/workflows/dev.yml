@@ -3,7 +3,7 @@ name: Build and deploy dev version Wallkit Integration Library
 on:
   push:
     branches:
-      - feature/setup-github-actions
+      - dev
 jobs:
   build:
     runs-on: ubuntu-latest
