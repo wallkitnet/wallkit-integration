@@ -1,4 +1,4 @@
-name: Deploy Wallkit Integration Library
+name: Build and deploy Wallkit Integration Library dev version
 
 on:
   push:
@@ -24,4 +24,4 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
       - name: Deploy to S3
-        run: aws s3 sync ./dist/. s3://wallkit-integration-dev --exclude '*.html' --exclude '*.txt'
+        run: aws s3 sync ./dist/. s3://wallkit-integration-dev/latest --exclude '*.html' --exclude '*.txt'
