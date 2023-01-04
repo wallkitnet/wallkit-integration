@@ -2652,7 +2652,7 @@ function _formatCheckAccessRequestPath2(id, params) {
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports["default"] = exports.WALLKIT_SDK_LOADED = exports.WALLKIT_LOGOUT = exports.WALLKIT_FRAME_ROUTE_CHANGE = exports.WALLKIT_FRAME_READY = exports.WALLKIT_FIREBASE_TOKEN = exports.WALLKIT_EVENT_USER = exports.WALLKIT_EVENT_TOKEN = exports.WALLKIT_EVENT_REGISTRATION = exports.WALLKIT_EVENT_ONE_TAP_SIGN_IN = exports.WALLKIT_EVENT_GET_TOKEN = exports.WALLKIT_EVENT_FIREBASE_TOKEN = exports.WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN = exports.WALLKIT_EVENT_AUTH = exports.WALLKIT_CHANGE_FRAME = exports.TICKETS_TOKEN_AUTH_SUCCESS = exports.SUCCESS_FIREBASE_AUTH = exports.SUCCESS_AUTH = exports.RECAPTCHA_VALIDATION_SUCCESS = exports.RECAPTCHA_VALIDATION_FAILED = exports.RECAPTCHA_LOADED = exports.MODAL_CREATED = exports.MODAL_CLOSED = exports.FRAME_MOUNTED = exports.FRAME_MODAL_CLOSED = exports.FRAME_MESSAGE = exports.FRAME_CREATED = exports.FIREBASE_UI_SHOWN = exports.FIREBASE_LOADED = exports.FIREBASE_INIT = exports.CHECK_USER_ACCESS = exports.AUTH_MODAL_CLOSED = void 0;
+exports["default"] = exports.WALLKIT_SDK_LOADED = exports.WALLKIT_LOGOUT = exports.WALLKIT_FRAME_ROUTE_CHANGE = exports.WALLKIT_FRAME_READY = exports.WALLKIT_FIREBASE_TOKEN = exports.WALLKIT_EVENT_USER = exports.WALLKIT_EVENT_TOKEN = exports.WALLKIT_EVENT_REGISTRATION = exports.WALLKIT_EVENT_ONE_TAP_SIGN_IN = exports.WALLKIT_EVENT_GET_TOKEN = exports.WALLKIT_EVENT_FIREBASE_TOKEN = exports.WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN = exports.WALLKIT_EVENT_CHANGE_LANGUAGE = exports.WALLKIT_EVENT_AUTH = exports.WALLKIT_CHANGE_FRAME = exports.TICKETS_TOKEN_AUTH_SUCCESS = exports.SUCCESS_FIREBASE_AUTH = exports.SUCCESS_AUTH = exports.RECAPTCHA_VALIDATION_SUCCESS = exports.RECAPTCHA_VALIDATION_FAILED = exports.RECAPTCHA_LOADED = exports.MODAL_CREATED = exports.MODAL_CLOSED = exports.FRAME_MOUNTED = exports.FRAME_MODAL_CLOSED = exports.FRAME_MESSAGE = exports.FRAME_CREATED = exports.FIREBASE_UI_SHOWN = exports.FIREBASE_LOADED = exports.FIREBASE_INIT = exports.CHECK_USER_ACCESS = exports.AUTH_MODAL_CLOSED = void 0;
 // Local Events Names
 var FRAME_CREATED = 'frame-created';
 exports.FRAME_CREATED = FRAME_CREATED;
@@ -2718,6 +2718,8 @@ var WALLKIT_FRAME_ROUTE_CHANGE = 'wk-event-route-change';
 exports.WALLKIT_FRAME_ROUTE_CHANGE = WALLKIT_FRAME_ROUTE_CHANGE;
 var WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN = 'wk-event-firebase-custom-token';
 exports.WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN = WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN;
+var WALLKIT_EVENT_CHANGE_LANGUAGE = 'wk-event-change-language';
+exports.WALLKIT_EVENT_CHANGE_LANGUAGE = WALLKIT_EVENT_CHANGE_LANGUAGE;
 var _default = {
   local: {
     FRAME_CREATED: FRAME_CREATED,
@@ -2748,7 +2750,8 @@ var _default = {
     WALLKIT_EVENT_REGISTRATION: WALLKIT_EVENT_REGISTRATION,
     WALLKIT_EVENT_ONE_TAP_SIGN_IN: WALLKIT_EVENT_ONE_TAP_SIGN_IN,
     WALLKIT_FRAME_ROUTE_CHANGE: WALLKIT_FRAME_ROUTE_CHANGE,
-    WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN: WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN
+    WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN: WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN,
+    WALLKIT_EVENT_CHANGE_LANGUAGE: WALLKIT_EVENT_CHANGE_LANGUAGE
   }
 };
 exports["default"] = _default;
@@ -4012,8 +4015,10 @@ var Frame = /*#__PURE__*/function () {
   }, {
     key: "getFrameURL",
     get: function get() {
+      var _this$options$lang;
       var host = this.options.mode === 'dev' ? _constants.WALLKIT_POPUP_DEV_URL : _constants.WALLKIT_POPUP_URL;
-      return "".concat(host, "?PUBLIC_KEY=").concat(this.options.public_key, "&version=").concat(this.options.version);
+      var lang = (_this$options$lang = this.options.lang) !== null && _this$options$lang !== void 0 ? _this$options$lang : 'en';
+      return "".concat(host, "?PUBLIC_KEY=").concat(this.options.public_key, "&version=").concat(this.options.version, "&lang=").concat(lang);
     }
   }, {
     key: "createFrame",
@@ -4126,10 +4131,22 @@ Object.defineProperty(exports, "__esModule", ({
 exports.Localization = void 0;
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
 var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
+var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(5194));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(8478));
 var _languages = __webpack_require__(8006);
+var _eventsName = __webpack_require__(6073);
+var _events2 = _interopRequireDefault(__webpack_require__(9889));
+function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
+function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
+var _events = /*#__PURE__*/new WeakMap();
 var Localization = /*#__PURE__*/function () {
   function Localization() {
     (0, _classCallCheck2["default"])(this, Localization);
+    _classPrivateFieldInitSpec(this, _events, {
+      writable: true,
+      value: void 0
+    });
+    (0, _classPrivateFieldSet2["default"])(this, _events, new _events2["default"]());
   }
   (0, _createClass2["default"])(Localization, null, [{
     key: "assembleLanguage",
@@ -4141,6 +4158,14 @@ var Localization = /*#__PURE__*/function () {
         }
       }
       return 'en';
+    }
+  }, {
+    key: "changeLanguage",
+    value: function changeLanguage() {
+      var language = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'en';
+      if (typeof language === "string") {
+        (0, _classPrivateFieldGet2["default"])(this, _events).notify(_eventsName.WALLKIT_EVENT_CHANGE_LANGUAGE, language);
+      }
     }
   }]);
   return Localization;
