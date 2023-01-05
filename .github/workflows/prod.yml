@@ -23,13 +23,34 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-      - name: Deploy to S3
-        run: aws s3 sync ./dist/. s3://wallkit-integration-prod/latest --exclude '*.html' --exclude '*.txt'
-      - name: Invalidate CloudFront
-        uses: chetan/invalidate-cloudfront-action@v2
-        env:
-          DISTRIBUTION: ${{ secrets.DEV_DISTRIBUTION_ID }}
-          PATHS: "/latest/*"
-          AWS_REGION: us-east-1
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Get package version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@main
+      - name: Check if lib version already exist
+        id: check-lib-version
+#        run: bash ${GITHUB_WORKSPACE}/.github/check-version.sh
+        run: |
+          aws s3 ls s3://wallkit-integration-prod/${{ steps.package-version.outputs.current-version}}
+          if [ $? == 0 ]
+          then
+            echo "exist-current-lib-version=true" >> $GITHUB_OUTPUT
+          else
+            echo "exist-current-lib-version=false" >> $GITHUB_OUTPUT
+          fi
+      - name: Debug vars
+        id: debug-vars
+#        run: bash ${GITHUB_WORKSPACE}/.github/debug-vars.sh
+        run: |
+          echo ${{ steps.package-version.outputs.current-version }}
+          echo ${{ steps.check-lib-version.exist-current-lib-version }}
+
+#      - name: Deploy to S3
+#        run: aws s3 sync ./dist/. s3://wallkit-integration-prod/latest --exclude '*.html' --exclude '*.txt'
+#      - name: Invalidate CloudFront
+#        uses: chetan/invalidate-cloudfront-action@v2
+#        env:
+#          DISTRIBUTION: ${{ secrets.DEV_DISTRIBUTION_ID }}
+#          PATHS: "/latest/*"
+#          AWS_REGION: us-east-1
+#          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
