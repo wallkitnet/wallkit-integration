@@ -28,7 +28,6 @@ jobs:
         uses: martinbeentjes/npm-get-version-action@main
       - name: Check if lib version already exist
         id: check-lib-version
-#        run: bash ${GITHUB_WORKSPACE}/.github/check-version.sh
         run: |
           aws s3 ls s3://wallkit-integration-prod/${{ steps.package-version.outputs.current-version}}
           if [ $? == 0 ]
@@ -39,10 +38,9 @@ jobs:
           fi
       - name: Debug vars
         id: debug-vars
-#        run: bash ${GITHUB_WORKSPACE}/.github/debug-vars.sh
         run: |
-          echo ${{ steps.package-version.outputs.current-version }}
-          echo ${{ steps.check-lib-version.exist-current-lib-version }}
+          echo "Lib version: ${{ steps.package-version.outputs.current-version }}"
+          echo "Exist current lib version on S3: ${{ steps.check-lib-version.outputs.exist-current-lib-version }}"
 
 #      - name: Deploy to S3
 #        run: aws s3 sync ./dist/. s3://wallkit-integration-prod/latest --exclude '*.html' --exclude '*.txt'
