@@ -30,8 +30,8 @@ jobs:
         id: check-lib-version
         run: |
           aws s3 ls s3://wallkit-integration-prod/${{ steps.package-version.outputs.current-version}}/wallkit-integration-library.min.js
-          echo $?
-          if [ $? == 0 ]; then
+          if [ $? == 0 ] 
+          then
             echo "exist-current-lib-version=false" >> $GITHUB_OUTPUT
           else
             echo "exist-current-lib-version=true" >> $GITHUB_OUTPUT
