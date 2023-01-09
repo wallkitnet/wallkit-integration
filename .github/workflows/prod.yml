@@ -29,9 +29,11 @@ jobs:
       - name: Check if lib version already exist
         id: check-lib-version
         run: |
+          aws --version
+          aws s3 ls
+          echo $?
           aws s3 ls s3://wallkit-integration-prod/${{ steps.package-version.outputs.current-version}}/wallkit-integration-library.min.js
-          if [ $? == 0 ] 
-          then
+          if [ $? == 0 ]; then
             echo "exist-current-lib-version=false" >> $GITHUB_OUTPUT
           else
             echo "exist-current-lib-version=true" >> $GITHUB_OUTPUT
