@@ -11,7 +11,7 @@
 return /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 350:
+/***/ 2350:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -26,7 +26,7 @@ exports.LIBRARY_STYLES = LIBRARY_STYLES;
 
 /***/ }),
 
-/***/ 66:
+/***/ 9066:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -35,23 +35,26 @@ exports.LIBRARY_STYLES = LIBRARY_STYLES;
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.FIREBASE_TOKEN_NAME = exports.WALLKIT_TOKEN_NAME = exports.WALLKIT_DEV_FIREBASE_CONFIG = exports.WALLKIT_FIREBASE_CONFIG = exports.WALLKIT_FRAME_ID = exports.WALLKIT_AUTH_FORM_PLACEHOLDER_ID = exports.WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID = exports.WALLKIT_FIREBASE_UI_PLACEHOLDER_ID = exports.WALLKIT_MODAL_MIN_HEIGHT = exports.WALLKIT_MODAL_MAX_WIDTH = exports.WALLKIT_MODAL_MIN_WIDTH = exports.WALLKIT_MODAL_CONTENT_CLASSNAME = exports.WALLKIT_MODAL_CLOSE_BTN_CLASSNAME = exports.WALLKIT_MODAL_WRAPPER_CLASSNAME = exports.ALLOWED_ORIGINS = exports.WALLKIT_CDN_ASSETS_URL = exports.WALLKIT_CDN_URL = exports.WALLKIT_POPUP_DEV_URL = exports.WALLKIT_POPUP_URL = void 0;
+exports.FIREBASE_TOKEN_NAME = exports.WALLKIT_TOKEN_NAME = exports.WALLKIT_DEV_FIREBASE_CONFIG = exports.WALLKIT_FIREBASE_CONFIG = exports.WALLKIT_FRAME_ID = exports.WALLKIT_USER_MANAGER_MODAL_FORM_PLACEHOLDER_ID = exports.WALLKIT_AUTH_FORM_PLACEHOLDER_ID = exports.WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID = exports.WALLKIT_FIREBASE_UI_PLACEHOLDER_ID = exports.WALLKIT_MODAL_MIN_HEIGHT = exports.WALLKIT_MODAL_MAX_WIDTH = exports.WALLKIT_MODAL_MIN_WIDTH = exports.WALLKIT_MODAL_CONTENT_CLASSNAME = exports.WALLKIT_MODAL_CLOSE_BTN_CLASSNAME = exports.WALLKIT_MODAL_WRAPPER_CLASSNAME = exports.ALLOWED_ORIGINS = exports.WALLKIT_CDN_ASSETS_URL = exports.WALLKIT_CDN_URL = exports.WALLKIT_POPUP_DEV_URL = exports.WALLKIT_POPUP_URL = void 0;
 // Popups
-var WALLKIT_POPUP_URL = 'https://wallkit.net/popups'; // export const WALLKIT_POPUP_URL = 'http://127.0.0.1:8000/popups';
-
+var WALLKIT_POPUP_URL = 'https://wallkit.net/popups';
+// export const WALLKIT_POPUP_URL = 'http://127.0.0.1:8000/popups';
 exports.WALLKIT_POPUP_URL = WALLKIT_POPUP_URL;
-var WALLKIT_POPUP_DEV_URL = 'https://dev.wallkit.net/popups'; // export const WALLKIT_POPUP_DEV_URL = 'https://wallkit-landing.com/popups';
+var WALLKIT_POPUP_DEV_URL = 'https://dev.wallkit.net/popups';
+// export const WALLKIT_POPUP_DEV_URL = 'https://wallkit-landing.com/popups';
 // export const WALLKIT_POPUP_DEV_URL = 'http://127.0.0.1:8000/popups';
-// Assets
 
+// Assets
 exports.WALLKIT_POPUP_DEV_URL = WALLKIT_POPUP_DEV_URL;
 var WALLKIT_CDN_URL = 'https://cdn.wallkit.net';
 exports.WALLKIT_CDN_URL = WALLKIT_CDN_URL;
-var WALLKIT_CDN_ASSETS_URL = WALLKIT_CDN_URL + '/assets'; // Safety
+var WALLKIT_CDN_ASSETS_URL = WALLKIT_CDN_URL + '/assets';
 
+// Safety
 exports.WALLKIT_CDN_ASSETS_URL = WALLKIT_CDN_ASSETS_URL;
-var ALLOWED_ORIGINS = [document.location.origin, 'http://127.0.0.1:8000', 'https://wallkit.net', 'https://dev.wallkit.net', 'https://demo.wallkit.net', 'https://wallkit-landing.com']; // Markup
+var ALLOWED_ORIGINS = [document.location.origin, 'http://127.0.0.1:8000', 'https://wallkit.net', 'https://dev.wallkit.net', 'https://demo.wallkit.net', 'https://wallkit-landing.com'];
 
+// Markup
 exports.ALLOWED_ORIGINS = ALLOWED_ORIGINS;
 var WALLKIT_MODAL_WRAPPER_CLASSNAME = 'wallkit-modal-wrapper';
 exports.WALLKIT_MODAL_WRAPPER_CLASSNAME = WALLKIT_MODAL_WRAPPER_CLASSNAME;
@@ -71,8 +74,11 @@ var WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID = 'wk-email-auth-form';
 exports.WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID = WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID;
 var WALLKIT_AUTH_FORM_PLACEHOLDER_ID = 'wk-auth-form';
 exports.WALLKIT_AUTH_FORM_PLACEHOLDER_ID = WALLKIT_AUTH_FORM_PLACEHOLDER_ID;
-var WALLKIT_FRAME_ID = 'wk-frame'; // Authentication
+var WALLKIT_USER_MANAGER_MODAL_FORM_PLACEHOLDER_ID = 'wk-user-manager-modal-form';
+exports.WALLKIT_USER_MANAGER_MODAL_FORM_PLACEHOLDER_ID = WALLKIT_USER_MANAGER_MODAL_FORM_PLACEHOLDER_ID;
+var WALLKIT_FRAME_ID = 'wk-frame';
 
+// Authentication
 exports.WALLKIT_FRAME_ID = WALLKIT_FRAME_ID;
 var WALLKIT_FIREBASE_CONFIG = {
   apiKey: "AIzaSyAoRdxZIlUE0HInqtzDid6rNxluhs5nCqg",
@@ -103,7 +109,7 @@ exports.FIREBASE_TOKEN_NAME = FIREBASE_TOKEN_NAME;
 
 /***/ }),
 
-/***/ 6:
+/***/ 8006:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -124,17 +130,13 @@ exports.FB_AVAILABLE_LANGUAGES = FB_AVAILABLE_LANGUAGES;
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(736);
-
+var _interopRequireDefault = __webpack_require__(9736);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.default = exports.DEFAULT_ERROR_MESSAGES = exports.ERRORS_TYPES = void 0;
-
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
-
-var _createClass2 = _interopRequireDefault(__webpack_require__(884));
-
+exports["default"] = exports.DEFAULT_ERROR_MESSAGES = exports.ERRORS_TYPES = void 0;
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(8972));
+var _createClass2 = _interopRequireDefault(__webpack_require__(8884));
 var ERRORS_TYPES = {
   DOM_ERROR: 'DOM_ERROR',
   ARGUMENT_ERROR: 'ARGUMENT_ERROR'
@@ -145,12 +147,10 @@ var DEFAULT_ERROR_MESSAGES = {
   ARGUMENT_ERROR: 'One of the argument were not provided'
 };
 exports.DEFAULT_ERROR_MESSAGES = DEFAULT_ERROR_MESSAGES;
-
 var Error = /*#__PURE__*/function () {
   function Error() {
     (0, _classCallCheck2["default"])(this, Error);
   }
-
   (0, _createClass2["default"])(Error, null, [{
     key: "isErrorRecognisable",
     value: function isErrorRecognisable(error_type) {
@@ -160,7 +160,6 @@ var Error = /*#__PURE__*/function () {
     key: "getErrorTypeMessage",
     value: function getErrorTypeMessage(error_type) {
       var _DEFAULT_ERROR_MESSAG;
-
       return (_DEFAULT_ERROR_MESSAG = DEFAULT_ERROR_MESSAGES[error_type]) !== null && _DEFAULT_ERROR_MESSAG !== void 0 ? _DEFAULT_ERROR_MESSAG : 'Unrecognised Error';
     }
   }, {
@@ -173,7 +172,6 @@ var Error = /*#__PURE__*/function () {
         throw new Error(errorMessage);
       } else {
         var _errorMessage = "ERROR::".concat(error_type, ";");
-
         console.log(_errorMessage);
         throw new Error(_errorMessage);
       }
@@ -188,53 +186,37 @@ var Error = /*#__PURE__*/function () {
   }]);
   return Error;
 }();
-
-exports.default = Error;
+exports["default"] = Error;
 
 /***/ }),
 
-/***/ 4:
+/***/ 6004:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(736);
-
+var _interopRequireDefault = __webpack_require__(9736);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 var _exportNames = {};
-exports.default = void 0;
-
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(239));
-
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
-
-var _createClass2 = _interopRequireDefault(__webpack_require__(884));
-
-var _authentication = _interopRequireDefault(__webpack_require__(484));
-
-var _modal = _interopRequireDefault(__webpack_require__(269));
-
-var _frame = _interopRequireDefault(__webpack_require__(967));
-
-var _sdk = _interopRequireDefault(__webpack_require__(753));
-
-var _events = _interopRequireDefault(__webpack_require__(889));
-
-var _analytics = _interopRequireDefault(__webpack_require__(343));
-
-var _content = _interopRequireDefault(__webpack_require__(958));
-
-var _styles = __webpack_require__(350);
-
-var _DOM = __webpack_require__(909);
-
-var _payments = __webpack_require__(672);
-
-var _constants = __webpack_require__(66);
-
+exports["default"] = void 0;
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(8239));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(8972));
+var _createClass2 = _interopRequireDefault(__webpack_require__(8884));
+var _authentication = _interopRequireDefault(__webpack_require__(7484));
+var _modal = _interopRequireDefault(__webpack_require__(9269));
+var _frame = _interopRequireDefault(__webpack_require__(8967));
+var _sdk = _interopRequireDefault(__webpack_require__(4753));
+var _events = _interopRequireDefault(__webpack_require__(9889));
+var _analytics = _interopRequireDefault(__webpack_require__(7343));
+var _content = _interopRequireDefault(__webpack_require__(8390));
+var _user = _interopRequireDefault(__webpack_require__(4442));
+var _styles = __webpack_require__(2350);
+var _DOM = __webpack_require__(2909);
+var _payments = __webpack_require__(8672);
+var _constants = __webpack_require__(9066);
 Object.keys(_constants).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
@@ -246,9 +228,7 @@ Object.keys(_constants).forEach(function (key) {
     }
   });
 });
-
-var _eventsName = __webpack_require__(73);
-
+var _eventsName = __webpack_require__(6073);
 Object.keys(_eventsName).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
@@ -260,29 +240,20 @@ Object.keys(_eventsName).forEach(function (key) {
     }
   });
 });
-
-var _url = __webpack_require__(234);
-
+var _url = __webpack_require__(5234);
 var _eventsListener, _insertStyles, _recogniseURLIncomeParams;
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
+function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
+function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
-
 window.WallkitIntegration = (_eventsListener = /*#__PURE__*/new WeakSet(), _insertStyles = /*#__PURE__*/new WeakSet(), _recogniseURLIncomeParams = /*#__PURE__*/new WeakSet(), /*#__PURE__*/function () {
   function WallkitIntegration(options) {
     var _this = this;
-
     (0, _classCallCheck2["default"])(this, WallkitIntegration);
-
-    _recogniseURLIncomeParams.add(this);
-
-    _insertStyles.add(this);
-
-    _eventsListener.add(this);
-
+    _classPrivateMethodInitSpec(this, _recogniseURLIncomeParams);
+    _classPrivateMethodInitSpec(this, _insertStyles);
+    _classPrivateMethodInitSpec(this, _eventsListener);
     this.config = options;
     this.events = new _events["default"]();
     this.frame = new _frame["default"](_objectSpread(_objectSpread({}, options), {}, {
@@ -306,7 +277,6 @@ window.WallkitIntegration = (_eventsListener = /*#__PURE__*/new WeakSet(), _inse
     this.sdk = new _sdk["default"](_objectSpread(_objectSpread({}, options), {}, {
       onLoaded: function onLoaded() {
         var _options$auth, _options$auth2, _options$auth2$modal, _options$auth3, _options$auth4, _options$auth4$modal, _options$auth5;
-
         _this.authentication = new _authentication["default"](_objectSpread(_objectSpread({}, options), {}, {
           firebase: options === null || options === void 0 ? void 0 : (_options$auth = options.auth) === null || _options$auth === void 0 ? void 0 : _options$auth.firebase,
           modalTitle: options === null || options === void 0 ? void 0 : (_options$auth2 = options.auth) === null || _options$auth2 === void 0 ? void 0 : (_options$auth2$modal = _options$auth2.modal) === null || _options$auth2$modal === void 0 ? void 0 : _options$auth2$modal.title,
@@ -314,12 +284,14 @@ window.WallkitIntegration = (_eventsListener = /*#__PURE__*/new WeakSet(), _inse
           reCaptcha: options === null || options === void 0 ? void 0 : (_options$auth5 = options.auth) === null || _options$auth5 === void 0 ? void 0 : _options$auth5.reCaptcha
         }));
         _this.analytics = new _analytics["default"](options === null || options === void 0 ? void 0 : options.analytics);
-
         _this.init();
+        _this.user_manager = new _user["default"]({
+          popup: _this.popup,
+          authentication: _this.authentication
+        });
       }
     }));
   }
-
   (0, _createClass2["default"])(WallkitIntegration, [{
     key: "modal",
     value: function modal(name, params) {
@@ -344,19 +316,13 @@ window.WallkitIntegration = (_eventsListener = /*#__PURE__*/new WeakSet(), _inse
     key: "init",
     value: function init() {
       _classPrivateMethodGet(this, _insertStyles, _insertStyles2).call(this);
-
       this.popup.init();
-
       if (this.config.auth.defaultInit !== false) {
         this.authentication.init();
       }
-
       this.analytics.init();
-
       _classPrivateMethodGet(this, _eventsListener, _eventsListener2).call(this);
-
       _classPrivateMethodGet(this, _recogniseURLIncomeParams, _recogniseURLIncomeParams2).call(this);
-
       if (this.config.onInit) {
         this.config.onInit(this);
       }
@@ -364,23 +330,18 @@ window.WallkitIntegration = (_eventsListener = /*#__PURE__*/new WeakSet(), _inse
   }]);
   return WallkitIntegration;
 }());
-
 function _eventsListener2() {
   var _this2 = this;
-
   window.addEventListener('message', function (event) {
     var _event$data = event.data,
-        value = _event$data.value,
-        name = _event$data.name,
-        origin = event.origin;
-
+      value = _event$data.value,
+      name = _event$data.name,
+      origin = event.origin;
     _this2.events.notify(name, value);
-
     _this2.events.notify(_eventsName.FRAME_MESSAGE, {
       name: name,
       value: value
     });
-
     try {
       if (_constants.ALLOWED_ORIGINS.includes(origin) && name) {
         switch (name) {
@@ -390,21 +351,15 @@ function _eventsListener2() {
             } else {
               _this2.frame.sendEvent("wk-event-get-token", _this2.config.public_key);
             }
-
             break;
-
           case "wk-event-resize":
             if (value.width !== 0 && value.height !== 0) {
               _this2.popup.resize(value.width, value.height);
             }
-
             break;
-
           case "show-firebase-auth":
             var redirect = value;
-
             _this2.popup.hide();
-
             _this2.events.subscribe(_eventsName.SUCCESS_AUTH, function () {
               if (redirect) {
                 _this2.popup.open(redirect);
@@ -412,33 +367,27 @@ function _eventsListener2() {
             }, {
               once: true
             });
-
             _this2.authentication.show();
-
             _this2.frame.openFrame('');
-
             break;
-
           case "wk-event-close-modal":
             _this2.popup.hide();
-
             break;
-
           case "wk-event-reload-page":
             _this2.popup.hide();
-
             location.reload();
             break;
-
           case "wk-event-storage-available":
             if (!value) {
               _this2.authentication.dispatchTokens();
             }
-
             break;
-
           case "wk-event-close-on-wrapper":
             _this2.popup.closeOutside = value;
+            break;
+          case "wk-firebase-change-password":
+            _this2.popup.hide();
+            _this2.user_manager.showChangePassword();
             break;
         }
       }
@@ -447,88 +396,67 @@ function _eventsListener2() {
     }
   });
 }
-
 function _insertStyles2() {
   var styles = (0, _DOM.createElement)('style');
   styles.innerHTML = _styles.LIBRARY_STYLES;
   (0, _DOM.injectInHead)(styles);
 }
-
 function _recogniseURLIncomeParams2() {
   var ticketPassAuthToken = (0, _url.parseAuthTokenHash)();
-
   if (ticketPassAuthToken) {
     this.authentication.handleTicketsToken(ticketPassAuthToken);
     (0, _url.resetHash)();
   }
 }
-
 var _default = WallkitIntegration;
-exports.default = _default;
+exports["default"] = _default;
 
 /***/ }),
 
-/***/ 343:
+/***/ 7343:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(736);
-
+var _interopRequireDefault = __webpack_require__(9736);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.default = void 0;
-
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
-
-var _createClass2 = _interopRequireDefault(__webpack_require__(884));
-
-var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(704));
-
-var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(401));
-
-var _sdk2 = _interopRequireDefault(__webpack_require__(753));
-
-var _authentication2 = _interopRequireDefault(__webpack_require__(484));
-
-var _events2 = _interopRequireDefault(__webpack_require__(889));
-
-var _eventsName = __webpack_require__(73);
-
+exports["default"] = void 0;
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(8972));
+var _createClass2 = _interopRequireDefault(__webpack_require__(8884));
+var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(9704));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(1401));
+var _sdk2 = _interopRequireDefault(__webpack_require__(4753));
+var _authentication2 = _interopRequireDefault(__webpack_require__(7484));
+var _events2 = _interopRequireDefault(__webpack_require__(9889));
+var _eventsName = __webpack_require__(6073);
+function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
+function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
 var _config = /*#__PURE__*/new WeakMap();
-
 var _sdk = /*#__PURE__*/new WeakMap();
-
 var _authentication = /*#__PURE__*/new WeakMap();
-
 var _events = /*#__PURE__*/new WeakMap();
-
 var Analytics = /*#__PURE__*/function () {
   function Analytics(options) {
     (0, _classCallCheck2["default"])(this, Analytics);
-
-    _config.set(this, {
+    _classPrivateFieldInitSpec(this, _config, {
       writable: true,
       value: void 0
     });
-
-    _sdk.set(this, {
+    _classPrivateFieldInitSpec(this, _sdk, {
       writable: true,
       value: void 0
     });
-
-    _authentication.set(this, {
+    _classPrivateFieldInitSpec(this, _authentication, {
       writable: true,
       value: void 0
     });
-
-    _events.set(this, {
+    _classPrivateFieldInitSpec(this, _events, {
       writable: true,
       value: void 0
     });
-
     (0, _classPrivateFieldSet2["default"])(this, _config, {
       parseUTM: (options === null || options === void 0 ? void 0 : options.parseUTM) !== undefined ? options.parseUTM : true
     });
@@ -537,12 +465,10 @@ var Analytics = /*#__PURE__*/function () {
     (0, _classPrivateFieldSet2["default"])(this, _events, new _events2["default"]());
     this.utmTags = {};
   }
-
   (0, _createClass2["default"])(Analytics, [{
     key: "parseUTMTags",
     value: function parseUTMTags() {
       var _this = this;
-
       if (!window.location.search.includes('utm')) return {};
       var queryParams = new URLSearchParams(window.location.search);
       var utmParams = ['utm_source', 'utm_medium', 'utm_campaign'];
@@ -553,7 +479,6 @@ var Analytics = /*#__PURE__*/function () {
         }
       });
       this.utmTags = foundedUTMParams;
-
       if ((0, _classPrivateFieldGet2["default"])(this, _authentication).isAuthenticated()) {
         (0, _classPrivateFieldGet2["default"])(this, _sdk).methods.updateUser({
           extra: this.utmTags
@@ -567,7 +492,6 @@ var Analytics = /*#__PURE__*/function () {
           once: true
         });
       }
-
       return foundedUTMParams;
     }
   }, {
@@ -585,71 +509,51 @@ var Analytics = /*#__PURE__*/function () {
   }]);
   return Analytics;
 }();
-
-exports.default = Analytics;
+exports["default"] = Analytics;
 
 /***/ }),
 
-/***/ 378:
+/***/ 3378:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(736);
-
+var _interopRequireDefault = __webpack_require__(9736);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.default = void 0;
-
+exports["default"] = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(107));
-
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(756));
-
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
-
-var _createClass2 = _interopRequireDefault(__webpack_require__(884));
-
-var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(704));
-
-var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(401));
-
-var _eventsName = _interopRequireDefault(__webpack_require__(73));
-
-var _DOM = __webpack_require__(909);
-
-var _loaders = __webpack_require__(758);
-
-var _sdk2 = _interopRequireDefault(__webpack_require__(753));
-
-var _events = _interopRequireDefault(__webpack_require__(889));
-
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(8972));
+var _createClass2 = _interopRequireDefault(__webpack_require__(8884));
+var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(9704));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(1401));
+var _eventsName = _interopRequireDefault(__webpack_require__(6073));
+var _DOM = __webpack_require__(2909);
+var _loaders = __webpack_require__(1758);
+var _sdk2 = _interopRequireDefault(__webpack_require__(4753));
+var _events = _interopRequireDefault(__webpack_require__(9889));
+function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
+function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
+function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
-
 var _sdk = /*#__PURE__*/new WeakMap();
-
 var _initReCaptchaPlaceholder = /*#__PURE__*/new WeakSet();
-
 var _onRecaptchaAuth = /*#__PURE__*/new WeakSet();
-
 var ReCaptchaFirebase = /*#__PURE__*/function () {
   function ReCaptchaFirebase(authenticationInstance, options) {
     (0, _classCallCheck2["default"])(this, ReCaptchaFirebase);
-
-    _onRecaptchaAuth.add(this);
-
-    _initReCaptchaPlaceholder.add(this);
-
-    _sdk.set(this, {
+    _classPrivateMethodInitSpec(this, _onRecaptchaAuth);
+    _classPrivateMethodInitSpec(this, _initReCaptchaPlaceholder);
+    _classPrivateFieldInitSpec(this, _sdk, {
       writable: true,
       value: void 0
     });
-
     if (!authenticationInstance) {
       throw Error('Authentication Instance is not provided');
     }
-
     this.enabled = this.isEnabled(options);
     this.authentication = authenticationInstance;
     this.options = options;
@@ -660,7 +564,6 @@ var ReCaptchaFirebase = /*#__PURE__*/function () {
     (0, _classPrivateFieldSet2["default"])(this, _sdk, new _sdk2["default"]());
     this.events = new _events["default"]();
   }
-
   (0, _createClass2["default"])(ReCaptchaFirebase, [{
     key: "isEnabled",
     value: function isEnabled(options) {
@@ -677,7 +580,6 @@ var ReCaptchaFirebase = /*#__PURE__*/function () {
         this.options = options;
         this.enabled = true;
       }
-
       return this;
     }
   }, {
@@ -685,29 +587,23 @@ var ReCaptchaFirebase = /*#__PURE__*/function () {
     value: function () {
       var _load = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
         var _this = this;
-
         var recaptchaScripts;
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
-
                 if (this.options) {
                   _context.next = 3;
                   break;
                 }
-
                 return _context.abrupt("return", false);
-
               case 3:
                 if (!this.loaded) {
                   _context.next = 5;
                   break;
                 }
-
                 return _context.abrupt("return", true);
-
               case 5:
                 recaptchaScripts = [{
                   url: "https://www.google.com/recaptcha/api.js",
@@ -716,27 +612,21 @@ var ReCaptchaFirebase = /*#__PURE__*/function () {
                   onload: function onload() {
                     _this.loaded = true;
                     _this.grecaptcha = window.grecaptcha;
-
                     _this.events.notify(_eventsName["default"].RECAPTCHA_LOADED, true);
-
                     Promise.resolve(true);
                   }
                 }];
                 window.onRecaptchaAuth = _classPrivateMethodGet(this, _onRecaptchaAuth, _onRecaptchaAuth2).bind(this);
-
                 _classPrivateMethodGet(this, _initReCaptchaPlaceholder, _initReCaptchaPlaceholder2).call(this);
-
                 this.hideBadge();
                 (0, _loaders.loadScripts)(recaptchaScripts);
                 _context.next = 16;
                 break;
-
               case 12:
                 _context.prev = 12;
                 _context.t0 = _context["catch"](0);
                 console.error(_context.t0);
                 return _context.abrupt("return", false);
-
               case 16:
               case "end":
                 return _context.stop();
@@ -744,11 +634,9 @@ var ReCaptchaFirebase = /*#__PURE__*/function () {
           }
         }, _callee, this, [[0, 12]]);
       }));
-
       function load() {
         return _load.apply(this, arguments);
       }
-
       return load;
     }()
   }, {
@@ -764,7 +652,6 @@ var ReCaptchaFirebase = /*#__PURE__*/function () {
       if (this.grecaptcha) {
         this.grecaptcha.reset();
       }
-
       this.authentication.firebase.reset();
       this.authentication.modal.toggleLoader(false);
     }
@@ -773,7 +660,6 @@ var ReCaptchaFirebase = /*#__PURE__*/function () {
     value: function () {
       var _initCaptchaProcess = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2() {
         var _this2 = this;
-
         var handleCaptchaState, executeReCaptcha, initTriggers, emailBtn, emailField, submitBtn;
         return _regenerator["default"].wrap(function _callee2$(_context2) {
           while (1) {
@@ -781,24 +667,18 @@ var ReCaptchaFirebase = /*#__PURE__*/function () {
               case 0:
                 try {
                   this.valid = false;
-
                   if (this.grecaptcha) {
                     this.grecaptcha.reset();
                   }
-
                   handleCaptchaState = function handleCaptchaState() {
                     if (!_this2.valid) {
                       _this2.events.notify(_eventsName["default"].local.RECAPTCHA_VALIDATION_FAILED);
-
                       _this2.authentication.firebase.reset();
-
                       _this2.authentication.modal.toggleLoader(true);
                     }
                   };
-
                   executeReCaptcha = function executeReCaptcha() {
                     _this2.authentication.modal.toggleLoader(true);
-
                     _this2.grecaptcha.ready(function () {
                       _this2.grecaptcha.execute().then(function () {
                         _this2.events.subscribe(_eventsName["default"].local.MODAL_CLOSED, function () {
@@ -811,13 +691,11 @@ var ReCaptchaFirebase = /*#__PURE__*/function () {
                       });
                     });
                   };
-
                   initTriggers = function initTriggers() {
                     executeReCaptcha();
                     var emailField = document.querySelector('.firebaseui-id-email');
                     var submitBtn = document.querySelector('.firebaseui-id-page-sign-in .firebaseui-id-submit');
                     var cancelBtn = document.querySelector('.firebaseui-id-page-sign-in .firebaseui-id-secondary-link');
-
                     if (emailField) {
                       emailField.addEventListener('input', function () {
                         handleCaptchaState();
@@ -828,34 +706,28 @@ var ReCaptchaFirebase = /*#__PURE__*/function () {
                         }
                       });
                     }
-
                     if (cancelBtn) {
                       cancelBtn.onclick = function () {
                         handleCaptchaState();
                       };
                     }
-
                     if (submitBtn) {
                       submitBtn.onclick = function () {
                         handleCaptchaState();
                       };
                     }
                   };
-
                   emailBtn = document.querySelector('.firebaseui-idp-button[data-provider-id="password"]');
                   emailField = document.querySelector('.firebaseui-id-email');
-
                   if (emailBtn) {
                     emailBtn.addEventListener('click', initTriggers.bind(this));
                   } else if (emailField) {
                     submitBtn = document.querySelector('.firebaseui-id-page-sign-in .firebaseui-id-submit');
-
                     if (submitBtn) {
                       submitBtn.onclick = function () {
                         handleCaptchaState();
                       };
                     }
-
                     emailField.addEventListener('input', function () {
                       if (!_this2.valid) {
                         emailField.blur();
@@ -867,7 +739,6 @@ var ReCaptchaFirebase = /*#__PURE__*/function () {
                   this.authentication.firebase.reset();
                   console.error('error', error);
                 }
-
               case 1:
               case "end":
                 return _context2.stop();
@@ -875,11 +746,9 @@ var ReCaptchaFirebase = /*#__PURE__*/function () {
           }
         }, _callee2, this);
       }));
-
       function initCaptchaProcess() {
         return _initCaptchaProcess.apply(this, arguments);
       }
-
       return initCaptchaProcess;
     }()
   }, {
@@ -892,50 +761,38 @@ var ReCaptchaFirebase = /*#__PURE__*/function () {
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.prev = 0;
-
                 if (!(!this.options || this.loaded)) {
                   _context3.next = 3;
                   break;
                 }
-
                 return _context3.abrupt("return", false);
-
               case 3:
                 if (!(this.options === true)) {
                   _context3.next = 12;
                   break;
                 }
-
                 _context3.next = 6;
                 return (0, _classPrivateFieldGet2["default"])(this, _sdk).methods.getReCaptchaSettings();
-
               case 6:
                 response = _context3.sent;
-
                 if (!(response && response.active)) {
                   _context3.next = 10;
                   break;
                 }
-
                 this.siteKey = response.recaptcha_public_key;
                 return _context3.abrupt("return", this.load());
-
               case 10:
                 _context3.next = 13;
                 break;
-
               case 12:
                 return _context3.abrupt("return", this.load());
-
               case 13:
                 return _context3.abrupt("return", false);
-
               case 16:
                 _context3.prev = 16;
                 _context3.t0 = _context3["catch"](0);
                 console.error(_context3.t0);
                 return _context3.abrupt("return", false);
-
               case 20:
               case "end":
                 return _context3.stop();
@@ -943,39 +800,30 @@ var ReCaptchaFirebase = /*#__PURE__*/function () {
           }
         }, _callee3, this, [[0, 16]]);
       }));
-
       function init() {
         return _init.apply(this, arguments);
       }
-
       return init;
     }()
   }]);
   return ReCaptchaFirebase;
 }();
-
-exports.default = ReCaptchaFirebase;
-
+exports["default"] = ReCaptchaFirebase;
 function _initReCaptchaPlaceholder2() {
   var reCaptchaPlaceholder = (0, _DOM.createElement)('div');
   reCaptchaPlaceholder.classList.add('g-recaptcha');
   reCaptchaPlaceholder.dataset.sitekey = this.siteKey;
   reCaptchaPlaceholder.dataset.size = 'invisible';
   reCaptchaPlaceholder.dataset.callback = 'onRecaptchaAuth';
-
   if (this.authentication.modal) {
     this.authentication.modal.modalContent.appendChild(reCaptchaPlaceholder);
   }
 }
-
 function _onRecaptchaAuth2(token) {
   var _this3 = this;
-
   return (0, _classPrivateFieldGet2["default"])(this, _sdk).methods.validateReCaptchaToken(token).then(function () {
     _this3.events.notify(_eventsName["default"].local.RECAPTCHA_VALIDATION_SUCCESS);
-
     _this3.valid = true;
-
     _this3.authentication.modal.toggleLoader(false);
   })["catch"](function () {
     _this3.valid = false;
@@ -992,47 +840,35 @@ function _onRecaptchaAuth2(token) {
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(736);
-
+var _interopRequireDefault = __webpack_require__(9736);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.default = void 0;
-
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
-
-var _createClass2 = _interopRequireDefault(__webpack_require__(884));
-
-var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(704));
-
-var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(401));
-
+exports["default"] = void 0;
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(8972));
+var _createClass2 = _interopRequireDefault(__webpack_require__(8884));
+var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(9704));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(1401));
 var _localStorage = _interopRequireDefault(__webpack_require__(347));
-
-var _cookie = __webpack_require__(48);
-
+var _cookie = __webpack_require__(5048);
+function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
+function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
 var _slug = /*#__PURE__*/new WeakMap();
-
 var _resource = /*#__PURE__*/new WeakMap();
-
 var Token = /*#__PURE__*/function () {
   function Token(slug, value, resource) {
     (0, _classCallCheck2["default"])(this, Token);
-
-    _slug.set(this, {
+    _classPrivateFieldInitSpec(this, _slug, {
       writable: true,
       value: void 0
     });
-
-    _resource.set(this, {
+    _classPrivateFieldInitSpec(this, _resource, {
       writable: true,
       value: void 0
     });
-
     if (slug && resource) {
       (0, _classPrivateFieldSet2["default"])(this, _resource, resource);
       (0, _classPrivateFieldSet2["default"])(this, _slug, this.createTokenSlug(slug, resource));
-
       if (value) {
         this.set(value);
       } else {
@@ -1040,7 +876,6 @@ var Token = /*#__PURE__*/function () {
       }
     }
   }
-
   (0, _createClass2["default"])(Token, [{
     key: "createTokenSlug",
     value: function createTokenSlug(slug, resource) {
@@ -1061,7 +896,6 @@ var Token = /*#__PURE__*/function () {
     value: function remove() {
       this.token = null;
       (0, _cookie.removeCookie)((0, _classPrivateFieldGet2["default"])(this, _slug));
-
       _localStorage["default"].removeItem((0, _classPrivateFieldGet2["default"])(this, _slug));
     }
   }, {
@@ -1072,93 +906,63 @@ var Token = /*#__PURE__*/function () {
         expires: 'Fri, 31 Dec 9999 23:59:59 GMT',
         path: "/"
       });
-
       _localStorage["default"].setItem((0, _classPrivateFieldGet2["default"])(this, _slug), value);
     }
   }]);
   return Token;
 }();
-
-exports.default = Token;
+exports["default"] = Token;
 
 /***/ }),
 
-/***/ 298:
+/***/ 5298:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(736);
-
+var _interopRequireDefault = __webpack_require__(9736);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.default = void 0;
-
+exports["default"] = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(107));
-
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(756));
-
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(239));
-
-var _typeof2 = _interopRequireDefault(__webpack_require__(630));
-
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
-
-var _createClass2 = _interopRequireDefault(__webpack_require__(884));
-
-var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(704));
-
-var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(401));
-
-var _loaders = __webpack_require__(758);
-
-var _DOM = __webpack_require__(909);
-
-var _constants = __webpack_require__(66);
-
-var _localization = __webpack_require__(761);
-
-var _events = _interopRequireDefault(__webpack_require__(889));
-
-var _eventsName = __webpack_require__(73);
-
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(8239));
+var _typeof2 = _interopRequireDefault(__webpack_require__(8630));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(8972));
+var _createClass2 = _interopRequireDefault(__webpack_require__(8884));
+var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(9704));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(1401));
+var _loaders = __webpack_require__(1758);
+var _DOM = __webpack_require__(2909);
+var _constants = __webpack_require__(9066);
+var _localization = __webpack_require__(7761);
+var _events = _interopRequireDefault(__webpack_require__(9889));
+var _eventsName = __webpack_require__(6073);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
+function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
+function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
+function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
-
 var _mode = /*#__PURE__*/new WeakMap();
-
 var _getElementPlaceholder = /*#__PURE__*/new WeakSet();
-
 var _loadFirebase = /*#__PURE__*/new WeakSet();
-
 var _authStateChanged = /*#__PURE__*/new WeakSet();
-
 var _firebaseInitApp = /*#__PURE__*/new WeakSet();
-
 var Firebase = /*#__PURE__*/function () {
   function Firebase(_options) {
     var _options$captchaKey, _options$genuineForm, _options$onSuccessAut, _options$onAuthStateC, _options$uiShown;
-
     (0, _classCallCheck2["default"])(this, Firebase);
-
-    _firebaseInitApp.add(this);
-
-    _authStateChanged.add(this);
-
-    _loadFirebase.add(this);
-
-    _getElementPlaceholder.add(this);
-
-    _mode.set(this, {
+    _classPrivateMethodInitSpec(this, _firebaseInitApp);
+    _classPrivateMethodInitSpec(this, _authStateChanged);
+    _classPrivateMethodInitSpec(this, _loadFirebase);
+    _classPrivateMethodInitSpec(this, _getElementPlaceholder);
+    _classPrivateFieldInitSpec(this, _mode, {
       writable: true,
       value: void 0
     });
-
     this.events = new _events["default"]();
     this.firebaseUiConfig = null;
     (0, _classPrivateFieldSet2["default"])(this, _mode, _options === null || _options === void 0 ? void 0 : _options.mode);
@@ -1179,7 +983,6 @@ var Firebase = /*#__PURE__*/function () {
     this.initialized = false;
     this.loaded = false;
   }
-
   (0, _createClass2["default"])(Firebase, [{
     key: "allowedProviders",
     get: function get() {
@@ -1195,7 +998,6 @@ var Firebase = /*#__PURE__*/function () {
     key: "hideAuthForm",
     value: function hideAuthForm() {
       var element = document.querySelector(this.elementPlaceholder);
-
       if (element) {
         element.style.display = 'none';
       }
@@ -1204,7 +1006,6 @@ var Firebase = /*#__PURE__*/function () {
     key: "showAuthForm",
     value: function showAuthForm() {
       var element = document.querySelector(this.elementPlaceholder);
-
       if (element) {
         element.style.display = 'block';
       }
@@ -1213,15 +1014,12 @@ var Firebase = /*#__PURE__*/function () {
     key: "formatSelectedProviders",
     value: function formatSelectedProviders(providers) {
       var _this = this;
-
       var selectedProviders = [];
-
       if (Array.isArray(providers)) {
         selectedProviders = providers.map(function (item) {
           if ((item === 'email' || item.provider === 'email') && _this.genuineForm === false) {
             return false;
           }
-
           if ((0, _typeof2["default"])(item) === "object") {
             if (_this.allowedProviders[item.provider]) {
               return _objectSpread(_objectSpread({}, item), {}, {
@@ -1237,7 +1035,6 @@ var Firebase = /*#__PURE__*/function () {
           return !!item;
         });
       }
-
       return selectedProviders;
     }
   }, {
@@ -1245,17 +1042,13 @@ var Firebase = /*#__PURE__*/function () {
     value: function () {
       var _initFirebase = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_ref) {
         var _this2 = this;
-
         var config, _ref$providers, providers, _ref$tosUrl, tosUrl, _ref$privacyPolicyUrl, privacyPolicyUrl, firebaseuiInstance;
-
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 config = _ref.config, _ref$providers = _ref.providers, providers = _ref$providers === void 0 ? ['email', 'google'] : _ref$providers, _ref$tosUrl = _ref.tosUrl, tosUrl = _ref$tosUrl === void 0 ? 'https://wallkit.net' : _ref$tosUrl, _ref$privacyPolicyUrl = _ref.privacyPolicyUrl, privacyPolicyUrl = _ref$privacyPolicyUrl === void 0 ? 'https://wallkit.net' : _ref$privacyPolicyUrl;
-
                 _classPrivateMethodGet(this, _firebaseInitApp, _firebaseInitApp2).call(this, config);
-
                 firebaseuiInstance = new this.firebaseui.auth.AuthUI(this.firebase.auth());
                 firebaseuiInstance.disableAutoSignIn();
                 this.firebaseUiConfig = {
@@ -1267,7 +1060,6 @@ var Firebase = /*#__PURE__*/function () {
                           userId: result.user.uid,
                           token: token
                         };
-
                         if (_this2.onSuccessAuth) {
                           _this2.onSuccessAuth(formattedResult, result);
                         }
@@ -1277,9 +1069,7 @@ var Firebase = /*#__PURE__*/function () {
                       if (_this2.uiShown) {
                         _this2.uiShown();
                       }
-
                       _this2.events.notify(_eventsName.FIREBASE_UI_SHOWN, true);
-
                       _this2.isUiShown = true;
                     }
                   },
@@ -1293,7 +1083,6 @@ var Firebase = /*#__PURE__*/function () {
                 this.startFirebaseUi(this.elementPlaceholder, this.firebaseUiConfig);
                 this.firebase.auth().onAuthStateChanged(_classPrivateMethodGet(this, _authStateChanged, _authStateChanged2).bind(this));
                 return _context.abrupt("return", true);
-
               case 9:
               case "end":
                 return _context.stop();
@@ -1301,11 +1090,9 @@ var Firebase = /*#__PURE__*/function () {
           }
         }, _callee, this);
       }));
-
       function initFirebase(_x) {
         return _initFirebase.apply(this, arguments);
       }
-
       return initFirebase;
     }()
   }, {
@@ -1325,7 +1112,6 @@ var Firebase = /*#__PURE__*/function () {
     key: "logout",
     value: function logout() {
       var _this3 = this;
-
       return new Promise(function (resolve) {
         if (_this3.firebase && _this3.firebase.auth) {
           _this3.firebase.auth().signOut().then(function () {
@@ -1340,7 +1126,6 @@ var Firebase = /*#__PURE__*/function () {
     key: "signIn",
     value: function signIn(email, password) {
       var _this4 = this;
-
       return this.firebase.auth().signInWithEmailAndPassword(email, password).then(function (result) {
         return _this4.handleSuccessAuth(result);
       });
@@ -1349,7 +1134,6 @@ var Firebase = /*#__PURE__*/function () {
     key: "signUp",
     value: function signUp(email, password) {
       var _this5 = this;
-
       return this.firebase.auth().createUserWithEmailAndPassword(email, password).then(function (result) {
         return _this5.handleSuccessAuth(result);
       });
@@ -1359,7 +1143,6 @@ var Firebase = /*#__PURE__*/function () {
     value: function updateName(name) {
       if (name) {
         var user = this.firebase.auth().currentUser;
-
         if (user) {
           user.updateProfile({
             displayName: name
@@ -1377,15 +1160,12 @@ var Firebase = /*#__PURE__*/function () {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.prev = 0;
-
                 if (!result) {
                   _context2.next = 7;
                   break;
                 }
-
                 _context2.next = 4;
                 return result.user.getIdToken();
-
               case 4:
                 token = _context2.sent;
                 formattedResult = {
@@ -1394,20 +1174,16 @@ var Firebase = /*#__PURE__*/function () {
                   userId: result.user.uid,
                   token: token
                 };
-
                 if (this.onSuccessAuth) {
                   this.onSuccessAuth(formattedResult, result);
                 }
-
               case 7:
                 _context2.next = 12;
                 break;
-
               case 9:
                 _context2.prev = 9;
                 _context2.t0 = _context2["catch"](0);
                 console.log('ERROR:', _context2.t0);
-
               case 12:
               case "end":
                 return _context2.stop();
@@ -1415,11 +1191,9 @@ var Firebase = /*#__PURE__*/function () {
           }
         }, _callee2, this, [[0, 9]]);
       }));
-
       function handleSuccessAuth(_x2) {
         return _handleSuccessAuth.apply(this, arguments);
       }
-
       return handleSuccessAuth;
     }()
   }, {
@@ -1428,64 +1202,137 @@ var Firebase = /*#__PURE__*/function () {
       return this.firebase.auth().sendPasswordResetEmail(email);
     }
   }, {
-    key: "authWithCustomToken",
+    key: "reauthenticateWithCredential",
     value: function () {
-      var _authWithCustomToken = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(token) {
+      var _reauthenticateWithCredential = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(oldPassword) {
+        var user, credential;
         return _regenerator["default"].wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                _context3.prev = 0;
-
-                if (!(this.firebase && this.firebase.auth)) {
-                  _context3.next = 5;
+                if (!oldPassword) {
+                  _context3.next = 12;
                   break;
                 }
-
-                _context3.next = 4;
-                return this.firebase.auth().signInWithCustomToken(token);
-
-              case 4:
+                user = this.firebase.auth().currentUser;
+                if (!user) {
+                  _context3.next = 9;
+                  break;
+                }
+                credential = this.firebase.auth.EmailAuthProvider.credential(user.email, oldPassword);
+                _context3.next = 6;
+                return user.reauthenticateWithCredential(credential);
+              case 6:
                 return _context3.abrupt("return", _context3.sent);
-
-              case 5:
-                return _context3.abrupt("return", false);
-
-              case 8:
-                _context3.prev = 8;
-                _context3.t0 = _context3["catch"](0);
-                console.error('Custom Token Auth Fail');
-                return _context3.abrupt("return", false);
-
+              case 9:
+                throw new Error('Your authorization is broken. Please login again.');
+              case 10:
+                _context3.next = 13;
+                break;
               case 12:
+                throw new Error('Old Password is empty');
+              case 13:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, this, [[0, 8]]);
+        }, _callee3, this);
       }));
-
-      function authWithCustomToken(_x3) {
+      function reauthenticateWithCredential(_x3) {
+        return _reauthenticateWithCredential.apply(this, arguments);
+      }
+      return reauthenticateWithCredential;
+    }()
+  }, {
+    key: "updatePassword",
+    value: function () {
+      var _updatePassword = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(newPassword) {
+        var user;
+        return _regenerator["default"].wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                if (!newPassword) {
+                  _context4.next = 10;
+                  break;
+                }
+                user = this.firebase.auth().currentUser;
+                if (!user) {
+                  _context4.next = 7;
+                  break;
+                }
+                _context4.next = 5;
+                return user.updatePassword(newPassword);
+              case 5:
+                _context4.next = 8;
+                break;
+              case 7:
+                throw new Error('Your authorization is broken. Please login again.');
+              case 8:
+                _context4.next = 11;
+                break;
+              case 10:
+                throw new Error('New Password is empty');
+              case 11:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
+      }));
+      function updatePassword(_x4) {
+        return _updatePassword.apply(this, arguments);
+      }
+      return updatePassword;
+    }()
+  }, {
+    key: "authWithCustomToken",
+    value: function () {
+      var _authWithCustomToken = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(token) {
+        return _regenerator["default"].wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.prev = 0;
+                if (!(this.firebase && this.firebase.auth)) {
+                  _context5.next = 5;
+                  break;
+                }
+                _context5.next = 4;
+                return this.firebase.auth().signInWithCustomToken(token);
+              case 4:
+                return _context5.abrupt("return", _context5.sent);
+              case 5:
+                return _context5.abrupt("return", false);
+              case 8:
+                _context5.prev = 8;
+                _context5.t0 = _context5["catch"](0);
+                console.error('Custom Token Auth Fail');
+                return _context5.abrupt("return", false);
+              case 12:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, this, [[0, 8]]);
+      }));
+      function authWithCustomToken(_x5) {
         return _authWithCustomToken.apply(this, arguments);
       }
-
       return authWithCustomToken;
     }()
   }, {
     key: "attachEmailListener",
     value: function attachEmailListener(callback) {
       var emailBtn = document.querySelector('.firebaseui-idp-button[data-provider-id="password"]');
-
       var attachListener = function attachListener() {
         var emailField = document.querySelector('.firebaseui-id-email');
-
         if (emailField) {
           emailField.addEventListener('blur', function (event) {
             callback(event);
           });
         }
       };
-
       if (emailBtn) {
         emailBtn.addEventListener('click', function () {
           setTimeout(function () {
@@ -1500,10 +1347,8 @@ var Firebase = /*#__PURE__*/function () {
     key: "init",
     value: function init() {
       var _this6 = this;
-
       _classPrivateMethodGet(this, _loadFirebase, _loadFirebase2).call(this).then(function () {
         _this6.events.notify(_eventsName.FIREBASE_LOADED, true);
-
         _this6.initFirebase({
           config: _this6.config,
           providers: _this6.providers,
@@ -1511,7 +1356,6 @@ var Firebase = /*#__PURE__*/function () {
           privacyPolicyUrl: _this6.privacyPolicyURL
         }).then(function () {
           _this6.initialized = true;
-
           _this6.events.notify(_eventsName.FIREBASE_INIT, true);
         });
       });
@@ -1519,27 +1363,19 @@ var Firebase = /*#__PURE__*/function () {
   }]);
   return Firebase;
 }();
-
-exports.default = Firebase;
-
+exports["default"] = Firebase;
 function _getElementPlaceholder2(options) {
   var defaultPlaceholder = "#".concat(_constants.WALLKIT_FIREBASE_UI_PLACEHOLDER_ID);
-
   if (this.genuineForm) {
     var _options$elementSelec;
-
     return (_options$elementSelec = options === null || options === void 0 ? void 0 : options.elementSelector) !== null && _options$elementSelec !== void 0 ? _options$elementSelec : defaultPlaceholder;
   }
-
   return defaultPlaceholder;
 }
-
 function _loadFirebase2() {
   var _this7 = this;
-
   return new Promise(function (resolve, reject) {
     _this7.loading = true;
-
     var onFirebaseAppLoaded = function onFirebaseAppLoaded() {
       var scripts = [{
         url: 'https://www.gstatic.com/firebasejs/8.7.0/firebase-analytics.js',
@@ -1578,10 +1414,8 @@ function _loadFirebase2() {
         }
       }];
       var loadedCounter = 0;
-
       var onScriptLoaded = function onScriptLoaded() {
         loadedCounter++;
-
         if (loadedCounter === scripts.length) {
           _this7.firebase = window.firebase;
           _this7.firebaseui = window.firebaseui;
@@ -1592,18 +1426,14 @@ function _loadFirebase2() {
           });
         }
       };
-
       (0, _loaders.loadScripts)(scripts);
       (0, _DOM.loadCSS)('https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.css', 'firebase-ui-styles');
     };
-
     (0, _DOM.insertScript)('https://www.gstatic.com/firebasejs/8.7.0/firebase-app.js', 'firebase-app', onFirebaseAppLoaded);
   });
 }
-
 function _authStateChanged2(user) {
   var _this8 = this;
-
   if (user) {
     user.getIdToken().then(function (token) {
       if (_this8.onAuthStateChanged) {
@@ -1612,119 +1442,80 @@ function _authStateChanged2(user) {
     });
   }
 }
-
 function _firebaseInitApp2(config) {
   if (this.firebase.apps.length === 0) {
     var defaultConfig = (0, _classPrivateFieldGet2["default"])(this, _mode) === 'dev' ? _constants.WALLKIT_DEV_FIREBASE_CONFIG : _constants.WALLKIT_FIREBASE_CONFIG;
     this.firebase.initializeApp(config !== null && config !== void 0 ? config : defaultConfig);
   }
-
   return this.firebase;
 }
 
 /***/ }),
 
-/***/ 484:
+/***/ 7484:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(736);
-
-var _typeof3 = __webpack_require__(630);
-
+var _interopRequireDefault = __webpack_require__(9736);
+var _typeof3 = __webpack_require__(8630);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.default = void 0;
-
+exports["default"] = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(107));
-
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(756));
-
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(239));
-
-var _typeof2 = _interopRequireDefault(__webpack_require__(630));
-
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
-
-var _createClass2 = _interopRequireDefault(__webpack_require__(884));
-
-var _classPrivateFieldGet9 = _interopRequireDefault(__webpack_require__(704));
-
-var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(401));
-
-var _modal = _interopRequireDefault(__webpack_require__(269));
-
-var _Firebase = _interopRequireDefault(__webpack_require__(298));
-
-var _constants = __webpack_require__(66);
-
-var _eventsName = _interopRequireWildcard(__webpack_require__(73));
-
-var _events = _interopRequireDefault(__webpack_require__(889));
-
-var _frame = _interopRequireDefault(__webpack_require__(967));
-
-var _sdk = _interopRequireDefault(__webpack_require__(753));
-
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(8239));
+var _typeof2 = _interopRequireDefault(__webpack_require__(8630));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(8972));
+var _createClass2 = _interopRequireDefault(__webpack_require__(8884));
+var _classPrivateFieldGet9 = _interopRequireDefault(__webpack_require__(9704));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(1401));
+var _modal = _interopRequireDefault(__webpack_require__(9269));
+var _Firebase = _interopRequireDefault(__webpack_require__(5298));
+var _constants = __webpack_require__(9066);
+var _eventsName = _interopRequireWildcard(__webpack_require__(6073));
+var _events = _interopRequireDefault(__webpack_require__(9889));
+var _frame = _interopRequireDefault(__webpack_require__(8967));
+var _sdk = _interopRequireDefault(__webpack_require__(4753));
 var _Token = _interopRequireDefault(__webpack_require__(526));
-
-var _ReCaptcha = _interopRequireDefault(__webpack_require__(378));
-
-var _AuthForm = __webpack_require__(31);
-
+var _ReCaptcha = _interopRequireDefault(__webpack_require__(3378));
+var _AuthForm = __webpack_require__(8031);
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof3(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
+function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
+function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
+function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
-
 var _options = /*#__PURE__*/new WeakMap();
-
 var _createModal = /*#__PURE__*/new WeakSet();
-
 var _initListeners = /*#__PURE__*/new WeakSet();
-
 var _setAuthorizationError = /*#__PURE__*/new WeakSet();
-
 var _resetAuthorizationError = /*#__PURE__*/new WeakSet();
-
 var Authentication = /*#__PURE__*/function () {
   function Authentication(options) {
     var _this = this;
-
     (0, _classCallCheck2["default"])(this, Authentication);
-
-    _resetAuthorizationError.add(this);
-
-    _setAuthorizationError.add(this);
-
-    _initListeners.add(this);
-
-    _createModal.add(this);
-
-    _options.set(this, {
+    _classPrivateMethodInitSpec(this, _resetAuthorizationError);
+    _classPrivateMethodInitSpec(this, _setAuthorizationError);
+    _classPrivateMethodInitSpec(this, _initListeners);
+    _classPrivateMethodInitSpec(this, _createModal);
+    _classPrivateFieldInitSpec(this, _options, {
       writable: true,
       value: void 0
     });
-
     if (!!Authentication.instance) {
       return Authentication.instance;
     }
-
     Authentication.instance = this;
     (0, _classPrivateFieldSet2["default"])(this, _options, options);
     this.token = new _Token["default"](_constants.WALLKIT_TOKEN_NAME, null, options.public_key);
     this.firebaseToken = new _Token["default"](_constants.FIREBASE_TOKEN_NAME, null, options.public_key);
     this.frame = new _frame["default"]();
     this.sdk = new _sdk["default"]();
-
     if (!!(options !== null && options !== void 0 && options.firebase)) {
       var config = {
         lang: options.lang || 'en',
@@ -1734,23 +1525,18 @@ var Authentication = /*#__PURE__*/function () {
         uiShown: this.onFirebaseInit.bind(this),
         onAuthFail: this.onFirebaseAuthFail.bind(this)
       };
-
       if ((0, _typeof2["default"])(options.firebase) === "object") {
         config = _objectSpread(_objectSpread({}, config), options.firebase);
-
         if (options.firebase.genuineForm === false) {
           config.tosURL = '';
           config.privacyPolicyURL = '';
         }
       }
-
       this.firebase = new _Firebase["default"](config);
-
       if (options.firebase.genuineForm === false) {
         this.initAuthForm();
       }
     }
-
     this.reCaptcha = new _ReCaptcha["default"](this, options === null || options === void 0 ? void 0 : options.reCaptcha);
     this.reCaptcha.events.subscribe(_eventsName["default"].local.RECAPTCHA_VALIDATION_FAILED, function () {
       _classPrivateMethodGet(_this, _setAuthorizationError, _setAuthorizationError2).call(_this, 'ReCaptcha Validation Failed! Please try again!');
@@ -1760,7 +1546,6 @@ var Authentication = /*#__PURE__*/function () {
     });
     this.events = new _events["default"]();
   }
-
   (0, _createClass2["default"])(Authentication, [{
     key: "isAuthenticated",
     value: function isAuthenticated() {
@@ -1781,12 +1566,10 @@ var Authentication = /*#__PURE__*/function () {
     key: "handleLogin",
     value: function handleLogin(data) {
       var _this2 = this;
-
       this.firebase.signIn(data.email, data.password).then(function () {})["catch"](function (error) {
         if (error.message) {
           _this2.authForm.loginForm.setFormError(error.message);
         }
-
         _this2.reCaptcha.grecaptcha.reset();
       });
     }
@@ -1794,14 +1577,12 @@ var Authentication = /*#__PURE__*/function () {
     key: "handleSignUp",
     value: function handleSignUp(data) {
       var _this3 = this;
-
       this.firebase.signUp(data.email, data.password).then(function () {
         _this3.firebase.updateName(data.name);
       })["catch"](function (error) {
         if (error.message) {
           _this3.authForm.signUpForm.setFormError(error.message);
         }
-
         _this3.reCaptcha.grecaptcha.reset();
       });
     }
@@ -1809,7 +1590,6 @@ var Authentication = /*#__PURE__*/function () {
     key: "executeRecaptcha",
     value: function executeRecaptcha() {
       var _this4 = this;
-
       this.reCaptcha.grecaptcha.ready(function () {
         _this4.reCaptcha.grecaptcha.execute().then(function () {
           _this4.modal.toggleLoader(true);
@@ -1822,12 +1602,11 @@ var Authentication = /*#__PURE__*/function () {
     key: "initAuthForm",
     value: function initAuthForm() {
       var _classPrivateFieldGet3,
-          _this5 = this;
-
+        _this5 = this;
       var _classPrivateFieldGet2 = (0, _classPrivateFieldGet9["default"])(this, _options).firebase,
-          tosURL = _classPrivateFieldGet2.tosURL,
-          privacyPolicyURL = _classPrivateFieldGet2.privacyPolicyURL,
-          termsOfService = _classPrivateFieldGet2.termsOfService;
+        tosURL = _classPrivateFieldGet2.tosURL,
+        privacyPolicyURL = _classPrivateFieldGet2.privacyPolicyURL,
+        termsOfService = _classPrivateFieldGet2.termsOfService;
       this.authForm = new _AuthForm.AuthForm("#".concat(_constants.WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID), {
         triggerButton: this.firebase.providers.length > 1,
         signUp: (_classPrivateFieldGet3 = (0, _classPrivateFieldGet9["default"])(this, _options).auth.signUp) !== null && _classPrivateFieldGet3 !== void 0 ? _classPrivateFieldGet3 : true,
@@ -1838,7 +1617,6 @@ var Authentication = /*#__PURE__*/function () {
         onLogin: function onLogin(data) {
           if (_this5.reCaptcha.enabled) {
             _this5.executeRecaptcha();
-
             _this5.reCaptcha.events.subscribe(_eventsName["default"].local.RECAPTCHA_VALIDATION_SUCCESS, _this5.handleLogin.bind(_this5, data), {
               once: true
             });
@@ -1849,7 +1627,6 @@ var Authentication = /*#__PURE__*/function () {
         onSignUp: function onSignUp(data) {
           if (_this5.reCaptcha.enabled) {
             _this5.executeRecaptcha();
-
             _this5.reCaptcha.events.subscribe(_eventsName["default"].local.RECAPTCHA_VALIDATION_SUCCESS, _this5.handleSignUp.bind(_this5, data), {
               once: true
             });
@@ -1860,67 +1637,50 @@ var Authentication = /*#__PURE__*/function () {
         onPasswordReset: function () {
           var _onPasswordReset = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(data) {
             var success, _yield$_this5$sdk$met, result;
-
             return _regenerator["default"].wrap(function _callee$(_context) {
               while (1) {
                 switch (_context.prev = _context.next) {
                   case 0:
                     _context.prev = 0;
-
                     _this5.toggleFormLoader(true);
-
                     if (!((0, _classPrivateFieldGet9["default"])(_this5, _options).firebase.genuinePasswordReset === false)) {
                       _context.next = 10;
                       break;
                     }
-
                     _context.next = 5;
                     return _this5.sdk.methods.firebasePasswordReset(data.email);
-
                   case 5:
                     _yield$_this5$sdk$met = _context.sent;
                     result = _yield$_this5$sdk$met.result;
                     success = result;
                     _context.next = 13;
                     break;
-
                   case 10:
                     _context.next = 12;
                     return _this5.firebase.sendPasswordResetEmail(data.email);
-
                   case 12:
                     success = true;
-
                   case 13:
                     if (!success) {
                       _context.next = 17;
                       break;
                     }
-
                     _this5.authForm.showSuccessPasswordReset();
-
                     _context.next = 18;
                     break;
-
                   case 17:
                     throw new Error('Something went wrong');
-
                   case 18:
                     _this5.toggleFormLoader(false);
-
                     _context.next = 25;
                     break;
-
                   case 21:
                     _context.prev = 21;
                     _context.t0 = _context["catch"](0);
-
                     if (_context.t0.message) {
                       _this5.authForm.forgotPasswordForm.setFormError(_context.t0.message);
                     }
-
                     _this5.toggleFormLoader(false);
-
                   case 25:
                   case "end":
                     return _context.stop();
@@ -1928,11 +1688,9 @@ var Authentication = /*#__PURE__*/function () {
               }
             }, _callee, null, [[0, 21]]);
           }));
-
           function onPasswordReset(_x) {
             return _onPasswordReset.apply(this, arguments);
           }
-
           return onPasswordReset;
         }(),
         onAuthFormShow: function onAuthFormShow() {
@@ -1940,7 +1698,6 @@ var Authentication = /*#__PURE__*/function () {
         },
         onCancel: function onCancel() {
           _this5.firebase.showAuthForm();
-
           _this5.authForm.reset();
         }
       });
@@ -1949,17 +1706,12 @@ var Authentication = /*#__PURE__*/function () {
     key: "onSuccessAuth",
     value: function onSuccessAuth(data) {
       var _this6 = this;
-
       this.toggleFormLoader(true);
-
       var handleAuthError = function handleAuthError(error) {
         _this6.resetAuthProcess();
-
         _this6.toggleFormLoader(false);
-
         _classPrivateMethodGet(_this6, _setAuthorizationError, _setAuthorizationError2).call(_this6, (error === null || error === void 0 ? void 0 : error.message) || 'Something went wrong!');
       };
-
       this.updateFirebaseToken(data.token);
       this.events.notify(_eventsName["default"].local.SUCCESS_FIREBASE_AUTH, data);
       this.authInWallkit(data.token).then(function (status) {
@@ -1968,11 +1720,9 @@ var Authentication = /*#__PURE__*/function () {
         } else {
           _this6.resetAuthProcess();
         }
-
         if (_this6.authForm) {
           _this6.authForm.hide();
         }
-
         _this6.toggleFormLoader(false);
       })["catch"](function (error) {
         return handleAuthError(error);
@@ -1982,45 +1732,31 @@ var Authentication = /*#__PURE__*/function () {
     key: "authInWallkit",
     value: function authInWallkit() {
       var _this7 = this;
-
       var firebaseToken = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-
       _classPrivateMethodGet(this, _resetAuthorizationError, _resetAuthorizationError2).call(this);
-
       return new Promise(function (resolve) {
         if (firebaseToken) {
           _this7.sdk.methods.authenticateWithFirebase(firebaseToken).then(function (_ref) {
             var token = _ref.token,
-                existed = _ref.existed;
-
+              existed = _ref.existed;
             _this7.setToken(token);
-
             var userGetTimeout = setTimeout(function () {
               resolve(false);
             }, 10000);
-
             var userEventCallback = function userEventCallback() {
               clearTimeout(userGetTimeout);
-
               _this7.sdk.methods.unsubscribeLocalEvent('user', userEventCallback);
-
               _this7.events.notify(_eventsName["default"].local.SUCCESS_AUTH, {
                 register: !existed
               });
-
               resolve(true);
             };
-
             _this7.sdk.methods.subscribeLocalEvent('user', userEventCallback);
           })["catch"](function (error) {
             var _error$response;
-
             console.log('error', error);
-
             _classPrivateMethodGet(_this7, _setAuthorizationError, _setAuthorizationError2).call(_this7, error === null || error === void 0 ? void 0 : (_error$response = error.response) === null || _error$response === void 0 ? void 0 : _error$response.error_description);
-
             _this7.removeTokens();
-
             resolve(false);
           });
         } else {
@@ -2032,7 +1768,6 @@ var Authentication = /*#__PURE__*/function () {
     key: "getDefaultAuthenticationFormContent",
     value: function getDefaultAuthenticationFormContent() {
       var _classPrivateFieldGet4, _classPrivateFieldGet5;
-
       return "<div>\n                    <div id=\"authorization-error\"></div>\n                    <h2 class=\"wallkit-auth-modal__title\">".concat((_classPrivateFieldGet4 = (_classPrivateFieldGet5 = (0, _classPrivateFieldGet9["default"])(this, _options)) === null || _classPrivateFieldGet5 === void 0 ? void 0 : _classPrivateFieldGet5.modalTitle) !== null && _classPrivateFieldGet4 !== void 0 ? _classPrivateFieldGet4 : 'Sign In', "</h2>\n                    <div id=\"").concat(_constants.WALLKIT_AUTH_FORM_PLACEHOLDER_ID, "\"></div>\n                </div>");
     }
   }, {
@@ -2041,7 +1776,6 @@ var Authentication = /*#__PURE__*/function () {
       var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _constants.WALLKIT_AUTH_FORM_PLACEHOLDER_ID;
       var placeholders = "<div id=\"".concat(_constants.WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID, "\"></div>\n                            <div id=\"").concat(_constants.WALLKIT_FIREBASE_UI_PLACEHOLDER_ID, "\"></div>");
       var targetElement = document.getElementById(selector);
-
       if (targetElement) {
         targetElement.innerHTML = placeholders;
       }
@@ -2051,17 +1785,14 @@ var Authentication = /*#__PURE__*/function () {
     value: function render() {
       if ((0, _classPrivateFieldGet9["default"])(this, _options).auth.renderType === 'selector') {
         var placeholder = document.querySelector((0, _classPrivateFieldGet9["default"])(this, _options).auth.selector);
-
         if (placeholder) {
           var _classPrivateFieldGet6;
-
           placeholder.insertAdjacentHTML('beforeend', ((_classPrivateFieldGet6 = (0, _classPrivateFieldGet9["default"])(this, _options)) === null || _classPrivateFieldGet6 === void 0 ? void 0 : _classPrivateFieldGet6.content) || this.getDefaultAuthenticationFormContent());
         }
       } else {
         this.modal = _classPrivateMethodGet(this, _createModal, _createModal2).call(this);
         this.modal.init();
       }
-
       this.attachFormPlaceholders();
     }
   }, {
@@ -2073,11 +1804,9 @@ var Authentication = /*#__PURE__*/function () {
             switch (_context2.prev = _context2.next) {
               case 0:
                 this.modal.show();
-
                 if (!this.firebase.isUiShown) {
                   this.checkFirebaseInit();
                 }
-
               case 2:
               case "end":
                 return _context2.stop();
@@ -2085,18 +1814,15 @@ var Authentication = /*#__PURE__*/function () {
           }
         }, _callee2, this);
       }));
-
       function show() {
         return _show.apply(this, arguments);
       }
-
       return show;
     }()
   }, {
     key: "checkFirebaseInit",
     value: function checkFirebaseInit() {
       var _this8 = this;
-
       if (!this.firebase.loaded) {
         this.firebase.events.subscribe(_eventsName.FIREBASE_LOADED, function () {
           return _this8.checkFirebaseInit();
@@ -2112,11 +1838,9 @@ var Authentication = /*#__PURE__*/function () {
           });
         } else {
           var shownTimeout = null;
-
           if (!this.firebase.isUiShown) {
             shownTimeout = setTimeout(function () {
               _this8.firebase.startFirebaseUi();
-
               _this8.checkFirebaseInit();
             }, 2000);
             this.firebase.events.subscribe(_eventsName.FIREBASE_UI_SHOWN, function () {
@@ -2139,7 +1863,6 @@ var Authentication = /*#__PURE__*/function () {
     key: "onFirebaseInit",
     value: function onFirebaseInit() {
       var _this9 = this;
-
       try {
         if ((0, _classPrivateFieldGet9["default"])(this, _options).firebase.genuineForm !== false) {
           if (this.reCaptcha.enabled && this.reCaptcha.loaded) {
@@ -2152,7 +1875,6 @@ var Authentication = /*#__PURE__*/function () {
             });
           }
         }
-
         this.toggleFormLoader(false);
       } catch (e) {
         this.toggleFormLoader(false);
@@ -2185,11 +1907,9 @@ var Authentication = /*#__PURE__*/function () {
     value: function resetAuthProcess() {
       this.firebase.reset();
       this.firebase.showAuthForm();
-
       if (this.firebase.genuineForm === false) {
         this.authForm.reset();
       }
-
       if (this.reCaptcha.enabled) {
         this.reCaptcha.grecaptcha.reset();
       }
@@ -2207,50 +1927,39 @@ var Authentication = /*#__PURE__*/function () {
                 this.removeToken();
                 _context3.next = 4;
                 return this.firebase.logout();
-
               case 4:
                 success = _context3.sent;
-
                 if (!success) {
                   _context3.next = 13;
                   break;
                 }
-
                 this.removeFirebaseToken();
-
                 if (!(this.reCaptcha.enabled && !this.reCaptcha.loaded)) {
                   _context3.next = 12;
                   break;
                 }
-
                 _context3.next = 10;
                 return this.reCaptcha.init();
-
               case 10:
                 _context3.next = 13;
                 break;
-
               case 12:
                 if (this.reCaptcha.loaded) {
                   this.resetAuthProcess();
                   this.reCaptcha.grecaptcha.reset();
-
                   if ((0, _classPrivateFieldGet9["default"])(this, _options).firebase.genuineForm !== false) {
                     this.reCaptcha.initCaptchaProcess();
                   }
                 }
-
               case 13:
                 this.resetAuthProcess();
                 _context3.next = 20;
                 break;
-
               case 16:
                 _context3.prev = 16;
                 _context3.t0 = _context3["catch"](0);
                 console.log('ERROR:', _context3.t0);
                 this.resetAuthProcess();
-
               case 20:
               case "end":
                 return _context3.stop();
@@ -2258,11 +1967,9 @@ var Authentication = /*#__PURE__*/function () {
           }
         }, _callee3, this, [[0, 16]]);
       }));
-
       function logout() {
         return _logout.apply(this, arguments);
       }
-
       return logout;
     }()
   }, {
@@ -2277,7 +1984,6 @@ var Authentication = /*#__PURE__*/function () {
     key: "dispatchWallkitToken",
     value: function dispatchWallkitToken() {
       var token = this.token.get();
-
       if (token) {
         this.frame.sendEvent(_eventsName["default"].wallkit.WALLKIT_EVENT_TOKEN, token);
       }
@@ -2286,7 +1992,6 @@ var Authentication = /*#__PURE__*/function () {
     key: "dispatchFirebaseToken",
     value: function dispatchFirebaseToken() {
       var token = this.firebaseToken.get();
-
       if (token) {
         this.frame.sendEvent(_eventsName["default"].wallkit.WALLKIT_EVENT_FIREBASE_TOKEN, token);
       }
@@ -2303,45 +2008,36 @@ var Authentication = /*#__PURE__*/function () {
                 _context4.prev = 0;
                 _context4.next = 3;
                 return this.sdk.methods.getAuthTokensByTicketPassToken(ticketPassAuthToken);
-
               case 3:
                 response = _context4.sent;
-
                 if (!response) {
                   _context4.next = 19;
                   break;
                 }
-
                 _context4.next = 7;
                 return this.firebase.authWithCustomToken(response.firebase_custom_token);
-
               case 7:
                 userCredential = _context4.sent;
                 _context4.next = 10;
                 return userCredential.user.getIdToken();
-
               case 10:
                 firebaseToken = _context4.sent;
                 this.updateFirebaseToken(firebaseToken);
                 this.setToken(response.token);
                 _context4.next = 15;
                 return this.sdk.methods.getUser();
-
               case 15:
                 this.dispatchTokens();
                 this.events.notify(_eventsName["default"].local.SUCCESS_AUTH, true);
                 this.events.notify(_eventsName["default"].local.TICKETS_TOKEN_AUTH_SUCCESS, true);
                 return _context4.abrupt("return", true);
-
               case 19:
                 return _context4.abrupt("return", false);
-
               case 22:
                 _context4.prev = 22;
                 _context4.t0 = _context4["catch"](0);
                 console.error(_context4.t0);
                 return _context4.abrupt("return", _context4.t0);
-
               case 26:
               case "end":
                 return _context4.stop();
@@ -2349,11 +2045,9 @@ var Authentication = /*#__PURE__*/function () {
           }
         }, _callee4, this, [[0, 22]]);
       }));
-
       function handleTicketsToken(_x2) {
         return _handleTicketsToken.apply(this, arguments);
       }
-
       return handleTicketsToken;
     }()
   }, {
@@ -2371,7 +2065,6 @@ var Authentication = /*#__PURE__*/function () {
     key: "init",
     value: function init() {
       var _classPrivateFieldGet7;
-
       if (!!((_classPrivateFieldGet7 = (0, _classPrivateFieldGet9["default"])(this, _options)) !== null && _classPrivateFieldGet7 !== void 0 && _classPrivateFieldGet7.firebase)) {
         // Render recaptcha before the firebase init if not custom FB form
         if ((0, _classPrivateFieldGet9["default"])(this, _options).firebase.genuineForm !== false) {
@@ -2381,27 +2074,21 @@ var Authentication = /*#__PURE__*/function () {
             }
           }
         }
-
         this.render();
         this.firebase.init();
-
         if (this.authForm) {
           this.authForm.render();
           this.reCaptcha.init();
         }
       }
-
       _classPrivateMethodGet(this, _initListeners, _initListeners2).call(this);
     }
   }]);
   return Authentication;
 }();
-
-exports.default = Authentication;
-
+exports["default"] = Authentication;
 function _createModal2() {
   var _classPrivateFieldGet8;
-
   return new _modal["default"]({
     modalName: 'auth-modal',
     content: ((_classPrivateFieldGet8 = (0, _classPrivateFieldGet9["default"])(this, _options)) === null || _classPrivateFieldGet8 === void 0 ? void 0 : _classPrivateFieldGet8.content) || this.getDefaultAuthenticationFormContent(),
@@ -2409,60 +2096,44 @@ function _createModal2() {
     initialLoader: true
   });
 }
-
 function _initListeners2() {
   var _this10 = this;
-
   this.events.subscribe(_eventsName["default"].local.FRAME_MESSAGE, function (_ref3) {
     var name = _ref3.name,
-        value = _ref3.value;
-
+      value = _ref3.value;
     switch (name) {
       case _eventsName["default"].wallkit.WALLKIT_EVENT_TOKEN:
         if (value) {
           _this10.setToken(value);
         }
-
         break;
-
       case _eventsName["default"].wallkit.WALLKIT_EVENT_AUTH:
       case _eventsName["default"].wallkit.WALLKIT_EVENT_REGISTRATION:
       case _eventsName["default"].wallkit.WALLKIT_EVENT_GET_TOKEN:
         if (value) {
           var token = value.token;
-
           _this10.setToken(token);
         }
-
         break;
-
       case _eventsName["default"].wallkit.WALLKIT_FIREBASE_TOKEN:
         _this10.firebaseToken.set(value);
-
         if (_this10.sdk) {
           _this10.sdk.methods.setFirebaseToken(value);
         }
-
         break;
-
       case _eventsName["default"].wallkit.WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN:
         if (value) {
           _this10.firebase.authWithCustomToken(value);
         }
-
         break;
-
       case _eventsName["default"].wallkit.WALLKIT_LOGOUT:
         _this10.logout();
-
         break;
     }
   });
 }
-
 function _setAuthorizationError2(error) {
   var errorPlaceholder = document.getElementById('authorization-error');
-
   if (errorPlaceholder) {
     if (error === null) {
       errorPlaceholder.innerHTML = '';
@@ -2471,79 +2142,63 @@ function _setAuthorizationError2(error) {
     }
   }
 }
-
 function _resetAuthorizationError2() {
   _classPrivateMethodGet(this, _setAuthorizationError, _setAuthorizationError2).call(this, null);
 }
 
 /***/ }),
 
-/***/ 958:
+/***/ 8390:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(736);
-
+var _interopRequireDefault = __webpack_require__(9736);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.default = void 0;
-
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
-
-var _createClass2 = _interopRequireDefault(__webpack_require__(884));
-
-var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(401));
-
-var _sdk = _interopRequireDefault(__webpack_require__(753));
-
+exports["default"] = void 0;
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(8972));
+var _createClass2 = _interopRequireDefault(__webpack_require__(8884));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(1401));
+var _sdk = _interopRequireDefault(__webpack_require__(4753));
+function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
+function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
+function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
-
 var _options = /*#__PURE__*/new WeakMap();
-
 var _encodeQueryData = /*#__PURE__*/new WeakSet();
-
 var _formatCheckAccessRequestPath = /*#__PURE__*/new WeakSet();
-
 var Content = /*#__PURE__*/function () {
   function Content(content, options) {
     (0, _classCallCheck2["default"])(this, Content);
-
-    _formatCheckAccessRequestPath.add(this);
-
-    _encodeQueryData.add(this);
-
-    _options.set(this, {
+    _classPrivateMethodInitSpec(this, _formatCheckAccessRequestPath);
+    _classPrivateMethodInitSpec(this, _encodeQueryData);
+    _classPrivateFieldInitSpec(this, _options, {
       writable: true,
       value: void 0
     });
-
     this.content = content;
     (0, _classPrivateFieldSet2["default"])(this, _options, options);
     this.sdk = new _sdk["default"]();
     this.accessCount = 0;
     this.accessCountLimit = 0;
   }
-
   (0, _createClass2["default"])(Content, [{
     key: "formatTaxonomies",
     value: function formatTaxonomies(taxonomies) {
       var formatted = {};
       var taxonimiesTitles = [];
       var taxonimiesKeys = [];
-
       var _loop = function _loop(taxKey) {
         var _taxonomies$taxKey;
-
         taxonimiesKeys.push(taxKey);
         taxonimiesTitles.push(taxonomies[taxKey].label);
         var termKeysKey = "term_keys[".concat(taxKey, "]");
         var termTitleKey = "term_titles[".concat(taxKey, "]");
         var targetTermKeys = formatted[termKeysKey];
         var targetTermTitles = formatted[termTitleKey];
-
         if ((_taxonomies$taxKey = taxonomies[taxKey]) !== null && _taxonomies$taxKey !== void 0 && _taxonomies$taxKey.items) {
           taxonomies[taxKey].items.forEach(function (item) {
             if (targetTermKeys) {
@@ -2551,7 +2206,6 @@ var Content = /*#__PURE__*/function () {
             } else {
               formatted[termKeysKey] = [item.slug];
             }
-
             if (targetTermTitles) {
               targetTermTitles.push(item.slug);
             } else {
@@ -2559,15 +2213,12 @@ var Content = /*#__PURE__*/function () {
             }
           });
         }
-
         formatted[termKeysKey] = formatted[termKeysKey].join(',');
         formatted[termTitleKey] = formatted[termTitleKey].join(',');
       };
-
       for (var taxKey in taxonomies) {
         _loop(taxKey);
       }
-
       formatted.taxonomy_titles = taxonimiesTitles.join(',');
       formatted.taxonomy_keys = taxonimiesKeys.join(',');
       return formatted;
@@ -2576,7 +2227,6 @@ var Content = /*#__PURE__*/function () {
     key: "checkContentAccessAndSync",
     value: function checkContentAccessAndSync(content) {
       var _this = this;
-
       var queryParams = {
         type: content.type,
         title: content.title,
@@ -2590,7 +2240,6 @@ var Content = /*#__PURE__*/function () {
         if (_this.sdk.methods.isAuthenticated()) {
           _this.getAccessDetails(content.id);
         }
-
         return {
           allowed: response.allow,
           data: response
@@ -2606,12 +2255,10 @@ var Content = /*#__PURE__*/function () {
     key: "checkAccess",
     value: function checkAccess() {
       var _this2 = this;
-
       return this.sdk.methods.checkAccess(this.content.id).then(function (response) {
         if (_this2.sdk.methods.isAuthenticated()) {
           _this2.getAccessDetails(_this2.content.id);
         }
-
         return {
           allowed: response.allow,
           data: response
@@ -2620,7 +2267,6 @@ var Content = /*#__PURE__*/function () {
         if (error.error === 'incorrect_content_key') {
           return _this2.checkContentAccessAndSync(_this2.content);
         }
-
         return {
           allowed: false,
           error: error
@@ -2631,7 +2277,6 @@ var Content = /*#__PURE__*/function () {
     key: "getAccessDetails",
     value: function getAccessDetails(contentId) {
       var _this3 = this;
-
       return this.sdk.client.get({
         path: "/user/content-access-details/".concat(contentId)
       }).then(function (response) {
@@ -2644,7 +2289,6 @@ var Content = /*#__PURE__*/function () {
             accessCountLimit: _this3.accessCountLimit
           };
         }
-
         return {
           accessCount: 0,
           accessCountLimit: 0
@@ -2656,30 +2300,24 @@ var Content = /*#__PURE__*/function () {
   }]);
   return Content;
 }();
-
-exports.default = Content;
-
+exports["default"] = Content;
 function _encodeQueryData2(data) {
   var ret = [];
-
   for (var d in data) {
     if (data[d] !== undefined) {
       ret.push("".concat(encodeURIComponent(d), "=").concat(encodeURIComponent(data[d])));
     }
   }
-
   return ret.join('&');
 }
-
 function _formatCheckAccessRequestPath2(id, params) {
   var query = _classPrivateMethodGet(this, _encodeQueryData, _encodeQueryData2).call(this, params);
-
   return "/user/content-sync-and-check/".concat(id, "?").concat(query);
 }
 
 /***/ }),
 
-/***/ 73:
+/***/ 6073:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -2688,7 +2326,7 @@ function _formatCheckAccessRequestPath2(id, params) {
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.default = exports.WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN = exports.WALLKIT_FRAME_ROUTE_CHANGE = exports.WALLKIT_EVENT_ONE_TAP_SIGN_IN = exports.WALLKIT_EVENT_REGISTRATION = exports.WALLKIT_EVENT_USER = exports.WALLKIT_EVENT_AUTH = exports.WALLKIT_EVENT_GET_TOKEN = exports.WALLKIT_FRAME_READY = exports.WALLKIT_EVENT_TOKEN = exports.WALLKIT_EVENT_FIREBASE_TOKEN = exports.WALLKIT_FIREBASE_TOKEN = exports.WALLKIT_LOGOUT = exports.WALLKIT_CHANGE_FRAME = exports.FIREBASE_UI_SHOWN = exports.FIREBASE_INIT = exports.FIREBASE_LOADED = exports.TICKETS_TOKEN_AUTH_SUCCESS = exports.RECAPTCHA_VALIDATION_SUCCESS = exports.RECAPTCHA_VALIDATION_FAILED = exports.RECAPTCHA_LOADED = exports.MODAL_CLOSED = exports.FRAME_MODAL_CLOSED = exports.AUTH_MODAL_CLOSED = exports.FRAME_MESSAGE = exports.WALLKIT_SDK_LOADED = exports.SUCCESS_FIREBASE_AUTH = exports.SUCCESS_AUTH = exports.MODAL_CREATED = exports.FRAME_MOUNTED = exports.FRAME_CREATED = void 0;
+exports["default"] = exports.WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN = exports.WALLKIT_FRAME_ROUTE_CHANGE = exports.WALLKIT_EVENT_ONE_TAP_SIGN_IN = exports.WALLKIT_EVENT_REGISTRATION = exports.WALLKIT_EVENT_USER = exports.WALLKIT_EVENT_AUTH = exports.WALLKIT_EVENT_GET_TOKEN = exports.WALLKIT_FRAME_READY = exports.WALLKIT_EVENT_TOKEN = exports.WALLKIT_EVENT_FIREBASE_TOKEN = exports.WALLKIT_FIREBASE_TOKEN = exports.WALLKIT_LOGOUT = exports.WALLKIT_CHANGE_FRAME = exports.FIREBASE_UI_SHOWN = exports.FIREBASE_INIT = exports.FIREBASE_LOADED = exports.TICKETS_TOKEN_AUTH_SUCCESS = exports.RECAPTCHA_VALIDATION_SUCCESS = exports.RECAPTCHA_VALIDATION_FAILED = exports.RECAPTCHA_LOADED = exports.MODAL_CLOSED = exports.FRAME_MODAL_CLOSED = exports.AUTH_MODAL_CLOSED = exports.FRAME_MESSAGE = exports.WALLKIT_SDK_LOADED = exports.SUCCESS_FIREBASE_AUTH = exports.SUCCESS_AUTH = exports.MODAL_CREATED = exports.FRAME_MOUNTED = exports.FRAME_CREATED = void 0;
 // Local Events Names
 var FRAME_CREATED = 'frame-created';
 exports.FRAME_CREATED = FRAME_CREATED;
@@ -2722,8 +2360,9 @@ var FIREBASE_LOADED = 'firebase-loaded';
 exports.FIREBASE_LOADED = FIREBASE_LOADED;
 var FIREBASE_INIT = 'firebase-init';
 exports.FIREBASE_INIT = FIREBASE_INIT;
-var FIREBASE_UI_SHOWN = 'firebase-ui-shown'; // Wallkit Events Names
+var FIREBASE_UI_SHOWN = 'firebase-ui-shown';
 
+// Wallkit Events Names
 exports.FIREBASE_UI_SHOWN = FIREBASE_UI_SHOWN;
 var WALLKIT_CHANGE_FRAME = 'wk-event-modal';
 exports.WALLKIT_CHANGE_FRAME = WALLKIT_CHANGE_FRAME;
@@ -2783,40 +2422,33 @@ var _default = {
     WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN: WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN
   }
 };
-exports.default = _default;
+exports["default"] = _default;
 
 /***/ }),
 
-/***/ 889:
+/***/ 9889:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(736);
-
+var _interopRequireDefault = __webpack_require__(9736);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.default = void 0;
-
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
-
-var _createClass2 = _interopRequireDefault(__webpack_require__(884));
-
+exports["default"] = void 0;
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(8972));
+var _createClass2 = _interopRequireDefault(__webpack_require__(8884));
 var Events = /*#__PURE__*/function () {
   function Events() {
     (0, _classCallCheck2["default"])(this, Events);
-
     if (!!Events.instance) {
       return Events.instance;
     }
-
     Events.instance = this;
     this.listeners = [];
     return this;
   }
-
   (0, _createClass2["default"])(Events, [{
     key: "subscribe",
     value: function subscribe(eventName, callback, options) {
@@ -2840,9 +2472,7 @@ var Events = /*#__PURE__*/function () {
       this.listeners.forEach(function (event, index) {
         if (eventName === event.name) {
           var _event$options;
-
           event.callback(data);
-
           if (!!(event !== null && event !== void 0 && (_event$options = event.options) !== null && _event$options !== void 0 && _event$options.once)) {
             onceIndexesToRemove.push(index);
           }
@@ -2855,8 +2485,7 @@ var Events = /*#__PURE__*/function () {
   }]);
   return Events;
 }();
-
-exports.default = Events;
+exports["default"] = Events;
 
 /***/ }),
 
@@ -2866,41 +2495,32 @@ exports.default = Events;
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(736);
-
+var _interopRequireDefault = __webpack_require__(9736);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.TriggerButton = void 0;
-
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
-
-var _createClass2 = _interopRequireDefault(__webpack_require__(884));
-
-var _DOM = __webpack_require__(909);
-
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(8972));
+var _createClass2 = _interopRequireDefault(__webpack_require__(8884));
+var _DOM = __webpack_require__(2909);
 var TriggerButton = /*#__PURE__*/function () {
   function TriggerButton(selector, options) {
     (0, _classCallCheck2["default"])(this, TriggerButton);
     this.selector = selector;
     this.element = this.createElement(options);
-
     if (options.onClick) {
       this.element.addEventListener('click', options.onClick.bind(this));
     }
   }
-
   (0, _createClass2["default"])(TriggerButton, [{
     key: "createElement",
     value: function createElement(options) {
       var className = 'wk-auth-form-button';
-
       if (options) {
         if (options.className) {
           className += " ".concat(options.className);
         }
       }
-
       return (0, _DOM.createElement)('div', {
         className: className,
         innerHTML: "\n                <span class=\"firebaseui-idp-icon-wrapper\">\n                    <img class=\"firebaseui-idp-icon\" alt=\"\" src=\"https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/mail.svg\">\n                </span>\n                <span class=\"firebaseui-idp-text firebaseui-idp-text-long\">Sign in with email</span>"
@@ -2920,7 +2540,6 @@ var TriggerButton = /*#__PURE__*/function () {
     key: "render",
     value: function render() {
       var targetElement = document.querySelector(this.selector);
-
       if (targetElement) {
         targetElement.appendChild(this.element);
       }
@@ -2928,61 +2547,42 @@ var TriggerButton = /*#__PURE__*/function () {
   }]);
   return TriggerButton;
 }();
-
 exports.TriggerButton = TriggerButton;
 
 /***/ }),
 
-/***/ 195:
+/***/ 4195:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(736);
-
+var _interopRequireDefault = __webpack_require__(9736);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.CheckBoxField = void 0;
-
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
-
-var _createClass2 = _interopRequireDefault(__webpack_require__(884));
-
-var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(168));
-
-var _inherits2 = _interopRequireDefault(__webpack_require__(914));
-
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(164));
-
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(94));
-
-var _index = __webpack_require__(751);
-
-var _DOM = __webpack_require__(909);
-
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(8972));
+var _createClass2 = _interopRequireDefault(__webpack_require__(8884));
+var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(9168));
+var _inherits2 = _interopRequireDefault(__webpack_require__(8914));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(2164));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(2094));
+var _index = __webpack_require__(4751);
+var _DOM = __webpack_require__(2909);
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2["default"])(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2["default"])(this, result); }; }
-
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
 var CheckBoxField = /*#__PURE__*/function (_FormField) {
   (0, _inherits2["default"])(CheckBoxField, _FormField);
-
   var _super = _createSuper(CheckBoxField);
-
   function CheckBoxField(options) {
     var _this;
-
     (0, _classCallCheck2["default"])(this, CheckBoxField);
     _this = _super.call(this, options);
     _this.type = 'checkbox';
-
     _this.input.addEventListener('change', _this.validate.bind((0, _assertThisInitialized2["default"])(_this)));
-
     return _this;
   }
-
   (0, _createClass2["default"])(CheckBoxField, [{
     key: "createCheckMark",
     value: function createCheckMark() {
@@ -3015,81 +2615,58 @@ var CheckBoxField = /*#__PURE__*/function (_FormField) {
   }]);
   return CheckBoxField;
 }(_index.FormField);
-
 exports.CheckBoxField = CheckBoxField;
 
 /***/ }),
 
-/***/ 386:
+/***/ 4386:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(736);
-
+var _interopRequireDefault = __webpack_require__(9736);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.PasswordField = void 0;
-
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
-
-var _createClass2 = _interopRequireDefault(__webpack_require__(884));
-
-var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(168));
-
-var _inherits2 = _interopRequireDefault(__webpack_require__(914));
-
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(164));
-
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(94));
-
-var _index = __webpack_require__(751);
-
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(8972));
+var _createClass2 = _interopRequireDefault(__webpack_require__(8884));
+var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(9168));
+var _get2 = _interopRequireDefault(__webpack_require__(8183));
+var _inherits2 = _interopRequireDefault(__webpack_require__(8914));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(2164));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(2094));
+var _index = __webpack_require__(4751);
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2["default"])(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2["default"])(this, result); }; }
-
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
+function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
+function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
-
 var _testPasswordRule = /*#__PURE__*/new WeakSet();
-
 var _testPassword = /*#__PURE__*/new WeakSet();
-
 var PasswordField = /*#__PURE__*/function (_FormField) {
   (0, _inherits2["default"])(PasswordField, _FormField);
-
   var _super = _createSuper(PasswordField);
-
   function PasswordField(options) {
     var _options$testStrength;
-
     var _this;
-
     (0, _classCallCheck2["default"])(this, PasswordField);
     _this = _super.call(this, options);
-
-    _testPassword.add((0, _assertThisInitialized2["default"])(_this));
-
-    _testPasswordRule.add((0, _assertThisInitialized2["default"])(_this));
-
+    _classPrivateMethodInitSpec((0, _assertThisInitialized2["default"])(_this), _testPassword);
+    _classPrivateMethodInitSpec((0, _assertThisInitialized2["default"])(_this), _testPasswordRule);
     _this.insertAffix("<div id=\"show-password-toggle\" class=\"wk-eye-toggle\"></div>", _this.togglePasswordVisibility.bind((0, _assertThisInitialized2["default"])(_this)));
-
     if (options.passwordHint) {
       _this.insertDescription("<div>\n            <span>Password should match requirements:</span>\n            <ul class=\"wk-field-list\">\n                <li>at least 1 uppercase character (A-Z)</li>\n                <li>at least 1 lowercase character (a-z)</li>\n                <li>at least 1 digit (0-9)</li>\n                <li>at least 1 special character (punctuation)</li>\n                <li>at least 8 characters length</li>\n            </ul>\n        </div>");
     }
-
     _this.testStrength = (_options$testStrength = options.testStrength) !== null && _options$testStrength !== void 0 ? _options$testStrength : false;
     return _this;
   }
-
   (0, _createClass2["default"])(PasswordField, [{
     key: "togglePasswordVisibility",
     value: function togglePasswordVisibility() {
       var targetElement = this.wrapper.querySelector('#show-password-toggle');
       var TOGGLE_CLASSNAME = 'wk-eye-toggled';
-
       if (targetElement) {
         if (targetElement.classList.contains(TOGGLE_CLASSNAME)) {
           targetElement.classList.remove(TOGGLE_CLASSNAME);
@@ -3111,47 +2688,36 @@ var PasswordField = /*#__PURE__*/function (_FormField) {
     key: "validate",
     value: function validate() {
       var value = this.getValue();
-
       var passwordValidation = _classPrivateMethodGet(this, _testPassword, _testPassword2).call(this, value);
-
       if (!passwordValidation.valid) {
         this.setError("<div>\n                <span>Password should be: ".concat(passwordValidation.message, "</span>\n            </div>"));
         return false;
       }
-
-      this.resetValidation();
-      this.setFieldValidationState(true);
-      return true;
+      return (0, _get2["default"])((0, _getPrototypeOf2["default"])(PasswordField.prototype), "validate", this).call(this);
     }
   }]);
   return PasswordField;
 }(_index.FormField);
-
 exports.PasswordField = PasswordField;
-
 function _testPasswordRule2(value, regex, errorMessage) {
   var uppercaseRegex = new RegExp(regex);
   var uppercaseValid = uppercaseRegex.test(value);
-
   if (!uppercaseValid) {
     return {
       message: errorMessage,
       valid: false
     };
   }
-
   return {
     valid: true
   };
 }
-
 function _testPassword2(password) {
   if (!this.testStrength) {
     return {
       valid: true
     };
   }
-
   var rules = [{
     regex: "^(?=.{8,})",
     message: "At least 8 characters length"
@@ -3168,17 +2734,13 @@ function _testPassword2(password) {
     regex: "^(?=.*[`~!@#$%^&*()+={}\/|:;'<>,.?_-])",
     message: "At least 1 special character (punctuation)"
   }];
-
   for (var _i = 0, _rules = rules; _i < _rules.length; _i++) {
     var rule = _rules[_i];
-
     var validateRule = _classPrivateMethodGet(this, _testPasswordRule, _testPasswordRule2).call(this, password, rule.regex, rule.message);
-
     if (!validateRule.valid) {
       return validateRule;
     }
   }
-
   return {
     valid: true
   };
@@ -3186,33 +2748,26 @@ function _testPassword2(password) {
 
 /***/ }),
 
-/***/ 751:
+/***/ 4751:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(736);
-
+var _interopRequireDefault = __webpack_require__(9736);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.FormField = void 0;
-
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
-
-var _createClass2 = _interopRequireDefault(__webpack_require__(884));
-
-var _DOM = __webpack_require__(909);
-
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(8972));
+var _createClass2 = _interopRequireDefault(__webpack_require__(8884));
+var _DOM = __webpack_require__(2909);
 var FormField = /*#__PURE__*/function () {
   function FormField(options) {
     (0, _classCallCheck2["default"])(this, FormField);
-
     if (!options) {
       throw new Error('No Options Provided');
     }
-
     this.wrapper = this.createWrapper(options);
     this.input = this.createInput(options);
     this.type = options.type || 'text';
@@ -3221,25 +2776,19 @@ var FormField = /*#__PURE__*/function () {
     this.required = options.required || false;
     this.slug = options.dataSlug;
     this.render(options);
-
     if (options.affix) {
       this.insertAffix(options.affix.content, options.affix.onClick);
     }
-
     if (options.description) {
       this.insertDescription(options.description);
     }
-
     if (options.onChange) {
       this.input.addEventListener('change', options.onChange.bind(this));
     }
-
     if (options.onInput) {
       this.input.addEventListener('input', options.onInput.bind(this));
     }
-
     this.input.addEventListener('blur', this.validate.bind(this));
-
     if (options.onEnter) {
       this.input.addEventListener('keydown', function (event) {
         if (event.keyCode === 13) {
@@ -3247,8 +2796,13 @@ var FormField = /*#__PURE__*/function () {
         }
       });
     }
+    if (options.onValidate && typeof options.onValidate === "function") {
+      this.onValidate = options.onValidate;
+    }
+    if (options.relatedData) {
+      this.relatedData = options.relatedData;
+    }
   }
-
   (0, _createClass2["default"])(FormField, [{
     key: "getElement",
     value: function getElement() {
@@ -3263,12 +2817,10 @@ var FormField = /*#__PURE__*/function () {
     key: "validate",
     value: function validate() {
       var value = this.getValue();
-
       if (this.required && !value) {
         this.setError('This field is required!');
         return false;
       }
-
       if (this.type === 'email') {
         if (!value) {
           this.setError('Enter your email address to continue!');
@@ -3278,7 +2830,11 @@ var FormField = /*#__PURE__*/function () {
           return false;
         }
       }
-
+      if (this.onValidate) {
+        if (!this.onValidate(this)) {
+          return false;
+        }
+      }
       this.resetValidation();
       this.setFieldValidationState(true);
       return true;
@@ -3372,7 +2928,6 @@ var FormField = /*#__PURE__*/function () {
     key: "setFieldValidationState",
     value: function setFieldValidationState(valid) {
       this.isValid = valid;
-
       if (!valid) {
         this.wrapper.classList.add('wk-form-field--invalid');
         this.wrapper.classList.remove('wk-form-field--valid');
@@ -3409,53 +2964,40 @@ var FormField = /*#__PURE__*/function () {
   }]);
   return FormField;
 }();
-
 exports.FormField = FormField;
 
 /***/ }),
 
-/***/ 31:
+/***/ 8031:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(736);
-
+var _interopRequireDefault = __webpack_require__(9736);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.AuthForm = exports.RESET_PASSWORD_FORM_SLUG = exports.SIGN_IN_FORM_SLUG = exports.SIGN_UP_FORM_SLUG = void 0;
-
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(239));
-
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
-
-var _createClass2 = _interopRequireDefault(__webpack_require__(884));
-
-var _DOM = __webpack_require__(909);
-
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(8239));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(8972));
+var _createClass2 = _interopRequireDefault(__webpack_require__(8884));
+var _DOM = __webpack_require__(2909);
 var _TriggerButton = __webpack_require__(447);
-
-var _LoginForm = __webpack_require__(138);
-
-var _SignUpForm = __webpack_require__(955);
-
-var _ForgotPasswordForm = __webpack_require__(486);
-
+var _LoginForm = __webpack_require__(4138);
+var _SignUpForm = __webpack_require__(8955);
+var _ForgotPasswordForm = __webpack_require__(7486);
 var SIGN_UP_FORM_SLUG = 'sign-up';
 exports.SIGN_UP_FORM_SLUG = SIGN_UP_FORM_SLUG;
 var SIGN_IN_FORM_SLUG = 'sign-in';
 exports.SIGN_IN_FORM_SLUG = SIGN_IN_FORM_SLUG;
 var RESET_PASSWORD_FORM_SLUG = 'reset-password';
 exports.RESET_PASSWORD_FORM_SLUG = RESET_PASSWORD_FORM_SLUG;
-
 var AuthForm = /*#__PURE__*/function () {
   function AuthForm(selector, options) {
     var _options$signUp,
-        _this = this,
-        _this$forms;
-
+      _this = this,
+      _this$forms;
     (0, _classCallCheck2["default"])(this, AuthForm);
     this.defaultFormSlug = (options === null || options === void 0 ? void 0 : options.defaultForm) || SIGN_UP_FORM_SLUG;
     this.wrapper = (0, _DOM.createElement)('div', {
@@ -3472,7 +3014,6 @@ var AuthForm = /*#__PURE__*/function () {
       onCancel: function onCancel() {
         if (options.onCancel) {
           options.onCancel();
-
           _this.loginForm.resetForm();
         }
       }
@@ -3480,24 +3021,17 @@ var AuthForm = /*#__PURE__*/function () {
     this.loginForm.formWrapper.addEventListener('click', function (event) {
       if (event.target.id === 'auth-signup-link') {
         event.preventDefault();
-
         _this.loginForm.hide();
-
         _this.signUpForm.show();
-
         _this.loginForm.resetForm();
       } else if (event.target.id === 'auth-password-link') {
         event.preventDefault();
-
         _this.loginForm.hide();
-
         _this.loginForm.resetForm();
-
         _this.forgotPasswordForm.show();
       }
     });
     this.loginForm.hide();
-
     if (options.signUp === true) {
       this.signUpForm = new _SignUpForm.SignupForm(selector, {
         termsOfService: options.termsOfService,
@@ -3510,15 +3044,12 @@ var AuthForm = /*#__PURE__*/function () {
       this.signUpForm.formWrapper.addEventListener('click', function (event) {
         if (event.target.id === 'auth-signin-link') {
           _this.loginForm.show();
-
           _this.signUpForm.hide();
-
           _this.signUpForm.resetForm();
         }
       });
       this.signUpForm.hide();
     }
-
     this.forgotPasswordForm = new _ForgotPasswordForm.ForgotPasswordForm(selector, {
       onSubmit: function onSubmit(data) {
         if (options.onPasswordReset) {
@@ -3529,35 +3060,26 @@ var AuthForm = /*#__PURE__*/function () {
     this.forgotPasswordForm.formWrapper.addEventListener('click', function (event) {
       if (event.target.id === 'back-to-login') {
         event.preventDefault();
-
         _this.forgotPasswordForm.hide();
-
         _this.forgotPasswordForm.resetForm();
-
         _this.loginForm.show();
-
         _this.forgotPasswordForm.reRender();
       }
     });
     this.forgotPasswordForm.hide();
-
     if (options.triggerButton !== false) {
       this.triggerButton = new _TriggerButton.TriggerButton(selector, {
         onClick: function onClick() {
           _this.loginForm.show();
-
           _this.triggerButton.hide();
-
           if (options.onAuthFormShow) {
             options.onAuthFormShow();
           }
         }
       });
     }
-
     this.forms = (_this$forms = {}, (0, _defineProperty2["default"])(_this$forms, RESET_PASSWORD_FORM_SLUG, this.forgotPasswordForm), (0, _defineProperty2["default"])(_this$forms, SIGN_IN_FORM_SLUG, this.loginForm), (0, _defineProperty2["default"])(_this$forms, SIGN_UP_FORM_SLUG, this.signUpForm), _this$forms);
   }
-
   (0, _createClass2["default"])(AuthForm, [{
     key: "defaultForm",
     get: function get() {
@@ -3567,7 +3089,6 @@ var AuthForm = /*#__PURE__*/function () {
     key: "showDefaultForm",
     value: function showDefaultForm() {
       var form = this.defaultForm;
-
       if (form) {
         form.show();
       }
@@ -3576,7 +3097,6 @@ var AuthForm = /*#__PURE__*/function () {
     key: "reset",
     value: function reset() {
       this.hide();
-
       if (this.triggerButton) {
         this.triggerButton.show();
       } else {
@@ -3589,7 +3109,6 @@ var AuthForm = /*#__PURE__*/function () {
       if (!!this.forms) {
         for (var formKey in this.forms) {
           var form = this.forms[formKey];
-
           if (form) {
             form.hide();
             form.resetForm();
@@ -3609,15 +3128,12 @@ var AuthForm = /*#__PURE__*/function () {
       if (this.loginForm) {
         this.loginForm.render();
       }
-
       if (this.signUpForm) {
         this.signUpForm.render();
       }
-
       if (this.forgotPasswordForm) {
         this.forgotPasswordForm.render();
       }
-
       if (this.triggerButton) {
         this.triggerButton.render();
       } else {
@@ -3627,52 +3143,167 @@ var AuthForm = /*#__PURE__*/function () {
   }]);
   return AuthForm;
 }();
-
 exports.AuthForm = AuthForm;
 
 /***/ }),
 
-/***/ 486:
+/***/ 8445:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(736);
+var _interopRequireDefault = __webpack_require__(9736);
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.ChangePasswordForm = void 0;
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(8972));
+var _createClass2 = _interopRequireDefault(__webpack_require__(8884));
+var _inherits2 = _interopRequireDefault(__webpack_require__(8914));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(2164));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(2094));
+var _DOM = __webpack_require__(2909);
+var _index = __webpack_require__(9356);
+var _PasswordField = __webpack_require__(4386);
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2["default"])(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2["default"])(this, result); }; }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+var ChangePasswordForm = /*#__PURE__*/function (_Form) {
+  (0, _inherits2["default"])(ChangePasswordForm, _Form);
+  var _super = _createSuper(ChangePasswordForm);
+  function ChangePasswordForm(targetElementSelector, options) {
+    var _this;
+    (0, _classCallCheck2["default"])(this, ChangePasswordForm);
+    _this = _super.call(this, targetElementSelector, options);
+    _this.onCancel = options.onCancel || false;
+    _this.options = options;
+    _this.options.title = 'Change Password' || 0;
+    _this.options.footer = _this.getFormFooter() || options.footer;
+    _this.oldPasswordField = new _PasswordField.PasswordField({
+      dataSlug: 'old_password',
+      name: 'wk-old-password',
+      testStrength: false,
+      passwordHint: false,
+      label: 'Old Password',
+      type: 'password',
+      onEnter: function onEnter() {
+        _this.submitForm();
+      },
+      onValidate: function onValidate(field) {
+        var value = field.getValue();
+        if (!value) {
+          field.setError("<div>\n                            <span>Password cannot be empty.</span>\n                        </div>");
+          return false;
+        }
+        return true;
+      }
+    });
+    _this.newPasswordField = new _PasswordField.PasswordField({
+      dataSlug: 'new_password',
+      name: 'wk-new-password',
+      testStrength: true,
+      passwordHint: true,
+      label: 'New Password',
+      type: 'password',
+      relatedData: {
+        oldPassword: _this.oldPasswordField
+      },
+      onEnter: function onEnter() {
+        _this.submitForm();
+      },
+      onValidate: function onValidate(field) {
+        var oldPasswordValue = field.relatedData.oldPassword.getValue();
+        var value = field.getValue();
+        if (oldPasswordValue === value) {
+          field.setError("<div>\n                            <span>The new password must not match the old one.</span>\n                        </div>");
+          return false;
+        }
+        return true;
+      }
+    });
+    _this.newPasswordConfirmField = new _PasswordField.PasswordField({
+      dataSlug: 'new_password_confirm',
+      name: 'wk-new-password-confirm',
+      testStrength: true,
+      passwordHint: false,
+      label: 'New Password Confirm',
+      type: 'password',
+      relatedData: {
+        newPassword: _this.newPasswordField
+      },
+      onEnter: function onEnter() {
+        _this.submitForm();
+      },
+      onValidate: function onValidate(field) {
+        var newPasswordValue = field.relatedData.newPassword.getValue();
+        var value = field.getValue();
+        if (newPasswordValue !== value) {
+          field.setError("<div>\n                            <span>The password confirmation must be the same as the new password.</span>\n                        </div>");
+          return false;
+        }
+        return true;
+      }
+    });
+    _this.fields = [_this.oldPasswordField, _this.newPasswordField, _this.newPasswordConfirmField];
+    _this.init();
+    return _this;
+  }
+  (0, _createClass2["default"])(ChangePasswordForm, [{
+    key: "cancelForm",
+    value: function cancelForm() {
+      if (typeof this.onCancel === "function") {
+        this.onCancel();
+      }
+    }
+  }, {
+    key: "getFormFooter",
+    value: function getFormFooter() {
+      var formFooter = (0, _DOM.createElement)('div', {
+        className: 'wk-form__footer'
+      });
+      formFooter.appendChild((0, _DOM.createElement)('a', {
+        className: 'wk-form__link account-settings-link',
+        innerText: 'Cancel',
+        attributes: {
+          href: '#'
+        }
+      }));
+      formFooter.appendChild(this.submitBtn);
+      return formFooter;
+    }
+  }]);
+  return ChangePasswordForm;
+}(_index.Form);
+exports.ChangePasswordForm = ChangePasswordForm;
 
+/***/ }),
+
+/***/ 7486:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(9736);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.ForgotPasswordForm = void 0;
-
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
-
-var _createClass2 = _interopRequireDefault(__webpack_require__(884));
-
-var _inherits2 = _interopRequireDefault(__webpack_require__(914));
-
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(164));
-
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(94));
-
-var _DOM = __webpack_require__(909);
-
-var _index = __webpack_require__(356);
-
-var _field = __webpack_require__(751);
-
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(8972));
+var _createClass2 = _interopRequireDefault(__webpack_require__(8884));
+var _inherits2 = _interopRequireDefault(__webpack_require__(8914));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(2164));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(2094));
+var _DOM = __webpack_require__(2909);
+var _index = __webpack_require__(9356);
+var _field = __webpack_require__(4751);
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2["default"])(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2["default"])(this, result); }; }
-
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
 var ForgotPasswordForm = /*#__PURE__*/function (_Form) {
   (0, _inherits2["default"])(ForgotPasswordForm, _Form);
-
   var _super = _createSuper(ForgotPasswordForm);
-
   function ForgotPasswordForm(targetElementSelector, options) {
     var _this;
-
     (0, _classCallCheck2["default"])(this, ForgotPasswordForm);
     _this = _super.call(this, targetElementSelector, options);
     _this.options = options;
@@ -3688,12 +3319,9 @@ var ForgotPasswordForm = /*#__PURE__*/function (_Form) {
       }
     });
     _this.fields = [_this.emailField];
-
     _this.init();
-
     return _this;
   }
-
   (0, _createClass2["default"])(ForgotPasswordForm, [{
     key: "getFormFooter",
     value: function getFormFooter() {
@@ -3708,56 +3336,38 @@ var ForgotPasswordForm = /*#__PURE__*/function (_Form) {
   }]);
   return ForgotPasswordForm;
 }(_index.Form);
-
 exports.ForgotPasswordForm = ForgotPasswordForm;
 
 /***/ }),
 
-/***/ 138:
+/***/ 4138:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(736);
-
+var _interopRequireDefault = __webpack_require__(9736);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.LoginForm = void 0;
-
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
-
-var _createClass2 = _interopRequireDefault(__webpack_require__(884));
-
-var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(168));
-
-var _inherits2 = _interopRequireDefault(__webpack_require__(914));
-
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(164));
-
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(94));
-
-var _DOM = __webpack_require__(909);
-
-var _index = __webpack_require__(356);
-
-var _field = __webpack_require__(751);
-
-var _PasswordField = __webpack_require__(386);
-
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(8972));
+var _createClass2 = _interopRequireDefault(__webpack_require__(8884));
+var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(9168));
+var _inherits2 = _interopRequireDefault(__webpack_require__(8914));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(2164));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(2094));
+var _DOM = __webpack_require__(2909);
+var _index = __webpack_require__(9356);
+var _field = __webpack_require__(4751);
+var _PasswordField = __webpack_require__(4386);
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2["default"])(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2["default"])(this, result); }; }
-
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
 var LoginForm = /*#__PURE__*/function (_Form) {
   (0, _inherits2["default"])(LoginForm, _Form);
-
   var _super = _createSuper(LoginForm);
-
   function LoginForm(targetElementSelector, options) {
     var _this;
-
     (0, _classCallCheck2["default"])(this, LoginForm);
     _this = _super.call(this, targetElementSelector, options);
     _this.options = options;
@@ -3783,16 +3393,12 @@ var LoginForm = /*#__PURE__*/function (_Form) {
       }
     });
     _this.fields = [_this.emailField, _this.passwordField];
-
     _this.init();
-
     if (options.onCancel) {
       _this.cancelBtn.addEventListener('click', options.onCancel.bind((0, _assertThisInitialized2["default"])(_this)));
     }
-
     return _this;
   }
-
   (0, _createClass2["default"])(LoginForm, [{
     key: "getFormFooter",
     value: function getFormFooter() {
@@ -3800,7 +3406,6 @@ var LoginForm = /*#__PURE__*/function (_Form) {
       var subFooter = (0, _DOM.createElement)('div', {
         className: 'wk-form__sub-footer'
       });
-
       if (this.options.signUp === true) {
         subFooter.appendChild((0, _DOM.createElement)('a', {
           id: 'auth-signup-link',
@@ -3811,7 +3416,6 @@ var LoginForm = /*#__PURE__*/function (_Form) {
           }
         }));
       }
-
       subFooter.appendChild((0, _DOM.createElement)('a', {
         className: 'wk-form__link wk-form__reset-password',
         innerText: 'Forgot password',
@@ -3824,11 +3428,9 @@ var LoginForm = /*#__PURE__*/function (_Form) {
         className: 'wk-form__footer wk-form__footer--right'
       });
       footerWrapper.appendChild(subFooter);
-
       if (this.options.cancelBtn !== false) {
         formFooter.appendChild(this.cancelBtn);
       }
-
       formFooter.appendChild(this.submitBtn);
       footerWrapper.appendChild(formFooter);
       return footerWrapper;
@@ -3836,69 +3438,47 @@ var LoginForm = /*#__PURE__*/function (_Form) {
   }]);
   return LoginForm;
 }(_index.Form);
-
 exports.LoginForm = LoginForm;
 
 /***/ }),
 
-/***/ 955:
+/***/ 8955:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(736);
-
+var _interopRequireDefault = __webpack_require__(9736);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.SignupForm = void 0;
-
-var _typeof2 = _interopRequireDefault(__webpack_require__(630));
-
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
-
-var _createClass2 = _interopRequireDefault(__webpack_require__(884));
-
-var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(168));
-
-var _inherits2 = _interopRequireDefault(__webpack_require__(914));
-
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(164));
-
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(94));
-
-var _DOM = __webpack_require__(909);
-
-var _index = __webpack_require__(356);
-
-var _field = __webpack_require__(751);
-
-var _PasswordField = __webpack_require__(386);
-
-var _CheckBoxField = __webpack_require__(195);
-
+var _typeof2 = _interopRequireDefault(__webpack_require__(8630));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(8972));
+var _createClass2 = _interopRequireDefault(__webpack_require__(8884));
+var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(9168));
+var _inherits2 = _interopRequireDefault(__webpack_require__(8914));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(2164));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(2094));
+var _DOM = __webpack_require__(2909);
+var _index = __webpack_require__(9356);
+var _field = __webpack_require__(4751);
+var _PasswordField = __webpack_require__(4386);
+var _CheckBoxField = __webpack_require__(4195);
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2["default"])(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2["default"])(this, result); }; }
-
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
+function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
+function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
-
 var _isTosEnabled = /*#__PURE__*/new WeakSet();
-
 var SignupForm = /*#__PURE__*/function (_Form) {
   (0, _inherits2["default"])(SignupForm, _Form);
-
   var _super = _createSuper(SignupForm);
-
   function SignupForm(targetElementSelector, _options) {
     var _this;
-
     (0, _classCallCheck2["default"])(this, SignupForm);
     _this = _super.call(this, targetElementSelector, _options);
-
-    _isTosEnabled.add((0, _assertThisInitialized2["default"])(_this));
-
+    _classPrivateMethodInitSpec((0, _assertThisInitialized2["default"])(_this), _isTosEnabled);
     _this.options = _options;
     _this.options.title = 'Sign Up' || 0;
     _this.options.footer = _this.getFormFooter() || _options.footer;
@@ -3931,7 +3511,6 @@ var SignupForm = /*#__PURE__*/function (_Form) {
         _this.submitForm();
       }
     });
-
     if (_classPrivateMethodGet((0, _assertThisInitialized2["default"])(_this), _isTosEnabled, _isTosEnabled2).call((0, _assertThisInitialized2["default"])(_this), _options)) {
       _this.tosField = new _CheckBoxField.CheckBoxField({
         dataSlug: 'agreement',
@@ -3941,18 +3520,13 @@ var SignupForm = /*#__PURE__*/function (_Form) {
         type: 'checkbox'
       });
     }
-
     _this.fields = [_this.emailField, _this.nameField, _this.passwordField];
-
     if (_this.tosField) {
       _this.fields.push(_this.tosField);
     }
-
     _this.init();
-
     return _this;
   }
-
   (0, _createClass2["default"])(SignupForm, [{
     key: "getFormFooter",
     value: function getFormFooter() {
@@ -3976,62 +3550,48 @@ var SignupForm = /*#__PURE__*/function (_Form) {
       if (!termsOptions) {
         return '';
       }
-
       if ((0, _typeof2["default"])(termsOptions) !== "object") {
         return termsOptions;
       }
-
-      var defaultLabel = "By signing up i agree with the";
-
+      var defaultLabel = "By signing up I agree with the";
       if (termsOptions.tosURL) {
         defaultLabel += " <a href=\"".concat(termsOptions.tosURL, "\" target=\"_blank\">Terms & Conditions</a>");
       }
-
       if (termsOptions.tosURL && termsOptions.privacyPolicyURL) {
         defaultLabel += " and ";
       }
-
       if (termsOptions.privacyPolicyURL) {
         defaultLabel += " <a href=\"".concat(termsOptions.privacyPolicyURL, "\" target=\"_blank\">Privacy Policy</a>");
       }
-
       return defaultLabel;
     }
   }]);
   return SignupForm;
 }(_index.Form);
-
 exports.SignupForm = SignupForm;
-
 function _isTosEnabled2(options) {
   if (!options.termsOfService) {
     return false;
   }
-
   return !!options.termsOfService || !!options.termsOfService.tosURL || !!options.termsOfService.privacyPolicyURL;
 }
 
 /***/ }),
 
-/***/ 356:
+/***/ 9356:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(736);
-
+var _interopRequireDefault = __webpack_require__(9736);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.Form = void 0;
-
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
-
-var _createClass2 = _interopRequireDefault(__webpack_require__(884));
-
-var _DOM = __webpack_require__(909);
-
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(8972));
+var _createClass2 = _interopRequireDefault(__webpack_require__(8884));
+var _DOM = __webpack_require__(2909);
 var Form = /*#__PURE__*/function () {
   function Form(targetElementSelector, options) {
     (0, _classCallCheck2["default"])(this, Form);
@@ -4051,13 +3611,11 @@ var Form = /*#__PURE__*/function () {
     this.options = options;
     this.fields = [];
   }
-
   (0, _createClass2["default"])(Form, [{
     key: "render",
     value: function render(selector) {
       try {
         var placeholderElement = document.querySelector(selector || this.targetElementSelector);
-
         if (placeholderElement) {
           placeholderElement.appendChild(this.getFormElement());
         }
@@ -4110,7 +3668,6 @@ var Form = /*#__PURE__*/function () {
     key: "insertFields",
     value: function insertFields() {
       var _this = this;
-
       this.formWrapperFields = (0, _DOM.createElement)('div', {
         className: 'wk-form-fields'
       });
@@ -4126,21 +3683,18 @@ var Form = /*#__PURE__*/function () {
       this.formWrapperHeader = (0, _DOM.createElement)('div', {
         className: 'wk-form-header'
       });
-
       if (this.options.title) {
         this.formWrapperHeader.appendChild((0, _DOM.createElement)('h2', {
           className: 'wk-form-header__title',
           innerText: this.options.title
         }));
       }
-
       if (this.options.description) {
         this.formWrapperHeader.appendChild((0, _DOM.createElement)('h2', {
           className: 'wk-form-header__description',
           innerText: this.options.description
         }));
       }
-
       this.formErrorPlaceholder = (0, _DOM.createElement)('div', {
         className: 'wk-form__error'
       });
@@ -4154,13 +3708,11 @@ var Form = /*#__PURE__*/function () {
       var formWrapperFooter = (0, _DOM.createElement)('div', {
         className: 'wk-form-footer'
       });
-
       if (!this.options.footer) {
         formWrapperFooter.appendChild(this.submitBtn);
       } else {
         formWrapperFooter.appendChild(this.options.footer);
       }
-
       this.formWrapper.appendChild(formWrapperFooter);
       return this;
     }
@@ -4170,7 +3722,6 @@ var Form = /*#__PURE__*/function () {
       var isValid = null;
       this.fields.forEach(function (field) {
         var isFieldValid = field.validate();
-
         if (isValid !== false) {
           isValid = isFieldValid;
         }
@@ -4226,50 +3777,38 @@ var Form = /*#__PURE__*/function () {
   }]);
   return Form;
 }();
-
 exports.Form = Form;
 
 /***/ }),
 
-/***/ 967:
+/***/ 8967:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(736);
-
+var _interopRequireDefault = __webpack_require__(9736);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.default = void 0;
-
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
-
-var _createClass2 = _interopRequireDefault(__webpack_require__(884));
-
-var _DOM = __webpack_require__(909);
-
-var _constants = __webpack_require__(66);
-
-var _eventsName = __webpack_require__(73);
-
-var _events = _interopRequireDefault(__webpack_require__(889));
-
+exports["default"] = void 0;
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(8972));
+var _createClass2 = _interopRequireDefault(__webpack_require__(8884));
+var _DOM = __webpack_require__(2909);
+var _constants = __webpack_require__(9066);
+var _eventsName = __webpack_require__(6073);
+var _events = _interopRequireDefault(__webpack_require__(9889));
+function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
+function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
-
 var _listeners = /*#__PURE__*/new WeakSet();
-
 var Frame = /*#__PURE__*/function () {
   function Frame(options) {
     (0, _classCallCheck2["default"])(this, Frame);
-
-    _listeners.add(this);
-
+    _classPrivateMethodInitSpec(this, _listeners);
     if (!!Frame.instance) {
       return Frame.instance;
     }
-
     Frame.instance = this;
     this.currentFrameName = '';
     this.options = options;
@@ -4277,7 +3816,6 @@ var Frame = /*#__PURE__*/function () {
     this.ready = false;
     this.events = new _events["default"]();
   }
-
   (0, _createClass2["default"])(Frame, [{
     key: "element",
     get: function get() {
@@ -4312,7 +3850,6 @@ var Frame = /*#__PURE__*/function () {
     value: function resize(width, height) {
       width = width >= _constants.WALLKIT_MODAL_MIN_WIDTH ? width : _constants.WALLKIT_MODAL_MIN_WIDTH;
       height = height >= _constants.WALLKIT_MODAL_MIN_HEIGHT ? height : _constants.WALLKIT_MODAL_MIN_HEIGHT;
-
       if (this.frameElement) {
         this.frameElement.width = width;
         this.frameElement.height = height;
@@ -4322,13 +3859,10 @@ var Frame = /*#__PURE__*/function () {
     key: "sendEvent",
     value: function sendEvent(name, value, params) {
       var _this = this;
-
       var event = function event() {
         if (_this.frameElement && _this.frameElement.contentWindow) {
           var frameWindow = _this.frameElement.contentWindow;
-
           _this.events.notify(name, value);
-
           frameWindow.postMessage({
             name: name,
             value: value,
@@ -4336,7 +3870,6 @@ var Frame = /*#__PURE__*/function () {
           }, '*');
         }
       };
-
       if (this.ready) {
         event();
       } else {
@@ -4347,9 +3880,7 @@ var Frame = /*#__PURE__*/function () {
     key: "openFrame",
     value: function openFrame(name, params) {
       var _this2 = this;
-
       this.currentFrameName = name;
-
       if (this.ready) {
         this.sendEvent(_eventsName.WALLKIT_CHANGE_FRAME, name, params);
       } else {
@@ -4364,12 +3895,9 @@ var Frame = /*#__PURE__*/function () {
     key: "onFrameReady",
     value: function onFrameReady() {
       var _this$options;
-
       this.ready = true;
-
       if ((_this$options = this.options) !== null && _this$options !== void 0 && _this$options.onReady) {
         var _this$options2;
-
         (_this$options2 = this.options) === null || _this$options2 === void 0 ? void 0 : _this$options2.onReady();
       }
     }
@@ -4377,18 +3905,14 @@ var Frame = /*#__PURE__*/function () {
     key: "init",
     value: function init() {
       _classPrivateMethodGet(this, _listeners, _listeners2).call(this);
-
       return this.createFrame();
     }
   }]);
   return Frame;
 }();
-
-exports.default = Frame;
-
+exports["default"] = Frame;
 function _listeners2() {
   var _this3 = this;
-
   this.events.subscribe(_eventsName.WALLKIT_FRAME_ROUTE_CHANGE, function (value) {
     _this3.currentFrameName = value;
   });
@@ -4401,124 +3925,86 @@ function _listeners2() {
 
 /***/ }),
 
-/***/ 761:
+/***/ 7761:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(736);
-
+var _interopRequireDefault = __webpack_require__(9736);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.Localization = void 0;
-
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
-
-var _createClass2 = _interopRequireDefault(__webpack_require__(884));
-
-var _languages = __webpack_require__(6);
-
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(8972));
+var _createClass2 = _interopRequireDefault(__webpack_require__(8884));
+var _languages = __webpack_require__(8006);
 var Localization = /*#__PURE__*/function () {
   function Localization() {
     (0, _classCallCheck2["default"])(this, Localization);
   }
-
   (0, _createClass2["default"])(Localization, null, [{
     key: "assembleLanguage",
     value: function assembleLanguage() {
       var language = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'en';
-
       if (typeof language === "string") {
         if (_languages.FB_AVAILABLE_LANGUAGES.includes(language.toLowerCase())) {
           return language;
         }
       }
-
       return 'en';
     }
   }]);
   return Localization;
 }();
-
 exports.Localization = Localization;
 
 /***/ }),
 
-/***/ 269:
+/***/ 9269:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(736);
-
+var _interopRequireDefault = __webpack_require__(9736);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.default = void 0;
-
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(239));
-
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
-
-var _createClass2 = _interopRequireDefault(__webpack_require__(884));
-
-var _constants = __webpack_require__(66);
-
-var _DOM = _interopRequireDefault(__webpack_require__(909));
-
-var _loaders = __webpack_require__(758);
-
-var _url = __webpack_require__(234);
-
-var _events = _interopRequireDefault(__webpack_require__(889));
-
-var _eventsName = __webpack_require__(73);
-
+exports["default"] = void 0;
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(8239));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(8972));
+var _createClass2 = _interopRequireDefault(__webpack_require__(8884));
+var _constants = __webpack_require__(9066);
+var _DOM = _interopRequireDefault(__webpack_require__(2909));
+var _loaders = __webpack_require__(1758);
+var _url = __webpack_require__(5234);
+var _events = _interopRequireDefault(__webpack_require__(9889));
+var _eventsName = __webpack_require__(6073);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
+function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
+function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
-
 var _getModalName = /*#__PURE__*/new WeakSet();
-
 var _createElement = /*#__PURE__*/new WeakSet();
-
 var _createCloseBtn = /*#__PURE__*/new WeakSet();
-
 var _createWrapper = /*#__PURE__*/new WeakSet();
-
 var _createContent = /*#__PURE__*/new WeakSet();
-
 var _createLoader = /*#__PURE__*/new WeakSet();
-
 var _completeModal = /*#__PURE__*/new WeakSet();
-
 var _loadAssets = /*#__PURE__*/new WeakSet();
-
 var Modal = /*#__PURE__*/function () {
   function Modal(_options) {
     (0, _classCallCheck2["default"])(this, Modal);
-
-    _loadAssets.add(this);
-
-    _completeModal.add(this);
-
-    _createLoader.add(this);
-
-    _createContent.add(this);
-
-    _createWrapper.add(this);
-
-    _createCloseBtn.add(this);
-
-    _createElement.add(this);
-
-    _getModalName.add(this);
-
+    _classPrivateMethodInitSpec(this, _loadAssets);
+    _classPrivateMethodInitSpec(this, _completeModal);
+    _classPrivateMethodInitSpec(this, _createLoader);
+    _classPrivateMethodInitSpec(this, _createContent);
+    _classPrivateMethodInitSpec(this, _createWrapper);
+    _classPrivateMethodInitSpec(this, _createCloseBtn);
+    _classPrivateMethodInitSpec(this, _createElement);
+    _classPrivateMethodInitSpec(this, _getModalName);
     this.options = _options;
     this.modalFrame = _options ? _options.resourceFrame : null;
     this.content = _options ? _options.content : null;
@@ -4529,7 +4015,6 @@ var Modal = /*#__PURE__*/function () {
     this.closeOutside = true;
     this.onClose = _options ? _options.onClose : null;
   }
-
   (0, _createClass2["default"])(Modal, [{
     key: "bindCloseEvent",
     value: function bindCloseEvent(element) {
@@ -4575,11 +4060,9 @@ var Modal = /*#__PURE__*/function () {
       events.notify(_eventsName.MODAL_CLOSED, {
         name: _classPrivateMethodGet(this, _getModalName, _getModalName2).call(this)
       });
-
       if (this.onClose) {
         this.onClose();
       }
-
       this.modalWrapper.style.display = 'none';
     }
   }, {
@@ -4600,7 +4083,6 @@ var Modal = /*#__PURE__*/function () {
     key: "openByHash",
     value: function openByHash() {
       var modal = (0, _url.parseModalHashURL)();
-
       if (modal) {
         this.open(modal.name, modal.params);
       }
@@ -4609,7 +4091,6 @@ var Modal = /*#__PURE__*/function () {
     key: "onReady",
     value: function onReady() {
       var _this$options;
-
       if ((_this$options = this.options) !== null && _this$options !== void 0 && _this$options.onReady) {
         this.options.onReady(this);
       }
@@ -4618,65 +4099,48 @@ var Modal = /*#__PURE__*/function () {
     key: "init",
     value: function init() {
       _classPrivateMethodGet(this, _createWrapper, _createWrapper2).call(this);
-
       _classPrivateMethodGet(this, _createContent, _createContent2).call(this);
-
       _classPrivateMethodGet(this, _createLoader, _createLoader2).call(this);
-
       _classPrivateMethodGet(this, _completeModal, _completeModal2).call(this);
-
       this.onReady();
     }
   }]);
   return Modal;
 }();
-
-exports.default = Modal;
-
+exports["default"] = Modal;
 function _getModalName2() {
   var _this$options$modalNa, _this$options2;
-
   return (_this$options$modalNa = (_this$options2 = this.options) === null || _this$options2 === void 0 ? void 0 : _this$options2.modalName) !== null && _this$options$modalNa !== void 0 ? _this$options$modalNa : 'wk-modal';
 }
-
 function _createElement2(elementTag, elementName, options) {
   var elementIdName = _classPrivateMethodGet(this, _getModalName, _getModalName2).call(this) + '-' + elementName;
   var elementIndex = 0;
   var elementId = elementIdName;
-
   while (_DOM["default"].checkIfElementExists('#' + elementId)) {
     ++elementIndex;
     elementId = elementIdName + '-' + elementIndex;
   }
-
   return _DOM["default"].createElement(elementTag, _objectSpread({
     id: elementId
   }, options));
 }
-
 function _createCloseBtn2() {
   var closeBtn = _classPrivateMethodGet(this, _createElement, _createElement2).call(this, 'div', 'close-btn', {
     className: _constants.WALLKIT_MODAL_CLOSE_BTN_CLASSNAME
   });
-
   closeBtn.innerHTML = '&#xd7;'; // Plus Symbol
 
   this.bindCloseEvent(closeBtn);
   return closeBtn;
 }
-
 function _createWrapper2() {
   var _this$options3,
-      _this = this;
-
+    _this = this;
   var modalClassName = _constants.WALLKIT_MODAL_WRAPPER_CLASSNAME;
-
   if ((_this$options3 = this.options) !== null && _this$options3 !== void 0 && _this$options3.className) {
     var _this$options4;
-
     modalClassName += ' ' + ((_this$options4 = this.options) === null || _this$options4 === void 0 ? void 0 : _this$options4.className);
   }
-
   this.modalWrapper = _classPrivateMethodGet(this, _createElement, _createElement2).call(this, 'div', 'wrapper', {
     styles: {
       display: 'none'
@@ -4692,7 +4156,6 @@ function _createWrapper2() {
   });
   return this.modalWrapper;
 }
-
 function _createContent2() {
   this.modalContent = _classPrivateMethodGet(this, _createElement, _createElement2).call(this, 'div', 'content', {
     className: _constants.WALLKIT_MODAL_CONTENT_CLASSNAME
@@ -4702,10 +4165,8 @@ function _createContent2() {
   this.modalContent.style.maxWidth = _constants.WALLKIT_MODAL_MAX_WIDTH + 'px';
   return this.modalContent;
 }
-
 function _createLoader2() {
   var _this$options5;
-
   this.loaderElement = _classPrivateMethodGet(this, _createElement, _createElement2).call(this, 'div', 'wallkit-modal-spinner', {
     className: 'wallkit-spinner',
     styles: {
@@ -4714,111 +4175,86 @@ function _createLoader2() {
   });
   this.loaderElement.insertAdjacentHTML('beforeend', '<div class="wallkit-spinner__container">' + '<div class="cube1"></div>' + '<div class="cube2"></div>' + '</div>');
 }
-
 function _completeModal2() {
   _classPrivateMethodGet(this, _loadAssets, _loadAssets2).call(this);
-
   this.modalWrapper.appendChild(this.modalContent);
   this.modalContent.appendChild(this.loaderElement);
   this.modalContent.appendChild(_classPrivateMethodGet(this, _createCloseBtn, _createCloseBtn2).call(this));
-
   if (this.modalFrame) {
     this.insertContent(this.modalFrame.init());
   } else if (this.modalContent) {
     this.insertContent(this.content);
   }
-
   return _DOM["default"].injectInBody(this.modalWrapper);
 }
-
 function _loadAssets2() {
   (0, _loaders.loadWallkitAsset)('css', '1.0', 'spinner');
 }
 
 /***/ }),
 
-/***/ 753:
+/***/ 4753:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(736);
-
+var _interopRequireDefault = __webpack_require__(9736);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.default = void 0;
-
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(972));
-
-var _createClass2 = _interopRequireDefault(__webpack_require__(884));
-
-var _classPrivateFieldGet4 = _interopRequireDefault(__webpack_require__(704));
-
-var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(401));
-
-var _DOM = __webpack_require__(909);
-
-var _constants = __webpack_require__(66);
-
-var _eventsName = __webpack_require__(73);
-
-var _events2 = _interopRequireDefault(__webpack_require__(889));
-
+exports["default"] = void 0;
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(8972));
+var _createClass2 = _interopRequireDefault(__webpack_require__(8884));
+var _classPrivateFieldGet4 = _interopRequireDefault(__webpack_require__(9704));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(1401));
+var _DOM = __webpack_require__(2909);
+var _constants = __webpack_require__(9066);
+var _eventsName = __webpack_require__(6073);
+var _events2 = _interopRequireDefault(__webpack_require__(9889));
+function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
+function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
 var _options = /*#__PURE__*/new WeakMap();
-
 var _events = /*#__PURE__*/new WeakMap();
-
 var _apiUrl = /*#__PURE__*/new WeakMap();
-
 var SDK = /*#__PURE__*/function () {
   function SDK(options) {
     (0, _classCallCheck2["default"])(this, SDK);
-
-    _options.set(this, {
+    _classPrivateFieldInitSpec(this, _options, {
       writable: true,
       value: void 0
     });
-
-    _events.set(this, {
+    _classPrivateFieldInitSpec(this, _events, {
       writable: true,
       value: void 0
     });
-
-    _apiUrl.set(this, {
+    _classPrivateFieldInitSpec(this, _apiUrl, {
       writable: true,
       value: void 0
     });
-
     if (!!SDK.instance) {
       return SDK.instance;
     }
-
     if (!options) {
       return new Error('No Options Provided');
     }
-
     SDK.instance = this;
     this.methods = null;
     this.client = null;
     (0, _classPrivateFieldSet2["default"])(this, _options, options);
     (0, _classPrivateFieldSet2["default"])(this, _events, new _events2["default"]());
     (0, _classPrivateFieldSet2["default"])(this, _apiUrl, options.mode === 'dev' ? 'https://api.dev.wallkit.net/api/v1' : undefined);
-
     if (window.Wallkit) {
       this.onLoad();
     } else {
       this.load();
     }
   }
-
   (0, _createClass2["default"])(SDK, [{
     key: "onLoad",
     value: function onLoad() {
       if (window.Wallkit) {
         var _classPrivateFieldGet2;
-
         window.Wallkit.init({
           resource: (0, _classPrivateFieldGet4["default"])(this, _options).public_key,
           api_url: (0, _classPrivateFieldGet4["default"])(this, _apiUrl)
@@ -4826,10 +4262,8 @@ var SDK = /*#__PURE__*/function () {
         this.methods = window.Wallkit;
         this.client = window.Wallkit.client;
         (0, _classPrivateFieldGet4["default"])(this, _events).notify(_eventsName.WALLKIT_SDK_LOADED, window.Wallkit);
-
         if ((_classPrivateFieldGet2 = (0, _classPrivateFieldGet4["default"])(this, _options)) !== null && _classPrivateFieldGet2 !== void 0 && _classPrivateFieldGet2.onLoaded) {
           var _classPrivateFieldGet3;
-
           (_classPrivateFieldGet3 = (0, _classPrivateFieldGet4["default"])(this, _options)) === null || _classPrivateFieldGet3 === void 0 ? void 0 : _classPrivateFieldGet3.onLoaded();
         }
       }
@@ -4838,7 +4272,6 @@ var SDK = /*#__PURE__*/function () {
     key: "awaitLoad",
     value: function awaitLoad() {
       var _this = this;
-
       return new Promise(function (resolve) {
         if (!_this.methods) {
           (0, _classPrivateFieldGet4["default"])(_this, _events).subscribe(_eventsName.WALLKIT_SDK_LOADED, function () {
@@ -4857,79 +4290,185 @@ var SDK = /*#__PURE__*/function () {
   }]);
   return SDK;
 }();
-
-exports.default = SDK;
+exports["default"] = SDK;
 
 /***/ }),
 
-/***/ 909:
+/***/ 4442:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _typeof = __webpack_require__(630);
-
+var _interopRequireDefault = __webpack_require__(9736);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.default = exports.isMobile = exports.insertScript = exports.loadCSS = exports.injectInHead = exports.injectInBody = exports.createElement = exports.insertAfter = exports.checkIfElementExists = exports.isDocumentAvailable = void 0;
+exports["default"] = void 0;
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(8972));
+var _createClass2 = _interopRequireDefault(__webpack_require__(8884));
+var _modal = _interopRequireDefault(__webpack_require__(9269));
+var _ChangePasswordForm = __webpack_require__(8445);
+var _constants = __webpack_require__(9066);
+function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
+function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
+function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
+var _initModal = /*#__PURE__*/new WeakSet();
+var _initChangePasswordForm = /*#__PURE__*/new WeakSet();
+var _setErrorMessageChangePasswordForm = /*#__PURE__*/new WeakSet();
+var _successChangePasswordForm = /*#__PURE__*/new WeakSet();
+var UserManager = /*#__PURE__*/function () {
+  function UserManager(_options) {
+    (0, _classCallCheck2["default"])(this, UserManager);
+    _classPrivateMethodInitSpec(this, _successChangePasswordForm);
+    _classPrivateMethodInitSpec(this, _setErrorMessageChangePasswordForm);
+    _classPrivateMethodInitSpec(this, _initChangePasswordForm);
+    _classPrivateMethodInitSpec(this, _initModal);
+    this.popup = _options.popup;
+    this.authentication = _options.authentication;
+    _classPrivateMethodGet(this, _initModal, _initModal2).call(this, {});
+  }
+  (0, _createClass2["default"])(UserManager, [{
+    key: "cancelModalForm",
+    value: function cancelModalForm(options) {
+      this.modal.hide();
+      if (options.openPopupName) {
+        this.popup.open(options.openPopupName);
+      }
+    }
+  }, {
+    key: "showChangePassword",
+    value: function showChangePassword() {
+      this.modal.show();
+      _classPrivateMethodGet(this, _initChangePasswordForm, _initChangePasswordForm2).call(this);
+    }
+  }, {
+    key: "getDefaultUserManagerModalContent",
+    value: function getDefaultUserManagerModalContent() {
+      return "<div>\n                    <div id=\"user-manager-modal-error\"></div>\n                    <div id=\"".concat(_constants.WALLKIT_USER_MANAGER_MODAL_FORM_PLACEHOLDER_ID, "\"></div>\n                </div>");
+    }
+  }]);
+  return UserManager;
+}();
+exports["default"] = UserManager;
+function _initModal2(options) {
+  var _this = this;
+  this.modal = new _modal["default"]({
+    modalName: options.name || 'user-manager-modal',
+    content: options.content || this.getDefaultUserManagerModalContent(),
+    className: options.className || 'wallkit-auth-modal',
+    initialLoader: options.loader || false
+  });
+  this.modal.init();
+  this.modal.modalWrapper.addEventListener('click', function (event) {
+    if (_this.changePasswordForm && event.target.classList.contains('account-settings-link')) {
+      event.preventDefault();
+      _this.changePasswordForm.cancelForm();
+    }
+  });
+}
+function _initChangePasswordForm2() {
+  var _this2 = this;
+  if (!this.changePasswordForm) {
+    this.changePasswordForm = new _ChangePasswordForm.ChangePasswordForm("#".concat(_constants.WALLKIT_USER_MANAGER_MODAL_FORM_PLACEHOLDER_ID), {
+      onCancel: function onCancel() {
+        _this2.cancelModalForm({
+          openPopupName: 'account-settings'
+        });
+      },
+      onSubmit: function onSubmit(data) {
+        if (_this2.modal) {
+          _this2.modal.toggleLoader(true);
+        }
+        _this2.authentication.firebase.reauthenticateWithCredential(data.old_password).then(function () {
+          _this2.authentication.firebase.updatePassword(data.new_password).then(function () {
+            _classPrivateMethodGet(_this2, _successChangePasswordForm, _successChangePasswordForm2).call(_this2);
+          })["catch"](function (error) {
+            _classPrivateMethodGet(_this2, _setErrorMessageChangePasswordForm, _setErrorMessageChangePasswordForm2).call(_this2, error);
+          });
+        })["catch"](function (error) {
+          _classPrivateMethodGet(_this2, _setErrorMessageChangePasswordForm, _setErrorMessageChangePasswordForm2).call(_this2, error);
+        });
+      }
+    });
+    this.changePasswordForm.render();
+  } else {
+    this.changePasswordForm.resetForm();
+    this.changePasswordForm.reRender();
+  }
+}
+function _setErrorMessageChangePasswordForm2(error) {
+  if (this.changePasswordForm) {
+    if (error.message) {
+      this.changePasswordForm.setFormError(error.message);
+    }
+    if (this.modal) {
+      this.modal.toggleLoader(false);
+    }
+  }
+}
+function _successChangePasswordForm2() {
+  if (this.changePasswordForm) {
+    this.changePasswordForm.showFormResult("\n            <div class=\"wk-success-message wk-password-reset-success\">\n                <h2 class=\"wk-success-message__title\">Password updated.</h2>\n                <a href=\"#\" class=\"wk-form__link account-settings-link\">Back to account settings</a>\n            </div>\n        ");
+    if (this.modal) {
+      this.modal.toggleLoader(false);
+    }
+  }
+}
 
+/***/ }),
+
+/***/ 2909:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _typeof = __webpack_require__(8630);
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = exports.isMobile = exports.insertScript = exports.loadCSS = exports.injectInHead = exports.injectInBody = exports.createElement = exports.insertAfter = exports.checkIfElementExists = exports.isDocumentAvailable = void 0;
 var _Error = _interopRequireWildcard(__webpack_require__(542));
-
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
 var isDocumentAvailable = function isDocumentAvailable() {
   return !!document;
 };
-
 exports.isDocumentAvailable = isDocumentAvailable;
-
 var checkIfElementExists = function checkIfElementExists(elementSelector) {
   if (!isDocumentAvailable()) return _Error["default"].handleError('Document is not available', _Error.ERRORS_TYPES.DOM_ERROR);
   return !!document.querySelector(elementSelector);
 };
-
 exports.checkIfElementExists = checkIfElementExists;
-
 var insertAfter = function insertAfter(newNode, referenceNode) {
   referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 };
-
 exports.insertAfter = insertAfter;
-
 var createElement = function createElement(tag, options) {
   if (!isDocumentAvailable()) return _Error["default"].handleError('Document is not available', _Error.ERRORS_TYPES.DOM_ERROR);
   if (!tag) return _Error["default"].checkRequiredArgument(tag);
   var element = document.createElement(tag);
-
   var _ref = options !== null && options !== void 0 ? options : {},
-      id = _ref.id,
-      className = _ref.className,
-      styles = _ref.styles,
-      attributes = _ref.attributes,
-      innerText = _ref.innerText,
-      innerHTML = _ref.innerHTML; // Options Arguments
-
+    id = _ref.id,
+    className = _ref.className,
+    styles = _ref.styles,
+    attributes = _ref.attributes,
+    innerText = _ref.innerText,
+    innerHTML = _ref.innerHTML; // Options Arguments
 
   if (id) {
     element.id = id;
   }
-
   if (innerText) {
     element.innerText = innerText;
   }
-
   if (innerHTML) {
     element.innerHTML = innerHTML;
   }
-
   if (className) {
     element.setAttribute('class', className);
   }
-
   if (styles && Object.keys(styles) && Object.keys(styles).length) {
     for (var prop in styles) {
       if (styles.hasOwnProperty(prop)) {
@@ -4937,7 +4476,6 @@ var createElement = function createElement(tag, options) {
       }
     }
   }
-
   if (attributes && Object.keys(attributes) && Object.keys(attributes).length) {
     for (var _prop in attributes) {
       if (attributes.hasOwnProperty(_prop)) {
@@ -4945,47 +4483,36 @@ var createElement = function createElement(tag, options) {
       }
     }
   }
-
   return element;
 };
-
 exports.createElement = createElement;
-
 var injectInBody = function injectInBody(element) {
   if (!isDocumentAvailable()) return _Error["default"].handleError('Document is not available', _Error.ERRORS_TYPES.DOM_ERROR);
   if (!element) return _Error["default"].checkRequiredArgument(element, 'element');
   return document.body.appendChild(element);
 };
-
 exports.injectInBody = injectInBody;
-
 var injectInHead = function injectInHead(element) {
   if (!isDocumentAvailable()) return _Error["default"].handleError('Document is not available', _Error.ERRORS_TYPES.DOM_ERROR);
   if (!element) return _Error["default"].checkRequiredArgument(element, 'element');
   return document.head.appendChild(element);
 };
-
 exports.injectInHead = injectInHead;
-
 var loadCSS = function loadCSS(url, id) {
   if (!isDocumentAvailable()) return _Error["default"].handleError('Document is not available', _Error.ERRORS_TYPES.DOM_ERROR);
   if (checkIfElementExists('#' + id)) return;
   var head = document.querySelector('head');
   var link = document.createElement('link');
-
   if (id) {
     link.id = id;
   }
-
   link.rel = 'stylesheet';
   link.type = 'text/css';
   link.href = url;
   link.media = 'all';
   return head.appendChild(link);
 };
-
 exports.loadCSS = loadCSS;
-
 var insertScript = function insertScript(url, id, onload) {
   if (!isDocumentAvailable()) return _Error["default"].handleError('Document is not available', _Error.ERRORS_TYPES.DOM_ERROR);
   if (checkIfElementExists('#' + id)) return;
@@ -4995,18 +4522,14 @@ var insertScript = function insertScript(url, id, onload) {
       src: url
     }
   });
-
   if (onload) {
     scriptElement.addEventListener('load', onload, {
       once: true
     });
   }
-
   return injectInBody(scriptElement);
 };
-
 exports.insertScript = insertScript;
-
 var isMobile = function isMobile() {
   if (typeof window !== 'undefined') {
     return window.innerWidth < 800;
@@ -5014,7 +4537,6 @@ var isMobile = function isMobile() {
     return false;
   }
 };
-
 exports.isMobile = isMobile;
 var _default = {
   createElement: createElement,
@@ -5024,11 +4546,11 @@ var _default = {
   insertScript: insertScript,
   isMobile: isMobile
 };
-exports.default = _default;
+exports["default"] = _default;
 
 /***/ }),
 
-/***/ 48:
+/***/ 5048:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -5037,54 +4559,44 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.default = exports.removeCookie = exports.setCookie = void 0;
-
+exports["default"] = exports.removeCookie = exports.setCookie = void 0;
 var setCookie = function setCookie(name, value, options) {
   options = options || {};
   var _options = options,
-      expires = _options.expires;
-
+    expires = _options.expires;
   if (typeof expires === "number" && expires) {
     var date = new Date();
     date.setTime(date.getTime() + expires * 1000);
     expires = options.expires = date;
   }
-
   if (expires && expires.toUTCString) {
     options.expires = expires.toUTCString();
   }
-
   value = encodeURIComponent(value);
   var updatedCookie = "".concat(name, "=").concat(value);
-
   for (var propName in options) {
     updatedCookie += "; " + propName;
     var propValue = options[propName];
-
     if (propValue) {
       updatedCookie += "=" + propValue;
     }
   }
-
   document.cookie = updatedCookie;
 };
-
 exports.setCookie = setCookie;
-
 var removeCookie = function removeCookie(name) {
   document.cookie = "".concat(name, "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;");
 };
-
 exports.removeCookie = removeCookie;
 var _default = {
   setCookie: setCookie,
   removeCookie: removeCookie
 };
-exports.default = _default;
+exports["default"] = _default;
 
 /***/ }),
 
-/***/ 758:
+/***/ 1758:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -5093,35 +4605,26 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.default = exports.loadScripts = exports.loadWallkitAsset = void 0;
-
-var _DOM = __webpack_require__(909);
-
-var _constants = __webpack_require__(66);
-
+exports["default"] = exports.loadScripts = exports.loadWallkitAsset = void 0;
+var _DOM = __webpack_require__(2909);
+var _constants = __webpack_require__(9066);
 var loadWallkitAsset = function loadWallkitAsset(type, version, name) {
   var min = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-
   switch (type) {
     case 'css':
       var assetName = name;
-
       if (min) {
         assetName += '.min.css';
       } else {
         assetName += '.css';
       }
-
       (0, _DOM.loadCSS)("".concat(_constants.WALLKIT_CDN_ASSETS_URL, "/css/").concat(version, "/").concat(assetName), "wk-css-".concat(name));
       return;
-
     default:
       return;
   }
 };
-
 exports.loadWallkitAsset = loadWallkitAsset;
-
 var loadScripts = function loadScripts(scripts) {
   if (Array.isArray(scripts)) {
     scripts.forEach(function (script) {
@@ -5129,13 +4632,12 @@ var loadScripts = function loadScripts(scripts) {
     });
   }
 };
-
 exports.loadScripts = loadScripts;
 var _default = {
   loadWallkitAsset: loadWallkitAsset,
   loadScripts: loadScripts
 };
-exports.default = _default;
+exports["default"] = _default;
 
 /***/ }),
 
@@ -5148,7 +4650,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.default = void 0;
+exports["default"] = void 0;
 var _default = {
   setItem: function setItem(key, value) {
     if (!this.isAvailable()) return null;
@@ -5172,11 +4674,11 @@ var _default = {
     }
   }
 };
-exports.default = _default;
+exports["default"] = _default;
 
 /***/ }),
 
-/***/ 672:
+/***/ 8672:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -5186,7 +4688,6 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.isApplePayAvailable = void 0;
-
 var isApplePayAvailable = function isApplePayAvailable() {
   try {
     if (window.ApplePaySession) {
@@ -5199,32 +4700,26 @@ var isApplePayAvailable = function isApplePayAvailable() {
     return false;
   }
 };
-
 exports.isApplePayAvailable = isApplePayAvailable;
 
 /***/ }),
 
-/***/ 234:
+/***/ 5234:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(736);
-
+var _interopRequireDefault = __webpack_require__(9736);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.resetHash = exports.parseAuthTokenHash = exports.parseModalHashURL = void 0;
-
-var _typeof2 = _interopRequireDefault(__webpack_require__(630));
-
+var _typeof2 = _interopRequireDefault(__webpack_require__(8630));
 var parseModalHashURL = function parseModalHashURL() {
   var UryModal = /#WkModal\((.*)\)$/.exec(decodeURIComponent(window.location.hash));
-
   if (UryModal && UryModal[1]) {
     var par = UryModal[1].split(/,(.+)/);
-
     if (typeof par[1] !== "undefined") {
       try {
         par[1] = JSON.parse(par[1]);
@@ -5234,7 +4729,6 @@ var parseModalHashURL = function parseModalHashURL() {
         };
       }
     }
-
     window.location.hash = "";
     return {
       name: par[0],
@@ -5242,37 +4736,29 @@ var parseModalHashURL = function parseModalHashURL() {
     };
   }
 };
-
 exports.parseModalHashURL = parseModalHashURL;
-
 var parseAuthTokenHash = function parseAuthTokenHash() {
   var hash = decodeURIComponent(window.location.hash);
-
   if (hash !== null && hash !== void 0 && hash.includes('wk-authorize')) {
     var splitHash = hash.split('=');
     var token = splitHash === null || splitHash === void 0 ? void 0 : splitHash[1];
-
     if (token) {
       return token;
     }
   }
-
   return null;
 };
-
 exports.parseAuthTokenHash = parseAuthTokenHash;
-
 var resetHash = function resetHash() {
   window.location.hash = '';
   var path = window.location.href.replace('#', '');
   window.history.pushState('', '', path);
 };
-
 exports.resetHash = resetHash;
 
 /***/ }),
 
-/***/ 168:
+/***/ 9168:
 /***/ ((module) => {
 
 function _assertThisInitialized(self) {
@@ -5284,7 +4770,7 @@ function _assertThisInitialized(self) {
 }
 
 module.exports = _assertThisInitialized;
-module.exports.default = module.exports, module.exports.__esModule = true;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
@@ -5328,11 +4814,11 @@ function _asyncToGenerator(fn) {
 }
 
 module.exports = _asyncToGenerator;
-module.exports.default = module.exports, module.exports.__esModule = true;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
-/***/ 461:
+/***/ 2461:
 /***/ ((module) => {
 
 function _classApplyDescriptorGet(receiver, descriptor) {
@@ -5344,11 +4830,11 @@ function _classApplyDescriptorGet(receiver, descriptor) {
 }
 
 module.exports = _classApplyDescriptorGet;
-module.exports.default = module.exports, module.exports.__esModule = true;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
-/***/ 838:
+/***/ 4838:
 /***/ ((module) => {
 
 function _classApplyDescriptorSet(receiver, descriptor, value) {
@@ -5364,11 +4850,11 @@ function _classApplyDescriptorSet(receiver, descriptor, value) {
 }
 
 module.exports = _classApplyDescriptorSet;
-module.exports.default = module.exports, module.exports.__esModule = true;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
-/***/ 972:
+/***/ 8972:
 /***/ ((module) => {
 
 function _classCallCheck(instance, Constructor) {
@@ -5378,11 +4864,11 @@ function _classCallCheck(instance, Constructor) {
 }
 
 module.exports = _classCallCheck;
-module.exports.default = module.exports, module.exports.__esModule = true;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
-/***/ 641:
+/***/ 8641:
 /***/ ((module) => {
 
 function _classExtractFieldDescriptor(receiver, privateMap, action) {
@@ -5394,16 +4880,16 @@ function _classExtractFieldDescriptor(receiver, privateMap, action) {
 }
 
 module.exports = _classExtractFieldDescriptor;
-module.exports.default = module.exports, module.exports.__esModule = true;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
-/***/ 704:
+/***/ 9704:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-var classApplyDescriptorGet = __webpack_require__(461);
+var classApplyDescriptorGet = __webpack_require__(2461);
 
-var classExtractFieldDescriptor = __webpack_require__(641);
+var classExtractFieldDescriptor = __webpack_require__(8641);
 
 function _classPrivateFieldGet(receiver, privateMap) {
   var descriptor = classExtractFieldDescriptor(receiver, privateMap, "get");
@@ -5411,16 +4897,16 @@ function _classPrivateFieldGet(receiver, privateMap) {
 }
 
 module.exports = _classPrivateFieldGet;
-module.exports.default = module.exports, module.exports.__esModule = true;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
-/***/ 401:
+/***/ 1401:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-var classApplyDescriptorSet = __webpack_require__(838);
+var classApplyDescriptorSet = __webpack_require__(4838);
 
-var classExtractFieldDescriptor = __webpack_require__(641);
+var classExtractFieldDescriptor = __webpack_require__(8641);
 
 function _classPrivateFieldSet(receiver, privateMap, value) {
   var descriptor = classExtractFieldDescriptor(receiver, privateMap, "set");
@@ -5429,11 +4915,11 @@ function _classPrivateFieldSet(receiver, privateMap, value) {
 }
 
 module.exports = _classPrivateFieldSet;
-module.exports.default = module.exports, module.exports.__esModule = true;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
-/***/ 884:
+/***/ 8884:
 /***/ ((module) => {
 
 function _defineProperties(target, props) {
@@ -5453,11 +4939,11 @@ function _createClass(Constructor, protoProps, staticProps) {
 }
 
 module.exports = _createClass;
-module.exports.default = module.exports, module.exports.__esModule = true;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
-/***/ 239:
+/***/ 8239:
 /***/ ((module) => {
 
 function _defineProperty(obj, key, value) {
@@ -5476,30 +4962,63 @@ function _defineProperty(obj, key, value) {
 }
 
 module.exports = _defineProperty;
-module.exports.default = module.exports, module.exports.__esModule = true;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
-/***/ 94:
+/***/ 8183:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var superPropBase = __webpack_require__(4624);
+
+function _get(target, property, receiver) {
+  if (typeof Reflect !== "undefined" && Reflect.get) {
+    module.exports = _get = Reflect.get;
+    module.exports["default"] = module.exports, module.exports.__esModule = true;
+  } else {
+    module.exports = _get = function _get(target, property, receiver) {
+      var base = superPropBase(target, property);
+      if (!base) return;
+      var desc = Object.getOwnPropertyDescriptor(base, property);
+
+      if (desc.get) {
+        return desc.get.call(receiver);
+      }
+
+      return desc.value;
+    };
+
+    module.exports["default"] = module.exports, module.exports.__esModule = true;
+  }
+
+  return _get(target, property, receiver || target);
+}
+
+module.exports = _get;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ 2094:
 /***/ ((module) => {
 
 function _getPrototypeOf(o) {
   module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
     return o.__proto__ || Object.getPrototypeOf(o);
   };
-  module.exports.default = module.exports, module.exports.__esModule = true;
+  module.exports["default"] = module.exports, module.exports.__esModule = true;
   return _getPrototypeOf(o);
 }
 
 module.exports = _getPrototypeOf;
-module.exports.default = module.exports, module.exports.__esModule = true;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
-/***/ 914:
+/***/ 8914:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-var setPrototypeOf = __webpack_require__(307);
+var setPrototypeOf = __webpack_require__(4307);
 
 function _inherits(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
@@ -5517,11 +5036,11 @@ function _inherits(subClass, superClass) {
 }
 
 module.exports = _inherits;
-module.exports.default = module.exports, module.exports.__esModule = true;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
-/***/ 736:
+/***/ 9736:
 /***/ ((module) => {
 
 function _interopRequireDefault(obj) {
@@ -5531,31 +5050,33 @@ function _interopRequireDefault(obj) {
 }
 
 module.exports = _interopRequireDefault;
-module.exports.default = module.exports, module.exports.__esModule = true;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
-/***/ 164:
+/***/ 2164:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-var _typeof = __webpack_require__(630).default;
+var _typeof = __webpack_require__(8630)["default"];
 
-var assertThisInitialized = __webpack_require__(168);
+var assertThisInitialized = __webpack_require__(9168);
 
 function _possibleConstructorReturn(self, call) {
   if (call && (_typeof(call) === "object" || typeof call === "function")) {
     return call;
+  } else if (call !== void 0) {
+    throw new TypeError("Derived constructors may only return object or undefined");
   }
 
   return assertThisInitialized(self);
 }
 
 module.exports = _possibleConstructorReturn;
-module.exports.default = module.exports, module.exports.__esModule = true;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
-/***/ 307:
+/***/ 4307:
 /***/ ((module) => {
 
 function _setPrototypeOf(o, p) {
@@ -5564,16 +5085,35 @@ function _setPrototypeOf(o, p) {
     return o;
   };
 
-  module.exports.default = module.exports, module.exports.__esModule = true;
+  module.exports["default"] = module.exports, module.exports.__esModule = true;
   return _setPrototypeOf(o, p);
 }
 
 module.exports = _setPrototypeOf;
-module.exports.default = module.exports, module.exports.__esModule = true;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
-/***/ 630:
+/***/ 4624:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var getPrototypeOf = __webpack_require__(2094);
+
+function _superPropBase(object, property) {
+  while (!Object.prototype.hasOwnProperty.call(object, property)) {
+    object = getPrototypeOf(object);
+    if (object === null) break;
+  }
+
+  return object;
+}
+
+module.exports = _superPropBase;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ 8630:
 /***/ ((module) => {
 
 function _typeof(obj) {
@@ -5584,32 +5124,32 @@ function _typeof(obj) {
       return typeof obj;
     };
 
-    module.exports.default = module.exports, module.exports.__esModule = true;
+    module.exports["default"] = module.exports, module.exports.__esModule = true;
   } else {
     module.exports = _typeof = function _typeof(obj) {
       return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     };
 
-    module.exports.default = module.exports, module.exports.__esModule = true;
+    module.exports["default"] = module.exports, module.exports.__esModule = true;
   }
 
   return _typeof(obj);
 }
 
 module.exports = _typeof;
-module.exports.default = module.exports, module.exports.__esModule = true;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
 /***/ 107:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__(390);
+module.exports = __webpack_require__(2390);
 
 
 /***/ }),
 
-/***/ 390:
+/***/ 2390:
 /***/ ((module) => {
 
 /**
@@ -6401,7 +5941,7 @@ try {
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	var __webpack_exports__ = __webpack_require__(4);
+/******/ 	var __webpack_exports__ = __webpack_require__(6004);
 /******/ 	
 /******/ 	return __webpack_exports__;
 /******/ })()
