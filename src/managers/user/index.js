@@ -7,7 +7,7 @@ export default class UserManager {
     constructor(options) {
         this.popup = options.popup;
         this.authentication = options.authentication;
-        this.#initModal({});
+        this.#initModal(options);
     }
 
     #initModal(options) {
@@ -36,24 +36,26 @@ export default class UserManager {
                         });
                     },
                     onSubmit: (data) => {
-                        if (this.modal) {
-                            this.modal.toggleLoader(true);
-                        }
-                        this.authentication.firebase.reauthenticateWithCredential(data.old_password).then(() => {
-                            this.authentication.firebase.updatePassword(data.new_password).then(() => {
-                                this.#successChangePasswordForm();
-                            }).catch((error) => {
-                                this.#setErrorMessageChangePasswordForm(error);
-                            })
-                        }).catch((error) => {
-                            this.#setErrorMessageChangePasswordForm(error);
-                        });
+                        this.#onSubmitChangePasswordForm(data);
                     }
                 });
             this.changePasswordForm.render();
         } else {
             this.changePasswordForm.resetForm();
             this.changePasswordForm.reRender();
+        }
+    }
+
+    async #onSubmitChangePasswordForm({old_password, new_password}) {
+        try {
+            if (this.modal) {
+                this.modal.toggleLoader(true);
+            }
+            await this.authentication.firebase.reauthenticateWithCredential(old_password);
+            await this.authentication.firebase.updatePassword(new_password);
+            this.#successChangePasswordForm();
+        } catch (error) {
+            this.#setErrorMessageChangePasswordForm(error);
         }
     }
 

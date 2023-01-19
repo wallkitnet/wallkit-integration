@@ -285,7 +285,7 @@ window.WallkitIntegration = (_eventsListener = /*#__PURE__*/new WeakSet(), _inse
         }));
         _this.analytics = new _analytics["default"](options === null || options === void 0 ? void 0 : options.analytics);
         _this.init();
-        _this.user_manager = new _user["default"]({
+        _this.userManager = new _user["default"]({
           popup: _this.popup,
           authentication: _this.authentication
         });
@@ -387,7 +387,7 @@ function _eventsListener2() {
             break;
           case "wk-firebase-change-password":
             _this2.popup.hide();
-            _this2.user_manager.showChangePassword();
+            _this2.userManager.showChangePassword();
             break;
         }
       }
@@ -4305,6 +4305,8 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports["default"] = void 0;
+var _regenerator = _interopRequireDefault(__webpack_require__(107));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(756));
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(8972));
 var _createClass2 = _interopRequireDefault(__webpack_require__(8884));
 var _modal = _interopRequireDefault(__webpack_require__(9269));
@@ -4315,6 +4317,7 @@ function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollect
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
 var _initModal = /*#__PURE__*/new WeakSet();
 var _initChangePasswordForm = /*#__PURE__*/new WeakSet();
+var _onSubmitChangePasswordForm = /*#__PURE__*/new WeakSet();
 var _setErrorMessageChangePasswordForm = /*#__PURE__*/new WeakSet();
 var _successChangePasswordForm = /*#__PURE__*/new WeakSet();
 var UserManager = /*#__PURE__*/function () {
@@ -4322,11 +4325,12 @@ var UserManager = /*#__PURE__*/function () {
     (0, _classCallCheck2["default"])(this, UserManager);
     _classPrivateMethodInitSpec(this, _successChangePasswordForm);
     _classPrivateMethodInitSpec(this, _setErrorMessageChangePasswordForm);
+    _classPrivateMethodInitSpec(this, _onSubmitChangePasswordForm);
     _classPrivateMethodInitSpec(this, _initChangePasswordForm);
     _classPrivateMethodInitSpec(this, _initModal);
     this.popup = _options.popup;
     this.authentication = _options.authentication;
-    _classPrivateMethodGet(this, _initModal, _initModal2).call(this, {});
+    _classPrivateMethodGet(this, _initModal, _initModal2).call(this, _options);
   }
   (0, _createClass2["default"])(UserManager, [{
     key: "cancelModalForm",
@@ -4377,18 +4381,7 @@ function _initChangePasswordForm2() {
         });
       },
       onSubmit: function onSubmit(data) {
-        if (_this2.modal) {
-          _this2.modal.toggleLoader(true);
-        }
-        _this2.authentication.firebase.reauthenticateWithCredential(data.old_password).then(function () {
-          _this2.authentication.firebase.updatePassword(data.new_password).then(function () {
-            _classPrivateMethodGet(_this2, _successChangePasswordForm, _successChangePasswordForm2).call(_this2);
-          })["catch"](function (error) {
-            _classPrivateMethodGet(_this2, _setErrorMessageChangePasswordForm, _setErrorMessageChangePasswordForm2).call(_this2, error);
-          });
-        })["catch"](function (error) {
-          _classPrivateMethodGet(_this2, _setErrorMessageChangePasswordForm, _setErrorMessageChangePasswordForm2).call(_this2, error);
-        });
+        _classPrivateMethodGet(_this2, _onSubmitChangePasswordForm, _onSubmitChangePasswordForm2).call(_this2, data);
       }
     });
     this.changePasswordForm.render();
@@ -4396,6 +4389,43 @@ function _initChangePasswordForm2() {
     this.changePasswordForm.resetForm();
     this.changePasswordForm.reRender();
   }
+}
+function _onSubmitChangePasswordForm2(_x) {
+  return _onSubmitChangePasswordForm3.apply(this, arguments);
+}
+function _onSubmitChangePasswordForm3() {
+  _onSubmitChangePasswordForm3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_ref) {
+    var old_password, new_password;
+    return _regenerator["default"].wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            old_password = _ref.old_password, new_password = _ref.new_password;
+            _context.prev = 1;
+            if (this.modal) {
+              this.modal.toggleLoader(true);
+            }
+            _context.next = 5;
+            return this.authentication.firebase.reauthenticateWithCredential(old_password);
+          case 5:
+            _context.next = 7;
+            return this.authentication.firebase.updatePassword(new_password);
+          case 7:
+            _classPrivateMethodGet(this, _successChangePasswordForm, _successChangePasswordForm2).call(this);
+            _context.next = 13;
+            break;
+          case 10:
+            _context.prev = 10;
+            _context.t0 = _context["catch"](1);
+            _classPrivateMethodGet(this, _setErrorMessageChangePasswordForm, _setErrorMessageChangePasswordForm2).call(this, _context.t0);
+          case 13:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, this, [[1, 10]]);
+  }));
+  return _onSubmitChangePasswordForm3.apply(this, arguments);
 }
 function _setErrorMessageChangePasswordForm2(error) {
   if (this.changePasswordForm) {

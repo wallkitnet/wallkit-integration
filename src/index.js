@@ -54,7 +54,7 @@ window.WallkitIntegration = class WallkitIntegration {
 
                 this.init();
 
-                this.user_manager = new UserManager({
+                this.userManager = new UserManager({
                     popup: this.popup,
                     authentication: this.authentication
                 });
@@ -140,7 +140,7 @@ window.WallkitIntegration = class WallkitIntegration {
 
                         case "wk-firebase-change-password" :
                             this.popup.hide();
-                            this.user_manager.showChangePassword();
+                            this.userManager.showChangePassword();
                             break;
                     }
                 }
