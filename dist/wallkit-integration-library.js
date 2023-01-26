@@ -1708,7 +1708,7 @@ var Authentication = /*#__PURE__*/function () {
       var _this6 = this;
       this.toggleFormLoader(true);
       var handleAuthError = function handleAuthError(error) {
-        _this6.resetAuthProcess();
+        _this6.resetAuthProcess(false);
         _this6.toggleFormLoader(false);
         _classPrivateMethodGet(_this6, _setAuthorizationError, _setAuthorizationError2).call(_this6, (error === null || error === void 0 ? void 0 : error.message) || 'Something went wrong!');
       };
@@ -1717,11 +1717,9 @@ var Authentication = /*#__PURE__*/function () {
       this.authInWallkit(data.token).then(function (status) {
         if (status) {
           _this6.modal.hide();
-        } else {
-          _this6.resetAuthProcess();
-        }
-        if (_this6.authForm) {
-          _this6.authForm.hide();
+          if (_this6.authForm) {
+            _this6.authForm.hide();
+          }
         }
         _this6.toggleFormLoader(false);
       })["catch"](function (error) {
@@ -1734,14 +1732,14 @@ var Authentication = /*#__PURE__*/function () {
       var _this7 = this;
       var firebaseToken = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       _classPrivateMethodGet(this, _resetAuthorizationError, _resetAuthorizationError2).call(this);
-      return new Promise(function (resolve) {
+      return new Promise(function (resolve, reject) {
         if (firebaseToken) {
           _this7.sdk.methods.authenticateWithFirebase(firebaseToken).then(function (_ref) {
             var token = _ref.token,
               existed = _ref.existed;
             _this7.setToken(token);
             var userGetTimeout = setTimeout(function () {
-              resolve(false);
+              reject(false);
             }, 10000);
             var userEventCallback = function userEventCallback() {
               clearTimeout(userGetTimeout);
@@ -1757,7 +1755,7 @@ var Authentication = /*#__PURE__*/function () {
             console.log('error', error);
             _classPrivateMethodGet(_this7, _setAuthorizationError, _setAuthorizationError2).call(_this7, error === null || error === void 0 ? void 0 : (_error$response = error.response) === null || _error$response === void 0 ? void 0 : _error$response.error_description);
             _this7.removeTokens();
-            resolve(false);
+            reject(error);
           });
         } else {
           resolve(false);
@@ -1905,9 +1903,10 @@ var Authentication = /*#__PURE__*/function () {
   }, {
     key: "resetAuthProcess",
     value: function resetAuthProcess() {
+      var reset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       this.firebase.reset();
       this.firebase.showAuthForm();
-      if (this.firebase.genuineForm === false) {
+      if (this.firebase.genuineForm === false && reset) {
         this.authForm.reset();
       }
       if (this.reCaptcha.enabled) {
@@ -2133,12 +2132,28 @@ function _initListeners2() {
   });
 }
 function _setAuthorizationError2(error) {
-  var errorPlaceholder = document.getElementById('authorization-error');
-  if (errorPlaceholder) {
+  var formName = '';
+  if (this.authForm.signUpForm.isVisible()) {
+    formName = 'signUpForm';
+  } else if (this.authForm.loginForm.isVisible()) {
+    formName = 'loginForm';
+  } else if (this.authForm.forgotPasswordForm.isVisible()) {
+    formName = 'forgotPasswordForm';
+  }
+  if (formName) {
     if (error === null) {
-      errorPlaceholder.innerHTML = '';
+      this.authForm[formName].resetFormError(error);
     } else {
-      errorPlaceholder.innerHTML = error || 'Something went wrong!';
+      this.authForm[formName].setFormError(error);
+    }
+  } else {
+    var errorPlaceholder = document.getElementById('authorization-error');
+    if (errorPlaceholder) {
+      if (error === null) {
+        errorPlaceholder.innerHTML = '';
+      } else {
+        errorPlaceholder.innerHTML = error || 'Something went wrong!';
+      }
     }
   }
 }
@@ -3739,6 +3754,11 @@ var Form = /*#__PURE__*/function () {
     value: function hide() {
       this.formWrapper.style.display = 'none';
       return this;
+    }
+  }, {
+    key: "isVisible",
+    value: function isVisible() {
+      return this.formWrapper.style.display === 'block';
     }
   }, {
     key: "submitForm",
