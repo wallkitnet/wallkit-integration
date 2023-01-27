@@ -30,13 +30,12 @@ jobs:
         id: check-lib-version
         run: |
           totalFoundObjects=$(aws s3 ls s3://wallkit-integration-prod/${{ steps.package-version.outputs.current-version}}/wallkit-integration-library.min.js --summarize | grep "Total Objects: " | sed 's/[^0-9]*//g')
-          echo "totalFoundObjects: $totalFoundObjects"
-#          if [ $? == 0 ]
-#          then
-#            echo "exist-current-lib-version=false" >> $GITHUB_OUTPUT
-#          else
-#            echo "exist-current-lib-version=true" >> $GITHUB_OUTPUT
-#          fi
+          if [ $totalFoundObjects == 0 ]
+          then
+            echo "exist-current-lib-version=false" >> $GITHUB_OUTPUT
+          else
+            echo "exist-current-lib-version=true" >> $GITHUB_OUTPUT
+          fi
       - name: Debug vars
         id: debug-vars
         run: |
