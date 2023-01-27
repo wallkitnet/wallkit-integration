@@ -194,7 +194,7 @@ export default class Authentication {
         this.toggleFormLoader(true);
 
         const handleAuthError = (error) => {
-            this.resetAuthProcess();
+            this.resetAuthProcess(false);
             this.toggleFormLoader(false);
             this.#setAuthorizationError(error?.message || 'Something went wrong!');
         }
@@ -205,12 +205,11 @@ export default class Authentication {
             .then((status) => {
                 if (status) {
                     this.modal.hide();
+                    if (this.authForm) {
+                        this.authForm.hide();
+                    }
                 } else {
-                    this.resetAuthProcess();
-                }
-
-                if (this.authForm) {
-                  this.authForm.hide();
+                    handleAuthError();
                 }
 
                 this.toggleFormLoader(false);
@@ -219,13 +218,13 @@ export default class Authentication {
 
     authInWallkit(firebaseToken = null) {
         this.#resetAuthorizationError();
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
             if (firebaseToken) {
                 this.sdk.methods.authenticateWithFirebase(firebaseToken).then(({ token, existed }) => {
                     this.setToken(token);
 
                     const userGetTimeout = setTimeout(() => {
-                        resolve(false);
+                        reject(false);
                     }, 10000);
 
                     const userEventCallback = () => {
@@ -240,7 +239,7 @@ export default class Authentication {
                     console.log('error', error);
                     this.#setAuthorizationError(error?.response?.error_description);
                     this.removeTokens();
-                    resolve(false);
+                    reject(error);
                 });
             } else {
                 resolve(false);
@@ -400,11 +399,11 @@ export default class Authentication {
         });
     }
 
-    resetAuthProcess () {
+    resetAuthProcess (reset = true) {
       this.firebase.reset();
       this.firebase.showAuthForm();
 
-      if (this.firebase.genuineForm === false) {
+      if (this.firebase.genuineForm === false && reset) {
         this.authForm.reset();
       }
 
@@ -489,12 +488,20 @@ export default class Authentication {
     }
 
     #setAuthorizationError(error) {
-        const errorPlaceholder = document.getElementById('authorization-error');
-        if (errorPlaceholder) {
+        if (this.authForm.visibleFormName) {
             if (error === null) {
-                errorPlaceholder.innerHTML = '';
+                this.authForm[this.authForm.visibleFormName].resetFormError(error);
             } else {
-                errorPlaceholder.innerHTML = error || 'Something went wrong!';
+                this.authForm[this.authForm.visibleFormName].setFormError(error);
+            }
+        } else {
+            const errorPlaceholder = document.getElementById('authorization-error');
+            if (errorPlaceholder) {
+                if (error === null) {
+                    errorPlaceholder.innerHTML = '';
+                } else {
+                    errorPlaceholder.innerHTML = error || 'Something went wrong!';
+                }
             }
         }
     }

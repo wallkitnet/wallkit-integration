@@ -153,6 +153,10 @@ export class Form {
         return this;
     }
 
+    isVisible () {
+        return this.formWrapper.style.display === 'block'
+    }
+
     submitForm () {
         if (this.validateForm()) {
             if (this.options.onSubmit) {

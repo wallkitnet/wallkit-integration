@@ -41,6 +41,14 @@ export class FormField {
             }
           });
         }
+
+        if (options.onValidate && typeof options.onValidate === "function") {
+            this.onValidate = options.onValidate;
+        }
+
+        if (options.relatedData) {
+            this.relatedData = options.relatedData;
+        }
     }
 
     getElement () {
@@ -68,6 +76,12 @@ export class FormField {
             } else if (!value.length > 4 || !value.includes('@') || !value.includes('.')) {
                 this.setError('This email address isn\'t correct!');
 
+                return false;
+            }
+        }
+
+        if (this.onValidate) {
+            if (!this.onValidate(this)) {
                 return false;
             }
         }

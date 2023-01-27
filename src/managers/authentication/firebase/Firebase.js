@@ -299,6 +299,36 @@ export default class Firebase {
         return this.firebase.auth().sendPasswordResetEmail(email);
     }
 
+    async reauthenticateWithCredential (oldPassword) {
+        if (!!oldPassword) {
+            const user = this.firebase.auth().currentUser;
+            if (user) {
+                const credential = this.firebase.auth.EmailAuthProvider.credential(
+                    user.email,
+                    oldPassword
+                );
+                return await user.reauthenticateWithCredential(credential);
+            } else {
+                throw new Error('Your authorization is broken. Please login again.');
+            }
+        } else {
+            throw new Error('Old Password is empty');
+        }
+    }
+
+    async updatePassword (newPassword) {
+        if (!!newPassword) {
+            const user = this.firebase.auth().currentUser;
+            if (user) {
+                await user.updatePassword(newPassword);
+            } else {
+                throw new Error('Your authorization is broken. Please login again.');
+            }
+        } else {
+            throw new Error('New Password is empty');
+        }
+    }
+
     async authWithCustomToken(token) {
         try {
             if (this.firebase && this.firebase.auth) {

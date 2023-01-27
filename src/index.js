@@ -6,6 +6,7 @@ import Events from "./managers/events";
 import Analytics from "./managers/analytics";
 import Content from "./managers/content";
 import Call from "./managers/call";
+import UserManager from "./managers/user"
 
 import { LIBRARY_STYLES } from './assets/styles';
 
@@ -54,6 +55,11 @@ window.WallkitIntegration = class WallkitIntegration {
                 this.call = new Call(this.popup, this.config);
 
                 this.init();
+
+                this.userManager = new UserManager({
+                    popup: this.popup,
+                    authentication: this.authentication
+                });
             }
         });
     }
@@ -132,6 +138,11 @@ window.WallkitIntegration = class WallkitIntegration {
 
                         case "wk-event-close-on-wrapper":
                             this.popup.closeOutside = value;
+                            break;
+
+                        case "wk-firebase-change-password" :
+                            this.popup.hide();
+                            this.userManager.showChangePassword();
                             break;
                     }
                 }

@@ -111,6 +111,18 @@ export class AuthForm {
       return this.forms[this.defaultFormSlug];
     }
 
+    get visibleFormName () {
+        if (this.signUpForm.isVisible()) {
+            return 'signUpForm';
+        } else if (this.loginForm.isVisible()) {
+            return 'loginForm';
+        } else if (this.forgotPasswordForm.isVisible()) {
+            return 'forgotPasswordForm';
+        } else {
+            return false;
+        }
+    }
+
     showDefaultForm () {
       const form = this.defaultForm;
 
