@@ -208,6 +208,8 @@ export default class Authentication {
                     if (this.authForm) {
                         this.authForm.hide();
                     }
+                } else {
+                    handleAuthError();
                 }
 
                 this.toggleFormLoader(false);
@@ -486,19 +488,11 @@ export default class Authentication {
     }
 
     #setAuthorizationError(error) {
-        let formName = ''
-        if (this.authForm.signUpForm.isVisible()) {
-            formName = 'signUpForm';
-        } else if (this.authForm.loginForm.isVisible()) {
-            formName = 'loginForm';
-        } else if (this.authForm.forgotPasswordForm.isVisible()) {
-            formName = 'forgotPasswordForm';
-        }
-        if (formName) {
+        if (this.authForm.visibleFormName) {
             if (error === null) {
-                this.authForm[formName].resetFormError(error);
+                this.authForm[this.authForm.visibleFormName].resetFormError(error);
             } else {
-                this.authForm[formName].setFormError(error);
+                this.authForm[this.authForm.visibleFormName].setFormError(error);
             }
         } else {
             const errorPlaceholder = document.getElementById('authorization-error');

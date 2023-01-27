@@ -1720,6 +1720,8 @@ var Authentication = /*#__PURE__*/function () {
           if (_this6.authForm) {
             _this6.authForm.hide();
           }
+        } else {
+          handleAuthError();
         }
         _this6.toggleFormLoader(false);
       })["catch"](function (error) {
@@ -2132,19 +2134,11 @@ function _initListeners2() {
   });
 }
 function _setAuthorizationError2(error) {
-  var formName = '';
-  if (this.authForm.signUpForm.isVisible()) {
-    formName = 'signUpForm';
-  } else if (this.authForm.loginForm.isVisible()) {
-    formName = 'loginForm';
-  } else if (this.authForm.forgotPasswordForm.isVisible()) {
-    formName = 'forgotPasswordForm';
-  }
-  if (formName) {
+  if (this.authForm.visibleFormName) {
     if (error === null) {
-      this.authForm[formName].resetFormError(error);
+      this.authForm[this.authForm.visibleFormName].resetFormError(error);
     } else {
-      this.authForm[formName].setFormError(error);
+      this.authForm[this.authForm.visibleFormName].setFormError(error);
     }
   } else {
     var errorPlaceholder = document.getElementById('authorization-error');
@@ -3099,6 +3093,19 @@ var AuthForm = /*#__PURE__*/function () {
     key: "defaultForm",
     get: function get() {
       return this.forms[this.defaultFormSlug];
+    }
+  }, {
+    key: "visibleFormName",
+    get: function get() {
+      if (this.signUpForm.isVisible()) {
+        return 'signUpForm';
+      } else if (this.loginForm.isVisible()) {
+        return 'loginForm';
+      } else if (this.forgotPasswordForm.isVisible()) {
+        return 'forgotPasswordForm';
+      } else {
+        return false;
+      }
     }
   }, {
     key: "showDefaultForm",
