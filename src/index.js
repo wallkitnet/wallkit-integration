@@ -104,7 +104,7 @@ window.WallkitIntegration = class WallkitIntegration {
                             const redirect = value;
                             this.popup.hide();
                             this.events.subscribe(SUCCESS_AUTH, () => {
-                                if (redirect) {
+                                if (typeof redirect === "string") {
                                     this.popup.open(redirect);
                                 }
                             }, { once: true });
