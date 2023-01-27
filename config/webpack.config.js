@@ -1,6 +1,7 @@
 const path = require('path');
 const TerserPlugin = require("terser-webpack-plugin");
 const webpack = require("webpack");
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -8,10 +9,13 @@ module.exports = {
         mini: './src/index.js'
     },
     devtool: false,
-    plugins: [new webpack.SourceMapDevToolPlugin({
+    plugins: [
+      new webpack.SourceMapDevToolPlugin({
         filename: 'wallkit-integration-library.js.map',
         exclude: ['wallkit-integration-library.min.js'],
-    })],
+      }),
+      new ESLintPlugin()
+    ],
     optimization: {
         minimizer: [
             new TerserPlugin({

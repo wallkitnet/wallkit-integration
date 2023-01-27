@@ -1,0 +1,8 @@
+# Ignore artifacts:
+dist
+config
+*/assets
+src/assets
+
+# Ignore all HTML files:
+*.html
