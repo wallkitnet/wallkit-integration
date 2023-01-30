@@ -2591,7 +2591,9 @@ function _initListeners2() {
 }
 
 function _setAuthorizationError2(error) {
-  if (this.authForm.visibleFormName) {
+  var _this$authForm;
+
+  if ((_this$authForm = this.authForm) !== null && _this$authForm !== void 0 && _this$authForm.visibleFormName) {
     if (error === null) {
       this.authForm[this.authForm.visibleFormName].resetFormError(error);
     } else {

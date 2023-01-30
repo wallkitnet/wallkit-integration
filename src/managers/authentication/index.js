@@ -488,7 +488,7 @@ export default class Authentication {
     }
 
     #setAuthorizationError(error) {
-        if (this.authForm.visibleFormName) {
+        if (this.authForm?.visibleFormName) {
             if (error === null) {
                 this.authForm[this.authForm.visibleFormName].resetFormError(error);
             } else {
