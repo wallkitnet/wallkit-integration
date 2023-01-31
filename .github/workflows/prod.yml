@@ -71,23 +71,23 @@ jobs:
           fi
           
           aws s3 sync $SYNC_DIR s3://$S3_BUCKET/$DEPLOYING_VERSION/ --exclude '*.html' --exclude '*.txt'
-          
-          compareResult=$(bash ../semver2.sh $DEPLOYING_VERSION $LATEST_CDN_VERSION)
-          echo "compareResult: $compareResult"
-          
-          if [ $compareResult == 0 ];
-          then
-            echo "DEPLOYING_VERSION equals LATEST_CDN_VERSION. Creating symlink."
-            aws s3 cp s3://$S3_BUCKET/$DEPLOYING_VERSION/ s3://$S3_BUCKET/latest/ --recursive
-          fi
-          
-          if [ $compareResult == 1 ];
-          then
-            echo "DEPLOYING_VERSION greater than LATEST_CDN_VERSION. Creating symlink."
-            aws s3 cp s3://$S3_BUCKET/$DEPLOYING_VERSION/ s3://$S3_BUCKET/latest/ --recursive
-          fi
-          
-          if [ $compareResult == -1 ];
-          then
-            echo "DEPLOYING_VERSION lower than LATEST_CDN_VERSION. Not creating symlink."
-          fi
+
+#          compareResult=$(bash ../semver2.sh $DEPLOYING_VERSION $LATEST_CDN_VERSION)
+#          echo "compareResult: $compareResult"
+#
+#          if [ $compareResult == 0 ];
+#          then
+#            echo "DEPLOYING_VERSION equals LATEST_CDN_VERSION. Creating symlink."
+#            aws s3 cp s3://$S3_BUCKET/$DEPLOYING_VERSION/ s3://$S3_BUCKET/latest/ --recursive
+#          fi
+#
+#          if [ $compareResult == 1 ];
+#          then
+#            echo "DEPLOYING_VERSION greater than LATEST_CDN_VERSION. Creating symlink."
+#            aws s3 cp s3://$S3_BUCKET/$DEPLOYING_VERSION/ s3://$S3_BUCKET/latest/ --recursive
+#          fi
+#
+#          if [ $compareResult == -1 ];
+#          then
+#            echo "DEPLOYING_VERSION lower than LATEST_CDN_VERSION. Not creating symlink."
+#          fi
