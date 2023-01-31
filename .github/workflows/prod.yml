@@ -43,7 +43,7 @@ jobs:
       - name: Deploy to S3
         run: |
           echo "Deploying to S3"
-          version=$(cat package.json | jq -r '.version')
+          version=$(cat ../package.json | jq -r '.version')
           existing_versions=$(aws s3 ls s3://${S3_BUCKET}/ --recursive | awk '{print $2}' | grep -oP '[\d]+\.[\d]+\.[\d]+')
           echo "Existing versions: existing_versions[@]"
           is_exists=false
