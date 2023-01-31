@@ -6,8 +6,6 @@ on:
       - feature/setup-github-actions
 
 env:
-  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   S3_BUCKET: 'cdn1.wallkit.net'
   SYNC_DIR: './dist/.'
   FILE_NAME_LIBRARY: 'wallkit-integration-library.min.js'
@@ -34,14 +32,10 @@ jobs:
           aws-region: us-east-1
 
       - name: Install dependencies
-        run: |
-          echo "Installing dependencies"
-          npm install
+        run: npm install
 
-      - name: Build project
-        run: |
-          echo "Building project"
-          npm run build
+      - name: Build
+        run: npm run build
 
       - name: Get package version
         id: package-version
