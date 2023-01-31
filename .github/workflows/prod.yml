@@ -6,7 +6,7 @@ on:
       - feature/setup-github-actions
 
 env:
-  S3_BUCKET: wallkit-integration-test
+  S3_BUCKET: cdn1.wallkit.net
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
@@ -53,7 +53,7 @@ jobs:
         
           echo "DEPLOYING_VERSION: $DEPLOYING_VERSION"
           
-          LATEST_CDN_VERSION=$(aws s3 ls s3://${S3_BUCKET}/ | grep -v "latest" | sort -Vr | head -n 1 | sed -n -e 's/^.*PRE \([^\/]*\)\//\1/p')
+          LATEST_CDN_VERSION=$(aws s3 ls s3://${S3_BUCKET}/js/integration/ | grep -v "latest" | sort -Vr | head -n 1 | sed -n -e 's/^.*PRE \([^\/]*\)\//\1/p')
           if [ -z "$LATEST_CDN_VERSION" ];
           then
             LATEST_CDN_VERSION="0.0.0"
@@ -61,7 +61,7 @@ jobs:
           echo "LATEST_CDN_VERSION: $LATEST_CDN_VERSION"
         
           # Check if the version already exists in the S3 bucket
-          total_found_objects=$(aws s3 ls s3://${S3_BUCKET}/${DEPLOYING_VERSION}/${FILE_NAME_LIBRARY} --summarize | grep "Total Objects: " | sed 's/[^0-9]*//g')
+          total_found_objects=$(aws s3 ls s3://${S3_BUCKET}/js/integration/${DEPLOYING_VERSION}/${FILE_NAME_LIBRARY} --summarize | grep "Total Objects: " | sed 's/[^0-9]*//g')
           echo "total_found_objects: $total_found_objects"
           if [ $total_found_objects == 0 ];
           then
@@ -70,7 +70,7 @@ jobs:
             echo "DEPLOYING_VERSION $DEPLOYING_VERSION already exists."
           fi
           
-          aws s3 sync $SYNC_DIR s3://$S3_BUCKET/$DEPLOYING_VERSION/ --exclude '*.html' --exclude '*.txt'
+          aws s3 sync $SYNC_DIR s3://$S3_BUCKET/js/integration/$DEPLOYING_VERSION/ --exclude '*.html' --exclude '*.txt'
 
           chmod +x ./.github/semver2.sh
           compareResult=$(bash ./.github/semver2.sh $DEPLOYING_VERSION $LATEST_CDN_VERSION)
@@ -79,13 +79,13 @@ jobs:
           if [ $compareResult == 0 ];
           then
             echo "DEPLOYING_VERSION equals LATEST_CDN_VERSION. Creating symlink."
-            aws s3 cp s3://$S3_BUCKET/$DEPLOYING_VERSION/ s3://$S3_BUCKET/latest/ --recursive
+            aws s3 cp s3://$S3_BUCKET/js/integration/$DEPLOYING_VERSION/ s3://$S3_BUCKET/js/integration/latest/ --recursive
           fi
 
           if [ $compareResult == 1 ];
           then
             echo "DEPLOYING_VERSION greater than LATEST_CDN_VERSION. Creating symlink."
-            aws s3 cp s3://$S3_BUCKET/$DEPLOYING_VERSION/ s3://$S3_BUCKET/latest/ --recursive
+            aws s3 cp s3://$S3_BUCKET/js/integration/$DEPLOYING_VERSION/ s3://$S3_BUCKET/js/integration/latest/ --recursive
           fi
 
           if [ $compareResult == -1 ];
