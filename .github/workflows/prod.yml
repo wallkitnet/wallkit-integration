@@ -47,7 +47,7 @@ jobs:
       - name: Deploy to S3
         run: |
           S3_BUCKET="wallkit-integration-test"
-          DEPLOYING_VERSION=${{ steps.package-version.outputs.current-version }}"
+          DEPLOYING_VERSION=${{ steps.package-version.outputs.current-version }}
           SYNC_DIR="./dist/."
           FILE_NAME_LIBRARY="wallkit-integration-library.min.js"
         
