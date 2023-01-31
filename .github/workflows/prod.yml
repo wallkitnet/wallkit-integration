@@ -8,10 +8,14 @@ on:
 env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  S3_BUCKET: 'cdn1.wallkit.net'
+  SYNC_DIR: './dist/.'
+  FILE_NAME_LIBRARY: 'wallkit-integration-library.min.js'
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Checkout code
@@ -45,11 +49,7 @@ jobs:
 
       - name: Deploy to S3
         run: |
-          S3_BUCKET="cdn1.wallkit.net"
           DEPLOYING_VERSION=${{ steps.package-version.outputs.current-version }}
-          SYNC_DIR="./dist/."
-          FILE_NAME_LIBRARY="wallkit-integration-library.min.js"
-        
           echo "DEPLOYING_VERSION: $DEPLOYING_VERSION"
           
           LATEST_CDN_VERSION=$(aws s3 ls s3://${S3_BUCKET}/js/integration/ | grep -v "latest" | sort -Vr | head -n 1 | sed -n -e 's/^.*PRE \([^\/]*\)\//\1/p')
@@ -69,7 +69,7 @@ jobs:
             echo "DEPLOYING_VERSION $DEPLOYING_VERSION already exists."
           fi
           
-          aws s3 sync $SYNC_DIR s3://$S3_BUCKET/js/integration/$DEPLOYING_VERSION/ --exclude '*.html' --exclude '*.txt'
+          aws s3 sync ${SYNC_DIR} s3://$S3_BUCKET/js/integration/$DEPLOYING_VERSION/ --exclude '*.html' --exclude '*.txt'
 
           chmod +x ./.github/semver2.sh
           compareResult=$(bash ./.github/semver2.sh $DEPLOYING_VERSION $LATEST_CDN_VERSION)
