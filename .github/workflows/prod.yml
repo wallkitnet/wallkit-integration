@@ -67,7 +67,7 @@ jobs:
         run: |
           echo "Deploying to S3"
           version="${{ steps.package-version.outputs.current-version}}"
-          existing_versions=$(aws s3 ls s3://${S3_BUCKET}/ --recursive | awk '{print $2}' | grep -oP '[\d]+\.[\d]+\.[\d]+')
+          existing_versions=$(aws s3 ls s3://wallkit-integration-test --recursive | grep '/$' | awk '{print $2}' | awk -F "/" '{print $1}')
           echo "Existing versions: $existing_versions[*]"
           is_exists=false
           for existing_version in $existing_versions
