@@ -216,35 +216,31 @@ export default class Authentication {
             }).catch((error) => handleAuthError(error));
     }
 
-    authInWallkit(firebaseToken = null) {
+    async authInWallkit(firebaseToken = null) {
         this.#resetAuthorizationError();
-        return new Promise((resolve, reject) => {
-            if (firebaseToken) {
-                this.sdk.methods.authenticateWithFirebase(firebaseToken).then(({ token, existed }) => {
-                    this.setToken(token);
-
-                    const userGetTimeout = setTimeout(() => {
-                        reject(false);
-                    }, 10000);
-
-                    const userEventCallback = () => {
-                        clearTimeout(userGetTimeout);
-                        this.sdk.methods.unsubscribeLocalEvent('user', userEventCallback);
-                        this.events.notify(EventsNames.local.SUCCESS_AUTH, { register: !existed });
-                        resolve(true);
-                    };
-
-                    this.sdk.methods.subscribeLocalEvent('user', userEventCallback);
-                }).catch((error) => {
-                    console.log('error', error);
-                    this.#setAuthorizationError(error?.response?.error_description);
-                    this.removeTokens();
-                    reject(error);
-                });
-            } else {
-                resolve(false);
-            }
-        });
+        if (!firebaseToken) {
+            throw new Error('Your authorization is broken. Please login again.');
+        }
+        try {
+            const response = await this.sdk.methods.authenticateWithFirebase(firebaseToken);
+            this.setToken(response.token);
+            return await new Promise((resolve, reject) => {
+                const userGetTimeout = setTimeout(() => {
+                    resolve(false);
+                }, 10000);
+                const userEventCallback = () => {
+                    clearTimeout(userGetTimeout);
+                    this.sdk.methods.unsubscribeLocalEvent('user', userEventCallback);
+                    this.events.notify(EventsNames.local.SUCCESS_AUTH, {register: !response.existed});
+                    resolve(true);
+                };
+                this.sdk.methods.subscribeLocalEvent('user', userEventCallback);
+            });
+        } catch (error) {
+            console.log('error', error);
+            this.removeTokens();
+            throw error;
+        }
     }
 
     getDefaultAuthenticationFormContent () {
@@ -488,12 +484,8 @@ export default class Authentication {
     }
 
     #setAuthorizationError(error) {
-        if (this.authForm.visibleFormName) {
-            if (error === null) {
-                this.authForm[this.authForm.visibleFormName].resetFormError(error);
-            } else {
-                this.authForm[this.authForm.visibleFormName].setFormError(error);
-            }
+        if (this.authForm) {
+            this.authForm.handleError(error);
         } else {
             const errorPlaceholder = document.getElementById('authorization-error');
             if (errorPlaceholder) {

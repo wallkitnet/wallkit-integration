@@ -1730,40 +1730,65 @@ var Authentication = /*#__PURE__*/function () {
     }
   }, {
     key: "authInWallkit",
-    value: function authInWallkit() {
-      var _this7 = this;
-      var firebaseToken = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      _classPrivateMethodGet(this, _resetAuthorizationError, _resetAuthorizationError2).call(this);
-      return new Promise(function (resolve, reject) {
-        if (firebaseToken) {
-          _this7.sdk.methods.authenticateWithFirebase(firebaseToken).then(function (_ref) {
-            var token = _ref.token,
-              existed = _ref.existed;
-            _this7.setToken(token);
-            var userGetTimeout = setTimeout(function () {
-              reject(false);
-            }, 10000);
-            var userEventCallback = function userEventCallback() {
-              clearTimeout(userGetTimeout);
-              _this7.sdk.methods.unsubscribeLocalEvent('user', userEventCallback);
-              _this7.events.notify(_eventsName["default"].local.SUCCESS_AUTH, {
-                register: !existed
-              });
-              resolve(true);
-            };
-            _this7.sdk.methods.subscribeLocalEvent('user', userEventCallback);
-          })["catch"](function (error) {
-            var _error$response;
-            console.log('error', error);
-            _classPrivateMethodGet(_this7, _setAuthorizationError, _setAuthorizationError2).call(_this7, error === null || error === void 0 ? void 0 : (_error$response = error.response) === null || _error$response === void 0 ? void 0 : _error$response.error_description);
-            _this7.removeTokens();
-            reject(error);
-          });
-        } else {
-          resolve(false);
-        }
-      });
-    }
+    value: function () {
+      var _authInWallkit = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2() {
+        var _this7 = this;
+        var firebaseToken,
+          response,
+          _args2 = arguments;
+        return _regenerator["default"].wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                firebaseToken = _args2.length > 0 && _args2[0] !== undefined ? _args2[0] : null;
+                _classPrivateMethodGet(this, _resetAuthorizationError, _resetAuthorizationError2).call(this);
+                if (firebaseToken) {
+                  _context2.next = 4;
+                  break;
+                }
+                throw new Error('Your authorization is broken. Please login again.');
+              case 4:
+                _context2.prev = 4;
+                _context2.next = 7;
+                return this.sdk.methods.authenticateWithFirebase(firebaseToken);
+              case 7:
+                response = _context2.sent;
+                this.setToken(response.token);
+                _context2.next = 11;
+                return new Promise(function (resolve, reject) {
+                  var userGetTimeout = setTimeout(function () {
+                    resolve(false);
+                  }, 10000);
+                  var userEventCallback = function userEventCallback() {
+                    clearTimeout(userGetTimeout);
+                    _this7.sdk.methods.unsubscribeLocalEvent('user', userEventCallback);
+                    _this7.events.notify(_eventsName["default"].local.SUCCESS_AUTH, {
+                      register: !response.existed
+                    });
+                    resolve(true);
+                  };
+                  _this7.sdk.methods.subscribeLocalEvent('user', userEventCallback);
+                });
+              case 11:
+                return _context2.abrupt("return", _context2.sent);
+              case 14:
+                _context2.prev = 14;
+                _context2.t0 = _context2["catch"](4);
+                console.log('error', _context2.t0);
+                this.removeTokens();
+                throw _context2.t0;
+              case 19:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this, [[4, 14]]);
+      }));
+      function authInWallkit() {
+        return _authInWallkit.apply(this, arguments);
+      }
+      return authInWallkit;
+    }()
   }, {
     key: "getDefaultAuthenticationFormContent",
     value: function getDefaultAuthenticationFormContent() {
@@ -1798,10 +1823,10 @@ var Authentication = /*#__PURE__*/function () {
   }, {
     key: "show",
     value: function () {
-      var _show = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2() {
-        return _regenerator["default"].wrap(function _callee2$(_context2) {
+      var _show = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3() {
+        return _regenerator["default"].wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
                 this.modal.show();
                 if (!this.firebase.isUiShown) {
@@ -1809,10 +1834,10 @@ var Authentication = /*#__PURE__*/function () {
                 }
               case 2:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, this);
+        }, _callee3, this);
       }));
       function show() {
         return _show.apply(this, arguments);
@@ -1918,31 +1943,31 @@ var Authentication = /*#__PURE__*/function () {
   }, {
     key: "logout",
     value: function () {
-      var _logout = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3() {
+      var _logout = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4() {
         var success;
-        return _regenerator["default"].wrap(function _callee3$(_context3) {
+        return _regenerator["default"].wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
-                _context3.prev = 0;
+                _context4.prev = 0;
                 this.removeToken();
-                _context3.next = 4;
+                _context4.next = 4;
                 return this.firebase.logout();
               case 4:
-                success = _context3.sent;
+                success = _context4.sent;
                 if (!success) {
-                  _context3.next = 13;
+                  _context4.next = 13;
                   break;
                 }
                 this.removeFirebaseToken();
                 if (!(this.reCaptcha.enabled && !this.reCaptcha.loaded)) {
-                  _context3.next = 12;
+                  _context4.next = 12;
                   break;
                 }
-                _context3.next = 10;
+                _context4.next = 10;
                 return this.reCaptcha.init();
               case 10:
-                _context3.next = 13;
+                _context4.next = 13;
                 break;
               case 12:
                 if (this.reCaptcha.loaded) {
@@ -1954,19 +1979,19 @@ var Authentication = /*#__PURE__*/function () {
                 }
               case 13:
                 this.resetAuthProcess();
-                _context3.next = 20;
+                _context4.next = 20;
                 break;
               case 16:
-                _context3.prev = 16;
-                _context3.t0 = _context3["catch"](0);
-                console.log('ERROR:', _context3.t0);
+                _context4.prev = 16;
+                _context4.t0 = _context4["catch"](0);
+                console.log('ERROR:', _context4.t0);
                 this.resetAuthProcess();
               case 20:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3, this, [[0, 16]]);
+        }, _callee4, this, [[0, 16]]);
       }));
       function logout() {
         return _logout.apply(this, arguments);
@@ -2000,51 +2025,51 @@ var Authentication = /*#__PURE__*/function () {
   }, {
     key: "handleTicketsToken",
     value: function () {
-      var _handleTicketsToken = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(ticketPassAuthToken) {
+      var _handleTicketsToken = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(ticketPassAuthToken) {
         var response, userCredential, firebaseToken;
-        return _regenerator["default"].wrap(function _callee4$(_context4) {
+        return _regenerator["default"].wrap(function _callee5$(_context5) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context5.prev = _context5.next) {
               case 0:
-                _context4.prev = 0;
-                _context4.next = 3;
+                _context5.prev = 0;
+                _context5.next = 3;
                 return this.sdk.methods.getAuthTokensByTicketPassToken(ticketPassAuthToken);
               case 3:
-                response = _context4.sent;
+                response = _context5.sent;
                 if (!response) {
-                  _context4.next = 19;
+                  _context5.next = 19;
                   break;
                 }
-                _context4.next = 7;
+                _context5.next = 7;
                 return this.firebase.authWithCustomToken(response.firebase_custom_token);
               case 7:
-                userCredential = _context4.sent;
-                _context4.next = 10;
+                userCredential = _context5.sent;
+                _context5.next = 10;
                 return userCredential.user.getIdToken();
               case 10:
-                firebaseToken = _context4.sent;
+                firebaseToken = _context5.sent;
                 this.updateFirebaseToken(firebaseToken);
                 this.setToken(response.token);
-                _context4.next = 15;
+                _context5.next = 15;
                 return this.sdk.methods.getUser();
               case 15:
                 this.dispatchTokens();
                 this.events.notify(_eventsName["default"].local.SUCCESS_AUTH, true);
                 this.events.notify(_eventsName["default"].local.TICKETS_TOKEN_AUTH_SUCCESS, true);
-                return _context4.abrupt("return", true);
+                return _context5.abrupt("return", true);
               case 19:
-                return _context4.abrupt("return", false);
+                return _context5.abrupt("return", false);
               case 22:
-                _context4.prev = 22;
-                _context4.t0 = _context4["catch"](0);
-                console.error(_context4.t0);
-                return _context4.abrupt("return", _context4.t0);
+                _context5.prev = 22;
+                _context5.t0 = _context5["catch"](0);
+                console.error(_context5.t0);
+                return _context5.abrupt("return", _context5.t0);
               case 26:
               case "end":
-                return _context4.stop();
+                return _context5.stop();
             }
           }
-        }, _callee4, this, [[0, 22]]);
+        }, _callee5, this, [[0, 22]]);
       }));
       function handleTicketsToken(_x2) {
         return _handleTicketsToken.apply(this, arguments);
@@ -2058,8 +2083,8 @@ var Authentication = /*#__PURE__*/function () {
     }
   }, {
     key: "handleOneTapResponse",
-    value: function handleOneTapResponse(_ref2) {
-      var credential = _ref2.credential;
+    value: function handleOneTapResponse(_ref) {
+      var credential = _ref.credential;
       this.frame.sendEvent(_eventsName["default"].wallkit.WALLKIT_EVENT_ONE_TAP_SIGN_IN, credential);
     }
   }, {
@@ -2099,9 +2124,9 @@ function _createModal2() {
 }
 function _initListeners2() {
   var _this10 = this;
-  this.events.subscribe(_eventsName["default"].local.FRAME_MESSAGE, function (_ref3) {
-    var name = _ref3.name,
-      value = _ref3.value;
+  this.events.subscribe(_eventsName["default"].local.FRAME_MESSAGE, function (_ref2) {
+    var name = _ref2.name,
+      value = _ref2.value;
     switch (name) {
       case _eventsName["default"].wallkit.WALLKIT_EVENT_TOKEN:
         if (value) {
@@ -2134,12 +2159,8 @@ function _initListeners2() {
   });
 }
 function _setAuthorizationError2(error) {
-  if (this.authForm.visibleFormName) {
-    if (error === null) {
-      this.authForm[this.authForm.visibleFormName].resetFormError(error);
-    } else {
-      this.authForm[this.authForm.visibleFormName].setFormError(error);
-    }
+  if (this.authForm) {
+    this.authForm.handleError(error);
   } else {
     var errorPlaceholder = document.getElementById('authorization-error');
     if (errorPlaceholder) {
@@ -3135,6 +3156,17 @@ var AuthForm = /*#__PURE__*/function () {
             form.hide();
             form.resetForm();
           }
+        }
+      }
+    }
+  }, {
+    key: "handleError",
+    value: function handleError(error) {
+      if (this.visibleFormName) {
+        if (error === null) {
+          this[this.visibleFormName].resetFormError(error);
+        } else {
+          this[this.visibleFormName].setFormError(error);
         }
       }
     }

@@ -154,6 +154,16 @@ export class AuthForm {
       }
     }
 
+    handleError(error) {
+        if (this.visibleFormName) {
+            if (error === null) {
+                this[this.visibleFormName].resetFormError(error);
+            } else {
+                this[this.visibleFormName].setFormError(error);
+            }
+        }
+    }
+
     showSuccessPasswordReset () {
         const email = this.forgotPasswordForm.emailField.getValue();
 
