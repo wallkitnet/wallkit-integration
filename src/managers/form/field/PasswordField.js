@@ -113,11 +113,7 @@ export class PasswordField extends FormField {
 
         return false;
       }
-
-      this.resetValidation();
-      this.setFieldValidationState(true);
-
-      return true;
+      return super.validate();
     }
 
 }

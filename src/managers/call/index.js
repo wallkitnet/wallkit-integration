@@ -40,8 +40,17 @@ export default class Call {
             }
         });
 
+        this.#events.subscribe(EventsNames.local.SUCCESS_AUTH, (value) => {
+            if (this.#isDebug()) {
+                console.log('subscribe ventsNames.local.SUCCESS_AUTH', value);
+            }
+            this.#getWallkitUserData();
+        });
+
         this.#events.subscribe(EventsNames.local.CHECK_USER_ACCESS, (value) => {
-            console.log('subscribe ventsNames.local.CHECK_USER_ACCESS', value);
+            if (this.#isDebug()) {
+                console.log('subscribe ventsNames.local.CHECK_USER_ACCESS', value);
+            }
             this.#setDataWkHasAccessInBody(value);
         });
     }

@@ -102,7 +102,7 @@ export class SignupForm extends Form {
         return termsOptions;
       }
 
-      let defaultLabel = `By signing up i agree with the`;
+      let defaultLabel = `By signing up I agree with the`;
 
       if (termsOptions.tosURL) {
         defaultLabel += ` <a href="${termsOptions.tosURL}" target="_blank">Terms & Conditions</a>`
