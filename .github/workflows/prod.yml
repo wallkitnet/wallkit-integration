@@ -6,7 +6,6 @@ on:
       - feature/setup-github-actions
 
 env:
-  S3_BUCKET: cdn1.wallkit.net
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
@@ -46,7 +45,7 @@ jobs:
 
       - name: Deploy to S3
         run: |
-          S3_BUCKET="wallkit-integration-test"
+          S3_BUCKET="cdn1.wallkit.net"
           DEPLOYING_VERSION=${{ steps.package-version.outputs.current-version }}
           SYNC_DIR="./dist/."
           FILE_NAME_LIBRARY="wallkit-integration-library.min.js"
