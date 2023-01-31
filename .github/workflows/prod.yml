@@ -92,4 +92,4 @@ jobs:
               ln -sfn ${version} latest
               aws s3 cp latest s3://${S3_BUCKET}/ --recursive
             fi
-       
+          fi
