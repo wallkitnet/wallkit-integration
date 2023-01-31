@@ -72,7 +72,8 @@ jobs:
           
           aws s3 sync $SYNC_DIR s3://$S3_BUCKET/$DEPLOYING_VERSION/ --exclude '*.html' --exclude '*.txt'
 
-          compareResult=$(bash ../semver2.sh $DEPLOYING_VERSION $LATEST_CDN_VERSION)
+          chmod +x ./.github/semver2.sh
+          compareResult=$(bash ./.github/semver2.sh $DEPLOYING_VERSION $LATEST_CDN_VERSION)
           echo "compareResult: $compareResult"
 
           if [ $compareResult == 0 ];
