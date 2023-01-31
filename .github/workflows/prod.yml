@@ -4,51 +4,74 @@ on:
   push:
     branches:
       - feature/setup-github-actions
+
+env:
+  AWS_REGION: us-east-1
+  S3_BUCKET: wallkit-integration-test
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
         with:
           node-version: 18
-      - name: Install dependencies
-        run: npm install
-      - name: Build
-        run: npm run build
-      - name: Set AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
-      - name: Get package version
-        id: package-version
-        uses: martinbeentjes/npm-get-version-action@main
-      - name: Check if lib version already exist
-        id: check-lib-version
-        run: |
-          totalFoundObjects=$(aws s3 ls s3://wallkit-integration-prod/${{ steps.package-version.outputs.current-version}}/wallkit-integration-library.min.js --summarize | grep "Total Objects: " | sed 's/[^0-9]*//g')
-          if [ $totalFoundObjects == 0 ]
-          then
-            echo "exist-current-lib-version=false" >> $GITHUB_OUTPUT
-          else
-            echo "exist-current-lib-version=true" >> $GITHUB_OUTPUT
-          fi
-      - name: Debug vars
-        id: debug-vars
-        run: |
-          echo "Lib version: ${{ steps.package-version.outputs.current-version }}"
-          echo "Exist current lib version on S3: ${{ steps.check-lib-version.outputs.exist-current-lib-version }}"
 
-#      - name: Deploy to S3
-#        run: aws s3 sync ./dist/. s3://wallkit-integration-prod/latest --exclude '*.html' --exclude '*.txt'
-#      - name: Invalidate CloudFront
-#        uses: chetan/invalidate-cloudfront-action@v2
-#        env:
-#          DISTRIBUTION: ${{ secrets.DEV_DISTRIBUTION_ID }}
-#          PATHS: "/latest/*"
-#          AWS_REGION: us-east-1
-#          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Configure AWS credentials
+        run: |
+          echo "Configuring AWS credentials"
+          echo "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}"
+          echo "AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}"
+          echo "AWS_REGION=${AWS_REGION}"
+          echo "S3_BUCKET=${S3_BUCKET}"
+          echo "::set-env name=AWS_REGION::${AWS_REGION}"
+          echo "::set-env name=AWS_ACCESS_KEY_ID::${AWS_ACCESS_KEY_ID}"
+          echo "::set-env name=AWS_SECRET_ACCESS_KEY::${AWS_SECRET_ACCESS_KEY}"
+
+      - name: Install dependencies
+        run: |
+          echo "Installing dependencies"
+          npm ci
+
+      - name: Build project
+        run: |
+          echo "Building project"
+          npm run build
+
+      - name: Deploy to S3
+        run: |
+          echo "Deploying to S3"
+          version=$(cat package.json | jq -r '.version')
+          existing_versions=$(aws s3 ls s3://${S3_BUCKET}/ --recursive | awk '{print $2}' | grep -oP '[\d]+\.[\d]+\.[\d]+')
+          echo "Existing versions: existing_versions[@]"
+          is_exists=false
+          for existing_version in $existing_versions
+          do
+            if [ "$version" = "$existing_version" ]; then
+              is_exists=true
+              break
+            fi
+          done
+          
+          if [ "$is_exists" = false ]; then
+            echo "is_exists: false"
+            aws s3 sync ./dist/. s3://${S3_BUCKET}/${version}/ --exclude '*.html' --exclude '*.txt'
+            if [ $? -eq 0 ]; then
+              ln -sfn ${version} latest
+              aws s3 cp latest s3://${S3_BUCKET}/ --recursive
+            fi
+          elif [ "$version" \> "$existing_version" ]; then
+            echo "version > existing_version"
+            aws s3 sync ./dist/. s3://${S3_BUCKET}/${version}/ --exclude '*.html' --exclude '*.txt'
+            if [ $? -eq 0 ]; then
+              ln -sfn ${version} latest
+              aws s3 cp latest s3://${S3_BUCKET}/ --recursive
+            fi
+       
