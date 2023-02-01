@@ -35,7 +35,7 @@ exports.LIBRARY_STYLES = LIBRARY_STYLES;
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.WALLKIT_TOKEN_NAME = exports.WALLKIT_POPUP_URL = exports.WALLKIT_POPUP_DEV_URL = exports.WALLKIT_MODAL_WRAPPER_CLASSNAME = exports.WALLKIT_MODAL_MIN_WIDTH = exports.WALLKIT_MODAL_MIN_HEIGHT = exports.WALLKIT_MODAL_MAX_WIDTH = exports.WALLKIT_MODAL_CONTENT_CLASSNAME = exports.WALLKIT_MODAL_CLOSE_BTN_CLASSNAME = exports.WALLKIT_FRAME_ID = exports.WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID = exports.WALLKIT_FIREBASE_UI_PLACEHOLDER_ID = exports.WALLKIT_FIREBASE_CONFIG = exports.WALLKIT_DEV_FIREBASE_CONFIG = exports.WALLKIT_CDN_URL = exports.WALLKIT_CDN_ASSETS_URL = exports.WALLKIT_AUTH_FORM_PLACEHOLDER_ID = exports.FIREBASE_TOKEN_NAME = exports.ALLOWED_ORIGINS = void 0;
+exports.WALLKIT_USER_MANAGER_MODAL_FORM_PLACEHOLDER_ID = exports.WALLKIT_TOKEN_NAME = exports.WALLKIT_POPUP_URL = exports.WALLKIT_POPUP_DEV_URL = exports.WALLKIT_MODAL_WRAPPER_CLASSNAME = exports.WALLKIT_MODAL_MIN_WIDTH = exports.WALLKIT_MODAL_MIN_HEIGHT = exports.WALLKIT_MODAL_MAX_WIDTH = exports.WALLKIT_MODAL_CONTENT_CLASSNAME = exports.WALLKIT_MODAL_CLOSE_BTN_CLASSNAME = exports.WALLKIT_FRAME_ID = exports.WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID = exports.WALLKIT_FIREBASE_UI_PLACEHOLDER_ID = exports.WALLKIT_FIREBASE_CONFIG = exports.WALLKIT_DEV_FIREBASE_CONFIG = exports.WALLKIT_CDN_URL = exports.WALLKIT_CDN_ASSETS_URL = exports.WALLKIT_AUTH_FORM_PLACEHOLDER_ID = exports.FIREBASE_TOKEN_NAME = exports.ALLOWED_ORIGINS = void 0;
 // Popups
 var WALLKIT_POPUP_URL = 'https://wallkit.net/popups';
 // export const WALLKIT_POPUP_URL = 'http://127.0.0.1:8000/popups';
@@ -74,6 +74,8 @@ var WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID = 'wk-email-auth-form';
 exports.WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID = WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID;
 var WALLKIT_AUTH_FORM_PLACEHOLDER_ID = 'wk-auth-form';
 exports.WALLKIT_AUTH_FORM_PLACEHOLDER_ID = WALLKIT_AUTH_FORM_PLACEHOLDER_ID;
+var WALLKIT_USER_MANAGER_MODAL_FORM_PLACEHOLDER_ID = 'wk-user-manager-modal-form';
+exports.WALLKIT_USER_MANAGER_MODAL_FORM_PLACEHOLDER_ID = WALLKIT_USER_MANAGER_MODAL_FORM_PLACEHOLDER_ID;
 var WALLKIT_FRAME_ID = 'wk-frame';
 
 // Authentication
@@ -211,6 +213,7 @@ var _events = _interopRequireDefault(__webpack_require__(9889));
 var _analytics = _interopRequireDefault(__webpack_require__(7343));
 var _content = _interopRequireDefault(__webpack_require__(8390));
 var _call = _interopRequireDefault(__webpack_require__(5613));
+var _user = _interopRequireDefault(__webpack_require__(4442));
 var _styles = __webpack_require__(2350);
 var _DOM = __webpack_require__(2909);
 var _payments = __webpack_require__(8672);
@@ -284,6 +287,10 @@ window.WallkitIntegration = (_eventsListener = /*#__PURE__*/new WeakSet(), _inse
         _this.analytics = new _analytics["default"](options === null || options === void 0 ? void 0 : options.analytics);
         _this.call = new _call["default"](_this.popup, _this.config);
         _this.init();
+        _this.userManager = new _user["default"]({
+          popup: _this.popup,
+          authentication: _this.authentication
+        });
       }
     }));
   }
@@ -360,7 +367,7 @@ function _eventsListener2() {
             var redirect = value;
             _this2.popup.hide();
             _this2.events.subscribe(_eventsName.SUCCESS_AUTH, function () {
-              if (redirect) {
+              if (typeof redirect === "string") {
                 _this2.popup.open(redirect);
               }
             }, {
@@ -383,6 +390,10 @@ function _eventsListener2() {
             break;
           case "wk-event-close-on-wrapper":
             _this2.popup.closeOutside = value;
+            break;
+          case "wk-firebase-change-password":
+            _this2.popup.hide();
+            _this2.userManager.showChangePassword();
             break;
         }
       }
@@ -1197,37 +1208,121 @@ var Firebase = /*#__PURE__*/function () {
       return this.firebase.auth().sendPasswordResetEmail(email);
     }
   }, {
-    key: "authWithCustomToken",
+    key: "reauthenticateWithCredential",
     value: function () {
-      var _authWithCustomToken = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(token) {
+      var _reauthenticateWithCredential = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(oldPassword) {
+        var user, credential;
         return _regenerator["default"].wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                _context3.prev = 0;
-                if (!(this.firebase && this.firebase.auth)) {
-                  _context3.next = 5;
+                if (!oldPassword) {
+                  _context3.next = 12;
                   break;
                 }
-                _context3.next = 4;
-                return this.firebase.auth().signInWithCustomToken(token);
-              case 4:
+                user = this.firebase.auth().currentUser;
+                if (!user) {
+                  _context3.next = 9;
+                  break;
+                }
+                credential = this.firebase.auth.EmailAuthProvider.credential(user.email, oldPassword);
+                _context3.next = 6;
+                return user.reauthenticateWithCredential(credential);
+              case 6:
                 return _context3.abrupt("return", _context3.sent);
-              case 5:
-                return _context3.abrupt("return", false);
-              case 8:
-                _context3.prev = 8;
-                _context3.t0 = _context3["catch"](0);
-                console.error('Custom Token Auth Fail');
-                return _context3.abrupt("return", false);
+              case 9:
+                throw new Error('Your authorization is broken. Please login again.');
+              case 10:
+                _context3.next = 13;
+                break;
               case 12:
+                throw new Error('Old Password is empty');
+              case 13:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, this, [[0, 8]]);
+        }, _callee3, this);
       }));
-      function authWithCustomToken(_x3) {
+      function reauthenticateWithCredential(_x3) {
+        return _reauthenticateWithCredential.apply(this, arguments);
+      }
+      return reauthenticateWithCredential;
+    }()
+  }, {
+    key: "updatePassword",
+    value: function () {
+      var _updatePassword = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(newPassword) {
+        var user;
+        return _regenerator["default"].wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                if (!newPassword) {
+                  _context4.next = 10;
+                  break;
+                }
+                user = this.firebase.auth().currentUser;
+                if (!user) {
+                  _context4.next = 7;
+                  break;
+                }
+                _context4.next = 5;
+                return user.updatePassword(newPassword);
+              case 5:
+                _context4.next = 8;
+                break;
+              case 7:
+                throw new Error('Your authorization is broken. Please login again.');
+              case 8:
+                _context4.next = 11;
+                break;
+              case 10:
+                throw new Error('New Password is empty');
+              case 11:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
+      }));
+      function updatePassword(_x4) {
+        return _updatePassword.apply(this, arguments);
+      }
+      return updatePassword;
+    }()
+  }, {
+    key: "authWithCustomToken",
+    value: function () {
+      var _authWithCustomToken = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(token) {
+        return _regenerator["default"].wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.prev = 0;
+                if (!(this.firebase && this.firebase.auth)) {
+                  _context5.next = 5;
+                  break;
+                }
+                _context5.next = 4;
+                return this.firebase.auth().signInWithCustomToken(token);
+              case 4:
+                return _context5.abrupt("return", _context5.sent);
+              case 5:
+                return _context5.abrupt("return", false);
+              case 8:
+                _context5.prev = 8;
+                _context5.t0 = _context5["catch"](0);
+                console.error('Custom Token Auth Fail');
+                return _context5.abrupt("return", false);
+              case 12:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, this, [[0, 8]]);
+      }));
+      function authWithCustomToken(_x5) {
         return _authWithCustomToken.apply(this, arguments);
       }
       return authWithCustomToken;
@@ -1619,7 +1714,7 @@ var Authentication = /*#__PURE__*/function () {
       var _this6 = this;
       this.toggleFormLoader(true);
       var handleAuthError = function handleAuthError(error) {
-        _this6.resetAuthProcess();
+        _this6.resetAuthProcess(false);
         _this6.toggleFormLoader(false);
         _classPrivateMethodGet(_this6, _setAuthorizationError, _setAuthorizationError2).call(_this6, (error === null || error === void 0 ? void 0 : error.message) || 'Something went wrong!');
       };
@@ -1628,11 +1723,11 @@ var Authentication = /*#__PURE__*/function () {
       this.authInWallkit(data.token).then(function (status) {
         if (status) {
           _this6.modal.hide();
+          if (_this6.authForm) {
+            _this6.authForm.hide();
+          }
         } else {
-          _this6.resetAuthProcess();
-        }
-        if (_this6.authForm) {
-          _this6.authForm.hide();
+          handleAuthError();
         }
         _this6.toggleFormLoader(false);
       })["catch"](function (error) {
@@ -1645,14 +1740,14 @@ var Authentication = /*#__PURE__*/function () {
       var _this7 = this;
       var firebaseToken = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       _classPrivateMethodGet(this, _resetAuthorizationError, _resetAuthorizationError2).call(this);
-      return new Promise(function (resolve) {
+      return new Promise(function (resolve, reject) {
         if (firebaseToken) {
           _this7.sdk.methods.authenticateWithFirebase(firebaseToken).then(function (_ref) {
             var token = _ref.token,
               existed = _ref.existed;
             _this7.setToken(token);
             var userGetTimeout = setTimeout(function () {
-              resolve(false);
+              reject(false);
             }, 10000);
             var userEventCallback = function userEventCallback() {
               clearTimeout(userGetTimeout);
@@ -1668,7 +1763,7 @@ var Authentication = /*#__PURE__*/function () {
             console.log('error', error);
             _classPrivateMethodGet(_this7, _setAuthorizationError, _setAuthorizationError2).call(_this7, error === null || error === void 0 ? void 0 : (_error$response = error.response) === null || _error$response === void 0 ? void 0 : _error$response.error_description);
             _this7.removeTokens();
-            resolve(false);
+            reject(error);
           });
         } else {
           resolve(false);
@@ -1816,9 +1911,10 @@ var Authentication = /*#__PURE__*/function () {
   }, {
     key: "resetAuthProcess",
     value: function resetAuthProcess() {
+      var reset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       this.firebase.reset();
       this.firebase.showAuthForm();
-      if (this.firebase.genuineForm === false) {
+      if (this.firebase.genuineForm === false && reset) {
         this.authForm.reset();
       }
       if (this.reCaptcha.enabled) {
@@ -2044,12 +2140,21 @@ function _initListeners2() {
   });
 }
 function _setAuthorizationError2(error) {
-  var errorPlaceholder = document.getElementById('authorization-error');
-  if (errorPlaceholder) {
+  var _this$authForm;
+  if ((_this$authForm = this.authForm) !== null && _this$authForm !== void 0 && _this$authForm.visibleFormName) {
     if (error === null) {
-      errorPlaceholder.innerHTML = '';
+      this.authForm[this.authForm.visibleFormName].resetFormError(error);
     } else {
-      errorPlaceholder.innerHTML = error || 'Something went wrong!';
+      this.authForm[this.authForm.visibleFormName].setFormError(error);
+    }
+  } else {
+    var errorPlaceholder = document.getElementById('authorization-error');
+    if (errorPlaceholder) {
+      if (error === null) {
+        errorPlaceholder.innerHTML = '';
+      } else {
+        errorPlaceholder.innerHTML = error || 'Something went wrong!';
+      }
     }
   }
 }
@@ -2297,8 +2402,16 @@ function _initWkListeners2() {
         break;
     }
   });
+  (0, _classPrivateFieldGet5["default"])(this, _events).subscribe(_eventsName["default"].local.SUCCESS_AUTH, function (value) {
+    if (_classPrivateMethodGet(_this, _isDebug, _isDebug2).call(_this)) {
+      console.log('subscribe ventsNames.local.SUCCESS_AUTH', value);
+    }
+    _classPrivateMethodGet(_this, _getWallkitUserData, _getWallkitUserData2).call(_this);
+  });
   (0, _classPrivateFieldGet5["default"])(this, _events).subscribe(_eventsName["default"].local.CHECK_USER_ACCESS, function (value) {
-    console.log('subscribe ventsNames.local.CHECK_USER_ACCESS', value);
+    if (_classPrivateMethodGet(_this, _isDebug, _isDebug2).call(_this)) {
+      console.log('subscribe ventsNames.local.CHECK_USER_ACCESS', value);
+    }
     _classPrivateMethodGet(_this, _setDataWkHasAccessInBody, _setDataWkHasAccessInBody2).call(_this, value);
   });
 }
@@ -2965,6 +3078,7 @@ exports.PasswordField = void 0;
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
 var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
 var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(1185));
+var _get2 = _interopRequireDefault(__webpack_require__(4560));
 var _inherits2 = _interopRequireDefault(__webpack_require__(7964));
 var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(8442));
 var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(7474));
@@ -3024,9 +3138,7 @@ var PasswordField = /*#__PURE__*/function (_FormField) {
         this.setError("<div>\n                <span>Password should be: ".concat(passwordValidation.message, "</span>\n            </div>"));
         return false;
       }
-      this.resetValidation();
-      this.setFieldValidationState(true);
-      return true;
+      return (0, _get2["default"])((0, _getPrototypeOf2["default"])(PasswordField.prototype), "validate", this).call(this);
     }
   }]);
   return PasswordField;
@@ -3129,6 +3241,12 @@ var FormField = /*#__PURE__*/function () {
         }
       });
     }
+    if (options.onValidate && typeof options.onValidate === "function") {
+      this.onValidate = options.onValidate;
+    }
+    if (options.relatedData) {
+      this.relatedData = options.relatedData;
+    }
   }
   (0, _createClass2["default"])(FormField, [{
     key: "getElement",
@@ -3154,6 +3272,11 @@ var FormField = /*#__PURE__*/function () {
           return false;
         } else if (!value.length > 4 || !value.includes('@') || !value.includes('.')) {
           this.setError('This email address isn\'t correct!');
+          return false;
+        }
+      }
+      if (this.onValidate) {
+        if (!this.onValidate(this)) {
           return false;
         }
       }
@@ -3408,6 +3531,19 @@ var AuthForm = /*#__PURE__*/function () {
       return this.forms[this.defaultFormSlug];
     }
   }, {
+    key: "visibleFormName",
+    get: function get() {
+      if (this.signUpForm.isVisible()) {
+        return 'signUpForm';
+      } else if (this.loginForm.isVisible()) {
+        return 'loginForm';
+      } else if (this.forgotPasswordForm.isVisible()) {
+        return 'forgotPasswordForm';
+      } else {
+        return false;
+      }
+    }
+  }, {
     key: "showDefaultForm",
     value: function showDefaultForm() {
       var form = this.defaultForm;
@@ -3466,6 +3602,137 @@ var AuthForm = /*#__PURE__*/function () {
   return AuthForm;
 }();
 exports.AuthForm = AuthForm;
+
+/***/ }),
+
+/***/ 8445:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(5656);
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.ChangePasswordForm = void 0;
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
+var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
+var _inherits2 = _interopRequireDefault(__webpack_require__(7964));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(8442));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(7474));
+var _DOM = __webpack_require__(2909);
+var _index = __webpack_require__(9356);
+var _PasswordField = __webpack_require__(4386);
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2["default"])(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2["default"])(this, result); }; }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+var ChangePasswordForm = /*#__PURE__*/function (_Form) {
+  (0, _inherits2["default"])(ChangePasswordForm, _Form);
+  var _super = _createSuper(ChangePasswordForm);
+  function ChangePasswordForm(targetElementSelector, options) {
+    var _this;
+    (0, _classCallCheck2["default"])(this, ChangePasswordForm);
+    _this = _super.call(this, targetElementSelector, options);
+    _this.onCancel = options.onCancel || false;
+    _this.options = options;
+    _this.options.title = 'Change Password' || 0;
+    _this.options.footer = _this.getFormFooter() || options.footer;
+    _this.oldPasswordField = new _PasswordField.PasswordField({
+      dataSlug: 'old_password',
+      name: 'wk-old-password',
+      testStrength: false,
+      passwordHint: false,
+      label: 'Old Password',
+      type: 'password',
+      onEnter: function onEnter() {
+        _this.submitForm();
+      },
+      onValidate: function onValidate(field) {
+        var value = field.getValue();
+        if (!value) {
+          field.setError("<div>\n                            <span>Password cannot be empty.</span>\n                        </div>");
+          return false;
+        }
+        return true;
+      }
+    });
+    _this.newPasswordField = new _PasswordField.PasswordField({
+      dataSlug: 'new_password',
+      name: 'wk-new-password',
+      testStrength: true,
+      passwordHint: true,
+      label: 'New Password',
+      type: 'password',
+      relatedData: {
+        oldPassword: _this.oldPasswordField
+      },
+      onEnter: function onEnter() {
+        _this.submitForm();
+      },
+      onValidate: function onValidate(field) {
+        var oldPasswordValue = field.relatedData.oldPassword.getValue();
+        var value = field.getValue();
+        if (oldPasswordValue === value) {
+          field.setError("<div>\n                            <span>The new password must not match the old one.</span>\n                        </div>");
+          return false;
+        }
+        return true;
+      }
+    });
+    _this.newPasswordConfirmField = new _PasswordField.PasswordField({
+      dataSlug: 'new_password_confirm',
+      name: 'wk-new-password-confirm',
+      testStrength: true,
+      passwordHint: false,
+      label: 'New Password Confirm',
+      type: 'password',
+      relatedData: {
+        newPassword: _this.newPasswordField
+      },
+      onEnter: function onEnter() {
+        _this.submitForm();
+      },
+      onValidate: function onValidate(field) {
+        var newPasswordValue = field.relatedData.newPassword.getValue();
+        var value = field.getValue();
+        if (newPasswordValue !== value) {
+          field.setError("<div>\n                            <span>The password confirmation must be the same as the new password.</span>\n                        </div>");
+          return false;
+        }
+        return true;
+      }
+    });
+    _this.fields = [_this.oldPasswordField, _this.newPasswordField, _this.newPasswordConfirmField];
+    _this.init();
+    return _this;
+  }
+  (0, _createClass2["default"])(ChangePasswordForm, [{
+    key: "cancelForm",
+    value: function cancelForm() {
+      if (typeof this.onCancel === "function") {
+        this.onCancel();
+      }
+    }
+  }, {
+    key: "getFormFooter",
+    value: function getFormFooter() {
+      var formFooter = (0, _DOM.createElement)('div', {
+        className: 'wk-form__footer'
+      });
+      formFooter.appendChild((0, _DOM.createElement)('a', {
+        className: 'wk-form__link account-settings-link',
+        innerText: 'Cancel',
+        attributes: {
+          href: '#'
+        }
+      }));
+      formFooter.appendChild(this.submitBtn);
+      return formFooter;
+    }
+  }]);
+  return ChangePasswordForm;
+}(_index.Form);
+exports.ChangePasswordForm = ChangePasswordForm;
 
 /***/ }),
 
@@ -3744,7 +4011,7 @@ var SignupForm = /*#__PURE__*/function (_Form) {
       if ((0, _typeof2["default"])(termsOptions) !== "object") {
         return termsOptions;
       }
-      var defaultLabel = "By signing up i agree with the";
+      var defaultLabel = "By signing up I agree with the";
       if (termsOptions.tosURL) {
         defaultLabel += " <a href=\"".concat(termsOptions.tosURL, "\" target=\"_blank\">Terms & Conditions</a>");
       }
@@ -3930,6 +4197,11 @@ var Form = /*#__PURE__*/function () {
     value: function hide() {
       this.formWrapper.style.display = 'none';
       return this;
+    }
+  }, {
+    key: "isVisible",
+    value: function isVisible() {
+      return this.formWrapper.style.display === 'block';
     }
   }, {
     key: "submitForm",
@@ -4507,6 +4779,160 @@ exports["default"] = SDK;
 
 /***/ }),
 
+/***/ 4442:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(5656);
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+var _regenerator = _interopRequireDefault(__webpack_require__(8047));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(7240));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
+var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
+var _modal = _interopRequireDefault(__webpack_require__(9269));
+var _ChangePasswordForm = __webpack_require__(8445);
+var _constants = __webpack_require__(9066);
+function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
+function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
+function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
+var _initModal = /*#__PURE__*/new WeakSet();
+var _initChangePasswordForm = /*#__PURE__*/new WeakSet();
+var _onSubmitChangePasswordForm = /*#__PURE__*/new WeakSet();
+var _setErrorMessageChangePasswordForm = /*#__PURE__*/new WeakSet();
+var _successChangePasswordForm = /*#__PURE__*/new WeakSet();
+var UserManager = /*#__PURE__*/function () {
+  function UserManager(_options) {
+    (0, _classCallCheck2["default"])(this, UserManager);
+    _classPrivateMethodInitSpec(this, _successChangePasswordForm);
+    _classPrivateMethodInitSpec(this, _setErrorMessageChangePasswordForm);
+    _classPrivateMethodInitSpec(this, _onSubmitChangePasswordForm);
+    _classPrivateMethodInitSpec(this, _initChangePasswordForm);
+    _classPrivateMethodInitSpec(this, _initModal);
+    this.popup = _options.popup;
+    this.authentication = _options.authentication;
+    _classPrivateMethodGet(this, _initModal, _initModal2).call(this, _options);
+  }
+  (0, _createClass2["default"])(UserManager, [{
+    key: "cancelModalForm",
+    value: function cancelModalForm(options) {
+      this.modal.hide();
+      if (options.openPopupName) {
+        this.popup.open(options.openPopupName);
+      }
+    }
+  }, {
+    key: "showChangePassword",
+    value: function showChangePassword() {
+      this.modal.show();
+      _classPrivateMethodGet(this, _initChangePasswordForm, _initChangePasswordForm2).call(this);
+    }
+  }, {
+    key: "getDefaultUserManagerModalContent",
+    value: function getDefaultUserManagerModalContent() {
+      return "<div>\n                    <div id=\"user-manager-modal-error\"></div>\n                    <div id=\"".concat(_constants.WALLKIT_USER_MANAGER_MODAL_FORM_PLACEHOLDER_ID, "\"></div>\n                </div>");
+    }
+  }]);
+  return UserManager;
+}();
+exports["default"] = UserManager;
+function _initModal2(options) {
+  var _this = this;
+  this.modal = new _modal["default"]({
+    modalName: options.name || 'user-manager-modal',
+    content: options.content || this.getDefaultUserManagerModalContent(),
+    className: options.className || 'wallkit-auth-modal',
+    initialLoader: options.loader || false
+  });
+  this.modal.init();
+  this.modal.modalWrapper.addEventListener('click', function (event) {
+    if (_this.changePasswordForm && event.target.classList.contains('account-settings-link')) {
+      event.preventDefault();
+      _this.changePasswordForm.cancelForm();
+    }
+  });
+}
+function _initChangePasswordForm2() {
+  var _this2 = this;
+  if (!this.changePasswordForm) {
+    this.changePasswordForm = new _ChangePasswordForm.ChangePasswordForm("#".concat(_constants.WALLKIT_USER_MANAGER_MODAL_FORM_PLACEHOLDER_ID), {
+      onCancel: function onCancel() {
+        _this2.cancelModalForm({
+          openPopupName: 'account-settings'
+        });
+      },
+      onSubmit: function onSubmit(data) {
+        _classPrivateMethodGet(_this2, _onSubmitChangePasswordForm, _onSubmitChangePasswordForm2).call(_this2, data);
+      }
+    });
+    this.changePasswordForm.render();
+  } else {
+    this.changePasswordForm.resetForm();
+    this.changePasswordForm.reRender();
+  }
+}
+function _onSubmitChangePasswordForm2(_x) {
+  return _onSubmitChangePasswordForm3.apply(this, arguments);
+}
+function _onSubmitChangePasswordForm3() {
+  _onSubmitChangePasswordForm3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_ref) {
+    var old_password, new_password;
+    return _regenerator["default"].wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            old_password = _ref.old_password, new_password = _ref.new_password;
+            _context.prev = 1;
+            if (this.modal) {
+              this.modal.toggleLoader(true);
+            }
+            _context.next = 5;
+            return this.authentication.firebase.reauthenticateWithCredential(old_password);
+          case 5:
+            _context.next = 7;
+            return this.authentication.firebase.updatePassword(new_password);
+          case 7:
+            _classPrivateMethodGet(this, _successChangePasswordForm, _successChangePasswordForm2).call(this);
+            _context.next = 13;
+            break;
+          case 10:
+            _context.prev = 10;
+            _context.t0 = _context["catch"](1);
+            _classPrivateMethodGet(this, _setErrorMessageChangePasswordForm, _setErrorMessageChangePasswordForm2).call(this, _context.t0);
+          case 13:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, this, [[1, 10]]);
+  }));
+  return _onSubmitChangePasswordForm3.apply(this, arguments);
+}
+function _setErrorMessageChangePasswordForm2(error) {
+  if (this.changePasswordForm) {
+    if (error.message) {
+      this.changePasswordForm.setFormError(error.message);
+    }
+    if (this.modal) {
+      this.modal.toggleLoader(false);
+    }
+  }
+}
+function _successChangePasswordForm2() {
+  if (this.changePasswordForm) {
+    this.changePasswordForm.showFormResult("\n            <div class=\"wk-success-message wk-password-reset-success\">\n                <h2 class=\"wk-success-message__title\">Password updated.</h2>\n                <a href=\"#\" class=\"wk-form__link account-settings-link\">Back to account settings</a>\n            </div>\n        ");
+    if (this.modal) {
+      this.modal.toggleLoader(false);
+    }
+  }
+}
+
+/***/ }),
+
 /***/ 2909:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
@@ -5026,6 +5452,30 @@ module.exports = _defineProperty, module.exports.__esModule = true, module.expor
 
 /***/ }),
 
+/***/ 4560:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var superPropBase = __webpack_require__(93);
+function _get() {
+  if (typeof Reflect !== "undefined" && Reflect.get) {
+    module.exports = _get = Reflect.get.bind(), module.exports.__esModule = true, module.exports["default"] = module.exports;
+  } else {
+    module.exports = _get = function _get(target, property, receiver) {
+      var base = superPropBase(target, property);
+      if (!base) return;
+      var desc = Object.getOwnPropertyDescriptor(base, property);
+      if (desc.get) {
+        return desc.get.call(arguments.length < 3 ? target : receiver);
+      }
+      return desc.value;
+    }, module.exports.__esModule = true, module.exports["default"] = module.exports;
+  }
+  return _get.apply(this, arguments);
+}
+module.exports = _get, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
 /***/ 7474:
 /***/ ((module) => {
 
@@ -5419,6 +5869,21 @@ function _setPrototypeOf(o, p) {
   return _setPrototypeOf(o, p);
 }
 module.exports = _setPrototypeOf, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 93:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var getPrototypeOf = __webpack_require__(7474);
+function _superPropBase(object, property) {
+  while (!Object.prototype.hasOwnProperty.call(object, property)) {
+    object = getPrototypeOf(object);
+    if (object === null) break;
+  }
+  return object;
+}
+module.exports = _superPropBase, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 
