@@ -3,7 +3,7 @@ name: Build and deploy prod version Wallkit Integration Library
 on:
   push:
     branches:
-      - feature/setup-github-actions
+      - master
 
 env:
   S3_BUCKET: 'cdn1.wallkit.net'
@@ -56,6 +56,7 @@ jobs:
           # Check if the version already exists in the S3 bucket
           total_found_objects=$(aws s3 ls s3://${S3_BUCKET}/js/integration/${DEPLOYING_VERSION}/${FILE_NAME_LIBRARY} --summarize | grep "Total Objects: " | sed 's/[^0-9]*//g')
           echo "total_found_objects: $total_found_objects"
+          
           if [ $total_found_objects == 0 ];
           then
             echo "DEPLOYING_VERSION $DEPLOYING_VERSION does not exists."
@@ -85,3 +86,12 @@ jobs:
           then
             echo "DEPLOYING_VERSION lower than LATEST_CDN_VERSION. Not creating symlink."
           fi
+
+      - name: Invalidate CloudFront
+        uses: chetan/invalidate-cloudfront-action@v2
+        env:
+          DISTRIBUTION: ${{ secrets.PROD_DISTRIBUTION_ID }}
+          PATHS: "/js/integration/*"
+          AWS_REGION: us-east-1
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

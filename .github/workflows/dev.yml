@@ -10,7 +10,7 @@ env:
   SYNC_DIR: './dist/.'
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -43,7 +43,7 @@ jobs:
         uses: chetan/invalidate-cloudfront-action@v2
         env:
           DISTRIBUTION: ${{ secrets.DEV_DISTRIBUTION_ID }}
-          PATHS: "/latest/*"
+          PATHS: "/js/integration/latest/*"
           AWS_REGION: us-east-1
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
