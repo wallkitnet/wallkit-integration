@@ -3116,17 +3116,18 @@ var AuthForm = /*#__PURE__*/function () {
       return this.forms[this.defaultFormSlug];
     }
   }, {
-    key: "visibleFormName",
+    key: "visibleForm",
     get: function get() {
-      if (this.signUpForm.isVisible()) {
-        return 'signUpForm';
-      } else if (this.loginForm.isVisible()) {
-        return 'loginForm';
-      } else if (this.forgotPasswordForm.isVisible()) {
-        return 'forgotPasswordForm';
-      } else {
-        return false;
+      var _this2 = this;
+      var form = false;
+      if (this.forms && Object.keys(this.forms).length) {
+        Object.keys(this.forms).forEach(function (key) {
+          if (_this2.forms[key].isVisible()) {
+            form = _this2.forms[key];
+          }
+        });
       }
+      return form;
     }
   }, {
     key: "showDefaultForm",
@@ -3162,11 +3163,11 @@ var AuthForm = /*#__PURE__*/function () {
   }, {
     key: "handleError",
     value: function handleError(error) {
-      if (this.visibleFormName) {
+      if (this.visibleForm) {
         if (error === null) {
-          this[this.visibleFormName].resetFormError(error);
+          this.visibleForm.resetFormError(error);
         } else {
-          this[this.visibleFormName].setFormError(error);
+          this.visibleForm.setFormError(error);
         }
       }
     }

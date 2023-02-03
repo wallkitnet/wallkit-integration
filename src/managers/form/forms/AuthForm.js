@@ -111,16 +111,16 @@ export class AuthForm {
       return this.forms[this.defaultFormSlug];
     }
 
-    get visibleFormName () {
-        if (this.signUpForm.isVisible()) {
-            return 'signUpForm';
-        } else if (this.loginForm.isVisible()) {
-            return 'loginForm';
-        } else if (this.forgotPasswordForm.isVisible()) {
-            return 'forgotPasswordForm';
-        } else {
-            return false;
+    get visibleForm () {
+        let form = false;
+        if (this.forms && Object.keys(this.forms).length){
+            Object.keys(this.forms).forEach(key => {
+                if (this.forms[key].isVisible()) {
+                    form = this.forms[key];
+                }
+            });
         }
+        return form;
     }
 
     showDefaultForm () {
@@ -155,11 +155,11 @@ export class AuthForm {
     }
 
     handleError(error) {
-        if (this.visibleFormName) {
+        if (this.visibleForm) {
             if (error === null) {
-                this[this.visibleFormName].resetFormError(error);
+                this.visibleForm.resetFormError(error);
             } else {
-                this[this.visibleFormName].setFormError(error);
+                this.visibleForm.setFormError(error);
             }
         }
     }
