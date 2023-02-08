@@ -1,6 +1,6 @@
 {
   "name": "wallkit-integration-lib",
-  "version": "3.0.0",
+  "version": "3.0.8",
   "description": "Wallkit Integration Library. Library to manipulate with Wallkit System: Paywall, Modals, Authentication, SDK.",
   "main": "./dist/index.js",
   "scripts": {
@@ -22,11 +22,11 @@
     "@babel/plugin-transform-runtime": "^7.16.5",
     "@babel/preset-env": "^7.14.8",
     "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^4.0.0",
     "source-map-loader": "^3.0.1",
     "terser-webpack-plugin": "^5.3.1",
     "webpack": "^5.47.1",
     "webpack-cli": "^4.7.2",
     "webpack-merge": "^5.8.0"
-  },
-  "dependencies": {}
+  }
 }

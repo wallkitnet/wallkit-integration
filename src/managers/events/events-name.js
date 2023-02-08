@@ -16,6 +16,7 @@ export const TICKETS_TOKEN_AUTH_SUCCESS = 'tickets-token-auth-success';
 export const FIREBASE_LOADED = 'firebase-loaded';
 export const FIREBASE_INIT = 'firebase-init';
 export const FIREBASE_UI_SHOWN = 'firebase-ui-shown';
+export const CHECK_USER_ACCESS = 'check-user-access';
 
 // Wallkit Events Names
 export const WALLKIT_CHANGE_FRAME = 'wk-event-modal';
@@ -31,6 +32,7 @@ export const WALLKIT_EVENT_REGISTRATION = 'wk-event-registration';
 export const WALLKIT_EVENT_ONE_TAP_SIGN_IN = 'wk-event-one-tap-sign-in';
 export const WALLKIT_FRAME_ROUTE_CHANGE = 'wk-event-route-change';
 export const WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN = 'wk-event-firebase-custom-token';
+export const WALLKIT_EVENT_CHANGE_LANGUAGE = 'wk-event-change-language';
 
 export default {
     local: {
@@ -46,7 +48,8 @@ export default {
         RECAPTCHA_LOADED,
         RECAPTCHA_VALIDATION_FAILED,
         RECAPTCHA_VALIDATION_SUCCESS,
-        TICKETS_TOKEN_AUTH_SUCCESS
+        TICKETS_TOKEN_AUTH_SUCCESS,
+        CHECK_USER_ACCESS
     },
     wallkit: {
         FRAME_CREATED,
@@ -61,6 +64,7 @@ export default {
         WALLKIT_EVENT_REGISTRATION,
         WALLKIT_EVENT_ONE_TAP_SIGN_IN,
         WALLKIT_FRAME_ROUTE_CHANGE,
-        WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN
+        WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN,
+        WALLKIT_EVENT_CHANGE_LANGUAGE
     }
 }

@@ -1,12 +1,16 @@
 import SDK from "../sdk";
+import Events from "../events";
+import {CHECK_USER_ACCESS} from "../events/events-name";
 
 export default class Content {
     #options;
+    #events;
 
     constructor(content, options) {
         this.content = content;
         this.#options = options;
         this.sdk = new SDK();
+        this.#events = new Events();
 
         this.accessCount = 0;
         this.accessCountLimit = 0;
@@ -87,8 +91,11 @@ export default class Content {
                 this.getAccessDetails(content.id);
             }
 
+            this.#events.notify(CHECK_USER_ACCESS, true);
             return { allowed: response.allow, data: response };
         }).catch((error) => {
+
+            this.#events.notify(CHECK_USER_ACCESS, false);
             return { allowed: false, error: error };
         })
     }
@@ -99,12 +106,15 @@ export default class Content {
             if (this.sdk.methods.isAuthenticated() || this.#options.checkAccessDetails) {
                 await this.getAccessDetails(this.content.id);
             }
+
+            this.#events.notify(CHECK_USER_ACCESS, true);
             return { allowed: response.allow, data: response };
         } catch (error) {
             if (error.error === 'incorrect_content_key') {
                 return this.checkContentAccessAndSync(this.content);
             }
 
+            this.#events.notify(CHECK_USER_ACCESS, false);
             return { allowed: false, error: error };
         }
     }
