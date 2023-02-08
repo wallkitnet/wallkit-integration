@@ -2189,8 +2189,11 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports["default"] = void 0;
+var _regenerator = _interopRequireDefault(__webpack_require__(107));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(756));
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(8972));
 var _createClass2 = _interopRequireDefault(__webpack_require__(8884));
+var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(9704));
 var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(1401));
 var _sdk = _interopRequireDefault(__webpack_require__(4753));
 function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
@@ -2283,40 +2286,68 @@ var Content = /*#__PURE__*/function () {
     }
   }, {
     key: "checkAccess",
-    value: function checkAccess() {
-      var _this2 = this;
-      return this.sdk.methods.checkAccess(this.content.id).then(function (response) {
-        if (_this2.sdk.methods.isAuthenticated()) {
-          _this2.getAccessDetails(_this2.content.id);
-        }
-        return {
-          allowed: response.allow,
-          data: response
-        };
-      })["catch"](function (error) {
-        if (error.error === 'incorrect_content_key') {
-          return _this2.checkContentAccessAndSync(_this2.content);
-        }
-        return {
-          allowed: false,
-          error: error
-        };
-      });
-    }
+    value: function () {
+      var _checkAccess = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
+        var response;
+        return _regenerator["default"].wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return this.sdk.methods.checkAccess(this.content.id);
+              case 3:
+                response = _context.sent;
+                if (!(this.sdk.methods.isAuthenticated() || (0, _classPrivateFieldGet2["default"])(this, _options).checkAccessDetails)) {
+                  _context.next = 7;
+                  break;
+                }
+                _context.next = 7;
+                return this.getAccessDetails(this.content.id);
+              case 7:
+                return _context.abrupt("return", {
+                  allowed: response.allow,
+                  data: response
+                });
+              case 10:
+                _context.prev = 10;
+                _context.t0 = _context["catch"](0);
+                if (!(_context.t0.error === 'incorrect_content_key')) {
+                  _context.next = 14;
+                  break;
+                }
+                return _context.abrupt("return", this.checkContentAccessAndSync(this.content));
+              case 14:
+                return _context.abrupt("return", {
+                  allowed: false,
+                  error: _context.t0
+                });
+              case 15:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this, [[0, 10]]);
+      }));
+      function checkAccess() {
+        return _checkAccess.apply(this, arguments);
+      }
+      return checkAccess;
+    }()
   }, {
     key: "getAccessDetails",
     value: function getAccessDetails(contentId) {
-      var _this3 = this;
+      var _this2 = this;
       return this.sdk.client.get({
         path: "/user/content-access-details/".concat(contentId)
       }).then(function (response) {
         if (response) {
           var terms = response.content_terms;
-          _this3.accessCount = terms.usedLimitInPeriod;
-          _this3.accessCountLimit = terms.accessLimit;
+          _this2.accessCount = terms.usedLimitInPeriod;
+          _this2.accessCountLimit = terms.accessLimit;
           return {
-            accessCount: _this3.accessCount,
-            accessCountLimit: _this3.accessCountLimit
+            accessCount: _this2.accessCount,
+            accessCountLimit: _this2.accessCountLimit
           };
         }
         return {
