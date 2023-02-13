@@ -1,14 +1,17 @@
 import LocalStorage from '../../utils/local-storage';
 import { removeCookie, setCookie } from "../../utils/cookie";
 import localStorage from "../../utils/local-storage";
+import { getParentDomain } from "../../utils/url";
 
 export default class Token {
     #slug;
     #resource;
+    #domain;
 
-    constructor(slug, value, resource) {
+    constructor(slug, value, resource, subDomain) {
         if (slug && resource) {
             this.#resource = resource;
+            this.#domain = subDomain === true ? getParentDomain() : '';
             this.#slug = this.createTokenSlug(slug, resource);
 
             if (value) {
@@ -42,6 +45,7 @@ export default class Token {
         setCookie(this.#slug, value, {
             expires: 'Fri, 31 Dec 9999 23:59:59 GMT',
             path: "/",
+            domain: this.#domain,
         });
         localStorage.setItem(this.#slug, value);
     }
