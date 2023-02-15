@@ -286,7 +286,10 @@ export default class Authentication {
         });
     }
 
-    async show() {
+    async show(authFormSlug) {
+        if (this.#options.firebase.genuineForm === false) {
+            this.authForm.showForm(authFormSlug);
+        }
         this.modal.show();
 
         if (!this.firebase.isUiShown) {
