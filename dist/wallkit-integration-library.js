@@ -6195,8 +6195,23 @@ var setCookie = function setCookie(name, value, options) {
 exports.setCookie = setCookie;
 
 var removeCookie = function removeCookie(name, domain) {
-  var domainName = domain ? "domain=".concat(domain, "; ") : '';
-  document.cookie = "".concat(name, "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; ").concat(domainName);
+  var props = {
+    name: '',
+    expires: 'Thu, 01 Jan 1970 00:00:00 UTC',
+    path: '/',
+    domain: domain || null
+  };
+  var cookieFingerprint = '';
+
+  for (var propName in props) {
+    var propValue = props[propName];
+
+    if (propValue !== null && propValue !== undefined) {
+      cookieFingerprint += "".concat(propName, "=").concat(propValue, "; ");
+    }
+  }
+
+  document.cookie = cookieFingerprint;
 };
 
 exports.removeCookie = removeCookie;

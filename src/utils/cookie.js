@@ -29,9 +29,22 @@ export const setCookie = (name, value, options) => {
 }
 
 export const removeCookie = (name, domain) => {
-    const domainName = domain ? `domain=${domain}; ` : '';
+    const props = {
+      name: '',
+      expires: 'Thu, 01 Jan 1970 00:00:00 UTC',
+      path: '/',
+      domain: domain || null
+    };
 
-    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; ${domainName}`;
+    let cookieFingerprint = '';
+    for (let propName in props) {
+      const propValue = props[propName];
+      if (propValue !== null && propValue !== undefined) {
+        cookieFingerprint += `${propName}=${propValue}; `;
+      }
+    }
+
+    document.cookie = cookieFingerprint;
 }
 
 export default {
