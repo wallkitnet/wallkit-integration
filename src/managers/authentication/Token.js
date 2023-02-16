@@ -36,7 +36,7 @@ export default class Token {
 
     remove() {
         this.token = null;
-        removeCookie(this.#slug);
+        removeCookie(this.#slug, this.#domain);
         localStorage.removeItem(this.#slug);
     }
 

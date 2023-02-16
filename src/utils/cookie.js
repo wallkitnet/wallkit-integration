@@ -28,8 +28,10 @@ export const setCookie = (name, value, options) => {
     document.cookie = updatedCookie;
 }
 
-export const removeCookie = (name) => {
-    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+export const removeCookie = (name, domain) => {
+    const domainName = domain ? `domain=${domain}; ` : '';
+
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; ${domainName}`;
 }
 
 export default {

@@ -1100,7 +1100,7 @@ var Token = /*#__PURE__*/function () {
     key: "remove",
     value: function remove() {
       this.token = null;
-      (0, _cookie.removeCookie)((0, _classPrivateFieldGet2["default"])(this, _slug));
+      (0, _cookie.removeCookie)((0, _classPrivateFieldGet2["default"])(this, _slug), (0, _classPrivateFieldGet2["default"])(this, _domain));
 
       _localStorage["default"].removeItem((0, _classPrivateFieldGet2["default"])(this, _slug));
     }
@@ -6194,8 +6194,9 @@ var setCookie = function setCookie(name, value, options) {
 
 exports.setCookie = setCookie;
 
-var removeCookie = function removeCookie(name) {
-  document.cookie = "".concat(name, "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;");
+var removeCookie = function removeCookie(name, domain) {
+  var domainName = domain ? "domain=".concat(domain, "; ") : '';
+  document.cookie = "".concat(name, "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; ").concat(domainName);
 };
 
 exports.removeCookie = removeCookie;
