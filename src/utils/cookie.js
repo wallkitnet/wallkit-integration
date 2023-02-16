@@ -30,7 +30,7 @@ export const setCookie = (name, value, options) => {
 
 export const removeCookie = (name, domain) => {
     const props = {
-      name: '',
+      [name]: '',
       expires: 'Thu, 01 Jan 1970 00:00:00 UTC',
       path: '/',
       domain: domain || null

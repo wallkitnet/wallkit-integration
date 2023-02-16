@@ -6150,15 +6150,19 @@ exports.default = _default;
 /***/ }),
 
 /***/ 5048:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
+
+var _interopRequireDefault = __webpack_require__(9736);
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.default = exports.removeCookie = exports.setCookie = void 0;
+
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(8239));
 
 var setCookie = function setCookie(name, value, options) {
   if (!name || !value) {
@@ -6195,12 +6199,9 @@ var setCookie = function setCookie(name, value, options) {
 exports.setCookie = setCookie;
 
 var removeCookie = function removeCookie(name, domain) {
-  var props = {
-    name: '',
-    expires: 'Thu, 01 Jan 1970 00:00:00 UTC',
-    path: '/',
-    domain: domain || null
-  };
+  var _props;
+
+  var props = (_props = {}, (0, _defineProperty2["default"])(_props, name, ''), (0, _defineProperty2["default"])(_props, "expires", 'Thu, 01 Jan 1970 00:00:00 UTC'), (0, _defineProperty2["default"])(_props, "path", '/'), (0, _defineProperty2["default"])(_props, "domain", domain || null), _props);
   var cookieFingerprint = '';
 
   for (var propName in props) {
