@@ -285,6 +285,13 @@ export const LIBRARY_STYLES = `
             background-color: hsla(0,0%,62%,.2);
         }
         
+        .wk-success-message.wk-password-reset-success {
+            min-height: 205px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
         .wk-password-reset-success .wk-form-button {
             left: 50%;
             transform: translateX(-50%);
