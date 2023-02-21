@@ -10,8 +10,11 @@ export const SIGN_IN_FORM_SLUG = 'sign-in';
 export const RESET_PASSWORD_FORM_SLUG = 'reset-password';
 
 export class AuthForm {
+    #options;
+
     constructor(selector, options) {
-        this.defaultFormSlug = options?.defaultForm || SIGN_UP_FORM_SLUG;
+        this.#options = options;
+        this.defaultForm = options?.defaultForm || false;
 
         this.wrapper = createElement('div', {
             id: 'wk-auth-form'
@@ -47,10 +50,17 @@ export class AuthForm {
 
         if (options.signUp === true) {
             this.signUpForm = new SignupForm(selector, {
+                cancelBtn: options.triggerButton !== false,
                 termsOfService: options.termsOfService,
                 onSubmit: (data) => {
                     if (options.onSignUp) {
                         options.onSignUp(data);
+                    }
+                },
+                onCancel: () => {
+                    if (options.onCancel) {
+                        options.onCancel();
+                        this.signUpForm.resetForm();
                     }
                 }
             });
@@ -85,7 +95,7 @@ export class AuthForm {
         if (options.triggerButton !== false) {
             this.triggerButton = new TriggerButton(selector, {
                 onClick: () => {
-                    this.loginForm.show();
+                    this.defaultForm.show();
                     this.triggerButton.hide();
                     if (options.onAuthFormShow) {
                         options.onAuthFormShow();
@@ -105,11 +115,19 @@ export class AuthForm {
         return this.forms[this.defaultFormSlug];
     }
 
+    set defaultForm (formSlug) {
+        if (formSlug && [SIGN_UP_FORM_SLUG, SIGN_IN_FORM_SLUG, RESET_PASSWORD_FORM_SLUG].includes(formSlug)) {
+            this.defaultFormSlug = formSlug;
+        } else {
+            this.defaultFormSlug = this.#options.defaultForm || SIGN_UP_FORM_SLUG;
+        }
+    }
+
     get activeForm () {
         let form = false;
         if (!!this.forms && Object.keys(this.forms).length){
             Object.keys(this.forms).forEach(key => {
-                if (this.forms[key].isVisible()) {
+                if (this.forms[key].isVisible) {
                     form = this.forms[key];
                 }
             });
@@ -125,11 +143,7 @@ export class AuthForm {
     }
 
     showDefaultForm () {
-        const form = this.defaultForm;
-
-        if (form) {
-            form.show();
-        }
+        this.showForm(this.defaultFormSlug)
     }
 
     reset () {

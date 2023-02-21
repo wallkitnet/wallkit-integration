@@ -43,4 +43,11 @@ export class TriggerButton {
             targetElement.appendChild(this.element);
         }
     }
+
+    get isVisible () {
+        if (window.getComputedStyle(this.element)){
+            return window.getComputedStyle(this.element).getPropertyValue('display') === 'block';
+        }
+        return false;
+    }
 }

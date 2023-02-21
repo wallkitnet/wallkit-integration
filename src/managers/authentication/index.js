@@ -127,6 +127,7 @@ export default class Authentication {
             triggerButton: this.firebase.providers.length > 1,
             signUp: this.#options.auth.signUp ?? true,
             termsOfService: termsOfService ?? { tosURL, privacyPolicyURL },
+            defaultForm: this.#options.auth.defaultForm || false,
             onLogin: (data) => {
               if (this.reCaptcha.enabled) {
                 this.executeRecaptcha();
@@ -288,7 +289,12 @@ export default class Authentication {
 
     async show(authFormSlug) {
         if (this.#options.firebase.genuineForm === false) {
-            this.authForm.showForm(authFormSlug);
+            if (this.authForm) {
+                this.authForm.defaultForm = authFormSlug;
+                if (!this.authForm.triggerButton || !this.authForm.triggerButton.isVisible) {
+                    this.authForm.showDefaultForm();
+                }
+            }
         }
         this.modal.show();
 

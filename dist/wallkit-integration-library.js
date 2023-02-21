@@ -1609,6 +1609,7 @@ var Authentication = /*#__PURE__*/function () {
           tosURL: tosURL,
           privacyPolicyURL: privacyPolicyURL
         },
+        defaultForm: (0, _classPrivateFieldGet9["default"])(this, _options).auth.defaultForm || false,
         onLogin: function onLogin(data) {
           if (_this5.reCaptcha.enabled) {
             _this5.executeRecaptcha();
@@ -1819,7 +1820,12 @@ var Authentication = /*#__PURE__*/function () {
           while (1) switch (_context3.prev = _context3.next) {
             case 0:
               if ((0, _classPrivateFieldGet9["default"])(this, _options).firebase.genuineForm === false) {
-                this.authForm.showForm(authFormSlug);
+                if (this.authForm) {
+                  this.authForm.defaultForm = authFormSlug;
+                  if (!this.authForm.triggerButton || !this.authForm.triggerButton.isVisible) {
+                    this.authForm.showDefaultForm();
+                  }
+                }
               }
               this.modal.show();
               if (!this.firebase.isUiShown) {
@@ -3019,6 +3025,14 @@ var TriggerButton = /*#__PURE__*/function () {
         targetElement.appendChild(this.element);
       }
     }
+  }, {
+    key: "isVisible",
+    get: function get() {
+      if (window.getComputedStyle(this.element)) {
+        return window.getComputedStyle(this.element).getPropertyValue('display') === 'block';
+      }
+      return false;
+    }
   }]);
   return TriggerButton;
 }();
@@ -3457,24 +3471,34 @@ exports.SIGN_UP_FORM_SLUG = exports.SIGN_IN_FORM_SLUG = exports.RESET_PASSWORD_F
 var _defineProperty2 = _interopRequireDefault(__webpack_require__(366));
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
 var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
+var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(5194));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(8478));
 var _DOM = __webpack_require__(2909);
 var _TriggerButton = __webpack_require__(447);
 var _LoginForm = __webpack_require__(4138);
 var _SignUpForm = __webpack_require__(8955);
 var _ForgotPasswordForm = __webpack_require__(7486);
+function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
+function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
 var SIGN_UP_FORM_SLUG = 'sign-up';
 exports.SIGN_UP_FORM_SLUG = SIGN_UP_FORM_SLUG;
 var SIGN_IN_FORM_SLUG = 'sign-in';
 exports.SIGN_IN_FORM_SLUG = SIGN_IN_FORM_SLUG;
 var RESET_PASSWORD_FORM_SLUG = 'reset-password';
 exports.RESET_PASSWORD_FORM_SLUG = RESET_PASSWORD_FORM_SLUG;
+var _options = /*#__PURE__*/new WeakMap();
 var AuthForm = /*#__PURE__*/function () {
   function AuthForm(selector, options) {
     var _options$signUp,
       _this = this,
       _this$forms;
     (0, _classCallCheck2["default"])(this, AuthForm);
-    this.defaultFormSlug = (options === null || options === void 0 ? void 0 : options.defaultForm) || SIGN_UP_FORM_SLUG;
+    _classPrivateFieldInitSpec(this, _options, {
+      writable: true,
+      value: void 0
+    });
+    (0, _classPrivateFieldSet2["default"])(this, _options, options);
+    this.defaultForm = (options === null || options === void 0 ? void 0 : options.defaultForm) || false;
     this.wrapper = (0, _DOM.createElement)('div', {
       id: 'wk-auth-form'
     });
@@ -3505,10 +3529,17 @@ var AuthForm = /*#__PURE__*/function () {
     this.loginForm.hide();
     if (options.signUp === true) {
       this.signUpForm = new _SignUpForm.SignupForm(selector, {
+        cancelBtn: options.triggerButton !== false,
         termsOfService: options.termsOfService,
         onSubmit: function onSubmit(data) {
           if (options.onSignUp) {
             options.onSignUp(data);
+          }
+        },
+        onCancel: function onCancel() {
+          if (options.onCancel) {
+            options.onCancel();
+            _this.signUpForm.resetForm();
           }
         }
       });
@@ -3538,7 +3569,7 @@ var AuthForm = /*#__PURE__*/function () {
     if (options.triggerButton !== false) {
       this.triggerButton = new _TriggerButton.TriggerButton(selector, {
         onClick: function onClick() {
-          _this.loginForm.show();
+          _this.defaultForm.show();
           _this.triggerButton.hide();
           if (options.onAuthFormShow) {
             options.onAuthFormShow();
@@ -3552,6 +3583,13 @@ var AuthForm = /*#__PURE__*/function () {
     key: "defaultForm",
     get: function get() {
       return this.forms[this.defaultFormSlug];
+    },
+    set: function set(formSlug) {
+      if (formSlug && [SIGN_UP_FORM_SLUG, SIGN_IN_FORM_SLUG, RESET_PASSWORD_FORM_SLUG].includes(formSlug)) {
+        this.defaultFormSlug = formSlug;
+      } else {
+        this.defaultFormSlug = (0, _classPrivateFieldGet2["default"])(this, _options).defaultForm || SIGN_UP_FORM_SLUG;
+      }
     }
   }, {
     key: "activeForm",
@@ -3560,7 +3598,7 @@ var AuthForm = /*#__PURE__*/function () {
       var form = false;
       if (!!this.forms && Object.keys(this.forms).length) {
         Object.keys(this.forms).forEach(function (key) {
-          if (_this2.forms[key].isVisible()) {
+          if (_this2.forms[key].isVisible) {
             form = _this2.forms[key];
           }
         });
@@ -3578,10 +3616,7 @@ var AuthForm = /*#__PURE__*/function () {
   }, {
     key: "showDefaultForm",
     value: function showDefaultForm() {
-      var form = this.defaultForm;
-      if (form) {
-        form.show();
-      }
+      this.showForm(this.defaultFormSlug);
     }
   }, {
     key: "reset",
@@ -4026,6 +4061,9 @@ var SignupForm = /*#__PURE__*/function (_Form) {
       _this.fields.push(_this.tosField);
     }
     _this.init();
+    if (_options.onCancel) {
+      _this.cancelBtn.addEventListener('click', _options.onCancel.bind((0, _assertThisInitialized2["default"])(_this)));
+    }
     return _this;
   }
   (0, _createClass2["default"])(SignupForm, [{
@@ -4042,6 +4080,9 @@ var SignupForm = /*#__PURE__*/function (_Form) {
           href: '#'
         }
       }));
+      if (this.options.cancelBtn !== false) {
+        formFooter.appendChild(this.cancelBtn);
+      }
       formFooter.appendChild(this.submitBtn);
       return formFooter;
     }
@@ -4243,8 +4284,11 @@ var Form = /*#__PURE__*/function () {
     }
   }, {
     key: "isVisible",
-    value: function isVisible() {
-      return this.formWrapper.style.display === 'block';
+    get: function get() {
+      if (window.getComputedStyle(this.formWrapper)) {
+        return window.getComputedStyle(this.formWrapper).getPropertyValue('display') === 'block';
+      }
+      return false;
     }
   }, {
     key: "submitForm",
