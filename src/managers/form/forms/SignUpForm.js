@@ -64,6 +64,10 @@ export class SignupForm extends Form {
         }
 
         this.init();
+
+        if (options.onCancel) {
+            this.cancelBtn.addEventListener('click', options.onCancel.bind(this));
+        }
     }
 
     getFormFooter () {
@@ -78,6 +82,11 @@ export class SignupForm extends Form {
                 href: '#'
             }
         }));
+
+        if (this.options.cancelBtn !== false) {
+            formFooter.appendChild(this.cancelBtn);
+        }
+
         formFooter.appendChild(this.submitBtn);
 
         return formFooter;

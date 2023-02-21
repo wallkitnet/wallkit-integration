@@ -153,8 +153,11 @@ export class Form {
         return this;
     }
 
-    isVisible () {
-        return this.formWrapper.style.display === 'block'
+    get isVisible () {
+        if (window.getComputedStyle(this.formWrapper)){
+            return window.getComputedStyle(this.formWrapper).getPropertyValue('display') === 'block';
+        }
+        return false;
     }
 
     submitForm () {
