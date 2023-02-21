@@ -3762,7 +3762,7 @@ var ChangePasswordForm = /*#__PURE__*/function (_Form) {
       name: 'wk-new-password-confirm',
       testStrength: true,
       passwordHint: false,
-      label: 'New Password Confirm',
+      label: 'New Password Confirmation',
       type: 'password',
       relatedData: {
         newPassword: _this.newPasswordField
