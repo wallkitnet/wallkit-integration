@@ -35,7 +35,7 @@ export default class Call {
                     this.#setDataWkHasAccessInBody(false);
                     break;
                 case EventsNames.wallkit.WALLKIT_EVENT_USER:
-                    this.#getWallkitUserData();
+                    this.getWallkitUserData();
                     break;
             }
         });
@@ -44,7 +44,7 @@ export default class Call {
             if (this.#isDebug()) {
                 console.log('subscribe ventsNames.local.SUCCESS_AUTH', value);
             }
-            this.#getWallkitUserData();
+            this.getWallkitUserData();
         });
 
         this.#events.subscribe(EventsNames.local.CHECK_USER_ACCESS, (value) => {
@@ -211,7 +211,7 @@ export default class Call {
         document.body.dataset.wkCallUserHasAccess = value;
     }
 
-    #getWallkitUserData() {
+    getWallkitUserData() {
         this.#sdk.client.get({path: `/user`})
             .then((response) => {
                 console.log(response);
@@ -221,6 +221,33 @@ export default class Call {
                 console.log('WK Call ERROR:', error);
                 this.setAllDataWkStatusesInDOMElements();
             });
+    }
+
+    removeAllDataWkStatuses() {
+        if (this.#isDebug()) {
+            console.log(`Remove all wallkit statuses from all DOM Elements.`);
+            console.log('Remove data-wk-call-user-has-access from body element.');
+        }
+        delete document.body.dataset.wkCallUserHasAccess;
+
+        for (const element of document.querySelectorAll(`.${this.#classThatReactOnTheUsersStatus}`)) {
+            if (this.#isDebug()) {
+                console.log('Remove data-wk-call-status-user from element:', element);
+            }
+            delete element.dataset.wkCallStatusUser;
+        }
+        for (const element of document.querySelectorAll(`.${this.#classThatReactOnTheUsersPlans}`)) {
+            if (this.#isDebug()) {
+                console.log('Remove data-wk-call-status-plans from element:', element);
+            }
+            delete element.dataset.wkCallStatusPlans;
+        }
+        for (const element of document.querySelectorAll(`.${this.#classThatReactOnTheUsersEvents}`)) {
+            if (this.#isDebug()) {
+                console.log('Remove data-wk-call-status-events from element:', element);
+            }
+            delete element.dataset.wkCallStatusEvents;
+        }
     }
 
     #debugUserStatus() {
@@ -269,7 +296,7 @@ export default class Call {
         this.#initUIListeners();
 
         if (this.#sdk.methods.isAuthenticated()) {
-            this.#getWallkitUserData();
+            this.getWallkitUserData();
         } else {
             this.setAllDataWkStatusesInDOMElements();
         }
