@@ -1,7 +1,7 @@
 /*!
  * Package name: wallkit-integration-lib.
  * Package description: Wallkit Integration Library. Library to manipulate with Wallkit System: Paywall, Modals, Authentication, SDK..
- * Package version: 3.0.8.
+ * Package version: 3.0.9.
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -856,12 +856,14 @@ var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(5194));
 var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(8478));
 var _localStorage = _interopRequireDefault(__webpack_require__(347));
 var _cookie = __webpack_require__(5048);
+var _url = __webpack_require__(5234);
 function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
 function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
 var _slug = /*#__PURE__*/new WeakMap();
 var _resource = /*#__PURE__*/new WeakMap();
+var _domain = /*#__PURE__*/new WeakMap();
 var Token = /*#__PURE__*/function () {
-  function Token(slug, value, resource) {
+  function Token(slug, value, resource, subDomain) {
     (0, _classCallCheck2["default"])(this, Token);
     _classPrivateFieldInitSpec(this, _slug, {
       writable: true,
@@ -871,8 +873,13 @@ var Token = /*#__PURE__*/function () {
       writable: true,
       value: void 0
     });
+    _classPrivateFieldInitSpec(this, _domain, {
+      writable: true,
+      value: void 0
+    });
     if (slug && resource) {
       (0, _classPrivateFieldSet2["default"])(this, _resource, resource);
+      (0, _classPrivateFieldSet2["default"])(this, _domain, subDomain === true ? (0, _url.getParentDomain)() : '');
       (0, _classPrivateFieldSet2["default"])(this, _slug, this.createTokenSlug(slug, resource));
       if (value) {
         this.set(value);
@@ -900,7 +907,7 @@ var Token = /*#__PURE__*/function () {
     key: "remove",
     value: function remove() {
       this.token = null;
-      (0, _cookie.removeCookie)((0, _classPrivateFieldGet2["default"])(this, _slug));
+      (0, _cookie.removeCookie)((0, _classPrivateFieldGet2["default"])(this, _slug), (0, _classPrivateFieldGet2["default"])(this, _domain));
       _localStorage["default"].removeItem((0, _classPrivateFieldGet2["default"])(this, _slug));
     }
   }, {
@@ -909,7 +916,8 @@ var Token = /*#__PURE__*/function () {
       this.token = value;
       (0, _cookie.setCookie)((0, _classPrivateFieldGet2["default"])(this, _slug), value, {
         expires: 'Fri, 31 Dec 9999 23:59:59 GMT',
-        path: "/"
+        path: "/",
+        domain: (0, _classPrivateFieldGet2["default"])(this, _domain)
       });
       _localStorage["default"].setItem((0, _classPrivateFieldGet2["default"])(this, _slug), value);
     }
@@ -1492,7 +1500,9 @@ var _setAuthorizationError = /*#__PURE__*/new WeakSet();
 var _resetAuthorizationError = /*#__PURE__*/new WeakSet();
 var Authentication = /*#__PURE__*/function () {
   function Authentication(options) {
-    var _this = this;
+    var _options$cookies,
+      _options$cookies2,
+      _this = this;
     (0, _classCallCheck2["default"])(this, Authentication);
     _classPrivateMethodInitSpec(this, _resetAuthorizationError);
     _classPrivateMethodInitSpec(this, _setAuthorizationError);
@@ -1507,8 +1517,8 @@ var Authentication = /*#__PURE__*/function () {
     }
     Authentication.instance = this;
     (0, _classPrivateFieldSet2["default"])(this, _options, options);
-    this.token = new _Token["default"](_constants.WALLKIT_TOKEN_NAME, null, options.public_key);
-    this.firebaseToken = new _Token["default"](_constants.FIREBASE_TOKEN_NAME, null, options.public_key);
+    this.token = new _Token["default"](_constants.WALLKIT_TOKEN_NAME, null, options.public_key, !!(options !== null && options !== void 0 && (_options$cookies = options.cookies) !== null && _options$cookies !== void 0 && _options$cookies.subDomain));
+    this.firebaseToken = new _Token["default"](_constants.FIREBASE_TOKEN_NAME, null, options.public_key, !!(options !== null && options !== void 0 && (_options$cookies2 = options.cookies) !== null && _options$cookies2 !== void 0 && _options$cookies2.subDomain));
     this.frame = new _frame["default"]();
     this.sdk = new _sdk["default"]();
     if (!!(options !== null && options !== void 0 && options.firebase)) {
@@ -2209,7 +2219,6 @@ var _isDebug = /*#__PURE__*/new WeakSet();
 var _initWkListeners = /*#__PURE__*/new WeakSet();
 var _initUIListeners = /*#__PURE__*/new WeakSet();
 var _setDataWkHasAccessInBody = /*#__PURE__*/new WeakSet();
-var _getWallkitUserData = /*#__PURE__*/new WeakSet();
 var _debugUserStatus = /*#__PURE__*/new WeakSet();
 var _debugElementsClickingOnWhichOpensPopups = /*#__PURE__*/new WeakSet();
 var _debugElementsThatReactToTheUsersStatus = /*#__PURE__*/new WeakSet();
@@ -2224,7 +2233,6 @@ var Call = /*#__PURE__*/function () {
     _classPrivateMethodInitSpec(this, _debugElementsThatReactToTheUsersStatus);
     _classPrivateMethodInitSpec(this, _debugElementsClickingOnWhichOpensPopups);
     _classPrivateMethodInitSpec(this, _debugUserStatus);
-    _classPrivateMethodInitSpec(this, _getWallkitUserData);
     _classPrivateMethodInitSpec(this, _setDataWkHasAccessInBody);
     _classPrivateMethodInitSpec(this, _initUIListeners);
     _classPrivateMethodInitSpec(this, _initWkListeners);
@@ -2368,6 +2376,74 @@ var Call = /*#__PURE__*/function () {
       }
     }
   }, {
+    key: "getWallkitUserData",
+    value: function getWallkitUserData() {
+      var _this = this;
+      (0, _classPrivateFieldGet5["default"])(this, _sdk).client.get({
+        path: "/user"
+      }).then(function (response) {
+        console.log(response);
+        _this.setAllDataWkStatusesInDOMElements(response);
+      })["catch"](function (error) {
+        console.log('WK Call ERROR:', error);
+        _this.setAllDataWkStatusesInDOMElements();
+      });
+    }
+  }, {
+    key: "removeAllDataWkStatuses",
+    value: function removeAllDataWkStatuses() {
+      if (_classPrivateMethodGet(this, _isDebug, _isDebug2).call(this)) {
+        console.log("Remove all wallkit statuses from all DOM Elements.");
+        console.log('Remove data-wk-call-user-has-access from body element.');
+      }
+      delete document.body.dataset.wkCallUserHasAccess;
+      var _iterator4 = _createForOfIteratorHelper(document.querySelectorAll(".".concat((0, _classPrivateFieldGet5["default"])(this, _classThatReactOnTheUsersStatus)))),
+        _step4;
+      try {
+        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+          var element = _step4.value;
+          if (_classPrivateMethodGet(this, _isDebug, _isDebug2).call(this)) {
+            console.log('Remove data-wk-call-status-user from element:', element);
+          }
+          delete element.dataset.wkCallStatusUser;
+        }
+      } catch (err) {
+        _iterator4.e(err);
+      } finally {
+        _iterator4.f();
+      }
+      var _iterator5 = _createForOfIteratorHelper(document.querySelectorAll(".".concat((0, _classPrivateFieldGet5["default"])(this, _classThatReactOnTheUsersPlans)))),
+        _step5;
+      try {
+        for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+          var _element = _step5.value;
+          if (_classPrivateMethodGet(this, _isDebug, _isDebug2).call(this)) {
+            console.log('Remove data-wk-call-status-plans from element:', _element);
+          }
+          delete _element.dataset.wkCallStatusPlans;
+        }
+      } catch (err) {
+        _iterator5.e(err);
+      } finally {
+        _iterator5.f();
+      }
+      var _iterator6 = _createForOfIteratorHelper(document.querySelectorAll(".".concat((0, _classPrivateFieldGet5["default"])(this, _classThatReactOnTheUsersEvents)))),
+        _step6;
+      try {
+        for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+          var _element2 = _step6.value;
+          if (_classPrivateMethodGet(this, _isDebug, _isDebug2).call(this)) {
+            console.log('Remove data-wk-call-status-events from element:', _element2);
+          }
+          delete _element2.dataset.wkCallStatusEvents;
+        }
+      } catch (err) {
+        _iterator6.e(err);
+      } finally {
+        _iterator6.f();
+      }
+    }
+  }, {
     key: "init",
     value: function init() {
       if (_classPrivateMethodGet(this, _isDebug, _isDebug2).call(this)) {
@@ -2382,7 +2458,7 @@ var Call = /*#__PURE__*/function () {
       _classPrivateMethodGet(this, _initWkListeners, _initWkListeners2).call(this);
       _classPrivateMethodGet(this, _initUIListeners, _initUIListeners2).call(this);
       if ((0, _classPrivateFieldGet5["default"])(this, _sdk).methods.isAuthenticated()) {
-        _classPrivateMethodGet(this, _getWallkitUserData, _getWallkitUserData2).call(this);
+        this.getWallkitUserData();
       } else {
         this.setAllDataWkStatusesInDOMElements();
       }
@@ -2396,51 +2472,51 @@ function _isDebug2() {
   return !!((_classPrivateFieldGet3 = (0, _classPrivateFieldGet5["default"])(this, _config)) !== null && _classPrivateFieldGet3 !== void 0 && (_classPrivateFieldGet4 = _classPrivateFieldGet3.call) !== null && _classPrivateFieldGet4 !== void 0 && _classPrivateFieldGet4.debug);
 }
 function _initWkListeners2() {
-  var _this = this;
+  var _this2 = this;
   (0, _classPrivateFieldGet5["default"])(this, _events).subscribe(_eventsName["default"].local.FRAME_MESSAGE, function (_ref3) {
     var name = _ref3.name,
       _ = _ref3._;
     switch (name) {
       case _eventsName["default"].wallkit.WALLKIT_LOGOUT:
-        _this.setAllDataWkStatusesInDOMElements();
-        _classPrivateMethodGet(_this, _setDataWkHasAccessInBody, _setDataWkHasAccessInBody2).call(_this, false);
+        _this2.setAllDataWkStatusesInDOMElements();
+        _classPrivateMethodGet(_this2, _setDataWkHasAccessInBody, _setDataWkHasAccessInBody2).call(_this2, false);
         break;
       case _eventsName["default"].wallkit.WALLKIT_EVENT_USER:
-        _classPrivateMethodGet(_this, _getWallkitUserData, _getWallkitUserData2).call(_this);
+        _this2.getWallkitUserData();
         break;
     }
   });
   (0, _classPrivateFieldGet5["default"])(this, _events).subscribe(_eventsName["default"].local.SUCCESS_AUTH, function (value) {
-    if (_classPrivateMethodGet(_this, _isDebug, _isDebug2).call(_this)) {
+    if (_classPrivateMethodGet(_this2, _isDebug, _isDebug2).call(_this2)) {
       console.log('subscribe ventsNames.local.SUCCESS_AUTH', value);
     }
-    _classPrivateMethodGet(_this, _getWallkitUserData, _getWallkitUserData2).call(_this);
+    _this2.getWallkitUserData();
   });
   (0, _classPrivateFieldGet5["default"])(this, _events).subscribe(_eventsName["default"].local.CHECK_USER_ACCESS, function (value) {
-    if (_classPrivateMethodGet(_this, _isDebug, _isDebug2).call(_this)) {
+    if (_classPrivateMethodGet(_this2, _isDebug, _isDebug2).call(_this2)) {
       console.log('subscribe ventsNames.local.CHECK_USER_ACCESS', value);
     }
-    _classPrivateMethodGet(_this, _setDataWkHasAccessInBody, _setDataWkHasAccessInBody2).call(_this, value);
+    _classPrivateMethodGet(_this2, _setDataWkHasAccessInBody, _setDataWkHasAccessInBody2).call(_this2, value);
   });
 }
 function _initUIListeners2() {
-  var _this2 = this;
+  var _this3 = this;
   document.body.addEventListener('click', function (e) {
     try {
-      if (_classPrivateMethodGet(_this2, _isDebug, _isDebug2).call(_this2)) {
+      if (_classPrivateMethodGet(_this3, _isDebug, _isDebug2).call(_this3)) {
         console.log('Click on element: ', e.target);
-        console.log("Does element have class ".concat((0, _classPrivateFieldGet5["default"])(_this2, _classForHandleClick), ": ").concat(e.target.classList.contains((0, _classPrivateFieldGet5["default"])(_this2, _classForHandleClick))));
+        console.log("Does element have class ".concat((0, _classPrivateFieldGet5["default"])(_this3, _classForHandleClick), ": ").concat(e.target.classList.contains((0, _classPrivateFieldGet5["default"])(_this3, _classForHandleClick))));
       }
 
       // skip if target element has no class `${this.#classForHandleClick}`
-      if (!e.target.classList.contains("".concat((0, _classPrivateFieldGet5["default"])(_this2, _classForHandleClick)))) return;
+      if (!e.target.classList.contains("".concat((0, _classPrivateFieldGet5["default"])(_this3, _classForHandleClick)))) return;
 
       // retrieve all classes for element
       var classes = Array.from(e.target.classList);
       var slugAndParamStr = classes.find(function (className) {
         return className.startsWith('wk–');
       });
-      if (_classPrivateMethodGet(_this2, _isDebug, _isDebug2).call(_this2)) {
+      if (_classPrivateMethodGet(_this3, _isDebug, _isDebug2).call(_this3)) {
         console.log('Popup\'s slug and params: ', slugAndParamStr);
         console.log('Exit if slug and param === "undefined"');
       }
@@ -2450,17 +2526,17 @@ function _initUIListeners2() {
       var slugAndParamArr = slugAndParamStr.split("–");
       var popupSlug = slugAndParamArr[1];
       var popupParams = slugAndParamArr[2];
-      if (_classPrivateMethodGet(_this2, _isDebug, _isDebug2).call(_this2)) {
+      if (_classPrivateMethodGet(_this3, _isDebug, _isDebug2).call(_this3)) {
         console.log('Popup\'s slug: ', popupSlug);
         console.log('Popup\'s params: ', popupParams);
       }
 
       // open popup without params
       if (typeof popupSlug !== "undefined" && typeof popupParams === "undefined") {
-        if (_classPrivateMethodGet(_this2, _isDebug, _isDebug2).call(_this2)) {
+        if (_classPrivateMethodGet(_this3, _isDebug, _isDebug2).call(_this3)) {
           console.log('Open popup without params. Only with slug: ', popupSlug);
         }
-        (0, _classPrivateFieldGet5["default"])(_this2, _popup).open(popupSlug);
+        (0, _classPrivateFieldGet5["default"])(_this3, _popup).open(popupSlug);
         e.preventDefault();
         return;
       }
@@ -2469,7 +2545,7 @@ function _initUIListeners2() {
       var popupParamsArr = popupParams.split('-');
       var key = popupParamsArr[0];
       var value = popupParamsArr[1];
-      if (_classPrivateMethodGet(_this2, _isDebug, _isDebug2).call(_this2)) {
+      if (_classPrivateMethodGet(_this3, _isDebug, _isDebug2).call(_this3)) {
         console.log('Popup\'s param key: ', key);
         console.log('Popup\'s param value: ', value);
       }
@@ -2487,10 +2563,10 @@ function _initUIListeners2() {
           item_key: value
         });
         var path = "".concat(popupSlug, "?[").concat(params, "]");
-        if (_classPrivateMethodGet(_this2, _isDebug, _isDebug2).call(_this2)) {
+        if (_classPrivateMethodGet(_this3, _isDebug, _isDebug2).call(_this3)) {
           console.log('Open popup with params: ', path);
         }
-        (0, _classPrivateFieldGet5["default"])(_this2, _popup).open(path);
+        (0, _classPrivateFieldGet5["default"])(_this3, _popup).open(path);
         e.preventDefault();
       }
     } catch (error) {
@@ -2504,69 +2580,12 @@ function _setDataWkHasAccessInBody2(value) {
   }
   document.body.dataset.wkCallUserHasAccess = value;
 }
-function _getWallkitUserData2() {
-  var _this3 = this;
-  (0, _classPrivateFieldGet5["default"])(this, _sdk).client.get({
-    path: "/user"
-  }).then(function (response) {
-    console.log(response);
-    _this3.setAllDataWkStatusesInDOMElements(response);
-  })["catch"](function (error) {
-    console.log('WK Call ERROR:', error);
-    _this3.setAllDataWkStatusesInDOMElements();
-  });
-}
 function _debugUserStatus2() {
   console.log("User status: ", this.getUserStatus());
 }
 function _debugElementsClickingOnWhichOpensPopups2() {
   console.log('Elements, clicking on which opens popups:');
-  var _iterator4 = _createForOfIteratorHelper(document.querySelectorAll(".".concat((0, _classPrivateFieldGet5["default"])(this, _classForHandleClick)))),
-    _step4;
-  try {
-    for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-      var element = _step4.value;
-      console.log(element);
-    }
-  } catch (err) {
-    _iterator4.e(err);
-  } finally {
-    _iterator4.f();
-  }
-}
-function _debugElementsThatReactToTheUsersStatus2() {
-  console.log('Elements that react to the user\'s status:');
-  var _iterator5 = _createForOfIteratorHelper(document.querySelectorAll(".".concat((0, _classPrivateFieldGet5["default"])(this, _classThatReactOnTheUsersStatus)))),
-    _step5;
-  try {
-    for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-      var element = _step5.value;
-      console.log(element);
-    }
-  } catch (err) {
-    _iterator5.e(err);
-  } finally {
-    _iterator5.f();
-  }
-}
-function _debugElementsThatReactToTheUsersPlans2() {
-  console.log('Elements that react to the user\'s plans:');
-  var _iterator6 = _createForOfIteratorHelper(document.querySelectorAll(".".concat((0, _classPrivateFieldGet5["default"])(this, _classThatReactOnTheUsersPlans)))),
-    _step6;
-  try {
-    for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-      var element = _step6.value;
-      console.log(element);
-    }
-  } catch (err) {
-    _iterator6.e(err);
-  } finally {
-    _iterator6.f();
-  }
-}
-function _debugElementsThatReactToTheUsersEvents2() {
-  console.log('Elements that react to the user\'s events:');
-  var _iterator7 = _createForOfIteratorHelper(document.querySelectorAll(".".concat((0, _classPrivateFieldGet5["default"])(this, _classThatReactOnTheUsersEvents)))),
+  var _iterator7 = _createForOfIteratorHelper(document.querySelectorAll(".".concat((0, _classPrivateFieldGet5["default"])(this, _classForHandleClick)))),
     _step7;
   try {
     for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
@@ -2577,6 +2596,51 @@ function _debugElementsThatReactToTheUsersEvents2() {
     _iterator7.e(err);
   } finally {
     _iterator7.f();
+  }
+}
+function _debugElementsThatReactToTheUsersStatus2() {
+  console.log('Elements that react to the user\'s status:');
+  var _iterator8 = _createForOfIteratorHelper(document.querySelectorAll(".".concat((0, _classPrivateFieldGet5["default"])(this, _classThatReactOnTheUsersStatus)))),
+    _step8;
+  try {
+    for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+      var element = _step8.value;
+      console.log(element);
+    }
+  } catch (err) {
+    _iterator8.e(err);
+  } finally {
+    _iterator8.f();
+  }
+}
+function _debugElementsThatReactToTheUsersPlans2() {
+  console.log('Elements that react to the user\'s plans:');
+  var _iterator9 = _createForOfIteratorHelper(document.querySelectorAll(".".concat((0, _classPrivateFieldGet5["default"])(this, _classThatReactOnTheUsersPlans)))),
+    _step9;
+  try {
+    for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
+      var element = _step9.value;
+      console.log(element);
+    }
+  } catch (err) {
+    _iterator9.e(err);
+  } finally {
+    _iterator9.f();
+  }
+}
+function _debugElementsThatReactToTheUsersEvents2() {
+  console.log('Elements that react to the user\'s events:');
+  var _iterator10 = _createForOfIteratorHelper(document.querySelectorAll(".".concat((0, _classPrivateFieldGet5["default"])(this, _classThatReactOnTheUsersEvents)))),
+    _step10;
+  try {
+    for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
+      var element = _step10.value;
+      console.log(element);
+    }
+  } catch (err) {
+    _iterator10.e(err);
+  } finally {
+    _iterator10.f();
   }
 }
 
@@ -2642,20 +2706,12 @@ var Content = /*#__PURE__*/function () {
         taxonimiesTitles.push(taxonomies[taxKey].label);
         var termKeysKey = "term_keys[".concat(taxKey, "]");
         var termTitleKey = "term_titles[".concat(taxKey, "]");
-        var targetTermKeys = formatted[termKeysKey];
-        var targetTermTitles = formatted[termTitleKey];
         if ((_taxonomies$taxKey = taxonomies[taxKey]) !== null && _taxonomies$taxKey !== void 0 && _taxonomies$taxKey.items) {
+          formatted[termKeysKey] = [];
+          formatted[termTitleKey] = [];
           taxonomies[taxKey].items.forEach(function (item) {
-            if (targetTermKeys) {
-              targetTermKeys.push(item.slug);
-            } else {
-              formatted[termKeysKey] = [item.slug];
-            }
-            if (targetTermTitles) {
-              targetTermTitles.push(item.slug);
-            } else {
-              formatted[termTitleKey] = [item.name];
-            }
+            formatted[termKeysKey].push(item.slug);
+            formatted[termTitleKey].push(item.name);
           });
         }
         formatted[termKeysKey] = formatted[termKeysKey].join(',');
@@ -2685,7 +2741,7 @@ var Content = /*#__PURE__*/function () {
         if (_this.sdk.methods.isAuthenticated()) {
           _this.getAccessDetails(content.id);
         }
-        (0, _classPrivateFieldGet2["default"])(_this, _events).notify(_eventsName.CHECK_USER_ACCESS, true);
+        (0, _classPrivateFieldGet2["default"])(_this, _events).notify(_eventsName.CHECK_USER_ACCESS, response.allow);
         return {
           allowed: response.allow,
           data: response
@@ -2718,7 +2774,7 @@ var Content = /*#__PURE__*/function () {
               _context.next = 7;
               return this.getAccessDetails(this.content.id);
             case 7:
-              (0, _classPrivateFieldGet2["default"])(this, _events).notify(_eventsName.CHECK_USER_ACCESS, true);
+              (0, _classPrivateFieldGet2["default"])(this, _events).notify(_eventsName.CHECK_USER_ACCESS, response.allow);
               return _context.abrupt("return", {
                 allowed: response.allow,
                 data: response
@@ -4778,7 +4834,7 @@ Object.defineProperty(exports, "__esModule", ({
 exports["default"] = void 0;
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
 var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
-var _classPrivateFieldGet4 = _interopRequireDefault(__webpack_require__(5194));
+var _classPrivateFieldGet6 = _interopRequireDefault(__webpack_require__(5194));
 var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(8478));
 var _DOM = __webpack_require__(2909);
 var _constants = __webpack_require__(9066);
@@ -4826,17 +4882,18 @@ var SDK = /*#__PURE__*/function () {
     key: "onLoad",
     value: function onLoad() {
       if (window.Wallkit) {
-        var _classPrivateFieldGet2;
+        var _classPrivateFieldGet2, _classPrivateFieldGet3, _classPrivateFieldGet4;
         window.Wallkit.init({
-          resource: (0, _classPrivateFieldGet4["default"])(this, _options).public_key,
-          api_url: (0, _classPrivateFieldGet4["default"])(this, _apiUrl)
+          resource: (0, _classPrivateFieldGet6["default"])(this, _options).public_key,
+          api_url: (0, _classPrivateFieldGet6["default"])(this, _apiUrl),
+          subDomainCookie: (_classPrivateFieldGet2 = (_classPrivateFieldGet3 = (0, _classPrivateFieldGet6["default"])(this, _options).cookies) === null || _classPrivateFieldGet3 === void 0 ? void 0 : _classPrivateFieldGet3.subDomain) !== null && _classPrivateFieldGet2 !== void 0 ? _classPrivateFieldGet2 : false
         });
         this.methods = window.Wallkit;
         this.client = window.Wallkit.client;
-        (0, _classPrivateFieldGet4["default"])(this, _events).notify(_eventsName.WALLKIT_SDK_LOADED, window.Wallkit);
-        if ((_classPrivateFieldGet2 = (0, _classPrivateFieldGet4["default"])(this, _options)) !== null && _classPrivateFieldGet2 !== void 0 && _classPrivateFieldGet2.onLoaded) {
-          var _classPrivateFieldGet3;
-          (_classPrivateFieldGet3 = (0, _classPrivateFieldGet4["default"])(this, _options)) === null || _classPrivateFieldGet3 === void 0 ? void 0 : _classPrivateFieldGet3.onLoaded();
+        (0, _classPrivateFieldGet6["default"])(this, _events).notify(_eventsName.WALLKIT_SDK_LOADED, window.Wallkit);
+        if ((_classPrivateFieldGet4 = (0, _classPrivateFieldGet6["default"])(this, _options)) !== null && _classPrivateFieldGet4 !== void 0 && _classPrivateFieldGet4.onLoaded) {
+          var _classPrivateFieldGet5;
+          (_classPrivateFieldGet5 = (0, _classPrivateFieldGet6["default"])(this, _options)) === null || _classPrivateFieldGet5 === void 0 ? void 0 : _classPrivateFieldGet5.onLoaded();
         }
       }
     }
@@ -4846,7 +4903,7 @@ var SDK = /*#__PURE__*/function () {
       var _this = this;
       return new Promise(function (resolve) {
         if (!_this.methods) {
-          (0, _classPrivateFieldGet4["default"])(_this, _events).subscribe(_eventsName.WALLKIT_SDK_LOADED, function () {
+          (0, _classPrivateFieldGet6["default"])(_this, _events).subscribe(_eventsName.WALLKIT_SDK_LOADED, function () {
             return resolve(_this);
           });
         } else {
@@ -4857,7 +4914,7 @@ var SDK = /*#__PURE__*/function () {
   }, {
     key: "load",
     value: function load() {
-      (0, _DOM.insertScript)("".concat(_constants.WALLKIT_CDN_URL, "/js/sdk/0.0.47/wallkit.umd.min.js"), 'wallkit-js-sdk', this.onLoad.bind(this));
+      (0, _DOM.insertScript)("".concat(_constants.WALLKIT_CDN_URL, "/js/sdk/0.0.48/wallkit.umd.min.js"), 'wallkit-js-sdk', this.onLoad.bind(this));
     }
   }]);
   return SDK;
@@ -5151,16 +5208,21 @@ exports["default"] = _default;
 /***/ }),
 
 /***/ 5048:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
+var _interopRequireDefault = __webpack_require__(5656);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.setCookie = exports.removeCookie = exports["default"] = void 0;
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(366));
 var setCookie = function setCookie(name, value, options) {
+  if (!name || !value) {
+    return;
+  }
   options = options || {};
   var _options = options,
     expires = _options.expires;
@@ -5172,20 +5234,27 @@ var setCookie = function setCookie(name, value, options) {
   if (expires && expires.toUTCString) {
     options.expires = expires.toUTCString();
   }
-  value = encodeURIComponent(value);
-  var updatedCookie = "".concat(name, "=").concat(value);
+  var updatedCookie = "".concat(name, "=").concat(encodeURIComponent(value), "; ");
   for (var propName in options) {
-    updatedCookie += "; " + propName;
     var propValue = options[propName];
     if (propValue) {
-      updatedCookie += "=" + propValue;
+      updatedCookie += "".concat(propName, "=").concat(propValue, "; ");
     }
   }
   document.cookie = updatedCookie;
 };
 exports.setCookie = setCookie;
-var removeCookie = function removeCookie(name) {
-  document.cookie = "".concat(name, "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;");
+var removeCookie = function removeCookie(name, domain) {
+  var _props;
+  var props = (_props = {}, (0, _defineProperty2["default"])(_props, name, ''), (0, _defineProperty2["default"])(_props, "expires", 'Thu, 01 Jan 1970 00:00:00 UTC'), (0, _defineProperty2["default"])(_props, "path", '/'), (0, _defineProperty2["default"])(_props, "domain", domain || null), _props);
+  var cookieFingerprint = '';
+  for (var propName in props) {
+    var propValue = props[propName];
+    if (propValue !== null && propValue !== undefined) {
+      cookieFingerprint += "".concat(propName, "=").concat(propValue, "; ");
+    }
+  }
+  document.cookie = cookieFingerprint;
 };
 exports.removeCookie = removeCookie;
 var _default = {
@@ -5314,7 +5383,7 @@ var _interopRequireDefault = __webpack_require__(5656);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.resetHash = exports.parseModalHashURL = exports.parseAuthTokenHash = void 0;
+exports.resetHash = exports.parseModalHashURL = exports.parseAuthTokenHash = exports.getParentDomain = exports.getDomainWithoutSubdomain = void 0;
 var _typeof2 = _interopRequireDefault(__webpack_require__(2125));
 var parseModalHashURL = function parseModalHashURL() {
   var UryModal = /#WkModal\((.*)\)$/.exec(decodeURIComponent(window.location.hash));
@@ -5355,6 +5424,15 @@ var resetHash = function resetHash() {
   window.history.pushState('', '', path);
 };
 exports.resetHash = resetHash;
+var getDomainWithoutSubdomain = function getDomainWithoutSubdomain(url) {
+  var urlParts = new URL(url).hostname.split('.');
+  return urlParts.slice(0).slice(-(urlParts.length === 4 ? 3 : 2)).join('.');
+};
+exports.getDomainWithoutSubdomain = getDomainWithoutSubdomain;
+var getParentDomain = function getParentDomain() {
+  return ".".concat(getDomainWithoutSubdomain(window.location));
+};
+exports.getParentDomain = getParentDomain;
 
 /***/ }),
 

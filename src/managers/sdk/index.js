@@ -21,6 +21,7 @@ export default class SDK {
 
         this.methods = null;
         this.client = null;
+
         this.#options = options;
         this.#events = new Events();
         this.#apiUrl = options.mode === 'dev' ? 'https://api.dev.wallkit.net/api/v1': undefined;
@@ -34,7 +35,11 @@ export default class SDK {
 
     onLoad() {
         if (window.Wallkit) {
-            window.Wallkit.init({ resource: this.#options.public_key, api_url: this.#apiUrl });
+            window.Wallkit.init({
+              resource: this.#options.public_key,
+              api_url: this.#apiUrl,
+              subDomainCookie: this.#options.cookies?.subDomain ?? false
+            });
             this.methods = window.Wallkit;
             this.client = window.Wallkit.client;
             this.#events.notify(WALLKIT_SDK_LOADED, window.Wallkit);
@@ -56,6 +61,6 @@ export default class SDK {
     }
 
     load() {
-        insertScript(`${WALLKIT_CDN_URL}/js/sdk/0.0.47/wallkit.umd.min.js`, 'wallkit-js-sdk', this.onLoad.bind(this));
+        insertScript(`${WALLKIT_CDN_URL}/js/sdk/0.0.48/wallkit.umd.min.js`, 'wallkit-js-sdk', this.onLoad.bind(this));
     }
 }
