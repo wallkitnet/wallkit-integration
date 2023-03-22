@@ -26,8 +26,8 @@ export default class Authentication {
 
         this.#options = options;
 
-        this.token = new Token(WALLKIT_TOKEN_NAME, null, options.public_key);
-        this.firebaseToken = new Token(FIREBASE_TOKEN_NAME, null, options.public_key);
+        this.token = new Token(WALLKIT_TOKEN_NAME, null, options.public_key, !!options?.cookies?.subDomain);
+        this.firebaseToken = new Token(FIREBASE_TOKEN_NAME, null, options.public_key, !!options?.cookies?.subDomain);
 
         this.frame = new Frame();
         this.sdk = new SDK();

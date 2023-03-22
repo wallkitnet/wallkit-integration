@@ -1,7 +1,7 @@
 /*!
  * Package name: wallkit-integration-lib.
  * Package description: Wallkit Integration Library. Library to manipulate with Wallkit System: Paywall, Modals, Authentication, SDK..
- * Package version: 3.0.8.
+ * Package version: 3.0.9.
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -26,7 +26,7 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.LIBRARY_STYLES = void 0;
-var LIBRARY_STYLES = "\n        .wallkit-modal-wrapper {\n            z-index: 100;\n            position: fixed;\n            top: 0;\n            left: 0;\n            right: 0;\n            bottom: 0;\n            background: rgba(18, 18, 20, 0.9);\n            display: flex;\n            align-items: center;\n            justify-content: flex-start;\n            flex-direction: column;\n            overflow-y: auto;\n            padding: 70px 15px 20px;\n        }\n\n        .wallkit-modal-wrapper__content {\n            background-color: #fff;\n            flex-shrink: 0;\n            position: relative;\n            box-sizing: border-box;\n            overflow: hidden;\n        }\n        \n        @media screen and (max-width: 500px) {\n            .wallkit-modal-wrapper__content {\n                width: 100%;\n                min-width: auto!important;\n            }\n        }\n\n        .wallkit-modal-wrapper__close-btn {\n            position: absolute;\n            right: 10px;\n            top: 10px;\n            cursor: pointer;\n            color: #000;\n            font-size: 37px;\n            width: 37px;\n            height: 37px;\n            text-align: center;\n            line-height: 34px;\n        }\n\n        .wallkit-modal-wrapper .wk-frame {\n            transition: all 0.3s linear 0s;\n            max-width: 100%;\n            border: none;\n        }\n\n        .wallkit-auth-modal {\n            z-index: 999;\n        }\n\n        .wallkit-auth-modal .wallkit-modal-wrapper__content {\n            padding: 20px;\n        }\n\n        .wallkit-auth-modal .wallkit-auth-modal__title {\n            font-family: Roboto, sans-serif;\n            text-align: center;\n        }\n        \n        .wk-auth-form {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .wk-form-field {\n            display: flex;\n            flex-direction: column;\n            font-family: Oxygen, sans-serif;\n            margin-bottom: 10px;\n        }\n\n        .wk-form-field .wk-form-field__label {\n            font-weight: 500;\n            color: #333;\n            margin-bottom: 5px;\n        }\n\n        .wk-form-field .wk-form-field__input-wrapper {\n            margin-bottom: 5px;\n            position: relative;\n        }\n        \n        .wk-eye-toggle {\n            background: url(https://www.gstatic.com/images/icons/material/system/1x/visibility_black_24dp.png);\n            width: 24px;\n            height: 24px;\n        }\n        \n        .wk-form-field__field-description {\n            font-size: 11px;\n            color: #989898;\n        }\n        \n        .wk-eye-toggle.wk-eye-toggled {\n            background: url(https://www.gstatic.com/images/icons/material/system/1x/visibility_off_black_24dp.png);\n        }\n        \n        .wk-form-field__field-affix {\n            position: absolute;\n            right: 5px;\n            top: 0;\n            bottom: 0;\n        }\n        \n        .wk-form-field .wk-form-field__input {\n            border-radius: 0;\n            border: 0;\n            border-bottom: 1px solid #ccc;\n            padding: 5px;\n            box-sizing: border-box;\n            width: 100%;\n        }\n        \n        .wk-field-list {\n            list-style-type: circle;\n            padding-left: 12px;\n            margin-top: 1px;\n        }\n\n        .wk-form-field .wk-form-field__input:focus {\n            border-bottom: 1px solid #3f51b5;\n            outline: none;\n        }\n\n        .wk-form-field .wk-form-field__message {\n            font-size: 12px;\n        }\n\n        .wk-auth-form-button {\n            background-color: #db4437;\n            direction: ltr;\n            font-weight: 500;\n            height: auto;\n            line-height: normal;\n            max-width: 220px;\n            min-height: 40px;\n            padding: 8px 16px;\n            text-align: left;\n            width: 100%;\n            box-sizing: border-box;\n            box-shadow: 0 2px 2px 0 rgba(0,0,0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.20), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n            border-radius: 2px;\n            font-family: \"Roboto\",\"Helvetica\",\"Arial\",sans-serif;\n            margin: 0 auto 15px;\n            cursor: pointer;\n        }\n        \n        .wk-auth-form-button:focus,\n        .wk-auth-form-button:active,{\n            background-color: #5b6abe;\n        }\n\n        .wk-form-field.wk-form-field--invalid .wk-form-field__input {\n            border-bottom: 1px solid #dd2c00;\n        }\n        \n        .wk-form-field.wk-form-field--checkbox.wk-form-field--invalid .wk-form-field__checkmark {\n            border-color: #dd2c00;\n        }\n\n        .wk-form-field.wk-form-field--valid .wk-form-field__input {\n            border-bottom: 1px solid green;\n        }\n\n        .wk-form-field.wk-form-field--invalid .wk-form-field__message {\n            color: #dd2c00;\n        }\n\n        .wk-form-field.wk-form-field--valid .wk-form-field__message {\n            color: green;\n        }\n\n        .wk-form .wk-form__link {\n            font-size: 14px;\n            color: #3170f3;\n            text-decoration: underline;\n        }\n\n        .wk-form {\n            font-family: Oxygen, sans-serif;\n        }\n        \n        .wk-form-header {\n            margin-bottom: 10px;\n        }\n\n        .wk-form .wk-form__footer {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n        }\n        \n        .wk-form .wk-form__footer.wk-form__footer--right {\n            justify-content: flex-end;\n        }\n\n        .wk-form .wk-form__sub-footer {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            margin-bottom: 20px;\n        }\n\n        .wk-form__reset-password {\n            text-align: right;\n        }\n\n        .wk-form-result {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n        }\n\n        .wk-form-button {\n            border: none;\n            border-radius: 2px;\n            background-color: #3f51b5;\n            color: #fff;\n            position: relative;\n            height: 36px;\n            margin: 0;\n            min-width: 64px;\n            padding: 0 16px;\n            display: inline-block;\n            font-family: \"Roboto\", \"Helvetica\", \"Arial\", sans-serif;\n            font-size: 14px;\n            font-weight: 500;\n            text-transform: uppercase;\n            letter-spacing: 0;\n            overflow: hidden;\n            will-change: box-shadow;\n            transition: box-shadow .2s cubic-bezier(0.4, 0, 1, 1),background-color .2s cubic-bezier(0.4, 0, 0.2, 1),color .2s cubic-bezier(0.4, 0, 0.2, 1);\n            outline: none;\n            cursor: pointer;\n            text-decoration: none;\n            text-align: center;\n            line-height: 36px;\n            vertical-align: middle;\n        }\n\n        .wk-form__error {\n            display: none;\n            margin: 10px 0;\n            border: 1px solid #f5c6cb;\n            border-radius: 5px;\n            color: #721c24;\n            background-color: #f8d7da;\n            line-height: 21px;\n            padding: 10px;\n        }\n\n        .wk-form__error.wk-form__error--show {\n            display: block;\n        }\n\n        .wk-form-button.wk-form-button--cancel {\n            margin-left: auto;\n            margin-right: 10px;\n            color: #3f51b5;\n            background: none;\n        }\n        \n        .wk-success-message {\n        }\n        \n        .wk-success-message__title {\n            font-weight: 500;\n            margin-bottom: 10px;\n        }\n        \n        .wk-success-message__description {\n            margin-bottom: 10px;\n        }\n        \n        .wk-success-message__description b {\n            font-weight: 500;\n        }\n\n        .wk-form-button.wk-form-button--cancel:hover {\n            background-color: hsla(0,0%,62%,.2);\n        }\n        \n        .wk-success-message.wk-password-reset-success {\n            min-height: 205px;\n            display: flex;\n            justify-content: center;\n            flex-direction: column;\n        }\n        \n        .wk-password-reset-success .wk-form-button {\n            left: 50%;\n            transform: translateX(-50%);\n        }\n        \n        .wk-form-field.wk-form-field--checkbox .wk-form-field__label {\n            position: relative;\n            padding-left: 30px;     \n            line-height: 20px;\n            font-size: 14px;     \n        } \n        \n        .wk-form-field.wk-form-field--checkbox input {\n            position: absolute;\n            opacity: 0;\n            cursor: pointer;\n            height: 0;\n            width: 0;\n        }\n        \n        .wk-form-field .wk-form-field__checkmark {\n            position: absolute;\n            top: 0;\n            left: 0;\n            height: 18px;\n            width: 18px;\n            background-color: none;\n            border: 2px solid #333;\n            box-sizing: border-box;\n            border-radius: 2px;\n        }\n        \n        .wk-form-field.wk-form-field--checkbox input:checked ~ .wk-form-field__checkmark {\n            background-color: #3f51b5;\n            border-color: #3f51b5;\n        }\n        \n        .wk-form-field__checkmark:after {\n            content: \"\";\n            position: absolute;\n            display: none;\n        }\n        \n        .wk-form-field input:checked ~ .wk-form-field__checkmark:after {\n            display: block;\n        }\n        \n        .wk-form-field .wk-form-field__checkmark:after {\n            left: 5px;\n            top: 2px;\n            width: 3px;\n            height: 7px;\n            border: solid white;\n            border-width: 0 2px 2px 0;\n            -webkit-transform: rotate(45deg);\n            -ms-transform: rotate(45deg);\n            transform: rotate(45deg);\n        }\n";
+var LIBRARY_STYLES = "\n        .wallkit-modal-wrapper {\n            z-index: 100;\n            position: fixed;\n            top: 0;\n            left: 0;\n            right: 0;\n            bottom: 0;\n            background: rgba(18, 18, 20, 0.9);\n            display: flex;\n            align-items: center;\n            justify-content: flex-start;\n            flex-direction: column;\n            overflow-y: auto;\n            padding: 70px 15px 20px;\n        }\n\n        .wallkit-modal-wrapper__content {\n            background-color: #fff;\n            flex-shrink: 0;\n            position: relative;\n            box-sizing: border-box;\n            overflow: hidden;\n        }\n        \n        @media screen and (max-width: 500px) {\n            .wallkit-modal-wrapper__content {\n                width: 100%;\n                min-width: auto!important;\n            }\n        }\n\n        .wallkit-modal-wrapper__close-btn {\n            position: absolute;\n            right: 10px;\n            top: 10px;\n            cursor: pointer;\n            color: #000;\n            font-size: 37px;\n            width: 37px;\n            height: 37px;\n            text-align: center;\n            line-height: 34px;\n        }\n\n        .wallkit-modal-wrapper .wk-frame {\n            transition: all 0.3s linear 0s;\n            max-width: 100%;\n            border: none;\n        }\n\n        .wallkit-auth-modal {\n            z-index: 999;\n        }\n\n        .wallkit-auth-modal .wallkit-modal-wrapper__content {\n            padding: 20px;\n        }\n\n        .wallkit-auth-modal .wallkit-auth-modal__title {\n            font-family: Roboto, sans-serif;\n            text-align: center;\n        }\n        \n        .wk-auth-form {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .wk-form-field {\n            display: flex;\n            flex-direction: column;\n            font-family: Oxygen, sans-serif;\n            margin-bottom: 10px;\n        }\n\n        .wk-form-field .wk-form-field__label {\n            font-weight: 500;\n            color: #333;\n            margin-bottom: 5px;\n        }\n\n        .wk-form-field .wk-form-field__input-wrapper {\n            margin-bottom: 5px;\n            position: relative;\n        }\n        \n        .wk-eye-toggle {\n            background: url(https://www.gstatic.com/images/icons/material/system/1x/visibility_black_24dp.png);\n            width: 24px;\n            height: 24px;\n        }\n        \n        .wk-form-field__field-description {\n            font-size: 11px;\n            color: #989898;\n        }\n        \n        .wk-eye-toggle.wk-eye-toggled {\n            background: url(https://www.gstatic.com/images/icons/material/system/1x/visibility_off_black_24dp.png);\n        }\n        \n        .wk-form-field__field-affix {\n            position: absolute;\n            right: 5px;\n            top: 0;\n            bottom: 0;\n        }\n        \n        .wk-form-field .wk-form-field__input {\n            border-radius: 0;\n            border: 0;\n            border-bottom: 1px solid #ccc;\n            padding: 5px;\n            box-sizing: border-box;\n            width: 100%;\n        }\n        \n        .wk-field-list {\n            list-style-type: circle;\n            padding-left: 12px;\n            margin-top: 1px;\n        }\n\n        .wk-form-field .wk-form-field__input:focus {\n            border-bottom: 1px solid #3f51b5;\n            outline: none;\n        }\n\n        .wk-form-field .wk-form-field__message {\n            font-size: 12px;\n        }\n\n        .wk-auth-form-button {\n            background-color: #db4437;\n            direction: ltr;\n            font-weight: 500;\n            height: auto;\n            line-height: normal;\n            max-width: 220px;\n            min-height: 40px;\n            padding: 8px 16px;\n            text-align: left;\n            width: 100%;\n            box-sizing: border-box;\n            box-shadow: 0 2px 2px 0 rgba(0,0,0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.20), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n            border-radius: 2px;\n            font-family: \"Roboto\",\"Helvetica\",\"Arial\",sans-serif;\n            margin: 0 auto 15px;\n            cursor: pointer;\n        }\n        \n        .wk-auth-form-button:focus,\n        .wk-auth-form-button:active,{\n            background-color: #5b6abe;\n        }\n\n        .wk-form-field.wk-form-field--invalid .wk-form-field__input {\n            border-bottom: 1px solid #dd2c00;\n        }\n        \n        .wk-form-field.wk-form-field--checkbox.wk-form-field--invalid .wk-form-field__checkmark {\n            border-color: #dd2c00;\n        }\n\n        .wk-form-field.wk-form-field--valid .wk-form-field__input {\n            border-bottom: 1px solid green;\n        }\n\n        .wk-form-field.wk-form-field--invalid .wk-form-field__message {\n            color: #dd2c00;\n        }\n\n        .wk-form-field.wk-form-field--valid .wk-form-field__message {\n            color: green;\n        }\n\n        .wk-form .wk-form__link {\n            font-size: 14px;\n            color: #3170f3;\n            text-decoration: underline;\n        }\n\n        .wk-form {\n            font-family: Oxygen, sans-serif;\n        }\n        \n        .wk-form-header {\n            margin-bottom: 10px;\n        }\n\n        .wk-form .wk-form__footer {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n        }\n        \n        .wk-form .wk-form__footer.wk-form__footer--right {\n            justify-content: flex-end;\n        }\n\n        .wk-form .wk-form__sub-footer {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            margin-bottom: 20px;\n        }\n\n        .wk-form__reset-password {\n            text-align: right;\n        }\n\n        .wk-form-result {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n        }\n\n        .wk-form-button {\n            border: none;\n            border-radius: 2px;\n            background-color: #3f51b5;\n            color: #fff;\n            position: relative;\n            height: 36px;\n            margin: 0;\n            min-width: 64px;\n            padding: 0 16px;\n            display: inline-block;\n            font-family: \"Roboto\", \"Helvetica\", \"Arial\", sans-serif;\n            font-size: 14px;\n            font-weight: 500;\n            text-transform: uppercase;\n            letter-spacing: 0;\n            overflow: hidden;\n            will-change: box-shadow;\n            transition: box-shadow .2s cubic-bezier(0.4, 0, 1, 1),background-color .2s cubic-bezier(0.4, 0, 0.2, 1),color .2s cubic-bezier(0.4, 0, 0.2, 1);\n            outline: none;\n            cursor: pointer;\n            text-decoration: none;\n            text-align: center;\n            line-height: 36px;\n            vertical-align: middle;\n        }\n\n        .wk-form__error {\n            display: none;\n            margin: 10px 0;\n            border: 1px solid #f5c6cb;\n            border-radius: 5px;\n            color: #721c24;\n            background-color: #f8d7da;\n            line-height: 21px;\n            padding: 10px;\n        }\n\n        .wk-form__error.wk-form__error--show {\n            display: block;\n        }\n\n        .wk-form-button.wk-form-button--cancel {\n            margin-left: auto;\n            margin-right: 10px;\n            color: #3f51b5;\n            background: none;\n        }\n        \n        .wk-success-message {\n        }\n        \n        .wk-success-message__title {\n            font-weight: 500;\n            margin-bottom: 10px;\n        }\n        \n        .wk-success-message__description {\n            margin-bottom: 10px;\n        }\n        \n        .wk-success-message__description b {\n            font-weight: 500;\n        }\n\n        .wk-form-button.wk-form-button--cancel:hover {\n            background-color: hsla(0,0%,62%,.2);\n        }\n        \n        .wk-password-reset-success .wk-form-button {\n            left: 50%;\n            transform: translateX(-50%);\n        }\n        \n        .wk-form-field.wk-form-field--checkbox .wk-form-field__label {\n            position: relative;\n            padding-left: 30px;     \n            line-height: 20px;\n            font-size: 14px;     \n        } \n        \n        .wk-form-field.wk-form-field--checkbox input {\n            position: absolute;\n            opacity: 0;\n            cursor: pointer;\n            height: 0;\n            width: 0;\n        }\n        \n        .wk-form-field .wk-form-field__checkmark {\n            position: absolute;\n            top: 0;\n            left: 0;\n            height: 18px;\n            width: 18px;\n            background-color: none;\n            border: 2px solid #333;\n            box-sizing: border-box;\n            border-radius: 2px;\n        }\n        \n        .wk-form-field.wk-form-field--checkbox input:checked ~ .wk-form-field__checkmark {\n            background-color: #3f51b5;\n            border-color: #3f51b5;\n        }\n        \n        .wk-form-field__checkmark:after {\n            content: \"\";\n            position: absolute;\n            display: none;\n        }\n        \n        .wk-form-field input:checked ~ .wk-form-field__checkmark:after {\n            display: block;\n        }\n        \n        .wk-form-field .wk-form-field__checkmark:after {\n            left: 5px;\n            top: 2px;\n            width: 3px;\n            height: 7px;\n            border: solid white;\n            border-width: 0 2px 2px 0;\n            -webkit-transform: rotate(45deg);\n            -ms-transform: rotate(45deg);\n            transform: rotate(45deg);\n        }\n";
 exports.LIBRARY_STYLES = LIBRARY_STYLES;
 
 /***/ }),
@@ -856,12 +856,14 @@ var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(5194));
 var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(8478));
 var _localStorage = _interopRequireDefault(__webpack_require__(347));
 var _cookie = __webpack_require__(5048);
+var _url = __webpack_require__(5234);
 function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
 function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
 var _slug = /*#__PURE__*/new WeakMap();
 var _resource = /*#__PURE__*/new WeakMap();
+var _domain = /*#__PURE__*/new WeakMap();
 var Token = /*#__PURE__*/function () {
-  function Token(slug, value, resource) {
+  function Token(slug, value, resource, subDomain) {
     (0, _classCallCheck2["default"])(this, Token);
     _classPrivateFieldInitSpec(this, _slug, {
       writable: true,
@@ -871,8 +873,13 @@ var Token = /*#__PURE__*/function () {
       writable: true,
       value: void 0
     });
+    _classPrivateFieldInitSpec(this, _domain, {
+      writable: true,
+      value: void 0
+    });
     if (slug && resource) {
       (0, _classPrivateFieldSet2["default"])(this, _resource, resource);
+      (0, _classPrivateFieldSet2["default"])(this, _domain, subDomain === true ? (0, _url.getParentDomain)() : '');
       (0, _classPrivateFieldSet2["default"])(this, _slug, this.createTokenSlug(slug, resource));
       if (value) {
         this.set(value);
@@ -900,7 +907,7 @@ var Token = /*#__PURE__*/function () {
     key: "remove",
     value: function remove() {
       this.token = null;
-      (0, _cookie.removeCookie)((0, _classPrivateFieldGet2["default"])(this, _slug));
+      (0, _cookie.removeCookie)((0, _classPrivateFieldGet2["default"])(this, _slug), (0, _classPrivateFieldGet2["default"])(this, _domain));
       _localStorage["default"].removeItem((0, _classPrivateFieldGet2["default"])(this, _slug));
     }
   }, {
@@ -909,7 +916,8 @@ var Token = /*#__PURE__*/function () {
       this.token = value;
       (0, _cookie.setCookie)((0, _classPrivateFieldGet2["default"])(this, _slug), value, {
         expires: 'Fri, 31 Dec 9999 23:59:59 GMT',
-        path: "/"
+        path: "/",
+        domain: (0, _classPrivateFieldGet2["default"])(this, _domain)
       });
       _localStorage["default"].setItem((0, _classPrivateFieldGet2["default"])(this, _slug), value);
     }
@@ -1492,7 +1500,9 @@ var _setAuthorizationError = /*#__PURE__*/new WeakSet();
 var _resetAuthorizationError = /*#__PURE__*/new WeakSet();
 var Authentication = /*#__PURE__*/function () {
   function Authentication(options) {
-    var _this = this;
+    var _options$cookies,
+      _options$cookies2,
+      _this = this;
     (0, _classCallCheck2["default"])(this, Authentication);
     _classPrivateMethodInitSpec(this, _resetAuthorizationError);
     _classPrivateMethodInitSpec(this, _setAuthorizationError);
@@ -1507,8 +1517,8 @@ var Authentication = /*#__PURE__*/function () {
     }
     Authentication.instance = this;
     (0, _classPrivateFieldSet2["default"])(this, _options, options);
-    this.token = new _Token["default"](_constants.WALLKIT_TOKEN_NAME, null, options.public_key);
-    this.firebaseToken = new _Token["default"](_constants.FIREBASE_TOKEN_NAME, null, options.public_key);
+    this.token = new _Token["default"](_constants.WALLKIT_TOKEN_NAME, null, options.public_key, !!(options !== null && options !== void 0 && (_options$cookies = options.cookies) !== null && _options$cookies !== void 0 && _options$cookies.subDomain));
+    this.firebaseToken = new _Token["default"](_constants.FIREBASE_TOKEN_NAME, null, options.public_key, !!(options !== null && options !== void 0 && (_options$cookies2 = options.cookies) !== null && _options$cookies2 !== void 0 && _options$cookies2.subDomain));
     this.frame = new _frame["default"]();
     this.sdk = new _sdk["default"]();
     if (!!(options !== null && options !== void 0 && options.firebase)) {
@@ -1609,7 +1619,6 @@ var Authentication = /*#__PURE__*/function () {
           tosURL: tosURL,
           privacyPolicyURL: privacyPolicyURL
         },
-        defaultForm: (0, _classPrivateFieldGet9["default"])(this, _options).auth.defaultForm || false,
         onLogin: function onLogin(data) {
           if (_this5.reCaptcha.enabled) {
             _this5.executeRecaptcha();
@@ -1724,63 +1733,40 @@ var Authentication = /*#__PURE__*/function () {
     }
   }, {
     key: "authInWallkit",
-    value: function () {
-      var _authInWallkit = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2() {
-        var _this7 = this;
-        var firebaseToken,
-          response,
-          _args2 = arguments;
-        return _regenerator["default"].wrap(function _callee2$(_context2) {
-          while (1) switch (_context2.prev = _context2.next) {
-            case 0:
-              firebaseToken = _args2.length > 0 && _args2[0] !== undefined ? _args2[0] : null;
-              _classPrivateMethodGet(this, _resetAuthorizationError, _resetAuthorizationError2).call(this);
-              if (firebaseToken) {
-                _context2.next = 4;
-                break;
-              }
-              throw new Error('Your authorization is broken. Please login again.');
-            case 4:
-              _context2.prev = 4;
-              _context2.next = 7;
-              return this.sdk.methods.authenticateWithFirebase(firebaseToken);
-            case 7:
-              response = _context2.sent;
-              this.setToken(response.token);
-              _context2.next = 11;
-              return new Promise(function (resolve, reject) {
-                var userGetTimeout = setTimeout(function () {
-                  resolve(false);
-                }, 10000);
-                var userEventCallback = function userEventCallback() {
-                  clearTimeout(userGetTimeout);
-                  _this7.sdk.methods.unsubscribeLocalEvent('user', userEventCallback);
-                  _this7.events.notify(_eventsName["default"].local.SUCCESS_AUTH, {
-                    register: !response.existed
-                  });
-                  resolve(true);
-                };
-                _this7.sdk.methods.subscribeLocalEvent('user', userEventCallback);
+    value: function authInWallkit() {
+      var _this7 = this;
+      var firebaseToken = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      _classPrivateMethodGet(this, _resetAuthorizationError, _resetAuthorizationError2).call(this);
+      return new Promise(function (resolve, reject) {
+        if (firebaseToken) {
+          _this7.sdk.methods.authenticateWithFirebase(firebaseToken).then(function (_ref) {
+            var token = _ref.token,
+              existed = _ref.existed;
+            _this7.setToken(token);
+            var userGetTimeout = setTimeout(function () {
+              reject(false);
+            }, 10000);
+            var userEventCallback = function userEventCallback() {
+              clearTimeout(userGetTimeout);
+              _this7.sdk.methods.unsubscribeLocalEvent('user', userEventCallback);
+              _this7.events.notify(_eventsName["default"].local.SUCCESS_AUTH, {
+                register: !existed
               });
-            case 11:
-              return _context2.abrupt("return", _context2.sent);
-            case 14:
-              _context2.prev = 14;
-              _context2.t0 = _context2["catch"](4);
-              console.log('error', _context2.t0);
-              this.removeTokens();
-              throw _context2.t0;
-            case 19:
-            case "end":
-              return _context2.stop();
-          }
-        }, _callee2, this, [[4, 14]]);
-      }));
-      function authInWallkit() {
-        return _authInWallkit.apply(this, arguments);
-      }
-      return authInWallkit;
-    }()
+              resolve(true);
+            };
+            _this7.sdk.methods.subscribeLocalEvent('user', userEventCallback);
+          })["catch"](function (error) {
+            var _error$response;
+            console.log('error', error);
+            _classPrivateMethodGet(_this7, _setAuthorizationError, _setAuthorizationError2).call(_this7, error === null || error === void 0 ? void 0 : (_error$response = error.response) === null || _error$response === void 0 ? void 0 : _error$response.error_description);
+            _this7.removeTokens();
+            reject(error);
+          });
+        } else {
+          resolve(false);
+        }
+      });
+    }
   }, {
     key: "getDefaultAuthenticationFormContent",
     value: function getDefaultAuthenticationFormContent() {
@@ -1815,29 +1801,21 @@ var Authentication = /*#__PURE__*/function () {
   }, {
     key: "show",
     value: function () {
-      var _show = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(authFormSlug) {
-        return _regenerator["default"].wrap(function _callee3$(_context3) {
-          while (1) switch (_context3.prev = _context3.next) {
+      var _show = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2() {
+        return _regenerator["default"].wrap(function _callee2$(_context2) {
+          while (1) switch (_context2.prev = _context2.next) {
             case 0:
-              if ((0, _classPrivateFieldGet9["default"])(this, _options).firebase.genuineForm === false) {
-                if (this.authForm) {
-                  this.authForm.defaultForm = authFormSlug;
-                  if (!this.authForm.triggerButton || !this.authForm.triggerButton.isVisible) {
-                    this.authForm.showDefaultForm();
-                  }
-                }
-              }
               this.modal.show();
               if (!this.firebase.isUiShown) {
                 this.checkFirebaseInit();
               }
-            case 3:
+            case 2:
             case "end":
-              return _context3.stop();
+              return _context2.stop();
           }
-        }, _callee3, this);
+        }, _callee2, this);
       }));
-      function show(_x2) {
+      function show() {
         return _show.apply(this, arguments);
       }
       return show;
@@ -1941,30 +1919,30 @@ var Authentication = /*#__PURE__*/function () {
   }, {
     key: "logout",
     value: function () {
-      var _logout = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4() {
+      var _logout = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3() {
         var success;
-        return _regenerator["default"].wrap(function _callee4$(_context4) {
-          while (1) switch (_context4.prev = _context4.next) {
+        return _regenerator["default"].wrap(function _callee3$(_context3) {
+          while (1) switch (_context3.prev = _context3.next) {
             case 0:
-              _context4.prev = 0;
+              _context3.prev = 0;
               this.removeToken();
-              _context4.next = 4;
+              _context3.next = 4;
               return this.firebase.logout();
             case 4:
-              success = _context4.sent;
+              success = _context3.sent;
               if (!success) {
-                _context4.next = 13;
+                _context3.next = 13;
                 break;
               }
               this.removeFirebaseToken();
               if (!(this.reCaptcha.enabled && !this.reCaptcha.loaded)) {
-                _context4.next = 12;
+                _context3.next = 12;
                 break;
               }
-              _context4.next = 10;
+              _context3.next = 10;
               return this.reCaptcha.init();
             case 10:
-              _context4.next = 13;
+              _context3.next = 13;
               break;
             case 12:
               if (this.reCaptcha.loaded) {
@@ -1976,18 +1954,18 @@ var Authentication = /*#__PURE__*/function () {
               }
             case 13:
               this.resetAuthProcess();
-              _context4.next = 20;
+              _context3.next = 20;
               break;
             case 16:
-              _context4.prev = 16;
-              _context4.t0 = _context4["catch"](0);
-              console.log('ERROR:', _context4.t0);
+              _context3.prev = 16;
+              _context3.t0 = _context3["catch"](0);
+              console.log('ERROR:', _context3.t0);
               this.resetAuthProcess();
             case 20:
             case "end":
-              return _context4.stop();
+              return _context3.stop();
           }
-        }, _callee4, this, [[0, 16]]);
+        }, _callee3, this, [[0, 16]]);
       }));
       function logout() {
         return _logout.apply(this, arguments);
@@ -2021,51 +1999,51 @@ var Authentication = /*#__PURE__*/function () {
   }, {
     key: "handleTicketsToken",
     value: function () {
-      var _handleTicketsToken = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(ticketPassAuthToken) {
+      var _handleTicketsToken = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(ticketPassAuthToken) {
         var response, userCredential, firebaseToken;
-        return _regenerator["default"].wrap(function _callee5$(_context5) {
-          while (1) switch (_context5.prev = _context5.next) {
+        return _regenerator["default"].wrap(function _callee4$(_context4) {
+          while (1) switch (_context4.prev = _context4.next) {
             case 0:
-              _context5.prev = 0;
-              _context5.next = 3;
+              _context4.prev = 0;
+              _context4.next = 3;
               return this.sdk.methods.getAuthTokensByTicketPassToken(ticketPassAuthToken);
             case 3:
-              response = _context5.sent;
+              response = _context4.sent;
               if (!response) {
-                _context5.next = 19;
+                _context4.next = 19;
                 break;
               }
-              _context5.next = 7;
+              _context4.next = 7;
               return this.firebase.authWithCustomToken(response.firebase_custom_token);
             case 7:
-              userCredential = _context5.sent;
-              _context5.next = 10;
+              userCredential = _context4.sent;
+              _context4.next = 10;
               return userCredential.user.getIdToken();
             case 10:
-              firebaseToken = _context5.sent;
+              firebaseToken = _context4.sent;
               this.updateFirebaseToken(firebaseToken);
               this.setToken(response.token);
-              _context5.next = 15;
+              _context4.next = 15;
               return this.sdk.methods.getUser();
             case 15:
               this.dispatchTokens();
               this.events.notify(_eventsName["default"].local.SUCCESS_AUTH, true);
               this.events.notify(_eventsName["default"].local.TICKETS_TOKEN_AUTH_SUCCESS, true);
-              return _context5.abrupt("return", true);
+              return _context4.abrupt("return", true);
             case 19:
-              return _context5.abrupt("return", false);
+              return _context4.abrupt("return", false);
             case 22:
-              _context5.prev = 22;
-              _context5.t0 = _context5["catch"](0);
-              console.error(_context5.t0);
-              return _context5.abrupt("return", _context5.t0);
+              _context4.prev = 22;
+              _context4.t0 = _context4["catch"](0);
+              console.error(_context4.t0);
+              return _context4.abrupt("return", _context4.t0);
             case 26:
             case "end":
-              return _context5.stop();
+              return _context4.stop();
           }
-        }, _callee5, this, [[0, 22]]);
+        }, _callee4, this, [[0, 22]]);
       }));
-      function handleTicketsToken(_x3) {
+      function handleTicketsToken(_x2) {
         return _handleTicketsToken.apply(this, arguments);
       }
       return handleTicketsToken;
@@ -2077,8 +2055,8 @@ var Authentication = /*#__PURE__*/function () {
     }
   }, {
     key: "handleOneTapResponse",
-    value: function handleOneTapResponse(_ref) {
-      var credential = _ref.credential;
+    value: function handleOneTapResponse(_ref2) {
+      var credential = _ref2.credential;
       this.frame.sendEvent(_eventsName["default"].wallkit.WALLKIT_EVENT_ONE_TAP_SIGN_IN, credential);
     }
   }, {
@@ -2118,9 +2096,9 @@ function _createModal2() {
 }
 function _initListeners2() {
   var _this10 = this;
-  this.events.subscribe(_eventsName["default"].local.FRAME_MESSAGE, function (_ref2) {
-    var name = _ref2.name,
-      value = _ref2.value;
+  this.events.subscribe(_eventsName["default"].local.FRAME_MESSAGE, function (_ref3) {
+    var name = _ref3.name,
+      value = _ref3.value;
     switch (name) {
       case _eventsName["default"].wallkit.WALLKIT_EVENT_TOKEN:
         if (value) {
@@ -2153,8 +2131,13 @@ function _initListeners2() {
   });
 }
 function _setAuthorizationError2(error) {
-  if (this.authForm) {
-    this.authForm.handleError(error);
+  var _this$authForm;
+  if ((_this$authForm = this.authForm) !== null && _this$authForm !== void 0 && _this$authForm.visibleFormName) {
+    if (error === null) {
+      this.authForm[this.authForm.visibleFormName].resetFormError(error);
+    } else {
+      this.authForm[this.authForm.visibleFormName].setFormError(error);
+    }
   } else {
     var errorPlaceholder = document.getElementById('authorization-error');
     if (errorPlaceholder) {
@@ -2209,7 +2192,6 @@ var _isDebug = /*#__PURE__*/new WeakSet();
 var _initWkListeners = /*#__PURE__*/new WeakSet();
 var _initUIListeners = /*#__PURE__*/new WeakSet();
 var _setDataWkHasAccessInBody = /*#__PURE__*/new WeakSet();
-var _getWallkitUserData = /*#__PURE__*/new WeakSet();
 var _debugUserStatus = /*#__PURE__*/new WeakSet();
 var _debugElementsClickingOnWhichOpensPopups = /*#__PURE__*/new WeakSet();
 var _debugElementsThatReactToTheUsersStatus = /*#__PURE__*/new WeakSet();
@@ -2224,7 +2206,6 @@ var Call = /*#__PURE__*/function () {
     _classPrivateMethodInitSpec(this, _debugElementsThatReactToTheUsersStatus);
     _classPrivateMethodInitSpec(this, _debugElementsClickingOnWhichOpensPopups);
     _classPrivateMethodInitSpec(this, _debugUserStatus);
-    _classPrivateMethodInitSpec(this, _getWallkitUserData);
     _classPrivateMethodInitSpec(this, _setDataWkHasAccessInBody);
     _classPrivateMethodInitSpec(this, _initUIListeners);
     _classPrivateMethodInitSpec(this, _initWkListeners);
@@ -2368,6 +2349,74 @@ var Call = /*#__PURE__*/function () {
       }
     }
   }, {
+    key: "getWallkitUserData",
+    value: function getWallkitUserData() {
+      var _this = this;
+      (0, _classPrivateFieldGet5["default"])(this, _sdk).client.get({
+        path: "/user"
+      }).then(function (response) {
+        console.log(response);
+        _this.setAllDataWkStatusesInDOMElements(response);
+      })["catch"](function (error) {
+        console.log('WK Call ERROR:', error);
+        _this.setAllDataWkStatusesInDOMElements();
+      });
+    }
+  }, {
+    key: "removeAllDataWkStatuses",
+    value: function removeAllDataWkStatuses() {
+      if (_classPrivateMethodGet(this, _isDebug, _isDebug2).call(this)) {
+        console.log("Remove all wallkit statuses from all DOM Elements.");
+        console.log('Remove data-wk-call-user-has-access from body element.');
+      }
+      delete document.body.dataset.wkCallUserHasAccess;
+      var _iterator4 = _createForOfIteratorHelper(document.querySelectorAll(".".concat((0, _classPrivateFieldGet5["default"])(this, _classThatReactOnTheUsersStatus)))),
+        _step4;
+      try {
+        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+          var element = _step4.value;
+          if (_classPrivateMethodGet(this, _isDebug, _isDebug2).call(this)) {
+            console.log('Remove data-wk-call-status-user from element:', element);
+          }
+          delete element.dataset.wkCallStatusUser;
+        }
+      } catch (err) {
+        _iterator4.e(err);
+      } finally {
+        _iterator4.f();
+      }
+      var _iterator5 = _createForOfIteratorHelper(document.querySelectorAll(".".concat((0, _classPrivateFieldGet5["default"])(this, _classThatReactOnTheUsersPlans)))),
+        _step5;
+      try {
+        for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+          var _element = _step5.value;
+          if (_classPrivateMethodGet(this, _isDebug, _isDebug2).call(this)) {
+            console.log('Remove data-wk-call-status-plans from element:', _element);
+          }
+          delete _element.dataset.wkCallStatusPlans;
+        }
+      } catch (err) {
+        _iterator5.e(err);
+      } finally {
+        _iterator5.f();
+      }
+      var _iterator6 = _createForOfIteratorHelper(document.querySelectorAll(".".concat((0, _classPrivateFieldGet5["default"])(this, _classThatReactOnTheUsersEvents)))),
+        _step6;
+      try {
+        for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+          var _element2 = _step6.value;
+          if (_classPrivateMethodGet(this, _isDebug, _isDebug2).call(this)) {
+            console.log('Remove data-wk-call-status-events from element:', _element2);
+          }
+          delete _element2.dataset.wkCallStatusEvents;
+        }
+      } catch (err) {
+        _iterator6.e(err);
+      } finally {
+        _iterator6.f();
+      }
+    }
+  }, {
     key: "init",
     value: function init() {
       if (_classPrivateMethodGet(this, _isDebug, _isDebug2).call(this)) {
@@ -2382,7 +2431,7 @@ var Call = /*#__PURE__*/function () {
       _classPrivateMethodGet(this, _initWkListeners, _initWkListeners2).call(this);
       _classPrivateMethodGet(this, _initUIListeners, _initUIListeners2).call(this);
       if ((0, _classPrivateFieldGet5["default"])(this, _sdk).methods.isAuthenticated()) {
-        _classPrivateMethodGet(this, _getWallkitUserData, _getWallkitUserData2).call(this);
+        this.getWallkitUserData();
       } else {
         this.setAllDataWkStatusesInDOMElements();
       }
@@ -2396,51 +2445,51 @@ function _isDebug2() {
   return !!((_classPrivateFieldGet3 = (0, _classPrivateFieldGet5["default"])(this, _config)) !== null && _classPrivateFieldGet3 !== void 0 && (_classPrivateFieldGet4 = _classPrivateFieldGet3.call) !== null && _classPrivateFieldGet4 !== void 0 && _classPrivateFieldGet4.debug);
 }
 function _initWkListeners2() {
-  var _this = this;
+  var _this2 = this;
   (0, _classPrivateFieldGet5["default"])(this, _events).subscribe(_eventsName["default"].local.FRAME_MESSAGE, function (_ref3) {
     var name = _ref3.name,
       _ = _ref3._;
     switch (name) {
       case _eventsName["default"].wallkit.WALLKIT_LOGOUT:
-        _this.setAllDataWkStatusesInDOMElements();
-        _classPrivateMethodGet(_this, _setDataWkHasAccessInBody, _setDataWkHasAccessInBody2).call(_this, false);
+        _this2.setAllDataWkStatusesInDOMElements();
+        _classPrivateMethodGet(_this2, _setDataWkHasAccessInBody, _setDataWkHasAccessInBody2).call(_this2, false);
         break;
       case _eventsName["default"].wallkit.WALLKIT_EVENT_USER:
-        _classPrivateMethodGet(_this, _getWallkitUserData, _getWallkitUserData2).call(_this);
+        _this2.getWallkitUserData();
         break;
     }
   });
   (0, _classPrivateFieldGet5["default"])(this, _events).subscribe(_eventsName["default"].local.SUCCESS_AUTH, function (value) {
-    if (_classPrivateMethodGet(_this, _isDebug, _isDebug2).call(_this)) {
+    if (_classPrivateMethodGet(_this2, _isDebug, _isDebug2).call(_this2)) {
       console.log('subscribe ventsNames.local.SUCCESS_AUTH', value);
     }
-    _classPrivateMethodGet(_this, _getWallkitUserData, _getWallkitUserData2).call(_this);
+    _this2.getWallkitUserData();
   });
   (0, _classPrivateFieldGet5["default"])(this, _events).subscribe(_eventsName["default"].local.CHECK_USER_ACCESS, function (value) {
-    if (_classPrivateMethodGet(_this, _isDebug, _isDebug2).call(_this)) {
+    if (_classPrivateMethodGet(_this2, _isDebug, _isDebug2).call(_this2)) {
       console.log('subscribe ventsNames.local.CHECK_USER_ACCESS', value);
     }
-    _classPrivateMethodGet(_this, _setDataWkHasAccessInBody, _setDataWkHasAccessInBody2).call(_this, value);
+    _classPrivateMethodGet(_this2, _setDataWkHasAccessInBody, _setDataWkHasAccessInBody2).call(_this2, value);
   });
 }
 function _initUIListeners2() {
-  var _this2 = this;
+  var _this3 = this;
   document.body.addEventListener('click', function (e) {
     try {
-      if (_classPrivateMethodGet(_this2, _isDebug, _isDebug2).call(_this2)) {
+      if (_classPrivateMethodGet(_this3, _isDebug, _isDebug2).call(_this3)) {
         console.log('Click on element: ', e.target);
-        console.log("Does element have class ".concat((0, _classPrivateFieldGet5["default"])(_this2, _classForHandleClick), ": ").concat(e.target.classList.contains((0, _classPrivateFieldGet5["default"])(_this2, _classForHandleClick))));
+        console.log("Does element have class ".concat((0, _classPrivateFieldGet5["default"])(_this3, _classForHandleClick), ": ").concat(e.target.classList.contains((0, _classPrivateFieldGet5["default"])(_this3, _classForHandleClick))));
       }
 
       // skip if target element has no class `${this.#classForHandleClick}`
-      if (!e.target.classList.contains("".concat((0, _classPrivateFieldGet5["default"])(_this2, _classForHandleClick)))) return;
+      if (!e.target.classList.contains("".concat((0, _classPrivateFieldGet5["default"])(_this3, _classForHandleClick)))) return;
 
       // retrieve all classes for element
       var classes = Array.from(e.target.classList);
       var slugAndParamStr = classes.find(function (className) {
         return className.startsWith('wk–');
       });
-      if (_classPrivateMethodGet(_this2, _isDebug, _isDebug2).call(_this2)) {
+      if (_classPrivateMethodGet(_this3, _isDebug, _isDebug2).call(_this3)) {
         console.log('Popup\'s slug and params: ', slugAndParamStr);
         console.log('Exit if slug and param === "undefined"');
       }
@@ -2450,17 +2499,17 @@ function _initUIListeners2() {
       var slugAndParamArr = slugAndParamStr.split("–");
       var popupSlug = slugAndParamArr[1];
       var popupParams = slugAndParamArr[2];
-      if (_classPrivateMethodGet(_this2, _isDebug, _isDebug2).call(_this2)) {
+      if (_classPrivateMethodGet(_this3, _isDebug, _isDebug2).call(_this3)) {
         console.log('Popup\'s slug: ', popupSlug);
         console.log('Popup\'s params: ', popupParams);
       }
 
       // open popup without params
       if (typeof popupSlug !== "undefined" && typeof popupParams === "undefined") {
-        if (_classPrivateMethodGet(_this2, _isDebug, _isDebug2).call(_this2)) {
+        if (_classPrivateMethodGet(_this3, _isDebug, _isDebug2).call(_this3)) {
           console.log('Open popup without params. Only with slug: ', popupSlug);
         }
-        (0, _classPrivateFieldGet5["default"])(_this2, _popup).open(popupSlug);
+        (0, _classPrivateFieldGet5["default"])(_this3, _popup).open(popupSlug);
         e.preventDefault();
         return;
       }
@@ -2469,7 +2518,7 @@ function _initUIListeners2() {
       var popupParamsArr = popupParams.split('-');
       var key = popupParamsArr[0];
       var value = popupParamsArr[1];
-      if (_classPrivateMethodGet(_this2, _isDebug, _isDebug2).call(_this2)) {
+      if (_classPrivateMethodGet(_this3, _isDebug, _isDebug2).call(_this3)) {
         console.log('Popup\'s param key: ', key);
         console.log('Popup\'s param value: ', value);
       }
@@ -2487,10 +2536,10 @@ function _initUIListeners2() {
           item_key: value
         });
         var path = "".concat(popupSlug, "?[").concat(params, "]");
-        if (_classPrivateMethodGet(_this2, _isDebug, _isDebug2).call(_this2)) {
+        if (_classPrivateMethodGet(_this3, _isDebug, _isDebug2).call(_this3)) {
           console.log('Open popup with params: ', path);
         }
-        (0, _classPrivateFieldGet5["default"])(_this2, _popup).open(path);
+        (0, _classPrivateFieldGet5["default"])(_this3, _popup).open(path);
         e.preventDefault();
       }
     } catch (error) {
@@ -2504,69 +2553,12 @@ function _setDataWkHasAccessInBody2(value) {
   }
   document.body.dataset.wkCallUserHasAccess = value;
 }
-function _getWallkitUserData2() {
-  var _this3 = this;
-  (0, _classPrivateFieldGet5["default"])(this, _sdk).client.get({
-    path: "/user"
-  }).then(function (response) {
-    console.log(response);
-    _this3.setAllDataWkStatusesInDOMElements(response);
-  })["catch"](function (error) {
-    console.log('WK Call ERROR:', error);
-    _this3.setAllDataWkStatusesInDOMElements();
-  });
-}
 function _debugUserStatus2() {
   console.log("User status: ", this.getUserStatus());
 }
 function _debugElementsClickingOnWhichOpensPopups2() {
   console.log('Elements, clicking on which opens popups:');
-  var _iterator4 = _createForOfIteratorHelper(document.querySelectorAll(".".concat((0, _classPrivateFieldGet5["default"])(this, _classForHandleClick)))),
-    _step4;
-  try {
-    for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-      var element = _step4.value;
-      console.log(element);
-    }
-  } catch (err) {
-    _iterator4.e(err);
-  } finally {
-    _iterator4.f();
-  }
-}
-function _debugElementsThatReactToTheUsersStatus2() {
-  console.log('Elements that react to the user\'s status:');
-  var _iterator5 = _createForOfIteratorHelper(document.querySelectorAll(".".concat((0, _classPrivateFieldGet5["default"])(this, _classThatReactOnTheUsersStatus)))),
-    _step5;
-  try {
-    for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-      var element = _step5.value;
-      console.log(element);
-    }
-  } catch (err) {
-    _iterator5.e(err);
-  } finally {
-    _iterator5.f();
-  }
-}
-function _debugElementsThatReactToTheUsersPlans2() {
-  console.log('Elements that react to the user\'s plans:');
-  var _iterator6 = _createForOfIteratorHelper(document.querySelectorAll(".".concat((0, _classPrivateFieldGet5["default"])(this, _classThatReactOnTheUsersPlans)))),
-    _step6;
-  try {
-    for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-      var element = _step6.value;
-      console.log(element);
-    }
-  } catch (err) {
-    _iterator6.e(err);
-  } finally {
-    _iterator6.f();
-  }
-}
-function _debugElementsThatReactToTheUsersEvents2() {
-  console.log('Elements that react to the user\'s events:');
-  var _iterator7 = _createForOfIteratorHelper(document.querySelectorAll(".".concat((0, _classPrivateFieldGet5["default"])(this, _classThatReactOnTheUsersEvents)))),
+  var _iterator7 = _createForOfIteratorHelper(document.querySelectorAll(".".concat((0, _classPrivateFieldGet5["default"])(this, _classForHandleClick)))),
     _step7;
   try {
     for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
@@ -2577,6 +2569,51 @@ function _debugElementsThatReactToTheUsersEvents2() {
     _iterator7.e(err);
   } finally {
     _iterator7.f();
+  }
+}
+function _debugElementsThatReactToTheUsersStatus2() {
+  console.log('Elements that react to the user\'s status:');
+  var _iterator8 = _createForOfIteratorHelper(document.querySelectorAll(".".concat((0, _classPrivateFieldGet5["default"])(this, _classThatReactOnTheUsersStatus)))),
+    _step8;
+  try {
+    for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+      var element = _step8.value;
+      console.log(element);
+    }
+  } catch (err) {
+    _iterator8.e(err);
+  } finally {
+    _iterator8.f();
+  }
+}
+function _debugElementsThatReactToTheUsersPlans2() {
+  console.log('Elements that react to the user\'s plans:');
+  var _iterator9 = _createForOfIteratorHelper(document.querySelectorAll(".".concat((0, _classPrivateFieldGet5["default"])(this, _classThatReactOnTheUsersPlans)))),
+    _step9;
+  try {
+    for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
+      var element = _step9.value;
+      console.log(element);
+    }
+  } catch (err) {
+    _iterator9.e(err);
+  } finally {
+    _iterator9.f();
+  }
+}
+function _debugElementsThatReactToTheUsersEvents2() {
+  console.log('Elements that react to the user\'s events:');
+  var _iterator10 = _createForOfIteratorHelper(document.querySelectorAll(".".concat((0, _classPrivateFieldGet5["default"])(this, _classThatReactOnTheUsersEvents)))),
+    _step10;
+  try {
+    for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
+      var element = _step10.value;
+      console.log(element);
+    }
+  } catch (err) {
+    _iterator10.e(err);
+  } finally {
+    _iterator10.f();
   }
 }
 
@@ -2593,8 +2630,6 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports["default"] = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(8047));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(7240));
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
 var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
 var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(5194));
@@ -2642,20 +2677,12 @@ var Content = /*#__PURE__*/function () {
         taxonimiesTitles.push(taxonomies[taxKey].label);
         var termKeysKey = "term_keys[".concat(taxKey, "]");
         var termTitleKey = "term_titles[".concat(taxKey, "]");
-        var targetTermKeys = formatted[termKeysKey];
-        var targetTermTitles = formatted[termTitleKey];
         if ((_taxonomies$taxKey = taxonomies[taxKey]) !== null && _taxonomies$taxKey !== void 0 && _taxonomies$taxKey.items) {
+          formatted[termKeysKey] = [];
+          formatted[termTitleKey] = [];
           taxonomies[taxKey].items.forEach(function (item) {
-            if (targetTermKeys) {
-              targetTermKeys.push(item.slug);
-            } else {
-              formatted[termKeysKey] = [item.slug];
-            }
-            if (targetTermTitles) {
-              targetTermTitles.push(item.slug);
-            } else {
-              formatted[termTitleKey] = [item.name];
-            }
+            formatted[termKeysKey].push(item.slug);
+            formatted[termTitleKey].push(item.name);
           });
         }
         formatted[termKeysKey] = formatted[termKeysKey].join(',');
@@ -2685,7 +2712,7 @@ var Content = /*#__PURE__*/function () {
         if (_this.sdk.methods.isAuthenticated()) {
           _this.getAccessDetails(content.id);
         }
-        (0, _classPrivateFieldGet2["default"])(_this, _events).notify(_eventsName.CHECK_USER_ACCESS, true);
+        (0, _classPrivateFieldGet2["default"])(_this, _events).notify(_eventsName.CHECK_USER_ACCESS, response.allow);
         return {
           allowed: response.allow,
           data: response
@@ -2700,68 +2727,42 @@ var Content = /*#__PURE__*/function () {
     }
   }, {
     key: "checkAccess",
-    value: function () {
-      var _checkAccess = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
-        var response;
-        return _regenerator["default"].wrap(function _callee$(_context) {
-          while (1) switch (_context.prev = _context.next) {
-            case 0:
-              _context.prev = 0;
-              _context.next = 3;
-              return this.sdk.methods.checkAccess(this.content.id);
-            case 3:
-              response = _context.sent;
-              if (!(this.sdk.methods.isAuthenticated() || (0, _classPrivateFieldGet2["default"])(this, _options).checkAccessDetails)) {
-                _context.next = 7;
-                break;
-              }
-              _context.next = 7;
-              return this.getAccessDetails(this.content.id);
-            case 7:
-              (0, _classPrivateFieldGet2["default"])(this, _events).notify(_eventsName.CHECK_USER_ACCESS, true);
-              return _context.abrupt("return", {
-                allowed: response.allow,
-                data: response
-              });
-            case 11:
-              _context.prev = 11;
-              _context.t0 = _context["catch"](0);
-              if (!(_context.t0.error === 'incorrect_content_key')) {
-                _context.next = 15;
-                break;
-              }
-              return _context.abrupt("return", this.checkContentAccessAndSync(this.content));
-            case 15:
-              (0, _classPrivateFieldGet2["default"])(this, _events).notify(_eventsName.CHECK_USER_ACCESS, false);
-              return _context.abrupt("return", {
-                allowed: false,
-                error: _context.t0
-              });
-            case 17:
-            case "end":
-              return _context.stop();
-          }
-        }, _callee, this, [[0, 11]]);
-      }));
-      function checkAccess() {
-        return _checkAccess.apply(this, arguments);
-      }
-      return checkAccess;
-    }()
+    value: function checkAccess() {
+      var _this2 = this;
+      return this.sdk.methods.checkAccess(this.content.id).then(function (response) {
+        if (_this2.sdk.methods.isAuthenticated()) {
+          _this2.getAccessDetails(_this2.content.id);
+        }
+        (0, _classPrivateFieldGet2["default"])(_this2, _events).notify(_eventsName.CHECK_USER_ACCESS, response.allow);
+        return {
+          allowed: response.allow,
+          data: response
+        };
+      })["catch"](function (error) {
+        if (error.error === 'incorrect_content_key') {
+          return _this2.checkContentAccessAndSync(_this2.content);
+        }
+        (0, _classPrivateFieldGet2["default"])(_this2, _events).notify(_eventsName.CHECK_USER_ACCESS, false);
+        return {
+          allowed: false,
+          error: error
+        };
+      });
+    }
   }, {
     key: "getAccessDetails",
     value: function getAccessDetails(contentId) {
-      var _this2 = this;
+      var _this3 = this;
       return this.sdk.client.get({
         path: "/user/content-access-details/".concat(contentId)
       }).then(function (response) {
         if (response) {
           var terms = response.content_terms;
-          _this2.accessCount = terms.usedLimitInPeriod;
-          _this2.accessCountLimit = terms.accessLimit;
+          _this3.accessCount = terms.usedLimitInPeriod;
+          _this3.accessCountLimit = terms.accessLimit;
           return {
-            accessCount: _this2.accessCount,
-            accessCountLimit: _this2.accessCountLimit
+            accessCount: _this3.accessCount,
+            accessCountLimit: _this3.accessCountLimit
           };
         }
         return {
@@ -3024,14 +3025,6 @@ var TriggerButton = /*#__PURE__*/function () {
       if (targetElement) {
         targetElement.appendChild(this.element);
       }
-    }
-  }, {
-    key: "isVisible",
-    get: function get() {
-      if (window.getComputedStyle(this.element)) {
-        return window.getComputedStyle(this.element).getPropertyValue('display') === 'block';
-      }
-      return false;
     }
   }]);
   return TriggerButton;
@@ -3471,34 +3464,24 @@ exports.SIGN_UP_FORM_SLUG = exports.SIGN_IN_FORM_SLUG = exports.RESET_PASSWORD_F
 var _defineProperty2 = _interopRequireDefault(__webpack_require__(366));
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
 var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
-var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(5194));
-var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(8478));
 var _DOM = __webpack_require__(2909);
 var _TriggerButton = __webpack_require__(447);
 var _LoginForm = __webpack_require__(4138);
 var _SignUpForm = __webpack_require__(8955);
 var _ForgotPasswordForm = __webpack_require__(7486);
-function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
-function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
 var SIGN_UP_FORM_SLUG = 'sign-up';
 exports.SIGN_UP_FORM_SLUG = SIGN_UP_FORM_SLUG;
 var SIGN_IN_FORM_SLUG = 'sign-in';
 exports.SIGN_IN_FORM_SLUG = SIGN_IN_FORM_SLUG;
 var RESET_PASSWORD_FORM_SLUG = 'reset-password';
 exports.RESET_PASSWORD_FORM_SLUG = RESET_PASSWORD_FORM_SLUG;
-var _options = /*#__PURE__*/new WeakMap();
 var AuthForm = /*#__PURE__*/function () {
   function AuthForm(selector, options) {
     var _options$signUp,
       _this = this,
       _this$forms;
     (0, _classCallCheck2["default"])(this, AuthForm);
-    _classPrivateFieldInitSpec(this, _options, {
-      writable: true,
-      value: void 0
-    });
-    (0, _classPrivateFieldSet2["default"])(this, _options, options);
-    this.defaultForm = (options === null || options === void 0 ? void 0 : options.defaultForm) || false;
+    this.defaultFormSlug = (options === null || options === void 0 ? void 0 : options.defaultForm) || SIGN_UP_FORM_SLUG;
     this.wrapper = (0, _DOM.createElement)('div', {
       id: 'wk-auth-form'
     });
@@ -3520,33 +3503,31 @@ var AuthForm = /*#__PURE__*/function () {
     this.loginForm.formWrapper.addEventListener('click', function (event) {
       if (event.target.id === 'auth-signup-link') {
         event.preventDefault();
-        _this.showForm(SIGN_UP_FORM_SLUG);
+        _this.loginForm.hide();
+        _this.signUpForm.show();
+        _this.loginForm.resetForm();
       } else if (event.target.id === 'auth-password-link') {
         event.preventDefault();
-        _this.showForm(RESET_PASSWORD_FORM_SLUG);
+        _this.loginForm.hide();
+        _this.loginForm.resetForm();
+        _this.forgotPasswordForm.show();
       }
     });
     this.loginForm.hide();
     if (options.signUp === true) {
       this.signUpForm = new _SignUpForm.SignupForm(selector, {
-        cancelBtn: options.triggerButton !== false,
         termsOfService: options.termsOfService,
         onSubmit: function onSubmit(data) {
           if (options.onSignUp) {
             options.onSignUp(data);
           }
-        },
-        onCancel: function onCancel() {
-          if (options.onCancel) {
-            options.onCancel();
-            _this.signUpForm.resetForm();
-          }
         }
       });
       this.signUpForm.formWrapper.addEventListener('click', function (event) {
         if (event.target.id === 'auth-signin-link') {
-          event.preventDefault();
-          _this.showForm(SIGN_IN_FORM_SLUG);
+          _this.loginForm.show();
+          _this.signUpForm.hide();
+          _this.signUpForm.resetForm();
         }
       });
       this.signUpForm.hide();
@@ -3561,7 +3542,9 @@ var AuthForm = /*#__PURE__*/function () {
     this.forgotPasswordForm.formWrapper.addEventListener('click', function (event) {
       if (event.target.id === 'back-to-login') {
         event.preventDefault();
-        _this.showForm(SIGN_IN_FORM_SLUG);
+        _this.forgotPasswordForm.hide();
+        _this.forgotPasswordForm.resetForm();
+        _this.loginForm.show();
         _this.forgotPasswordForm.reRender();
       }
     });
@@ -3569,7 +3552,7 @@ var AuthForm = /*#__PURE__*/function () {
     if (options.triggerButton !== false) {
       this.triggerButton = new _TriggerButton.TriggerButton(selector, {
         onClick: function onClick() {
-          _this.defaultForm.show();
+          _this.loginForm.show();
           _this.triggerButton.hide();
           if (options.onAuthFormShow) {
             options.onAuthFormShow();
@@ -3583,40 +3566,27 @@ var AuthForm = /*#__PURE__*/function () {
     key: "defaultForm",
     get: function get() {
       return this.forms[this.defaultFormSlug];
-    },
-    set: function set(formSlug) {
-      if (formSlug && [SIGN_UP_FORM_SLUG, SIGN_IN_FORM_SLUG, RESET_PASSWORD_FORM_SLUG].includes(formSlug)) {
-        this.defaultFormSlug = formSlug;
-      } else {
-        this.defaultFormSlug = (0, _classPrivateFieldGet2["default"])(this, _options).defaultForm || SIGN_UP_FORM_SLUG;
-      }
     }
   }, {
-    key: "activeForm",
+    key: "visibleFormName",
     get: function get() {
-      var _this2 = this;
-      var form = false;
-      if (!!this.forms && Object.keys(this.forms).length) {
-        Object.keys(this.forms).forEach(function (key) {
-          if (_this2.forms[key].isVisible) {
-            form = _this2.forms[key];
-          }
-        });
-      }
-      return form;
-    }
-  }, {
-    key: "showForm",
-    value: function showForm(authFormSlug) {
-      if (authFormSlug && this.forms[authFormSlug]) {
-        this.hide();
-        this.forms[authFormSlug].show();
+      if (this.signUpForm.isVisible()) {
+        return 'signUpForm';
+      } else if (this.loginForm.isVisible()) {
+        return 'loginForm';
+      } else if (this.forgotPasswordForm.isVisible()) {
+        return 'forgotPasswordForm';
+      } else {
+        return false;
       }
     }
   }, {
     key: "showDefaultForm",
     value: function showDefaultForm() {
-      this.showForm(this.defaultFormSlug);
+      var form = this.defaultForm;
+      if (form) {
+        form.show();
+      }
     }
   }, {
     key: "reset",
@@ -3638,17 +3608,6 @@ var AuthForm = /*#__PURE__*/function () {
             form.hide();
             form.resetForm();
           }
-        }
-      }
-    }
-  }, {
-    key: "handleError",
-    value: function handleError(error) {
-      if (this.activeForm) {
-        if (error === null) {
-          this.activeForm.resetFormError(error);
-        } else {
-          this.activeForm.setFormError(error);
         }
       }
     }
@@ -3762,7 +3721,7 @@ var ChangePasswordForm = /*#__PURE__*/function (_Form) {
       name: 'wk-new-password-confirm',
       testStrength: true,
       passwordHint: false,
-      label: 'New Password Confirmation',
+      label: 'New Password Confirm',
       type: 'password',
       relatedData: {
         newPassword: _this.newPasswordField
@@ -4061,9 +4020,6 @@ var SignupForm = /*#__PURE__*/function (_Form) {
       _this.fields.push(_this.tosField);
     }
     _this.init();
-    if (_options.onCancel) {
-      _this.cancelBtn.addEventListener('click', _options.onCancel.bind((0, _assertThisInitialized2["default"])(_this)));
-    }
     return _this;
   }
   (0, _createClass2["default"])(SignupForm, [{
@@ -4080,9 +4036,6 @@ var SignupForm = /*#__PURE__*/function (_Form) {
           href: '#'
         }
       }));
-      if (this.options.cancelBtn !== false) {
-        formFooter.appendChild(this.cancelBtn);
-      }
       formFooter.appendChild(this.submitBtn);
       return formFooter;
     }
@@ -4284,11 +4237,8 @@ var Form = /*#__PURE__*/function () {
     }
   }, {
     key: "isVisible",
-    get: function get() {
-      if (window.getComputedStyle(this.formWrapper)) {
-        return window.getComputedStyle(this.formWrapper).getPropertyValue('display') === 'block';
-      }
-      return false;
+    value: function isVisible() {
+      return this.formWrapper.style.display === 'block';
     }
   }, {
     key: "submitForm",
@@ -4778,7 +4728,7 @@ Object.defineProperty(exports, "__esModule", ({
 exports["default"] = void 0;
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
 var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
-var _classPrivateFieldGet4 = _interopRequireDefault(__webpack_require__(5194));
+var _classPrivateFieldGet6 = _interopRequireDefault(__webpack_require__(5194));
 var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(8478));
 var _DOM = __webpack_require__(2909);
 var _constants = __webpack_require__(9066);
@@ -4826,17 +4776,18 @@ var SDK = /*#__PURE__*/function () {
     key: "onLoad",
     value: function onLoad() {
       if (window.Wallkit) {
-        var _classPrivateFieldGet2;
+        var _classPrivateFieldGet2, _classPrivateFieldGet3, _classPrivateFieldGet4;
         window.Wallkit.init({
-          resource: (0, _classPrivateFieldGet4["default"])(this, _options).public_key,
-          api_url: (0, _classPrivateFieldGet4["default"])(this, _apiUrl)
+          resource: (0, _classPrivateFieldGet6["default"])(this, _options).public_key,
+          api_url: (0, _classPrivateFieldGet6["default"])(this, _apiUrl),
+          subDomainCookie: (_classPrivateFieldGet2 = (_classPrivateFieldGet3 = (0, _classPrivateFieldGet6["default"])(this, _options).cookies) === null || _classPrivateFieldGet3 === void 0 ? void 0 : _classPrivateFieldGet3.subDomain) !== null && _classPrivateFieldGet2 !== void 0 ? _classPrivateFieldGet2 : false
         });
         this.methods = window.Wallkit;
         this.client = window.Wallkit.client;
-        (0, _classPrivateFieldGet4["default"])(this, _events).notify(_eventsName.WALLKIT_SDK_LOADED, window.Wallkit);
-        if ((_classPrivateFieldGet2 = (0, _classPrivateFieldGet4["default"])(this, _options)) !== null && _classPrivateFieldGet2 !== void 0 && _classPrivateFieldGet2.onLoaded) {
-          var _classPrivateFieldGet3;
-          (_classPrivateFieldGet3 = (0, _classPrivateFieldGet4["default"])(this, _options)) === null || _classPrivateFieldGet3 === void 0 ? void 0 : _classPrivateFieldGet3.onLoaded();
+        (0, _classPrivateFieldGet6["default"])(this, _events).notify(_eventsName.WALLKIT_SDK_LOADED, window.Wallkit);
+        if ((_classPrivateFieldGet4 = (0, _classPrivateFieldGet6["default"])(this, _options)) !== null && _classPrivateFieldGet4 !== void 0 && _classPrivateFieldGet4.onLoaded) {
+          var _classPrivateFieldGet5;
+          (_classPrivateFieldGet5 = (0, _classPrivateFieldGet6["default"])(this, _options)) === null || _classPrivateFieldGet5 === void 0 ? void 0 : _classPrivateFieldGet5.onLoaded();
         }
       }
     }
@@ -4846,7 +4797,7 @@ var SDK = /*#__PURE__*/function () {
       var _this = this;
       return new Promise(function (resolve) {
         if (!_this.methods) {
-          (0, _classPrivateFieldGet4["default"])(_this, _events).subscribe(_eventsName.WALLKIT_SDK_LOADED, function () {
+          (0, _classPrivateFieldGet6["default"])(_this, _events).subscribe(_eventsName.WALLKIT_SDK_LOADED, function () {
             return resolve(_this);
           });
         } else {
@@ -4857,7 +4808,7 @@ var SDK = /*#__PURE__*/function () {
   }, {
     key: "load",
     value: function load() {
-      (0, _DOM.insertScript)("".concat(_constants.WALLKIT_CDN_URL, "/js/sdk/0.0.47/wallkit.umd.min.js"), 'wallkit-js-sdk', this.onLoad.bind(this));
+      (0, _DOM.insertScript)("".concat(_constants.WALLKIT_CDN_URL, "/js/sdk/0.0.48/wallkit.umd.min.js"), 'wallkit-js-sdk', this.onLoad.bind(this));
     }
   }]);
   return SDK;
@@ -5009,7 +4960,7 @@ function _setErrorMessageChangePasswordForm2(error) {
 }
 function _successChangePasswordForm2() {
   if (this.changePasswordForm) {
-    this.changePasswordForm.showFormResult("\n            <div class=\"wk-success-message wk-password-reset-success\">\n                <h2 class=\"wk-success-message__title\">Your password has been successfully changed!</h2>\n                <a href=\"#\" class=\"wk-form__link account-settings-link\">Back to account settings</a>\n            </div>\n        ");
+    this.changePasswordForm.showFormResult("\n            <div class=\"wk-success-message wk-password-reset-success\">\n                <h2 class=\"wk-success-message__title\">Password updated.</h2>\n                <a href=\"#\" class=\"wk-form__link account-settings-link\">Back to account settings</a>\n            </div>\n        ");
     if (this.modal) {
       this.modal.toggleLoader(false);
     }
@@ -5151,16 +5102,21 @@ exports["default"] = _default;
 /***/ }),
 
 /***/ 5048:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
+var _interopRequireDefault = __webpack_require__(5656);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.setCookie = exports.removeCookie = exports["default"] = void 0;
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(366));
 var setCookie = function setCookie(name, value, options) {
+  if (!name || !value) {
+    return;
+  }
   options = options || {};
   var _options = options,
     expires = _options.expires;
@@ -5172,20 +5128,27 @@ var setCookie = function setCookie(name, value, options) {
   if (expires && expires.toUTCString) {
     options.expires = expires.toUTCString();
   }
-  value = encodeURIComponent(value);
-  var updatedCookie = "".concat(name, "=").concat(value);
+  var updatedCookie = "".concat(name, "=").concat(encodeURIComponent(value), "; ");
   for (var propName in options) {
-    updatedCookie += "; " + propName;
     var propValue = options[propName];
     if (propValue) {
-      updatedCookie += "=" + propValue;
+      updatedCookie += "".concat(propName, "=").concat(propValue, "; ");
     }
   }
   document.cookie = updatedCookie;
 };
 exports.setCookie = setCookie;
-var removeCookie = function removeCookie(name) {
-  document.cookie = "".concat(name, "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;");
+var removeCookie = function removeCookie(name, domain) {
+  var _props;
+  var props = (_props = {}, (0, _defineProperty2["default"])(_props, name, ''), (0, _defineProperty2["default"])(_props, "expires", 'Thu, 01 Jan 1970 00:00:00 UTC'), (0, _defineProperty2["default"])(_props, "path", '/'), (0, _defineProperty2["default"])(_props, "domain", domain || null), _props);
+  var cookieFingerprint = '';
+  for (var propName in props) {
+    var propValue = props[propName];
+    if (propValue !== null && propValue !== undefined) {
+      cookieFingerprint += "".concat(propName, "=").concat(propValue, "; ");
+    }
+  }
+  document.cookie = cookieFingerprint;
 };
 exports.removeCookie = removeCookie;
 var _default = {
@@ -5314,7 +5277,7 @@ var _interopRequireDefault = __webpack_require__(5656);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.resetHash = exports.parseModalHashURL = exports.parseAuthTokenHash = void 0;
+exports.resetHash = exports.parseModalHashURL = exports.parseAuthTokenHash = exports.getParentDomain = exports.getDomainWithoutSubdomain = void 0;
 var _typeof2 = _interopRequireDefault(__webpack_require__(2125));
 var parseModalHashURL = function parseModalHashURL() {
   var UryModal = /#WkModal\((.*)\)$/.exec(decodeURIComponent(window.location.hash));
@@ -5355,6 +5318,15 @@ var resetHash = function resetHash() {
   window.history.pushState('', '', path);
 };
 exports.resetHash = resetHash;
+var getDomainWithoutSubdomain = function getDomainWithoutSubdomain(url) {
+  var urlParts = new URL(url).hostname.split('.');
+  return urlParts.slice(0).slice(-(urlParts.length === 4 ? 3 : 2)).join('.');
+};
+exports.getDomainWithoutSubdomain = getDomainWithoutSubdomain;
+var getParentDomain = function getParentDomain() {
+  return ".".concat(getDomainWithoutSubdomain(window.location));
+};
+exports.getParentDomain = getParentDomain;
 
 /***/ }),
 

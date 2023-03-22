@@ -47,22 +47,14 @@ export default class Content {
             let termKeysKey = `term_keys[${taxKey}]`;
             let termTitleKey = `term_titles[${taxKey}]`;
 
-            let targetTermKeys = formatted[termKeysKey];
-            let targetTermTitles = formatted[termTitleKey];
-
             if (taxonomies[taxKey]?.items) {
-                taxonomies[taxKey].items.forEach((item) => {
-                    if (targetTermKeys) {
-                        targetTermKeys.push(item.slug);
-                    } else {
-                        formatted[termKeysKey] = [item.slug];
-                    }
 
-                    if (targetTermTitles) {
-                        targetTermTitles.push(item.slug);
-                    } else {
-                        formatted[termTitleKey] = [item.name];
-                    }
+                formatted[termKeysKey] = [];
+                formatted[termTitleKey] = [];
+
+                taxonomies[taxKey].items.forEach((item) => {
+                    formatted[termKeysKey].push(item.slug);
+                    formatted[termTitleKey].push(item.name);
                 });
             }
 
@@ -91,7 +83,7 @@ export default class Content {
                 this.getAccessDetails(content.id);
             }
 
-            this.#events.notify(CHECK_USER_ACCESS, true);
+            this.#events.notify(CHECK_USER_ACCESS, response.allow);
             return { allowed: response.allow, data: response };
         }).catch((error) => {
 
@@ -107,7 +99,7 @@ export default class Content {
                 await this.getAccessDetails(this.content.id);
             }
 
-            this.#events.notify(CHECK_USER_ACCESS, true);
+            this.#events.notify(CHECK_USER_ACCESS, response.allow);
             return { allowed: response.allow, data: response };
         } catch (error) {
             if (error.error === 'incorrect_content_key') {
