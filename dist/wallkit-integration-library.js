@@ -1371,7 +1371,11 @@ function _getElementPlaceholder2(options) {
   var defaultPlaceholder = "#".concat(_constants.WALLKIT_FIREBASE_UI_PLACEHOLDER_ID);
   if (this.genuineForm) {
     var _options$elementSelec;
-    return (_options$elementSelec = options === null || options === void 0 ? void 0 : options.elementSelector) !== null && _options$elementSelec !== void 0 ? _options$elementSelec : defaultPlaceholder;
+    var selector = (_options$elementSelec = options === null || options === void 0 ? void 0 : options.elementSelector) !== null && _options$elementSelec !== void 0 ? _options$elementSelec : defaultPlaceholder;
+    if (!['#', '.'].includes(selector.charAt(0))) {
+      selector = "#".concat(selector);
+    }
+    return selector;
   }
   return defaultPlaceholder;
 }
@@ -1473,7 +1477,7 @@ var _defineProperty2 = _interopRequireDefault(__webpack_require__(366));
 var _typeof2 = _interopRequireDefault(__webpack_require__(2125));
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
 var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
-var _classPrivateFieldGet9 = _interopRequireDefault(__webpack_require__(5194));
+var _classPrivateFieldGet13 = _interopRequireDefault(__webpack_require__(5194));
 var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(8478));
 var _modal = _interopRequireDefault(__webpack_require__(9269));
 var _Firebase = _interopRequireDefault(__webpack_require__(5298));
@@ -1494,6 +1498,8 @@ function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedec
 function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
 var _options = /*#__PURE__*/new WeakMap();
+var _authPlaceholderElementSelector = /*#__PURE__*/new WeakMap();
+var _authPlaceholderElementSelectorType = /*#__PURE__*/new WeakMap();
 var _createModal = /*#__PURE__*/new WeakSet();
 var _initListeners = /*#__PURE__*/new WeakSet();
 var _setAuthorizationError = /*#__PURE__*/new WeakSet();
@@ -1508,6 +1514,14 @@ var Authentication = /*#__PURE__*/function () {
     _classPrivateMethodInitSpec(this, _setAuthorizationError);
     _classPrivateMethodInitSpec(this, _initListeners);
     _classPrivateMethodInitSpec(this, _createModal);
+    _classPrivateFieldInitSpec(this, _authPlaceholderElementSelectorType, {
+      get: _get_authPlaceholderElementSelectorType,
+      set: void 0
+    });
+    _classPrivateFieldInitSpec(this, _authPlaceholderElementSelector, {
+      get: _get_authPlaceholderElementSelector,
+      set: void 0
+    });
     _classPrivateFieldInitSpec(this, _options, {
       writable: true,
       value: void 0
@@ -1608,18 +1622,18 @@ var Authentication = /*#__PURE__*/function () {
     value: function initAuthForm() {
       var _classPrivateFieldGet3,
         _this5 = this;
-      var _classPrivateFieldGet2 = (0, _classPrivateFieldGet9["default"])(this, _options).firebase,
+      var _classPrivateFieldGet2 = (0, _classPrivateFieldGet13["default"])(this, _options).firebase,
         tosURL = _classPrivateFieldGet2.tosURL,
         privacyPolicyURL = _classPrivateFieldGet2.privacyPolicyURL,
         termsOfService = _classPrivateFieldGet2.termsOfService;
       this.authForm = new _AuthForm.AuthForm("#".concat(_constants.WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID), {
         triggerButton: this.firebase.providers.length > 1,
-        signUp: (_classPrivateFieldGet3 = (0, _classPrivateFieldGet9["default"])(this, _options).auth.signUp) !== null && _classPrivateFieldGet3 !== void 0 ? _classPrivateFieldGet3 : true,
+        signUp: (_classPrivateFieldGet3 = (0, _classPrivateFieldGet13["default"])(this, _options).auth.signUp) !== null && _classPrivateFieldGet3 !== void 0 ? _classPrivateFieldGet3 : true,
         termsOfService: termsOfService !== null && termsOfService !== void 0 ? termsOfService : {
           tosURL: tosURL,
           privacyPolicyURL: privacyPolicyURL
         },
-        defaultForm: (0, _classPrivateFieldGet9["default"])(this, _options).auth.defaultForm || false,
+        defaultForm: (0, _classPrivateFieldGet13["default"])(this, _options).auth.defaultForm || false,
         onLogin: function onLogin(data) {
           if (_this5.reCaptcha.enabled) {
             _this5.executeRecaptcha();
@@ -1648,7 +1662,7 @@ var Authentication = /*#__PURE__*/function () {
                 case 0:
                   _context.prev = 0;
                   _this5.toggleFormLoader(true);
-                  if (!((0, _classPrivateFieldGet9["default"])(_this5, _options).firebase.genuinePasswordReset === false)) {
+                  if (!((0, _classPrivateFieldGet13["default"])(_this5, _options).firebase.genuinePasswordReset === false)) {
                     _context.next = 10;
                     break;
                   }
@@ -1795,14 +1809,14 @@ var Authentication = /*#__PURE__*/function () {
     key: "getDefaultAuthenticationFormContent",
     value: function getDefaultAuthenticationFormContent() {
       var _classPrivateFieldGet4, _classPrivateFieldGet5;
-      return "<div>\n                    <div id=\"authorization-error\"></div>\n                    <h2 class=\"wallkit-auth-modal__title\">".concat((_classPrivateFieldGet4 = (_classPrivateFieldGet5 = (0, _classPrivateFieldGet9["default"])(this, _options)) === null || _classPrivateFieldGet5 === void 0 ? void 0 : _classPrivateFieldGet5.modalTitle) !== null && _classPrivateFieldGet4 !== void 0 ? _classPrivateFieldGet4 : 'Sign In', "</h2>\n                    <div id=\"").concat(_constants.WALLKIT_AUTH_FORM_PLACEHOLDER_ID, "\"></div>\n                </div>");
+      return "<div>\n                    <div id=\"authorization-error\"></div>\n                    <h2 class=\"wallkit-auth-modal__title\">".concat((_classPrivateFieldGet4 = (_classPrivateFieldGet5 = (0, _classPrivateFieldGet13["default"])(this, _options)) === null || _classPrivateFieldGet5 === void 0 ? void 0 : _classPrivateFieldGet5.modalTitle) !== null && _classPrivateFieldGet4 !== void 0 ? _classPrivateFieldGet4 : 'Sign In', "</h2>\n                    <div ").concat((0, _classPrivateFieldGet13["default"])(this, _authPlaceholderElementSelectorType), "=\"").concat((0, _classPrivateFieldGet13["default"])(this, _authPlaceholderElementSelector).substring(1), "\"></div>\n                </div>");
     }
   }, {
     key: "attachFormPlaceholders",
     value: function attachFormPlaceholders() {
-      var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _constants.WALLKIT_AUTH_FORM_PLACEHOLDER_ID;
+      var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : (0, _classPrivateFieldGet13["default"])(this, _authPlaceholderElementSelector);
       var placeholders = "<div id=\"".concat(_constants.WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID, "\"></div>\n                            <div id=\"").concat(_constants.WALLKIT_FIREBASE_UI_PLACEHOLDER_ID, "\"></div>");
-      var targetElement = document.getElementById(selector);
+      var targetElement = document.querySelector(selector);
       if (targetElement) {
         targetElement.innerHTML = placeholders;
       }
@@ -1810,11 +1824,11 @@ var Authentication = /*#__PURE__*/function () {
   }, {
     key: "render",
     value: function render() {
-      if ((0, _classPrivateFieldGet9["default"])(this, _options).auth.renderType === 'selector') {
-        var placeholder = document.querySelector((0, _classPrivateFieldGet9["default"])(this, _options).auth.selector);
+      if ((0, _classPrivateFieldGet13["default"])(this, _options).auth.renderType === 'selector') {
+        var placeholder = document.querySelector((0, _classPrivateFieldGet13["default"])(this, _options).auth.selector);
         if (placeholder) {
           var _classPrivateFieldGet6;
-          placeholder.insertAdjacentHTML('beforeend', ((_classPrivateFieldGet6 = (0, _classPrivateFieldGet9["default"])(this, _options)) === null || _classPrivateFieldGet6 === void 0 ? void 0 : _classPrivateFieldGet6.content) || this.getDefaultAuthenticationFormContent());
+          placeholder.insertAdjacentHTML('beforeend', ((_classPrivateFieldGet6 = (0, _classPrivateFieldGet13["default"])(this, _options)) === null || _classPrivateFieldGet6 === void 0 ? void 0 : _classPrivateFieldGet6.content) || this.getDefaultAuthenticationFormContent());
         }
       } else {
         this.modal = _classPrivateMethodGet(this, _createModal, _createModal2).call(this);
@@ -1829,7 +1843,7 @@ var Authentication = /*#__PURE__*/function () {
         return _regenerator["default"].wrap(function _callee3$(_context3) {
           while (1) switch (_context3.prev = _context3.next) {
             case 0:
-              if ((0, _classPrivateFieldGet9["default"])(this, _options).firebase.genuineForm === false) {
+              if ((0, _classPrivateFieldGet13["default"])(this, _options).firebase.genuineForm === false) {
                 if (this.authForm) {
                   this.authForm.defaultForm = authFormSlug;
                   if (!this.authForm.triggerButton || !this.authForm.triggerButton.isVisible) {
@@ -1897,7 +1911,7 @@ var Authentication = /*#__PURE__*/function () {
     value: function onFirebaseInit() {
       var _this9 = this;
       try {
-        if ((0, _classPrivateFieldGet9["default"])(this, _options).firebase.genuineForm !== false) {
+        if ((0, _classPrivateFieldGet13["default"])(this, _options).firebase.genuineForm !== false) {
           if (this.reCaptcha.enabled && this.reCaptcha.loaded) {
             this.reCaptcha.initCaptchaProcess();
           } else if (!this.reCaptcha.loaded) {
@@ -1980,7 +1994,7 @@ var Authentication = /*#__PURE__*/function () {
               if (this.reCaptcha.loaded) {
                 this.resetAuthProcess();
                 this.reCaptcha.grecaptcha.reset();
-                if ((0, _classPrivateFieldGet9["default"])(this, _options).firebase.genuineForm !== false) {
+                if ((0, _classPrivateFieldGet13["default"])(this, _options).firebase.genuineForm !== false) {
                   this.reCaptcha.initCaptchaProcess();
                 }
               }
@@ -2095,9 +2109,9 @@ var Authentication = /*#__PURE__*/function () {
     key: "init",
     value: function init() {
       var _classPrivateFieldGet7;
-      if (!!((_classPrivateFieldGet7 = (0, _classPrivateFieldGet9["default"])(this, _options)) !== null && _classPrivateFieldGet7 !== void 0 && _classPrivateFieldGet7.firebase)) {
+      if (!!((_classPrivateFieldGet7 = (0, _classPrivateFieldGet13["default"])(this, _options)) !== null && _classPrivateFieldGet7 !== void 0 && _classPrivateFieldGet7.firebase)) {
         // Render recaptcha before the firebase init if not custom FB form
-        if ((0, _classPrivateFieldGet9["default"])(this, _options).firebase.genuineForm !== false) {
+        if ((0, _classPrivateFieldGet13["default"])(this, _options).firebase.genuineForm !== false) {
           if (this.reCaptcha.enabled) {
             if (!this.isAuthenticated()) {
               this.reCaptcha.init();
@@ -2117,11 +2131,28 @@ var Authentication = /*#__PURE__*/function () {
   return Authentication;
 }();
 exports["default"] = Authentication;
+function _get_authPlaceholderElementSelector() {
+  var _classPrivateFieldGet8, _classPrivateFieldGet9, _classPrivateFieldGet10, _classPrivateFieldGet11;
+  var selector = (_classPrivateFieldGet8 = (_classPrivateFieldGet9 = (0, _classPrivateFieldGet13["default"])(this, _options)) === null || _classPrivateFieldGet9 === void 0 ? void 0 : (_classPrivateFieldGet10 = _classPrivateFieldGet9.auth) === null || _classPrivateFieldGet10 === void 0 ? void 0 : (_classPrivateFieldGet11 = _classPrivateFieldGet10.firebase) === null || _classPrivateFieldGet11 === void 0 ? void 0 : _classPrivateFieldGet11.elementSelector) !== null && _classPrivateFieldGet8 !== void 0 ? _classPrivateFieldGet8 : "#".concat(_constants.WALLKIT_AUTH_FORM_PLACEHOLDER_ID);
+  if (!['#', '.'].includes(selector.charAt(0))) {
+    selector = "#".concat(selector);
+  }
+  return selector;
+}
+function _get_authPlaceholderElementSelectorType() {
+  switch ((0, _classPrivateFieldGet13["default"])(this, _authPlaceholderElementSelector).charAt(0)) {
+    case '#':
+      return 'id';
+    case '.':
+      return 'class';
+  }
+  return 'id';
+}
 function _createModal2() {
-  var _classPrivateFieldGet8;
+  var _classPrivateFieldGet12;
   return new _modal["default"]({
     modalName: 'auth-modal',
-    content: ((_classPrivateFieldGet8 = (0, _classPrivateFieldGet9["default"])(this, _options)) === null || _classPrivateFieldGet8 === void 0 ? void 0 : _classPrivateFieldGet8.content) || this.getDefaultAuthenticationFormContent(),
+    content: ((_classPrivateFieldGet12 = (0, _classPrivateFieldGet13["default"])(this, _options)) === null || _classPrivateFieldGet12 === void 0 ? void 0 : _classPrivateFieldGet12.content) || this.getDefaultAuthenticationFormContent(),
     className: 'wallkit-auth-modal',
     initialLoader: true
   });
@@ -3555,9 +3586,11 @@ var AuthForm = /*#__PURE__*/function () {
     });
     (0, _classPrivateFieldSet2["default"])(this, _options, options);
     this.defaultForm = (options === null || options === void 0 ? void 0 : options.defaultForm) || false;
-    this.wrapper = (0, _DOM.createElement)('div', {
-      id: 'wk-auth-form'
-    });
+
+    // this.wrapper = createElement('div', {
+    //     id: 'wk-auth-form'
+    // });
+
     this.loginForm = new _LoginForm.LoginForm(selector, {
       cancelBtn: options.triggerButton !== false,
       signUp: (_options$signUp = options.signUp) !== null && _options$signUp !== void 0 ? _options$signUp : true,

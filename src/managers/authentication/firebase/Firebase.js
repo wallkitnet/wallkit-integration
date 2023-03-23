@@ -45,7 +45,11 @@ export default class Firebase {
       const defaultPlaceholder = `#${WALLKIT_FIREBASE_UI_PLACEHOLDER_ID}`;
 
       if (this.genuineForm) {
-        return options?.elementSelector ?? defaultPlaceholder;
+        let selector = options?.elementSelector ?? defaultPlaceholder;
+        if (!['#', '.'].includes(selector.charAt(0))) {
+          selector = `#${selector}`;
+        }
+        return selector
       }
 
       return defaultPlaceholder;

@@ -72,6 +72,24 @@ export default class Authentication {
         this.events = new Events();
     }
 
+    get #authPlaceholderElementSelector() {
+        let selector = this.#options?.auth?.firebase?.elementSelector ?? `#${WALLKIT_AUTH_FORM_PLACEHOLDER_ID}`;
+        if (!['#', '.'].includes(selector.charAt(0))) {
+            selector = `#${selector}`;
+        }
+        return selector;
+    }
+
+    get #authPlaceholderElementSelectorType() {
+        switch (this.#authPlaceholderElementSelector.charAt(0)) {
+            case '#':
+                return 'id'
+            case '.':
+                return 'class'
+        }
+        return 'id';
+    }
+
     isAuthenticated() {
         if (this.sdk) {
             return this.sdk.methods.isAuthenticated();
@@ -248,15 +266,15 @@ export default class Authentication {
         return `<div>
                     <div id="authorization-error"></div>
                     <h2 class="wallkit-auth-modal__title">${this.#options?.modalTitle ?? 'Sign In'}</h2>
-                    <div id="${WALLKIT_AUTH_FORM_PLACEHOLDER_ID}"></div>
+                    <div ${this.#authPlaceholderElementSelectorType}="${this.#authPlaceholderElementSelector.substring(1)}"></div>
                 </div>`;
     }
 
-    attachFormPlaceholders (selector = WALLKIT_AUTH_FORM_PLACEHOLDER_ID) {
+    attachFormPlaceholders (selector = this.#authPlaceholderElementSelector) {
       const placeholders = `<div id="${WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID}"></div>
                             <div id="${WALLKIT_FIREBASE_UI_PLACEHOLDER_ID}"></div>`
 
-      const targetElement = document.getElementById(selector);
+      const targetElement = document.querySelector(selector);
 
       if (targetElement) {
         targetElement.innerHTML = placeholders;

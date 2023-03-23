@@ -16,9 +16,9 @@ export class AuthForm {
         this.#options = options;
         this.defaultForm = options?.defaultForm || false;
 
-        this.wrapper = createElement('div', {
-            id: 'wk-auth-form'
-        });
+        // this.wrapper = createElement('div', {
+        //     id: 'wk-auth-form'
+        // });
 
         this.loginForm = new LoginForm(selector, {
             cancelBtn: options.triggerButton !== false,
