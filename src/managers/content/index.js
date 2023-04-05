@@ -2,18 +2,25 @@ import SDK from "../sdk";
 import Events from "../events";
 import {CHECK_USER_ACCESS} from "../events/events-name";
 
-export default class Content {
+    export default class Content {
     #options;
     #events;
 
-    constructor(content, options) {
+    constructor(content, options={}) {
         this.content = content;
-        this.#options = options;
+        this.#options = this.#optionsCheck(options);
         this.sdk = new SDK();
         this.#events = new Events();
 
         this.accessCount = 0;
         this.accessCountLimit = 0;
+    }
+
+    #optionsCheck(options) {
+        if (typeof options.checkAccessDetails === "undefined") {
+            options.checkAccessDetails = false;
+        }
+        return options;
     }
 
     #encodeQueryData(data) {
