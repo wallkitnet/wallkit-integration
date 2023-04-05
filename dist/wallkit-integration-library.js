@@ -2703,13 +2703,16 @@ function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollect
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
 var _options = /*#__PURE__*/new WeakMap();
 var _events = /*#__PURE__*/new WeakMap();
+var _optionsCheck = /*#__PURE__*/new WeakSet();
 var _encodeQueryData = /*#__PURE__*/new WeakSet();
 var _formatCheckAccessRequestPath = /*#__PURE__*/new WeakSet();
 var Content = /*#__PURE__*/function () {
-  function Content(content, options) {
+  function Content(content) {
+    var _options2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     (0, _classCallCheck2["default"])(this, Content);
     _classPrivateMethodInitSpec(this, _formatCheckAccessRequestPath);
     _classPrivateMethodInitSpec(this, _encodeQueryData);
+    _classPrivateMethodInitSpec(this, _optionsCheck);
     _classPrivateFieldInitSpec(this, _options, {
       writable: true,
       value: void 0
@@ -2719,7 +2722,7 @@ var Content = /*#__PURE__*/function () {
       value: void 0
     });
     this.content = content;
-    (0, _classPrivateFieldSet2["default"])(this, _options, options);
+    (0, _classPrivateFieldSet2["default"])(this, _options, _classPrivateMethodGet(this, _optionsCheck, _optionsCheck2).call(this, _options2));
     this.sdk = new _sdk["default"]();
     (0, _classPrivateFieldSet2["default"])(this, _events, new _events2["default"]());
     this.accessCount = 0;
@@ -2863,6 +2866,12 @@ var Content = /*#__PURE__*/function () {
   return Content;
 }();
 exports["default"] = Content;
+function _optionsCheck2(options) {
+  if (typeof options.checkAccessDetails === "undefined") {
+    options.checkAccessDetails = false;
+  }
+  return options;
+}
 function _encodeQueryData2(data) {
   var ret = [];
   for (var d in data) {
