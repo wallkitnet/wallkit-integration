@@ -13,6 +13,7 @@ import SDK from "../sdk";
 import Token from "./Token";
 import ReCaptcha from "./ReCaptcha";
 import { AuthForm } from "../form/forms/AuthForm";
+import { normalizeSelector } from "../../utils/DOM";
 
 export default class Authentication {
     #options;
@@ -74,10 +75,7 @@ export default class Authentication {
 
     get #authPlaceholderElementSelector() {
         let selector = this.#options?.auth?.firebase?.elementSelector ?? `#${WALLKIT_AUTH_FORM_PLACEHOLDER_ID}`;
-        if (!['#', '.'].includes(selector.charAt(0))) {
-            selector = `#${selector}`;
-        }
-        return selector;
+        return normalizeSelector(selector);
     }
 
     get #authPlaceholderElementSelectorType() {

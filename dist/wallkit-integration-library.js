@@ -1372,10 +1372,7 @@ function _getElementPlaceholder2(options) {
   if (this.genuineForm) {
     var _options$elementSelec;
     var selector = (_options$elementSelec = options === null || options === void 0 ? void 0 : options.elementSelector) !== null && _options$elementSelec !== void 0 ? _options$elementSelec : defaultPlaceholder;
-    if (!['#', '.'].includes(selector.charAt(0))) {
-      selector = "#".concat(selector);
-    }
-    return selector;
+    return (0, _DOM.normalizeSelector)(selector);
   }
   return defaultPlaceholder;
 }
@@ -1489,6 +1486,7 @@ var _sdk = _interopRequireDefault(__webpack_require__(4753));
 var _Token = _interopRequireDefault(__webpack_require__(526));
 var _ReCaptcha = _interopRequireDefault(__webpack_require__(3378));
 var _AuthForm = __webpack_require__(8031);
+var _DOM = __webpack_require__(2909);
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof3(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -2134,10 +2132,7 @@ exports["default"] = Authentication;
 function _get_authPlaceholderElementSelector() {
   var _classPrivateFieldGet8, _classPrivateFieldGet9, _classPrivateFieldGet10, _classPrivateFieldGet11;
   var selector = (_classPrivateFieldGet8 = (_classPrivateFieldGet9 = (0, _classPrivateFieldGet13["default"])(this, _options)) === null || _classPrivateFieldGet9 === void 0 ? void 0 : (_classPrivateFieldGet10 = _classPrivateFieldGet9.auth) === null || _classPrivateFieldGet10 === void 0 ? void 0 : (_classPrivateFieldGet11 = _classPrivateFieldGet10.firebase) === null || _classPrivateFieldGet11 === void 0 ? void 0 : _classPrivateFieldGet11.elementSelector) !== null && _classPrivateFieldGet8 !== void 0 ? _classPrivateFieldGet8 : "#".concat(_constants.WALLKIT_AUTH_FORM_PLACEHOLDER_ID);
-  if (!['#', '.'].includes(selector.charAt(0))) {
-    selector = "#".concat(selector);
-  }
-  return selector;
+  return (0, _DOM.normalizeSelector)(selector);
 }
 function _get_authPlaceholderElementSelectorType() {
   switch ((0, _classPrivateFieldGet13["default"])(this, _authPlaceholderElementSelector).charAt(0)) {
@@ -5127,7 +5122,7 @@ var _typeof = __webpack_require__(2125);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.loadCSS = exports.isMobile = exports.isDocumentAvailable = exports.insertScript = exports.insertAfter = exports.injectInHead = exports.injectInBody = exports["default"] = exports.createElement = exports.checkIfElementExists = void 0;
+exports.normalizeSelector = exports.loadCSS = exports.isMobile = exports.isDocumentAvailable = exports.insertScript = exports.insertAfter = exports.injectInHead = exports.injectInBody = exports["default"] = exports.createElement = exports.checkIfElementExists = void 0;
 var _Error = _interopRequireWildcard(__webpack_require__(542));
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -5237,13 +5232,21 @@ var isMobile = function isMobile() {
   }
 };
 exports.isMobile = isMobile;
+var normalizeSelector = function normalizeSelector(selector) {
+  if (!!selector && !['#', '.'].includes(selector.charAt(0))) {
+    selector = "#".concat(selector);
+  }
+  return selector;
+};
+exports.normalizeSelector = normalizeSelector;
 var _default = {
   createElement: createElement,
   injectInBody: injectInBody,
   checkIfElementExists: checkIfElementExists,
   loadCSS: loadCSS,
   insertScript: insertScript,
-  isMobile: isMobile
+  isMobile: isMobile,
+  normalizeSelector: normalizeSelector
 };
 exports["default"] = _default;
 
