@@ -2,7 +2,7 @@ import SDK from "../sdk";
 import Events from "../events";
 import {CHECK_USER_ACCESS} from "../events/events-name";
 
-    export default class Content {
+export default class Content {
     #options;
     #events;
 

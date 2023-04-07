@@ -117,11 +117,19 @@ export const isMobile = () => {
     }
 };
 
+export const normalizeSelector = (selector) => {
+    if (!!selector && !['#', '.'].includes(selector.charAt(0))) {
+        selector = `#${selector}`;
+    }
+    return selector;
+}
+
 export default {
     createElement,
     injectInBody,
     checkIfElementExists,
     loadCSS,
     insertScript,
-    isMobile
+    isMobile,
+    normalizeSelector
 }
