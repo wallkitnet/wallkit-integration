@@ -1627,9 +1627,10 @@ var Authentication = /*#__PURE__*/function () {
       this.authForm = new _AuthForm.AuthForm("#".concat(_constants.WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID), {
         triggerButton: this.firebase.providers.length > 1,
         signUp: (_classPrivateFieldGet3 = (0, _classPrivateFieldGet13["default"])(this, _options).auth.signUp) !== null && _classPrivateFieldGet3 !== void 0 ? _classPrivateFieldGet3 : true,
-        termsOfService: termsOfService !== null && termsOfService !== void 0 ? termsOfService : {
+        termsOfService: {
           tosURL: tosURL,
-          privacyPolicyURL: privacyPolicyURL
+          privacyPolicyURL: privacyPolicyURL,
+          termsOfService: termsOfService
         },
         defaultForm: (0, _classPrivateFieldGet13["default"])(this, _options).auth.defaultForm || false,
         onLogin: function onLogin(data) {
@@ -3398,15 +3399,20 @@ var FormField = /*#__PURE__*/function () {
     value: function validate() {
       var value = this.getValue();
       if (this.required && !value) {
-        this.setError('This field is required!');
+        this.setError('This field is required.');
         return false;
       }
       if (this.type === 'email') {
         if (!value) {
-          this.setError('Enter your email address to continue!');
+          this.setError('Enter your email address to continue.');
           return false;
         } else if (!value.length > 4 || !value.includes('@') || !value.includes('.')) {
-          this.setError('This email address isn\'t correct!');
+          this.setError('This email address isn\'t correct.');
+          return false;
+        }
+      } else if (this.type === 'password') {
+        if (!value) {
+          this.setError('Enter your password to continue.');
           return false;
         }
       }
@@ -4082,7 +4088,6 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.SignupForm = void 0;
-var _typeof2 = _interopRequireDefault(__webpack_require__(2125));
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
 var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
 var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(1185));
@@ -4099,6 +4104,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
 function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
+var _defaultTermsOfServiceOption = /*#__PURE__*/new WeakSet();
 var _isTosEnabled = /*#__PURE__*/new WeakSet();
 var SignupForm = /*#__PURE__*/function (_Form) {
   (0, _inherits2["default"])(SignupForm, _Form);
@@ -4108,9 +4114,11 @@ var SignupForm = /*#__PURE__*/function (_Form) {
     (0, _classCallCheck2["default"])(this, SignupForm);
     _this = _super.call(this, targetElementSelector, _options);
     _classPrivateMethodInitSpec((0, _assertThisInitialized2["default"])(_this), _isTosEnabled);
+    _classPrivateMethodInitSpec((0, _assertThisInitialized2["default"])(_this), _defaultTermsOfServiceOption);
     _this.options = _options;
     _this.options.title = 'Sign Up' || 0;
     _this.options.footer = _this.getFormFooter() || _options.footer;
+    _this.options.termsOfService.termsOfService = _classPrivateMethodGet((0, _assertThisInitialized2["default"])(_this), _defaultTermsOfServiceOption, _defaultTermsOfServiceOption2).call((0, _assertThisInitialized2["default"])(_this), _this.options.termsOfService.termsOfService);
     _this.emailField = new _field.FormField({
       dataSlug: 'email',
       name: 'wk-fb-email',
@@ -4167,7 +4175,7 @@ var SignupForm = /*#__PURE__*/function (_Form) {
       });
       formFooter.appendChild((0, _DOM.createElement)('a', {
         className: 'wk-form__link',
-        innerText: 'Already have an account? Login',
+        innerText: 'Already have an account? Sign-in',
         id: 'auth-signin-link',
         attributes: {
           href: '#'
@@ -4182,11 +4190,11 @@ var SignupForm = /*#__PURE__*/function (_Form) {
   }, {
     key: "getTosAcceptLabel",
     value: function getTosAcceptLabel(termsOptions) {
-      if (!termsOptions) {
+      if (!termsOptions || !termsOptions.termsOfService) {
         return '';
       }
-      if ((0, _typeof2["default"])(termsOptions) !== "object") {
-        return termsOptions;
+      if (typeof termsOptions.termsOfService === "string") {
+        return termsOptions.termsOfService;
       }
       var defaultLabel = "By signing up I agree with the";
       if (termsOptions.tosURL) {
@@ -4204,11 +4212,17 @@ var SignupForm = /*#__PURE__*/function (_Form) {
   return SignupForm;
 }(_index.Form);
 exports.SignupForm = SignupForm;
+function _defaultTermsOfServiceOption2(termsOfService) {
+  if (typeof termsOfService === "undefined" || typeof termsOfService !== "string" && typeof termsOfService !== "boolean") {
+    termsOfService = true;
+  }
+  return termsOfService;
+}
 function _isTosEnabled2(options) {
-  if (!options.termsOfService) {
+  if (!options.termsOfService.termsOfService) {
     return false;
   }
-  return !!options.termsOfService || !!options.termsOfService.tosURL || !!options.termsOfService.privacyPolicyURL;
+  return !!options.termsOfService.termsOfService && typeof options.termsOfService.termsOfService === "string" || !!options.termsOfService.tosURL || !!options.termsOfService.privacyPolicyURL;
 }
 
 /***/ }),

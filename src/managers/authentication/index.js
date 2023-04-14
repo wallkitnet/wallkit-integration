@@ -142,7 +142,7 @@ export default class Authentication {
         this.authForm = new AuthForm(`#${WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID}`, {
             triggerButton: this.firebase.providers.length > 1,
             signUp: this.#options.auth.signUp ?? true,
-            termsOfService: termsOfService ?? { tosURL, privacyPolicyURL },
+            termsOfService: { tosURL, privacyPolicyURL, termsOfService },
             defaultForm: this.#options.auth.defaultForm || false,
             onLogin: (data) => {
               if (this.reCaptcha.enabled) {
