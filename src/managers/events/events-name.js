@@ -3,6 +3,7 @@ export const FRAME_CREATED = 'frame-created';
 export const FRAME_MOUNTED = 'frame-mounted';
 export const MODAL_CREATED = 'modal-created';
 export const SUCCESS_AUTH = 'success-auth';
+export const PRE_SIGN_IN = 'pre-sign-in';
 export const SUCCESS_FIREBASE_AUTH = 'success-firebase-auth';
 export const WALLKIT_SDK_LOADED = 'wallkit-js-sdk-loaded';
 export const FRAME_MESSAGE = 'frame-message';
@@ -49,7 +50,8 @@ export default {
         RECAPTCHA_VALIDATION_FAILED,
         RECAPTCHA_VALIDATION_SUCCESS,
         TICKETS_TOKEN_AUTH_SUCCESS,
-        CHECK_USER_ACCESS
+        CHECK_USER_ACCESS,
+        PRE_SIGN_IN
     },
     wallkit: {
         FRAME_CREATED,
