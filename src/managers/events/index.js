@@ -34,4 +34,24 @@ export default class Events {
 
         this.listeners = this.listeners.filter((item, index) => !onceIndexesToRemove.includes(index));
     }
+
+    getEventByName (eventName) {
+      return this.listeners?.find((item) => item.name === eventName);
+    }
+
+    async preventiveEvent (eventName, data) {
+      const event = this.getEventByName(eventName);
+
+      if (event) {
+        try {
+          const proceed = await event.callback(data);
+
+          return !!proceed;
+        } catch (e) {
+          console.log('ERROR:', e);
+        }
+      }
+
+      return true;
+    }
 }
