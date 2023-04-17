@@ -83,14 +83,19 @@ export class SignupForm extends Form {
         const formFooter = createElement('div', {
             className: 'wk-form__footer'
         });
-        formFooter.appendChild(createElement('a', {
+        const signInWrapper = createElement( 'div', {
+            className: 'wk-form__footer-sign-in',
+            innerText: 'Already have an account? ',
+        });
+        signInWrapper.appendChild(createElement('a', {
             className: 'wk-form__link',
-            innerText: 'Already have an account? Sign-in',
+            innerText: 'Sign-in',
             id: 'auth-signin-link',
             attributes: {
                 href: '#'
             }
         }));
+        formFooter.appendChild(signInWrapper);
 
         if (this.options.cancelBtn !== false) {
             formFooter.appendChild(this.cancelBtn);

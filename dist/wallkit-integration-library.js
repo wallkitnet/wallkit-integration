@@ -4173,14 +4173,19 @@ var SignupForm = /*#__PURE__*/function (_Form) {
       var formFooter = (0, _DOM.createElement)('div', {
         className: 'wk-form__footer'
       });
-      formFooter.appendChild((0, _DOM.createElement)('a', {
+      var signInWrapper = (0, _DOM.createElement)('div', {
+        className: 'wk-form__footer-sign-in',
+        innerText: 'Already have an account? '
+      });
+      signInWrapper.appendChild((0, _DOM.createElement)('a', {
         className: 'wk-form__link',
-        innerText: 'Already have an account? Sign-in',
+        innerText: 'Sign-in',
         id: 'auth-signin-link',
         attributes: {
           href: '#'
         }
       }));
+      formFooter.appendChild(signInWrapper);
       if (this.options.cancelBtn !== false) {
         formFooter.appendChild(this.cancelBtn);
       }
