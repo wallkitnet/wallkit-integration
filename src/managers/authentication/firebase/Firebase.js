@@ -300,6 +300,39 @@ export default class Firebase {
         return this.firebase.auth().sendPasswordResetEmail(email);
     }
 
+    async sendNewPasswordResetPassword(password, oobCode) {
+        if (!password) {
+            throw new Error("The password cannot be empty of false.");
+        }
+        if (!oobCode) {
+            throw new Error("Invalid values in the password reset url.");
+        }
+
+        const passResetUrl = `https://identitytoolkit.googleapis.com/v1/accounts:resetPassword?key=${this.config.apiKey}`
+        return await fetch(passResetUrl,
+            {
+                method: 'POST',
+                body: JSON.stringify({
+                    oobCode: oobCode,
+                    newPassword: password
+                }),
+                headers: { "Content-Type": "application/json" }
+        }).then(async (res) => {
+            const resJson = await res.json();
+            if (!!resJson.error) {
+                if (resJson.error.message === "INVALID_OOB_CODE") {
+                    throw new Error("The password reset link is expired or has already been used. Please generate a new one using the Forgot password form.");
+                } else {
+                    throw new Error(resJson.error.message);
+                }
+            } else {
+                return true;
+            }
+        }).catch((error) => {
+            throw error;
+        });
+    }
+
     async reauthenticateWithCredential (oldPassword) {
         if (!!oldPassword) {
             const user = this.firebase.auth().currentUser;
