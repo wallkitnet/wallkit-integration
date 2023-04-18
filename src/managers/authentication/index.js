@@ -4,9 +4,10 @@ import {
   WALLKIT_FIREBASE_UI_PLACEHOLDER_ID,
   WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID,
   WALLKIT_TOKEN_NAME,
-  FIREBASE_TOKEN_NAME, WALLKIT_AUTH_FORM_PLACEHOLDER_ID
+  FIREBASE_TOKEN_NAME,
+  WALLKIT_AUTH_FORM_PLACEHOLDER_ID
 } from "../../configs/constants";
-import EventsNames, { FIREBASE_INIT, FIREBASE_LOADED, FIREBASE_UI_SHOWN } from "../events/events-name";
+import EventsNames, { FIREBASE_INIT, FIREBASE_LOADED, FIREBASE_UI_SHOWN, PRE_SIGN_IN } from "../events/events-name";
 import Events from "../events";
 import Frame from "../frame";
 import SDK from "../sdk";
@@ -144,7 +145,13 @@ export default class Authentication {
             signUp: this.#options.auth.signUp ?? true,
             termsOfService: { tosURL, privacyPolicyURL, termsOfService },
             defaultForm: this.#options.auth.defaultForm || false,
-            onLogin: (data) => {
+            onLogin: async (data) => {
+              const proceed = await this.events.preventiveEvent(PRE_SIGN_IN, data);
+
+              if (!proceed) {
+                return;
+              }
+
               if (this.reCaptcha.enabled) {
                 this.executeRecaptcha();
 
