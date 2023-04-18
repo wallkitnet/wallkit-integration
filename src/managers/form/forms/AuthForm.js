@@ -10,12 +10,15 @@ export const SIGN_IN_FORM_SLUG = 'sign-in';
 export const RESET_PASSWORD_FORM_SLUG = 'reset-password';
 
 export class AuthForm {
-    constructor(selector, options) {
-        this.defaultFormSlug = options?.defaultForm || SIGN_UP_FORM_SLUG;
+    #options;
 
-        this.wrapper = createElement('div', {
-            id: 'wk-auth-form'
-        });
+    constructor(selector, options) {
+        this.#options = options;
+        this.defaultForm = options?.defaultForm || false;
+
+        // this.wrapper = createElement('div', {
+        //     id: 'wk-auth-form'
+        // });
 
         this.loginForm = new LoginForm(selector, {
             cancelBtn: options.triggerButton !== false,
@@ -36,33 +39,36 @@ export class AuthForm {
             if (event.target.id === 'auth-signup-link') {
                 event.preventDefault();
 
-                this.loginForm.hide();
-                this.signUpForm.show();
-                this.loginForm.resetForm();
+                this.showForm(SIGN_UP_FORM_SLUG);
             } else if (event.target.id === 'auth-password-link') {
                 event.preventDefault();
 
-                this.loginForm.hide();
-                this.loginForm.resetForm();
-                this.forgotPasswordForm.show();
+                this.showForm(RESET_PASSWORD_FORM_SLUG);
             }
         });
         this.loginForm.hide();
 
         if (options.signUp === true) {
             this.signUpForm = new SignupForm(selector, {
+                cancelBtn: options.triggerButton !== false,
                 termsOfService: options.termsOfService,
                 onSubmit: (data) => {
                     if (options.onSignUp) {
                         options.onSignUp(data);
                     }
+                },
+                onCancel: () => {
+                    if (options.onCancel) {
+                        options.onCancel();
+                        this.signUpForm.resetForm();
+                    }
                 }
             });
             this.signUpForm.formWrapper.addEventListener('click', (event) => {
                 if (event.target.id === 'auth-signin-link') {
-                    this.loginForm.show();
-                    this.signUpForm.hide();
-                    this.signUpForm.resetForm();
+                    event.preventDefault();
+
+                    this.showForm(SIGN_IN_FORM_SLUG);
                 }
             });
             this.signUpForm.hide();
@@ -80,78 +86,97 @@ export class AuthForm {
             if (event.target.id === 'back-to-login') {
                 event.preventDefault();
 
-                this.forgotPasswordForm.hide();
-                this.forgotPasswordForm.resetForm();
-                this.loginForm.show();
+                this.showForm(SIGN_IN_FORM_SLUG);
                 this.forgotPasswordForm.reRender();
             }
         });
         this.forgotPasswordForm.hide();
 
         if (options.triggerButton !== false) {
-          this.triggerButton = new TriggerButton(selector, {
-            onClick: () => {
-              this.loginForm.show();
-              this.triggerButton.hide();
-              if (options.onAuthFormShow) {
-                options.onAuthFormShow();
-              }
-            }
-          });
+            this.triggerButton = new TriggerButton(selector, {
+                onClick: () => {
+                    this.defaultForm.show();
+                    this.triggerButton.hide();
+                    if (options.onAuthFormShow) {
+                        options.onAuthFormShow();
+                    }
+                }
+            });
         }
 
-      this.forms = {
-        [RESET_PASSWORD_FORM_SLUG]: this.forgotPasswordForm,
-        [SIGN_IN_FORM_SLUG]: this.loginForm,
-        [SIGN_UP_FORM_SLUG]: this.signUpForm
-      };
+        this.forms = {
+            [RESET_PASSWORD_FORM_SLUG]: this.forgotPasswordForm,
+            [SIGN_IN_FORM_SLUG]: this.loginForm,
+            [SIGN_UP_FORM_SLUG]: this.signUpForm
+        };
     }
 
     get defaultForm () {
-      return this.forms[this.defaultFormSlug];
+        return this.forms[this.defaultFormSlug];
     }
 
-    get visibleFormName () {
-        if (this.signUpForm.isVisible()) {
-            return 'signUpForm';
-        } else if (this.loginForm.isVisible()) {
-            return 'loginForm';
-        } else if (this.forgotPasswordForm.isVisible()) {
-            return 'forgotPasswordForm';
+    set defaultForm (formSlug) {
+        if (formSlug && [SIGN_UP_FORM_SLUG, SIGN_IN_FORM_SLUG, RESET_PASSWORD_FORM_SLUG].includes(formSlug)) {
+            this.defaultFormSlug = formSlug;
         } else {
-            return false;
+            this.defaultFormSlug = this.#options.defaultForm || SIGN_UP_FORM_SLUG;
+        }
+    }
+
+    get activeForm () {
+        let form = false;
+        if (!!this.forms && Object.keys(this.forms).length){
+            Object.keys(this.forms).forEach(key => {
+                if (this.forms[key].isVisible) {
+                    form = this.forms[key];
+                }
+            });
+        }
+        return form;
+    }
+
+    showForm (authFormSlug) {
+        if (authFormSlug && this.forms[authFormSlug]) {
+            this.hide();
+            this.forms[authFormSlug].show();
         }
     }
 
     showDefaultForm () {
-      const form = this.defaultForm;
-
-      if (form) {
-        form.show();
-      }
+        this.showForm(this.defaultFormSlug)
     }
 
     reset () {
         this.hide();
 
         if (this.triggerButton) {
-          this.triggerButton.show();
+            this.triggerButton.show();
         } else {
-          this.showDefaultForm();
+            this.showDefaultForm();
         }
     }
 
     hide () {
-      if (!!this.forms) {
-        for (let formKey in this.forms) {
-          const form = this.forms[formKey];
+        if (!!this.forms) {
+            for (let formKey in this.forms) {
+                const form = this.forms[formKey];
 
-          if (form) {
-            form.hide();
-            form.resetForm();
-          }
+                if (form) {
+                    form.hide();
+                    form.resetForm();
+                }
+            }
         }
-      }
+    }
+
+    handleError(error) {
+        if (this.activeForm) {
+            if (error === null) {
+                this.activeForm.resetFormError(error);
+            } else {
+                this.activeForm.setFormError(error);
+            }
+        }
     }
 
     showSuccessPasswordReset () {
