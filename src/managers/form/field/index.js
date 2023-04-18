@@ -63,18 +63,24 @@ export class FormField {
         const value = this.getValue();
 
         if (this.required && !value) {
-            this.setError('This field is required!');
+            this.setError('This field is required.');
 
             return false;
         }
 
         if (this.type === 'email') {
             if (!value) {
-                this.setError('Enter your email address to continue!');
+                this.setError('Enter your email address to continue.');
 
                 return false;
             } else if (!value.length > 4 || !value.includes('@') || !value.includes('.')) {
-                this.setError('This email address isn\'t correct!');
+                this.setError('This email address isn\'t correct.');
+
+                return false;
+            }
+        } else if (this.type === 'password') {
+            if (!value) {
+                this.setError('Enter your password to continue.');
 
                 return false;
             }

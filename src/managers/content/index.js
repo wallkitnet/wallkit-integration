@@ -6,14 +6,21 @@ export default class Content {
     #options;
     #events;
 
-    constructor(content, options) {
+    constructor(content, options={}) {
         this.content = content;
-        this.#options = options;
+        this.#options = this.#optionsCheck(options);
         this.sdk = new SDK();
         this.#events = new Events();
 
         this.accessCount = 0;
         this.accessCountLimit = 0;
+    }
+
+    #optionsCheck(options) {
+        if (typeof options.checkAccessDetails === "undefined") {
+            options.checkAccessDetails = false;
+        }
+        return options;
     }
 
     #encodeQueryData(data) {
@@ -92,22 +99,23 @@ export default class Content {
         })
     }
 
-    checkAccess() {
-        return this.sdk.methods.checkAccess(this.content.id).then((response) => {
-            if (this.sdk.methods.isAuthenticated()) {
-                this.getAccessDetails(this.content.id);
+    async checkAccess() {
+        try {
+            const response = await this.sdk.methods.checkAccess(this.content.id);
+            if (this.sdk.methods.isAuthenticated() || this.#options.checkAccessDetails) {
+                await this.getAccessDetails(this.content.id);
             }
 
             this.#events.notify(CHECK_USER_ACCESS, response.allow);
             return { allowed: response.allow, data: response };
-        }).catch((error) => {
+        } catch (error) {
             if (error.error === 'incorrect_content_key') {
                 return this.checkContentAccessAndSync(this.content);
             }
 
             this.#events.notify(CHECK_USER_ACCESS, false);
             return { allowed: false, error: error };
-        });
+        }
     }
 
     getAccessDetails(contentId) {

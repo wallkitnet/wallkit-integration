@@ -74,7 +74,7 @@ export default class UserManager {
         if (this.changePasswordForm) {
             this.changePasswordForm.showFormResult(`
             <div class="wk-success-message wk-password-reset-success">
-                <h2 class="wk-success-message__title">Password updated.</h2>
+                <h2 class="wk-success-message__title">Your password has been successfully changed!</h2>
                 <a href="#" class="wk-form__link account-settings-link">Back to account settings</a>
             </div>
         `);

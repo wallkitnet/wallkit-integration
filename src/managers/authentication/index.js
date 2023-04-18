@@ -13,6 +13,7 @@ import SDK from "../sdk";
 import Token from "./Token";
 import ReCaptcha from "./ReCaptcha";
 import { AuthForm } from "../form/forms/AuthForm";
+import { normalizeSelector } from "../../utils/DOM";
 
 export default class Authentication {
     #options;
@@ -72,6 +73,21 @@ export default class Authentication {
         this.events = new Events();
     }
 
+    get #authPlaceholderElementSelector() {
+        let selector = this.#options?.auth?.firebase?.elementSelector ?? `#${WALLKIT_AUTH_FORM_PLACEHOLDER_ID}`;
+        return normalizeSelector(selector);
+    }
+
+    get #authPlaceholderElementSelectorType() {
+        switch (this.#authPlaceholderElementSelector.charAt(0)) {
+            case '#':
+                return 'id'
+            case '.':
+                return 'class'
+        }
+        return 'id';
+    }
+
     isAuthenticated() {
         if (this.sdk) {
             return this.sdk.methods.isAuthenticated();
@@ -126,7 +142,8 @@ export default class Authentication {
         this.authForm = new AuthForm(`#${WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID}`, {
             triggerButton: this.firebase.providers.length > 1,
             signUp: this.#options.auth.signUp ?? true,
-            termsOfService: termsOfService ?? { tosURL, privacyPolicyURL },
+            termsOfService: { tosURL, privacyPolicyURL, termsOfService },
+            defaultForm: this.#options.auth.defaultForm || false,
             onLogin: (data) => {
               if (this.reCaptcha.enabled) {
                 this.executeRecaptcha();
@@ -216,50 +233,46 @@ export default class Authentication {
             }).catch((error) => handleAuthError(error));
     }
 
-    authInWallkit(firebaseToken = null) {
+    async authInWallkit(firebaseToken = null) {
         this.#resetAuthorizationError();
-        return new Promise((resolve, reject) => {
-            if (firebaseToken) {
-                this.sdk.methods.authenticateWithFirebase(firebaseToken).then(({ token, existed }) => {
-                    this.setToken(token);
-
-                    const userGetTimeout = setTimeout(() => {
-                        reject(false);
-                    }, 10000);
-
-                    const userEventCallback = () => {
-                        clearTimeout(userGetTimeout);
-                        this.sdk.methods.unsubscribeLocalEvent('user', userEventCallback);
-                        this.events.notify(EventsNames.local.SUCCESS_AUTH, { register: !existed });
-                        resolve(true);
-                    };
-
-                    this.sdk.methods.subscribeLocalEvent('user', userEventCallback);
-                }).catch((error) => {
-                    console.log('error', error);
-                    this.#setAuthorizationError(error?.response?.error_description);
-                    this.removeTokens();
-                    reject(error);
-                });
-            } else {
-                resolve(false);
-            }
-        });
+        if (!firebaseToken) {
+            throw new Error('Your authorization is broken. Please login again.');
+        }
+        try {
+            const response = await this.sdk.methods.authenticateWithFirebase(firebaseToken);
+            this.setToken(response.token);
+            return await new Promise((resolve, reject) => {
+                const userGetTimeout = setTimeout(() => {
+                    resolve(false);
+                }, 10000);
+                const userEventCallback = () => {
+                    clearTimeout(userGetTimeout);
+                    this.sdk.methods.unsubscribeLocalEvent('user', userEventCallback);
+                    this.events.notify(EventsNames.local.SUCCESS_AUTH, {register: !response.existed});
+                    resolve(true);
+                };
+                this.sdk.methods.subscribeLocalEvent('user', userEventCallback);
+            });
+        } catch (error) {
+            console.log('error', error);
+            this.removeTokens();
+            throw error;
+        }
     }
 
     getDefaultAuthenticationFormContent () {
         return `<div>
                     <div id="authorization-error"></div>
                     <h2 class="wallkit-auth-modal__title">${this.#options?.modalTitle ?? 'Sign In'}</h2>
-                    <div id="${WALLKIT_AUTH_FORM_PLACEHOLDER_ID}"></div>
+                    <div ${this.#authPlaceholderElementSelectorType}="${this.#authPlaceholderElementSelector.substring(1)}"></div>
                 </div>`;
     }
 
-    attachFormPlaceholders (selector = WALLKIT_AUTH_FORM_PLACEHOLDER_ID) {
+    attachFormPlaceholders (selector = this.#authPlaceholderElementSelector) {
       const placeholders = `<div id="${WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID}"></div>
                             <div id="${WALLKIT_FIREBASE_UI_PLACEHOLDER_ID}"></div>`
 
-      const targetElement = document.getElementById(selector);
+      const targetElement = document.querySelector(selector);
 
       if (targetElement) {
         targetElement.innerHTML = placeholders;
@@ -290,7 +303,15 @@ export default class Authentication {
         });
     }
 
-    async show() {
+    async show(authFormSlug) {
+        if (this.#options.firebase.genuineForm === false) {
+            if (this.authForm) {
+                this.authForm.defaultForm = authFormSlug;
+                if (!this.authForm.triggerButton || !this.authForm.triggerButton.isVisible) {
+                    this.authForm.showDefaultForm();
+                }
+            }
+        }
         this.modal.show();
 
         if (!this.firebase.isUiShown) {
@@ -488,12 +509,8 @@ export default class Authentication {
     }
 
     #setAuthorizationError(error) {
-        if (this.authForm?.visibleFormName) {
-            if (error === null) {
-                this.authForm[this.authForm.visibleFormName].resetFormError(error);
-            } else {
-                this.authForm[this.authForm.visibleFormName].setFormError(error);
-            }
+        if (this.authForm) {
+            this.authForm.handleError(error);
         } else {
             const errorPlaceholder = document.getElementById('authorization-error');
             if (errorPlaceholder) {

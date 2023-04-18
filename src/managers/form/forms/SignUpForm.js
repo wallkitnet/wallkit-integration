@@ -12,6 +12,7 @@ export class SignupForm extends Form {
         this.options = options;
         this.options.title = 'Sign Up' || options.title;
         this.options.footer = this.getFormFooter() || options.footer;
+        this.options.termsOfService.termsOfService = this.#defaultTermsOfServiceOption(this.options.termsOfService.termsOfService);
 
         this.emailField = new FormField({
             dataSlug: 'email',
@@ -64,42 +65,64 @@ export class SignupForm extends Form {
         }
 
         this.init();
+
+        if (options.onCancel) {
+            this.cancelBtn.addEventListener('click', options.onCancel.bind(this));
+        }
+    }
+
+    #defaultTermsOfServiceOption(termsOfService) {
+        if (typeof termsOfService === "undefined" ||
+            ( typeof termsOfService !== "string" && typeof termsOfService !== "boolean" ) ) {
+            termsOfService = true
+        }
+        return termsOfService;
     }
 
     getFormFooter () {
         const formFooter = createElement('div', {
             className: 'wk-form__footer'
         });
-        formFooter.appendChild(createElement('a', {
+        const signInWrapper = createElement( 'div', {
+            className: 'wk-form__footer-sign-in',
+            innerText: 'Already have an account? ',
+        });
+        signInWrapper.appendChild(createElement('a', {
             className: 'wk-form__link',
-            innerText: 'Already have an account? Login',
+            innerText: 'Sign-in',
             id: 'auth-signin-link',
             attributes: {
                 href: '#'
             }
         }));
+        formFooter.appendChild(signInWrapper);
+
+        if (this.options.cancelBtn !== false) {
+            formFooter.appendChild(this.cancelBtn);
+        }
+
         formFooter.appendChild(this.submitBtn);
 
         return formFooter;
     }
 
     #isTosEnabled (options) {
-      if (!options.termsOfService) {
+      if (!options.termsOfService.termsOfService) {
         return false;
       }
 
-      return !!options.termsOfService ||
+      return (!!options.termsOfService.termsOfService && typeof options.termsOfService.termsOfService === "string") ||
         !!options.termsOfService.tosURL ||
         !!options.termsOfService.privacyPolicyURL;
     }
 
     getTosAcceptLabel (termsOptions) {
-      if (!termsOptions) {
+      if (!termsOptions || !termsOptions.termsOfService) {
         return '';
       }
 
-      if (typeof termsOptions !== "object") {
-        return termsOptions;
+      if (typeof termsOptions.termsOfService === "string") {
+        return termsOptions.termsOfService;
       }
 
       let defaultLabel = `By signing up I agree with the`;

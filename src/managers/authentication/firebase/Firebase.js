@@ -1,5 +1,5 @@
 import { loadScripts } from "../../../utils/loaders";
-import { insertScript, loadCSS } from "../../../utils/DOM";
+import { insertScript, loadCSS, normalizeSelector } from "../../../utils/DOM";
 import {
     WALLKIT_FIREBASE_CONFIG,
     WALLKIT_DEV_FIREBASE_CONFIG,
@@ -45,7 +45,8 @@ export default class Firebase {
       const defaultPlaceholder = `#${WALLKIT_FIREBASE_UI_PLACEHOLDER_ID}`;
 
       if (this.genuineForm) {
-        return options?.elementSelector ?? defaultPlaceholder;
+        let selector = options?.elementSelector ?? defaultPlaceholder;
+        return normalizeSelector(selector);
       }
 
       return defaultPlaceholder;
