@@ -292,10 +292,7 @@ export const LIBRARY_STYLES = `
             flex-direction: column;
         }
         
-        .wk-password-reset-success .wk-form-button {
-            left: 50%;
-            transform: translateX(-50%);
-        }
+       
         
         .wk-form-field.wk-form-field--checkbox .wk-form-field__label {
             position: relative;
