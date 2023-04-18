@@ -4,9 +4,11 @@ import { TriggerButton } from "../buttons/TriggerButton";
 import { LoginForm } from "./LoginForm";
 import { SignupForm } from "./SignUpForm";
 import { ForgotPasswordForm } from "./ForgotPasswordForm";
+import { ResetPasswordForm } from "./ResetPasswordForm";
 
 export const SIGN_UP_FORM_SLUG = 'sign-up';
 export const SIGN_IN_FORM_SLUG = 'sign-in';
+export const FORGOT_PASSWORD_FORM_SLUG = 'forgot-password';
 export const RESET_PASSWORD_FORM_SLUG = 'reset-password';
 
 export class AuthForm {
@@ -43,7 +45,7 @@ export class AuthForm {
             } else if (event.target.id === 'auth-password-link') {
                 event.preventDefault();
 
-                this.showForm(RESET_PASSWORD_FORM_SLUG);
+                this.showForm(FORGOT_PASSWORD_FORM_SLUG);
             }
         });
         this.loginForm.hide();
@@ -76,8 +78,8 @@ export class AuthForm {
 
         this.forgotPasswordForm = new ForgotPasswordForm(selector, {
             onSubmit: (data) => {
-                if (options.onPasswordReset) {
-                    options.onPasswordReset(data);
+                if (options.onPasswordForgot) {
+                    options.onPasswordForgot(data);
                 }
             }
         });
@@ -92,6 +94,24 @@ export class AuthForm {
         });
         this.forgotPasswordForm.hide();
 
+        this.resetPasswordForm = new ResetPasswordForm(selector, {
+            onSubmit: (data) => {
+                if (options.onPasswordReset) {
+                    options.onPasswordReset(data);
+                }
+            }
+        });
+
+        this.resetPasswordForm.formWrapper.addEventListener('click', (event) => {
+            if (event.target.id === 'back-to-login') {
+                event.preventDefault();
+
+                this.showForm(SIGN_IN_FORM_SLUG);
+                this.resetPasswordForm.reRender();
+            }
+        });
+        this.resetPasswordForm.hide();
+
         if (options.triggerButton !== false) {
             this.triggerButton = new TriggerButton(selector, {
                 onClick: () => {
@@ -105,7 +125,8 @@ export class AuthForm {
         }
 
         this.forms = {
-            [RESET_PASSWORD_FORM_SLUG]: this.forgotPasswordForm,
+            [FORGOT_PASSWORD_FORM_SLUG]: this.forgotPasswordForm,
+            [RESET_PASSWORD_FORM_SLUG]: this.resetPasswordForm,
             [SIGN_IN_FORM_SLUG]: this.loginForm,
             [SIGN_UP_FORM_SLUG]: this.signUpForm
         };
@@ -116,7 +137,7 @@ export class AuthForm {
     }
 
     set defaultForm (formSlug) {
-        if (formSlug && [SIGN_UP_FORM_SLUG, SIGN_IN_FORM_SLUG, RESET_PASSWORD_FORM_SLUG].includes(formSlug)) {
+        if (formSlug && [SIGN_UP_FORM_SLUG, SIGN_IN_FORM_SLUG, FORGOT_PASSWORD_FORM_SLUG, RESET_PASSWORD_FORM_SLUG].includes(formSlug)) {
             this.defaultFormSlug = formSlug;
         } else {
             this.defaultFormSlug = this.#options.defaultForm || SIGN_UP_FORM_SLUG;
@@ -179,13 +200,21 @@ export class AuthForm {
         }
     }
 
-    showSuccessPasswordReset () {
+    showSuccessPasswordForgot () {
         const email = this.forgotPasswordForm.emailField.getValue();
 
         this.forgotPasswordForm.showFormResult(`
-            <div class="wk-success-message wk-password-reset-success">
-                <h2 class="wk-success-message__title">Check your email!</h2>
-                <p class="wk-success-message__description">Follow the instructions sent to <b>${email}</b> to recover your password</p>
+            <div class="wk-success-message wk-password-reset-success wk-password-forgot-message">
+                <p class="wk-success-message__description">Please follow the instructions sent to <b>${email}</b> to recover your password</p>
+                <button id="back-to-login" class="wk-form-button wk-form-button--cancel">Back to login</button>
+            </div>
+        `);
+    }
+
+    showSuccessPasswordReset () {
+        this.resetPasswordForm.showFormResult(`
+            <div class="wk-success-message wk-password-reset-success wk-password-reset-message">
+                <h2 class="wk-success-message__title">Your password has been successfully changed!</h2>
                 <button id="back-to-login" class="wk-form-button wk-form-button--cancel">Back to login</button>
             </div>
         `);
@@ -202,6 +231,10 @@ export class AuthForm {
 
         if (this.forgotPasswordForm) {
             this.forgotPasswordForm.render();
+        }
+
+        if (this.resetPasswordForm) {
+            this.resetPasswordForm.render();
         }
 
         if (this.triggerButton) {

@@ -13,11 +13,13 @@ import Frame from "../frame";
 import SDK from "../sdk";
 import Token from "./Token";
 import ReCaptcha from "./ReCaptcha";
-import { AuthForm } from "../form/forms/AuthForm";
+import {AuthForm, RESET_PASSWORD_FORM_SLUG} from "../form/forms/AuthForm";
 import { normalizeSelector } from "../../utils/DOM";
+import { parseResetPasswordOobCodeHash, resetHash } from "../../utils/url";
 
 export default class Authentication {
     #options;
+    #oobCode='';
 
     constructor(options) {
         if (!!Authentication.instance) {
@@ -177,7 +179,7 @@ export default class Authentication {
                 this.handleSignUp(data);
               }
             },
-            onPasswordReset: async (data) => {
+            onPasswordForgot: async (data) => {
               try {
                 this.toggleFormLoader(true);
 
@@ -191,7 +193,7 @@ export default class Authentication {
                 }
 
                 if (success) {
-                  this.authForm.showSuccessPasswordReset();
+                  this.authForm.showSuccessPasswordForgot();
                 } else {
                   throw new Error('Something went wrong');
                 }
@@ -203,6 +205,28 @@ export default class Authentication {
                 }
                 this.toggleFormLoader(false);
               }
+            },
+            onPasswordReset: async (data) => {
+                try {
+                    this.toggleFormLoader(true);
+
+                    let success;
+
+                    success = await this.firebase.sendNewPasswordResetPassword(data.new_password, this.#oobCode)
+
+                    if (success) {
+                        this.authForm.showSuccessPasswordReset();
+                    } else {
+                        this.authForm.resetPasswordForm.setFormError("Something went wrong");
+                    }
+
+                    this.toggleFormLoader(false);
+                } catch (error) {
+                    if (error.message) {
+                        this.authForm.resetPasswordForm.setFormError(error.message);
+                    }
+                    this.toggleFormLoader(false);
+                }
             },
             onAuthFormShow: () => {
                 this.firebase.hideAuthForm();
@@ -542,6 +566,18 @@ export default class Authentication {
         this.frame.sendEvent(EventsNames.wallkit.WALLKIT_EVENT_ONE_TAP_SIGN_IN, credential);
     }
 
+    #checkIfResetPasswordURL() {
+        const oobCode = parseResetPasswordOobCodeHash();
+        if (oobCode) {
+            this.#oobCode = oobCode;
+            this.authForm.triggerButton.hide();
+            this.firebase.hideAuthForm();
+            this.authForm.showForm(RESET_PASSWORD_FORM_SLUG);
+            this.modal.show();
+            resetHash();
+        }
+    }
+
     init() {
         if (!!this.#options?.firebase) {
             // Render recaptcha before the firebase init if not custom FB form
@@ -562,5 +598,6 @@ export default class Authentication {
             }
         }
         this.#initListeners();
+        this.#checkIfResetPasswordURL();
     }
 }
