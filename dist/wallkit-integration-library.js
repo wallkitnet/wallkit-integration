@@ -2370,7 +2370,9 @@ function _checkIfResetPasswordURL2() {
   var oobCode = (0, _url.parseResetPasswordOobCodeHash)();
   if (oobCode) {
     (0, _classPrivateFieldSet2["default"])(this, _oobCode, oobCode);
-    this.authForm.triggerButton.hide();
+    if (this.authForm.triggerButton) {
+      this.authForm.triggerButton.hide();
+    }
     this.firebase.hideAuthForm();
     this.authForm.showForm(_AuthForm.RESET_PASSWORD_FORM_SLUG);
     this.modal.show();
