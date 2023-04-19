@@ -570,7 +570,9 @@ export default class Authentication {
         const oobCode = parseResetPasswordOobCodeHash();
         if (oobCode) {
             this.#oobCode = oobCode;
-            this.authForm.triggerButton.hide();
+            if (this.authForm.triggerButton) {
+                this.authForm.triggerButton.hide();
+            }
             this.firebase.hideAuthForm();
             this.authForm.showForm(RESET_PASSWORD_FORM_SLUG);
             this.modal.show();
