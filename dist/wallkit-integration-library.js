@@ -3993,12 +3993,12 @@ var AuthForm = /*#__PURE__*/function () {
     key: "showSuccessPasswordForgot",
     value: function showSuccessPasswordForgot() {
       var email = this.forgotPasswordForm.emailField.getValue();
-      this.forgotPasswordForm.showFormResult("\n            <div class=\"wk-success-message wk-password-reset-success wk-password-forgot-message\">\n                <h2 class=\"wk-success-message__title\">Check your email!</h2>\n                <p class=\"wk-success-message__description\">Follow the instructions sent to <b>".concat(email, "</b> to recover your password</p>\n                <button id=\"back-to-login\" class=\"wk-form-button wk-form-button--cancel\">Back to login</button>\n            </div>\n        "));
+      this.forgotPasswordForm.showFormResult("\n            <div class=\"wk-success-message wk-password-reset-success wk-password-forgot-message\">\n                <p class=\"wk-success-message__description\">Please follow the instructions sent to <b>".concat(email, "</b> to recover your password</p>\n                <button id=\"back-to-login\" class=\"wk-form-button wk-form-button--cancel\">Back to login</button>\n            </div>\n        "));
     }
   }, {
     key: "showSuccessPasswordReset",
     value: function showSuccessPasswordReset() {
-      this.resetPasswordForm.showFormResult("\n            <div class=\"wk-success-message wk-password-reset-success wk-password-reset-message\">\n                <h2 class=\"wk-success-message__title\">Your password has been successfully changed!</h2>\n                <p class=\"wk-success-message__description\"></p>\n                <button id=\"back-to-login\" class=\"wk-form-button wk-form-button--cancel\">Back to login</button>\n            </div>\n        ");
+      this.resetPasswordForm.showFormResult("\n            <div class=\"wk-success-message wk-password-reset-success wk-password-reset-message\">\n                <h2 class=\"wk-success-message__title\">Your password has been successfully changed!</h2>\n                <button id=\"back-to-login\" class=\"wk-form-button wk-form-button--cancel\">Back to login</button>\n            </div>\n        ");
     }
   }, {
     key: "render",
