@@ -15,7 +15,7 @@ import Token from "./Token";
 import ReCaptcha from "./ReCaptcha";
 import {AuthForm, RESET_PASSWORD_FORM_SLUG} from "../form/forms/AuthForm";
 import { normalizeSelector } from "../../utils/DOM";
-import { parseResetPasswordOobCodeHash } from "../../utils/url";
+import { parseResetPasswordOobCodeHash, resetHash } from "../../utils/url";
 
 export default class Authentication {
     #options;
@@ -574,6 +574,7 @@ export default class Authentication {
             this.firebase.hideAuthForm();
             this.authForm.showForm(RESET_PASSWORD_FORM_SLUG);
             this.modal.show();
+            resetHash();
         }
     }
 

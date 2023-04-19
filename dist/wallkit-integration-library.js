@@ -2368,6 +2368,7 @@ function _checkIfResetPasswordURL2() {
     this.firebase.hideAuthForm();
     this.authForm.showForm(_AuthForm.RESET_PASSWORD_FORM_SLUG);
     this.modal.show();
+    (0, _url.resetHash)();
   }
 }
 
