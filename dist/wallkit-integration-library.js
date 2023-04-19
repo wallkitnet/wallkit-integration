@@ -1251,23 +1251,29 @@ var Firebase = /*#__PURE__*/function () {
                         return res.json();
                       case 2:
                         resJson = _context3.sent;
-                        if (!resJson.error) {
-                          _context3.next = 11;
+                        if (!(!!resJson.error && !!resJson.error.message)) {
+                          _context3.next = 14;
                           break;
                         }
-                        if (!(resJson.error.message === "INVALID_OOB_CODE")) {
-                          _context3.next = 8;
-                          break;
-                        }
-                        throw new Error("The password reset link is expired or has already been used. Please generate a new one using the Forgot password form.");
-                      case 8:
-                        throw new Error(resJson.error.message);
-                      case 9:
-                        _context3.next = 12;
+                        _context3.t0 = resJson.error.message;
+                        _context3.next = _context3.t0 === 'OPERATION_NOT_ALLOWED' ? 7 : _context3.t0 === 'EXPIRED_OOB_CODE' ? 8 : _context3.t0 === 'INVALID_OOB_CODE' ? 9 : _context3.t0 === 'USER_DISABLED' ? 10 : 11;
                         break;
+                      case 7:
+                        throw new Error("Password sign-in is disabled for this project.");
+                      case 8:
+                        throw new Error("The password reset link has expired.");
+                      case 9:
+                        throw new Error("The password reset link is invalid. This can happen if the code is malformed, expired, or has already been used. Please generate a new one using the Forgot password form.");
+                      case 10:
+                        throw new Error("The user account has been disabled by an administrator.");
                       case 11:
-                        return _context3.abrupt("return", true);
+                        throw new Error(resJson.error.message);
                       case 12:
+                        _context3.next = 15;
+                        break;
+                      case 14:
+                        return _context3.abrupt("return", true);
+                      case 15:
                       case "end":
                         return _context3.stop();
                     }

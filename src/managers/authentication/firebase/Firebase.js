@@ -319,11 +319,18 @@ export default class Firebase {
                 headers: { "Content-Type": "application/json" }
         }).then(async (res) => {
             const resJson = await res.json();
-            if (!!resJson.error) {
-                if (resJson.error.message === "INVALID_OOB_CODE") {
-                    throw new Error("The password reset link is expired or has already been used. Please generate a new one using the Forgot password form.");
-                } else {
-                    throw new Error(resJson.error.message);
+            if (!!resJson.error && !!resJson.error.message) {
+                switch (resJson.error.message) {
+                    case 'OPERATION_NOT_ALLOWED':
+                        throw new Error("Password sign-in is disabled for this project.");
+                    case 'EXPIRED_OOB_CODE':
+                        throw new Error("The password reset link has expired.");
+                    case 'INVALID_OOB_CODE':
+                        throw new Error("The password reset link is invalid. This can happen if the code is malformed, expired, or has already been used. Please generate a new one using the Forgot password form.");
+                    case 'USER_DISABLED':
+                        throw new Error("The user account has been disabled by an administrator.");
+                    default :
+                        throw new Error(resJson.error.message);
                 }
             } else {
                 return true;
