@@ -205,7 +205,7 @@ export class AuthForm {
 
         this.forgotPasswordForm.showFormResult(`
             <div class="wk-success-message wk-password-reset-success wk-password-forgot-message">
-                <p class="wk-success-message__description">Please follow the instructions sent to <b>${email}</b> to recover your password</p>
+                <p class="wk-success-message__description">Please follow the instructions sent to <b>${email}</b> to set a new password.</p>
                 <button id="back-to-login" class="wk-form-button wk-form-button--cancel">Back to login</button>
             </div>
         `);
@@ -214,7 +214,7 @@ export class AuthForm {
     showSuccessPasswordReset () {
         this.resetPasswordForm.showFormResult(`
             <div class="wk-success-message wk-password-reset-success wk-password-reset-message">
-                <h2 class="wk-success-message__title">Your password has been successfully changed!</h2>
+                <h2 class="wk-success-message__title">Your password had been saved successfully!</h2>
                 <button id="back-to-login" class="wk-form-button wk-form-button--cancel">Back to login</button>
             </div>
         `);
