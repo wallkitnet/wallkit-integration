@@ -1,7 +1,7 @@
 /*!
  * Package name: wallkit-integration-lib.
  * Package description: Wallkit Integration Library. Library to manipulate with Wallkit System: Paywall, Modals, Authentication, SDK..
- * Package version: 3.0.10.
+ * Package version: 3.0.12.
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -26,7 +26,7 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.LIBRARY_STYLES = void 0;
-var LIBRARY_STYLES = "\n        .wallkit-modal-wrapper {\n            z-index: 100;\n            position: fixed;\n            top: 0;\n            left: 0;\n            right: 0;\n            bottom: 0;\n            background: rgba(18, 18, 20, 0.9);\n            display: flex;\n            align-items: center;\n            justify-content: flex-start;\n            flex-direction: column;\n            overflow-y: auto;\n            padding: 70px 15px 20px;\n        }\n\n        .wallkit-modal-wrapper__content {\n            background-color: #fff;\n            flex-shrink: 0;\n            position: relative;\n            box-sizing: border-box;\n            overflow: hidden;\n        }\n        \n        @media screen and (max-width: 500px) {\n            .wallkit-modal-wrapper__content {\n                width: 100%;\n                min-width: auto!important;\n            }\n        }\n\n        .wallkit-modal-wrapper__close-btn {\n            position: absolute;\n            right: 10px;\n            top: 10px;\n            cursor: pointer;\n            color: #000;\n            font-size: 37px;\n            width: 37px;\n            height: 37px;\n            text-align: center;\n            line-height: 34px;\n        }\n\n        .wallkit-modal-wrapper .wk-frame {\n            transition: all 0.3s linear 0s;\n            max-width: 100%;\n            border: none;\n        }\n\n        .wallkit-auth-modal {\n            z-index: 999;\n        }\n\n        .wallkit-auth-modal .wallkit-modal-wrapper__content {\n            padding: 20px;\n        }\n\n        .wallkit-auth-modal .wallkit-auth-modal__title {\n            font-family: Roboto, sans-serif;\n            text-align: center;\n        }\n        \n        .wk-auth-form {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .wk-form-field {\n            display: flex;\n            flex-direction: column;\n            font-family: Oxygen, sans-serif;\n            margin-bottom: 10px;\n        }\n\n        .wk-form-field .wk-form-field__label {\n            font-weight: 500;\n            color: #333;\n            margin-bottom: 5px;\n        }\n\n        .wk-form-field .wk-form-field__input-wrapper {\n            margin-bottom: 5px;\n            position: relative;\n        }\n        \n        .wk-eye-toggle {\n            background: url(https://www.gstatic.com/images/icons/material/system/1x/visibility_black_24dp.png);\n            width: 24px;\n            height: 24px;\n        }\n        \n        .wk-form-field__field-description {\n            font-size: 11px;\n            color: #989898;\n        }\n        \n        .wk-eye-toggle.wk-eye-toggled {\n            background: url(https://www.gstatic.com/images/icons/material/system/1x/visibility_off_black_24dp.png);\n        }\n        \n        .wk-form-field__field-affix {\n            position: absolute;\n            right: 5px;\n            top: 0;\n            bottom: 0;\n        }\n        \n        .wk-form-field .wk-form-field__input {\n            border-radius: 0;\n            border: 0;\n            border-bottom: 1px solid #ccc;\n            padding: 5px;\n            box-sizing: border-box;\n            width: 100%;\n        }\n        \n        .wk-field-list {\n            list-style-type: circle;\n            padding-left: 12px;\n            margin-top: 1px;\n        }\n\n        .wk-form-field .wk-form-field__input:focus {\n            border-bottom: 1px solid #3f51b5;\n            outline: none;\n        }\n\n        .wk-form-field .wk-form-field__message {\n            font-size: 12px;\n        }\n\n        .wk-auth-form-button {\n            background-color: #db4437;\n            direction: ltr;\n            font-weight: 500;\n            height: auto;\n            line-height: normal;\n            max-width: 220px;\n            min-height: 40px;\n            padding: 8px 16px;\n            text-align: left;\n            width: 100%;\n            box-sizing: border-box;\n            box-shadow: 0 2px 2px 0 rgba(0,0,0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.20), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n            border-radius: 2px;\n            font-family: \"Roboto\",\"Helvetica\",\"Arial\",sans-serif;\n            margin: 0 auto 15px;\n            cursor: pointer;\n        }\n        \n        .wk-auth-form-button:focus,\n        .wk-auth-form-button:active,{\n            background-color: #5b6abe;\n        }\n\n        .wk-form-field.wk-form-field--invalid .wk-form-field__input {\n            border-bottom: 1px solid #dd2c00;\n        }\n        \n        .wk-form-field.wk-form-field--checkbox.wk-form-field--invalid .wk-form-field__checkmark {\n            border-color: #dd2c00;\n        }\n\n        .wk-form-field.wk-form-field--valid .wk-form-field__input {\n            border-bottom: 1px solid green;\n        }\n\n        .wk-form-field.wk-form-field--invalid .wk-form-field__message {\n            color: #dd2c00;\n        }\n\n        .wk-form-field.wk-form-field--valid .wk-form-field__message {\n            color: green;\n        }\n\n        .wk-form .wk-form__link {\n            font-size: 14px;\n            color: #3170f3;\n            text-decoration: underline;\n        }\n\n        .wk-form {\n            font-family: Oxygen, sans-serif;\n        }\n        \n        .wk-form-header {\n            margin-bottom: 10px;\n        }\n\n        .wk-form .wk-form__footer {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n        }\n        \n        .wk-form .wk-form__footer.wk-form__footer--right {\n            justify-content: flex-end;\n        }\n\n        .wk-form .wk-form__sub-footer {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            margin-bottom: 20px;\n        }\n\n        .wk-form__reset-password {\n            text-align: right;\n        }\n\n        .wk-form-result {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n        }\n\n        .wk-form-button {\n            border: none;\n            border-radius: 2px;\n            background-color: #3f51b5;\n            color: #fff;\n            position: relative;\n            height: 36px;\n            margin: 0;\n            min-width: 64px;\n            padding: 0 16px;\n            display: inline-block;\n            font-family: \"Roboto\", \"Helvetica\", \"Arial\", sans-serif;\n            font-size: 14px;\n            font-weight: 500;\n            text-transform: uppercase;\n            letter-spacing: 0;\n            overflow: hidden;\n            will-change: box-shadow;\n            transition: box-shadow .2s cubic-bezier(0.4, 0, 1, 1),background-color .2s cubic-bezier(0.4, 0, 0.2, 1),color .2s cubic-bezier(0.4, 0, 0.2, 1);\n            outline: none;\n            cursor: pointer;\n            text-decoration: none;\n            text-align: center;\n            line-height: 36px;\n            vertical-align: middle;\n        }\n\n        .wk-form__error {\n            display: none;\n            margin: 10px 0;\n            border: 1px solid #f5c6cb;\n            border-radius: 5px;\n            color: #721c24;\n            background-color: #f8d7da;\n            line-height: 21px;\n            padding: 10px;\n        }\n\n        .wk-form__error.wk-form__error--show {\n            display: block;\n        }\n\n        .wk-form-button.wk-form-button--cancel {\n            margin-left: auto;\n            margin-right: 10px;\n            color: #3f51b5;\n            background: none;\n        }\n        \n        .wk-success-message {\n        }\n        \n        .wk-success-message__title {\n            font-weight: 500;\n            margin-bottom: 10px;\n        }\n        \n        .wk-success-message__description {\n            margin-bottom: 10px;\n        }\n        \n        .wk-success-message__description b {\n            font-weight: 500;\n        }\n\n        .wk-form-button.wk-form-button--cancel:hover {\n            background-color: hsla(0,0%,62%,.2);\n        }\n        \n        .wk-success-message.wk-password-reset-success {\n            min-height: 205px;\n            display: flex;\n            justify-content: center;\n            flex-direction: column;\n        }\n        \n        .wk-password-reset-success .wk-form-button {\n            left: 50%;\n            transform: translateX(-50%);\n        }\n        \n        .wk-form-field.wk-form-field--checkbox .wk-form-field__label {\n            position: relative;\n            padding-left: 30px;     \n            line-height: 20px;\n            font-size: 14px;     \n        } \n        \n        .wk-form-field.wk-form-field--checkbox input {\n            position: absolute;\n            opacity: 0;\n            cursor: pointer;\n            height: 0;\n            width: 0;\n        }\n        \n        .wk-form-field .wk-form-field__checkmark {\n            position: absolute;\n            top: 0;\n            left: 0;\n            height: 18px;\n            width: 18px;\n            background-color: none;\n            border: 2px solid #333;\n            box-sizing: border-box;\n            border-radius: 2px;\n        }\n        \n        .wk-form-field.wk-form-field--checkbox input:checked ~ .wk-form-field__checkmark {\n            background-color: #3f51b5;\n            border-color: #3f51b5;\n        }\n        \n        .wk-form-field__checkmark:after {\n            content: \"\";\n            position: absolute;\n            display: none;\n        }\n        \n        .wk-form-field input:checked ~ .wk-form-field__checkmark:after {\n            display: block;\n        }\n        \n        .wk-form-field .wk-form-field__checkmark:after {\n            left: 5px;\n            top: 2px;\n            width: 3px;\n            height: 7px;\n            border: solid white;\n            border-width: 0 2px 2px 0;\n            -webkit-transform: rotate(45deg);\n            -ms-transform: rotate(45deg);\n            transform: rotate(45deg);\n        }\n";
+var LIBRARY_STYLES = "\n        .wallkit-modal-wrapper {\n            z-index: 100;\n            position: fixed;\n            top: 0;\n            left: 0;\n            right: 0;\n            bottom: 0;\n            background: rgba(18, 18, 20, 0.9);\n            display: flex;\n            align-items: center;\n            justify-content: flex-start;\n            flex-direction: column;\n            overflow-y: auto;\n            padding: 70px 15px 20px;\n        }\n\n        .wallkit-modal-wrapper__content {\n            background-color: #fff;\n            flex-shrink: 0;\n            position: relative;\n            box-sizing: border-box;\n            overflow: hidden;\n        }\n        \n        @media screen and (max-width: 500px) {\n            .wallkit-modal-wrapper__content {\n                width: 100%;\n                min-width: auto!important;\n            }\n        }\n\n        .wallkit-modal-wrapper__close-btn {\n            position: absolute;\n            right: 10px;\n            top: 10px;\n            cursor: pointer;\n            color: #000;\n            font-size: 37px;\n            width: 37px;\n            height: 37px;\n            text-align: center;\n            line-height: 34px;\n        }\n\n        .wallkit-modal-wrapper .wk-frame {\n            transition: all 0.3s linear 0s;\n            max-width: 100%;\n            border: none;\n        }\n\n        .wallkit-auth-modal {\n            z-index: 999;\n        }\n\n        .wallkit-auth-modal .wallkit-modal-wrapper__content {\n            padding: 20px;\n        }\n\n        .wallkit-auth-modal .wallkit-auth-modal__title {\n            font-family: Roboto, sans-serif;\n            text-align: center;\n        }\n        \n        .wk-auth-form {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .wk-form-field {\n            display: flex;\n            flex-direction: column;\n            font-family: Oxygen, sans-serif;\n            margin-bottom: 10px;\n        }\n\n        .wk-form-field .wk-form-field__label {\n            font-weight: 500;\n            color: #333;\n            margin-bottom: 5px;\n        }\n\n        .wk-form-field .wk-form-field__input-wrapper {\n            margin-bottom: 5px;\n            position: relative;\n        }\n        \n        .wk-eye-toggle {\n            background: url(https://www.gstatic.com/images/icons/material/system/1x/visibility_black_24dp.png);\n            width: 24px;\n            height: 24px;\n        }\n        \n        .wk-form-field__field-description {\n            font-size: 11px;\n            color: #989898;\n        }\n        \n        .wk-eye-toggle.wk-eye-toggled {\n            background: url(https://www.gstatic.com/images/icons/material/system/1x/visibility_off_black_24dp.png);\n        }\n        \n        .wk-form-field__field-affix {\n            position: absolute;\n            right: 5px;\n            top: 0;\n            bottom: 0;\n        }\n        \n        .wk-form-field .wk-form-field__input {\n            border-radius: 0;\n            border: 0;\n            border-bottom: 1px solid #ccc;\n            padding: 5px;\n            box-sizing: border-box;\n            width: 100%;\n        }\n        \n        .wk-field-list {\n            list-style-type: circle;\n            padding-left: 12px;\n            margin-top: 1px;\n        }\n\n        .wk-form-field .wk-form-field__input:focus {\n            border-bottom: 1px solid #3f51b5;\n            outline: none;\n        }\n\n        .wk-form-field .wk-form-field__message {\n            font-size: 12px;\n        }\n\n        .wk-auth-form-button {\n            background-color: #db4437;\n            direction: ltr;\n            font-weight: 500;\n            height: auto;\n            line-height: normal;\n            max-width: 220px;\n            min-height: 40px;\n            padding: 8px 16px;\n            text-align: left;\n            width: 100%;\n            box-sizing: border-box;\n            box-shadow: 0 2px 2px 0 rgba(0,0,0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.20), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n            border-radius: 2px;\n            font-family: \"Roboto\",\"Helvetica\",\"Arial\",sans-serif;\n            margin: 0 auto 15px;\n            cursor: pointer;\n        }\n        \n        .wk-auth-form-button:focus,\n        .wk-auth-form-button:active,{\n            background-color: #5b6abe;\n        }\n\n        .wk-form-field.wk-form-field--invalid .wk-form-field__input {\n            border-bottom: 1px solid #dd2c00;\n        }\n        \n        .wk-form-field.wk-form-field--checkbox.wk-form-field--invalid .wk-form-field__checkmark {\n            border-color: #dd2c00;\n        }\n\n        .wk-form-field.wk-form-field--valid .wk-form-field__input {\n            border-bottom: 1px solid green;\n        }\n\n        .wk-form-field.wk-form-field--invalid .wk-form-field__message {\n            color: #dd2c00;\n        }\n\n        .wk-form-field.wk-form-field--valid .wk-form-field__message {\n            color: green;\n        }\n\n        .wk-form .wk-form__link {\n            font-size: 14px;\n            color: #3170f3;\n            text-decoration: underline;\n        }\n\n        .wk-form {\n            font-family: Oxygen, sans-serif;\n        }\n        \n        .wk-form-header {\n            margin-bottom: 10px;\n        }\n\n        .wk-form .wk-form__footer {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n        }\n        \n        .wk-form .wk-form__footer.wk-form__footer--right {\n            justify-content: flex-end;\n        }\n\n        .wk-form .wk-form__sub-footer {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            margin-bottom: 20px;\n        }\n\n        .wk-form__reset-password {\n            text-align: right;\n        }\n\n        .wk-form-result {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n        }\n\n        .wk-form-button {\n            border: none;\n            border-radius: 2px;\n            background-color: #3f51b5;\n            color: #fff;\n            position: relative;\n            height: 36px;\n            margin: 0;\n            min-width: 64px;\n            padding: 0 16px;\n            display: inline-block;\n            font-family: \"Roboto\", \"Helvetica\", \"Arial\", sans-serif;\n            font-size: 14px;\n            font-weight: 500;\n            text-transform: uppercase;\n            letter-spacing: 0;\n            overflow: hidden;\n            will-change: box-shadow;\n            transition: box-shadow .2s cubic-bezier(0.4, 0, 1, 1),background-color .2s cubic-bezier(0.4, 0, 0.2, 1),color .2s cubic-bezier(0.4, 0, 0.2, 1);\n            outline: none;\n            cursor: pointer;\n            text-decoration: none;\n            text-align: center;\n            line-height: 36px;\n            vertical-align: middle;\n        }\n\n        .wk-form__error {\n            display: none;\n            margin: 10px 0;\n            border: 1px solid #f5c6cb;\n            border-radius: 5px;\n            color: #721c24;\n            background-color: #f8d7da;\n            line-height: 21px;\n            padding: 10px;\n        }\n\n        .wk-form__error.wk-form__error--show {\n            display: block;\n        }\n\n        .wk-form-button.wk-form-button--cancel {\n            margin-left: auto;\n            margin-right: 10px;\n            color: #3f51b5;\n            background: none;\n        }\n        \n        .wk-success-message {\n        }\n        \n        .wk-success-message__title {\n            font-weight: 500;\n            margin-bottom: 10px;\n        }\n        \n        .wk-success-message__description {\n            margin-bottom: 10px;\n        }\n        \n        .wk-success-message__description b {\n            font-weight: 500;\n        }\n\n        .wk-form-button.wk-form-button--cancel:hover {\n            background-color: hsla(0,0%,62%,.2);\n        }\n        \n        .wk-success-message.wk-password-reset-success {\n            min-height: 205px;\n            display: flex;\n            justify-content: center;\n            flex-direction: column;\n        }\n        \n       \n        \n        .wk-form-field.wk-form-field--checkbox .wk-form-field__label {\n            position: relative;\n            padding-left: 30px;     \n            line-height: 20px;\n            font-size: 14px;     \n        } \n        \n        .wk-form-field.wk-form-field--checkbox input {\n            position: absolute;\n            opacity: 0;\n            cursor: pointer;\n            height: 0;\n            width: 0;\n        }\n        \n        .wk-form-field .wk-form-field__checkmark {\n            position: absolute;\n            top: 0;\n            left: 0;\n            height: 18px;\n            width: 18px;\n            background-color: none;\n            border: 2px solid #333;\n            box-sizing: border-box;\n            border-radius: 2px;\n        }\n        \n        .wk-form-field.wk-form-field--checkbox input:checked ~ .wk-form-field__checkmark {\n            background-color: #3f51b5;\n            border-color: #3f51b5;\n        }\n        \n        .wk-form-field__checkmark:after {\n            content: \"\";\n            position: absolute;\n            display: none;\n        }\n        \n        .wk-form-field input:checked ~ .wk-form-field__checkmark:after {\n            display: block;\n        }\n        \n        .wk-form-field .wk-form-field__checkmark:after {\n            left: 5px;\n            top: 2px;\n            width: 3px;\n            height: 7px;\n            border: solid white;\n            border-width: 0 2px 2px 0;\n            -webkit-transform: rotate(45deg);\n            -ms-transform: rotate(45deg);\n            transform: rotate(45deg);\n        }\n";
 exports.LIBRARY_STYLES = LIBRARY_STYLES;
 
 /***/ }),
@@ -1211,41 +1211,129 @@ var Firebase = /*#__PURE__*/function () {
       return this.firebase.auth().sendPasswordResetEmail(email);
     }
   }, {
+    key: "sendNewPasswordResetPassword",
+    value: function () {
+      var _sendNewPasswordResetPassword = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(password, oobCode) {
+        var passResetUrl;
+        return _regenerator["default"].wrap(function _callee4$(_context4) {
+          while (1) switch (_context4.prev = _context4.next) {
+            case 0:
+              if (password) {
+                _context4.next = 2;
+                break;
+              }
+              throw new Error("The password cannot be empty of false.");
+            case 2:
+              if (oobCode) {
+                _context4.next = 4;
+                break;
+              }
+              throw new Error("Invalid values in the password reset url.");
+            case 4:
+              passResetUrl = "https://identitytoolkit.googleapis.com/v1/accounts:resetPassword?key=".concat(this.config.apiKey);
+              _context4.next = 7;
+              return fetch(passResetUrl, {
+                method: 'POST',
+                body: JSON.stringify({
+                  oobCode: oobCode,
+                  newPassword: password
+                }),
+                headers: {
+                  "Content-Type": "application/json"
+                }
+              }).then( /*#__PURE__*/function () {
+                var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(res) {
+                  var resJson;
+                  return _regenerator["default"].wrap(function _callee3$(_context3) {
+                    while (1) switch (_context3.prev = _context3.next) {
+                      case 0:
+                        _context3.next = 2;
+                        return res.json();
+                      case 2:
+                        resJson = _context3.sent;
+                        if (!(!!resJson.error && !!resJson.error.message)) {
+                          _context3.next = 14;
+                          break;
+                        }
+                        _context3.t0 = resJson.error.message;
+                        _context3.next = _context3.t0 === 'OPERATION_NOT_ALLOWED' ? 7 : _context3.t0 === 'EXPIRED_OOB_CODE' ? 8 : _context3.t0 === 'INVALID_OOB_CODE' ? 9 : _context3.t0 === 'USER_DISABLED' ? 10 : 11;
+                        break;
+                      case 7:
+                        throw new Error("Password sign-in is disabled for this project.");
+                      case 8:
+                        throw new Error("The password reset link has expired.");
+                      case 9:
+                        throw new Error("The password reset link is invalid. This can happen if the code is malformed, expired, or has already been used. Please generate a new one using the Forgot password form.");
+                      case 10:
+                        throw new Error("The user account has been disabled by an administrator.");
+                      case 11:
+                        throw new Error(resJson.error.message);
+                      case 12:
+                        _context3.next = 15;
+                        break;
+                      case 14:
+                        return _context3.abrupt("return", true);
+                      case 15:
+                      case "end":
+                        return _context3.stop();
+                    }
+                  }, _callee3);
+                }));
+                return function (_x5) {
+                  return _ref2.apply(this, arguments);
+                };
+              }())["catch"](function (error) {
+                throw error;
+              });
+            case 7:
+              return _context4.abrupt("return", _context4.sent);
+            case 8:
+            case "end":
+              return _context4.stop();
+          }
+        }, _callee4, this);
+      }));
+      function sendNewPasswordResetPassword(_x3, _x4) {
+        return _sendNewPasswordResetPassword.apply(this, arguments);
+      }
+      return sendNewPasswordResetPassword;
+    }()
+  }, {
     key: "reauthenticateWithCredential",
     value: function () {
-      var _reauthenticateWithCredential = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(oldPassword) {
+      var _reauthenticateWithCredential = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(oldPassword) {
         var user, credential;
-        return _regenerator["default"].wrap(function _callee3$(_context3) {
-          while (1) switch (_context3.prev = _context3.next) {
+        return _regenerator["default"].wrap(function _callee5$(_context5) {
+          while (1) switch (_context5.prev = _context5.next) {
             case 0:
               if (!oldPassword) {
-                _context3.next = 12;
+                _context5.next = 12;
                 break;
               }
               user = this.firebase.auth().currentUser;
               if (!user) {
-                _context3.next = 9;
+                _context5.next = 9;
                 break;
               }
               credential = this.firebase.auth.EmailAuthProvider.credential(user.email, oldPassword);
-              _context3.next = 6;
+              _context5.next = 6;
               return user.reauthenticateWithCredential(credential);
             case 6:
-              return _context3.abrupt("return", _context3.sent);
+              return _context5.abrupt("return", _context5.sent);
             case 9:
               throw new Error('Your authorization is broken. Please login again.');
             case 10:
-              _context3.next = 13;
+              _context5.next = 13;
               break;
             case 12:
               throw new Error('Old Password is empty');
             case 13:
             case "end":
-              return _context3.stop();
+              return _context5.stop();
           }
-        }, _callee3, this);
+        }, _callee5, this);
       }));
-      function reauthenticateWithCredential(_x3) {
+      function reauthenticateWithCredential(_x6) {
         return _reauthenticateWithCredential.apply(this, arguments);
       }
       return reauthenticateWithCredential;
@@ -1253,39 +1341,39 @@ var Firebase = /*#__PURE__*/function () {
   }, {
     key: "updatePassword",
     value: function () {
-      var _updatePassword = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(newPassword) {
+      var _updatePassword = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(newPassword) {
         var user;
-        return _regenerator["default"].wrap(function _callee4$(_context4) {
-          while (1) switch (_context4.prev = _context4.next) {
+        return _regenerator["default"].wrap(function _callee6$(_context6) {
+          while (1) switch (_context6.prev = _context6.next) {
             case 0:
               if (!newPassword) {
-                _context4.next = 10;
+                _context6.next = 10;
                 break;
               }
               user = this.firebase.auth().currentUser;
               if (!user) {
-                _context4.next = 7;
+                _context6.next = 7;
                 break;
               }
-              _context4.next = 5;
+              _context6.next = 5;
               return user.updatePassword(newPassword);
             case 5:
-              _context4.next = 8;
+              _context6.next = 8;
               break;
             case 7:
               throw new Error('Your authorization is broken. Please login again.');
             case 8:
-              _context4.next = 11;
+              _context6.next = 11;
               break;
             case 10:
               throw new Error('New Password is empty');
             case 11:
             case "end":
-              return _context4.stop();
+              return _context6.stop();
           }
-        }, _callee4, this);
+        }, _callee6, this);
       }));
-      function updatePassword(_x4) {
+      function updatePassword(_x7) {
         return _updatePassword.apply(this, arguments);
       }
       return updatePassword;
@@ -1293,33 +1381,33 @@ var Firebase = /*#__PURE__*/function () {
   }, {
     key: "authWithCustomToken",
     value: function () {
-      var _authWithCustomToken = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(token) {
-        return _regenerator["default"].wrap(function _callee5$(_context5) {
-          while (1) switch (_context5.prev = _context5.next) {
+      var _authWithCustomToken = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee7(token) {
+        return _regenerator["default"].wrap(function _callee7$(_context7) {
+          while (1) switch (_context7.prev = _context7.next) {
             case 0:
-              _context5.prev = 0;
+              _context7.prev = 0;
               if (!(this.firebase && this.firebase.auth)) {
-                _context5.next = 5;
+                _context7.next = 5;
                 break;
               }
-              _context5.next = 4;
+              _context7.next = 4;
               return this.firebase.auth().signInWithCustomToken(token);
             case 4:
-              return _context5.abrupt("return", _context5.sent);
+              return _context7.abrupt("return", _context7.sent);
             case 5:
-              return _context5.abrupt("return", false);
+              return _context7.abrupt("return", false);
             case 8:
-              _context5.prev = 8;
-              _context5.t0 = _context5["catch"](0);
+              _context7.prev = 8;
+              _context7.t0 = _context7["catch"](0);
               console.error('Custom Token Auth Fail');
-              return _context5.abrupt("return", false);
+              return _context7.abrupt("return", false);
             case 12:
             case "end":
-              return _context5.stop();
+              return _context7.stop();
           }
-        }, _callee5, this, [[0, 8]]);
+        }, _callee7, this, [[0, 8]]);
       }));
-      function authWithCustomToken(_x5) {
+      function authWithCustomToken(_x8) {
         return _authWithCustomToken.apply(this, arguments);
       }
       return authWithCustomToken;
@@ -1487,6 +1575,7 @@ var _Token = _interopRequireDefault(__webpack_require__(526));
 var _ReCaptcha = _interopRequireDefault(__webpack_require__(3378));
 var _AuthForm = __webpack_require__(8031);
 var _DOM = __webpack_require__(2909);
+var _url = __webpack_require__(5234);
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof3(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -1496,18 +1585,21 @@ function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedec
 function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
 var _options = /*#__PURE__*/new WeakMap();
+var _oobCode = /*#__PURE__*/new WeakMap();
 var _authPlaceholderElementSelector = /*#__PURE__*/new WeakMap();
 var _authPlaceholderElementSelectorType = /*#__PURE__*/new WeakMap();
 var _createModal = /*#__PURE__*/new WeakSet();
 var _initListeners = /*#__PURE__*/new WeakSet();
 var _setAuthorizationError = /*#__PURE__*/new WeakSet();
 var _resetAuthorizationError = /*#__PURE__*/new WeakSet();
+var _checkIfResetPasswordURL = /*#__PURE__*/new WeakSet();
 var Authentication = /*#__PURE__*/function () {
   function Authentication(options) {
     var _options$cookies,
       _options$cookies2,
       _this = this;
     (0, _classCallCheck2["default"])(this, Authentication);
+    _classPrivateMethodInitSpec(this, _checkIfResetPasswordURL);
     _classPrivateMethodInitSpec(this, _resetAuthorizationError);
     _classPrivateMethodInitSpec(this, _setAuthorizationError);
     _classPrivateMethodInitSpec(this, _initListeners);
@@ -1523,6 +1615,10 @@ var Authentication = /*#__PURE__*/function () {
     _classPrivateFieldInitSpec(this, _options, {
       writable: true,
       value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _oobCode, {
+      writable: true,
+      value: ''
     });
     if (!!Authentication.instance) {
       return Authentication.instance;
@@ -1678,8 +1774,8 @@ var Authentication = /*#__PURE__*/function () {
             _this5.handleSignUp(data);
           }
         },
-        onPasswordReset: function () {
-          var _onPasswordReset = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(data) {
+        onPasswordForgot: function () {
+          var _onPasswordForgot = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(data) {
             var success, _yield$_this5$sdk$met, result;
             return _regenerator["default"].wrap(function _callee2$(_context2) {
               while (1) switch (_context2.prev = _context2.next) {
@@ -1708,7 +1804,7 @@ var Authentication = /*#__PURE__*/function () {
                     _context2.next = 17;
                     break;
                   }
-                  _this5.authForm.showSuccessPasswordReset();
+                  _this5.authForm.showSuccessPasswordForgot();
                   _context2.next = 18;
                   break;
                 case 17:
@@ -1730,7 +1826,45 @@ var Authentication = /*#__PURE__*/function () {
               }
             }, _callee2, null, [[0, 21]]);
           }));
-          function onPasswordReset(_x2) {
+          function onPasswordForgot(_x2) {
+            return _onPasswordForgot.apply(this, arguments);
+          }
+          return onPasswordForgot;
+        }(),
+        onPasswordReset: function () {
+          var _onPasswordReset = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(data) {
+            var success;
+            return _regenerator["default"].wrap(function _callee3$(_context3) {
+              while (1) switch (_context3.prev = _context3.next) {
+                case 0:
+                  _context3.prev = 0;
+                  _this5.toggleFormLoader(true);
+                  _context3.next = 4;
+                  return _this5.firebase.sendNewPasswordResetPassword(data.new_password, (0, _classPrivateFieldGet13["default"])(_this5, _oobCode));
+                case 4:
+                  success = _context3.sent;
+                  if (success) {
+                    _this5.authForm.showSuccessPasswordReset();
+                  } else {
+                    _this5.authForm.resetPasswordForm.setFormError("Something went wrong");
+                  }
+                  _this5.toggleFormLoader(false);
+                  _context3.next = 13;
+                  break;
+                case 9:
+                  _context3.prev = 9;
+                  _context3.t0 = _context3["catch"](0);
+                  if (_context3.t0.message) {
+                    _this5.authForm.resetPasswordForm.setFormError(_context3.t0.message);
+                  }
+                  _this5.toggleFormLoader(false);
+                case 13:
+                case "end":
+                  return _context3.stop();
+              }
+            }, _callee3, null, [[0, 9]]);
+          }));
+          function onPasswordReset(_x3) {
             return _onPasswordReset.apply(this, arguments);
           }
           return onPasswordReset;
@@ -1773,29 +1907,29 @@ var Authentication = /*#__PURE__*/function () {
   }, {
     key: "authInWallkit",
     value: function () {
-      var _authInWallkit = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3() {
+      var _authInWallkit = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4() {
         var _this7 = this;
         var firebaseToken,
           response,
-          _args3 = arguments;
-        return _regenerator["default"].wrap(function _callee3$(_context3) {
-          while (1) switch (_context3.prev = _context3.next) {
+          _args4 = arguments;
+        return _regenerator["default"].wrap(function _callee4$(_context4) {
+          while (1) switch (_context4.prev = _context4.next) {
             case 0:
-              firebaseToken = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : null;
+              firebaseToken = _args4.length > 0 && _args4[0] !== undefined ? _args4[0] : null;
               _classPrivateMethodGet(this, _resetAuthorizationError, _resetAuthorizationError2).call(this);
               if (firebaseToken) {
-                _context3.next = 4;
+                _context4.next = 4;
                 break;
               }
               throw new Error('Your authorization is broken. Please login again.');
             case 4:
-              _context3.prev = 4;
-              _context3.next = 7;
+              _context4.prev = 4;
+              _context4.next = 7;
               return this.sdk.methods.authenticateWithFirebase(firebaseToken);
             case 7:
-              response = _context3.sent;
+              response = _context4.sent;
               this.setToken(response.token);
-              _context3.next = 11;
+              _context4.next = 11;
               return new Promise(function (resolve, reject) {
                 var userGetTimeout = setTimeout(function () {
                   resolve(false);
@@ -1811,18 +1945,18 @@ var Authentication = /*#__PURE__*/function () {
                 _this7.sdk.methods.subscribeLocalEvent('user', userEventCallback);
               });
             case 11:
-              return _context3.abrupt("return", _context3.sent);
+              return _context4.abrupt("return", _context4.sent);
             case 14:
-              _context3.prev = 14;
-              _context3.t0 = _context3["catch"](4);
-              console.log('error', _context3.t0);
+              _context4.prev = 14;
+              _context4.t0 = _context4["catch"](4);
+              console.log('error', _context4.t0);
               this.removeTokens();
-              throw _context3.t0;
+              throw _context4.t0;
             case 19:
             case "end":
-              return _context3.stop();
+              return _context4.stop();
           }
-        }, _callee3, this, [[4, 14]]);
+        }, _callee4, this, [[4, 14]]);
       }));
       function authInWallkit() {
         return _authInWallkit.apply(this, arguments);
@@ -1863,9 +1997,9 @@ var Authentication = /*#__PURE__*/function () {
   }, {
     key: "show",
     value: function () {
-      var _show = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(authFormSlug) {
-        return _regenerator["default"].wrap(function _callee4$(_context4) {
-          while (1) switch (_context4.prev = _context4.next) {
+      var _show = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(authFormSlug) {
+        return _regenerator["default"].wrap(function _callee5$(_context5) {
+          while (1) switch (_context5.prev = _context5.next) {
             case 0:
               if ((0, _classPrivateFieldGet13["default"])(this, _options).firebase.genuineForm === false) {
                 if (this.authForm) {
@@ -1881,11 +2015,11 @@ var Authentication = /*#__PURE__*/function () {
               }
             case 3:
             case "end":
-              return _context4.stop();
+              return _context5.stop();
           }
-        }, _callee4, this);
+        }, _callee5, this);
       }));
-      function show(_x3) {
+      function show(_x4) {
         return _show.apply(this, arguments);
       }
       return show;
@@ -1989,30 +2123,30 @@ var Authentication = /*#__PURE__*/function () {
   }, {
     key: "logout",
     value: function () {
-      var _logout = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5() {
+      var _logout = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6() {
         var success;
-        return _regenerator["default"].wrap(function _callee5$(_context5) {
-          while (1) switch (_context5.prev = _context5.next) {
+        return _regenerator["default"].wrap(function _callee6$(_context6) {
+          while (1) switch (_context6.prev = _context6.next) {
             case 0:
-              _context5.prev = 0;
+              _context6.prev = 0;
               this.removeToken();
-              _context5.next = 4;
+              _context6.next = 4;
               return this.firebase.logout();
             case 4:
-              success = _context5.sent;
+              success = _context6.sent;
               if (!success) {
-                _context5.next = 13;
+                _context6.next = 13;
                 break;
               }
               this.removeFirebaseToken();
               if (!(this.reCaptcha.enabled && !this.reCaptcha.loaded)) {
-                _context5.next = 12;
+                _context6.next = 12;
                 break;
               }
-              _context5.next = 10;
+              _context6.next = 10;
               return this.reCaptcha.init();
             case 10:
-              _context5.next = 13;
+              _context6.next = 13;
               break;
             case 12:
               if (this.reCaptcha.loaded) {
@@ -2024,18 +2158,18 @@ var Authentication = /*#__PURE__*/function () {
               }
             case 13:
               this.resetAuthProcess();
-              _context5.next = 20;
+              _context6.next = 20;
               break;
             case 16:
-              _context5.prev = 16;
-              _context5.t0 = _context5["catch"](0);
-              console.log('ERROR:', _context5.t0);
+              _context6.prev = 16;
+              _context6.t0 = _context6["catch"](0);
+              console.log('ERROR:', _context6.t0);
               this.resetAuthProcess();
             case 20:
             case "end":
-              return _context5.stop();
+              return _context6.stop();
           }
-        }, _callee5, this, [[0, 16]]);
+        }, _callee6, this, [[0, 16]]);
       }));
       function logout() {
         return _logout.apply(this, arguments);
@@ -2069,51 +2203,51 @@ var Authentication = /*#__PURE__*/function () {
   }, {
     key: "handleTicketsToken",
     value: function () {
-      var _handleTicketsToken = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(ticketPassAuthToken) {
+      var _handleTicketsToken = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee7(ticketPassAuthToken) {
         var response, userCredential, firebaseToken;
-        return _regenerator["default"].wrap(function _callee6$(_context6) {
-          while (1) switch (_context6.prev = _context6.next) {
+        return _regenerator["default"].wrap(function _callee7$(_context7) {
+          while (1) switch (_context7.prev = _context7.next) {
             case 0:
-              _context6.prev = 0;
-              _context6.next = 3;
+              _context7.prev = 0;
+              _context7.next = 3;
               return this.sdk.methods.getAuthTokensByTicketPassToken(ticketPassAuthToken);
             case 3:
-              response = _context6.sent;
+              response = _context7.sent;
               if (!response) {
-                _context6.next = 19;
+                _context7.next = 19;
                 break;
               }
-              _context6.next = 7;
+              _context7.next = 7;
               return this.firebase.authWithCustomToken(response.firebase_custom_token);
             case 7:
-              userCredential = _context6.sent;
-              _context6.next = 10;
+              userCredential = _context7.sent;
+              _context7.next = 10;
               return userCredential.user.getIdToken();
             case 10:
-              firebaseToken = _context6.sent;
+              firebaseToken = _context7.sent;
               this.updateFirebaseToken(firebaseToken);
               this.setToken(response.token);
-              _context6.next = 15;
+              _context7.next = 15;
               return this.sdk.methods.getUser();
             case 15:
               this.dispatchTokens();
               this.events.notify(_eventsName["default"].local.SUCCESS_AUTH, true);
               this.events.notify(_eventsName["default"].local.TICKETS_TOKEN_AUTH_SUCCESS, true);
-              return _context6.abrupt("return", true);
+              return _context7.abrupt("return", true);
             case 19:
-              return _context6.abrupt("return", false);
+              return _context7.abrupt("return", false);
             case 22:
-              _context6.prev = 22;
-              _context6.t0 = _context6["catch"](0);
-              console.error(_context6.t0);
-              return _context6.abrupt("return", _context6.t0);
+              _context7.prev = 22;
+              _context7.t0 = _context7["catch"](0);
+              console.error(_context7.t0);
+              return _context7.abrupt("return", _context7.t0);
             case 26:
             case "end":
-              return _context6.stop();
+              return _context7.stop();
           }
-        }, _callee6, this, [[0, 22]]);
+        }, _callee7, this, [[0, 22]]);
       }));
-      function handleTicketsToken(_x4) {
+      function handleTicketsToken(_x5) {
         return _handleTicketsToken.apply(this, arguments);
       }
       return handleTicketsToken;
@@ -2150,6 +2284,7 @@ var Authentication = /*#__PURE__*/function () {
         }
       }
       _classPrivateMethodGet(this, _initListeners, _initListeners2).call(this);
+      _classPrivateMethodGet(this, _checkIfResetPasswordURL, _checkIfResetPasswordURL2).call(this);
     }
   }]);
   return Authentication;
@@ -2230,6 +2365,17 @@ function _setAuthorizationError2(error) {
 }
 function _resetAuthorizationError2() {
   _classPrivateMethodGet(this, _setAuthorizationError, _setAuthorizationError2).call(this, null);
+}
+function _checkIfResetPasswordURL2() {
+  var oobCode = (0, _url.parseResetPasswordOobCodeHash)();
+  if (oobCode) {
+    (0, _classPrivateFieldSet2["default"])(this, _oobCode, oobCode);
+    this.authForm.triggerButton.hide();
+    this.firebase.hideAuthForm();
+    this.authForm.showForm(_AuthForm.RESET_PASSWORD_FORM_SLUG);
+    this.modal.show();
+    (0, _url.resetHash)();
+  }
 }
 
 /***/ }),
@@ -3638,7 +3784,7 @@ var _interopRequireDefault = __webpack_require__(5656);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.SIGN_UP_FORM_SLUG = exports.SIGN_IN_FORM_SLUG = exports.RESET_PASSWORD_FORM_SLUG = exports.AuthForm = void 0;
+exports.SIGN_UP_FORM_SLUG = exports.SIGN_IN_FORM_SLUG = exports.RESET_PASSWORD_FORM_SLUG = exports.FORGOT_PASSWORD_FORM_SLUG = exports.AuthForm = void 0;
 var _defineProperty2 = _interopRequireDefault(__webpack_require__(366));
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
 var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
@@ -3649,12 +3795,15 @@ var _TriggerButton = __webpack_require__(447);
 var _LoginForm = __webpack_require__(4138);
 var _SignUpForm = __webpack_require__(8955);
 var _ForgotPasswordForm = __webpack_require__(7486);
+var _ResetPasswordForm = __webpack_require__(2217);
 function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
 function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
 var SIGN_UP_FORM_SLUG = 'sign-up';
 exports.SIGN_UP_FORM_SLUG = SIGN_UP_FORM_SLUG;
 var SIGN_IN_FORM_SLUG = 'sign-in';
 exports.SIGN_IN_FORM_SLUG = SIGN_IN_FORM_SLUG;
+var FORGOT_PASSWORD_FORM_SLUG = 'forgot-password';
+exports.FORGOT_PASSWORD_FORM_SLUG = FORGOT_PASSWORD_FORM_SLUG;
 var RESET_PASSWORD_FORM_SLUG = 'reset-password';
 exports.RESET_PASSWORD_FORM_SLUG = RESET_PASSWORD_FORM_SLUG;
 var _options = /*#__PURE__*/new WeakMap();
@@ -3696,7 +3845,7 @@ var AuthForm = /*#__PURE__*/function () {
         _this.showForm(SIGN_UP_FORM_SLUG);
       } else if (event.target.id === 'auth-password-link') {
         event.preventDefault();
-        _this.showForm(RESET_PASSWORD_FORM_SLUG);
+        _this.showForm(FORGOT_PASSWORD_FORM_SLUG);
       }
     });
     this.loginForm.hide();
@@ -3726,8 +3875,8 @@ var AuthForm = /*#__PURE__*/function () {
     }
     this.forgotPasswordForm = new _ForgotPasswordForm.ForgotPasswordForm(selector, {
       onSubmit: function onSubmit(data) {
-        if (options.onPasswordReset) {
-          options.onPasswordReset(data);
+        if (options.onPasswordForgot) {
+          options.onPasswordForgot(data);
         }
       }
     });
@@ -3739,6 +3888,21 @@ var AuthForm = /*#__PURE__*/function () {
       }
     });
     this.forgotPasswordForm.hide();
+    this.resetPasswordForm = new _ResetPasswordForm.ResetPasswordForm(selector, {
+      onSubmit: function onSubmit(data) {
+        if (options.onPasswordReset) {
+          options.onPasswordReset(data);
+        }
+      }
+    });
+    this.resetPasswordForm.formWrapper.addEventListener('click', function (event) {
+      if (event.target.id === 'back-to-login') {
+        event.preventDefault();
+        _this.showForm(SIGN_IN_FORM_SLUG);
+        _this.resetPasswordForm.reRender();
+      }
+    });
+    this.resetPasswordForm.hide();
     if (options.triggerButton !== false) {
       this.triggerButton = new _TriggerButton.TriggerButton(selector, {
         onClick: function onClick() {
@@ -3750,7 +3914,7 @@ var AuthForm = /*#__PURE__*/function () {
         }
       });
     }
-    this.forms = (_this$forms = {}, (0, _defineProperty2["default"])(_this$forms, RESET_PASSWORD_FORM_SLUG, this.forgotPasswordForm), (0, _defineProperty2["default"])(_this$forms, SIGN_IN_FORM_SLUG, this.loginForm), (0, _defineProperty2["default"])(_this$forms, SIGN_UP_FORM_SLUG, this.signUpForm), _this$forms);
+    this.forms = (_this$forms = {}, (0, _defineProperty2["default"])(_this$forms, FORGOT_PASSWORD_FORM_SLUG, this.forgotPasswordForm), (0, _defineProperty2["default"])(_this$forms, RESET_PASSWORD_FORM_SLUG, this.resetPasswordForm), (0, _defineProperty2["default"])(_this$forms, SIGN_IN_FORM_SLUG, this.loginForm), (0, _defineProperty2["default"])(_this$forms, SIGN_UP_FORM_SLUG, this.signUpForm), _this$forms);
   }
   (0, _createClass2["default"])(AuthForm, [{
     key: "defaultForm",
@@ -3758,7 +3922,7 @@ var AuthForm = /*#__PURE__*/function () {
       return this.forms[this.defaultFormSlug];
     },
     set: function set(formSlug) {
-      if (formSlug && [SIGN_UP_FORM_SLUG, SIGN_IN_FORM_SLUG, RESET_PASSWORD_FORM_SLUG].includes(formSlug)) {
+      if (formSlug && [SIGN_UP_FORM_SLUG, SIGN_IN_FORM_SLUG, FORGOT_PASSWORD_FORM_SLUG, RESET_PASSWORD_FORM_SLUG].includes(formSlug)) {
         this.defaultFormSlug = formSlug;
       } else {
         this.defaultFormSlug = (0, _classPrivateFieldGet2["default"])(this, _options).defaultForm || SIGN_UP_FORM_SLUG;
@@ -3826,10 +3990,15 @@ var AuthForm = /*#__PURE__*/function () {
       }
     }
   }, {
+    key: "showSuccessPasswordForgot",
+    value: function showSuccessPasswordForgot() {
+      var email = this.forgotPasswordForm.emailField.getValue();
+      this.forgotPasswordForm.showFormResult("\n            <div class=\"wk-success-message wk-password-reset-success wk-password-forgot-message\">\n                <p class=\"wk-success-message__description\">Please follow the instructions sent to <b>".concat(email, "</b> to recover your password</p>\n                <button id=\"back-to-login\" class=\"wk-form-button wk-form-button--cancel\">Back to login</button>\n            </div>\n        "));
+    }
+  }, {
     key: "showSuccessPasswordReset",
     value: function showSuccessPasswordReset() {
-      var email = this.forgotPasswordForm.emailField.getValue();
-      this.forgotPasswordForm.showFormResult("\n            <div class=\"wk-success-message wk-password-reset-success\">\n                <h2 class=\"wk-success-message__title\">Check your email!</h2>\n                <p class=\"wk-success-message__description\">Follow the instructions sent to <b>".concat(email, "</b> to recover your password</p>\n                <button id=\"back-to-login\" class=\"wk-form-button wk-form-button--cancel\">Back to login</button>\n            </div>\n        "));
+      this.resetPasswordForm.showFormResult("\n            <div class=\"wk-success-message wk-password-reset-success wk-password-reset-message\">\n                <h2 class=\"wk-success-message__title\">Your password has been successfully changed!</h2>\n                <button id=\"back-to-login\" class=\"wk-form-button wk-form-button--cancel\">Back to login</button>\n            </div>\n        ");
     }
   }, {
     key: "render",
@@ -3842,6 +4011,9 @@ var AuthForm = /*#__PURE__*/function () {
       }
       if (this.forgotPasswordForm) {
         this.forgotPasswordForm.render();
+      }
+      if (this.resetPasswordForm) {
+        this.resetPasswordForm.render();
       }
       if (this.triggerButton) {
         this.triggerButton.render();
@@ -4148,6 +4320,70 @@ var LoginForm = /*#__PURE__*/function (_Form) {
   return LoginForm;
 }(_index.Form);
 exports.LoginForm = LoginForm;
+
+/***/ }),
+
+/***/ 2217:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(5656);
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.ResetPasswordForm = void 0;
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
+var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
+var _inherits2 = _interopRequireDefault(__webpack_require__(7964));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(8442));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(7474));
+var _DOM = __webpack_require__(2909);
+var _index = __webpack_require__(9356);
+var _PasswordField = __webpack_require__(4386);
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2["default"])(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2["default"])(this, result); }; }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+var ResetPasswordForm = /*#__PURE__*/function (_Form) {
+  (0, _inherits2["default"])(ResetPasswordForm, _Form);
+  var _super = _createSuper(ResetPasswordForm);
+  function ResetPasswordForm(targetElementSelector, options) {
+    var _this;
+    (0, _classCallCheck2["default"])(this, ResetPasswordForm);
+    _this = _super.call(this, targetElementSelector, options);
+    _this.options = options;
+    _this.options.title = 'Reset Password' || 0;
+    _this.options.footer = _this.getFormFooter() || options.footer;
+    _this.newPasswordField = new _PasswordField.PasswordField({
+      dataSlug: 'new_password',
+      name: 'wk-new-password',
+      testStrength: true,
+      passwordHint: true,
+      label: 'New Password',
+      type: 'password',
+      onEnter: function onEnter() {
+        _this.submitForm();
+      }
+    });
+    _this.fields = [_this.newPasswordField];
+    _this.init();
+    return _this;
+  }
+  (0, _createClass2["default"])(ResetPasswordForm, [{
+    key: "getFormFooter",
+    value: function getFormFooter() {
+      var formFooter = (0, _DOM.createElement)('div', {
+        className: 'wk-form__footer'
+      });
+      formFooter.appendChild(this.cancelBtn);
+      this.cancelBtn.id = 'back-to-login';
+      formFooter.appendChild(this.submitBtn);
+      return formFooter;
+    }
+  }]);
+  return ResetPasswordForm;
+}(_index.Form);
+exports.ResetPasswordForm = ResetPasswordForm;
 
 /***/ }),
 
@@ -5521,7 +5757,7 @@ var _interopRequireDefault = __webpack_require__(5656);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.resetHash = exports.parseModalHashURL = exports.parseAuthTokenHash = exports.getParentDomain = exports.getDomainWithoutSubdomain = void 0;
+exports.resetHash = exports.parseResetPasswordOobCodeHash = exports.parseModalHashURL = exports.parseAuthTokenHash = exports.getParentDomain = exports.getDomainWithoutSubdomain = void 0;
 var _typeof2 = _interopRequireDefault(__webpack_require__(2125));
 var parseModalHashURL = function parseModalHashURL() {
   var UryModal = /#WkModal\((.*)\)$/.exec(decodeURIComponent(window.location.hash));
@@ -5571,6 +5807,18 @@ var getParentDomain = function getParentDomain() {
   return ".".concat(getDomainWithoutSubdomain(window.location));
 };
 exports.getParentDomain = getParentDomain;
+var parseResetPasswordOobCodeHash = function parseResetPasswordOobCodeHash() {
+  var hash = decodeURIComponent(window.location.hash);
+  if (hash !== null && hash !== void 0 && hash.includes('#reset-password=')) {
+    var splitHash = hash.split('=');
+    var oobCode = splitHash === null || splitHash === void 0 ? void 0 : splitHash[1];
+    if (oobCode) {
+      return oobCode;
+    }
+  }
+  return null;
+};
+exports.parseResetPasswordOobCodeHash = parseResetPasswordOobCodeHash;
 
 /***/ }),
 

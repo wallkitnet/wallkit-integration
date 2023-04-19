@@ -55,3 +55,18 @@ export const getDomainWithoutSubdomain = url => {
 export const getParentDomain = () => {
   return `.${getDomainWithoutSubdomain(window.location)}`;
 }
+
+export const parseResetPasswordOobCodeHash = () => {
+    const hash = decodeURIComponent(window.location.hash)
+
+    if (hash?.includes('#reset-password=')) {
+        const splitHash = hash.split('=');
+
+        const oobCode = splitHash?.[1];
+        if (oobCode) {
+            return oobCode;
+        }
+    }
+
+    return null;
+}
