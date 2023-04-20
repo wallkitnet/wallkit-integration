@@ -36,6 +36,10 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Get package version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@main
+
       - name: Deploy to S3
         run: aws s3 sync ${SYNC_DIR} s3://${S3_BUCKET}/js/integration/latest --exclude '*.html' --exclude '*.txt'
 
@@ -52,8 +56,9 @@ jobs:
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
-          author_name: Wallkit Integration Library
+          author_name: Wallkit Integration Library (dev)
           fields: repo,pullRequest,commit,message,author,eventName,took
+          text: "Deployed version: ${{ steps.package-version.outputs.current-version }}"
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         if: always()
