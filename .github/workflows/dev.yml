@@ -58,7 +58,16 @@ jobs:
           status: ${{ job.status }}
           author_name: Wallkit Integration Library (dev)
           fields: repo,pullRequest,commit,message,author,eventName,took
-          text: "Deployed version: ${{ steps.package-version.outputs.current-version }}"
+          custom_payload: |
+            {
+              attachments: [{
+                fields: [{
+                  title: "Deployed version",
+                  value: "${{ steps.package-version.outputs.current-version }}",
+                  short: true
+                }]
+              }]
+            }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         if: always()
