@@ -57,7 +57,7 @@ jobs:
         with:
           status: ${{ job.status }}
           author_name: Wallkit Integration Library (dev)
-          fields: repo,pullRequest,commit,message,author,eventName,took
+          fields: repo,commit,message,author,took
           custom_payload: |
             {
               attachments: [{
