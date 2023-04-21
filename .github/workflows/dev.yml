@@ -55,14 +55,14 @@ jobs:
       - name: Slack Notification
         uses: 8398a7/action-slack@v3
         with:
-          status: ${{ job.status }}
+          status: custom
           author_name: Wallkit Integration Library (dev)
           fields: repo,commit,message,author,took
           custom_payload: |
             {
               attachments: [{
                 fields: [{
-                  title: "Deployed version",
+                  title: "version",
                   value: "${{ steps.package-version.outputs.current-version }}",
                   short: true
                 }]
