@@ -36,6 +36,10 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Get package version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@main
+
       - name: Deploy to S3
         run: aws s3 sync ${SYNC_DIR} s3://${S3_BUCKET}/js/integration/latest --exclude '*.html' --exclude '*.txt'
 
@@ -47,3 +51,32 @@ jobs:
           AWS_REGION: us-east-1
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Slack Notification
+        uses: 8398a7/action-slack@v3
+        with:
+          status: custom
+          fields: repo,commit,message,author,took,pullRequest
+          custom_payload: |
+            {
+              text: "Build Wallkit Integration Library",
+              attachments: [{
+                color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
+                text: `repo: ${process.env.AS_REPO}\n message: ${process.env.AS_MESSAGE}\n commit: ${process.env.AS_COMMIT}\n PR: ${process.env.AS_PULL_REQUEST}\n author: ${process.env.AS_AUTHOR}\n status: ${{ job.status }} in ${process.env.AS_TOOK}`,
+                fields: [
+                  {
+                    title: "branch",
+                    value: "dev",
+                    short: true
+                  },
+                  {
+                    title: "version",
+                    value: "${{ steps.package-version.outputs.current-version }}",
+                    short: true
+                  }
+                ]
+              }]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: always()
