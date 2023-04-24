@@ -56,7 +56,7 @@ jobs:
         uses: 8398a7/action-slack@v3
         with:
           status: custom
-          fields: repo,commit,message,author,took
+          fields: repo,commit,message,author,took,pullRequest
           custom_payload: |
             {
               text: "Build Wallkit Integration Library",
@@ -75,27 +75,27 @@ jobs:
                   },
                   {
                     title: "repo",
-                    value: "${{process.env.AS_REPO}}",
+                    value: `${{process.env.AS_REPO}}`,
                     short: true
                   },
                   {
                     title: "commit",
-                    value: "${{process.env.AS_COMMIT}}",
+                    value: `${{process.env.AS_COMMIT}}`,
                     short: true
                   },
                   {
                     title: "message",
-                    value: "${{process.env.AS_MESSAGE}}",
+                    value: `${{process.env.AS_MESSAGE}}`,
                     short: true
                   }, 
                   {
                     title: "author",
-                    value: "${{process.env.AS_AUTHOR}}",
+                    value: `${{process.env.AS_AUTHOR}}`,
                     short: true
                   }, 
                   {
                     title: "took",
-                    value: "${{process.env.AS_TOOK}}",
+                    value: `${{process.env.AS_TOOK}}`,
                     short: true
                   }
                 ]
