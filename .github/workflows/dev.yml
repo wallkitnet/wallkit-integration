@@ -62,6 +62,7 @@ jobs:
               text: "Build Wallkit Integration Library",
               attachments: [{
                 color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
+                text: `${process.env.AS_MESSAGE} (${process.env.AS_COMMIT}) in ${process.env.AS_REPO}\n by ${process.env.AS_AUTHOR}\n ${{ job.status }} in ${process.env.AS_TOOK}`,
                 fields: [
                   {
                     title: "branch",
@@ -71,31 +72,6 @@ jobs:
                   {
                     title: "version",
                     value: "${{ steps.package-version.outputs.current-version }}",
-                    short: true
-                  },
-                  {
-                    title: "repo",
-                    value: `${process.env.AS_REPO}`,
-                    short: true
-                  },
-                  {
-                    title: "commit",
-                    value: `${{process.env.AS_COMMIT}}`,
-                    short: true
-                  },
-                  {
-                    title: "message",
-                    value: `${process.env.AS_MESSAGE}`,
-                    short: true
-                  }, 
-                  {
-                    title: "author",
-                    value: `${process.env.AS_AUTHOR}`,
-                    short: true
-                  }, 
-                  {
-                    title: "took",
-                    value: `${process.env.AS_TOOK}`,
                     short: true
                   }
                 ]
