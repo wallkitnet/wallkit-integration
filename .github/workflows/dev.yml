@@ -56,16 +56,49 @@ jobs:
         uses: 8398a7/action-slack@v3
         with:
           status: custom
-          author_name: Wallkit Integration Library (dev)
           fields: repo,commit,message,author,took
           custom_payload: |
             {
+              text: "Build Wallkit Integration Library",
               attachments: [{
-                fields: [{
-                  title: "version",
-                  value: "${{ steps.package-version.outputs.current-version }}",
-                  short: true
-                }]
+                color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
+                fields: [
+                  {
+                    title: "branch",
+                    value: "dev",
+                    short: true
+                  },
+                  {
+                    title: "version",
+                    value: "${{ steps.package-version.outputs.current-version }}",
+                    short: true
+                  },
+                  {
+                    title: "repo",
+                    value: "${process.env.AS_REPO}",
+                    short: true
+                  },
+                  {
+                    title: "commit",
+                    value: "${process.env.AS_COMMIT}",
+                    short: true
+                  },
+                  {
+                    title: "message",
+                    value: "${process.env.AS_MESSAGE}",
+                    short: true
+                  }, 
+                  {
+                    title: "author",
+                    value: "${process.env.AS_AUTHOR}",
+                    short: true
+                  }, 
+                  {
+                    title: "took",
+                    value: "${process.env.AS_TOOK}",
+                    short: true
+                  }
+                ]
               }]
             }
         env:
