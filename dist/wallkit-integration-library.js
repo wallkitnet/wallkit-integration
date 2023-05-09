@@ -1,7 +1,7 @@
 /*!
  * Package name: wallkit-integration-lib.
  * Package description: Wallkit Integration Library. Library to manipulate with Wallkit System: Paywall, Modals, Authentication, SDK..
- * Package version: 3.0.12.
+ * Package version: 3.0.13.
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -222,6 +222,7 @@ var _user = _interopRequireDefault(__webpack_require__(4442));
 var _styles = __webpack_require__(2350);
 var _DOM = __webpack_require__(2909);
 var _payments = __webpack_require__(8672);
+var _crawlers = __webpack_require__(7857);
 var _constants = __webpack_require__(9066);
 Object.keys(_constants).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -255,13 +256,19 @@ function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollect
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
 window.WallkitIntegration = (_eventsListener = /*#__PURE__*/new WeakSet(), _insertStyles = /*#__PURE__*/new WeakSet(), _recogniseURLIncomeParams = /*#__PURE__*/new WeakSet(), /*#__PURE__*/function () {
   function WallkitIntegration(options) {
-    var _this = this;
+    var _options$prevent_exec,
+      _this = this;
     (0, _classCallCheck2["default"])(this, WallkitIntegration);
     _classPrivateMethodInitSpec(this, _recogniseURLIncomeParams);
     _classPrivateMethodInitSpec(this, _insertStyles);
     _classPrivateMethodInitSpec(this, _eventsListener);
     this.config = options;
     this.events = new _events["default"]();
+    this.content = _content["default"];
+    var preventExecutionForCrawlers = (_options$prevent_exec = options === null || options === void 0 ? void 0 : options.prevent_execution_for_crawlers) !== null && _options$prevent_exec !== void 0 ? _options$prevent_exec : true;
+    if (preventExecutionForCrawlers && (0, _crawlers.isCrawler)()) {
+      return;
+    }
     this.frame = new _frame["default"](_objectSpread(_objectSpread({}, options), {}, {
       onReady: function onReady() {
         return _this.popup.toggleLoader(false);
@@ -279,7 +286,6 @@ window.WallkitIntegration = (_eventsListener = /*#__PURE__*/new WeakSet(), _inse
         });
       }
     });
-    this.content = _content["default"];
     this.sdk = new _sdk["default"](_objectSpread(_objectSpread({}, options), {}, {
       onLoaded: function onLoaded() {
         var _options$auth, _options$auth2, _options$auth2$modal, _options$auth3, _options$auth4, _options$auth4$modal, _options$auth5;
@@ -5638,6 +5644,23 @@ var _default = {
   removeCookie: removeCookie
 };
 exports["default"] = _default;
+
+/***/ }),
+
+/***/ 7857:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.isCrawler = void 0;
+var isCrawler = function isCrawler() {
+  return /bot|googlebot|crawler|spider|robot|crawling|facebookexternalhit|facebookcatalog/i.test(navigator.userAgent);
+};
+exports.isCrawler = isCrawler;
 
 /***/ }),
 
