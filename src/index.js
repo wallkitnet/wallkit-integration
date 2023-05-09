@@ -12,6 +12,7 @@ import { LIBRARY_STYLES } from './assets/styles';
 
 import { createElement, injectInHead } from "./utils/DOM";
 import { isApplePayAvailable } from './utils/payments';
+import { isCrawler } from './utils/crawlers';
 
 import { ALLOWED_ORIGINS } from './configs/constants';
 import { SUCCESS_AUTH, FRAME_MESSAGE, FRAME_MODAL_CLOSED } from "./managers/events/events-name";
@@ -21,6 +22,12 @@ window.WallkitIntegration = class WallkitIntegration {
     constructor(options) {
         this.config = options;
         this.events = new Events();
+        this.content = Content;
+
+        const preventExecutionForCrawlers = options?.prevent_execution_for_crawlers ?? true;
+        if (preventExecutionForCrawlers && isCrawler()) {
+            return;
+        }
 
         this.frame = new Frame({
             ...options,
@@ -37,8 +44,6 @@ window.WallkitIntegration = class WallkitIntegration {
                 this.events.notify(FRAME_MODAL_CLOSED, { name: this.frame.currentFrameName });
             }
         });
-
-        this.content = Content;
 
         this.sdk = new SDK({
             ...options,
