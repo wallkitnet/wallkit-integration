@@ -5,7 +5,7 @@ import {
   WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID,
   WALLKIT_TOKEN_NAME,
   FIREBASE_TOKEN_NAME,
-  WALLKIT_AUTH_FORM_PLACEHOLDER_ID
+  WALLKIT_AUTH_FORM_PLACEHOLDER_ID, WALLKIT_POPUP_DEV_URL
 } from "../../configs/constants";
 import EventsNames, { FIREBASE_INIT, FIREBASE_LOADED, FIREBASE_UI_SHOWN, PRE_SIGN_IN } from "../events/events-name";
 import Events from "../events";
@@ -13,9 +13,10 @@ import Frame from "../frame";
 import SDK from "../sdk";
 import Token from "./Token";
 import ReCaptcha from "./ReCaptcha";
-import {AuthForm, RESET_PASSWORD_FORM_SLUG} from "../form/forms/AuthForm";
+import { AuthForm, RESET_PASSWORD_FORM_SLUG } from "../form/forms/AuthForm";
 import { normalizeSelector } from "../../utils/DOM";
 import { parseResetPasswordOobCodeHash, resetHash } from "../../utils/url";
+import { Confirmation } from "./Confirmation";
 
 export default class Authentication {
     #options;
@@ -74,6 +75,7 @@ export default class Authentication {
         });
 
         this.events = new Events();
+        this.confirmation = new Confirmation();
     }
 
     get #authPlaceholderElementSelector() {

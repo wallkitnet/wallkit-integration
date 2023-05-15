@@ -21,6 +21,7 @@ export const LIBRARY_STYLES = `
             position: relative;
             box-sizing: border-box;
             overflow: hidden;
+            font-family: Roboto, sans-serif;
         }
         
         @media screen and (max-width: 500px) {
@@ -346,5 +347,29 @@ export const LIBRARY_STYLES = `
             -webkit-transform: rotate(45deg);
             -ms-transform: rotate(45deg);
             transform: rotate(45deg);
+        }
+        
+        .wallkit-modal-error {
+            border: 1px solid #f1aeb5;
+            border-radius: 5px;
+            padding: 10px;
+            width: calc(100% - 50px);
+            background-color: #f8d7da;
+            color: #58151c;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+        }
+        
+        .wallkit-modal-success {
+            border: 1px solid #a3cfbb;
+            border-radius: 5px;
+            padding: 10px;
+            width: 100%;
+            background-color: #d1e7dd;
+            color: #0a3622;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+        }
+        
+        .wallkit-email-confirmation-modal {
+          text-align: center;
         }
 `;

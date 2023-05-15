@@ -193,6 +193,10 @@ export default class Modal {
         }
     }
 
+    setError(error) {
+        this.modalContent.insertAdjacentHTML('afterbegin', `<div class="wallkit-modal-error">${error}</div>`);
+    }
+
     init() {
         this.#createWrapper();
         this.#createContent();
