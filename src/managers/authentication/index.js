@@ -13,6 +13,7 @@ import SDK from "../sdk";
 import Token from "./Token";
 import ReCaptcha from "./ReCaptcha";
 import { AuthForm } from "../form/forms/AuthForm";
+import { Confirmation } from "./Confirmation";
 
 export default class Authentication {
     #options;
@@ -70,6 +71,7 @@ export default class Authentication {
         });
 
         this.events = new Events();
+        this.confirmation = new Confirmation();
     }
 
     isAuthenticated() {

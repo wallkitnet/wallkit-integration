@@ -37,6 +37,21 @@ export const parseAuthTokenHash = () => {
     return null;
 }
 
+export const parseConfirmTokenHash = () => {
+  const hash = decodeURIComponent(window.location.hash)
+
+  if (hash?.includes('wk-confirm-email')) {
+    const splitHash = hash.split('=');
+
+    const token = splitHash?.[1];
+    if (token) {
+      return token;
+    }
+  }
+
+  return null;
+}
+
 export const resetHash = () => {
     window.location.hash = '';
     const path = window.location.href.replace('#', '');

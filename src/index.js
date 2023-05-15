@@ -15,7 +15,7 @@ import { isApplePayAvailable } from './utils/payments';
 
 import { ALLOWED_ORIGINS } from './configs/constants';
 import { SUCCESS_AUTH, FRAME_MESSAGE, FRAME_MODAL_CLOSED } from "./managers/events/events-name";
-import { parseAuthTokenHash, resetHash } from "./utils/url";
+import { parseAuthTokenHash, parseConfirmTokenHash, resetHash } from "./utils/url";
 
 window.WallkitIntegration = class WallkitIntegration {
     constructor(options) {
@@ -144,6 +144,15 @@ window.WallkitIntegration = class WallkitIntegration {
                             this.popup.hide();
                             this.userManager.showChangePassword();
                             break;
+
+                        case "wk-event-confirmation-required":
+                            if (value.popup === 'plans') {
+                              this.frame.openFrame('account-settings');
+                              this.authentication.confirmation.showEmailConfirmationModal();
+                              this.popup.hide();
+                            }
+
+                            break;
                     }
                 }
             } catch (error) {
@@ -164,6 +173,12 @@ window.WallkitIntegration = class WallkitIntegration {
         if (ticketPassAuthToken) {
             this.authentication.handleTicketsToken(ticketPassAuthToken);
             resetHash();
+        }
+
+        const confirmToken = parseConfirmTokenHash();
+        if (confirmToken) {
+          this.authentication.confirmation.confirmUserEmail(confirmToken);
+          resetHash();
         }
     }
 
