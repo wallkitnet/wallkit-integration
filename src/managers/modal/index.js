@@ -7,7 +7,7 @@ import {
 } from "../../configs/constants";
 import DOM from '../../utils/DOM';
 import { loadWallkitAsset } from "../../utils/loaders";
-import { parseModalHashURL } from "../../utils/url";
+import { parseModalHashURL, parseUrlToShowAuthModal } from "../../utils/url";
 import Events from "../events";
 import { MODAL_CLOSED } from "../events/events-name";
 
@@ -177,9 +177,10 @@ export default class Modal {
 
     openByHash() {
         const modal = parseModalHashURL();
-
         if (modal) {
             this.open(modal.name, modal.params);
+        } else if (parseUrlToShowAuthModal()) {
+            this.open('sign-in');
         }
     }
 
