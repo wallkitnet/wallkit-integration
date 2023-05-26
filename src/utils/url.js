@@ -58,6 +58,16 @@ export const resetHash = () => {
     window.history.pushState('', '', path);
 }
 
+export const resetSearchParams = (params) => {
+    if (!!params && !!window.location.search && window.location.search.includes(params)) {
+        if (window.location.search.replace(params, '') === '?') {
+            params = '?'+params;
+        }
+        const path = window.location.href.replace(params, '');
+        window.history.pushState('', '', path);
+    }
+}
+
 export const getDomainWithoutSubdomain = url => {
   const urlParts = new URL(url).hostname.split('.')
 
@@ -84,4 +94,14 @@ export const parseResetPasswordOobCodeHash = () => {
     }
 
     return null;
+}
+
+export const parseUrlToShowAuthModal = () => {
+    const authUrlPattern = 'auth-modal=true';
+    const search = decodeURIComponent(window.location.search);
+    if (!!search?.includes(authUrlPattern)) {
+        resetSearchParams(authUrlPattern);
+        return true;
+    }
+    return false;
 }
