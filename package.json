@@ -1,11 +1,11 @@
 {
   "name": "wallkit-integration-lib",
-  "version": "3.0.13",
+  "version": "3.0.14",
   "description": "Wallkit Integration Library. Library to manipulate with Wallkit System: Paywall, Modals, Authentication, SDK.",
   "main": "./dist/index.js",
   "scripts": {
     "build": "webpack --config ./config/webpack.config.js",
-    "dev": "webpack --config ./config/webpack.dev.js"
+    "dev": "webpack --config ./config/wq:ebpack.dev.js"
   },
   "keywords": [
     "wallkit",
