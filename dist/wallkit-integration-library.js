@@ -1,7 +1,7 @@
 /*!
  * Package name: wallkit-integration-lib.
  * Package description: Wallkit Integration Library. Library to manipulate with Wallkit System: Paywall, Modals, Authentication, SDK..
- * Package version: 3.0.14.
+ * Package version: 3.0.15.
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -2259,6 +2259,70 @@ var Authentication = /*#__PURE__*/function () {
       return handleTicketsToken;
     }()
   }, {
+    key: "handleExternalAuthProvider",
+    value: function () {
+      var _handleExternalAuthProvider = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee8(externalUserId) {
+        var response, userCredential, firebaseToken;
+        return _regenerator["default"].wrap(function _callee8$(_context8) {
+          while (1) switch (_context8.prev = _context8.next) {
+            case 0:
+              _context8.prev = 0;
+              if (externalUserId) {
+                _context8.next = 3;
+                break;
+              }
+              return _context8.abrupt("return", false);
+            case 3:
+              _context8.next = 5;
+              return this.sdk.methods.getAuthTokensByExternalUserId(externalUserId);
+            case 5:
+              response = _context8.sent;
+              if (response) {
+                _context8.next = 8;
+                break;
+              }
+              return _context8.abrupt("return", false);
+            case 8:
+              _context8.next = 10;
+              return this.firebase.authWithCustomToken(response.firebase_custom_token);
+            case 10:
+              userCredential = _context8.sent;
+              _context8.next = 13;
+              return userCredential.user.getIdToken();
+            case 13:
+              firebaseToken = _context8.sent;
+              if (!(!response.token || !firebaseToken)) {
+                _context8.next = 16;
+                break;
+              }
+              return _context8.abrupt("return", false);
+            case 16:
+              this.updateFirebaseToken(firebaseToken);
+              this.setToken(response.token);
+              _context8.next = 20;
+              return this.sdk.methods.getUser();
+            case 20:
+              this.dispatchTokens();
+              this.events.notify(_eventsName["default"].local.SUCCESS_AUTH, true);
+              this.events.notify(_eventsName["default"].local.EXTERNAL_PROVIDER_TOKEN_AUTH_SUCCESS, true);
+              return _context8.abrupt("return", true);
+            case 26:
+              _context8.prev = 26;
+              _context8.t0 = _context8["catch"](0);
+              console.error(_context8.t0);
+              return _context8.abrupt("return", _context8.t0);
+            case 30:
+            case "end":
+              return _context8.stop();
+          }
+        }, _callee8, this, [[0, 26]]);
+      }));
+      function handleExternalAuthProvider(_x6) {
+        return _handleExternalAuthProvider.apply(this, arguments);
+      }
+      return handleExternalAuthProvider;
+    }()
+  }, {
     key: "onFirebaseAuthFail",
     value: function onFirebaseAuthFail(error) {
       this.toggleFormLoader(false);
@@ -3072,7 +3136,7 @@ function _formatCheckAccessRequestPath2(id, params) {
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports["default"] = exports.WALLKIT_SDK_LOADED = exports.WALLKIT_LOGOUT = exports.WALLKIT_FRAME_ROUTE_CHANGE = exports.WALLKIT_FRAME_READY = exports.WALLKIT_FIREBASE_TOKEN = exports.WALLKIT_EVENT_USER = exports.WALLKIT_EVENT_TOKEN = exports.WALLKIT_EVENT_REGISTRATION = exports.WALLKIT_EVENT_ONE_TAP_SIGN_IN = exports.WALLKIT_EVENT_GET_TOKEN = exports.WALLKIT_EVENT_FIREBASE_TOKEN = exports.WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN = exports.WALLKIT_EVENT_CHANGE_LANGUAGE = exports.WALLKIT_EVENT_AUTH = exports.WALLKIT_CHANGE_FRAME = exports.TICKETS_TOKEN_AUTH_SUCCESS = exports.SUCCESS_FIREBASE_AUTH = exports.SUCCESS_AUTH = exports.RECAPTCHA_VALIDATION_SUCCESS = exports.RECAPTCHA_VALIDATION_FAILED = exports.RECAPTCHA_LOADED = exports.PRE_SIGN_IN = exports.MODAL_CREATED = exports.MODAL_CLOSED = exports.FRAME_MOUNTED = exports.FRAME_MODAL_CLOSED = exports.FRAME_MESSAGE = exports.FRAME_CREATED = exports.FIREBASE_UI_SHOWN = exports.FIREBASE_LOADED = exports.FIREBASE_INIT = exports.CHECK_USER_ACCESS = exports.AUTH_MODAL_CLOSED = void 0;
+exports["default"] = exports.WALLKIT_SDK_LOADED = exports.WALLKIT_LOGOUT = exports.WALLKIT_FRAME_ROUTE_CHANGE = exports.WALLKIT_FRAME_READY = exports.WALLKIT_FIREBASE_TOKEN = exports.WALLKIT_EVENT_USER = exports.WALLKIT_EVENT_TOKEN = exports.WALLKIT_EVENT_REGISTRATION = exports.WALLKIT_EVENT_ONE_TAP_SIGN_IN = exports.WALLKIT_EVENT_GET_TOKEN = exports.WALLKIT_EVENT_FIREBASE_TOKEN = exports.WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN = exports.WALLKIT_EVENT_EXTERNAL_PROVIDER_TOKEN = exports.WALLKIT_EVENT_CHANGE_LANGUAGE = exports.WALLKIT_EVENT_AUTH = exports.WALLKIT_CHANGE_FRAME = exports.TICKETS_TOKEN_AUTH_SUCCESS = exports.SUCCESS_FIREBASE_AUTH = exports.SUCCESS_AUTH = exports.RECAPTCHA_VALIDATION_SUCCESS = exports.RECAPTCHA_VALIDATION_FAILED = exports.RECAPTCHA_LOADED = exports.PRE_SIGN_IN = exports.MODAL_CREATED = exports.MODAL_CLOSED = exports.FRAME_MOUNTED = exports.FRAME_MODAL_CLOSED = exports.FRAME_MESSAGE = exports.FRAME_CREATED = exports.FIREBASE_UI_SHOWN = exports.FIREBASE_LOADED = exports.FIREBASE_INIT = exports.EXTERNAL_PROVIDER_TOKEN_AUTH_SUCCESS = exports.CHECK_USER_ACCESS = exports.AUTH_MODAL_CLOSED = void 0;
 // Local Events Names
 var FRAME_CREATED = 'frame-created';
 exports.FRAME_CREATED = FRAME_CREATED;
@@ -3111,9 +3175,11 @@ exports.FIREBASE_INIT = FIREBASE_INIT;
 var FIREBASE_UI_SHOWN = 'firebase-ui-shown';
 exports.FIREBASE_UI_SHOWN = FIREBASE_UI_SHOWN;
 var CHECK_USER_ACCESS = 'check-user-access';
+exports.CHECK_USER_ACCESS = CHECK_USER_ACCESS;
+var EXTERNAL_PROVIDER_TOKEN_AUTH_SUCCESS = 'external-provider-token-auth-success';
 
 // Wallkit Events Names
-exports.CHECK_USER_ACCESS = CHECK_USER_ACCESS;
+exports.EXTERNAL_PROVIDER_TOKEN_AUTH_SUCCESS = EXTERNAL_PROVIDER_TOKEN_AUTH_SUCCESS;
 var WALLKIT_CHANGE_FRAME = 'wk-event-modal';
 exports.WALLKIT_CHANGE_FRAME = WALLKIT_CHANGE_FRAME;
 var WALLKIT_LOGOUT = 'wk-event-logout';
@@ -3142,6 +3208,8 @@ var WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN = 'wk-event-firebase-custom-token';
 exports.WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN = WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN;
 var WALLKIT_EVENT_CHANGE_LANGUAGE = 'wk-event-change-language';
 exports.WALLKIT_EVENT_CHANGE_LANGUAGE = WALLKIT_EVENT_CHANGE_LANGUAGE;
+var WALLKIT_EVENT_EXTERNAL_PROVIDER_TOKEN = 'wk-event-external-provider-token';
+exports.WALLKIT_EVENT_EXTERNAL_PROVIDER_TOKEN = WALLKIT_EVENT_EXTERNAL_PROVIDER_TOKEN;
 var _default = {
   local: {
     FRAME_CREATED: FRAME_CREATED,
@@ -3158,7 +3226,8 @@ var _default = {
     RECAPTCHA_VALIDATION_SUCCESS: RECAPTCHA_VALIDATION_SUCCESS,
     TICKETS_TOKEN_AUTH_SUCCESS: TICKETS_TOKEN_AUTH_SUCCESS,
     CHECK_USER_ACCESS: CHECK_USER_ACCESS,
-    PRE_SIGN_IN: PRE_SIGN_IN
+    PRE_SIGN_IN: PRE_SIGN_IN,
+    EXTERNAL_PROVIDER_TOKEN_AUTH_SUCCESS: EXTERNAL_PROVIDER_TOKEN_AUTH_SUCCESS
   },
   wallkit: {
     FRAME_CREATED: FRAME_CREATED,
@@ -3174,7 +3243,8 @@ var _default = {
     WALLKIT_EVENT_ONE_TAP_SIGN_IN: WALLKIT_EVENT_ONE_TAP_SIGN_IN,
     WALLKIT_FRAME_ROUTE_CHANGE: WALLKIT_FRAME_ROUTE_CHANGE,
     WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN: WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN,
-    WALLKIT_EVENT_CHANGE_LANGUAGE: WALLKIT_EVENT_CHANGE_LANGUAGE
+    WALLKIT_EVENT_CHANGE_LANGUAGE: WALLKIT_EVENT_CHANGE_LANGUAGE,
+    WALLKIT_EVENT_EXTERNAL_PROVIDER_TOKEN: WALLKIT_EVENT_EXTERNAL_PROVIDER_TOKEN
   }
 };
 exports["default"] = _default;
@@ -5290,7 +5360,7 @@ var SDK = /*#__PURE__*/function () {
   }, {
     key: "load",
     value: function load() {
-      (0, _DOM.insertScript)("".concat(_constants.WALLKIT_CDN_URL, "/js/sdk/0.0.49/wallkit.umd.min.js"), 'wallkit-js-sdk', this.onLoad.bind(this));
+      (0, _DOM.insertScript)("".concat(_constants.WALLKIT_CDN_URL, "/js/sdk/0.0.50/wallkit.umd.min.js"), 'wallkit-js-sdk', this.onLoad.bind(this));
     }
   }]);
   return SDK;

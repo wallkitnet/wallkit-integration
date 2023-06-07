@@ -539,6 +539,41 @@ export default class Authentication {
         }
     }
 
+    async handleExternalAuthProvider(externalUserId) {
+        try {
+            if (!externalUserId) {
+                return false;
+            }
+
+            const response = await this.sdk.methods.getAuthTokensByExternalUserId(externalUserId);
+            if (!response) {
+                return false;
+            }
+
+            const userCredential = await this.firebase.authWithCustomToken(response.firebase_custom_token);
+            const firebaseToken = await userCredential.user.getIdToken();
+
+            if (!response.token || !firebaseToken) {
+                return false;
+            }
+
+            this.updateFirebaseToken(firebaseToken);
+            this.setToken(response.token);
+
+            await this.sdk.methods.getUser();
+            this.dispatchTokens();
+
+            this.events.notify(EventsNames.local.SUCCESS_AUTH, true);
+            this.events.notify(EventsNames.local.EXTERNAL_PROVIDER_TOKEN_AUTH_SUCCESS, true);
+
+            return true;
+
+        } catch (error) {
+            console.error(error);
+            return error;
+        }
+    }
+
     #setAuthorizationError(error) {
         if (this.authForm) {
             this.authForm.handleError(error);
