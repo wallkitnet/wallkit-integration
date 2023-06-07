@@ -5157,6 +5157,8 @@ var Modal = /*#__PURE__*/function () {
       var modal = (0, _url.parseModalHashURL)();
       if (modal) {
         this.open(modal.name, modal.params);
+      } else if ((0, _url.parseUrlToShowAuthModal)()) {
+        this.open('sign-in');
       }
     }
   }, {
@@ -5852,7 +5854,7 @@ var _interopRequireDefault = __webpack_require__(5656);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.resetHash = exports.parseResetPasswordOobCodeHash = exports.parseModalHashURL = exports.parseAuthTokenHash = exports.getParentDomain = exports.getDomainWithoutSubdomain = void 0;
+exports.resetSearchParams = exports.resetHash = exports.parseUrlToShowAuthModal = exports.parseResetPasswordOobCodeHash = exports.parseModalHashURL = exports.parseAuthTokenHash = exports.getParentDomain = exports.getDomainWithoutSubdomain = void 0;
 var _typeof2 = _interopRequireDefault(__webpack_require__(2125));
 var parseModalHashURL = function parseModalHashURL() {
   var UryModal = /#WkModal\((.*)\)$/.exec(decodeURIComponent(window.location.hash));
@@ -5893,6 +5895,16 @@ var resetHash = function resetHash() {
   window.history.pushState('', '', path);
 };
 exports.resetHash = resetHash;
+var resetSearchParams = function resetSearchParams(params) {
+  if (!!params && !!window.location.search && window.location.search.includes(params)) {
+    if (window.location.search.replace(params, '') === '?') {
+      params = '?' + params;
+    }
+    var path = window.location.href.replace(params, '');
+    window.history.pushState('', '', path);
+  }
+};
+exports.resetSearchParams = resetSearchParams;
 var getDomainWithoutSubdomain = function getDomainWithoutSubdomain(url) {
   var urlParts = new URL(url).hostname.split('.');
   return urlParts.slice(0).slice(-(urlParts.length === 4 ? 3 : 2)).join('.');
@@ -5914,6 +5926,16 @@ var parseResetPasswordOobCodeHash = function parseResetPasswordOobCodeHash() {
   return null;
 };
 exports.parseResetPasswordOobCodeHash = parseResetPasswordOobCodeHash;
+var parseUrlToShowAuthModal = function parseUrlToShowAuthModal() {
+  var authUrlPattern = 'auth-modal=true';
+  var search = decodeURIComponent(window.location.search);
+  if (!!(search !== null && search !== void 0 && search.includes(authUrlPattern))) {
+    resetSearchParams(authUrlPattern);
+    return true;
+  }
+  return false;
+};
+exports.parseUrlToShowAuthModal = parseUrlToShowAuthModal;
 
 /***/ }),
 
