@@ -482,6 +482,14 @@ export default class Authentication {
               this.reCaptcha.initCaptchaProcess();
             }
           }
+
+          if (this.isAuthenticated()) {
+            await this.sdk.methods.logout();
+          } else {
+            this.frame.sendEvent('wk-event-logout', true);
+          }
+
+          this.events.notify(EventsNames.local.LOGOUT, true);
         }
 
         this.resetAuthProcess();
