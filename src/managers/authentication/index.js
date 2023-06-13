@@ -484,6 +484,14 @@ export default class Authentication {
               this.reCaptcha.initCaptchaProcess();
             }
           }
+
+          if (this.isAuthenticated()) {
+            await this.sdk.methods.logout();
+          } else {
+            this.frame.sendEvent('wk-event-logout', true);
+          }
+
+          this.events.notify(EventsNames.local.LOGOUT, true);
         }
 
         this.resetAuthProcess();
@@ -535,6 +543,41 @@ export default class Authentication {
             }
 
             return false;
+        } catch (error) {
+            console.error(error);
+            return error;
+        }
+    }
+
+    async handleExternalAuthProvider(externalUserId) {
+        try {
+            if (!externalUserId) {
+                return false;
+            }
+
+            const response = await this.sdk.methods.getAuthTokensByExternalUserId(externalUserId);
+            if (!response) {
+                return false;
+            }
+
+            const userCredential = await this.firebase.authWithCustomToken(response.firebase_custom_token);
+            const firebaseToken = await userCredential.user.getIdToken();
+
+            if (!response.token || !firebaseToken) {
+                return false;
+            }
+
+            this.updateFirebaseToken(firebaseToken);
+            this.setToken(response.token);
+
+            await this.sdk.methods.getUser();
+            this.dispatchTokens();
+
+            this.events.notify(EventsNames.local.SUCCESS_AUTH, true);
+            this.events.notify(EventsNames.local.EXTERNAL_PROVIDER_TOKEN_AUTH_SUCCESS, true);
+
+            return true;
+
         } catch (error) {
             console.error(error);
             return error;
