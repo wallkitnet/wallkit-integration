@@ -466,7 +466,7 @@ export default class Authentication {
 
     async logout() {
       try {
-        this.removeToken()
+        this.removeToken();
         const success = await this.firebase.logout();
 
         if (success) {
@@ -485,11 +485,11 @@ export default class Authentication {
 
           if (this.isAuthenticated()) {
             await this.sdk.methods.logout();
-          } else {
-            this.frame.sendEvent('wk-event-logout', true);
+            this.events.notify(EventsNames.local.LOGOUT, true);
+          } else if (this.token.get() || this.firebaseToken.get()) {
+            this.frame.sendEvent(EventsNames.wallkit.WALLKIT_LOGOUT, true);
+            this.events.notify(EventsNames.local.LOGOUT, true);
           }
-
-          this.events.notify(EventsNames.local.LOGOUT, true);
         }
 
         this.resetAuthProcess();
