@@ -42,10 +42,10 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.FIREBASE_TOKEN_NAME = exports.WALLKIT_TOKEN_NAME = exports.WALLKIT_DEV_FIREBASE_CONFIG = exports.WALLKIT_FIREBASE_CONFIG = exports.WALLKIT_FRAME_ID = exports.WALLKIT_USER_MANAGER_MODAL_FORM_PLACEHOLDER_ID = exports.WALLKIT_AUTH_FORM_PLACEHOLDER_ID = exports.WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID = exports.WALLKIT_FIREBASE_UI_PLACEHOLDER_ID = exports.WALLKIT_MODAL_MIN_HEIGHT = exports.WALLKIT_MODAL_MAX_WIDTH = exports.WALLKIT_MODAL_MIN_WIDTH = exports.WALLKIT_MODAL_CONTENT_CLASSNAME = exports.WALLKIT_MODAL_CLOSE_BTN_CLASSNAME = exports.WALLKIT_MODAL_WRAPPER_CLASSNAME = exports.ALLOWED_ORIGINS = exports.WALLKIT_CDN_ASSETS_URL = exports.WALLKIT_CDN_URL = exports.WALLKIT_POPUP_DEV_URL = exports.WALLKIT_POPUP_URL = void 0;
 // Popups
-// export const WALLKIT_POPUP_URL = 'https://wallkit.net/popups';
-var WALLKIT_POPUP_URL = 'http://127.0.0.1:8000/popups';
+var WALLKIT_POPUP_URL = 'https://wallkit.net/popups'; // export const WALLKIT_POPUP_URL = 'http://127.0.0.1:8000/popups';
+
 exports.WALLKIT_POPUP_URL = WALLKIT_POPUP_URL;
-var WALLKIT_POPUP_DEV_URL = 'http://127.0.0.1:8000/popups'; // export const WALLKIT_POPUP_DEV_URL = 'https://wallkit-landing.com/popups';
+var WALLKIT_POPUP_DEV_URL = 'https://dev.wallkit.net/popups'; // export const WALLKIT_POPUP_DEV_URL = 'https://wallkit-landing.com/popups';
 // export const WALLKIT_POPUP_DEV_URL = 'http://127.0.0.1:8000/popups';
 // Assets
 
@@ -2666,7 +2666,7 @@ var Authentication = /*#__PURE__*/function () {
 
               case 13:
                 if (!this.isAuthenticated()) {
-                  _context6.next = 18;
+                  _context6.next = 19;
                   break;
                 }
 
@@ -2674,14 +2674,15 @@ var Authentication = /*#__PURE__*/function () {
                 return this.sdk.methods.logout();
 
               case 16:
-                _context6.next = 19;
+                this.events.notify(_eventsName["default"].local.LOGOUT, true);
+                _context6.next = 20;
                 break;
 
-              case 18:
-                this.frame.sendEvent('wk-event-logout', true);
-
               case 19:
-                this.events.notify(_eventsName["default"].local.LOGOUT, true);
+                if (this.token.get() || this.firebaseToken.get()) {
+                  this.frame.sendEvent(_eventsName["default"].wallkit.WALLKIT_LOGOUT, true);
+                  this.events.notify(_eventsName["default"].local.LOGOUT, true);
+                }
 
               case 20:
                 this.resetAuthProcess();
