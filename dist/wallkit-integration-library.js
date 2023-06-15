@@ -6558,7 +6558,7 @@ var SDK = /*#__PURE__*/function () {
   }, {
     key: "load",
     value: function load() {
-      (0, _DOM.insertScript)("".concat(_constants.WALLKIT_CDN_URL, "/js/sdk/0.0.50/wallkit.umd.min.js"), 'wallkit-js-sdk', this.onLoad.bind(this));
+      (0, _DOM.insertScript)("".concat(_constants.WALLKIT_CDN_URL, "/js/sdk/0.0.51/wallkit.umd.min.js"), 'wallkit-js-sdk', this.onLoad.bind(this));
     }
   }]);
   return SDK;
