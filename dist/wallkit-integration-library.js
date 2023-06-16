@@ -5932,6 +5932,8 @@ var _events = _interopRequireDefault(__webpack_require__(9889));
 
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
 
+var ADDITIONAL_FRAME_CLASSNAMES = 'intrinsic-ignore';
+
 var _listeners = /*#__PURE__*/new WeakSet();
 
 var Frame = /*#__PURE__*/function () {
@@ -5971,7 +5973,7 @@ var Frame = /*#__PURE__*/function () {
     value: function createFrame() {
       this.frameElement = (0, _DOM.createElement)('iframe', {
         id: _constants.WALLKIT_FRAME_ID,
-        className: _constants.WALLKIT_FRAME_ID,
+        className: "".concat(_constants.WALLKIT_FRAME_ID, " ").concat(ADDITIONAL_FRAME_CLASSNAMES),
         attributes: {
           scrolling: 'no',
           allowtransparency: 'true',
