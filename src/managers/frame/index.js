@@ -3,6 +3,8 @@ import { WALLKIT_MODAL_MIN_WIDTH, WALLKIT_MODAL_MIN_HEIGHT, WALLKIT_POPUP_URL, W
 import { FRAME_CREATED, WALLKIT_CHANGE_FRAME, WALLKIT_FRAME_READY, WALLKIT_FRAME_ROUTE_CHANGE } from "../events/events-name";
 import Events from "../events";
 
+const ADDITIONAL_FRAME_CLASSNAMES = 'intrinsic-ignore';
+
 export default class Frame {
     constructor(options) {
         if (!!Frame.instance) {
@@ -32,7 +34,7 @@ export default class Frame {
     createFrame() {
         this.frameElement = createElement('iframe', {
             id: WALLKIT_FRAME_ID,
-            className: WALLKIT_FRAME_ID,
+            className: `${WALLKIT_FRAME_ID} ${ADDITIONAL_FRAME_CLASSNAMES}`,
             attributes: {
                 scrolling: 'no',
                 allowtransparency: 'true',
