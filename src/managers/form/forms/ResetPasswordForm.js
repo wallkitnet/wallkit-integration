@@ -8,7 +8,7 @@ export class ResetPasswordForm extends Form {
         super(targetElementSelector, options);
 
         this.options = options;
-        this.options.title = 'Reset Password' || options.title;
+        this.options.title = options.title || 'Reset Password';
         this.options.footer = this.getFormFooter() || options.footer;
 
         this.newPasswordField = new PasswordField({

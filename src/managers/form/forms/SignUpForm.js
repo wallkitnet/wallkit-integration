@@ -10,7 +10,7 @@ export class SignupForm extends Form {
         super(targetElementSelector, options);
 
         this.options = options;
-        this.options.title = 'Sign Up' || options.title;
+        this.options.title = options.title || 'Sign Up';
         this.options.footer = this.getFormFooter() || options.footer;
         this.options.termsOfService.termsOfService = this.#defaultTermsOfServiceOption(this.options.termsOfService.termsOfService);
 
@@ -89,7 +89,7 @@ export class SignupForm extends Form {
         });
         signInWrapper.appendChild(createElement('a', {
             className: 'wk-form__link',
-            innerText: 'Sign-in',
+            innerText: this.options.signInLinkTitle || 'Sign-in',
             id: 'auth-signin-link',
             attributes: {
                 href: '#'
