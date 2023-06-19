@@ -19,6 +19,7 @@ export const FIREBASE_INIT = 'firebase-init';
 export const FIREBASE_UI_SHOWN = 'firebase-ui-shown';
 export const CHECK_USER_ACCESS = 'check-user-access';
 export const EXTERNAL_PROVIDER_TOKEN_AUTH_SUCCESS = 'external-provider-token-auth-success';
+export const DEFAULT_AUTH_FORM_SLUG_UPDATED = 'default-auth-form-slug-updated';
 
 // Wallkit Events Names
 export const WALLKIT_CHANGE_FRAME = 'wk-event-modal';

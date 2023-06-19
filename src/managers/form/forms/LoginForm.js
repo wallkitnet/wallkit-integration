@@ -9,8 +9,7 @@ export class LoginForm extends Form {
         super(targetElementSelector, options);
 
         this.options = options;
-
-        this.options.title = 'Sign in with email' || options.title;
+        this.options.title = options.title || 'Sign in with email';
         this.options.footer = this.getFormFooter() || options.footer;
 
         this.emailField = new FormField({
@@ -57,7 +56,7 @@ export class LoginForm extends Form {
             subFooter.appendChild(createElement('a', {
                 id: 'auth-signup-link',
                 className: 'wk-form__link',
-                innerText: 'Sign Up',
+                innerText: this.options.signUpLinkTitle || 'Sign Up',
                 attributes: {
                     href: '#'
                 }

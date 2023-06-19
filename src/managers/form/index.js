@@ -10,12 +10,12 @@ export class Form {
 
         this.submitBtn = createElement('button', {
             className: 'wk-form-button',
-            innerText: 'Submit'
+            innerText: options.submitBtnTitle || 'Submit'
         });
 
         this.cancelBtn = createElement('button', {
             className: 'wk-form-button wk-form-button--cancel',
-            innerText: 'Cancel'
+            innerText: options.cancelBtnTitle || 'Cancel'
         });
 
         this.loading = false;

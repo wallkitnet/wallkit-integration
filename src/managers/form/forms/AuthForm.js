@@ -5,6 +5,7 @@ import { LoginForm } from "./LoginForm";
 import { SignupForm } from "./SignUpForm";
 import { ForgotPasswordForm } from "./ForgotPasswordForm";
 import { ResetPasswordForm } from "./ResetPasswordForm";
+import {DEFAULT_AUTH_FORM_SLUG_UPDATED} from "../../events/events-name";
 
 export const SIGN_UP_FORM_SLUG = 'sign-up';
 export const SIGN_IN_FORM_SLUG = 'sign-in';
@@ -25,6 +26,7 @@ export class AuthForm {
         this.loginForm = new LoginForm(selector, {
             cancelBtn: options.triggerButton !== false,
             signUp: options.signUp ?? true,
+            ...(options.customizeAuthForms?.signIn || {}),
             onSubmit: (data) => {
                 if (options.onLogin) {
                     options.onLogin(data);
@@ -52,6 +54,7 @@ export class AuthForm {
 
         if (options.signUp === true) {
             this.signUpForm = new SignupForm(selector, {
+                ...(options.customizeAuthForms?.signUp || {}),
                 cancelBtn: options.triggerButton !== false,
                 termsOfService: options.termsOfService,
                 onSubmit: (data) => {
@@ -77,6 +80,7 @@ export class AuthForm {
         }
 
         this.forgotPasswordForm = new ForgotPasswordForm(selector, {
+            ...(options.customizeAuthForms?.forgotPassword || {}),
             onSubmit: (data) => {
                 if (options.onPasswordForgot) {
                     options.onPasswordForgot(data);
@@ -95,6 +99,7 @@ export class AuthForm {
         this.forgotPasswordForm.hide();
 
         this.resetPasswordForm = new ResetPasswordForm(selector, {
+            ...(options.customizeAuthForms?.resetPassword || {}),
             onSubmit: (data) => {
                 if (options.onPasswordReset) {
                     options.onPasswordReset(data);
@@ -114,6 +119,8 @@ export class AuthForm {
 
         if (options.triggerButton !== false) {
             this.triggerButton = new TriggerButton(selector, {
+                authProviders: options.authProviders,
+                defaultFormSlug: this.defaultFormSlug,
                 onClick: () => {
                     this.defaultForm.show();
                     this.triggerButton.hide();
@@ -137,10 +144,17 @@ export class AuthForm {
     }
 
     set defaultForm (formSlug) {
+        let oldSlug = this.defaultFormSlug;
         if (formSlug && [SIGN_UP_FORM_SLUG, SIGN_IN_FORM_SLUG, FORGOT_PASSWORD_FORM_SLUG, RESET_PASSWORD_FORM_SLUG].includes(formSlug)) {
             this.defaultFormSlug = formSlug;
         } else {
             this.defaultFormSlug = this.#options.defaultForm || SIGN_UP_FORM_SLUG;
+        }
+        if (this.#options.triggerButton !== false && this.triggerButton) {
+            this.triggerButton.events.notify(DEFAULT_AUTH_FORM_SLUG_UPDATED, {
+                "new": this.defaultFormSlug,
+                "old": oldSlug
+            });
         }
     }
 
