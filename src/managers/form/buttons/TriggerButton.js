@@ -10,6 +10,7 @@ import {
     TRIGGER_GOOGLE_BUTTON_TITLE_SELECTOR,
     TRIGGER_EMAIL_BUTTON_CLASS_NAME
 } from "../../../configs/constants";
+import isEmpty from 'lodash.isempty';
 
 export class TriggerButton {
     #fullLabel = {
@@ -22,6 +23,7 @@ export class TriggerButton {
         google: TRIGGER_GOOGLE_BUTTON_TITLE_SELECTOR
     }
     #options;
+
     constructor(selector, options) {
         this.#options = this.checkOptions(options);
         this.events = new Events();
@@ -35,67 +37,55 @@ export class TriggerButton {
     }
 
     checkOptions(options) {
-        if (options.authProviders && options.authProviders.length) {
-            Object.keys(options.authProviders).forEach(key => {
-                let authProvider = options.authProviders[key];
-                if (typeof authProvider.provider !== "undefined" && authProvider.provider !== '') {
-                    let buttonKey = authProvider.provider.toLowerCase();
-                    options[buttonKey] = {
-                        fullLabel: '',
-                        signInLabel: '',
-                        signUpLabel: '',
-                        label: '',
-                        backgroundColor: '',
-                        textColor: '',
-                        textColorStyle: '',
-                        iconUrl: '',
-                        styles: {}
-                    };
-                    if (buttonKey === 'email') {
-                        if (typeof this.#fullLabel[buttonKey] !== "undefined") {
-                            options[buttonKey].fullLabel = this.#fullLabel[buttonKey];
-                            options[buttonKey].label = this.#fullLabel[buttonKey];
-                        }
-                        options[buttonKey].iconUrl = this.#emailButonIconUrl;
-                    }
-                    if (typeof authProvider.fullLabel !== "undefined"
-                        && authProvider.fullLabel.trim() !== "") {
-                        options[buttonKey].fullLabel = authProvider.fullLabel;
-                        options[buttonKey].label = authProvider.fullLabel;
-                    }
-                    if (typeof authProvider.signInLabel !== "undefined"
-                        && authProvider.signInLabel.trim() !== "") {
-                        options[buttonKey].signInLabel = authProvider.signInLabel;
-                        if (options.defaultFormSlug === SIGN_IN_FORM_SLUG) {
-                            options[buttonKey].label = options[buttonKey].signInLabel;
-                        }
-                    }
-                    if (typeof authProvider.signUpLabel !== "undefined"
-                        && authProvider.signUpLabel.trim() !== "") {
-                        options[buttonKey].signUpLabel = authProvider.signUpLabel;
-                        if (options.defaultFormSlug === SIGN_UP_FORM_SLUG) {
-                            options[buttonKey].label = options[buttonKey].signUpLabel;
-                        }
-                    }
-                    if (typeof authProvider.buttonColor !== "undefined"
-                        && authProvider.buttonColor.trim() !== "") {
-                        options[buttonKey].backgroundColor = authProvider.buttonColor;
-                        options[buttonKey].styles.backgroundColor = authProvider.buttonColor;
-                    }
-                    if (typeof authProvider.buttonTextColor !== "undefined"
-                        && authProvider.buttonTextColor.trim() !== "") {
-                        if (!authProvider.buttonTextColor.trim().startsWith('#')) {
-                            authProvider.buttonTextColor = '#'+authProvider.buttonTextColor.trim();
-                        }
-                        options[buttonKey].textColor = `${authProvider.buttonTextColor}`;
-                        options[buttonKey].textColorStyle = ` style="color:${authProvider.buttonTextColor}"`;
-                    }
-                    if (typeof authProvider.iconUrl !== "undefined"
-                        && authProvider.iconUrl.trim() !== "") {
-                        options[buttonKey].iconUrl = authProvider.iconUrl;
-                    }
+        if(!Array.isArray(options.authProviders)) return options;
+        for (const authProvider of options.authProviders) {
+            if (isEmpty(authProvider.provider)) continue;
+
+            const aProvider = authProvider.provider.toLowerCase();
+            options[aProvider] = {
+                fullLabel: '',
+                signInLabel: '',
+                signUpLabel: '',
+                label: '',
+                backgroundColor: '',
+                textColor: '',
+                textColorStyle: '',
+                iconUrl: '',
+                styles: {}
+            };
+            const { fullLabel, signInLabel, signUpLabel, buttonColor, buttonTextColor, iconUrl } = authProvider;
+            if (aProvider === 'email') {
+                options[aProvider].fullLabel = this.#fullLabel[aProvider];
+                options[aProvider].label = this.#fullLabel[aProvider];
+                options[aProvider].iconUrl = this.#emailButonIconUrl;
+            }
+            if (!isEmpty(fullLabel)) {
+                options[aProvider].fullLabel = fullLabel;
+                options[aProvider].label = fullLabel;
+            }
+            if (!isEmpty(signInLabel)) {
+                options[aProvider].signInLabel = signInLabel;
+                if (options.defaultFormSlug === SIGN_IN_FORM_SLUG) {
+                    options[aProvider].label = signInLabel;
                 }
-            });
+            }
+            if (!isEmpty(signUpLabel)) {
+                options[aProvider].signUpLabel = signUpLabel;
+                if (options.defaultFormSlug === SIGN_UP_FORM_SLUG) {
+                    options[aProvider].label = signUpLabel;
+                }
+            }
+            if (!isEmpty(buttonColor)) {
+                options[aProvider].backgroundColor = ((!buttonColor.trim().startsWith('#'))?'#':'')+buttonColor;
+                options[aProvider].styles.backgroundColor = ((!buttonColor.trim().startsWith('#'))?'#':'')+buttonColor;
+            }
+            if (!isEmpty(buttonTextColor )) {
+                options[aProvider].textColor = ((!buttonTextColor.trim().startsWith('#'))?'#':'')+buttonTextColor;
+                options[aProvider].textColorStyle = ` style="color:${((!buttonTextColor.trim().startsWith('#'))?'#':'')}${buttonTextColor}"`;
+            }
+            if (!isEmpty(iconUrl)) {
+                options[aProvider].iconUrl = iconUrl;
+            }
         }
         return options;
     }
@@ -106,72 +96,65 @@ export class TriggerButton {
             this.#changeAuthButtonsTitle(this.#options.defaultFormSlug, false);
             this.#changeAuthButtonsTitleColor();
         }, {once: true});
+
         /** change titles on auth form change */
         this.events.subscribe(DEFAULT_AUTH_FORM_SLUG_UPDATED, (value) => {
-            if (value && value.new && value.new !== value.old) {
+            if (value?.new && value.new !== value.old) {
                 this.#changeAuthButtonsTitle(value.new, value.old);
             }
         });
     }
 
     #changeAuthButtonsTitleColor() {
-        Object.keys(this.#options.authProviders).forEach(key => {
-            let authProvider = this.#options.authProviders[key];
-            if (typeof authProvider.provider !== "undefined" && authProvider.provider !== '') {
-                let buttonKey = authProvider.provider.toLowerCase();
-                if (buttonKey !== 'email' && typeof this.#options[buttonKey] !== "undefined" && this.#options[buttonKey].textColor !== '') {
-                    let buttonsTitle = document.querySelectorAll(this.#buttonsTitleSelector[buttonKey]);
-                    let color = this.#options[buttonKey].textColor;
-                    if (buttonsTitle && !!color) {
-                        buttonsTitle.forEach(function (item) {
-                            if (item.style.color !== color) {
-                                item.style.color = color;
-                            }
+        if(!Array.isArray(this.#options.authProviders)) return;
+        for (const authProvider of this.#options.authProviders) {
+            if (isEmpty(authProvider.provider)) continue;
+
+            const aProvider = authProvider.provider.toLowerCase();
+            const textColor = this.#options[aProvider]?.textColor;
+            if (aProvider !== 'email' && textColor) {
+                const buttonsTitle = document.querySelectorAll(this.#buttonsTitleSelector[aProvider]);
+                if (buttonsTitle) {
+                    buttonsTitle.forEach( (item) => {
+                        item.style.color = textColor;
+                    });
+                }
+            }
+        }
+    }
+
+    #changeAuthButtonsTitle(authNew, authOld) {
+        if(!Array.isArray(this.#options.authProviders)) return;
+        if ( authNew && authNew !== authOld && [SIGN_UP_FORM_SLUG, SIGN_IN_FORM_SLUG].includes(authNew) ) {
+            for (const authProvider of this.#options.authProviders) {
+                if (isEmpty(authProvider.provider)) continue;
+
+                const aProvider = authProvider.provider.toLowerCase();
+                const {signInLabel, signUpLabel, fullLabel} = this.#options[aProvider];
+                if (!isEmpty(this.#options[aProvider]) && (!isEmpty(signInLabel) || !isEmpty(signUpLabel))) {
+                    const buttonsTitle = document.querySelectorAll(this.#buttonsTitleSelector[aProvider]);
+                    const title = (authNew === SIGN_UP_FORM_SLUG) ? signUpLabel || fullLabel : signInLabel || fullLabel;
+                    if (buttonsTitle && title) {
+                        buttonsTitle.forEach((item) => {
+                            item.innerHTML = title;
                         });
                     }
                 }
             }
-        });
-    }
-
-    #changeAuthButtonsTitle(authNew, authOld) {
-        if ( authNew
-            && authNew !== authOld
-            && [SIGN_UP_FORM_SLUG, SIGN_IN_FORM_SLUG].includes(authNew) )
-        {
-            Object.keys(this.#options.authProviders).forEach(key => {
-                let authProvider = this.#options.authProviders[key];
-                if (typeof authProvider.provider !== "undefined" && authProvider.provider !== '') {
-                    let buttonKey = authProvider.provider.toLowerCase();
-                    if (typeof this.#options[buttonKey] !== "undefined" && (this.#options[buttonKey].signInLabel !== '' || this.#options[buttonKey].signUpLabel !== '')) {
-                        if (authNew === SIGN_UP_FORM_SLUG) {
-                            this.#options[buttonKey].label = (this.#options[buttonKey].signUpLabel !== '') ? this.#options[buttonKey].signUpLabel : this.#options[buttonKey].fullLabel;
-                        } else if (authNew === SIGN_IN_FORM_SLUG) {
-                            this.#options[buttonKey].label = (this.#options[buttonKey].signInLabel !== '') ? this.#options[buttonKey].signInLabel : this.#options[buttonKey].fullLabel;
-                        }
-                        let buttonsTitle = document.querySelectorAll(this.#buttonsTitleSelector[buttonKey]);
-                        let title = this.#options[buttonKey].label;
-                        if (buttonsTitle && !!title) {
-                            buttonsTitle.forEach(function (item) {
-                                item.innerHTML = title;
-                            });
-                        }
-                    }
-                }
-            });
         }
     }
 
     createElement () {
-        let elementKey = 'email';
+        const elementKey = 'email';
+        const { iconUrl, textColorStyle, label, styles } = this.#options[elementKey];
         return createElement('div', {
             className: this.#className,
             innerHTML: `
                 <span class="firebaseui-idp-icon-wrapper">
-                    <img class="firebaseui-idp-icon" alt="" src="${this.#options[elementKey].iconUrl}">
+                    <img class="firebaseui-idp-icon" alt="" src="${iconUrl}">
                 </span>
-                <span class="wk-auth-form-button-email-title firebaseui-idp-text firebaseui-idp-text-long"${this.#options[elementKey].textColorStyle}>${this.#options[elementKey].label}</span>`,
-            styles: this.#options[elementKey].styles
+                <span class="wk-auth-form-button-email-title firebaseui-idp-text firebaseui-idp-text-long"${textColorStyle}>${label}</span>`,
+            styles
         });
     }
 
