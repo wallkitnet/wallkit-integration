@@ -1,7 +1,7 @@
 /*!
  * Package name: wallkit-integration-lib.
  * Package description: Wallkit Integration Library. Library to manipulate with Wallkit System: Paywall, Modals, Authentication, SDK..
- * Package version: 3.0.15.
+ * Package version: 3.0.16.
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
