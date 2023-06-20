@@ -4714,8 +4714,12 @@ var LoginForm = /*#__PURE__*/function (_Form) {
       var subFooter = (0, _DOM.createElement)('div', {
         className: 'wk-form__sub-footer'
       });
+      var signUpWrapper = (0, _DOM.createElement)('div', {
+        className: 'wk-form__footer-sign-up',
+        innerText: this.options.signUpPreLinkTitle || ''
+      });
       if (this.options.signUp === true) {
-        subFooter.appendChild((0, _DOM.createElement)('a', {
+        signUpWrapper.appendChild((0, _DOM.createElement)('a', {
           id: 'auth-signup-link',
           className: 'wk-form__link',
           innerText: this.options.signUpLinkTitle || 'Sign Up',
@@ -4724,6 +4728,7 @@ var LoginForm = /*#__PURE__*/function (_Form) {
           }
         }));
       }
+      subFooter.appendChild(signUpWrapper);
       subFooter.appendChild((0, _DOM.createElement)('a', {
         className: 'wk-form__link wk-form__reset-password',
         innerText: 'Forgot password',
@@ -4912,7 +4917,7 @@ var SignupForm = /*#__PURE__*/function (_Form) {
       });
       var signInWrapper = (0, _DOM.createElement)('div', {
         className: 'wk-form__footer-sign-in',
-        innerText: 'Already have an account? '
+        innerText: this.options.signInPreLinkTitle || 'Already have an account? '
       });
       signInWrapper.appendChild((0, _DOM.createElement)('a', {
         className: 'wk-form__link',
