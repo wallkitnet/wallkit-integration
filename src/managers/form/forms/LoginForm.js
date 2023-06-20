@@ -52,8 +52,13 @@ export class LoginForm extends Form {
             className: 'wk-form__sub-footer',
         });
 
+        const signUpWrapper = createElement( 'div', {
+            className: 'wk-form__footer-sign-up',
+            innerText: this.options.signUpPreLinkTitle || '',
+        });
+
         if (this.options.signUp === true) {
-            subFooter.appendChild(createElement('a', {
+            signUpWrapper.appendChild(createElement('a', {
                 id: 'auth-signup-link',
                 className: 'wk-form__link',
                 innerText: this.options.signUpLinkTitle || 'Sign Up',
@@ -62,6 +67,7 @@ export class LoginForm extends Form {
                 }
             }));
         }
+        subFooter.appendChild(signUpWrapper);
 
         subFooter.appendChild(createElement('a', {
             className: 'wk-form__link wk-form__reset-password',

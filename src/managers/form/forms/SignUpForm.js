@@ -85,7 +85,7 @@ export class SignupForm extends Form {
         });
         const signInWrapper = createElement( 'div', {
             className: 'wk-form__footer-sign-in',
-            innerText: 'Already have an account? ',
+            innerText: this.options.signInPreLinkTitle || 'Already have an account? ',
         });
         signInWrapper.appendChild(createElement('a', {
             className: 'wk-form__link',
