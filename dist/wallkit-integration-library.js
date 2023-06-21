@@ -3648,12 +3648,12 @@ var TriggerButton = /*#__PURE__*/function () {
             }
           }
           if (!(0, _lodash["default"])(buttonColor)) {
-            options[aProvider].backgroundColor = (!buttonColor.trim().startsWith('#') ? '#' : '') + buttonColor;
-            options[aProvider].styles.backgroundColor = (!buttonColor.trim().startsWith('#') ? '#' : '') + buttonColor;
+            options[aProvider].backgroundColor = buttonColor;
+            options[aProvider].styles.backgroundColor = buttonColor;
           }
           if (!(0, _lodash["default"])(buttonTextColor)) {
-            options[aProvider].textColor = (!buttonTextColor.trim().startsWith('#') ? '#' : '') + buttonTextColor;
-            options[aProvider].textColorStyle = " style=\"color:".concat(!buttonTextColor.trim().startsWith('#') ? '#' : '').concat(buttonTextColor, "\"");
+            options[aProvider].textColor = buttonTextColor;
+            options[aProvider].textColorStyle = " style=\"color:".concat(buttonTextColor, "\"");
           }
           if (!(0, _lodash["default"])(iconUrl)) {
             options[aProvider].iconUrl = iconUrl;

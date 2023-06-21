@@ -76,12 +76,12 @@ export class TriggerButton {
                 }
             }
             if (!isEmpty(buttonColor)) {
-                options[aProvider].backgroundColor = ((!buttonColor.trim().startsWith('#'))?'#':'')+buttonColor;
-                options[aProvider].styles.backgroundColor = ((!buttonColor.trim().startsWith('#'))?'#':'')+buttonColor;
+                options[aProvider].backgroundColor = buttonColor;
+                options[aProvider].styles.backgroundColor = buttonColor;
             }
             if (!isEmpty(buttonTextColor )) {
-                options[aProvider].textColor = ((!buttonTextColor.trim().startsWith('#'))?'#':'')+buttonTextColor;
-                options[aProvider].textColorStyle = ` style="color:${((!buttonTextColor.trim().startsWith('#'))?'#':'')}${buttonTextColor}"`;
+                options[aProvider].textColor = buttonTextColor;
+                options[aProvider].textColorStyle = ` style="color:${buttonTextColor}"`;
             }
             if (!isEmpty(iconUrl)) {
                 options[aProvider].iconUrl = iconUrl;
