@@ -144,7 +144,7 @@ export class AuthForm {
     }
 
     set defaultForm (formSlug) {
-        let oldSlug = this.defaultFormSlug;
+        const oldSlug = this.defaultFormSlug;
         if (formSlug && [SIGN_UP_FORM_SLUG, SIGN_IN_FORM_SLUG, FORGOT_PASSWORD_FORM_SLUG, RESET_PASSWORD_FORM_SLUG].includes(formSlug)) {
             this.defaultFormSlug = formSlug;
         } else {
