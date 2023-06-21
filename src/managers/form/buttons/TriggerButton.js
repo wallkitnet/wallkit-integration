@@ -11,6 +11,7 @@ import {
     TRIGGER_EMAIL_BUTTON_CLASS_NAME
 } from "../../../configs/constants";
 import isEmpty from 'lodash.isempty';
+import get from 'lodash.get';
 
 export class TriggerButton {
     #fullLabel = {
@@ -99,8 +100,10 @@ export class TriggerButton {
 
         /** change titles on auth form change */
         this.events.subscribe(DEFAULT_AUTH_FORM_SLUG_UPDATED, (value) => {
-            if (value?.new && value.new !== value.old) {
-                this.#changeAuthButtonsTitle(value.new, value.old);
+            const newValue = get(value, 'new', false);
+            const oldValue = get(value, 'old', false);
+            if (newValue && newValue !== oldValue) {
+                this.#changeAuthButtonsTitle(newValue, oldValue);
             }
         });
     }
@@ -111,8 +114,10 @@ export class TriggerButton {
             if (isEmpty(authProvider.provider)) continue;
 
             const aProvider = authProvider.provider.toLowerCase();
-            const textColor = this.#options[aProvider]?.textColor;
-            if (aProvider !== 'email' && textColor) {
+            if (aProvider !== 'email') {
+                const textColor = get(this.#options[aProvider], 'textColor', false);
+                if (!textColor) continue;
+
                 const buttonsTitle = document.querySelectorAll(this.#buttonsTitleSelector[aProvider]);
                 if (buttonsTitle) {
                     buttonsTitle.forEach( (item) => {
