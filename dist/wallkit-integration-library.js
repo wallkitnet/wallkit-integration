@@ -3338,7 +3338,6 @@ var Call = /*#__PURE__*/function () {
   (0, _createClass2["default"])(Call, [{
     key: "getUserStatus",
     value: function getUserStatus() {
-      console.log('this.#sdk.methods.isAuthenticated()', (0, _classPrivateFieldGet5["default"])(this, _sdk).methods.isAuthenticated());
       return (0, _classPrivateFieldGet5["default"])(this, _sdk).methods.isAuthenticated() ? 'authorized' : 'guest';
     }
   }, {
@@ -3598,8 +3597,6 @@ function _initWkListeners2() {
     _this2.getWallkitUserData();
   });
   (0, _classPrivateFieldGet5["default"])(this, _events).subscribe(_eventsName["default"].local.LOGOUT, function () {
-    console.log('here2344');
-
     _this2.setAllDataWkStatusesInDOMElements();
 
     _classPrivateMethodGet(_this2, _setDataWkHasAccessInBody, _setDataWkHasAccessInBody2).call(_this2, false);
