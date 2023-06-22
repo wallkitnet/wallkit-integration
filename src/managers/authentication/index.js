@@ -17,6 +17,7 @@ import { AuthForm, RESET_PASSWORD_FORM_SLUG } from "../form/forms/AuthForm";
 import { normalizeSelector } from "../../utils/DOM";
 import { parseResetPasswordOobCodeHash, resetHash } from "../../utils/url";
 import { Confirmation } from "./Confirmation";
+import isEmpty from "lodash.isempty";
 
 export default class Authentication {
     #options;
@@ -61,7 +62,7 @@ export default class Authentication {
 
             this.firebase = new Firebase(config);
 
-            if (options.firebase.genuineForm === false) {
+            if (options.firebase.genuineForm === false && this.#isEmailProvider) {
                 this.initAuthForm();
             }
         }
@@ -141,15 +142,25 @@ export default class Authentication {
       })
     }
 
-    initAuthForm () {
-        const { tosURL, privacyPolicyURL, termsOfService } = this.#options.firebase;
+    get #isEmailProvider () {
+        const { providers } = this.#options.firebase;
+        if (isEmpty(providers)) return false;
+        if(!Array.isArray(providers)) return false;
+        for (const provider of providers) {
+            if (typeof provider === "string" && provider.toLowerCase() === 'email') return true;
+            if (typeof provider !== "string" && !isEmpty(provider.provider) && provider.provider.toLowerCase() === 'email') return true;
+        }
+        return false;
+    }
 
+    initAuthForm () {
+        const { tosURL, privacyPolicyURL, termsOfService, providers } = this.#options.firebase;
         this.authForm = new AuthForm(`#${WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID}`, {
             triggerButton: this.firebase.providers.length > 1,
             signUp: this.#options.auth.signUp ?? true,
             termsOfService: { tosURL, privacyPolicyURL, termsOfService },
             defaultForm: this.#options.auth.defaultForm || false,
-            authProviders: this.firebase.providers || false,
+            authProviders: providers || false,
             customizeAuthForms: this.#options.auth.forms || false,
             onLogin: async (data) => {
               const proceed = await this.events.preventiveEvent(PRE_SIGN_IN, data);
