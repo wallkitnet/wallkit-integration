@@ -95,7 +95,7 @@ export default class Authentication {
 
     isAuthenticated() {
         if (this.sdk) {
-            return this.sdk.methods.isAuthenticated();
+            return this.sdk.methods.isAuthenticated() || this.token.get() || this.firebaseToken.get();
         } else {
             return !!this.token.get();
         }
@@ -447,7 +447,9 @@ export default class Authentication {
                     }
                     break;
                 case EventsNames.wallkit.WALLKIT_LOGOUT:
-                    this.logout();
+                    if (this.isAuthenticated()) {
+                      this.logout();
+                    }
                     break;
             }
         });
@@ -485,13 +487,13 @@ export default class Authentication {
             }
           }
 
-          if (this.isAuthenticated()) {
+          if (this.sdk.methods.isAuthenticated()) {
             await this.sdk.methods.logout();
-            this.events.notify(EventsNames.local.LOGOUT, true);
           } else if (this.token.get() || this.firebaseToken.get()) {
             this.frame.sendEvent(EventsNames.wallkit.WALLKIT_LOGOUT, true);
-            this.events.notify(EventsNames.local.LOGOUT, true);
           }
+
+          this.events.notify(EventsNames.local.LOGOUT, true);
         }
 
         this.resetAuthProcess();

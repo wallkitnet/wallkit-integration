@@ -2205,7 +2205,7 @@ var Authentication = /*#__PURE__*/function () {
     key: "isAuthenticated",
     value: function isAuthenticated() {
       if (this.sdk) {
-        return this.sdk.methods.isAuthenticated();
+        return this.sdk.methods.isAuthenticated() || this.token.get() || this.firebaseToken.get();
       } else {
         return !!this.token.get();
       }
@@ -2807,8 +2807,8 @@ var Authentication = /*#__PURE__*/function () {
                 }
 
               case 13:
-                if (!this.isAuthenticated()) {
-                  _context6.next = 19;
+                if (!this.sdk.methods.isAuthenticated()) {
+                  _context6.next = 18;
                   break;
                 }
 
@@ -2816,15 +2816,16 @@ var Authentication = /*#__PURE__*/function () {
                 return this.sdk.methods.logout();
 
               case 16:
-                this.events.notify(_eventsName["default"].local.LOGOUT, true);
-                _context6.next = 20;
+                _context6.next = 19;
                 break;
 
-              case 19:
+              case 18:
                 if (this.token.get() || this.firebaseToken.get()) {
                   this.frame.sendEvent(_eventsName["default"].wallkit.WALLKIT_LOGOUT, true);
-                  this.events.notify(_eventsName["default"].local.LOGOUT, true);
                 }
+
+              case 19:
+                this.events.notify(_eventsName["default"].local.LOGOUT, true);
 
               case 20:
                 this.resetAuthProcess();
@@ -3143,7 +3144,9 @@ function _initListeners2() {
         break;
 
       case _eventsName["default"].wallkit.WALLKIT_LOGOUT:
-        _this10.logout();
+        if (_this10.isAuthenticated()) {
+          _this10.logout();
+        }
 
         break;
     }
@@ -3335,6 +3338,7 @@ var Call = /*#__PURE__*/function () {
   (0, _createClass2["default"])(Call, [{
     key: "getUserStatus",
     value: function getUserStatus() {
+      console.log('this.#sdk.methods.isAuthenticated()', (0, _classPrivateFieldGet5["default"])(this, _sdk).methods.isAuthenticated());
       return (0, _classPrivateFieldGet5["default"])(this, _sdk).methods.isAuthenticated() ? 'authorized' : 'guest';
     }
   }, {
@@ -3580,13 +3584,6 @@ function _initWkListeners2() {
         _ = _ref3._;
 
     switch (name) {
-      case _eventsName["default"].wallkit.WALLKIT_LOGOUT:
-        _this2.setAllDataWkStatusesInDOMElements();
-
-        _classPrivateMethodGet(_this2, _setDataWkHasAccessInBody, _setDataWkHasAccessInBody2).call(_this2, false);
-
-        break;
-
       case _eventsName["default"].wallkit.WALLKIT_EVENT_USER:
         _this2.getWallkitUserData();
 
@@ -3599,6 +3596,13 @@ function _initWkListeners2() {
     }
 
     _this2.getWallkitUserData();
+  });
+  (0, _classPrivateFieldGet5["default"])(this, _events).subscribe(_eventsName["default"].local.LOGOUT, function () {
+    console.log('here2344');
+
+    _this2.setAllDataWkStatusesInDOMElements();
+
+    _classPrivateMethodGet(_this2, _setDataWkHasAccessInBody, _setDataWkHasAccessInBody2).call(_this2, false);
   });
   (0, _classPrivateFieldGet5["default"])(this, _events).subscribe(_eventsName["default"].local.CHECK_USER_ACCESS, function (value) {
     if (_classPrivateMethodGet(_this2, _isDebug, _isDebug2).call(_this2)) {
