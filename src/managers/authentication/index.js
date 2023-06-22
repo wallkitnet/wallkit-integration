@@ -147,6 +147,8 @@ export default class Authentication {
             signUp: this.#options.auth.signUp ?? true,
             termsOfService: { tosURL, privacyPolicyURL, termsOfService },
             defaultForm: this.#options.auth.defaultForm || false,
+            authProviders: this.firebase.providers || false,
+            customizeAuthForms: this.#options.auth.forms || false,
             onLogin: async (data) => {
               const proceed = await this.events.preventiveEvent(PRE_SIGN_IN, data);
 
@@ -390,6 +392,8 @@ export default class Authentication {
                 this.reCaptcha.initCaptchaProcess();
               }, {once: true});
             }
+          } else if (this.authForm?.triggerButton){
+              this.authForm.triggerButton.events.notify(FIREBASE_UI_SHOWN, true);
           }
 
           this.toggleFormLoader(false);
