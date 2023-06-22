@@ -9,8 +9,7 @@ export class LoginForm extends Form {
         super(targetElementSelector, options);
 
         this.options = options;
-
-        this.options.title = 'Sign in with email' || options.title;
+        this.options.title = options.title || 'Sign in with email';
         this.options.footer = this.getFormFooter() || options.footer;
 
         this.emailField = new FormField({
@@ -53,16 +52,22 @@ export class LoginForm extends Form {
             className: 'wk-form__sub-footer',
         });
 
+        const signUpWrapper = createElement( 'div', {
+            className: 'wk-form__footer-sign-up',
+            innerText: this.options.signUpPreLinkTitle || '',
+        });
+
         if (this.options.signUp === true) {
-            subFooter.appendChild(createElement('a', {
+            signUpWrapper.appendChild(createElement('a', {
                 id: 'auth-signup-link',
                 className: 'wk-form__link',
-                innerText: 'Sign Up',
+                innerText: this.options.signUpLinkTitle || 'Sign Up',
                 attributes: {
                     href: '#'
                 }
             }));
         }
+        subFooter.appendChild(signUpWrapper);
 
         subFooter.appendChild(createElement('a', {
             className: 'wk-form__link wk-form__reset-password',

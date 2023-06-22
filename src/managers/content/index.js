@@ -120,21 +120,30 @@ export default class Content {
 
     getAccessDetails(contentId) {
         return this.sdk.client.get({ path: `/user/content-access-details/${contentId}` }).then((response) => {
-            if (response) {
-                const terms = response.content_terms;
-
-                this.accessCount = terms.usedLimitInPeriod;
-                this.accessCountLimit = terms.accessLimit;
-
-                return {
-                    accessCount: this.accessCount,
-                    accessCountLimit: this.accessCountLimit
+            this.accessCount = 0;
+            this.accessCountLimit = 0;
+            let checkDone = false;
+            this.accessDetails = {...response || false};
+            if (response?.content_terms?.items?.length ) {
+                if (!response.content_terms.exclude) {
+                    this.accessCount = response.content_terms.usedLimitInPeriod;
+                    this.accessCountLimit = response.content_terms.accessLimit;
+                } else {
+                    checkDone = true;
                 }
             }
-
+            if (response?.content_types?.items?.length && !checkDone) {
+                if (!response.content_types.exclude) {
+                    this.accessCount = response.content_terms.usedLimitInPeriod < this.accessCount ? response.content_terms.usedLimitInPeriod : this.accessCount;
+                    this.accessCountLimit = response.content_terms.accessLimit < this.accessCountLimit ? response.content_terms.accessLimit : this.accessCountLimit;
+                } else {
+                    this.accessCount = 0;
+                    this.accessCountLimit = 0;
+                }
+            }
             return {
-                accessCount: 0,
-                accessCountLimit: 0
+                accessCount: this.accessCount,
+                accessCountLimit: this.accessCountLimit
             }
         }).catch((error) => {
             return error;
