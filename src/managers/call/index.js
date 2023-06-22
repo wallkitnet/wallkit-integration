@@ -30,10 +30,6 @@ export default class Call {
     #initWkListeners() {
         this.#events.subscribe(EventsNames.local.FRAME_MESSAGE, ({name, _}) => {
             switch (name) {
-                case EventsNames.wallkit.WALLKIT_LOGOUT:
-                    this.setAllDataWkStatusesInDOMElements();
-                    this.#setDataWkHasAccessInBody(false);
-                    break;
                 case EventsNames.wallkit.WALLKIT_EVENT_USER:
                     this.getWallkitUserData();
                     break;
@@ -45,6 +41,11 @@ export default class Call {
                 console.log('subscribe ventsNames.local.SUCCESS_AUTH', value);
             }
             this.getWallkitUserData();
+        });
+
+        this.#events.subscribe(EventsNames.local.LOGOUT, () => {
+          this.setAllDataWkStatusesInDOMElements();
+          this.#setDataWkHasAccessInBody(false);
         });
 
         this.#events.subscribe(EventsNames.local.CHECK_USER_ACCESS, (value) => {
