@@ -3458,8 +3458,8 @@ var TriggerButton = /*#__PURE__*/function () {
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var authProvider = _step.value;
-          if ((0, _lodash["default"])(authProvider.provider)) continue;
-          var aProvider = authProvider.provider.toLowerCase();
+          if (typeof authProvider !== "string" && (0, _lodash["default"])(authProvider.provider)) continue;
+          var aProvider = typeof authProvider === "string" ? authProvider : authProvider.provider.toLowerCase();
           options[aProvider] = {
             fullLabel: '',
             signInLabel: '',
