@@ -40,9 +40,9 @@ export class TriggerButton {
     checkOptions(options) {
         if(!Array.isArray(options.authProviders)) return options;
         for (const authProvider of options.authProviders) {
-            if (isEmpty(authProvider.provider)) continue;
+            if (typeof authProvider !== "string" && isEmpty(authProvider.provider)) continue;
 
-            const aProvider = authProvider.provider.toLowerCase();
+            const aProvider = typeof authProvider === "string" ? authProvider : authProvider.provider.toLowerCase();
             options[aProvider] = {
                 fullLabel: '',
                 signInLabel: '',

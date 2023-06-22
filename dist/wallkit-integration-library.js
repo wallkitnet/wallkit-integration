@@ -1588,8 +1588,12 @@ var _ReCaptcha = _interopRequireDefault(__webpack_require__(3378));
 var _AuthForm = __webpack_require__(8031);
 var _DOM = __webpack_require__(2909);
 var _url = __webpack_require__(5234);
+var _lodash = _interopRequireDefault(__webpack_require__(5828));
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof3(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
@@ -1600,6 +1604,7 @@ var _options = /*#__PURE__*/new WeakMap();
 var _oobCode = /*#__PURE__*/new WeakMap();
 var _authPlaceholderElementSelector = /*#__PURE__*/new WeakMap();
 var _authPlaceholderElementSelectorType = /*#__PURE__*/new WeakMap();
+var _isEmailProvider = /*#__PURE__*/new WeakMap();
 var _createModal = /*#__PURE__*/new WeakSet();
 var _initListeners = /*#__PURE__*/new WeakSet();
 var _setAuthorizationError = /*#__PURE__*/new WeakSet();
@@ -1616,6 +1621,10 @@ var Authentication = /*#__PURE__*/function () {
     _classPrivateMethodInitSpec(this, _setAuthorizationError);
     _classPrivateMethodInitSpec(this, _initListeners);
     _classPrivateMethodInitSpec(this, _createModal);
+    _classPrivateFieldInitSpec(this, _isEmailProvider, {
+      get: _get_isEmailProvider,
+      set: void 0
+    });
     _classPrivateFieldInitSpec(this, _authPlaceholderElementSelectorType, {
       get: _get_authPlaceholderElementSelectorType,
       set: void 0
@@ -1658,7 +1667,7 @@ var Authentication = /*#__PURE__*/function () {
         }
       }
       this.firebase = new _Firebase["default"](config);
-      if (options.firebase.genuineForm === false) {
+      if (options.firebase.genuineForm === false && (0, _classPrivateFieldGet13["default"])(this, _isEmailProvider)) {
         this.initAuthForm();
       }
     }
@@ -1731,7 +1740,8 @@ var Authentication = /*#__PURE__*/function () {
       var _classPrivateFieldGet2 = (0, _classPrivateFieldGet13["default"])(this, _options).firebase,
         tosURL = _classPrivateFieldGet2.tosURL,
         privacyPolicyURL = _classPrivateFieldGet2.privacyPolicyURL,
-        termsOfService = _classPrivateFieldGet2.termsOfService;
+        termsOfService = _classPrivateFieldGet2.termsOfService,
+        providers = _classPrivateFieldGet2.providers;
       this.authForm = new _AuthForm.AuthForm("#".concat(_constants.WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID), {
         triggerButton: this.firebase.providers.length > 1,
         signUp: (_classPrivateFieldGet3 = (0, _classPrivateFieldGet13["default"])(this, _options).auth.signUp) !== null && _classPrivateFieldGet3 !== void 0 ? _classPrivateFieldGet3 : true,
@@ -1741,7 +1751,7 @@ var Authentication = /*#__PURE__*/function () {
           termsOfService: termsOfService
         },
         defaultForm: (0, _classPrivateFieldGet13["default"])(this, _options).auth.defaultForm || false,
-        authProviders: this.firebase.providers || false,
+        authProviders: providers || false,
         customizeAuthForms: (0, _classPrivateFieldGet13["default"])(this, _options).auth.forms || false,
         onLogin: function () {
           var _onLogin = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(data) {
@@ -2384,6 +2394,25 @@ function _get_authPlaceholderElementSelectorType() {
       return 'class';
   }
   return 'id';
+}
+function _get_isEmailProvider() {
+  var providers = (0, _classPrivateFieldGet13["default"])(this, _options).firebase.providers;
+  if ((0, _lodash["default"])(providers)) return false;
+  if (!Array.isArray(providers)) return false;
+  var _iterator = _createForOfIteratorHelper(providers),
+    _step;
+  try {
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      var provider = _step.value;
+      if (typeof provider === "string" && provider.toLowerCase() === 'email') return true;
+      if (typeof provider !== "string" && !(0, _lodash["default"])(provider.provider) && provider.provider.toLowerCase() === 'email') return true;
+    }
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
+  }
+  return false;
 }
 function _createModal2() {
   var _classPrivateFieldGet12;
@@ -3458,8 +3487,8 @@ var TriggerButton = /*#__PURE__*/function () {
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var authProvider = _step.value;
-          if ((0, _lodash["default"])(authProvider.provider)) continue;
-          var aProvider = authProvider.provider.toLowerCase();
+          if (typeof authProvider !== "string" && (0, _lodash["default"])(authProvider.provider)) continue;
+          var aProvider = typeof authProvider === "string" ? authProvider : authProvider.provider.toLowerCase();
           options[aProvider] = {
             fullLabel: '',
             signInLabel: '',
