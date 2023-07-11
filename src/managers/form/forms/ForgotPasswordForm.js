@@ -16,6 +16,7 @@ export class ForgotPasswordForm extends Form {
             dataSlug: 'email',
             label: 'Email',
             type: 'email',
+            messages: options.messages || {},
             onEnter: () => {
               this.submitForm();
             }

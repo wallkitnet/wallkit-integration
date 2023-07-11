@@ -155,13 +155,14 @@ export default class Authentication {
 
     initAuthForm () {
         const { tosURL, privacyPolicyURL, termsOfService, providers } = this.#options.firebase;
+        const { signUp, defaultForm, forms } = this.#options.auth || {};
         this.authForm = new AuthForm(`#${WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID}`, {
             triggerButton: this.firebase.providers.length > 1,
-            signUp: this.#options.auth.signUp ?? true,
+            signUp: signUp ?? true,
             termsOfService: { tosURL, privacyPolicyURL, termsOfService },
-            defaultForm: this.#options.auth.defaultForm || false,
+            defaultForm: defaultForm || false,
             authProviders: providers || false,
-            customizeAuthForms: this.#options.auth.forms || false,
+            customizeAuthForms: forms || false,
             onLogin: async (data) => {
               const proceed = await this.events.preventiveEvent(PRE_SIGN_IN, data);
 

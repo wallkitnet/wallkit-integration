@@ -57,8 +57,8 @@ export default {
         CHECK_USER_ACCESS,
         PRE_SIGN_IN,
         EXTERNAL_PROVIDER_TOKEN_AUTH_SUCCESS,
-        LOGOUT,
-        DEFAULT_AUTH_FORM_SLUG_UPDATED
+        DEFAULT_AUTH_FORM_SLUG_UPDATED,
+        LOGOUT
     },
     wallkit: {
         FRAME_CREATED,

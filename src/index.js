@@ -48,20 +48,22 @@ window.WallkitIntegration = class WallkitIntegration {
         this.sdk = new SDK({
             ...options,
             onLoaded: () => {
+                const { firebase, modal, content, reCaptcha, forms } = options.auth || {};
+
                 this.authentication = new Authentication({
                     ...options,
-                    firebase: options?.auth?.firebase,
-                    modalTitle: options?.auth?.modal?.title,
-                    content: options?.auth?.content || options?.auth?.modal?.content,
-                    reCaptcha: options?.auth?.reCaptcha,
+                    firebase: firebase,
+                    modalTitle: modal?.title,
+                    content: content || modal?.content,
+                    reCaptcha: reCaptcha,
                 });
 
                 this.analytics = new Analytics(options?.analytics);
                 this.call = new Call(this.popup, this.config);
 
                 this.init();
-
                 this.userManager = new UserManager({
+                    customizeForms: forms || false,
                     popup: this.popup,
                     authentication: this.authentication
                 });

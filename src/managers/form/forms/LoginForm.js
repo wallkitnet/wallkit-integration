@@ -17,6 +17,7 @@ export class LoginForm extends Form {
             name: 'wk-fb-email',
             label: 'Email',
             type: 'email',
+            messages: options.messages || {},
             onEnter: () => {
               this.passwordField.focus();
             }
@@ -28,6 +29,7 @@ export class LoginForm extends Form {
             testStrength: false,
             label: 'Password',
             type: 'password',
+            messages: options.messages || {},
             onEnter: () => {
               this.submitForm();
             }

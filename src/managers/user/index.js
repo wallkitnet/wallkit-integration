@@ -1,10 +1,13 @@
 import Modal from "../modal";
 import { ChangePasswordForm } from "../form/forms/ChangePasswordForm"
 import {WALLKIT_USER_MANAGER_MODAL_FORM_PLACEHOLDER_ID} from "../../configs/constants";
+import isEmpty from "lodash.isempty";
 
 export default class UserManager {
+    #options;
 
     constructor(options) {
+        this.#options = options;
         this.popup = options.popup;
         this.authentication = options.authentication;
         this.#initModal(options);
@@ -28,8 +31,18 @@ export default class UserManager {
 
     #initChangePasswordForm () {
         if (!this.changePasswordForm) {
+            const { messages, changePassword } = this.#options.customizeForms || {};
+            let changePasswordMessages = {};
+            if (!isEmpty(changePassword) && !isEmpty(changePassword.messages)) {
+                changePasswordMessages = changePassword.messages;
+            }
             this.changePasswordForm = new ChangePasswordForm(
                 `#${WALLKIT_USER_MANAGER_MODAL_FORM_PLACEHOLDER_ID}`, {
+                    ...(changePassword || {}),
+                    messages: {
+                        ...(messages || {}),
+                        ...changePasswordMessages
+                    },
                     onCancel: () => {
                         this.cancelModalForm({
                             openPopupName: 'account-settings'
@@ -72,10 +85,12 @@ export default class UserManager {
 
     #successChangePasswordForm () {
         if (this.changePasswordForm) {
+            const { successPasswordChange } = this.#options.customizeForms || {};
+            const { description, backLinkTitle } = successPasswordChange || {};
             this.changePasswordForm.showFormResult(`
             <div class="wk-success-message wk-password-reset-success">
-                <h2 class="wk-success-message__title">Your password has been successfully changed!</h2>
-                <a href="#" class="wk-form__link account-settings-link">Back to account settings</a>
+                <h2 class="wk-success-message__title">${description || 'Your password has been successfully changed!'}</h2>
+                <a href="#" class="wk-form__link account-settings-link">${backLinkTitle || 'Back to account settings'}</a>
             </div>
         `);
             if (this.modal) {
