@@ -1,4 +1,6 @@
 import { createElement } from "../../utils/DOM";
+import isEmpty from "lodash.isempty";
+import get from 'lodash.get';
 
 export class Form {
     constructor(targetElementSelector, options) {
@@ -39,9 +41,16 @@ export class Form {
         return this.formWrapper;
     }
 
-    setFormError (error) {
-        this.formErrorPlaceholder.innerText = error;
+    setFormError (error, errorCode) {
+        let errorMessage = false;
+        if (!isEmpty(this.options.messages)) {
+            errorMessage = get(this.options.messages, errorCode, false);
+        }
+        this.formErrorPlaceholder.innerText = errorMessage || error;
         this.formErrorPlaceholder.classList.add('wk-form__error--show');
+        if (!isEmpty(errorCode)) {
+            this.formErrorPlaceholder.dataset.errorCode = errorCode;
+        }
     }
 
     resetFormError () {

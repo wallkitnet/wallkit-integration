@@ -68,7 +68,7 @@ export default class Authentication {
 
         this.reCaptcha = new ReCaptcha(this, options?.reCaptcha);
         this.reCaptcha.events.subscribe(EventsNames.local.RECAPTCHA_VALIDATION_FAILED, () => {
-            this.#setAuthorizationError('ReCaptcha Validation Failed! Please try again!');
+            this.#setAuthorizationError('ReCaptcha Validation Failed! Please try again!', 'recaptcha/validation-failed');
         });
         this.reCaptcha.events.subscribe(EventsNames.local.RECAPTCHA_VALIDATION_SUCCESS, () => {
             this.#resetAuthorizationError();
@@ -110,8 +110,8 @@ export default class Authentication {
       this.firebase.signIn(data.email, data.password)
         .then(() => {})
         .catch((error) => {
-          if (error.message) {
-            this.authForm.loginForm.setFormError(error.message);
+          if (!isEmpty(error.message)) {
+            this.authForm.loginForm.setFormError(error.message, error.code || false);
           }
           this.reCaptcha.grecaptcha.reset();
         });
@@ -123,8 +123,8 @@ export default class Authentication {
           this.firebase.updateName(data.name);
         })
         .catch((error) => {
-          if (error.message) {
-            this.authForm.signUpForm.setFormError(error.message);
+          if (!isEmpty(error.message)) {
+            this.authForm.signUpForm.setFormError(error.message, error.code || false);
           }
           this.reCaptcha.grecaptcha.reset();
         });
@@ -214,8 +214,8 @@ export default class Authentication {
 
                 this.toggleFormLoader(false);
               } catch (error) {
-                if (error.message) {
-                    this.authForm.forgotPasswordForm.setFormError(error.message);
+                if (!isEmpty(error.message)) {
+                    this.authForm.forgotPasswordForm.setFormError(error.message, error.code || false);
                 }
                 this.toggleFormLoader(false);
               }
@@ -231,13 +231,13 @@ export default class Authentication {
                     if (success) {
                         this.authForm.showSuccessPasswordReset();
                     } else {
-                        this.authForm.resetPasswordForm.setFormError("Something went wrong");
+                        this.authForm.resetPasswordForm.setFormError("Something went wrong", 'reset-password/unknown-error');
                     }
 
                     this.toggleFormLoader(false);
                 } catch (error) {
-                    if (error.message) {
-                        this.authForm.resetPasswordForm.setFormError(error.message);
+                    if (!isEmpty(error.message)) {
+                        this.authForm.resetPasswordForm.setFormError(error.message, error.code || false);
                     }
                     this.toggleFormLoader(false);
                 }
@@ -258,7 +258,7 @@ export default class Authentication {
         const handleAuthError = (error) => {
             this.resetAuthProcess(false);
             this.toggleFormLoader(false);
-            this.#setAuthorizationError(error?.message || 'Something went wrong!');
+            this.#setAuthorizationError(error?.message || 'Something went wrong!', error?.code || 'unknown-error');
         }
 
         this.updateFirebaseToken(data.token);
@@ -600,16 +600,16 @@ export default class Authentication {
         }
     }
 
-    #setAuthorizationError(error) {
+    #setAuthorizationError(errorMessage, errorCode) {
         if (this.authForm) {
-            this.authForm.handleError(error);
+            this.authForm.handleError(errorMessage, errorCode);
         } else {
             const errorPlaceholder = document.getElementById('authorization-error');
             if (errorPlaceholder) {
-                if (error === null) {
+                if (errorMessage === null) {
                     errorPlaceholder.innerHTML = '';
                 } else {
-                    errorPlaceholder.innerHTML = error || 'Something went wrong!';
+                    errorPlaceholder.innerHTML = errorMessage || 'Something went wrong!';
                 }
             }
         }
