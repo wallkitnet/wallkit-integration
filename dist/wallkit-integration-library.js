@@ -1793,7 +1793,7 @@ var Authentication = /*#__PURE__*/function () {
     }
     this.reCaptcha = new _ReCaptcha["default"](this, options === null || options === void 0 ? void 0 : options.reCaptcha);
     this.reCaptcha.events.subscribe(_eventsName["default"].local.RECAPTCHA_VALIDATION_FAILED, function () {
-      _classPrivateMethodGet(_this, _setAuthorizationError, _setAuthorizationError2).call(_this, 'ReCaptcha Validation Failed! Please try again!');
+      _classPrivateMethodGet(_this, _setAuthorizationError, _setAuthorizationError2).call(_this, 'ReCaptcha Validation Failed! Please try again!', 'recaptcha/validation-failed');
     });
     this.reCaptcha.events.subscribe(_eventsName["default"].local.RECAPTCHA_VALIDATION_SUCCESS, function () {
       _classPrivateMethodGet(_this, _resetAuthorizationError, _resetAuthorizationError2).call(_this);
@@ -1822,8 +1822,8 @@ var Authentication = /*#__PURE__*/function () {
     value: function handleLogin(data) {
       var _this2 = this;
       this.firebase.signIn(data.email, data.password).then(function () {})["catch"](function (error) {
-        if (error.message) {
-          _this2.authForm.loginForm.setFormError(error.message);
+        if (!(0, _lodash["default"])(error.message)) {
+          _this2.authForm.loginForm.setFormError(error.message, error.code || false);
         }
         _this2.reCaptcha.grecaptcha.reset();
       });
@@ -1835,8 +1835,8 @@ var Authentication = /*#__PURE__*/function () {
       this.firebase.signUp(data.email, data.password).then(function () {
         _this3.firebase.updateName(data.name);
       })["catch"](function (error) {
-        if (error.message) {
-          _this3.authForm.signUpForm.setFormError(error.message);
+        if (!(0, _lodash["default"])(error.message)) {
+          _this3.authForm.signUpForm.setFormError(error.message, error.code || false);
         }
         _this3.reCaptcha.grecaptcha.reset();
       });
@@ -1964,8 +1964,8 @@ var Authentication = /*#__PURE__*/function () {
                 case 21:
                   _context2.prev = 21;
                   _context2.t0 = _context2["catch"](0);
-                  if (_context2.t0.message) {
-                    _this5.authForm.forgotPasswordForm.setFormError(_context2.t0.message);
+                  if (!(0, _lodash["default"])(_context2.t0.message)) {
+                    _this5.authForm.forgotPasswordForm.setFormError(_context2.t0.message, _context2.t0.code || false);
                   }
                   _this5.toggleFormLoader(false);
                 case 25:
@@ -1994,7 +1994,7 @@ var Authentication = /*#__PURE__*/function () {
                   if (success) {
                     _this5.authForm.showSuccessPasswordReset();
                   } else {
-                    _this5.authForm.resetPasswordForm.setFormError("Something went wrong");
+                    _this5.authForm.resetPasswordForm.setFormError("Something went wrong", 'reset-password/unknown-error');
                   }
                   _this5.toggleFormLoader(false);
                   _context3.next = 13;
@@ -2002,8 +2002,8 @@ var Authentication = /*#__PURE__*/function () {
                 case 9:
                   _context3.prev = 9;
                   _context3.t0 = _context3["catch"](0);
-                  if (_context3.t0.message) {
-                    _this5.authForm.resetPasswordForm.setFormError(_context3.t0.message);
+                  if (!(0, _lodash["default"])(_context3.t0.message)) {
+                    _this5.authForm.resetPasswordForm.setFormError(_context3.t0.message, _context3.t0.code || false);
                   }
                   _this5.toggleFormLoader(false);
                 case 13:
@@ -2034,7 +2034,7 @@ var Authentication = /*#__PURE__*/function () {
       var handleAuthError = function handleAuthError(error) {
         _this6.resetAuthProcess(false);
         _this6.toggleFormLoader(false);
-        _classPrivateMethodGet(_this6, _setAuthorizationError, _setAuthorizationError2).call(_this6, (error === null || error === void 0 ? void 0 : error.message) || 'Something went wrong!');
+        _classPrivateMethodGet(_this6, _setAuthorizationError, _setAuthorizationError2).call(_this6, (error === null || error === void 0 ? void 0 : error.message) || 'Something went wrong!', (error === null || error === void 0 ? void 0 : error.code) || 'unknown-error');
       };
       this.updateFirebaseToken(data.token);
       this.events.notify(_eventsName["default"].local.SUCCESS_FIREBASE_AUTH, data);
@@ -2601,16 +2601,16 @@ function _initListeners2() {
     }
   });
 }
-function _setAuthorizationError2(error) {
+function _setAuthorizationError2(errorMessage, errorCode) {
   if (this.authForm) {
-    this.authForm.handleError(error);
+    this.authForm.handleError(errorMessage, errorCode);
   } else {
     var errorPlaceholder = document.getElementById('authorization-error');
     if (errorPlaceholder) {
-      if (error === null) {
+      if (errorMessage === null) {
         errorPlaceholder.innerHTML = '';
       } else {
-        errorPlaceholder.innerHTML = error || 'Something went wrong!';
+        errorPlaceholder.innerHTML = errorMessage || 'Something went wrong!';
       }
     }
   }
@@ -4609,12 +4609,12 @@ var AuthForm = /*#__PURE__*/function () {
     }
   }, {
     key: "handleError",
-    value: function handleError(error) {
+    value: function handleError(errorMessage, errorCode) {
       if (this.activeForm) {
-        if (error === null) {
-          this.activeForm.resetFormError(error);
+        if (errorMessage === null) {
+          this.activeForm.resetFormError(errorMessage);
         } else {
-          this.activeForm.setFormError(error);
+          this.activeForm.setFormError(errorMessage, errorCode);
         }
       }
     }
@@ -5236,6 +5236,8 @@ exports.Form = void 0;
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
 var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
 var _DOM = __webpack_require__(2909);
+var _lodash = _interopRequireDefault(__webpack_require__(5828));
+var _lodash2 = _interopRequireDefault(__webpack_require__(4174));
 var Form = /*#__PURE__*/function () {
   function Form(targetElementSelector, options) {
     (0, _classCallCheck2["default"])(this, Form);
@@ -5274,9 +5276,16 @@ var Form = /*#__PURE__*/function () {
     }
   }, {
     key: "setFormError",
-    value: function setFormError(error) {
-      this.formErrorPlaceholder.innerText = error;
+    value: function setFormError(error, errorCode) {
+      var errorMessage = false;
+      if (!(0, _lodash["default"])(this.options.messages)) {
+        errorMessage = (0, _lodash2["default"])(this.options.messages, errorCode, false);
+      }
+      this.formErrorPlaceholder.innerText = errorMessage || error;
       this.formErrorPlaceholder.classList.add('wk-form__error--show');
+      if (!(0, _lodash["default"])(errorCode)) {
+        this.formErrorPlaceholder.dataset.errorCode = errorCode;
+      }
     }
   }, {
     key: "resetFormError",
@@ -6131,8 +6140,8 @@ function _onSubmitChangePasswordForm3() {
 }
 function _setErrorMessageChangePasswordForm2(error) {
   if (this.changePasswordForm) {
-    if (error.message) {
-      this.changePasswordForm.setFormError(error.message);
+    if (!(0, _lodash["default"])(error.message)) {
+      this.changePasswordForm.setFormError(error.message, error.code || false);
     }
     if (this.modal) {
       this.modal.toggleLoader(false);

@@ -238,12 +238,12 @@ export class AuthForm {
         }
     }
 
-    handleError(error) {
+    handleError(errorMessage, errorCode) {
         if (this.activeForm) {
-            if (error === null) {
-                this.activeForm.resetFormError(error);
+            if (errorMessage === null) {
+                this.activeForm.resetFormError(errorMessage);
             } else {
-                this.activeForm.setFormError(error);
+                this.activeForm.setFormError(errorMessage, errorCode);
             }
         }
     }
