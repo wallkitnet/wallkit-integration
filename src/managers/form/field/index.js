@@ -1,11 +1,17 @@
 import {createElement, insertAfter} from "../../../utils/DOM";
+import isEmpty from "lodash.isempty";
 
 export class FormField {
+    #errorMessageRequired = 'This field is required.'
+    #errorMessageEmptyEmail = 'Enter your email address to continue.'
+    #errorMessageIncorrectEmail = 'This email address isn\'t correct.'
+    #errorMessageEmptyPassword = 'Enter your password to continue.'
+
     constructor(options) {
-        if (!options) {
+        if (isEmpty(options)) {
             throw new Error('No Options Provided');
         }
-
+        const { messages } = options || {};
         this.wrapper = this.createWrapper(options);
         this.input = this.createInput(options);
         this.type = options.type || 'text';
@@ -30,6 +36,13 @@ export class FormField {
 
         if (options.onInput) {
             this.input.addEventListener('input', options.onInput.bind(this));
+        }
+        if (!isEmpty(messages)) {
+            const { required, emptyEmail, incorrectEmail, emptyPassword } = messages || {};
+            this.#errorMessageRequired = required || this.#errorMessageRequired;
+            this.#errorMessageEmptyEmail = emptyEmail || this.#errorMessageEmptyEmail;
+            this.#errorMessageIncorrectEmail = incorrectEmail || this.#errorMessageIncorrectEmail;
+            this.#errorMessageEmptyPassword = emptyPassword || this.#errorMessageEmptyPassword;
         }
 
         this.input.addEventListener('blur', this.validate.bind(this));
@@ -63,24 +76,24 @@ export class FormField {
         const value = this.getValue();
 
         if (this.required && !value) {
-            this.setError('This field is required.');
+            this.setError(this.#errorMessageRequired);
 
             return false;
         }
 
         if (this.type === 'email') {
             if (!value) {
-                this.setError('Enter your email address to continue.');
+                this.setError(this.#errorMessageEmptyEmail);
 
                 return false;
             } else if (!value.length > 4 || !value.includes('@') || !value.includes('.')) {
-                this.setError('This email address isn\'t correct.');
+                this.setError(this.#errorMessageIncorrectEmail);
 
                 return false;
             }
         } else if (this.type === 'password') {
             if (!value) {
-                this.setError('Enter your password to continue.');
+                this.setError(this.#errorMessageEmptyPassword);
 
                 return false;
             }

@@ -18,6 +18,7 @@ export class ResetPasswordForm extends Form {
             passwordHint: true,
             label: 'New Password',
             type: 'password',
+            messages: options.messages || {},
             onEnter: () => {
                 this.submitForm();
             },
