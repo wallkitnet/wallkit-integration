@@ -11,6 +11,7 @@ export const SIGN_UP_FORM_SLUG = 'sign-up';
 export const SIGN_IN_FORM_SLUG = 'sign-in';
 export const FORGOT_PASSWORD_FORM_SLUG = 'forgot-password';
 export const RESET_PASSWORD_FORM_SLUG = 'reset-password';
+import isEmpty from "lodash.isempty";
 
 export class AuthForm {
     #options;
@@ -22,11 +23,20 @@ export class AuthForm {
         // this.wrapper = createElement('div', {
         //     id: 'wk-auth-form'
         // });
+        const { messages, signIn, signUp, forgotPassword, resetPassword } = options.customizeAuthForms || {};
 
+        let signInMessages = {};
+        if (!isEmpty(signIn) && !isEmpty(signIn.messages)) {
+            signInMessages = signIn.messages;
+        }
         this.loginForm = new LoginForm(selector, {
             cancelBtn: options.triggerButton !== false,
             signUp: options.signUp ?? true,
-            ...(options.customizeAuthForms?.signIn || {}),
+            ...(signIn || {}),
+            messages: {
+                ...(messages || {}),
+                ...signInMessages
+            },
             onSubmit: (data) => {
                 if (options.onLogin) {
                     options.onLogin(data);
@@ -52,11 +62,19 @@ export class AuthForm {
         });
         this.loginForm.hide();
 
+        let signUpMessages = {};
+        if (!isEmpty(signUp) && !isEmpty(signUp.messages)) {
+            signUpMessages = signUp.messages;
+        }
         if (options.signUp === true) {
             this.signUpForm = new SignupForm(selector, {
-                ...(options.customizeAuthForms?.signUp || {}),
                 cancelBtn: options.triggerButton !== false,
                 termsOfService: options.termsOfService,
+                ...(signUp || {}),
+                messages: {
+                    ...(messages || {}),
+                    ...signUpMessages
+                },
                 onSubmit: (data) => {
                     if (options.onSignUp) {
                         options.onSignUp(data);
@@ -79,8 +97,16 @@ export class AuthForm {
             this.signUpForm.hide();
         }
 
+        let forgotPasswordMessages = {};
+        if (!isEmpty(forgotPassword) && !isEmpty(forgotPassword.messages)) {
+            forgotPasswordMessages = forgotPassword.messages;
+        }
         this.forgotPasswordForm = new ForgotPasswordForm(selector, {
-            ...(options.customizeAuthForms?.forgotPassword || {}),
+            ...(forgotPassword || {}),
+            messages: {
+                ...(messages || {}),
+                ...forgotPasswordMessages
+            },
             onSubmit: (data) => {
                 if (options.onPasswordForgot) {
                     options.onPasswordForgot(data);
@@ -98,8 +124,16 @@ export class AuthForm {
         });
         this.forgotPasswordForm.hide();
 
+        let resetPasswordMessages = {};
+        if (!isEmpty(resetPassword) && !isEmpty(resetPassword.messages)) {
+            resetPasswordMessages = resetPassword.messages;
+        }
         this.resetPasswordForm = new ResetPasswordForm(selector, {
-            ...(options.customizeAuthForms?.resetPassword || {}),
+            ...(resetPassword || {}),
+            messages: {
+                ...(messages || {}),
+                ...resetPasswordMessages
+            },
             onSubmit: (data) => {
                 if (options.onPasswordReset) {
                     options.onPasswordReset(data);
@@ -204,32 +238,35 @@ export class AuthForm {
         }
     }
 
-    handleError(error) {
+    handleError(errorMessage, errorCode) {
         if (this.activeForm) {
-            if (error === null) {
-                this.activeForm.resetFormError(error);
+            if (errorMessage === null) {
+                this.activeForm.resetFormError(errorMessage);
             } else {
-                this.activeForm.setFormError(error);
+                this.activeForm.setFormError(errorMessage, errorCode);
             }
         }
     }
 
     showSuccessPasswordForgot () {
         const email = this.forgotPasswordForm.emailField.getValue();
-
+        const { successPasswordForgot } = this.#options.customizeAuthForms || {};
+        const { descriptionPrefix, descriptionPostfix, backLinkTitle } = successPasswordForgot || {};
         this.forgotPasswordForm.showFormResult(`
             <div class="wk-success-message wk-password-reset-success wk-password-forgot-message">
-                <p class="wk-success-message__description">Please follow the instructions sent to <b>${email}</b> to set a new password.</p>
-                <button id="back-to-login" class="wk-form-button wk-form-button--cancel">Back to login</button>
+                <p class="wk-success-message__description">${descriptionPrefix || 'Please follow the instructions sent to '}<b>${email}</b>${descriptionPostfix || ' to set a new password.'}</p>
+                <button id="back-to-login" class="wk-form-button wk-form-button--cancel">${backLinkTitle || 'Back to login'}</button>
             </div>
         `);
     }
 
     showSuccessPasswordReset () {
+        const { successPasswordReset } = this.#options.customizeAuthForms || {};
+        const { description, backLinkTitle } = successPasswordReset || {};
         this.resetPasswordForm.showFormResult(`
             <div class="wk-success-message wk-password-reset-success wk-password-reset-message">
-                <h2 class="wk-success-message__title">Your password had been saved successfully!</h2>
-                <button id="back-to-login" class="wk-form-button wk-form-button--cancel">Back to login</button>
+                <h2 class="wk-success-message__title">${description || 'Your password had been saved successfully!'}</h2>
+                <button id="back-to-login" class="wk-form-button wk-form-button--cancel">${backLinkTitle || 'Back to login'}</button>
             </div>
         `);
     }
