@@ -32,6 +32,7 @@ export class AuthForm {
         this.loginForm = new LoginForm(selector, {
             cancelBtn: options.triggerButton !== false,
             signUp: options.signUp ?? true,
+            passwordSignInIgnoreValidation: options.passwordSignInIgnoreValidation || false,
             ...(signIn || {}),
             messages: {
                 ...(messages || {}),

@@ -31,7 +31,7 @@ export class PasswordField extends FormField {
             this.insertDescription(passwordHintDescription || this.#hintDescription);
         }
 
-        this.testStrength = options.testStrength ?? false;
+        this.ignoreValidation = options.ignoreValidation ?? false;
     }
 
     togglePasswordVisibility () {
@@ -72,7 +72,7 @@ export class PasswordField extends FormField {
     }
 
     #testPassword (password) {
-        if (!this.testStrength) {
+        if (this.ignoreValidation) {
           return {
             valid: true
           };
