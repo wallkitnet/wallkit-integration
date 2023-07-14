@@ -1682,6 +1682,7 @@ function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollect
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
 var _options = /*#__PURE__*/new WeakMap();
 var _oobCode = /*#__PURE__*/new WeakMap();
+var _showAuthFormSlug = /*#__PURE__*/new WeakMap();
 var _authPlaceholderElementSelector = /*#__PURE__*/new WeakMap();
 var _authPlaceholderElementSelectorType = /*#__PURE__*/new WeakMap();
 var _isEmailProvider = /*#__PURE__*/new WeakMap();
@@ -1720,6 +1721,10 @@ var Authentication = /*#__PURE__*/function () {
       value: void 0
     });
     _classPrivateFieldInitSpec(this, _oobCode, {
+      writable: true,
+      value: ''
+    });
+    _classPrivateFieldInitSpec(this, _showAuthFormSlug, {
       writable: true,
       value: ''
     });
@@ -2031,6 +2036,9 @@ var Authentication = /*#__PURE__*/function () {
         onCancel: function onCancel() {
           _this5.firebase.showAuthForm();
           _this5.authForm.reset();
+        },
+        getShowAuthFormSlug: function getShowAuthFormSlug() {
+          return (0, _classPrivateFieldGet12["default"])(_this5, _showAuthFormSlug);
         }
       });
     }
@@ -2157,6 +2165,7 @@ var Authentication = /*#__PURE__*/function () {
         return _regenerator["default"].wrap(function _callee6$(_context6) {
           while (1) switch (_context6.prev = _context6.next) {
             case 0:
+              (0, _classPrivateFieldSet2["default"])(this, _showAuthFormSlug, authFormSlug !== null && authFormSlug !== void 0 ? authFormSlug : '');
               if ((0, _classPrivateFieldGet12["default"])(this, _options).firebase.genuineForm === false) {
                 if (this.authForm) {
                   this.authForm.defaultForm = authFormSlug;
@@ -2169,7 +2178,7 @@ var Authentication = /*#__PURE__*/function () {
               if (!this.firebase.isUiShown) {
                 this.checkFirebaseInit();
               }
-            case 3:
+            case 4:
             case "end":
               return _context6.stop();
           }
@@ -4655,6 +4664,12 @@ var AuthForm = /*#__PURE__*/function () {
         authProviders: options.authProviders,
         defaultFormSlug: this.defaultFormSlug,
         emailOnClick: function emailOnClick() {
+          var authFormSlug = options.defaultForm || SIGN_IN_FORM_SLUG;
+          if (options.getShowAuthFormSlug) {
+            var showAuthFormSlug = options.getShowAuthFormSlug();
+            authFormSlug = showAuthFormSlug || authFormSlug;
+          }
+          _this.defaultForm = authFormSlug;
           _this.defaultForm.show();
           _this.triggerButton.hide();
           if (options.onAuthFormShow) {
