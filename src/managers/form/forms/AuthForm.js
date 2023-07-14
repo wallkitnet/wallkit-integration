@@ -5,12 +5,14 @@ import { LoginForm } from "./LoginForm";
 import { SignupForm } from "./SignUpForm";
 import { ForgotPasswordForm } from "./ForgotPasswordForm";
 import { ResetPasswordForm } from "./ResetPasswordForm";
+import { EmailLinkForm } from "./EmailLinkForm";
 import {DEFAULT_AUTH_FORM_SLUG_UPDATED} from "../../events/events-name";
 
 export const SIGN_UP_FORM_SLUG = 'sign-up';
 export const SIGN_IN_FORM_SLUG = 'sign-in';
 export const FORGOT_PASSWORD_FORM_SLUG = 'forgot-password';
 export const RESET_PASSWORD_FORM_SLUG = 'reset-password';
+export const EMAIL_LINK_FORM_SLUG = 'email-link';
 import isEmpty from "lodash.isempty";
 
 export class AuthForm {
@@ -23,8 +25,9 @@ export class AuthForm {
         // this.wrapper = createElement('div', {
         //     id: 'wk-auth-form'
         // });
-        const { messages, signIn, signUp, forgotPassword, resetPassword } = options.customizeAuthForms || {};
+        const { messages, signIn, signUp, emailLink, forgotPassword, resetPassword } = options.customizeAuthForms || {};
 
+        /** LoginForm */
         let signInMessages = {};
         if (!isEmpty(signIn) && !isEmpty(signIn.messages)) {
             signInMessages = signIn.messages;
@@ -62,6 +65,7 @@ export class AuthForm {
         });
         this.loginForm.hide();
 
+        /** SignupForm */
         let signUpMessages = {};
         if (!isEmpty(signUp) && !isEmpty(signUp.messages)) {
             signUpMessages = signUp.messages;
@@ -97,6 +101,54 @@ export class AuthForm {
             this.signUpForm.hide();
         }
 
+        /** EmailLinkForm */
+        let emailLinkMessages = {};
+        if (!isEmpty(emailLink) && !isEmpty(emailLink.messages)) {
+            emailLinkMessages = emailLink.messages;
+        }
+        this.emailLinkForm = new EmailLinkForm(selector, {
+            cancelBtn: options.triggerButton !== false,
+            signUp: options.signUp ?? true,
+            ...(emailLink || {}),
+            messages: {
+                ...(messages || {}),
+                ...emailLinkMessages
+            },
+            onSubmit: (data) => {
+                if (options.onGetEmailLink) {
+                    options.onGetEmailLink(data);
+                }
+            },
+            onCancel: () => {
+                if (options.onCancel) {
+                    options.onCancel();
+                    this.emailLinkForm.resetForm();
+                }
+            }
+        });
+        this.emailLinkForm.formWrapper.addEventListener('click', (event) => {
+            if (event.target.id === 'auth-signup-link') {
+                event.preventDefault();
+
+                this.showForm(SIGN_UP_FORM_SLUG);
+            } else if (event.target.id === 'auth-password-link') {
+                event.preventDefault();
+
+                this.showForm(FORGOT_PASSWORD_FORM_SLUG);
+            }
+        });
+        this.emailLinkForm.formWrapper.addEventListener('click', (event) => {
+            if (event.target.id === 'back-to-login') {
+                event.preventDefault();
+                if (options.onCancel) {
+                    options.onCancel();
+                    this.loginForm.resetForm();
+                }
+            }
+        });
+        this.emailLinkForm.hide();
+
+        /** ForgotPasswordForm */
         let forgotPasswordMessages = {};
         if (!isEmpty(forgotPassword) && !isEmpty(forgotPassword.messages)) {
             forgotPasswordMessages = forgotPassword.messages;
@@ -124,6 +176,7 @@ export class AuthForm {
         });
         this.forgotPasswordForm.hide();
 
+        /** ResetPasswordForm */
         let resetPasswordMessages = {};
         if (!isEmpty(resetPassword) && !isEmpty(resetPassword.messages)) {
             resetPasswordMessages = resetPassword.messages;
@@ -151,11 +204,20 @@ export class AuthForm {
         });
         this.resetPasswordForm.hide();
 
+        /** TriggerButton */
         if (options.triggerButton !== false) {
             this.triggerButton = new TriggerButton(selector, {
                 authProviders: options.authProviders,
                 defaultFormSlug: this.defaultFormSlug,
-                onClick: () => {
+                emailOnClick: () => {
+                    this.defaultForm.show();
+                    this.triggerButton.hide();
+                    if (options.onAuthFormShow) {
+                        options.onAuthFormShow();
+                    }
+                },
+                emaillinkOnClick: () => {
+                    this.defaultForm = EMAIL_LINK_FORM_SLUG;
                     this.defaultForm.show();
                     this.triggerButton.hide();
                     if (options.onAuthFormShow) {
@@ -169,7 +231,8 @@ export class AuthForm {
             [FORGOT_PASSWORD_FORM_SLUG]: this.forgotPasswordForm,
             [RESET_PASSWORD_FORM_SLUG]: this.resetPasswordForm,
             [SIGN_IN_FORM_SLUG]: this.loginForm,
-            [SIGN_UP_FORM_SLUG]: this.signUpForm
+            [SIGN_UP_FORM_SLUG]: this.signUpForm,
+            [EMAIL_LINK_FORM_SLUG]: this.emailLinkForm
         };
     }
 
@@ -179,7 +242,7 @@ export class AuthForm {
 
     set defaultForm (formSlug) {
         const oldSlug = this.defaultFormSlug;
-        if (formSlug && [SIGN_UP_FORM_SLUG, SIGN_IN_FORM_SLUG, FORGOT_PASSWORD_FORM_SLUG, RESET_PASSWORD_FORM_SLUG].includes(formSlug)) {
+        if (formSlug && [SIGN_UP_FORM_SLUG, SIGN_IN_FORM_SLUG, FORGOT_PASSWORD_FORM_SLUG, RESET_PASSWORD_FORM_SLUG, EMAIL_LINK_FORM_SLUG].includes(formSlug)) {
             this.defaultFormSlug = formSlug;
         } else {
             this.defaultFormSlug = this.#options.defaultForm || SIGN_UP_FORM_SLUG;
@@ -248,6 +311,18 @@ export class AuthForm {
         }
     }
 
+    showSuccessEmailLink () {
+        const email = this.emailLinkForm.emailField.getValue();
+        const { successEmailLink } = this.#options.customizeAuthForms || {};
+        const { descriptionPrefix, descriptionPostfix, backLinkTitle } = successEmailLink || {};
+        this.emailLinkForm.showFormResult(`
+            <div class="wk-success-message wk-email-link-success wk-email-link-message">
+                <p class="wk-success-message__description">${descriptionPrefix || 'Please follow the instructions sent to '}<b>${email}</b>${descriptionPostfix || ' to sign in.'}</p>
+                <button id="back-to-login" class="wk-form-button wk-form-button--cancel">${backLinkTitle || 'Back to login'}</button>
+            </div>
+        `);
+    }
+
     showSuccessPasswordForgot () {
         const email = this.forgotPasswordForm.emailField.getValue();
         const { successPasswordForgot } = this.#options.customizeAuthForms || {};
@@ -278,6 +353,10 @@ export class AuthForm {
 
         if (this.signUpForm) {
             this.signUpForm.render();
+        }
+
+        if (this.emailLinkForm) {
+            this.emailLinkForm.render();
         }
 
         if (this.forgotPasswordForm) {
