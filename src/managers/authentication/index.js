@@ -22,6 +22,7 @@ import isEmpty from "lodash.isempty";
 export default class Authentication {
     #options;
     #oobCode='';
+    #showAuthFormSlug = '';
 
     constructor(options) {
         if (!!Authentication.instance) {
@@ -280,6 +281,9 @@ export default class Authentication {
             onCancel: () => {
                 this.firebase.showAuthForm();
                 this.authForm.reset();
+            },
+            getShowAuthFormSlug: () => {
+                return this.#showAuthFormSlug;
             }
         });
     }
@@ -381,6 +385,8 @@ export default class Authentication {
     }
 
     async show(authFormSlug) {
+        this.#showAuthFormSlug = authFormSlug ?? '';
+
         if (this.#options.firebase.genuineForm === false) {
             if (this.authForm) {
                 this.authForm.defaultForm = authFormSlug;
