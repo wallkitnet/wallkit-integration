@@ -15,7 +15,7 @@ import Token from "./Token";
 import ReCaptcha from "./ReCaptcha";
 import {AuthForm, RESET_PASSWORD_FORM_SLUG} from "../form/forms/AuthForm";
 import { normalizeSelector } from "../../utils/DOM";
-import { parseResetPasswordOobCodeHash, resetHash } from "../../utils/url";
+import { parseResetPasswordOobCodeHash, resetHash, parseAuthEmailLinkOobCodeHash } from "../../utils/url";
 import isEmpty from "lodash.isempty";
 
 export default class Authentication {
@@ -192,6 +192,36 @@ export default class Authentication {
               } else {
                 this.handleSignUp(data);
               }
+            },
+            onGetEmailLink: async (data) => {
+                try {
+                    this.toggleFormLoader(true);
+
+                    await this.sdk.client.post({
+                        path: '/firebase/email-auth-link',
+                        data: {
+                            email: data.email
+                        }
+                    }).then((res)=>{
+                        if (res.result){
+                            this.authForm.showSuccessEmailLink();
+                        } else {
+                            this.authForm.emailLinkForm.setFormError("Something went wrong", 'auth-email-link/unknown-error');
+                        }
+                    }).catch(error => {
+                        if (!isEmpty(error.message)) {
+                            this.authForm.emailLinkForm.setFormError(error.message, error.code || false);
+                        }
+                        this.toggleFormLoader(false);
+                    });
+
+                    this.toggleFormLoader(false);
+                } catch (error) {
+                    if (!isEmpty(error.message)) {
+                        this.authForm.emailLinkForm.setFormError(error.message, error.code || false);
+                    }
+                    this.toggleFormLoader(false);
+                }
             },
             onPasswordForgot: async (data) => {
               try {
@@ -641,6 +671,27 @@ export default class Authentication {
         }
     }
 
+    async #checkIfAuthEmailLinkURL() {
+        if (!this.firebase.loaded) {
+            this.firebase.events.subscribe(FIREBASE_LOADED, () => this.#checkIfAuthEmailLinkURL(), { once: true });
+        } else {
+            if (!this.firebase.initialized) {
+                this.firebase.events.subscribe(FIREBASE_INIT, () => this.#checkIfAuthEmailLinkURL(), {once: true});
+            } else {
+                const authData = parseAuthEmailLinkOobCodeHash();
+                const { oobcode, email } = authData || {}
+                if (!isEmpty(oobcode) && !isEmpty(email)) {
+
+                    const resJson = await this.firebase.authEmailLink(oobcode, email);
+                    this.onSuccessAuth({
+                        operationType: "signIn",
+                        token: resJson.idToken,
+                    });
+                }
+            }
+        }
+    }
+
     init() {
         if (!!this.#options?.firebase) {
             // Render recaptcha before the firebase init if not custom FB form
@@ -662,5 +713,6 @@ export default class Authentication {
         }
         this.#initListeners();
         this.#checkIfResetPasswordURL();
+        this.#checkIfAuthEmailLinkURL();
     }
 }
