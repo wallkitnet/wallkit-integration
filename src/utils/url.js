@@ -1,3 +1,5 @@
+import isEmpty from "lodash.isempty";
+
 export const parseModalHashURL = () => {
     const UryModal = /#WkModal\((.*)\)$/.exec(decodeURIComponent(window.location.hash));
     if (UryModal && UryModal[1]) {
@@ -94,6 +96,30 @@ export const parseResetPasswordOobCodeHash = () => {
     }
 
     return null;
+}
+
+export const parseAuthEmailLinkOobCodeHash = () => {
+    const hash = decodeURIComponent(window.location.hash)
+    let authData = {}
+    if (hash?.includes('#auth-email-link=')) {
+        const splitHash = hash.split('&');
+        if (Array.isArray(splitHash)) {
+            for (const hashItem of splitHash) {
+                const item = hashItem.split('=');
+                if (!isEmpty(item[0]) && !isEmpty(item[1])) {
+                    item[0] = item[0].toLowerCase();
+                    if (item[0].startsWith('#')) {
+                        item[0] = item[0].slice(1);
+                    }
+                    if (item[0] === 'auth-email-link') {
+                        item[0] = 'oobcode';
+                    }
+                    authData[item[0]] = item[1];
+                }
+            }
+        }
+    }
+    return authData;
 }
 
 export const parseUrlToShowAuthModal = () => {
