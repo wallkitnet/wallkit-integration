@@ -2760,50 +2760,26 @@ function _checkIfAuthEmailLinkURL2() {
 }
 function _checkIfAuthEmailLinkURL3() {
   _checkIfAuthEmailLinkURL3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee10() {
-    var _this11 = this;
     var authData, _ref4, oobcode, email, resJson;
     return _regenerator["default"].wrap(function _callee10$(_context10) {
       while (1) switch (_context10.prev = _context10.next) {
         case 0:
-          if (this.firebase.loaded) {
-            _context10.next = 4;
-            break;
-          }
-          this.firebase.events.subscribe(_eventsName.FIREBASE_LOADED, function () {
-            return _classPrivateMethodGet(_this11, _checkIfAuthEmailLinkURL, _checkIfAuthEmailLinkURL2).call(_this11);
-          }, {
-            once: true
-          });
-          _context10.next = 15;
-          break;
-        case 4:
-          if (this.firebase.initialized) {
-            _context10.next = 8;
-            break;
-          }
-          this.firebase.events.subscribe(_eventsName.FIREBASE_INIT, function () {
-            return _classPrivateMethodGet(_this11, _checkIfAuthEmailLinkURL, _checkIfAuthEmailLinkURL2).call(_this11);
-          }, {
-            once: true
-          });
-          _context10.next = 15;
-          break;
-        case 8:
           authData = (0, _url.parseAuthEmailLinkOobCodeHash)();
           _ref4 = authData || {}, oobcode = _ref4.oobcode, email = _ref4.email;
           if (!(!(0, _lodash["default"])(oobcode) && !(0, _lodash["default"])(email))) {
-            _context10.next = 15;
+            _context10.next = 8;
             break;
           }
-          _context10.next = 13;
+          (0, _url.resetHash)();
+          _context10.next = 6;
           return this.firebase.authEmailLink(oobcode, email);
-        case 13:
+        case 6:
           resJson = _context10.sent;
           this.onSuccessAuth({
             operationType: "signIn",
             token: resJson.idToken
           });
-        case 15:
+        case 8:
         case "end":
           return _context10.stop();
       }

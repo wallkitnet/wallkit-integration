@@ -674,23 +674,15 @@ export default class Authentication {
     }
 
     async #checkIfAuthEmailLinkURL() {
-        if (!this.firebase.loaded) {
-            this.firebase.events.subscribe(FIREBASE_LOADED, () => this.#checkIfAuthEmailLinkURL(), { once: true });
-        } else {
-            if (!this.firebase.initialized) {
-                this.firebase.events.subscribe(FIREBASE_INIT, () => this.#checkIfAuthEmailLinkURL(), {once: true});
-            } else {
-                const authData = parseAuthEmailLinkOobCodeHash();
-                const { oobcode, email } = authData || {}
-                if (!isEmpty(oobcode) && !isEmpty(email)) {
-
-                    const resJson = await this.firebase.authEmailLink(oobcode, email);
-                    this.onSuccessAuth({
-                        operationType: "signIn",
-                        token: resJson.idToken,
-                    });
-                }
-            }
+        const authData = parseAuthEmailLinkOobCodeHash();
+        const { oobcode, email } = authData || {}
+        if (!isEmpty(oobcode) && !isEmpty(email)) {
+            resetHash();
+            const resJson = await this.firebase.authEmailLink(oobcode, email);
+            this.onSuccessAuth({
+                operationType: "signIn",
+                token: resJson.idToken,
+            });
         }
     }
 
