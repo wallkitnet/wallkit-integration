@@ -44,6 +44,7 @@ export class FormField {
             this.#errorMessageIncorrectEmail = incorrectEmail || this.#errorMessageIncorrectEmail;
             this.#errorMessageEmptyPassword = emptyPassword || this.#errorMessageEmptyPassword;
         }
+        this.ignoreValidation = options.ignoreValidation ?? false;
 
         this.input.addEventListener('blur', this.validate.bind(this));
 
@@ -73,6 +74,9 @@ export class FormField {
     }
 
     validate () {
+        if (this.ignoreValidation) {
+            return true;
+        }
         const value = this.getValue();
 
         if (this.required && !value) {

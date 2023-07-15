@@ -37,7 +37,7 @@ export class SignupForm extends Form {
         this.passwordField = new PasswordField({
             dataSlug: 'password',
             name: 'wk-fb-password',
-            testStrength: true,
+            ignoreValidation: false,
             passwordHint: true,
             label: 'Password',
             type: 'password',
