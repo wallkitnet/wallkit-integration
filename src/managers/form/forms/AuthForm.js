@@ -211,6 +211,12 @@ export class AuthForm {
                 authProviders: options.authProviders,
                 defaultFormSlug: this.defaultFormSlug,
                 emailOnClick: () => {
+                    let authFormSlug = options.defaultForm || SIGN_IN_FORM_SLUG;
+                    if (options.getShowAuthFormSlug) {
+                        const showAuthFormSlug = options.getShowAuthFormSlug();
+                        authFormSlug = showAuthFormSlug || authFormSlug;
+                    }
+                    this.defaultForm = authFormSlug;
                     this.defaultForm.show();
                     this.triggerButton.hide();
                     if (options.onAuthFormShow) {
