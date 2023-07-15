@@ -14,7 +14,7 @@ export class ResetPasswordForm extends Form {
         this.newPasswordField = new PasswordField({
             dataSlug: 'new_password',
             name: 'wk-new-password',
-            testStrength: true,
+            ignoreValidation: false,
             passwordHint: true,
             label: 'New Password',
             type: 'password',

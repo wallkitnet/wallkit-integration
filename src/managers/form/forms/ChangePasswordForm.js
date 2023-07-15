@@ -19,7 +19,7 @@ export class ChangePasswordForm extends Form {
         this.oldPasswordField = new PasswordField({
             dataSlug: 'old_password',
             name: 'wk-old-password',
-            testStrength: false,
+            ignoreValidation: true,
             passwordHint: false,
             label: 'Old Password',
             type: 'password',
@@ -41,7 +41,7 @@ export class ChangePasswordForm extends Form {
         this.newPasswordField = new PasswordField({
             dataSlug: 'new_password',
             name: 'wk-new-password',
-            testStrength: true,
+            ignoreValidation: false,
             passwordHint: true,
             label: 'New Password',
             type: 'password',
@@ -67,7 +67,7 @@ export class ChangePasswordForm extends Form {
         this.newPasswordConfirmField = new PasswordField({
             dataSlug: 'new_password_confirm',
             name: 'wk-new-password-confirm',
-            testStrength: true,
+            ignoreValidation: false,
             passwordHint: false,
             label: 'New Password Confirmation',
             type: 'password',

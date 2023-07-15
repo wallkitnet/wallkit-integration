@@ -155,7 +155,7 @@ export default class Authentication {
     }
 
     initAuthForm () {
-        const { tosURL, privacyPolicyURL, termsOfService, providers } = this.#options.firebase;
+        const { tosURL, privacyPolicyURL, termsOfService, providers, passwordSignInIgnoreValidation } = this.#options.firebase;
         const { signUp, defaultForm, forms } = this.#options.auth || {};
         this.authForm = new AuthForm(`#${WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID}`, {
             triggerButton: this.firebase.providers.length > 1,
@@ -164,6 +164,7 @@ export default class Authentication {
             defaultForm: defaultForm || false,
             authProviders: providers || false,
             customizeAuthForms: forms || false,
+            passwordSignInIgnoreValidation: passwordSignInIgnoreValidation || false,
             onLogin: async (data) => {
               const proceed = await this.events.preventiveEvent(PRE_SIGN_IN, data);
 
