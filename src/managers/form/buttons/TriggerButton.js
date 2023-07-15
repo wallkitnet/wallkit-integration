@@ -7,8 +7,11 @@ import {
 } from "../forms/AuthForm";
 import {
     TRIGGER_EMAIL_BUTTON_TITLE_SELECTOR,
+    TRIGGER_EMAILLINK_BUTTON_TITLE_SELECTOR,
     TRIGGER_GOOGLE_BUTTON_TITLE_SELECTOR,
-    TRIGGER_EMAIL_BUTTON_CLASS_NAME
+    TRIGGER_EMAIL_BUTTON_CLASS_NAME,
+    TRIGGER_EMAILLINK_BUTTON_CLASS_NAME,
+    TRIGGER_BUTTON_CLASS_NAME
 } from "../../../configs/constants";
 import isEmpty from 'lodash.isempty';
 import get from 'lodash.get';
@@ -16,11 +19,16 @@ import get from 'lodash.get';
 export class TriggerButton {
     #fullLabel = {
         email: 'Sign in with email',
+        emaillink: 'Sign by email link'
     };
     #emailButonIconUrl = 'https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/mail.svg';
-    #className = TRIGGER_EMAIL_BUTTON_CLASS_NAME;
+    #classNames = {
+        email: TRIGGER_EMAIL_BUTTON_CLASS_NAME,
+        emaillink: TRIGGER_EMAILLINK_BUTTON_CLASS_NAME,
+    };
     #buttonsTitleSelector = {
         email: TRIGGER_EMAIL_BUTTON_TITLE_SELECTOR,
+        emaillink: TRIGGER_EMAILLINK_BUTTON_TITLE_SELECTOR,
         google: TRIGGER_GOOGLE_BUTTON_TITLE_SELECTOR
     }
     #options;
@@ -29,12 +37,23 @@ export class TriggerButton {
         this.#options = this.checkOptions(options);
         this.events = new Events();
         this.selector = selector;
-        this.element = this.createElement();
-        this.subscribeEventForChanges();
 
-        if (options.onClick) {
-            this.element.addEventListener('click', options.onClick.bind(this));
+        this.elements = {};
+        const {email, emaillink} = this.#options || {};
+        if (!isEmpty(email)) {
+            this.elements.email = this.createElement('email');
+            if (options.emailOnClick) {
+                this.elements.email.addEventListener('click', options.emailOnClick.bind(this));
+            }
         }
+        if (!isEmpty(emaillink)) {
+            this.elements.emaillink = this.createElement('emaillink');
+            if (options.emaillinkOnClick) {
+                this.elements.emaillink.addEventListener('click', options.emaillinkOnClick.bind(this));
+            }
+        }
+
+        this.subscribeEventForChanges();
     }
 
     checkOptions(options) {
@@ -149,40 +168,63 @@ export class TriggerButton {
         }
     }
 
-    createElement () {
-        const elementKey = 'email';
+    createElement (key) {
+        const elementKey = key || 'email';
+        const className = this.#classNames[elementKey] ?? TRIGGER_BUTTON_CLASS_NAME
+        const buttonTitleSelector = `wk-auth-form-button-${elementKey}-title`;
         const { iconUrl, textColorStyle, label, styles } = this.#options[elementKey];
         return createElement('div', {
-            className: this.#className,
+            className,
             innerHTML: `
                 <span class="firebaseui-idp-icon-wrapper">
                     <img class="firebaseui-idp-icon" alt="" src="${iconUrl}">
                 </span>
-                <span class="wk-auth-form-button-email-title firebaseui-idp-text firebaseui-idp-text-long"${textColorStyle}>${label}</span>`,
+                <span class="${buttonTitleSelector} firebaseui-idp-text firebaseui-idp-text-long"${textColorStyle}>${label}</span>`,
             styles
         });
     }
 
     hide () {
-        this.element.style.display = 'none';
+        if (!isEmpty(this.elements) && Object.keys(this.elements).length){
+            Object.keys(this.elements).forEach(key => {
+                this.elements[key].style.display = 'none';
+            });
+        }
     }
 
     show () {
-        this.element.style.display = 'block';
+        if (!isEmpty(this.elements) && Object.keys(this.elements).length){
+            Object.keys(this.elements).forEach(key => {
+                this.elements[key].style.display = 'block';
+            });
+        }
     }
 
     render() {
         const targetElement = document.querySelector(this.selector);
 
         if (targetElement) {
-            targetElement.appendChild(this.element);
+            if (!isEmpty(this.elements) && Object.keys(this.elements).length){
+                Object.keys(this.elements).forEach(key => {
+                    targetElement.appendChild(this.elements[key]);
+                });
+            }
         }
     }
 
     get isVisible () {
-        if (window.getComputedStyle(this.element)){
-            return window.getComputedStyle(this.element).getPropertyValue('display') === 'block';
+        let isVisible = false;
+        if (isEmpty(this.elements)) {
+            return false;
         }
-        return false;
+        if (Object.keys(this.elements).length) {
+            Object.keys(this.elements).forEach(key => {
+                if (window.getComputedStyle(this.elements[key])){
+                    isVisible = window.getComputedStyle(this.elements[key]).getPropertyValue('display') === 'block';
+                    return isVisible
+                }
+            });
+        }
+        return isVisible;
     }
 }
