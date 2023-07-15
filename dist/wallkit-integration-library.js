@@ -1,7 +1,7 @@
 /*!
  * Package name: wallkit-integration-lib.
  * Package description: Wallkit Integration Library. Library to manipulate with Wallkit System: Paywall, Modals, Authentication, SDK..
- * Package version: 3.0.19.
+ * Package version: 3.0.20.
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -1822,7 +1822,8 @@ var Authentication = /*#__PURE__*/function () {
         tosURL = _classPrivateFieldGet2.tosURL,
         privacyPolicyURL = _classPrivateFieldGet2.privacyPolicyURL,
         termsOfService = _classPrivateFieldGet2.termsOfService,
-        providers = _classPrivateFieldGet2.providers;
+        providers = _classPrivateFieldGet2.providers,
+        passwordSignInIgnoreValidation = _classPrivateFieldGet2.passwordSignInIgnoreValidation;
       var _ref = (0, _classPrivateFieldGet12["default"])(this, _options).auth || {},
         signUp = _ref.signUp,
         defaultForm = _ref.defaultForm,
@@ -1838,6 +1839,7 @@ var Authentication = /*#__PURE__*/function () {
         defaultForm: defaultForm || false,
         authProviders: providers || false,
         customizeAuthForms: forms || false,
+        passwordSignInIgnoreValidation: passwordSignInIgnoreValidation || false,
         onLogin: function () {
           var _onLogin = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(data) {
             var proceed;
@@ -4023,7 +4025,7 @@ var PasswordField = /*#__PURE__*/function (_FormField) {
   (0, _inherits2["default"])(PasswordField, _FormField);
   var _super = _createSuper(PasswordField);
   function PasswordField(options) {
-    var _options$testStrength;
+    var _options$ignoreValida;
     var _this;
     (0, _classCallCheck2["default"])(this, PasswordField);
     _this = _super.call(this, options);
@@ -4072,7 +4074,7 @@ var PasswordField = /*#__PURE__*/function (_FormField) {
     if (options.passwordHint) {
       _this.insertDescription(passwordHintDescription || (0, _classPrivateFieldGet2["default"])((0, _assertThisInitialized2["default"])(_this), _hintDescription));
     }
-    _this.testStrength = (_options$testStrength = options.testStrength) !== null && _options$testStrength !== void 0 ? _options$testStrength : false;
+    _this.ignoreValidation = (_options$ignoreValida = options.ignoreValidation) !== null && _options$ignoreValida !== void 0 ? _options$ignoreValida : false;
     return _this;
   }
   (0, _createClass2["default"])(PasswordField, [{
@@ -4129,7 +4131,7 @@ function _testPasswordRule2(value, regex, errorMessage) {
   };
 }
 function _testPassword2(password) {
-  if (!this.testStrength) {
+  if (this.ignoreValidation) {
     return {
       valid: true
     };
@@ -4195,6 +4197,7 @@ var _errorMessageIncorrectEmail = /*#__PURE__*/new WeakMap();
 var _errorMessageEmptyPassword = /*#__PURE__*/new WeakMap();
 var FormField = /*#__PURE__*/function () {
   function FormField(options) {
+    var _options$ignoreValida;
     (0, _classCallCheck2["default"])(this, FormField);
     _classPrivateFieldInitSpec(this, _errorMessageRequired, {
       writable: true,
@@ -4248,6 +4251,7 @@ var FormField = /*#__PURE__*/function () {
       (0, _classPrivateFieldSet2["default"])(this, _errorMessageIncorrectEmail, incorrectEmail || (0, _classPrivateFieldGet2["default"])(this, _errorMessageIncorrectEmail));
       (0, _classPrivateFieldSet2["default"])(this, _errorMessageEmptyPassword, emptyPassword || (0, _classPrivateFieldGet2["default"])(this, _errorMessageEmptyPassword));
     }
+    this.ignoreValidation = (_options$ignoreValida = options.ignoreValidation) !== null && _options$ignoreValida !== void 0 ? _options$ignoreValida : false;
     this.input.addEventListener('blur', this.validate.bind(this));
     if (options.onEnter) {
       this.input.addEventListener('keydown', function (event) {
@@ -4276,6 +4280,9 @@ var FormField = /*#__PURE__*/function () {
   }, {
     key: "validate",
     value: function validate() {
+      if (this.ignoreValidation) {
+        return true;
+      }
       var value = this.getValue();
       if (this.required && !value) {
         this.setError((0, _classPrivateFieldGet2["default"])(this, _errorMessageRequired));
@@ -4505,7 +4512,8 @@ var AuthForm = /*#__PURE__*/function () {
     }
     this.loginForm = new _LoginForm.LoginForm(selector, _objectSpread(_objectSpread({
       cancelBtn: options.triggerButton !== false,
-      signUp: (_options$signUp = options.signUp) !== null && _options$signUp !== void 0 ? _options$signUp : true
+      signUp: (_options$signUp = options.signUp) !== null && _options$signUp !== void 0 ? _options$signUp : true,
+      passwordSignInIgnoreValidation: options.passwordSignInIgnoreValidation || false
     }, signIn || {}), {}, {
       messages: _objectSpread(_objectSpread({}, messages || {}), signInMessages),
       onSubmit: function onSubmit(data) {
@@ -4867,7 +4875,7 @@ var ChangePasswordForm = /*#__PURE__*/function (_Form) {
     _this.oldPasswordField = new _PasswordField.PasswordField({
       dataSlug: 'old_password',
       name: 'wk-old-password',
-      testStrength: false,
+      ignoreValidation: true,
       passwordHint: false,
       label: 'Old Password',
       type: 'password',
@@ -4887,7 +4895,7 @@ var ChangePasswordForm = /*#__PURE__*/function (_Form) {
     _this.newPasswordField = new _PasswordField.PasswordField({
       dataSlug: 'new_password',
       name: 'wk-new-password',
-      testStrength: true,
+      ignoreValidation: false,
       passwordHint: true,
       label: 'New Password',
       type: 'password',
@@ -4911,7 +4919,7 @@ var ChangePasswordForm = /*#__PURE__*/function (_Form) {
     _this.newPasswordConfirmField = new _PasswordField.PasswordField({
       dataSlug: 'new_password_confirm',
       name: 'wk-new-password-confirm',
-      testStrength: true,
+      ignoreValidation: false,
       passwordHint: false,
       label: 'New Password Confirmation',
       type: 'password',
@@ -5166,7 +5174,7 @@ var LoginForm = /*#__PURE__*/function (_Form) {
     _this.passwordField = new _PasswordField.PasswordField({
       dataSlug: 'password',
       name: 'wk-fb-password',
-      testStrength: false,
+      ignoreValidation: options.passwordSignInIgnoreValidation || false,
       label: 'Password',
       type: 'password',
       messages: options.messages || {},
@@ -5263,7 +5271,7 @@ var ResetPasswordForm = /*#__PURE__*/function (_Form) {
     _this.newPasswordField = new _PasswordField.PasswordField({
       dataSlug: 'new_password',
       name: 'wk-new-password',
-      testStrength: true,
+      ignoreValidation: false,
       passwordHint: true,
       label: 'New Password',
       type: 'password',
@@ -5362,7 +5370,7 @@ var SignupForm = /*#__PURE__*/function (_Form) {
     _this.passwordField = new _PasswordField.PasswordField({
       dataSlug: 'password',
       name: 'wk-fb-password',
-      testStrength: true,
+      ignoreValidation: false,
       passwordHint: true,
       label: 'Password',
       type: 'password',
