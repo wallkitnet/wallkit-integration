@@ -155,7 +155,7 @@ export default class Authentication {
     }
 
     initAuthForm () {
-        const { tosURL, privacyPolicyURL, termsOfService, providers, passwordSignInIgnoreValidation } = this.#options.firebase;
+        const { tosURL, privacyPolicyURL, termsOfService, providers, passwordSignInIgnoreValidation, authOnPasswordReset } = this.#options.firebase || {};
         const { signUp, defaultForm, forms } = this.#options.auth || {};
         this.authForm = new AuthForm(`#${WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID}`, {
             triggerButton: this.firebase.providers.length > 1,
@@ -165,6 +165,7 @@ export default class Authentication {
             authProviders: providers || false,
             customizeAuthForms: forms || false,
             passwordSignInIgnoreValidation: passwordSignInIgnoreValidation || false,
+            authOnPasswordReset: authOnPasswordReset || false,
             onLogin: async (data) => {
               const proceed = await this.events.preventiveEvent(PRE_SIGN_IN, data);
 
@@ -263,7 +264,11 @@ export default class Authentication {
                     success = await this.firebase.sendNewPasswordResetPassword(data.new_password, this.#oobCode)
 
                     if (success) {
+                        const { authOnPasswordReset } = this.#options.firebase;
                         this.authForm.showSuccessPasswordReset();
+                        if (authOnPasswordReset) {
+                            this.handleLogin({email: success.email, password: data.new_password})
+                        }
                     } else {
                         this.authForm.resetPasswordForm.setFormError("Something went wrong", 'reset-password/unknown-error');
                     }

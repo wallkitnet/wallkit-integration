@@ -334,7 +334,7 @@ export default class Firebase {
                         throw new Error(resJson.error.message);
                 }
             } else {
-                return true;
+                return resJson;
             }
         }).catch((error) => {
             throw error;
