@@ -343,12 +343,13 @@ export class AuthForm {
     }
 
     showSuccessPasswordReset () {
+        const { authOnPasswordReset } = this.#options || {};
         const { successPasswordReset } = this.#options.customizeAuthForms || {};
         const { description, backLinkTitle } = successPasswordReset || {};
         this.resetPasswordForm.showFormResult(`
             <div class="wk-success-message wk-password-reset-success wk-password-reset-message">
                 <h2 class="wk-success-message__title">${description || 'Your password had been saved successfully!'}</h2>
-                <button id="back-to-login" class="wk-form-button wk-form-button--cancel">${backLinkTitle || 'Back to login'}</button>
+                ${ authOnPasswordReset ? '' : '<button id="back-to-login" class="wk-form-button wk-form-button--cancel">' + ( backLinkTitle || 'Back to login' ) + '</button>' }
             </div>
         `);
     }
