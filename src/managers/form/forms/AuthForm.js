@@ -33,6 +33,7 @@ export class AuthForm {
             signInMessages = signIn.messages;
         }
         this.loginForm = new LoginForm(selector, {
+            className: 'wk-form-login',
             cancelBtn: options.triggerButton !== false,
             signUp: options.signUp ?? true,
             passwordSignInIgnoreValidation: options.passwordSignInIgnoreValidation || false,
@@ -73,6 +74,7 @@ export class AuthForm {
         }
         if (options.signUp === true) {
             this.signUpForm = new SignupForm(selector, {
+                className: 'wk-form-signup',
                 cancelBtn: options.triggerButton !== false,
                 termsOfService: options.termsOfService,
                 ...(signUp || {}),
@@ -108,6 +110,7 @@ export class AuthForm {
             emailLinkMessages = emailLink.messages;
         }
         this.emailLinkForm = new EmailLinkForm(selector, {
+            className: 'wk-form-email-link',
             cancelBtn: options.triggerButton !== false,
             signUp: options.signUp ?? true,
             ...(emailLink || {}),
@@ -155,6 +158,7 @@ export class AuthForm {
             forgotPasswordMessages = forgotPassword.messages;
         }
         this.forgotPasswordForm = new ForgotPasswordForm(selector, {
+            className: 'wk-form-forgot-password',
             ...(forgotPassword || {}),
             messages: {
                 ...(messages || {}),
@@ -183,6 +187,7 @@ export class AuthForm {
             resetPasswordMessages = resetPassword.messages;
         }
         this.resetPasswordForm = new ResetPasswordForm(selector, {
+            className: 'wk-form-reset-password',
             ...(resetPassword || {}),
             messages: {
                 ...(messages || {}),
