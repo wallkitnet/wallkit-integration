@@ -19,6 +19,7 @@ export class SignupForm extends Form {
             name: 'wk-fb-email',
             label: 'Email',
             type: 'email',
+            messages: options.messages || {},
             onEnter: () => {
               this.nameField.focus();
             }
@@ -28,6 +29,7 @@ export class SignupForm extends Form {
             name: 'wk-fb-name',
             label: 'Name',
             type: 'text',
+            messages: options.messages || {},
             onEnter: () => {
               this.passwordField.focus();
             }
@@ -35,15 +37,16 @@ export class SignupForm extends Form {
         this.passwordField = new PasswordField({
             dataSlug: 'password',
             name: 'wk-fb-password',
-            testStrength: true,
+            ignoreValidation: false,
             passwordHint: true,
             label: 'Password',
             type: 'password',
+            messages: options.messages || {},
             onEnter: () => {
               this.submitForm();
             }
         });
-
+        const {tosRequired, required} = options.messages || {};
         if (this.#isTosEnabled(options)) {
           this.tosField = new CheckBoxField({
             dataSlug: 'agreement',
@@ -51,6 +54,10 @@ export class SignupForm extends Form {
             required: true,
             label: this.getTosAcceptLabel(options.termsOfService),
             type: 'checkbox',
+            messages: {
+                ...(options.messages || {}),
+                ...{required: tosRequired || required || false}
+                },
           });
         }
 

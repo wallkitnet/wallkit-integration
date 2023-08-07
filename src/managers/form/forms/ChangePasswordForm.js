@@ -4,21 +4,26 @@ import { Form } from "../index";
 import { PasswordField } from "../field/PasswordField.js";
 
 export class ChangePasswordForm extends Form {
+    #options;
+
     constructor(targetElementSelector, options) {
         super(targetElementSelector, options);
 
         this.onCancel = options.onCancel || false;
-        this.options = options;
-        this.options.title = 'Change Password' || options.title;
-        this.options.footer = this.getFormFooter() || options.footer;
+        this.#options = options;
+        this.#options.title = options.title || 'Change Password';
+        this.#options.footer = this.getFormFooter() || options.footer;
+
+        const { emptyPassword, newNotMatchOld, confirmationMatchNew } = options.messages || {};
 
         this.oldPasswordField = new PasswordField({
             dataSlug: 'old_password',
             name: 'wk-old-password',
-            testStrength: false,
+            ignoreValidation: true,
             passwordHint: false,
             label: 'Old Password',
             type: 'password',
+            messages: options.messages || {},
             onEnter: () => {
                 this.submitForm();
             },
@@ -26,7 +31,7 @@ export class ChangePasswordForm extends Form {
                 const value = field.getValue();
                 if (!value) {
                     field.setError(`<div>
-                            <span>Password cannot be empty.</span>
+                            <span>${ emptyPassword || 'Password cannot be empty.' }</span>
                         </div>`);
                     return false;
                 }
@@ -36,10 +41,11 @@ export class ChangePasswordForm extends Form {
         this.newPasswordField = new PasswordField({
             dataSlug: 'new_password',
             name: 'wk-new-password',
-            testStrength: true,
+            ignoreValidation: false,
             passwordHint: true,
             label: 'New Password',
             type: 'password',
+            messages: options.messages || {},
             relatedData: {
                 oldPassword: this.oldPasswordField
             },
@@ -51,7 +57,7 @@ export class ChangePasswordForm extends Form {
                 const value = field.getValue();
                 if (oldPasswordValue === value) {
                     field.setError(`<div>
-                            <span>The new password must not match the old one.</span>
+                            <span>${ newNotMatchOld || 'The new password must not match the old one.' }</span>
                         </div>`);
                     return false;
                 }
@@ -61,10 +67,11 @@ export class ChangePasswordForm extends Form {
         this.newPasswordConfirmField = new PasswordField({
             dataSlug: 'new_password_confirm',
             name: 'wk-new-password-confirm',
-            testStrength: true,
+            ignoreValidation: false,
             passwordHint: false,
             label: 'New Password Confirmation',
             type: 'password',
+            messages: options.messages || {},
             relatedData: {
                 newPassword: this.newPasswordField
             },
@@ -76,7 +83,7 @@ export class ChangePasswordForm extends Form {
                 const value = field.getValue();
                 if (newPasswordValue !== value) {
                     field.setError(`<div>
-                            <span>The password confirmation must be the same as the new password.</span>
+                            <span>${ confirmationMatchNew || 'The password confirmation must be the same as the new password.' }</span>
                         </div>`);
                     return false;
                 }
@@ -104,9 +111,10 @@ export class ChangePasswordForm extends Form {
         const formFooter = createElement('div', {
             className: 'wk-form__footer'
         });
+        const { cancelBtnTitle } = this.#options || {};
         formFooter.appendChild(createElement('a', {
             className: 'wk-form__link account-settings-link',
-            innerText: 'Cancel',
+            innerText: cancelBtnTitle || 'Cancel',
             attributes: {
                 href: '#'
             }

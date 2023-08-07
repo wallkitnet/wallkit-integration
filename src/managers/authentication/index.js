@@ -15,12 +15,13 @@ import Token from "./Token";
 import ReCaptcha from "./ReCaptcha";
 import {AuthForm, RESET_PASSWORD_FORM_SLUG} from "../form/forms/AuthForm";
 import { normalizeSelector } from "../../utils/DOM";
-import { parseResetPasswordOobCodeHash, resetHash } from "../../utils/url";
+import { parseResetPasswordOobCodeHash, resetHash, parseAuthEmailLinkOobCodeHash } from "../../utils/url";
 import isEmpty from "lodash.isempty";
 
 export default class Authentication {
     #options;
     #oobCode='';
+    #showAuthFormSlug = '';
 
     constructor(options) {
         if (!!Authentication.instance) {
@@ -68,7 +69,7 @@ export default class Authentication {
 
         this.reCaptcha = new ReCaptcha(this, options?.reCaptcha);
         this.reCaptcha.events.subscribe(EventsNames.local.RECAPTCHA_VALIDATION_FAILED, () => {
-            this.#setAuthorizationError('ReCaptcha Validation Failed! Please try again!');
+            this.#setAuthorizationError('ReCaptcha Validation Failed! Please try again!', 'recaptcha/validation-failed');
         });
         this.reCaptcha.events.subscribe(EventsNames.local.RECAPTCHA_VALIDATION_SUCCESS, () => {
             this.#resetAuthorizationError();
@@ -110,8 +111,8 @@ export default class Authentication {
       this.firebase.signIn(data.email, data.password)
         .then(() => {})
         .catch((error) => {
-          if (error.message) {
-            this.authForm.loginForm.setFormError(error.message);
+          if (!isEmpty(error.message)) {
+            this.authForm.loginForm.setFormError(error.message, error.code || false);
           }
           this.reCaptcha.grecaptcha.reset();
         });
@@ -123,8 +124,8 @@ export default class Authentication {
           this.firebase.updateName(data.name);
         })
         .catch((error) => {
-          if (error.message) {
-            this.authForm.signUpForm.setFormError(error.message);
+          if (!isEmpty(error.message)) {
+            this.authForm.signUpForm.setFormError(error.message, error.code || false);
           }
           this.reCaptcha.grecaptcha.reset();
         });
@@ -152,14 +153,17 @@ export default class Authentication {
     }
 
     initAuthForm () {
-        const { tosURL, privacyPolicyURL, termsOfService, providers } = this.#options.firebase;
+        const { tosURL, privacyPolicyURL, termsOfService, providers, passwordSignInIgnoreValidation, authOnPasswordReset } = this.#options.firebase || {};
+        const { signUp, defaultForm, forms } = this.#options.auth || {};
         this.authForm = new AuthForm(`#${WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID}`, {
             triggerButton: this.firebase.providers.length > 1,
-            signUp: this.#options.auth.signUp ?? true,
+            signUp: signUp ?? true,
             termsOfService: { tosURL, privacyPolicyURL, termsOfService },
-            defaultForm: this.#options.auth.defaultForm || false,
+            defaultForm: defaultForm || false,
             authProviders: providers || false,
-            customizeAuthForms: this.#options.auth.forms || false,
+            customizeAuthForms: forms || false,
+            passwordSignInIgnoreValidation: passwordSignInIgnoreValidation || false,
+            authOnPasswordReset: authOnPasswordReset || false,
             onLogin: async (data) => {
               const proceed = await this.events.preventiveEvent(PRE_SIGN_IN, data);
 
@@ -192,6 +196,36 @@ export default class Authentication {
                 this.handleSignUp(data);
               }
             },
+            onGetEmailLink: async (data) => {
+                try {
+                    this.toggleFormLoader(true);
+
+                    await this.sdk.client.post({
+                        path: '/firebase/email-auth-link',
+                        data: {
+                            email: data.email
+                        }
+                    }).then((res)=>{
+                        if (res.result){
+                            this.authForm.showSuccessEmailLink();
+                        } else {
+                            this.authForm.emailLinkForm.setFormError("Something went wrong", 'auth-email-link/unknown-error');
+                        }
+                    }).catch(error => {
+                        if (!isEmpty(error.message)) {
+                            this.authForm.emailLinkForm.setFormError(error.message, error.code || false);
+                        }
+                        this.toggleFormLoader(false);
+                    });
+
+                    this.toggleFormLoader(false);
+                } catch (error) {
+                    if (!isEmpty(error.message)) {
+                        this.authForm.emailLinkForm.setFormError(error.message, error.code || false);
+                    }
+                    this.toggleFormLoader(false);
+                }
+            },
             onPasswordForgot: async (data) => {
               try {
                 this.toggleFormLoader(true);
@@ -213,8 +247,8 @@ export default class Authentication {
 
                 this.toggleFormLoader(false);
               } catch (error) {
-                if (error.message) {
-                    this.authForm.forgotPasswordForm.setFormError(error.message);
+                if (!isEmpty(error.message)) {
+                    this.authForm.forgotPasswordForm.setFormError(error.message, error.code || false);
                 }
                 this.toggleFormLoader(false);
               }
@@ -228,15 +262,19 @@ export default class Authentication {
                     success = await this.firebase.sendNewPasswordResetPassword(data.new_password, this.#oobCode)
 
                     if (success) {
+                        const { authOnPasswordReset } = this.#options.firebase;
                         this.authForm.showSuccessPasswordReset();
+                        if (authOnPasswordReset) {
+                            this.handleLogin({email: success.email, password: data.new_password})
+                        }
                     } else {
-                        this.authForm.resetPasswordForm.setFormError("Something went wrong");
+                        this.authForm.resetPasswordForm.setFormError("Something went wrong", 'reset-password/unknown-error');
                     }
 
                     this.toggleFormLoader(false);
                 } catch (error) {
-                    if (error.message) {
-                        this.authForm.resetPasswordForm.setFormError(error.message);
+                    if (!isEmpty(error.message)) {
+                        this.authForm.resetPasswordForm.setFormError(error.message, error.code || false);
                     }
                     this.toggleFormLoader(false);
                 }
@@ -247,6 +285,9 @@ export default class Authentication {
             onCancel: () => {
                 this.firebase.showAuthForm();
                 this.authForm.reset();
+            },
+            getShowAuthFormSlug: () => {
+                return this.#showAuthFormSlug;
             }
         });
     }
@@ -257,7 +298,7 @@ export default class Authentication {
         const handleAuthError = (error) => {
             this.resetAuthProcess(false);
             this.toggleFormLoader(false);
-            this.#setAuthorizationError(error?.message || 'Something went wrong!');
+            this.#setAuthorizationError(error?.message || 'Something went wrong!', error?.code || 'unknown-error');
         }
 
         this.updateFirebaseToken(data.token);
@@ -348,6 +389,8 @@ export default class Authentication {
     }
 
     async show(authFormSlug) {
+        this.#showAuthFormSlug = authFormSlug ?? '';
+
         if (this.#options.firebase.genuineForm === false) {
             if (this.authForm) {
                 this.authForm.defaultForm = authFormSlug;
@@ -599,16 +642,16 @@ export default class Authentication {
         }
     }
 
-    #setAuthorizationError(error) {
+    #setAuthorizationError(errorMessage, errorCode) {
         if (this.authForm) {
-            this.authForm.handleError(error);
+            this.authForm.handleError(errorMessage, errorCode);
         } else {
             const errorPlaceholder = document.getElementById('authorization-error');
             if (errorPlaceholder) {
-                if (error === null) {
+                if (errorMessage === null) {
                     errorPlaceholder.innerHTML = '';
                 } else {
-                    errorPlaceholder.innerHTML = error || 'Something went wrong!';
+                    errorPlaceholder.innerHTML = errorMessage || 'Something went wrong!';
                 }
             }
         }
@@ -640,6 +683,19 @@ export default class Authentication {
         }
     }
 
+    async #checkIfAuthEmailLinkURL() {
+        const authData = parseAuthEmailLinkOobCodeHash();
+        const { oobcode, email } = authData || {}
+        if (!isEmpty(oobcode) && !isEmpty(email)) {
+            resetHash();
+            const resJson = await this.firebase.authEmailLink(oobcode, email);
+            this.onSuccessAuth({
+                operationType: "signIn",
+                token: resJson.idToken,
+            });
+        }
+    }
+
     init() {
         if (!!this.#options?.firebase) {
             // Render recaptcha before the firebase init if not custom FB form
@@ -661,5 +717,6 @@ export default class Authentication {
         }
         this.#initListeners();
         this.#checkIfResetPasswordURL();
+        this.#checkIfAuthEmailLinkURL();
     }
 }

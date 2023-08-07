@@ -36,8 +36,11 @@ export const WALLKIT_AUTH_FORM_PLACEHOLDER_ID = 'wk-auth-form';
 export const WALLKIT_USER_MANAGER_MODAL_FORM_PLACEHOLDER_ID = 'wk-user-manager-modal-form';
 export const WALLKIT_FRAME_ID = 'wk-frame';
 export const TRIGGER_EMAIL_BUTTON_TITLE_SELECTOR = 'span.wk-auth-form-button-email-title';
+export const TRIGGER_EMAILLINK_BUTTON_TITLE_SELECTOR = 'span.wk-auth-form-button-emaillink-title';
 export const TRIGGER_GOOGLE_BUTTON_TITLE_SELECTOR = '#firebase-ui-placeholder .firebaseui-container .firebaseui-idp-google span.firebaseui-idp-text-long';
-export const TRIGGER_EMAIL_BUTTON_CLASS_NAME = 'wk-auth-form-button';
+export const TRIGGER_EMAIL_BUTTON_CLASS_NAME = 'wk-auth-form-button wk-auth-form-button-email';
+export const TRIGGER_EMAILLINK_BUTTON_CLASS_NAME = 'wk-auth-form-button wk-auth-form-button-emaillink';
+export const TRIGGER_BUTTON_CLASS_NAME = 'wk-auth-form-button';
 
 // Authentication
 export const WALLKIT_FIREBASE_CONFIG = {

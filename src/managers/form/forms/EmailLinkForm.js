@@ -2,9 +2,8 @@ import { createElement } from "../../../utils/DOM";
 import { Form } from "../index";
 
 import { FormField } from "../field";
-import { PasswordField } from "../field/PasswordField.js";
 
-export class LoginForm extends Form {
+export class EmailLinkForm extends Form {
     constructor(targetElementSelector, options) {
         super(targetElementSelector, options);
 
@@ -13,22 +12,10 @@ export class LoginForm extends Form {
         this.options.footer = this.getFormFooter() || options.footer;
 
         this.emailField = new FormField({
-            dataSlug: 'email',
             name: 'wk-fb-email',
+            dataSlug: 'email',
             label: 'Email',
             type: 'email',
-            messages: options.messages || {},
-            onEnter: () => {
-              this.passwordField.focus();
-            }
-        });
-
-        this.passwordField = new PasswordField({
-            dataSlug: 'password',
-            name: 'wk-fb-password',
-            ignoreValidation: options.passwordSignInIgnoreValidation || false,
-            label: 'Password',
-            type: 'password',
             messages: options.messages || {},
             onEnter: () => {
               this.submitForm();
@@ -36,8 +23,7 @@ export class LoginForm extends Form {
         });
 
         this.fields = [
-            this.emailField,
-            this.passwordField
+            this.emailField
         ];
 
         this.init();
@@ -71,15 +57,6 @@ export class LoginForm extends Form {
         }
         subFooter.appendChild(signUpWrapper);
 
-        subFooter.appendChild(createElement('a', {
-            className: 'wk-form__link wk-form__reset-password',
-            innerText: 'Forgot password',
-            id: 'auth-password-link',
-            attributes: {
-                href: '#'
-            }
-        }));
-
         const formFooter = createElement('div', {
             className: 'wk-form__footer wk-form__footer--right'
         });
@@ -87,7 +64,7 @@ export class LoginForm extends Form {
         footerWrapper.appendChild(subFooter);
 
         if (this.options.cancelBtn !== false) {
-          formFooter.appendChild(this.cancelBtn);
+            formFooter.appendChild(this.cancelBtn);
         }
         formFooter.appendChild(this.submitBtn);
 
@@ -95,4 +72,5 @@ export class LoginForm extends Form {
 
         return footerWrapper;
     }
+
 }

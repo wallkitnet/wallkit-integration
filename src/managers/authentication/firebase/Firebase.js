@@ -12,6 +12,7 @@ import {
     FIREBASE_LOADED,
     FIREBASE_UI_SHOWN
 } from "../../events/events-name";
+import isEmpty from "lodash.isempty";
 
 export default class Firebase {
     #mode;
@@ -333,11 +334,37 @@ export default class Firebase {
                         throw new Error(resJson.error.message);
                 }
             } else {
-                return true;
+                return resJson;
             }
         }).catch((error) => {
             throw error;
         });
+    }
+
+    async authEmailLink(oobcode, email) {
+        if (isEmpty(oobcode) || isEmpty(email)) {
+            throw new Error("Invalid values in the auth email link.");
+        }
+
+        const signInWithEmailLinkUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithEmailLink?key=${this.config.apiKey}`
+        return await fetch(signInWithEmailLinkUrl,
+            {
+                method: 'POST',
+                body: JSON.stringify({
+                    oobCode: oobcode,
+                    email: email
+                }),
+                headers: { "Content-Type": "application/json" }
+            }).then(async (res) => {
+                const resJson = await res.json();
+                if (!!resJson.error && !!resJson.error.message) {
+                    throw new Error(resJson.error.message);
+                } else {
+                    return resJson;
+                }
+            }).catch((error) => {
+                throw error;
+            });
     }
 
     async reauthenticateWithCredential (oldPassword) {
