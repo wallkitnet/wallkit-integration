@@ -1,7 +1,9 @@
 // Popups
-export const WALLKIT_POPUP_URL = 'https://wallkit.net/popups';
+// export const WALLKIT_POPUP_URL = 'https://wallkit.net/popups';
+export const WALLKIT_POPUP_URL = 'https://popups.wallkit.net';
 // export const WALLKIT_POPUP_URL = 'http://127.0.0.1:8000/popups';
-export const WALLKIT_POPUP_DEV_URL = 'https://dev.wallkit.net/popups';
+// export const WALLKIT_POPUP_DEV_URL = 'https://dev.wallkit.net/popups';
+export const WALLKIT_POPUP_DEV_URL = 'https://popups.dev.wallkit.net';
 // export const WALLKIT_POPUP_DEV_URL = 'https://wallkit-landing.com/popups';
 // export const WALLKIT_POPUP_DEV_URL = 'http://127.0.0.1:8000/popups';
 
@@ -17,6 +19,8 @@ export const ALLOWED_ORIGINS = [
     'https://dev.wallkit.net',
     'https://demo.wallkit.net',
     'https://wallkit-landing.com',
+    'https://popups.wallkit.net',
+    'https://popups.dev.wallkit.net',
 ];
 
 // Markup
