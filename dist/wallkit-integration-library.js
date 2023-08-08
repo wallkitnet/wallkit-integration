@@ -1,7 +1,7 @@
 /*!
  * Package name: wallkit-integration-lib.
  * Package description: Wallkit Integration Library. Library to manipulate with Wallkit System: Paywall, Modals, Authentication, SDK..
- * Package version: 3.0.22.
+ * Package version: 3.0.23.
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -42,10 +42,12 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.WALLKIT_USER_MANAGER_MODAL_FORM_PLACEHOLDER_ID = exports.WALLKIT_TOKEN_NAME = exports.WALLKIT_POPUP_URL = exports.WALLKIT_POPUP_DEV_URL = exports.WALLKIT_MODAL_WRAPPER_CLASSNAME = exports.WALLKIT_MODAL_MIN_WIDTH = exports.WALLKIT_MODAL_MIN_HEIGHT = exports.WALLKIT_MODAL_MAX_WIDTH = exports.WALLKIT_MODAL_CONTENT_CLASSNAME = exports.WALLKIT_MODAL_CLOSE_BTN_CLASSNAME = exports.WALLKIT_FRAME_ID = exports.WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID = exports.WALLKIT_FIREBASE_UI_PLACEHOLDER_ID = exports.WALLKIT_FIREBASE_CONFIG = exports.WALLKIT_DEV_FIREBASE_CONFIG = exports.WALLKIT_CDN_URL = exports.WALLKIT_CDN_ASSETS_URL = exports.WALLKIT_AUTH_FORM_PLACEHOLDER_ID = exports.TRIGGER_GOOGLE_BUTTON_TITLE_SELECTOR = exports.TRIGGER_EMAIL_BUTTON_TITLE_SELECTOR = exports.TRIGGER_EMAIL_BUTTON_CLASS_NAME = exports.TRIGGER_EMAILLINK_BUTTON_TITLE_SELECTOR = exports.TRIGGER_EMAILLINK_BUTTON_CLASS_NAME = exports.TRIGGER_BUTTON_CLASS_NAME = exports.FIREBASE_TOKEN_NAME = exports.ALLOWED_ORIGINS = void 0;
 // Popups
-var WALLKIT_POPUP_URL = 'https://wallkit.net/popups';
+// export const WALLKIT_POPUP_URL = 'https://wallkit.net/popups';
+var WALLKIT_POPUP_URL = 'https://popups.wallkit.net';
 // export const WALLKIT_POPUP_URL = 'http://127.0.0.1:8000/popups';
+// export const WALLKIT_POPUP_DEV_URL = 'https://dev.wallkit.net/popups';
 exports.WALLKIT_POPUP_URL = WALLKIT_POPUP_URL;
-var WALLKIT_POPUP_DEV_URL = 'https://dev.wallkit.net/popups';
+var WALLKIT_POPUP_DEV_URL = 'https://popups.dev.wallkit.net';
 // export const WALLKIT_POPUP_DEV_URL = 'https://wallkit-landing.com/popups';
 // export const WALLKIT_POPUP_DEV_URL = 'http://127.0.0.1:8000/popups';
 
@@ -57,7 +59,7 @@ var WALLKIT_CDN_ASSETS_URL = WALLKIT_CDN_URL + '/assets';
 
 // Safety
 exports.WALLKIT_CDN_ASSETS_URL = WALLKIT_CDN_ASSETS_URL;
-var ALLOWED_ORIGINS = [document.location.origin, 'http://127.0.0.1:8000', 'https://wallkit.net', 'https://dev.wallkit.net', 'https://demo.wallkit.net', 'https://wallkit-landing.com'];
+var ALLOWED_ORIGINS = [document.location.origin, 'http://127.0.0.1:8000', 'https://wallkit.net', 'https://dev.wallkit.net', 'https://demo.wallkit.net', 'https://wallkit-landing.com', 'https://popups.wallkit.net', 'https://popups.dev.wallkit.net'];
 
 // Markup
 exports.ALLOWED_ORIGINS = ALLOWED_ORIGINS;
