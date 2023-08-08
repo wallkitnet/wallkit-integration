@@ -1,7 +1,7 @@
 /*!
  * Package name: wallkit-integration-lib.
  * Package description: Wallkit Integration Library. Library to manipulate with Wallkit System: Paywall, Modals, Authentication, SDK..
- * Package version: 3.0.21.
+ * Package version: 3.0.22.
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -2523,6 +2523,19 @@ var Authentication = /*#__PURE__*/function () {
       this.frame.sendEvent(_eventsName["default"].wallkit.WALLKIT_EVENT_ONE_TAP_SIGN_IN, credential);
     }
   }, {
+    key: "showResetPassword",
+    value: function showResetPassword(oobCode) {
+      if (!(0, _lodash["default"])(oobCode)) {
+        (0, _classPrivateFieldSet2["default"])(this, _oobCode, oobCode);
+        if (this.authForm.triggerButton) {
+          this.authForm.triggerButton.hide();
+        }
+        this.firebase.hideAuthForm();
+        this.authForm.showForm(_AuthForm.RESET_PASSWORD_FORM_SLUG);
+        this.modal.show();
+      }
+    }
+  }, {
     key: "init",
     value: function init() {
       var _classPrivateFieldGet5;
@@ -2650,13 +2663,7 @@ function _resetAuthorizationError2() {
 function _checkIfResetPasswordURL2() {
   var oobCode = (0, _url.parseResetPasswordOobCodeHash)();
   if (oobCode) {
-    (0, _classPrivateFieldSet2["default"])(this, _oobCode, oobCode);
-    if (this.authForm.triggerButton) {
-      this.authForm.triggerButton.hide();
-    }
-    this.firebase.hideAuthForm();
-    this.authForm.showForm(_AuthForm.RESET_PASSWORD_FORM_SLUG);
-    this.modal.show();
+    this.showResetPassword(oobCode);
     (0, _url.resetHash)();
   }
 }
