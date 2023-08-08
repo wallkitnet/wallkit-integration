@@ -680,6 +680,13 @@ export default class Authentication {
     #checkIfResetPasswordURL() {
         const oobCode = parseResetPasswordOobCodeHash();
         if (oobCode) {
+            this.showResetPassword(oobCode);
+            resetHash();
+        }
+    }
+
+    showResetPassword(oobCode) {
+        if (!isEmpty(oobCode)) {
             this.#oobCode = oobCode;
             if (this.authForm.triggerButton) {
                 this.authForm.triggerButton.hide();
@@ -687,7 +694,6 @@ export default class Authentication {
             this.firebase.hideAuthForm();
             this.authForm.showForm(RESET_PASSWORD_FORM_SLUG);
             this.modal.show();
-            resetHash();
         }
     }
 
