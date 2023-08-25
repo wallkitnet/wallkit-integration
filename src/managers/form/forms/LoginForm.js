@@ -27,6 +27,7 @@ export class LoginForm extends Form {
             dataSlug: 'password',
             name: 'wk-fb-password',
             ignoreValidation: options.passwordSignInIgnoreValidation || false,
+            testStrength: false,
             label: 'Password',
             type: 'password',
             messages: options.messages || {},
