@@ -38,6 +38,7 @@ export class SignupForm extends Form {
             dataSlug: 'password',
             name: 'wk-fb-password',
             ignoreValidation: false,
+            testStrength: true,
             passwordHint: true,
             label: 'Password',
             type: 'password',
