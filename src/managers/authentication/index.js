@@ -633,7 +633,6 @@ export default class Authentication {
             this.dispatchTokens();
 
             this.events.notify(EventsNames.local.SUCCESS_AUTH, true);
-            this.events.notify(EventsNames.local.TICKETS_TOKEN_AUTH_SUCCESS, true);
 
             return true;
 
