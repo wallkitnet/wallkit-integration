@@ -5,7 +5,7 @@ import {
   WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID,
   WALLKIT_TOKEN_NAME,
   FIREBASE_TOKEN_NAME,
-  WALLKIT_AUTH_FORM_PLACEHOLDER_ID, WALLKIT_POPUP_DEV_URL
+  WALLKIT_AUTH_FORM_PLACEHOLDER_ID
 } from "../../configs/constants";
 import EventsNames, {
     FIREBASE_INIT,
@@ -19,7 +19,6 @@ import Frame from "../frame";
 import SDK from "../sdk";
 import Token from "./Token";
 import ReCaptcha from "./ReCaptcha";
-import { Confirmation } from "./Confirmation";
 import {AuthForm, RESET_PASSWORD_FORM_SLUG} from "../form/forms/AuthForm";
 import {normalizeSelector} from "../../utils/DOM";
 import {
@@ -88,7 +87,6 @@ export default class Authentication {
         });
 
         this.events = new Events();
-        this.confirmation = new Confirmation();
     }
 
     get #authPlaceholderElementSelector() {
@@ -127,9 +125,7 @@ export default class Authentication {
           if (!isEmpty(error.message)) {
             this.authForm.loginForm.setFormError(error.message, error.code || false);
           }
-          if (!isEmpty(this.reCaptcha) && this.reCaptcha.enabled && !isEmpty(this.reCaptcha.grecaptcha)) {
-              this.reCaptcha.grecaptcha.reset();
-          }
+          this.reCaptcha.grecaptcha.reset();
         });
     }
 
@@ -142,9 +138,7 @@ export default class Authentication {
           if (!isEmpty(error.message)) {
             this.authForm.signUpForm.setFormError(error.message, error.code || false);
           }
-          if (!isEmpty(this.reCaptcha) && this.reCaptcha.enabled && !isEmpty(this.reCaptcha.grecaptcha)) {
-            this.reCaptcha.grecaptcha.reset();
-          }
+          this.reCaptcha.grecaptcha.reset();
         });
     }
 
@@ -536,7 +530,7 @@ export default class Authentication {
         this.authForm.reset();
       }
 
-      if (!isEmpty(this.reCaptcha) && this.reCaptcha.enabled && !isEmpty(this.reCaptcha.grecaptcha)) {
+      if (this.reCaptcha.enabled) {
         this.reCaptcha.grecaptcha.reset();
       }
     }
@@ -553,9 +547,7 @@ export default class Authentication {
             await this.reCaptcha.init();
           } else if (this.reCaptcha.loaded) {
             this.resetAuthProcess();
-            if (!isEmpty(this.reCaptcha) && this.reCaptcha.enabled && !isEmpty(this.reCaptcha.grecaptcha)) {
-              this.reCaptcha.grecaptcha.reset();
-            }
+            this.reCaptcha.grecaptcha.reset();
 
             if (this.#options.firebase.genuineForm !== false) {
               this.reCaptcha.initCaptchaProcess();
@@ -641,7 +633,6 @@ export default class Authentication {
             this.dispatchTokens();
 
             this.events.notify(EventsNames.local.SUCCESS_AUTH, true);
-            this.events.notify(EventsNames.local.TICKETS_TOKEN_AUTH_SUCCESS, true);
 
             return true;
 
@@ -710,7 +701,7 @@ export default class Authentication {
         this.toggleFormLoader(false);
     }
 
-    handleOneTapResponse({ credential }) {
+    handleOneTapResponse({credential}) {
         this.frame.sendEvent(EventsNames.wallkit.WALLKIT_EVENT_ONE_TAP_SIGN_IN, credential);
     }
 
@@ -736,7 +727,7 @@ export default class Authentication {
 
     async #checkIfAuthEmailLinkURL() {
         const authData = parseAuthEmailLinkOobCodeHash();
-        const { oobcode, email } = authData || {}
+        const {oobcode, email} = authData || {}
         if (!isEmpty(oobcode) && !isEmpty(email)) {
             resetHash();
             const resJson = await this.firebase.authEmailLink(oobcode, email);
