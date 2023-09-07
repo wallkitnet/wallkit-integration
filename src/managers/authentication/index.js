@@ -747,7 +747,10 @@ export default class Authentication {
             const wallkitToken = getUrlParamByKey('wallkit-token');
             const popupSlug = getUrlParamByKey('popup-slug');
 
-            if (customFirebaseToken) {
+            if (customFirebaseToken && wallkitToken) {
+
+                window.history.replaceState({}, document.title, window.location.pathname);
+
                 await this.authWithCustomToken(customFirebaseToken, wallkitToken);
                 if (popupSlug) {
                     this.events.notify(MODAL_OPEN, popupSlug);
