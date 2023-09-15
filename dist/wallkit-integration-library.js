@@ -1,7 +1,7 @@
 /*!
  * Package name: wallkit-integration-lib.
  * Package description: Wallkit Integration Library. Library to manipulate with Wallkit System: Paywall, Modals, Authentication, SDK..
- * Package version: 3.0.22.
+ * Package version: 3.0.26.
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -42,22 +42,25 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.WALLKIT_USER_MANAGER_MODAL_FORM_PLACEHOLDER_ID = exports.WALLKIT_TOKEN_NAME = exports.WALLKIT_POPUP_URL = exports.WALLKIT_POPUP_DEV_URL = exports.WALLKIT_MODAL_WRAPPER_CLASSNAME = exports.WALLKIT_MODAL_MIN_WIDTH = exports.WALLKIT_MODAL_MIN_HEIGHT = exports.WALLKIT_MODAL_MAX_WIDTH = exports.WALLKIT_MODAL_CONTENT_CLASSNAME = exports.WALLKIT_MODAL_CLOSE_BTN_CLASSNAME = exports.WALLKIT_FRAME_ID = exports.WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID = exports.WALLKIT_FIREBASE_UI_PLACEHOLDER_ID = exports.WALLKIT_FIREBASE_CONFIG = exports.WALLKIT_DEV_FIREBASE_CONFIG = exports.WALLKIT_CDN_URL = exports.WALLKIT_CDN_ASSETS_URL = exports.WALLKIT_AUTH_FORM_PLACEHOLDER_ID = exports.TRIGGER_GOOGLE_BUTTON_TITLE_SELECTOR = exports.TRIGGER_EMAIL_BUTTON_TITLE_SELECTOR = exports.TRIGGER_EMAIL_BUTTON_CLASS_NAME = exports.TRIGGER_EMAILLINK_BUTTON_TITLE_SELECTOR = exports.TRIGGER_EMAILLINK_BUTTON_CLASS_NAME = exports.TRIGGER_BUTTON_CLASS_NAME = exports.FIREBASE_TOKEN_NAME = exports.ALLOWED_ORIGINS = void 0;
 // Popups
-var WALLKIT_POPUP_URL = 'https://wallkit.net/popups';
+// export const WALLKIT_POPUP_URL = 'https://wallkit.net/popups';
+var WALLKIT_POPUP_URL = 'https://popups.wallkit.net';
 // export const WALLKIT_POPUP_URL = 'http://127.0.0.1:8000/popups';
+// export const WALLKIT_POPUP_DEV_URL = 'https://dev.wallkit.net/popups';
 exports.WALLKIT_POPUP_URL = WALLKIT_POPUP_URL;
-var WALLKIT_POPUP_DEV_URL = 'https://dev.wallkit.net/popups';
+var WALLKIT_POPUP_DEV_URL = 'https://popups.dev.wallkit.net';
+// export const WALLKIT_POPUP_DEV_URL = 'http://192.168.0.105:8000';
 // export const WALLKIT_POPUP_DEV_URL = 'https://wallkit-landing.com/popups';
 // export const WALLKIT_POPUP_DEV_URL = 'http://127.0.0.1:8000/popups';
 
 // Assets
 exports.WALLKIT_POPUP_DEV_URL = WALLKIT_POPUP_DEV_URL;
-var WALLKIT_CDN_URL = 'https://cdn.wallkit.net';
+var WALLKIT_CDN_URL = 'https://cdn1.wallkit.net';
 exports.WALLKIT_CDN_URL = WALLKIT_CDN_URL;
 var WALLKIT_CDN_ASSETS_URL = WALLKIT_CDN_URL + '/assets';
 
 // Safety
 exports.WALLKIT_CDN_ASSETS_URL = WALLKIT_CDN_ASSETS_URL;
-var ALLOWED_ORIGINS = [document.location.origin, 'http://127.0.0.1:8000', 'https://wallkit.net', 'https://dev.wallkit.net', 'https://demo.wallkit.net', 'https://wallkit-landing.com'];
+var ALLOWED_ORIGINS = [document.location.origin, 'http://127.0.0.1:8000', 'https://wallkit.net', 'https://dev.wallkit.net', 'https://demo.wallkit.net', 'https://wallkit-landing.com', 'https://popups.wallkit.net', 'https://popups.dev.wallkit.net'];
 
 // Markup
 exports.ALLOWED_ORIGINS = ALLOWED_ORIGINS;
@@ -367,6 +370,9 @@ window.WallkitIntegration = (_eventsListener = /*#__PURE__*/new WeakSet(), _inse
 }());
 function _eventsListener2() {
   var _this2 = this;
+  this.events.subscribe(_eventsName.MODAL_OPEN, function (name) {
+    _this2.modal(name);
+  });
   window.addEventListener('message', function (event) {
     var _event$data = event.data,
       value = _event$data.value,
@@ -1692,12 +1698,14 @@ var _setAuthorizationError = /*#__PURE__*/new WeakSet();
 var _resetAuthorizationError = /*#__PURE__*/new WeakSet();
 var _checkIfResetPasswordURL = /*#__PURE__*/new WeakSet();
 var _checkIfAuthEmailLinkURL = /*#__PURE__*/new WeakSet();
+var _checkCustomToken = /*#__PURE__*/new WeakSet();
 var Authentication = /*#__PURE__*/function () {
   function Authentication(options) {
     var _options$cookies,
       _options$cookies2,
       _this = this;
     (0, _classCallCheck2["default"])(this, Authentication);
+    _classPrivateMethodInitSpec(this, _checkCustomToken);
     _classPrivateMethodInitSpec(this, _checkIfAuthEmailLinkURL);
     _classPrivateMethodInitSpec(this, _checkIfResetPasswordURL);
     _classPrivateMethodInitSpec(this, _resetAuthorizationError);
@@ -1771,7 +1779,7 @@ var Authentication = /*#__PURE__*/function () {
     key: "isAuthenticated",
     value: function isAuthenticated() {
       if (this.sdk) {
-        return this.sdk.methods.isAuthenticated() || this.token.get() || this.firebaseToken.get();
+        return !!(this.sdk.methods.isAuthenticated() || this.token.get() || this.firebaseToken.get());
       } else {
         return !!this.token.get();
       }
@@ -2405,7 +2413,7 @@ var Authentication = /*#__PURE__*/function () {
     key: "handleTicketsToken",
     value: function () {
       var _handleTicketsToken = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee8(ticketPassAuthToken) {
-        var response, userCredential, firebaseToken;
+        var response;
         return _regenerator["default"].wrap(function _callee8$(_context8) {
           while (1) switch (_context8.prev = _context8.next) {
             case 0:
@@ -2415,38 +2423,25 @@ var Authentication = /*#__PURE__*/function () {
             case 3:
               response = _context8.sent;
               if (!response) {
-                _context8.next = 19;
+                _context8.next = 8;
                 break;
               }
               _context8.next = 7;
-              return this.firebase.authWithCustomToken(response.firebase_custom_token);
+              return this.authWithCustomToken(response.firebase_custom_token);
             case 7:
-              userCredential = _context8.sent;
-              _context8.next = 10;
-              return userCredential.user.getIdToken();
-            case 10:
-              firebaseToken = _context8.sent;
-              this.updateFirebaseToken(firebaseToken);
-              this.setToken(response.token);
-              _context8.next = 15;
-              return this.sdk.methods.getUser();
-            case 15:
-              this.dispatchTokens();
-              this.events.notify(_eventsName["default"].local.SUCCESS_AUTH, true);
-              this.events.notify(_eventsName["default"].local.TICKETS_TOKEN_AUTH_SUCCESS, true);
-              return _context8.abrupt("return", true);
-            case 19:
+              return _context8.abrupt("return", _context8.sent);
+            case 8:
               return _context8.abrupt("return", false);
-            case 22:
-              _context8.prev = 22;
+            case 11:
+              _context8.prev = 11;
               _context8.t0 = _context8["catch"](0);
               console.error(_context8.t0);
               return _context8.abrupt("return", _context8.t0);
-            case 26:
+            case 15:
             case "end":
               return _context8.stop();
           }
-        }, _callee8, this, [[0, 22]]);
+        }, _callee8, this, [[0, 11]]);
       }));
       function handleTicketsToken(_x6) {
         return _handleTicketsToken.apply(this, arguments);
@@ -2454,63 +2449,125 @@ var Authentication = /*#__PURE__*/function () {
       return handleTicketsToken;
     }()
   }, {
-    key: "handleExternalAuthProvider",
+    key: "authWithCustomToken",
     value: function () {
-      var _handleExternalAuthProvider = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee9(externalUserId) {
-        var response, userCredential, firebaseToken;
+      var _authWithCustomToken = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee9() {
+        var customFirebaseToken,
+          wallkitToken,
+          userCredential,
+          firebaseToken,
+          _args9 = arguments;
         return _regenerator["default"].wrap(function _callee9$(_context9) {
           while (1) switch (_context9.prev = _context9.next) {
             case 0:
-              _context9.prev = 0;
-              if (externalUserId) {
-                _context9.next = 3;
+              customFirebaseToken = _args9.length > 0 && _args9[0] !== undefined ? _args9[0] : null;
+              wallkitToken = _args9.length > 1 && _args9[1] !== undefined ? _args9[1] : null;
+              if (!(!customFirebaseToken || !wallkitToken)) {
+                _context9.next = 4;
                 break;
               }
               return _context9.abrupt("return", false);
-            case 3:
-              _context9.next = 5;
-              return this.sdk.methods.getAuthTokensByExternalUserId(externalUserId);
-            case 5:
-              response = _context9.sent;
-              if (response) {
-                _context9.next = 8;
-                break;
-              }
-              return _context9.abrupt("return", false);
-            case 8:
-              _context9.next = 10;
-              return this.firebase.authWithCustomToken(response.firebase_custom_token);
-            case 10:
+            case 4:
+              _context9.prev = 4;
+              _context9.next = 7;
+              return this.firebase.authWithCustomToken(customFirebaseToken);
+            case 7:
               userCredential = _context9.sent;
+              console.log('authWithCustomToken -> userCredential', userCredential);
+              if (userCredential) {
+                _context9.next = 11;
+                break;
+              }
+              return _context9.abrupt("return", false);
+            case 11:
               _context9.next = 13;
               return userCredential.user.getIdToken();
             case 13:
               firebaseToken = _context9.sent;
-              if (!(!response.token || !firebaseToken)) {
-                _context9.next = 16;
+              console.log('authWithCustomToken -> firebaseToken', firebaseToken);
+              this.updateFirebaseToken(firebaseToken);
+              this.setToken(wallkitToken);
+              _context9.next = 19;
+              return this.sdk.methods.getUser();
+            case 19:
+              this.dispatchTokens();
+              this.events.notify(_eventsName["default"].local.SUCCESS_AUTH, true);
+              return _context9.abrupt("return", true);
+            case 24:
+              _context9.prev = 24;
+              _context9.t0 = _context9["catch"](4);
+              console.log('authWithCustomToken -> error', _context9.t0);
+              console.error(_context9.t0);
+              return _context9.abrupt("return", false);
+            case 29:
+            case "end":
+              return _context9.stop();
+          }
+        }, _callee9, this, [[4, 24]]);
+      }));
+      function authWithCustomToken() {
+        return _authWithCustomToken.apply(this, arguments);
+      }
+      return authWithCustomToken;
+    }()
+  }, {
+    key: "handleExternalAuthProvider",
+    value: function () {
+      var _handleExternalAuthProvider = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee10(externalUserId) {
+        var response, userCredential, firebaseToken;
+        return _regenerator["default"].wrap(function _callee10$(_context10) {
+          while (1) switch (_context10.prev = _context10.next) {
+            case 0:
+              _context10.prev = 0;
+              if (externalUserId) {
+                _context10.next = 3;
                 break;
               }
-              return _context9.abrupt("return", false);
+              return _context10.abrupt("return", false);
+            case 3:
+              _context10.next = 5;
+              return this.sdk.methods.getAuthTokensByExternalUserId(externalUserId);
+            case 5:
+              response = _context10.sent;
+              if (response) {
+                _context10.next = 8;
+                break;
+              }
+              return _context10.abrupt("return", false);
+            case 8:
+              _context10.next = 10;
+              return this.firebase.authWithCustomToken(response.firebase_custom_token);
+            case 10:
+              userCredential = _context10.sent;
+              _context10.next = 13;
+              return userCredential.user.getIdToken();
+            case 13:
+              firebaseToken = _context10.sent;
+              if (!(!response.token || !firebaseToken)) {
+                _context10.next = 16;
+                break;
+              }
+              return _context10.abrupt("return", false);
             case 16:
               this.updateFirebaseToken(firebaseToken);
               this.setToken(response.token);
-              _context9.next = 20;
+              _context10.next = 20;
               return this.sdk.methods.getUser();
             case 20:
               this.dispatchTokens();
               this.events.notify(_eventsName["default"].local.SUCCESS_AUTH, true);
               this.events.notify(_eventsName["default"].local.EXTERNAL_PROVIDER_TOKEN_AUTH_SUCCESS, true);
-              return _context9.abrupt("return", true);
+              return _context10.abrupt("return", true);
             case 26:
-              _context9.prev = 26;
-              _context9.t0 = _context9["catch"](0);
-              console.error(_context9.t0);
-              return _context9.abrupt("return", _context9.t0);
+              _context10.prev = 26;
+              _context10.t0 = _context10["catch"](0);
+              console.error(_context10.t0);
+              return _context10.abrupt("return", _context10.t0);
             case 30:
             case "end":
-              return _context9.stop();
+              return _context10.stop();
           }
-        }, _callee9, this, [[0, 26]]);
+        }, _callee10, this, [[0, 26]]);
       }));
       function handleExternalAuthProvider(_x7) {
         return _handleExternalAuthProvider.apply(this, arguments);
@@ -2564,6 +2621,7 @@ var Authentication = /*#__PURE__*/function () {
       _classPrivateMethodGet(this, _initListeners, _initListeners2).call(this);
       _classPrivateMethodGet(this, _checkIfResetPasswordURL, _checkIfResetPasswordURL2).call(this);
       _classPrivateMethodGet(this, _checkIfAuthEmailLinkURL, _checkIfAuthEmailLinkURL2).call(this);
+      _classPrivateMethodGet(this, _checkCustomToken, _checkCustomToken2).call(this);
     }
   }]);
   return Authentication;
@@ -2677,33 +2735,78 @@ function _checkIfAuthEmailLinkURL2() {
   return _checkIfAuthEmailLinkURL3.apply(this, arguments);
 }
 function _checkIfAuthEmailLinkURL3() {
-  _checkIfAuthEmailLinkURL3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee10() {
+  _checkIfAuthEmailLinkURL3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee11() {
     var authData, _ref5, oobcode, email, resJson;
-    return _regenerator["default"].wrap(function _callee10$(_context10) {
-      while (1) switch (_context10.prev = _context10.next) {
+    return _regenerator["default"].wrap(function _callee11$(_context11) {
+      while (1) switch (_context11.prev = _context11.next) {
         case 0:
           authData = (0, _url.parseAuthEmailLinkOobCodeHash)();
           _ref5 = authData || {}, oobcode = _ref5.oobcode, email = _ref5.email;
           if (!(!(0, _lodash["default"])(oobcode) && !(0, _lodash["default"])(email))) {
-            _context10.next = 8;
+            _context11.next = 8;
             break;
           }
           (0, _url.resetHash)();
-          _context10.next = 6;
+          _context11.next = 6;
           return this.firebase.authEmailLink(oobcode, email);
         case 6:
-          resJson = _context10.sent;
+          resJson = _context11.sent;
           this.onSuccessAuth({
             operationType: "signIn",
             token: resJson.idToken
           });
         case 8:
         case "end":
-          return _context10.stop();
+          return _context11.stop();
       }
-    }, _callee10, this);
+    }, _callee11, this);
   }));
   return _checkIfAuthEmailLinkURL3.apply(this, arguments);
+}
+function _checkCustomToken2() {
+  return _checkCustomToken3.apply(this, arguments);
+}
+function _checkCustomToken3() {
+  _checkCustomToken3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee13() {
+    var _this11 = this;
+    return _regenerator["default"].wrap(function _callee13$(_context13) {
+      while (1) switch (_context13.prev = _context13.next) {
+        case 0:
+          this.firebase.events.subscribe(_eventsName.FIREBASE_INIT, /*#__PURE__*/(0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee12() {
+            var customFirebaseToken, wallkitToken, popupSlug;
+            return _regenerator["default"].wrap(function _callee12$(_context12) {
+              while (1) switch (_context12.prev = _context12.next) {
+                case 0:
+                  _this11.checkFirebaseInit();
+                  customFirebaseToken = (0, _url.getUrlParamByKey)('custom-firebase-token');
+                  wallkitToken = (0, _url.getUrlParamByKey)('wallkit-token');
+                  popupSlug = (0, _url.getUrlParamByKey)('popup-slug');
+                  if (!(customFirebaseToken && wallkitToken)) {
+                    _context12.next = 9;
+                    break;
+                  }
+                  window.history.replaceState({}, document.title, window.location.pathname);
+                  _context12.next = 8;
+                  return _this11.authWithCustomToken(customFirebaseToken, wallkitToken);
+                case 8:
+                  if (popupSlug) {
+                    _this11.events.notify(_eventsName.MODAL_OPEN, popupSlug);
+                  }
+                case 9:
+                case "end":
+                  return _context12.stop();
+              }
+            }, _callee12);
+          })), {
+            once: true
+          });
+        case 1:
+        case "end":
+          return _context13.stop();
+      }
+    }, _callee13, this);
+  }));
+  return _checkCustomToken3.apply(this, arguments);
 }
 
 /***/ }),
@@ -3392,7 +3495,7 @@ function _formatCheckAccessRequestPath2(id, params) {
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports["default"] = exports.WALLKIT_SDK_LOADED = exports.WALLKIT_LOGOUT = exports.WALLKIT_FRAME_ROUTE_CHANGE = exports.WALLKIT_FRAME_READY = exports.WALLKIT_FIREBASE_TOKEN = exports.WALLKIT_EVENT_USER = exports.WALLKIT_EVENT_TOKEN = exports.WALLKIT_EVENT_REGISTRATION = exports.WALLKIT_EVENT_ONE_TAP_SIGN_IN = exports.WALLKIT_EVENT_GET_TOKEN = exports.WALLKIT_EVENT_FIREBASE_TOKEN = exports.WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN = exports.WALLKIT_EVENT_EXTERNAL_PROVIDER_TOKEN = exports.WALLKIT_EVENT_CHANGE_LANGUAGE = exports.WALLKIT_EVENT_AUTH = exports.WALLKIT_CHANGE_FRAME = exports.TICKETS_TOKEN_AUTH_SUCCESS = exports.SUCCESS_FIREBASE_AUTH = exports.SUCCESS_AUTH = exports.RECAPTCHA_VALIDATION_SUCCESS = exports.RECAPTCHA_VALIDATION_FAILED = exports.RECAPTCHA_LOADED = exports.PRE_SIGN_IN = exports.MODAL_CREATED = exports.MODAL_CLOSED = exports.LOGOUT = exports.FRAME_MOUNTED = exports.FRAME_MODAL_CLOSED = exports.FRAME_MESSAGE = exports.FRAME_CREATED = exports.FIREBASE_UI_SHOWN = exports.FIREBASE_LOADED = exports.FIREBASE_INIT = exports.EXTERNAL_PROVIDER_TOKEN_AUTH_SUCCESS = exports.DEFAULT_AUTH_FORM_SLUG_UPDATED = exports.CHECK_USER_ACCESS = exports.AUTH_MODAL_CLOSED = void 0;
+exports["default"] = exports.WALLKIT_SDK_LOADED = exports.WALLKIT_LOGOUT = exports.WALLKIT_FRAME_ROUTE_CHANGE = exports.WALLKIT_FRAME_READY = exports.WALLKIT_FIREBASE_TOKEN = exports.WALLKIT_EVENT_USER = exports.WALLKIT_EVENT_TOKEN = exports.WALLKIT_EVENT_REGISTRATION = exports.WALLKIT_EVENT_ONE_TAP_SIGN_IN = exports.WALLKIT_EVENT_GET_TOKEN = exports.WALLKIT_EVENT_FIREBASE_TOKEN = exports.WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN = exports.WALLKIT_EVENT_EXTERNAL_PROVIDER_TOKEN = exports.WALLKIT_EVENT_CHANGE_LANGUAGE = exports.WALLKIT_EVENT_AUTH = exports.WALLKIT_CHANGE_FRAME = exports.TICKETS_TOKEN_AUTH_SUCCESS = exports.SUCCESS_FIREBASE_AUTH = exports.SUCCESS_AUTH = exports.RECAPTCHA_VALIDATION_SUCCESS = exports.RECAPTCHA_VALIDATION_FAILED = exports.RECAPTCHA_LOADED = exports.PRE_SIGN_IN = exports.MODAL_OPEN = exports.MODAL_CREATED = exports.MODAL_CLOSED = exports.LOGOUT = exports.FRAME_MOUNTED = exports.FRAME_MODAL_CLOSED = exports.FRAME_MESSAGE = exports.FRAME_CREATED = exports.FIREBASE_UI_SHOWN = exports.FIREBASE_LOADED = exports.FIREBASE_INIT = exports.EXTERNAL_PROVIDER_TOKEN_AUTH_SUCCESS = exports.DEFAULT_AUTH_FORM_SLUG_UPDATED = exports.CHECK_USER_ACCESS = exports.AUTH_MODAL_CLOSED = void 0;
 // Local Events Names
 var FRAME_CREATED = 'frame-created';
 exports.FRAME_CREATED = FRAME_CREATED;
@@ -3437,9 +3540,11 @@ exports.EXTERNAL_PROVIDER_TOKEN_AUTH_SUCCESS = EXTERNAL_PROVIDER_TOKEN_AUTH_SUCC
 var LOGOUT = 'logout';
 exports.LOGOUT = LOGOUT;
 var DEFAULT_AUTH_FORM_SLUG_UPDATED = 'default-auth-form-slug-updated';
+exports.DEFAULT_AUTH_FORM_SLUG_UPDATED = DEFAULT_AUTH_FORM_SLUG_UPDATED;
+var MODAL_OPEN = 'modal-open';
 
 // Wallkit Events Names
-exports.DEFAULT_AUTH_FORM_SLUG_UPDATED = DEFAULT_AUTH_FORM_SLUG_UPDATED;
+exports.MODAL_OPEN = MODAL_OPEN;
 var WALLKIT_CHANGE_FRAME = 'wk-event-modal';
 exports.WALLKIT_CHANGE_FRAME = WALLKIT_CHANGE_FRAME;
 var WALLKIT_LOGOUT = 'wk-event-logout';
@@ -3489,7 +3594,8 @@ var _default = {
     PRE_SIGN_IN: PRE_SIGN_IN,
     EXTERNAL_PROVIDER_TOKEN_AUTH_SUCCESS: EXTERNAL_PROVIDER_TOKEN_AUTH_SUCCESS,
     DEFAULT_AUTH_FORM_SLUG_UPDATED: DEFAULT_AUTH_FORM_SLUG_UPDATED,
-    LOGOUT: LOGOUT
+    LOGOUT: LOGOUT,
+    MODAL_OPEN: MODAL_OPEN
   },
   wallkit: {
     FRAME_CREATED: FRAME_CREATED,
@@ -6222,7 +6328,20 @@ var SDK = /*#__PURE__*/function () {
     this.client = null;
     (0, _classPrivateFieldSet2["default"])(this, _options, options);
     (0, _classPrivateFieldSet2["default"])(this, _events, new _events2["default"]());
-    (0, _classPrivateFieldSet2["default"])(this, _apiUrl, options.mode === 'dev' ? 'https://api.dev.wallkit.net/api/v1' : undefined);
+    switch (options.mode) {
+      case 'prod':
+        (0, _classPrivateFieldSet2["default"])(this, _apiUrl, 'https://api.wallkit.net/api/v1');
+        break;
+      case 'dev':
+        (0, _classPrivateFieldSet2["default"])(this, _apiUrl, 'https://api.dev.wallkit.net/api/v1');
+        break;
+      case 'demo':
+        (0, _classPrivateFieldSet2["default"])(this, _apiUrl, 'https://api.demo.wallkit.net/api/v1');
+        break;
+      default:
+        (0, _classPrivateFieldSet2["default"])(this, _apiUrl, 'https://api.wallkit.net/api/v1');
+    }
+    console.log('this.#apiUrl', (0, _classPrivateFieldGet6["default"])(this, _apiUrl), options);
     if (window.Wallkit) {
       this.onLoad();
     } else {
@@ -6265,7 +6384,7 @@ var SDK = /*#__PURE__*/function () {
   }, {
     key: "load",
     value: function load() {
-      (0, _DOM.insertScript)("".concat(_constants.WALLKIT_CDN_URL, "/js/sdk/0.0.51/wallkit.umd.min.js"), 'wallkit-js-sdk', this.onLoad.bind(this));
+      (0, _DOM.insertScript)("".concat(_constants.WALLKIT_CDN_URL, "/js/sdk/latest/wallkit.umd.min.js"), 'wallkit-js-sdk', this.onLoad.bind(this));
     }
   }]);
   return SDK;
@@ -6785,7 +6904,7 @@ var _interopRequireDefault = __webpack_require__(5656);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.resetSearchParams = exports.resetHash = exports.parseUrlToShowAuthModal = exports.parseResetPasswordOobCodeHash = exports.parseModalHashURL = exports.parseAuthTokenHash = exports.parseAuthEmailLinkOobCodeHash = exports.getParentDomain = exports.getDomainWithoutSubdomain = void 0;
+exports.resetSearchParams = exports.resetHash = exports.parseUrlToShowAuthModal = exports.parseResetPasswordOobCodeHash = exports.parseModalHashURL = exports.parseAuthTokenHash = exports.parseAuthEmailLinkOobCodeHash = exports.getUrlParamByKey = exports.getParentDomain = exports.getDomainWithoutSubdomain = void 0;
 var _typeof2 = _interopRequireDefault(__webpack_require__(2125));
 var _lodash = _interopRequireDefault(__webpack_require__(5828));
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -6904,6 +7023,15 @@ var parseUrlToShowAuthModal = function parseUrlToShowAuthModal() {
   return false;
 };
 exports.parseUrlToShowAuthModal = parseUrlToShowAuthModal;
+var getUrlParamByKey = function getUrlParamByKey($key) {
+  var search = decodeURIComponent(window.location.search);
+  if (!!search) {
+    var searchParams = new URLSearchParams(search);
+    return searchParams.get($key);
+  }
+  return null;
+};
+exports.getUrlParamByKey = getUrlParamByKey;
 
 /***/ }),
 
