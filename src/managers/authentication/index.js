@@ -7,20 +7,31 @@ import {
   FIREBASE_TOKEN_NAME,
   WALLKIT_AUTH_FORM_PLACEHOLDER_ID
 } from "../../configs/constants";
-import EventsNames, { FIREBASE_INIT, FIREBASE_LOADED, FIREBASE_UI_SHOWN, PRE_SIGN_IN } from "../events/events-name";
+import EventsNames, {
+    FIREBASE_INIT,
+    FIREBASE_LOADED,
+    FIREBASE_UI_SHOWN,
+    MODAL_OPEN,
+    PRE_SIGN_IN
+} from "../events/events-name";
 import Events from "../events";
 import Frame from "../frame";
 import SDK from "../sdk";
 import Token from "./Token";
 import ReCaptcha from "./ReCaptcha";
 import {AuthForm, RESET_PASSWORD_FORM_SLUG} from "../form/forms/AuthForm";
-import { normalizeSelector } from "../../utils/DOM";
-import { parseResetPasswordOobCodeHash, resetHash, parseAuthEmailLinkOobCodeHash } from "../../utils/url";
+import {normalizeSelector} from "../../utils/DOM";
+import {
+    parseResetPasswordOobCodeHash,
+    resetHash,
+    parseAuthEmailLinkOobCodeHash,
+    parseCustomTokenHash, getUrlParamByKey
+} from "../../utils/url";
 import isEmpty from "lodash.isempty";
 
 export default class Authentication {
     #options;
-    #oobCode='';
+    #oobCode = '';
     #showAuthFormSlug = '';
 
     constructor(options) {
@@ -95,7 +106,7 @@ export default class Authentication {
 
     isAuthenticated() {
         if (this.sdk) {
-            return this.sdk.methods.isAuthenticated() || this.token.get() || this.firebaseToken.get();
+            return !!(this.sdk.methods.isAuthenticated() || this.token.get() || this.firebaseToken.get());
         } else {
             return !!this.token.get();
         }
@@ -591,25 +602,50 @@ export default class Authentication {
             const response = await this.sdk.methods.getAuthTokensByTicketPassToken(ticketPassAuthToken);
 
             if (response) {
-                const userCredential = await this.firebase.authWithCustomToken(response.firebase_custom_token);
-                const firebaseToken = await userCredential.user.getIdToken();
-
-                this.updateFirebaseToken(firebaseToken);
-                this.setToken(response.token);
-
-                await this.sdk.methods.getUser();
-                this.dispatchTokens();
-
-                this.events.notify(EventsNames.local.SUCCESS_AUTH, true);
-                this.events.notify(EventsNames.local.TICKETS_TOKEN_AUTH_SUCCESS, true);
-
-                return true;
+                return await this.authWithCustomToken(response.firebase_custom_token);
             }
 
             return false;
         } catch (error) {
             console.error(error);
             return error;
+        }
+    }
+
+    async authWithCustomToken(customFirebaseToken = null, wallkitToken = null) {
+
+        if (!customFirebaseToken || !wallkitToken) {
+            return false;
+        }
+
+        try {
+
+            const userCredential = await this.firebase.authWithCustomToken(customFirebaseToken);
+
+            console.log('authWithCustomToken -> userCredential', userCredential);
+
+            if (!userCredential) {
+                return false;
+            }
+
+            const firebaseToken = await userCredential.user.getIdToken();
+
+            console.log('authWithCustomToken -> firebaseToken', firebaseToken);
+
+            this.updateFirebaseToken(firebaseToken);
+            this.setToken(wallkitToken);
+
+            await this.sdk.methods.getUser();
+            this.dispatchTokens();
+
+            this.events.notify(EventsNames.local.SUCCESS_AUTH, true);
+
+            return true;
+
+        } catch (error) {
+            console.log('authWithCustomToken -> error', error)
+            console.error(error);
+            return false;
         }
     }
 
@@ -671,13 +707,20 @@ export default class Authentication {
         this.toggleFormLoader(false);
     }
 
-    handleOneTapResponse({ credential }) {
+    handleOneTapResponse({credential}) {
         this.frame.sendEvent(EventsNames.wallkit.WALLKIT_EVENT_ONE_TAP_SIGN_IN, credential);
     }
 
     #checkIfResetPasswordURL() {
         const oobCode = parseResetPasswordOobCodeHash();
         if (oobCode) {
+            this.showResetPassword(oobCode);
+            resetHash();
+        }
+    }
+
+    showResetPassword(oobCode) {
+        if (!isEmpty(oobCode)) {
             this.#oobCode = oobCode;
             if (this.authForm.triggerButton) {
                 this.authForm.triggerButton.hide();
@@ -685,13 +728,12 @@ export default class Authentication {
             this.firebase.hideAuthForm();
             this.authForm.showForm(RESET_PASSWORD_FORM_SLUG);
             this.modal.show();
-            resetHash();
         }
     }
 
     async #checkIfAuthEmailLinkURL() {
         const authData = parseAuthEmailLinkOobCodeHash();
-        const { oobcode, email } = authData || {}
+        const {oobcode, email} = authData || {}
         if (!isEmpty(oobcode) && !isEmpty(email)) {
             resetHash();
             const resJson = await this.firebase.authEmailLink(oobcode, email);
@@ -700,6 +742,28 @@ export default class Authentication {
                 token: resJson.idToken,
             });
         }
+    }
+
+    async #checkCustomToken() {
+
+        this.firebase.events.subscribe(FIREBASE_INIT, async () => {
+            this.checkFirebaseInit();
+
+            const customFirebaseToken = getUrlParamByKey('custom-firebase-token');
+            const wallkitToken = getUrlParamByKey('wallkit-token');
+            const popupSlug = getUrlParamByKey('popup-slug');
+
+            if (customFirebaseToken && wallkitToken) {
+
+                window.history.replaceState({}, document.title, window.location.pathname);
+
+                await this.authWithCustomToken(customFirebaseToken, wallkitToken);
+                if (popupSlug) {
+                    this.events.notify(MODAL_OPEN, popupSlug);
+                }
+            }
+
+        }, {once: true});
     }
 
     init() {
@@ -724,5 +788,6 @@ export default class Authentication {
         this.#initListeners();
         this.#checkIfResetPasswordURL();
         this.#checkIfAuthEmailLinkURL();
+        this.#checkCustomToken();
     }
 }

@@ -15,8 +15,8 @@ import { isApplePayAvailable } from './utils/payments';
 import { isCrawler } from './utils/crawlers';
 
 import { ALLOWED_ORIGINS } from './configs/constants';
-import { SUCCESS_AUTH, FRAME_MESSAGE, FRAME_MODAL_CLOSED } from "./managers/events/events-name";
-import { parseAuthTokenHash, resetHash } from "./utils/url";
+import {SUCCESS_AUTH, FRAME_MESSAGE, FRAME_MODAL_CLOSED, MODAL_OPEN} from "./managers/events/events-name";
+import { parseAuthTokenHash, resetHash} from "./utils/url";
 
 window.WallkitIntegration = class WallkitIntegration {
     constructor(options) {
@@ -88,6 +88,11 @@ window.WallkitIntegration = class WallkitIntegration {
     }
 
     #eventsListener() {
+
+        this.events.subscribe(MODAL_OPEN, (name) => {
+            this.modal(name);
+        });
+
         window.addEventListener('message', (event) => {
             const { data: { value, name }, origin } = event;
 

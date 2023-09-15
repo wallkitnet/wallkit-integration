@@ -1,6 +1,6 @@
 {
   "name": "wallkit-integration-lib",
-  "version": "3.0.22",
+  "version": "3.0.26",
   "description": "Wallkit Integration Library. Library to manipulate with Wallkit System: Paywall, Modals, Authentication, SDK.",
   "main": "./dist/index.js",
   "scripts": {
