@@ -18,7 +18,8 @@ export default class UserManager {
             modalName: options.name || 'user-manager-modal',
             content: options.content || this.getDefaultUserManagerModalContent(),
             className: options.className || 'wallkit-auth-modal',
-            initialLoader: options.loader || false
+            initialLoader: options.loader || false,
+            ui: options?.ui,
         });
         this.modal.init();
         this.modal.modalWrapper.addEventListener('click', (event) => {

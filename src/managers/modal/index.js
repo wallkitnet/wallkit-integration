@@ -70,13 +70,15 @@ export default class Modal {
             className: modalClassName
         });
 
-        this.modalWrapper.addEventListener('click', (event) => {
-            if (event.target.id === this.modalWrapper.id) {
-                if (this.closeOutside) {
-                    this.hide();
+        if (this.options?.ui?.type !== 'inline') {
+            this.modalWrapper.addEventListener('click', (event) => {
+                if (event.target.id === this.modalWrapper.id) {
+                    if (this.closeOutside) {
+                        this.hide();
+                    }
                 }
-            }
-        });
+            });
+        }
 
         return this.modalWrapper;
     }
@@ -126,7 +128,9 @@ export default class Modal {
         this.#loadAssets();
         this.modalWrapper.appendChild(this.modalContent);
         this.modalContent.appendChild(this.loaderElement);
-        this.modalContent.appendChild(this.#createCloseBtn());
+        if (this.options?.ui?.type !== 'inline') {
+            this.modalContent.appendChild(this.#createCloseBtn());
+        }
 
         if (this.modalFrame) {
             this.insertContent(this.modalFrame.init());
@@ -134,7 +138,11 @@ export default class Modal {
             this.insertContent(this.content);
         }
 
-        return DOM.injectInBody(this.modalWrapper);
+        if (this.options?.ui?.type !== 'inline') {
+            return DOM.injectInBody(this.modalWrapper);
+        } else {
+            return DOM.injectInElement(this.options?.ui?.selector, this.modalWrapper);
+        }
     }
 
     open(name, params) {

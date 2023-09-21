@@ -395,7 +395,8 @@ export default class Authentication {
             modalName: 'auth-modal',
             content: this.#options?.content || this.getDefaultAuthenticationFormContent(),
             className: 'wallkit-auth-modal',
-            initialLoader: true
+            initialLoader: true,
+            ui: this.#options?.ui,
         });
     }
 
@@ -452,13 +453,16 @@ export default class Authentication {
           if (this.#options.firebase.genuineForm !== false) {
             if (this.reCaptcha.enabled && this.reCaptcha.loaded) {
               this.reCaptcha.initCaptchaProcess();
+              this.events.notify('firebase-ready', true);
             } else if (!this.reCaptcha.loaded) {
               this.events.subscribe(EventsNames.local.RECAPTCHA_LOADED, () => {
                 this.reCaptcha.initCaptchaProcess();
+                this.events.notify('firebase-ready', true);
               }, {once: true});
             }
           } else if (this.authForm?.triggerButton){
               this.authForm.triggerButton.events.notify(FIREBASE_UI_SHOWN, true);
+              this.events.notify('firebase-ready', true);
           }
 
           this.toggleFormLoader(false);

@@ -8,21 +8,71 @@ import Content from "./managers/content";
 import Call from "./managers/call";
 import UserManager from "./managers/user"
 
-import { LIBRARY_STYLES } from './assets/styles';
+import { POPUP_UI_LIBRARY_STYLES, INLINE_UI_LIBRARY_STYLES } from './assets/styles';
 
 import { createElement, injectInHead } from "./utils/DOM";
 import { isApplePayAvailable } from './utils/payments';
 import { isCrawler } from './utils/crawlers';
 
 import { ALLOWED_ORIGINS } from './configs/constants';
-import {SUCCESS_AUTH, FRAME_MESSAGE, FRAME_MODAL_CLOSED, MODAL_OPEN} from "./managers/events/events-name";
+import { SUCCESS_AUTH, FRAME_MESSAGE, FRAME_MODAL_CLOSED, MODAL_OPEN } from "./managers/events/events-name";
 import { parseAuthTokenHash, parseConfirmTokenHash, resetHash } from "./utils/url";
 
 window.WallkitIntegration = class WallkitIntegration {
     constructor(options) {
+
+        this.managersStatuses = {
+            analytics: {
+                isEnabled: options?.analytics?.parseUTM ?? false,
+                isReady: false,
+            },
+            authentication: {
+                isEnabled: true,
+                isReady: false,
+            },
+            call: {
+                isEnabled: options?.call?.use ?? false,
+                isReady: false,
+            },
+            content: {
+                isEnabled: true,
+                isReady: false,
+            },
+            events: {
+                isEnabled: true,
+                isReady: false,
+            },
+            frame: {
+                isEnabled: true,
+                isReady: false,
+            },
+            localization: {
+                isEnabled: false,
+                isReady: false,
+            },
+            modal: {
+                isEnabled: true,
+                isReady: false,
+            },
+            sdk: {
+                isEnabled: true,
+                isReady: false,
+            },
+            user: {
+                isEnabled: true,
+                isReady: false,
+            }
+        };
+
         this.config = options;
+
+        this.uiType = options?.ui?.type ?? 'popup';
+
         this.events = new Events();
+        this.managersStatuses.events.isReady = true;
+
         this.content = Content;
+        this.managersStatuses.content.isReady = true;
 
         const preventExecutionForCrawlers = options?.prevent_execution_for_crawlers ?? true;
         if (preventExecutionForCrawlers && isCrawler()) {
@@ -31,24 +81,29 @@ window.WallkitIntegration = class WallkitIntegration {
 
         this.frame = new Frame({
             ...options,
-            onReady: () => this.popup.toggleLoader(false)
+            onReady: () => {
+                this.popup.toggleLoader(false);
+                this.managersStatuses.frame.isReady = true;
+            }
         });
 
         this.popup = new Modal({
             resourceFrame: this.frame,
             initialLoader: true,
             onReady: (modal) => {
+                this.managersStatuses.modal.isReady = true;
                 modal.openByHash();
             },
             onClose: () => {
-                this.events.notify(FRAME_MODAL_CLOSED, { name: this.frame.currentFrameName });
-            }
+                this.events.notify(FRAME_MODAL_CLOSED, {name: this.frame.currentFrameName});
+            },
+            ui: options?.ui
         });
 
         this.sdk = new SDK({
             ...options,
             onLoaded: () => {
-                const { firebase, modal, content, reCaptcha, forms } = options.auth || {};
+                const {firebase, modal, content, reCaptcha, forms} = options.auth || {};
 
                 this.authentication = new Authentication({
                     ...options,
@@ -59,16 +114,37 @@ window.WallkitIntegration = class WallkitIntegration {
                 });
 
                 this.analytics = new Analytics(options?.analytics);
-                this.call = new Call(this.popup, this.config);
+                this.managersStatuses.analytics.isReady = true;
+
+                this.call = new Call(this.popup, this.config, () => {
+                    this.managersStatuses.call.isReady = true;
+                });
 
                 this.init();
                 this.userManager = new UserManager({
                     customizeForms: forms || false,
                     popup: this.popup,
-                    authentication: this.authentication
+                    authentication: this.authentication,
+                    ui: options?.ui,
                 });
+                this.managersStatuses.user.isReady = true;
+                this.managersStatuses.sdk.isReady = true;
             }
         });
+
+        this.checkAlreadyDefinedCallbacks();
+    }
+
+    checkAlreadyDefinedCallbacks() {
+        if (Array.isArray(window.wk) && window.wk.length > 0) {
+            window.wk.forEach(([event, callback, options]) => {
+                if (typeof event !== 'string' || typeof callback !== 'function') {
+                    return;
+                }
+
+                this.on(event, callback, options);
+            });
+        }
     }
 
     modal (name, params) {
@@ -171,11 +247,41 @@ window.WallkitIntegration = class WallkitIntegration {
                 console.log('ERROR', error);
             }
         });
+
+        this.events.subscribe('firebase-ready', (params) => {
+            this.managersStatuses.authentication.isReady = true;
+        });
+
+        let loadingInPercent = 0;
+        let wkReady = setInterval(() => {
+
+            const dif = [];
+            for (const manager in this.managersStatuses) {
+                if (this.managersStatuses[manager].isEnabled && !this.managersStatuses[manager].isReady) {
+                    dif.push({manager, ...this.managersStatuses[manager]});
+                }
+            }
+
+            const currentLoadingInPercent = Math.round((Object.keys(this.managersStatuses).length - dif.length) / Object.keys(this.managersStatuses).length * 100);
+            if (currentLoadingInPercent !== loadingInPercent) {
+                console.log(`WIL is loading... ${currentLoadingInPercent}%`);
+                loadingInPercent = currentLoadingInPercent;
+            }
+
+            if (dif.length === 0) {
+                console.log('WIL is ready...')
+                clearInterval(wkReady);
+
+                this.events.notify('ready', true);
+
+            }
+        }, 100);
+
     }
 
     #insertStyles () {
         const styles = createElement('style');
-        styles.innerHTML = LIBRARY_STYLES;
+        styles.innerHTML = this.uiType === 'popup' ? POPUP_UI_LIBRARY_STYLES : INLINE_UI_LIBRARY_STYLES;
 
         injectInHead(styles);
     }
@@ -194,7 +300,7 @@ window.WallkitIntegration = class WallkitIntegration {
         }
     }
 
-    init() {
+    async init() {
         this.#insertStyles();
         this.popup.init();
 
@@ -210,10 +316,18 @@ window.WallkitIntegration = class WallkitIntegration {
             this.config.onInit(this);
         }
 
-        if(this.config?.call?.use){
-            this.call.init();
+        if (this.config?.call?.use) {
+            await this.call.init();
         }
 
+    }
+
+    push ([event, callback, options]) {
+        if (typeof event !== 'string' || typeof callback !== 'function') {
+            return;
+        }
+
+        this.events.subscribe(event, callback, options);
     }
 }
 
