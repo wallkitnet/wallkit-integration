@@ -64,6 +64,15 @@ export const injectInBody = (element) => {
 
     return document.body.appendChild(element);
 }
+export const injectInElement = (querySelector, element) => {
+    if (!isDocumentAvailable()) return Error.handleError('Document is not available', ERRORS_TYPES.DOM_ERROR);
+    if (!element) return Error.checkRequiredArgument(element, 'element');
+
+    const wrapper = document.querySelector(querySelector);
+    if (!wrapper) return Error.checkRequiredArgument(wrapper, 'wrapper');
+
+    return wrapper.appendChild(element);
+}
 
 export const injectInHead = (element) => {
     if (!isDocumentAvailable()) return Error.handleError('Document is not available', ERRORS_TYPES.DOM_ERROR);
@@ -131,5 +140,6 @@ export default {
     loadCSS,
     insertScript,
     isMobile,
-    normalizeSelector
+    normalizeSelector,
+    injectInElement
 }
