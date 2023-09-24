@@ -1,7 +1,7 @@
 /*!
  * Package name: wallkit-integration-lib.
  * Package description: Wallkit Integration Library. Library to manipulate with Wallkit System: Paywall, Modals, Authentication, SDK..
- * Package version: 3.0.26.
+ * Package version: 3.0.27.
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -362,7 +362,6 @@ window.WallkitIntegration = (_eventsListener = /*#__PURE__*/new WeakSet(), _inse
       initialLoader: true,
       onReady: function onReady(modal) {
         _this.managersStatuses.modal.isReady = true;
-        modal.openByHash();
       },
       onClose: function onClose() {
         _this.events.notify(_eventsName.FRAME_MODAL_CLOSED, {
@@ -583,6 +582,44 @@ function _eventsListener2() {
       _this3.events.notify('ready', true);
     }
   }, 100);
+  this.on(_eventsName.READY, /*#__PURE__*/(0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2() {
+    var isOpenAuthRouting, modal;
+    return _regenerator["default"].wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.next = 2;
+          return _this3.authentication.handleAuthRouting();
+        case 2:
+          isOpenAuthRouting = _context2.sent;
+          console.log('isOpenAuthRouting', isOpenAuthRouting);
+          if (!isOpenAuthRouting) {
+            _context2.next = 6;
+            break;
+          }
+          return _context2.abrupt("return");
+        case 6:
+          if (_this3.uiType === 'popup') {
+            _this3.popup.openByHash();
+          } else {
+            modal = (0, _url.parseModalHashURL)();
+            if (modal) {
+              _this3.popup.open(modal.name, modal.params);
+            } else {
+              if (_this3.authentication.isAuthenticated()) {
+                _this3.popup.open('account-settings');
+              } else {
+                _this3.popup.open('sign-in');
+              }
+            }
+          }
+        case 7:
+        case "end":
+          return _context2.stop();
+      }
+    }, _callee2);
+  })), {
+    once: true
+  });
 }
 function _insertStyles2() {
   var styles = (0, _DOM.createElement)('style');
@@ -2758,6 +2795,38 @@ var Authentication = /*#__PURE__*/function () {
       }
     }
   }, {
+    key: "handleAuthRouting",
+    value: function () {
+      var _handleAuthRouting = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee11() {
+        var isOpenResetPassword, isOpenAuthWithLink, isOpenModalAfterAuthWithCustomToken;
+        return _regenerator["default"].wrap(function _callee11$(_context11) {
+          while (1) switch (_context11.prev = _context11.next) {
+            case 0:
+              isOpenResetPassword = _classPrivateMethodGet(this, _checkIfResetPasswordURL, _checkIfResetPasswordURL2).call(this);
+              _context11.next = 3;
+              return _classPrivateMethodGet(this, _checkIfAuthEmailLinkURL, _checkIfAuthEmailLinkURL2).call(this);
+            case 3:
+              isOpenAuthWithLink = _context11.sent;
+              _context11.next = 6;
+              return _classPrivateMethodGet(this, _checkCustomToken, _checkCustomToken2).call(this);
+            case 6:
+              isOpenModalAfterAuthWithCustomToken = _context11.sent;
+              console.log('isOpenResetPassword', isOpenResetPassword);
+              console.log('isOpenAuthWithLink', isOpenAuthWithLink);
+              console.log('isOpenModalAfterAuthWithCustomToken', isOpenModalAfterAuthWithCustomToken);
+              return _context11.abrupt("return", isOpenResetPassword || isOpenAuthWithLink || isOpenModalAfterAuthWithCustomToken);
+            case 11:
+            case "end":
+              return _context11.stop();
+          }
+        }, _callee11, this);
+      }));
+      function handleAuthRouting() {
+        return _handleAuthRouting.apply(this, arguments);
+      }
+      return handleAuthRouting;
+    }()
+  }, {
     key: "init",
     value: function init() {
       var _classPrivateFieldGet5;
@@ -2778,9 +2847,6 @@ var Authentication = /*#__PURE__*/function () {
         }
       }
       _classPrivateMethodGet(this, _initListeners, _initListeners2).call(this);
-      _classPrivateMethodGet(this, _checkIfResetPasswordURL, _checkIfResetPasswordURL2).call(this);
-      _classPrivateMethodGet(this, _checkIfAuthEmailLinkURL, _checkIfAuthEmailLinkURL2).call(this);
-      _classPrivateMethodGet(this, _checkCustomToken, _checkCustomToken2).call(this);
     }
   }]);
   return Authentication;
@@ -2889,37 +2955,42 @@ function _checkIfResetPasswordURL2() {
   if (oobCode) {
     this.showResetPassword(oobCode);
     (0, _url.resetHash)();
+    return true;
   }
+  return false;
 }
 function _checkIfAuthEmailLinkURL2() {
   return _checkIfAuthEmailLinkURL3.apply(this, arguments);
 }
 function _checkIfAuthEmailLinkURL3() {
-  _checkIfAuthEmailLinkURL3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee11() {
+  _checkIfAuthEmailLinkURL3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee12() {
     var authData, _ref5, oobcode, email, resJson;
-    return _regenerator["default"].wrap(function _callee11$(_context11) {
-      while (1) switch (_context11.prev = _context11.next) {
+    return _regenerator["default"].wrap(function _callee12$(_context12) {
+      while (1) switch (_context12.prev = _context12.next) {
         case 0:
           authData = (0, _url.parseAuthEmailLinkOobCodeHash)();
           _ref5 = authData || {}, oobcode = _ref5.oobcode, email = _ref5.email;
           if (!(!(0, _lodash["default"])(oobcode) && !(0, _lodash["default"])(email))) {
-            _context11.next = 8;
+            _context12.next = 9;
             break;
           }
           (0, _url.resetHash)();
-          _context11.next = 6;
+          _context12.next = 6;
           return this.firebase.authEmailLink(oobcode, email);
         case 6:
-          resJson = _context11.sent;
+          resJson = _context12.sent;
           this.onSuccessAuth({
             operationType: "signIn",
             token: resJson.idToken
           });
-        case 8:
+          return _context12.abrupt("return", true);
+        case 9:
+          return _context12.abrupt("return", false);
+        case 10:
         case "end":
-          return _context11.stop();
+          return _context12.stop();
       }
-    }, _callee11, this);
+    }, _callee12, this);
   }));
   return _checkIfAuthEmailLinkURL3.apply(this, arguments);
 }
@@ -2928,39 +2999,32 @@ function _checkCustomToken2() {
 }
 function _checkCustomToken3() {
   _checkCustomToken3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee13() {
-    var _this11 = this;
+    var customFirebaseToken, wallkitToken, popupSlug;
     return _regenerator["default"].wrap(function _callee13$(_context13) {
       while (1) switch (_context13.prev = _context13.next) {
         case 0:
-          this.firebase.events.subscribe(_eventsName.FIREBASE_INIT, /*#__PURE__*/(0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee12() {
-            var customFirebaseToken, wallkitToken, popupSlug;
-            return _regenerator["default"].wrap(function _callee12$(_context12) {
-              while (1) switch (_context12.prev = _context12.next) {
-                case 0:
-                  _this11.checkFirebaseInit();
-                  customFirebaseToken = (0, _url.getUrlParamByKey)('custom-firebase-token');
-                  wallkitToken = (0, _url.getUrlParamByKey)('wallkit-token');
-                  popupSlug = (0, _url.getUrlParamByKey)('popup-slug');
-                  if (!(customFirebaseToken && wallkitToken)) {
-                    _context12.next = 9;
-                    break;
-                  }
-                  window.history.replaceState({}, document.title, window.location.pathname);
-                  _context12.next = 8;
-                  return _this11.authWithCustomToken(customFirebaseToken, wallkitToken);
-                case 8:
-                  if (popupSlug) {
-                    _this11.events.notify(_eventsName.MODAL_OPEN, popupSlug);
-                  }
-                case 9:
-                case "end":
-                  return _context12.stop();
-              }
-            }, _callee12);
-          })), {
-            once: true
-          });
-        case 1:
+          // this.firebase.events.subscribe(FIREBASE_INIT, async () => {
+          this.checkFirebaseInit();
+          customFirebaseToken = (0, _url.getUrlParamByKey)('custom-firebase-token');
+          wallkitToken = (0, _url.getUrlParamByKey)('wallkit-token');
+          popupSlug = (0, _url.getUrlParamByKey)('popup-slug');
+          if (!(customFirebaseToken && wallkitToken)) {
+            _context13.next = 11;
+            break;
+          }
+          window.history.replaceState({}, document.title, window.location.pathname);
+          _context13.next = 8;
+          return this.authWithCustomToken(customFirebaseToken, wallkitToken);
+        case 8:
+          if (!popupSlug) {
+            _context13.next = 11;
+            break;
+          }
+          this.events.notify(_eventsName.MODAL_OPEN, popupSlug);
+          return _context13.abrupt("return", true);
+        case 11:
+          return _context13.abrupt("return", false);
+        case 12:
         case "end":
           return _context13.stop();
       }
