@@ -15,8 +15,8 @@ import { isApplePayAvailable } from './utils/payments';
 import { isCrawler } from './utils/crawlers';
 
 import { ALLOWED_ORIGINS } from './configs/constants';
-import { SUCCESS_AUTH, FRAME_MESSAGE, FRAME_MODAL_CLOSED, MODAL_OPEN } from "./managers/events/events-name";
-import { parseAuthTokenHash, parseConfirmTokenHash, resetHash } from "./utils/url";
+import { SUCCESS_AUTH, FRAME_MESSAGE, FRAME_MODAL_CLOSED, MODAL_OPEN, READY } from "./managers/events/events-name";
+import { parseAuthTokenHash, parseModalHashURL, resetHash } from "./utils/url";
 
 window.WallkitIntegration = class WallkitIntegration {
     constructor(options) {
@@ -92,7 +92,6 @@ window.WallkitIntegration = class WallkitIntegration {
             initialLoader: true,
             onReady: (modal) => {
                 this.managersStatuses.modal.isReady = true;
-                modal.openByHash();
             },
             onClose: () => {
                 this.events.notify(FRAME_MODAL_CLOSED, {name: this.frame.currentFrameName});
@@ -271,11 +270,35 @@ window.WallkitIntegration = class WallkitIntegration {
             if (dif.length === 0) {
                 console.log('WIL is ready...')
                 clearInterval(wkReady);
-
                 this.events.notify('ready', true);
-
             }
+
         }, 100);
+
+
+        this.on(READY, async () => {
+
+            const isOpenAuthRouting = await this.authentication.handleAuthRouting();
+            console.log('isOpenAuthRouting', isOpenAuthRouting);
+            if (isOpenAuthRouting) {
+                return;
+            }
+
+            if (this.uiType === 'popup') {
+                this.popup.openByHash();
+            } else {
+                const modal = parseModalHashURL();
+                if (modal) {
+                    this.popup.open(modal.name, modal.params);
+                } else {
+                    if (this.authentication.isAuthenticated()) {
+                        this.popup.open('account-settings');
+                    } else {
+                        this.popup.open('sign-in');
+                    }
+                }
+            }
+        }, {once: true});
 
     }
 
