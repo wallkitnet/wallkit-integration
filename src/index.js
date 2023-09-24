@@ -16,7 +16,7 @@ import { isCrawler } from './utils/crawlers';
 
 import { ALLOWED_ORIGINS } from './configs/constants';
 import { SUCCESS_AUTH, FRAME_MESSAGE, FRAME_MODAL_CLOSED, MODAL_OPEN, READY } from "./managers/events/events-name";
-import { parseAuthTokenHash, parseModalHashURL, resetHash } from "./utils/url";
+import { parseAuthTokenHash, parseModalHashURL, resetHash, parseConfirmTokenHash } from "./utils/url";
 
 window.WallkitIntegration = class WallkitIntegration {
     constructor(options) {
