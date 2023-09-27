@@ -454,7 +454,7 @@ export default class Authentication {
             if (this.reCaptcha.enabled && this.reCaptcha.loaded) {
               this.reCaptcha.initCaptchaProcess();
               this.events.notify('firebase-ready', true);
-            } else if (!this.reCaptcha.loaded) {
+            } else if (!this.reCaptcha.loaded && this.reCaptcha.enabled) {
               this.events.subscribe(EventsNames.local.RECAPTCHA_LOADED, () => {
                 this.reCaptcha.initCaptchaProcess();
                 this.events.notify('firebase-ready', true);
