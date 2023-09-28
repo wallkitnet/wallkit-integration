@@ -42,8 +42,6 @@ export default class SDK {
                 this.#apiUrl = 'https://api.wallkit.net/api/v1';
         }
 
-        console.log('this.#apiUrl', this.#apiUrl, options);
-
         if (window.Wallkit) {
             this.onLoad();
         } else {

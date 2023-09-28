@@ -11,8 +11,9 @@ export default class Call {
     #classThatReactOnTheUsersStatus;
     #classThatReactOnTheUsersPlans;
     #classThatReactOnTheUsersEvents;
+    #onReady;
 
-    constructor(popup, config) {
+    constructor(popup, config, onReady) {
         this.#popup = popup;
         this.#config = config;
         this.#events = new Events();
@@ -21,6 +22,7 @@ export default class Call {
         this.#classThatReactOnTheUsersStatus = config?.call?.classThatReactOnTheUsersStatus ?? 'wk-call-status-user';
         this.#classThatReactOnTheUsersPlans = config?.call?.classThatReactOnTheUsersPlans ?? 'wk-call-status-plans';
         this.#classThatReactOnTheUsersEvents = config?.call?.classThatReactOnTheUsersEvents ?? 'wk-call-status-events';
+        this.#onReady = onReady;
     }
 
     #isDebug() {
@@ -213,9 +215,8 @@ export default class Call {
     }
 
     getWallkitUserData() {
-        this.#sdk.client.get({path: `/user`})
+        return this.#sdk.client.get({path: `/user`})
             .then((response) => {
-                console.log(response);
                 this.setAllDataWkStatusesInDOMElements(response);
             })
             .catch((error) => {
@@ -283,7 +284,7 @@ export default class Call {
         }
     }
 
-    init() {
+    async init() {
         if (this.#isDebug()) {
             console.log('Init Wallkit Call with config: ', this.#config?.call);
             this.#debugUserStatus();
@@ -297,9 +298,13 @@ export default class Call {
         this.#initUIListeners();
 
         if (this.#sdk.methods.isAuthenticated()) {
-            this.getWallkitUserData();
+            await this.getWallkitUserData();
         } else {
             this.setAllDataWkStatusesInDOMElements();
+        }
+
+        if (this.#onReady) {
+            this.#onReady();
         }
 
     }
