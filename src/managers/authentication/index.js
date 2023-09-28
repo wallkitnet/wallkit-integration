@@ -777,10 +777,6 @@ export default class Authentication {
         const isOpenAuthWithLink =  await this.#checkIfAuthEmailLinkURL();
         const isOpenModalAfterAuthWithCustomToken =  await this.#checkCustomToken();
 
-        console.log('isOpenResetPassword', isOpenResetPassword);
-        console.log('isOpenAuthWithLink', isOpenAuthWithLink);
-        console.log('isOpenModalAfterAuthWithCustomToken', isOpenModalAfterAuthWithCustomToken);
-
         return isOpenResetPassword || isOpenAuthWithLink || isOpenModalAfterAuthWithCustomToken;
     }
 

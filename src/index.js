@@ -270,7 +270,7 @@ window.WallkitIntegration = class WallkitIntegration {
         this.on(READY, async () => {
 
             const isOpenAuthRouting = await this.authentication.handleAuthRouting();
-            console.log('isOpenAuthRouting', isOpenAuthRouting);
+
             if (isOpenAuthRouting) {
                 return;
             }
