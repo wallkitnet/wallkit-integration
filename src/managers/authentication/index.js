@@ -465,6 +465,8 @@ export default class Authentication {
           } else if (this.authForm?.triggerButton){
               this.authForm.triggerButton.events.notify(FIREBASE_UI_SHOWN, true);
               this.events.notify('firebase-ready', true);
+          } else {
+              this.events.notify('firebase-ready', true);
           }
 
           this.toggleFormLoader(false);
