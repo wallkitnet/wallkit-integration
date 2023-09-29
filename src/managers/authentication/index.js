@@ -465,6 +465,8 @@ export default class Authentication {
           } else if (this.authForm?.triggerButton){
               this.authForm.triggerButton.events.notify(FIREBASE_UI_SHOWN, true);
               this.events.notify('firebase-ready', true);
+          } else {
+              this.events.notify('firebase-ready', true);
           }
 
           this.toggleFormLoader(false);
@@ -776,10 +778,6 @@ export default class Authentication {
         const isOpenResetPassword = this.#checkIfResetPasswordURL();
         const isOpenAuthWithLink =  await this.#checkIfAuthEmailLinkURL();
         const isOpenModalAfterAuthWithCustomToken =  await this.#checkCustomToken();
-
-        console.log('isOpenResetPassword', isOpenResetPassword);
-        console.log('isOpenAuthWithLink', isOpenAuthWithLink);
-        console.log('isOpenModalAfterAuthWithCustomToken', isOpenModalAfterAuthWithCustomToken);
 
         return isOpenResetPassword || isOpenAuthWithLink || isOpenModalAfterAuthWithCustomToken;
     }

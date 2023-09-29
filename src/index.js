@@ -279,7 +279,7 @@ window.WallkitIntegration = class WallkitIntegration {
         this.on(READY, async () => {
 
             const isOpenAuthRouting = await this.authentication.handleAuthRouting();
-            console.log('isOpenAuthRouting', isOpenAuthRouting);
+
             if (isOpenAuthRouting) {
                 return;
             }
@@ -302,14 +302,14 @@ window.WallkitIntegration = class WallkitIntegration {
 
     }
 
-    #insertStyles () {
+    #insertStyles() {
         const styles = createElement('style');
         styles.innerHTML = this.uiType === 'popup' ? POPUP_UI_LIBRARY_STYLES : INLINE_UI_LIBRARY_STYLES;
 
         injectInHead(styles);
     }
 
-    #recogniseURLIncomeParams () {
+    #recogniseURLIncomeParams() {
         const ticketPassAuthToken = parseAuthTokenHash();
         if (ticketPassAuthToken) {
             this.authentication.handleTicketsToken(ticketPassAuthToken);
