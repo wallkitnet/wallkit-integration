@@ -873,7 +873,7 @@ var ReCaptchaFirebase = /*#__PURE__*/function () {
             case 0:
               try {
                 this.valid = false;
-                if (this.grecaptcha) {
+                if (this.grecaptcha && typeof this.grecaptcha.reset === 'function') {
                   this.grecaptcha.reset();
                 }
                 handleCaptchaState = function handleCaptchaState() {

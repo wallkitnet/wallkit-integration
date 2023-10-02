@@ -122,7 +122,7 @@ export default class ReCaptchaFirebase {
         try {
             this.valid = false;
 
-            if (this.grecaptcha) {
+            if (this.grecaptcha && typeof this.grecaptcha.reset === 'function') {
                 this.grecaptcha.reset();
             }
 
