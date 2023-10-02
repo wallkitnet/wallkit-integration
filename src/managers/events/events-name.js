@@ -23,6 +23,7 @@ export const LOGOUT = 'logout';
 export const DEFAULT_AUTH_FORM_SLUG_UPDATED = 'default-auth-form-slug-updated';
 export const MODAL_OPEN = 'modal-open';
 export const READY = 'ready';
+export const FIREBASE_READY = 'firebase-ready';
 
 // Wallkit Events Names
 export const WALLKIT_CHANGE_FRAME = 'wk-event-modal';
@@ -62,7 +63,8 @@ export default {
         DEFAULT_AUTH_FORM_SLUG_UPDATED,
         LOGOUT,
         MODAL_OPEN,
-        READY
+        READY,
+        FIREBASE_READY
     },
     wallkit: {
         FRAME_CREATED,

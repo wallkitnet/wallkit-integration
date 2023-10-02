@@ -60,7 +60,7 @@ export default class ReCaptchaFirebase {
                     onload: () => {
                         this.loaded = true;
                         this.grecaptcha = window.grecaptcha;
-                        this.events.notify(EventsNames.RECAPTCHA_LOADED, true);
+                        this.events.notify(EventsNames.local.RECAPTCHA_LOADED, true);
 
                         Promise.resolve(true);
                     }
@@ -198,7 +198,9 @@ export default class ReCaptchaFirebase {
                 });
             }
         } catch (error) {
-            this.authentication.firebase.reset();
+            if (typeof this.authentication.firebase.reset === 'function') {
+                this.authentication.firebase.reset();
+            }
             console.error('error', error);
         }
     }
