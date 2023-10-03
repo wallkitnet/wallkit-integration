@@ -153,6 +153,8 @@ export default class ReCaptchaFirebase {
                 const cancelBtn = document.querySelector('.firebaseui-id-page-sign-in .firebaseui-id-secondary-link');
 
                 if (emailField) {
+                    emailField.setAttribute( "autocomplete", "off" );
+
                     emailField.addEventListener('input', () => {
                         handleCaptchaState();
                     });
@@ -190,15 +192,7 @@ export default class ReCaptchaFirebase {
                     }
                 }
 
-                emailField.readOnly = true;
-
-                emailField.addEventListener('focus', () => {
-                    emailField.removeAttribute('readonly');
-                });
-
-                emailField.addEventListener('blur', () => {
-                    emailField.readOnly = true;
-                });
+                emailField.setAttribute( "autocomplete", "off" );
 
                 emailField.addEventListener('input', () => {
                     if (!this.valid) {
