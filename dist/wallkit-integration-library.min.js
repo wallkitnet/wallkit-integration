@@ -1,7 +1,7 @@
 /*!
  * Package name: wallkit-integration-lib.
  * Package description: Wallkit Integration Library. Library to manipulate with Wallkit System: Paywall, Modals, Authentication, SDK..
- * Package version: 3.0.27.
+ * Package version: 3.0.29.
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -341,10 +341,10 @@ window.WallkitIntegration = (_eventsListener = /*#__PURE__*/new WeakSet(), _inse
         isReady: false
       }
     };
-    this.config = options;
-    this.uiType = (_options$ui$type = options === null || options === void 0 ? void 0 : (_options$ui = options.ui) === null || _options$ui === void 0 ? void 0 : _options$ui.type) !== null && _options$ui$type !== void 0 ? _options$ui$type : 'popup';
     this.events = new _events["default"]();
     this.managersStatuses.events.isReady = true;
+    this.config = options;
+    this.uiType = (_options$ui$type = options === null || options === void 0 ? void 0 : (_options$ui = options.ui) === null || _options$ui === void 0 ? void 0 : _options$ui.type) !== null && _options$ui$type !== void 0 ? _options$ui$type : 'popup';
     this.content = _content["default"];
     this.managersStatuses.content.isReady = true;
     var preventExecutionForCrawlers = (_options$prevent_exec = options === null || options === void 0 ? void 0 : options.prevent_execution_for_crawlers) !== null && _options$prevent_exec !== void 0 ? _options$prevent_exec : true;
@@ -558,7 +558,7 @@ function _eventsListener2() {
       console.log('ERROR', error);
     }
   });
-  this.events.subscribe('firebase-ready', function (params) {
+  this.events.subscribe(_eventsName.FIREBASE_READY, function (params) {
     _this3.managersStatuses.authentication.isReady = true;
   });
   var loadingInPercent = 0;
@@ -573,7 +573,7 @@ function _eventsListener2() {
     }
     var currentLoadingInPercent = Math.round((Object.keys(_this3.managersStatuses).length - dif.length) / Object.keys(_this3.managersStatuses).length * 100);
     if (currentLoadingInPercent !== loadingInPercent) {
-      console.log("WIL is loading... ".concat(currentLoadingInPercent, "%"));
+      console.log("WIL is loading... ".concat(currentLoadingInPercent, "%"), dif);
       loadingInPercent = currentLoadingInPercent;
     }
     if (dif.length === 0) {
@@ -591,13 +591,12 @@ function _eventsListener2() {
           return _this3.authentication.handleAuthRouting();
         case 2:
           isOpenAuthRouting = _context2.sent;
-          console.log('isOpenAuthRouting', isOpenAuthRouting);
           if (!isOpenAuthRouting) {
-            _context2.next = 6;
+            _context2.next = 5;
             break;
           }
           return _context2.abrupt("return");
-        case 6:
+        case 5:
           if (_this3.uiType === 'popup') {
             _this3.popup.openByHash();
           } else {
@@ -612,7 +611,7 @@ function _eventsListener2() {
               }
             }
           }
-        case 7:
+        case 6:
         case "end":
           return _context2.stop();
       }
@@ -842,7 +841,7 @@ var ReCaptchaFirebase = /*#__PURE__*/function () {
                 onload: function onload() {
                   _this.loaded = true;
                   _this.grecaptcha = window.grecaptcha;
-                  _this.events.notify(_eventsName["default"].RECAPTCHA_LOADED, true);
+                  _this.events.notify(_eventsName["default"].local.RECAPTCHA_LOADED, true);
                   Promise.resolve(true);
                 }
               }];
@@ -895,7 +894,7 @@ var ReCaptchaFirebase = /*#__PURE__*/function () {
             case 0:
               try {
                 this.valid = false;
-                if (this.grecaptcha) {
+                if (this.grecaptcha && typeof this.grecaptcha.reset === 'function') {
                   this.grecaptcha.reset();
                 }
                 handleCaptchaState = function handleCaptchaState() {
@@ -925,6 +924,7 @@ var ReCaptchaFirebase = /*#__PURE__*/function () {
                   var submitBtn = document.querySelector('.firebaseui-id-page-sign-in .firebaseui-id-submit');
                   var cancelBtn = document.querySelector('.firebaseui-id-page-sign-in .firebaseui-id-secondary-link');
                   if (emailField) {
+                    emailField.setAttribute("autocomplete", "off");
                     emailField.addEventListener('input', function () {
                       handleCaptchaState();
                     });
@@ -956,6 +956,7 @@ var ReCaptchaFirebase = /*#__PURE__*/function () {
                       handleCaptchaState();
                     };
                   }
+                  emailField.setAttribute("autocomplete", "off");
                   emailField.addEventListener('input', function () {
                     if (!_this2.valid) {
                       emailField.blur();
@@ -964,7 +965,9 @@ var ReCaptchaFirebase = /*#__PURE__*/function () {
                   });
                 }
               } catch (error) {
-                this.authentication.firebase.reset();
+                if (typeof this.authentication.firebase.reset === 'function') {
+                  this.authentication.firebase.reset();
+                }
                 console.error('error', error);
               }
             case 1:
@@ -1859,7 +1862,7 @@ var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/run
 var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ "./node_modules/@babel/runtime/helpers/typeof.js"));
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"));
 var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js"));
-var _classPrivateFieldGet12 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldGet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldGet.js"));
+var _classPrivateFieldGet13 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldGet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldGet.js"));
 var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldSet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldSet.js"));
 var _modal = _interopRequireDefault(__webpack_require__(/*! ../modal */ "./src/managers/modal/index.js"));
 var _Firebase = _interopRequireDefault(__webpack_require__(/*! ./firebase/Firebase */ "./src/managers/authentication/firebase/Firebase.js"));
@@ -1961,7 +1964,7 @@ var Authentication = /*#__PURE__*/function () {
         }
       }
       this.firebase = new _Firebase["default"](config);
-      if (options.firebase.genuineForm === false && (0, _classPrivateFieldGet12["default"])(this, _isEmailProvider)) {
+      if (options.firebase.genuineForm === false && (0, _classPrivateFieldGet13["default"])(this, _isEmailProvider)) {
         this.initAuthForm();
       }
     }
@@ -1978,7 +1981,12 @@ var Authentication = /*#__PURE__*/function () {
     key: "isAuthenticated",
     value: function isAuthenticated() {
       if (this.sdk) {
-        return !!(this.sdk.methods.isAuthenticated() || this.token.get() || this.firebaseToken.get());
+        var _classPrivateFieldGet2;
+        if (!!((_classPrivateFieldGet2 = (0, _classPrivateFieldGet13["default"])(this, _options)) !== null && _classPrivateFieldGet2 !== void 0 && _classPrivateFieldGet2.firebase)) {
+          return !!(this.sdk.methods.isAuthenticated() && this.token.get() && this.firebaseToken.get());
+        } else {
+          return !!(this.sdk.methods.isAuthenticated() && this.token.get());
+        }
       } else {
         return !!this.token.get();
       }
@@ -2030,14 +2038,14 @@ var Authentication = /*#__PURE__*/function () {
     key: "initAuthForm",
     value: function initAuthForm() {
       var _this5 = this;
-      var _ref = (0, _classPrivateFieldGet12["default"])(this, _options).firebase || {},
+      var _ref = (0, _classPrivateFieldGet13["default"])(this, _options).firebase || {},
         tosURL = _ref.tosURL,
         privacyPolicyURL = _ref.privacyPolicyURL,
         termsOfService = _ref.termsOfService,
         providers = _ref.providers,
         passwordSignInIgnoreValidation = _ref.passwordSignInIgnoreValidation,
         authOnPasswordReset = _ref.authOnPasswordReset;
-      var _ref2 = (0, _classPrivateFieldGet12["default"])(this, _options).auth || {},
+      var _ref2 = (0, _classPrivateFieldGet13["default"])(this, _options).auth || {},
         signUp = _ref2.signUp,
         defaultForm = _ref2.defaultForm,
         forms = _ref2.forms;
@@ -2154,7 +2162,7 @@ var Authentication = /*#__PURE__*/function () {
                 case 0:
                   _context3.prev = 0;
                   _this5.toggleFormLoader(true);
-                  if (!((0, _classPrivateFieldGet12["default"])(_this5, _options).firebase.genuinePasswordReset === false)) {
+                  if (!((0, _classPrivateFieldGet13["default"])(_this5, _options).firebase.genuinePasswordReset === false)) {
                     _context3.next = 10;
                     break;
                   }
@@ -2212,11 +2220,11 @@ var Authentication = /*#__PURE__*/function () {
                   _context4.prev = 0;
                   _this5.toggleFormLoader(true);
                   _context4.next = 4;
-                  return _this5.firebase.sendNewPasswordResetPassword(data.new_password, (0, _classPrivateFieldGet12["default"])(_this5, _oobCode));
+                  return _this5.firebase.sendNewPasswordResetPassword(data.new_password, (0, _classPrivateFieldGet13["default"])(_this5, _oobCode));
                 case 4:
                   success = _context4.sent;
                   if (success) {
-                    _authOnPasswordReset = (0, _classPrivateFieldGet12["default"])(_this5, _options).firebase.authOnPasswordReset;
+                    _authOnPasswordReset = (0, _classPrivateFieldGet13["default"])(_this5, _options).firebase.authOnPasswordReset;
                     _this5.authForm.showSuccessPasswordReset();
                     if (_authOnPasswordReset) {
                       _this5.handleLogin({
@@ -2256,7 +2264,7 @@ var Authentication = /*#__PURE__*/function () {
           _this5.authForm.reset();
         },
         getShowAuthFormSlug: function getShowAuthFormSlug() {
-          return (0, _classPrivateFieldGet12["default"])(_this5, _showAuthFormSlug);
+          return (0, _classPrivateFieldGet13["default"])(_this5, _showAuthFormSlug);
         }
       });
     }
@@ -2348,13 +2356,13 @@ var Authentication = /*#__PURE__*/function () {
   }, {
     key: "getDefaultAuthenticationFormContent",
     value: function getDefaultAuthenticationFormContent() {
-      var _classPrivateFieldGet2, _classPrivateFieldGet3;
-      return "<div>\n                    <div id=\"authorization-error\"></div>\n                    <h2 class=\"wallkit-auth-modal__title\">".concat((_classPrivateFieldGet2 = (_classPrivateFieldGet3 = (0, _classPrivateFieldGet12["default"])(this, _options)) === null || _classPrivateFieldGet3 === void 0 ? void 0 : _classPrivateFieldGet3.modalTitle) !== null && _classPrivateFieldGet2 !== void 0 ? _classPrivateFieldGet2 : 'Sign In', "</h2>\n                    <div ").concat((0, _classPrivateFieldGet12["default"])(this, _authPlaceholderElementSelectorType), "=\"").concat((0, _classPrivateFieldGet12["default"])(this, _authPlaceholderElementSelector).substring(1), "\"></div>\n                </div>");
+      var _classPrivateFieldGet3, _classPrivateFieldGet4;
+      return "<div>\n                    <div id=\"authorization-error\"></div>\n                    <h2 class=\"wallkit-auth-modal__title\">".concat((_classPrivateFieldGet3 = (_classPrivateFieldGet4 = (0, _classPrivateFieldGet13["default"])(this, _options)) === null || _classPrivateFieldGet4 === void 0 ? void 0 : _classPrivateFieldGet4.modalTitle) !== null && _classPrivateFieldGet3 !== void 0 ? _classPrivateFieldGet3 : 'Sign In', "</h2>\n                    <div ").concat((0, _classPrivateFieldGet13["default"])(this, _authPlaceholderElementSelectorType), "=\"").concat((0, _classPrivateFieldGet13["default"])(this, _authPlaceholderElementSelector).substring(1), "\"></div>\n                </div>");
     }
   }, {
     key: "attachFormPlaceholders",
     value: function attachFormPlaceholders() {
-      var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : (0, _classPrivateFieldGet12["default"])(this, _authPlaceholderElementSelector);
+      var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : (0, _classPrivateFieldGet13["default"])(this, _authPlaceholderElementSelector);
       var placeholders = "<div id=\"".concat(_constants.WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID, "\"></div>\n                            <div id=\"").concat(_constants.WALLKIT_FIREBASE_UI_PLACEHOLDER_ID, "\"></div>");
       var targetElement = document.querySelector(selector);
       if (targetElement) {
@@ -2364,11 +2372,11 @@ var Authentication = /*#__PURE__*/function () {
   }, {
     key: "render",
     value: function render() {
-      if ((0, _classPrivateFieldGet12["default"])(this, _options).auth.renderType === 'selector') {
-        var placeholder = document.querySelector((0, _classPrivateFieldGet12["default"])(this, _options).auth.selector);
+      if ((0, _classPrivateFieldGet13["default"])(this, _options).auth.renderType === 'selector') {
+        var placeholder = document.querySelector((0, _classPrivateFieldGet13["default"])(this, _options).auth.selector);
         if (placeholder) {
-          var _classPrivateFieldGet4;
-          placeholder.insertAdjacentHTML('beforeend', ((_classPrivateFieldGet4 = (0, _classPrivateFieldGet12["default"])(this, _options)) === null || _classPrivateFieldGet4 === void 0 ? void 0 : _classPrivateFieldGet4.content) || this.getDefaultAuthenticationFormContent());
+          var _classPrivateFieldGet5;
+          placeholder.insertAdjacentHTML('beforeend', ((_classPrivateFieldGet5 = (0, _classPrivateFieldGet13["default"])(this, _options)) === null || _classPrivateFieldGet5 === void 0 ? void 0 : _classPrivateFieldGet5.content) || this.getDefaultAuthenticationFormContent());
         }
       } else {
         this.modal = _classPrivateMethodGet(this, _createModal, _createModal2).call(this);
@@ -2384,7 +2392,7 @@ var Authentication = /*#__PURE__*/function () {
           while (1) switch (_context6.prev = _context6.next) {
             case 0:
               (0, _classPrivateFieldSet2["default"])(this, _showAuthFormSlug, authFormSlug !== null && authFormSlug !== void 0 ? authFormSlug : '');
-              if ((0, _classPrivateFieldGet12["default"])(this, _options).firebase.genuineForm === false) {
+              if ((0, _classPrivateFieldGet13["default"])(this, _options).firebase.genuineForm === false) {
                 if (this.authForm) {
                   this.authForm.defaultForm = authFormSlug;
                   if (!this.authForm.triggerButton || !this.authForm.triggerButton.isVisible) {
@@ -2453,21 +2461,27 @@ var Authentication = /*#__PURE__*/function () {
       var _this9 = this;
       try {
         var _this$authForm;
-        if ((0, _classPrivateFieldGet12["default"])(this, _options).firebase.genuineForm !== false) {
+        if ((0, _classPrivateFieldGet13["default"])(this, _options).firebase.genuineForm !== false) {
           if (this.reCaptcha.enabled && this.reCaptcha.loaded) {
-            this.reCaptcha.initCaptchaProcess();
-            this.events.notify('firebase-ready', true);
-          } else if (!this.reCaptcha.loaded) {
+            this.reCaptcha.initCaptchaProcess().then(function () {
+              _this9.events.notify(_eventsName["default"].local.FIREBASE_READY, true);
+            });
+          } else if (!this.reCaptcha.loaded && this.reCaptcha.enabled) {
             this.events.subscribe(_eventsName["default"].local.RECAPTCHA_LOADED, function () {
-              _this9.reCaptcha.initCaptchaProcess();
-              _this9.events.notify('firebase-ready', true);
+              _this9.reCaptcha.initCaptchaProcess().then(function () {
+                _this9.events.notify(_eventsName["default"].local.FIREBASE_READY, true);
+              });
             }, {
               once: true
             });
+          } else if (!this.reCaptcha.enabled) {
+            this.events.notify(_eventsName["default"].local.FIREBASE_READY, true);
           }
         } else if ((_this$authForm = this.authForm) !== null && _this$authForm !== void 0 && _this$authForm.triggerButton) {
           this.authForm.triggerButton.events.notify(_eventsName.FIREBASE_UI_SHOWN, true);
-          this.events.notify('firebase-ready', true);
+          this.events.notify(_eventsName["default"].local.FIREBASE_READY, true);
+        } else {
+          this.events.notify(_eventsName["default"].local.FIREBASE_READY, true);
         }
         this.toggleFormLoader(false);
       } catch (e) {
@@ -2541,7 +2555,7 @@ var Authentication = /*#__PURE__*/function () {
               if (this.reCaptcha.loaded) {
                 this.resetAuthProcess();
                 this.reCaptcha.grecaptcha.reset();
-                if ((0, _classPrivateFieldGet12["default"])(this, _options).firebase.genuineForm !== false) {
+                if ((0, _classPrivateFieldGet13["default"])(this, _options).firebase.genuineForm !== false) {
                   this.reCaptcha.initCaptchaProcess();
                 }
               }
@@ -2811,11 +2825,8 @@ var Authentication = /*#__PURE__*/function () {
               return _classPrivateMethodGet(this, _checkCustomToken, _checkCustomToken2).call(this);
             case 6:
               isOpenModalAfterAuthWithCustomToken = _context11.sent;
-              console.log('isOpenResetPassword', isOpenResetPassword);
-              console.log('isOpenAuthWithLink', isOpenAuthWithLink);
-              console.log('isOpenModalAfterAuthWithCustomToken', isOpenModalAfterAuthWithCustomToken);
               return _context11.abrupt("return", isOpenResetPassword || isOpenAuthWithLink || isOpenModalAfterAuthWithCustomToken);
-            case 11:
+            case 8:
             case "end":
               return _context11.stop();
           }
@@ -2829,10 +2840,10 @@ var Authentication = /*#__PURE__*/function () {
   }, {
     key: "init",
     value: function init() {
-      var _classPrivateFieldGet5;
-      if (!!((_classPrivateFieldGet5 = (0, _classPrivateFieldGet12["default"])(this, _options)) !== null && _classPrivateFieldGet5 !== void 0 && _classPrivateFieldGet5.firebase)) {
+      var _classPrivateFieldGet6;
+      if (!!((_classPrivateFieldGet6 = (0, _classPrivateFieldGet13["default"])(this, _options)) !== null && _classPrivateFieldGet6 !== void 0 && _classPrivateFieldGet6.firebase)) {
         // Render recaptcha before the firebase init if not custom FB form
-        if ((0, _classPrivateFieldGet12["default"])(this, _options).firebase.genuineForm !== false) {
+        if ((0, _classPrivateFieldGet13["default"])(this, _options).firebase.genuineForm !== false) {
           if (this.reCaptcha.enabled) {
             if (!this.isAuthenticated()) {
               this.reCaptcha.init();
@@ -2853,12 +2864,12 @@ var Authentication = /*#__PURE__*/function () {
 }();
 exports["default"] = Authentication;
 function _get_authPlaceholderElementSelector() {
-  var _classPrivateFieldGet6, _classPrivateFieldGet7, _classPrivateFieldGet8, _classPrivateFieldGet9;
-  var selector = (_classPrivateFieldGet6 = (_classPrivateFieldGet7 = (0, _classPrivateFieldGet12["default"])(this, _options)) === null || _classPrivateFieldGet7 === void 0 ? void 0 : (_classPrivateFieldGet8 = _classPrivateFieldGet7.auth) === null || _classPrivateFieldGet8 === void 0 ? void 0 : (_classPrivateFieldGet9 = _classPrivateFieldGet8.firebase) === null || _classPrivateFieldGet9 === void 0 ? void 0 : _classPrivateFieldGet9.elementSelector) !== null && _classPrivateFieldGet6 !== void 0 ? _classPrivateFieldGet6 : "#".concat(_constants.WALLKIT_AUTH_FORM_PLACEHOLDER_ID);
+  var _classPrivateFieldGet7, _classPrivateFieldGet8, _classPrivateFieldGet9, _classPrivateFieldGet10;
+  var selector = (_classPrivateFieldGet7 = (_classPrivateFieldGet8 = (0, _classPrivateFieldGet13["default"])(this, _options)) === null || _classPrivateFieldGet8 === void 0 ? void 0 : (_classPrivateFieldGet9 = _classPrivateFieldGet8.auth) === null || _classPrivateFieldGet9 === void 0 ? void 0 : (_classPrivateFieldGet10 = _classPrivateFieldGet9.firebase) === null || _classPrivateFieldGet10 === void 0 ? void 0 : _classPrivateFieldGet10.elementSelector) !== null && _classPrivateFieldGet7 !== void 0 ? _classPrivateFieldGet7 : "#".concat(_constants.WALLKIT_AUTH_FORM_PLACEHOLDER_ID);
   return (0, _DOM.normalizeSelector)(selector);
 }
 function _get_authPlaceholderElementSelectorType() {
-  switch ((0, _classPrivateFieldGet12["default"])(this, _authPlaceholderElementSelector).charAt(0)) {
+  switch ((0, _classPrivateFieldGet13["default"])(this, _authPlaceholderElementSelector).charAt(0)) {
     case '#':
       return 'id';
     case '.':
@@ -2867,7 +2878,7 @@ function _get_authPlaceholderElementSelectorType() {
   return 'id';
 }
 function _get_isEmailProvider() {
-  var providers = (0, _classPrivateFieldGet12["default"])(this, _options).firebase.providers;
+  var providers = (0, _classPrivateFieldGet13["default"])(this, _options).firebase.providers;
   if ((0, _lodash["default"])(providers)) return false;
   if (!Array.isArray(providers)) return false;
   var _iterator = _createForOfIteratorHelper(providers),
@@ -2886,13 +2897,13 @@ function _get_isEmailProvider() {
   return false;
 }
 function _createModal2() {
-  var _classPrivateFieldGet10, _classPrivateFieldGet11;
+  var _classPrivateFieldGet11, _classPrivateFieldGet12;
   return new _modal["default"]({
     modalName: 'auth-modal',
-    content: ((_classPrivateFieldGet10 = (0, _classPrivateFieldGet12["default"])(this, _options)) === null || _classPrivateFieldGet10 === void 0 ? void 0 : _classPrivateFieldGet10.content) || this.getDefaultAuthenticationFormContent(),
+    content: ((_classPrivateFieldGet11 = (0, _classPrivateFieldGet13["default"])(this, _options)) === null || _classPrivateFieldGet11 === void 0 ? void 0 : _classPrivateFieldGet11.content) || this.getDefaultAuthenticationFormContent(),
     className: 'wallkit-auth-modal',
     initialLoader: true,
-    ui: (_classPrivateFieldGet11 = (0, _classPrivateFieldGet12["default"])(this, _options)) === null || _classPrivateFieldGet11 === void 0 ? void 0 : _classPrivateFieldGet11.ui
+    ui: (_classPrivateFieldGet12 = (0, _classPrivateFieldGet13["default"])(this, _options)) === null || _classPrivateFieldGet12 === void 0 ? void 0 : _classPrivateFieldGet12.ui
   });
 }
 function _initListeners2() {
@@ -3759,7 +3770,7 @@ function _formatCheckAccessRequestPath2(id, params) {
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports["default"] = exports.WALLKIT_SDK_LOADED = exports.WALLKIT_LOGOUT = exports.WALLKIT_FRAME_ROUTE_CHANGE = exports.WALLKIT_FRAME_READY = exports.WALLKIT_FIREBASE_TOKEN = exports.WALLKIT_EVENT_USER = exports.WALLKIT_EVENT_TOKEN = exports.WALLKIT_EVENT_REGISTRATION = exports.WALLKIT_EVENT_ONE_TAP_SIGN_IN = exports.WALLKIT_EVENT_GET_TOKEN = exports.WALLKIT_EVENT_FIREBASE_TOKEN = exports.WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN = exports.WALLKIT_EVENT_EXTERNAL_PROVIDER_TOKEN = exports.WALLKIT_EVENT_CHANGE_LANGUAGE = exports.WALLKIT_EVENT_AUTH = exports.WALLKIT_CHANGE_FRAME = exports.TICKETS_TOKEN_AUTH_SUCCESS = exports.SUCCESS_FIREBASE_AUTH = exports.SUCCESS_AUTH = exports.RECAPTCHA_VALIDATION_SUCCESS = exports.RECAPTCHA_VALIDATION_FAILED = exports.RECAPTCHA_LOADED = exports.READY = exports.PRE_SIGN_IN = exports.MODAL_OPEN = exports.MODAL_CREATED = exports.MODAL_CLOSED = exports.LOGOUT = exports.FRAME_MOUNTED = exports.FRAME_MODAL_CLOSED = exports.FRAME_MESSAGE = exports.FRAME_CREATED = exports.FIREBASE_UI_SHOWN = exports.FIREBASE_LOADED = exports.FIREBASE_INIT = exports.EXTERNAL_PROVIDER_TOKEN_AUTH_SUCCESS = exports.DEFAULT_AUTH_FORM_SLUG_UPDATED = exports.CHECK_USER_ACCESS = exports.AUTH_MODAL_CLOSED = void 0;
+exports["default"] = exports.WALLKIT_SDK_LOADED = exports.WALLKIT_LOGOUT = exports.WALLKIT_FRAME_ROUTE_CHANGE = exports.WALLKIT_FRAME_READY = exports.WALLKIT_FIREBASE_TOKEN = exports.WALLKIT_EVENT_USER = exports.WALLKIT_EVENT_TOKEN = exports.WALLKIT_EVENT_REGISTRATION = exports.WALLKIT_EVENT_ONE_TAP_SIGN_IN = exports.WALLKIT_EVENT_GET_TOKEN = exports.WALLKIT_EVENT_FIREBASE_TOKEN = exports.WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN = exports.WALLKIT_EVENT_EXTERNAL_PROVIDER_TOKEN = exports.WALLKIT_EVENT_CHANGE_LANGUAGE = exports.WALLKIT_EVENT_AUTH = exports.WALLKIT_CHANGE_FRAME = exports.TICKETS_TOKEN_AUTH_SUCCESS = exports.SUCCESS_FIREBASE_AUTH = exports.SUCCESS_AUTH = exports.RECAPTCHA_VALIDATION_SUCCESS = exports.RECAPTCHA_VALIDATION_FAILED = exports.RECAPTCHA_LOADED = exports.READY = exports.PRE_SIGN_IN = exports.MODAL_OPEN = exports.MODAL_CREATED = exports.MODAL_CLOSED = exports.LOGOUT = exports.FRAME_MOUNTED = exports.FRAME_MODAL_CLOSED = exports.FRAME_MESSAGE = exports.FRAME_CREATED = exports.FIREBASE_UI_SHOWN = exports.FIREBASE_READY = exports.FIREBASE_LOADED = exports.FIREBASE_INIT = exports.EXTERNAL_PROVIDER_TOKEN_AUTH_SUCCESS = exports.DEFAULT_AUTH_FORM_SLUG_UPDATED = exports.CHECK_USER_ACCESS = exports.AUTH_MODAL_CLOSED = void 0;
 // Local Events Names
 var FRAME_CREATED = 'frame-created';
 exports.FRAME_CREATED = FRAME_CREATED;
@@ -3808,9 +3819,11 @@ exports.DEFAULT_AUTH_FORM_SLUG_UPDATED = DEFAULT_AUTH_FORM_SLUG_UPDATED;
 var MODAL_OPEN = 'modal-open';
 exports.MODAL_OPEN = MODAL_OPEN;
 var READY = 'ready';
+exports.READY = READY;
+var FIREBASE_READY = 'firebase-ready';
 
 // Wallkit Events Names
-exports.READY = READY;
+exports.FIREBASE_READY = FIREBASE_READY;
 var WALLKIT_CHANGE_FRAME = 'wk-event-modal';
 exports.WALLKIT_CHANGE_FRAME = WALLKIT_CHANGE_FRAME;
 var WALLKIT_LOGOUT = 'wk-event-logout';
@@ -3862,7 +3875,8 @@ var _default = {
     DEFAULT_AUTH_FORM_SLUG_UPDATED: DEFAULT_AUTH_FORM_SLUG_UPDATED,
     LOGOUT: LOGOUT,
     MODAL_OPEN: MODAL_OPEN,
-    READY: READY
+    READY: READY,
+    FIREBASE_READY: FIREBASE_READY
   },
   wallkit: {
     FRAME_CREATED: FRAME_CREATED,

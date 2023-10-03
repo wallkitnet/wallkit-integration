@@ -15,7 +15,7 @@ import { isApplePayAvailable } from './utils/payments';
 import { isCrawler } from './utils/crawlers';
 
 import { ALLOWED_ORIGINS } from './configs/constants';
-import { SUCCESS_AUTH, FRAME_MESSAGE, FRAME_MODAL_CLOSED, MODAL_OPEN, READY } from "./managers/events/events-name";
+import { SUCCESS_AUTH, FRAME_MESSAGE, FRAME_MODAL_CLOSED, MODAL_OPEN, READY, FIREBASE_READY } from "./managers/events/events-name";
 import { parseAuthTokenHash, parseModalHashURL, resetHash } from "./utils/url";
 
 window.WallkitIntegration = class WallkitIntegration {
@@ -64,12 +64,12 @@ window.WallkitIntegration = class WallkitIntegration {
             }
         };
 
+        this.events = new Events();
+        this.managersStatuses.events.isReady = true;
+
         this.config = options;
 
         this.uiType = options?.ui?.type ?? 'popup';
-
-        this.events = new Events();
-        this.managersStatuses.events.isReady = true;
 
         this.content = Content;
         this.managersStatuses.content.isReady = true;
@@ -238,7 +238,7 @@ window.WallkitIntegration = class WallkitIntegration {
             }
         });
 
-        this.events.subscribe('firebase-ready', (params) => {
+        this.events.subscribe(FIREBASE_READY, (params) => {
             this.managersStatuses.authentication.isReady = true;
         });
 
@@ -254,7 +254,7 @@ window.WallkitIntegration = class WallkitIntegration {
 
             const currentLoadingInPercent = Math.round((Object.keys(this.managersStatuses).length - dif.length) / Object.keys(this.managersStatuses).length * 100);
             if (currentLoadingInPercent !== loadingInPercent) {
-                console.log(`WIL is loading... ${currentLoadingInPercent}%`);
+                console.log(`WIL is loading... ${currentLoadingInPercent}%`, dif);
                 loadingInPercent = currentLoadingInPercent;
             }
 

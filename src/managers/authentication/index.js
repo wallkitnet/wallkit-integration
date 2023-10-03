@@ -106,7 +106,11 @@ export default class Authentication {
 
     isAuthenticated() {
         if (this.sdk) {
-            return !!(this.sdk.methods.isAuthenticated() || this.token.get() || this.firebaseToken.get());
+            if(!!this.#options?.firebase){
+                return !!(this.sdk.methods.isAuthenticated() && this.token.get() && this.firebaseToken.get());
+            } else {
+                return !!(this.sdk.methods.isAuthenticated() && this.token.get());
+            }
         } else {
             return !!this.token.get();
         }
@@ -452,19 +456,27 @@ export default class Authentication {
         try {
           if (this.#options.firebase.genuineForm !== false) {
             if (this.reCaptcha.enabled && this.reCaptcha.loaded) {
-              this.reCaptcha.initCaptchaProcess();
-              this.events.notify('firebase-ready', true);
+
+              this.reCaptcha.initCaptchaProcess().then(() => {
+                this.events.notify(EventsNames.local.FIREBASE_READY, true);
+              });
+
             } else if (!this.reCaptcha.loaded && this.reCaptcha.enabled) {
+
               this.events.subscribe(EventsNames.local.RECAPTCHA_LOADED, () => {
-                this.reCaptcha.initCaptchaProcess();
-                this.events.notify('firebase-ready', true);
+                this.reCaptcha.initCaptchaProcess().then(() => {
+                    this.events.notify(EventsNames.local.FIREBASE_READY, true);
+                });
               }, {once: true});
+
             } else if (!this.reCaptcha.enabled) {
-                this.events.notify('firebase-ready', true);
+                this.events.notify(EventsNames.local.FIREBASE_READY, true);
             }
           } else if (this.authForm?.triggerButton){
               this.authForm.triggerButton.events.notify(FIREBASE_UI_SHOWN, true);
-              this.events.notify('firebase-ready', true);
+              this.events.notify(EventsNames.local.FIREBASE_READY, true);
+          } else {
+              this.events.notify(EventsNames.local.FIREBASE_READY, true);
           }
 
           this.toggleFormLoader(false);
