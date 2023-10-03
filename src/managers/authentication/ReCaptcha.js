@@ -190,6 +190,16 @@ export default class ReCaptchaFirebase {
                     }
                 }
 
+                emailField.readOnly = true;
+
+                emailField.addEventListener('focus', () => {
+                    emailField.removeAttribute('readonly');
+                });
+
+                emailField.addEventListener('blur', () => {
+                    emailField.readOnly = true;
+                });
+
                 emailField.addEventListener('input', () => {
                     if (!this.valid) {
                         emailField.blur();

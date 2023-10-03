@@ -946,6 +946,13 @@ var ReCaptchaFirebase = /*#__PURE__*/function () {
                       handleCaptchaState();
                     };
                   }
+                  emailField.readOnly = true;
+                  emailField.addEventListener('focus', function () {
+                    emailField.removeAttribute('readonly');
+                  });
+                  emailField.addEventListener('blur', function () {
+                    emailField.readOnly = true;
+                  });
                   emailField.addEventListener('input', function () {
                     if (!_this2.valid) {
                       emailField.blur();
