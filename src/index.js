@@ -8,21 +8,71 @@ import Content from "./managers/content";
 import Call from "./managers/call";
 import UserManager from "./managers/user"
 
-import { LIBRARY_STYLES } from './assets/styles';
+import { POPUP_UI_LIBRARY_STYLES, INLINE_UI_LIBRARY_STYLES } from './assets/styles';
 
 import { createElement, injectInHead } from "./utils/DOM";
 import { isApplePayAvailable } from './utils/payments';
 import { isCrawler } from './utils/crawlers';
 
 import { ALLOWED_ORIGINS } from './configs/constants';
-import { SUCCESS_AUTH, FRAME_MESSAGE, FRAME_MODAL_CLOSED } from "./managers/events/events-name";
-import { parseAuthTokenHash, resetHash } from "./utils/url";
+import { SUCCESS_AUTH, FRAME_MESSAGE, FRAME_MODAL_CLOSED, MODAL_OPEN, READY, FIREBASE_READY } from "./managers/events/events-name";
+import { parseAuthTokenHash, parseModalHashURL, resetHash } from "./utils/url";
 
 window.WallkitIntegration = class WallkitIntegration {
     constructor(options) {
-        this.config = options;
+
+        this.managersStatuses = {
+            analytics: {
+                isEnabled: options?.analytics?.parseUTM ?? false,
+                isReady: false,
+            },
+            authentication: {
+                isEnabled: true,
+                isReady: false,
+            },
+            call: {
+                isEnabled: options?.call?.use ?? false,
+                isReady: false,
+            },
+            content: {
+                isEnabled: true,
+                isReady: false,
+            },
+            events: {
+                isEnabled: true,
+                isReady: false,
+            },
+            frame: {
+                isEnabled: true,
+                isReady: false,
+            },
+            localization: {
+                isEnabled: false,
+                isReady: false,
+            },
+            modal: {
+                isEnabled: true,
+                isReady: false,
+            },
+            sdk: {
+                isEnabled: true,
+                isReady: false,
+            },
+            user: {
+                isEnabled: true,
+                isReady: false,
+            }
+        };
+
         this.events = new Events();
+        this.managersStatuses.events.isReady = true;
+
+        this.config = options;
+
+        this.uiType = options?.ui?.type ?? 'popup';
+
         this.content = Content;
+        this.managersStatuses.content.isReady = true;
 
         const preventExecutionForCrawlers = options?.prevent_execution_for_crawlers ?? true;
         if (preventExecutionForCrawlers && isCrawler()) {
@@ -31,24 +81,28 @@ window.WallkitIntegration = class WallkitIntegration {
 
         this.frame = new Frame({
             ...options,
-            onReady: () => this.popup.toggleLoader(false)
+            onReady: () => {
+                this.popup.toggleLoader(false);
+                this.managersStatuses.frame.isReady = true;
+            }
         });
 
         this.popup = new Modal({
             resourceFrame: this.frame,
             initialLoader: true,
             onReady: (modal) => {
-                modal.openByHash();
+                this.managersStatuses.modal.isReady = true;
             },
             onClose: () => {
-                this.events.notify(FRAME_MODAL_CLOSED, { name: this.frame.currentFrameName });
-            }
+                this.events.notify(FRAME_MODAL_CLOSED, {name: this.frame.currentFrameName});
+            },
+            ui: options?.ui
         });
 
         this.sdk = new SDK({
             ...options,
             onLoaded: () => {
-                const { firebase, modal, content, reCaptcha, forms } = options.auth || {};
+                const {firebase, modal, content, reCaptcha, forms} = options.auth || {};
 
                 this.authentication = new Authentication({
                     ...options,
@@ -59,16 +113,37 @@ window.WallkitIntegration = class WallkitIntegration {
                 });
 
                 this.analytics = new Analytics(options?.analytics);
-                this.call = new Call(this.popup, this.config);
+                this.managersStatuses.analytics.isReady = true;
+
+                this.call = new Call(this.popup, this.config, () => {
+                    this.managersStatuses.call.isReady = true;
+                });
 
                 this.init();
                 this.userManager = new UserManager({
                     customizeForms: forms || false,
                     popup: this.popup,
-                    authentication: this.authentication
+                    authentication: this.authentication,
+                    ui: options?.ui,
                 });
+                this.managersStatuses.user.isReady = true;
+                this.managersStatuses.sdk.isReady = true;
             }
         });
+
+        this.checkAlreadyDefinedCallbacks();
+    }
+
+    checkAlreadyDefinedCallbacks() {
+        if (Array.isArray(window.wk) && window.wk.length > 0) {
+            window.wk.forEach(([event, callback, options]) => {
+                if (typeof event !== 'string' || typeof callback !== 'function') {
+                    return;
+                }
+
+                this.on(event, callback, options);
+            });
+        }
     }
 
     modal (name, params) {
@@ -88,6 +163,11 @@ window.WallkitIntegration = class WallkitIntegration {
     }
 
     #eventsListener() {
+
+        this.events.subscribe(MODAL_OPEN, (name) => {
+            this.modal(name);
+        });
+
         window.addEventListener('message', (event) => {
             const { data: { value, name }, origin } = event;
 
@@ -157,16 +237,70 @@ window.WallkitIntegration = class WallkitIntegration {
                 console.log('ERROR', error);
             }
         });
+
+        this.events.subscribe(FIREBASE_READY, (params) => {
+            this.managersStatuses.authentication.isReady = true;
+        });
+
+        let loadingInPercent = 0;
+        let wkReady = setInterval(() => {
+
+            const dif = [];
+            for (const manager in this.managersStatuses) {
+                if (this.managersStatuses[manager].isEnabled && !this.managersStatuses[manager].isReady) {
+                    dif.push({manager, ...this.managersStatuses[manager]});
+                }
+            }
+
+            const currentLoadingInPercent = Math.round((Object.keys(this.managersStatuses).length - dif.length) / Object.keys(this.managersStatuses).length * 100);
+            if (currentLoadingInPercent !== loadingInPercent) {
+                console.log(`WIL is loading... ${currentLoadingInPercent}%`, dif);
+                loadingInPercent = currentLoadingInPercent;
+            }
+
+            if (dif.length === 0) {
+                console.log('WIL is ready...')
+                clearInterval(wkReady);
+                this.events.notify('ready', true);
+            }
+
+        }, 100);
+
+
+        this.on(READY, async () => {
+
+            const isOpenAuthRouting = await this.authentication.handleAuthRouting();
+
+            if (isOpenAuthRouting) {
+                return;
+            }
+
+            if (this.uiType === 'popup') {
+                this.popup.openByHash();
+            } else {
+                const modal = parseModalHashURL();
+                if (modal) {
+                    this.popup.open(modal.name, modal.params);
+                } else {
+                    if (this.authentication.isAuthenticated()) {
+                        this.popup.open('account-settings');
+                    } else {
+                        this.popup.open('sign-in');
+                    }
+                }
+            }
+        }, {once: true});
+
     }
 
-    #insertStyles () {
+    #insertStyles() {
         const styles = createElement('style');
-        styles.innerHTML = LIBRARY_STYLES;
+        styles.innerHTML = this.uiType === 'popup' ? POPUP_UI_LIBRARY_STYLES : INLINE_UI_LIBRARY_STYLES;
 
         injectInHead(styles);
     }
 
-    #recogniseURLIncomeParams () {
+    #recogniseURLIncomeParams() {
         const ticketPassAuthToken = parseAuthTokenHash();
         if (ticketPassAuthToken) {
             this.authentication.handleTicketsToken(ticketPassAuthToken);
@@ -174,7 +308,7 @@ window.WallkitIntegration = class WallkitIntegration {
         }
     }
 
-    init() {
+    async init() {
         this.#insertStyles();
         this.popup.init();
 
@@ -190,10 +324,18 @@ window.WallkitIntegration = class WallkitIntegration {
             this.config.onInit(this);
         }
 
-        if(this.config?.call?.use){
-            this.call.init();
+        if (this.config?.call?.use) {
+            await this.call.init();
         }
 
+    }
+
+    push ([event, callback, options]) {
+        if (typeof event !== 'string' || typeof callback !== 'function') {
+            return;
+        }
+
+        this.events.subscribe(event, callback, options);
     }
 }
 

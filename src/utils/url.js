@@ -116,3 +116,12 @@ export const parseUrlToShowAuthModal = () => {
     }
     return false;
 }
+
+export const getUrlParamByKey = ($key) => {
+    const search = decodeURIComponent(window.location.search);
+    if (!!search) {
+        const searchParams = new URLSearchParams(search);
+        return searchParams.get($key);
+    }
+    return null;
+}

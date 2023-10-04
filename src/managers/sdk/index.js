@@ -1,6 +1,6 @@
-import { insertScript } from "../../utils/DOM";
-import { WALLKIT_CDN_URL } from "../../configs/constants";
-import { WALLKIT_SDK_LOADED } from '../events/events-name';
+import {insertScript} from "../../utils/DOM";
+import {WALLKIT_CDN_URL} from "../../configs/constants";
+import {WALLKIT_SDK_LOADED} from '../events/events-name';
 import Events from "../events";
 
 export default class SDK {
@@ -24,7 +24,23 @@ export default class SDK {
 
         this.#options = options;
         this.#events = new Events();
-        this.#apiUrl = options.mode === 'dev' ? 'https://api.dev.wallkit.net/api/v1': undefined;
+
+        switch (options.mode) {
+            case 'prod':
+                this.#apiUrl = 'https://api.wallkit.net/api/v1';
+                break;
+
+            case 'dev':
+                this.#apiUrl = 'https://api.dev.wallkit.net/api/v1';
+                break;
+
+            case 'demo':
+                this.#apiUrl = 'https://api.demo.wallkit.net/api/v1';
+                break;
+
+            default:
+                this.#apiUrl = 'https://api.wallkit.net/api/v1';
+        }
 
         if (window.Wallkit) {
             this.onLoad();
@@ -36,9 +52,9 @@ export default class SDK {
     onLoad() {
         if (window.Wallkit) {
             window.Wallkit.init({
-              resource: this.#options.public_key,
-              api_url: this.#apiUrl,
-              subDomainCookie: this.#options.cookies?.subDomain ?? false
+                resource: this.#options.public_key,
+                api_url: this.#apiUrl,
+                subDomainCookie: this.#options.cookies?.subDomain ?? false
             });
             this.methods = window.Wallkit;
             this.client = window.Wallkit.client;
@@ -61,6 +77,6 @@ export default class SDK {
     }
 
     load() {
-        insertScript(`${WALLKIT_CDN_URL}/js/sdk/0.0.51/wallkit.umd.min.js`, 'wallkit-js-sdk', this.onLoad.bind(this));
+        insertScript(`${WALLKIT_CDN_URL}/js/sdk/latest/wallkit.umd.min.js`, 'wallkit-js-sdk', this.onLoad.bind(this));
     }
 }

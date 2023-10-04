@@ -21,6 +21,9 @@ export const CHECK_USER_ACCESS = 'check-user-access';
 export const EXTERNAL_PROVIDER_TOKEN_AUTH_SUCCESS = 'external-provider-token-auth-success';
 export const LOGOUT = 'logout';
 export const DEFAULT_AUTH_FORM_SLUG_UPDATED = 'default-auth-form-slug-updated';
+export const MODAL_OPEN = 'modal-open';
+export const READY = 'ready';
+export const FIREBASE_READY = 'firebase-ready';
 
 // Wallkit Events Names
 export const WALLKIT_CHANGE_FRAME = 'wk-event-modal';
@@ -58,7 +61,10 @@ export default {
         PRE_SIGN_IN,
         EXTERNAL_PROVIDER_TOKEN_AUTH_SUCCESS,
         DEFAULT_AUTH_FORM_SLUG_UPDATED,
-        LOGOUT
+        LOGOUT,
+        MODAL_OPEN,
+        READY,
+        FIREBASE_READY
     },
     wallkit: {
         FRAME_CREATED,
