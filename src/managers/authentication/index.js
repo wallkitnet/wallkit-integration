@@ -106,7 +106,11 @@ export default class Authentication {
 
     isAuthenticated() {
         if (this.sdk) {
-            return !!(this.sdk.methods.isAuthenticated() || this.token.get() || this.firebaseToken.get());
+            if(!!this.#options?.firebase){
+                return !!(this.sdk.methods.isAuthenticated() && this.token.get() && this.firebaseToken.get());
+            } else {
+                return !!(this.sdk.methods.isAuthenticated() && this.token.get());
+            }
         } else {
             return !!this.token.get();
         }
@@ -399,7 +403,8 @@ export default class Authentication {
             modalName: 'auth-modal',
             content: this.#options?.content || this.getDefaultAuthenticationFormContent(),
             className: 'wallkit-auth-modal',
-            initialLoader: true
+            initialLoader: true,
+            ui: this.#options?.ui,
         });
     }
 
@@ -455,14 +460,27 @@ export default class Authentication {
         try {
           if (this.#options.firebase.genuineForm !== false) {
             if (this.reCaptcha.enabled && this.reCaptcha.loaded) {
-              this.reCaptcha.initCaptchaProcess();
-            } else if (!this.reCaptcha.loaded) {
+
+              this.reCaptcha.initCaptchaProcess().then(() => {
+                this.events.notify(EventsNames.local.FIREBASE_READY, true);
+              });
+
+            } else if (!this.reCaptcha.loaded && this.reCaptcha.enabled) {
+
               this.events.subscribe(EventsNames.local.RECAPTCHA_LOADED, () => {
-                this.reCaptcha.initCaptchaProcess();
+                this.reCaptcha.initCaptchaProcess().then(() => {
+                    this.events.notify(EventsNames.local.FIREBASE_READY, true);
+                });
               }, {once: true});
+
+            } else if (!this.reCaptcha.enabled) {
+                this.events.notify(EventsNames.local.FIREBASE_READY, true);
             }
           } else if (this.authForm?.triggerButton){
               this.authForm.triggerButton.events.notify(FIREBASE_UI_SHOWN, true);
+              this.events.notify(EventsNames.local.FIREBASE_READY, true);
+          } else {
+              this.events.notify(EventsNames.local.FIREBASE_READY, true);
           }
 
           this.toggleFormLoader(false);
@@ -716,7 +734,9 @@ export default class Authentication {
         if (oobCode) {
             this.showResetPassword(oobCode);
             resetHash();
+            return true;
         }
+        return false;
     }
 
     showResetPassword(oobCode) {
@@ -741,12 +761,14 @@ export default class Authentication {
                 operationType: "signIn",
                 token: resJson.idToken,
             });
+            return true;
         }
+        return false;
     }
 
     async #checkCustomToken() {
 
-        this.firebase.events.subscribe(FIREBASE_INIT, async () => {
+        // this.firebase.events.subscribe(FIREBASE_INIT, async () => {
             this.checkFirebaseInit();
 
             const customFirebaseToken = getUrlParamByKey('custom-firebase-token');
@@ -760,10 +782,20 @@ export default class Authentication {
                 await this.authWithCustomToken(customFirebaseToken, wallkitToken);
                 if (popupSlug) {
                     this.events.notify(MODAL_OPEN, popupSlug);
+                    return true;
                 }
             }
+            return false;
 
-        }, {once: true});
+        // }, {once: true});
+    }
+
+    async handleAuthRouting() {
+        const isOpenResetPassword = this.#checkIfResetPasswordURL();
+        const isOpenAuthWithLink =  await this.#checkIfAuthEmailLinkURL();
+        const isOpenModalAfterAuthWithCustomToken =  await this.#checkCustomToken();
+
+        return isOpenResetPassword || isOpenAuthWithLink || isOpenModalAfterAuthWithCustomToken;
     }
 
     init() {
@@ -786,8 +818,6 @@ export default class Authentication {
             }
         }
         this.#initListeners();
-        this.#checkIfResetPasswordURL();
-        this.#checkIfAuthEmailLinkURL();
-        this.#checkCustomToken();
+
     }
 }

@@ -1,7 +1,7 @@
 /*!
  * Package name: wallkit-integration-lib.
  * Package description: Wallkit Integration Library. Library to manipulate with Wallkit System: Paywall, Modals, Authentication, SDK..
- * Package version: 3.0.26.
+ * Package version: 3.0.29.
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -16,7 +16,10 @@
 return /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 2350:
+/***/ "./src/assets/styles.js":
+/*!******************************!*\
+  !*** ./src/assets/styles.js ***!
+  \******************************/
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -25,13 +28,18 @@ return /******/ (() => { // webpackBootstrap
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.LIBRARY_STYLES = void 0;
-var LIBRARY_STYLES = "\n        .wallkit-modal-wrapper {\n            z-index: 100;\n            position: fixed;\n            top: 0;\n            left: 0;\n            right: 0;\n            bottom: 0;\n            background: rgba(18, 18, 20, 0.9);\n            display: flex;\n            align-items: center;\n            justify-content: flex-start;\n            flex-direction: column;\n            overflow-y: auto;\n            padding: 70px 15px 20px;\n        }\n\n        .wallkit-modal-wrapper__content {\n            background-color: #fff;\n            flex-shrink: 0;\n            position: relative;\n            box-sizing: border-box;\n            overflow: hidden;\n        }\n        \n        @media screen and (max-width: 500px) {\n            .wallkit-modal-wrapper__content {\n                width: 100%;\n                min-width: auto!important;\n            }\n        }\n\n        .wallkit-modal-wrapper__close-btn {\n            position: absolute;\n            right: 10px;\n            top: 10px;\n            cursor: pointer;\n            color: #000;\n            font-size: 37px;\n            width: 37px;\n            height: 37px;\n            text-align: center;\n            line-height: 34px;\n        }\n\n        .wallkit-modal-wrapper .wk-frame {\n            transition: all 0.3s linear 0s;\n            max-width: 100%;\n            border: none;\n        }\n\n        .wallkit-auth-modal {\n            z-index: 999;\n        }\n\n        .wallkit-auth-modal .wallkit-modal-wrapper__content {\n            padding: 20px;\n        }\n\n        .wallkit-auth-modal .wallkit-auth-modal__title {\n            font-family: Roboto, sans-serif;\n            text-align: center;\n        }\n        \n        .wk-auth-form {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .wk-form-field {\n            display: flex;\n            flex-direction: column;\n            font-family: Oxygen, sans-serif;\n            margin-bottom: 10px;\n        }\n\n        .wk-form-field .wk-form-field__label {\n            font-weight: 500;\n            color: #333;\n            margin-bottom: 5px;\n        }\n\n        .wk-form-field .wk-form-field__input-wrapper {\n            margin-bottom: 5px;\n            position: relative;\n        }\n        \n        .wk-eye-toggle {\n            background: url(https://www.gstatic.com/images/icons/material/system/1x/visibility_black_24dp.png);\n            width: 24px;\n            height: 24px;\n        }\n        \n        .wk-form-field__field-description {\n            font-size: 11px;\n            color: #989898;\n        }\n        \n        .wk-eye-toggle.wk-eye-toggled {\n            background: url(https://www.gstatic.com/images/icons/material/system/1x/visibility_off_black_24dp.png);\n        }\n        \n        .wk-form-field__field-affix {\n            position: absolute;\n            right: 5px;\n            top: 0;\n            bottom: 0;\n        }\n        \n        .wk-form-field .wk-form-field__input {\n            border-radius: 0;\n            border: 0;\n            border-bottom: 1px solid #ccc;\n            padding: 5px;\n            box-sizing: border-box;\n            width: 100%;\n        }\n        \n        .wk-field-list {\n            list-style-type: circle;\n            padding-left: 12px;\n            margin-top: 1px;\n        }\n\n        .wk-form-field .wk-form-field__input:focus {\n            border-bottom: 1px solid #3f51b5;\n            outline: none;\n        }\n\n        .wk-form-field .wk-form-field__message {\n            font-size: 12px;\n        }\n\n        .wk-auth-form-button {\n            background-color: #db4437;\n            direction: ltr;\n            font-weight: 500;\n            height: auto;\n            line-height: normal;\n            max-width: 220px;\n            min-height: 40px;\n            padding: 8px 16px;\n            text-align: left;\n            width: 100%;\n            box-sizing: border-box;\n            box-shadow: 0 2px 2px 0 rgba(0,0,0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.20), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n            border-radius: 2px;\n            font-family: \"Roboto\",\"Helvetica\",\"Arial\",sans-serif;\n            margin: 0 auto 15px;\n            cursor: pointer;\n        }\n        \n        .wk-auth-form-button:focus,\n        .wk-auth-form-button:active,{\n            background-color: #5b6abe;\n        }\n\n        .wk-form-field.wk-form-field--invalid .wk-form-field__input {\n            border-bottom: 1px solid #dd2c00;\n        }\n        \n        .wk-form-field.wk-form-field--checkbox.wk-form-field--invalid .wk-form-field__checkmark {\n            border-color: #dd2c00;\n        }\n\n        .wk-form-field.wk-form-field--valid .wk-form-field__input {\n            border-bottom: 1px solid green;\n        }\n\n        .wk-form-field.wk-form-field--invalid .wk-form-field__message {\n            color: #dd2c00;\n        }\n\n        .wk-form-field.wk-form-field--valid .wk-form-field__message {\n            color: green;\n        }\n\n        .wk-form .wk-form__link {\n            font-size: 14px;\n            color: #3170f3;\n            text-decoration: underline;\n        }\n\n        .wk-form {\n            font-family: Oxygen, sans-serif;\n        }\n        \n        .wk-form-header {\n            margin-bottom: 10px;\n        }\n\n        .wk-form .wk-form__footer {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n        }\n        \n        .wk-form .wk-form__footer.wk-form__footer--right {\n            justify-content: flex-end;\n        }\n\n        .wk-form .wk-form__sub-footer {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            margin-bottom: 20px;\n        }\n\n        .wk-form__reset-password {\n            text-align: right;\n        }\n\n        .wk-form-result {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n        }\n\n        .wk-form-button {\n            border: none;\n            border-radius: 2px;\n            background-color: #3f51b5;\n            color: #fff;\n            position: relative;\n            height: 36px;\n            margin: 0;\n            min-width: 64px;\n            padding: 0 16px;\n            display: inline-block;\n            font-family: \"Roboto\", \"Helvetica\", \"Arial\", sans-serif;\n            font-size: 14px;\n            font-weight: 500;\n            text-transform: uppercase;\n            letter-spacing: 0;\n            overflow: hidden;\n            will-change: box-shadow;\n            transition: box-shadow .2s cubic-bezier(0.4, 0, 1, 1),background-color .2s cubic-bezier(0.4, 0, 0.2, 1),color .2s cubic-bezier(0.4, 0, 0.2, 1);\n            outline: none;\n            cursor: pointer;\n            text-decoration: none;\n            text-align: center;\n            line-height: 36px;\n            vertical-align: middle;\n        }\n\n        .wk-form__error {\n            display: none;\n            margin: 10px 0;\n            border: 1px solid #f5c6cb;\n            border-radius: 5px;\n            color: #721c24;\n            background-color: #f8d7da;\n            line-height: 21px;\n            padding: 10px;\n        }\n\n        .wk-form__error.wk-form__error--show {\n            display: block;\n        }\n\n        .wk-form-button.wk-form-button--cancel {\n            margin-left: auto;\n            margin-right: 10px;\n            color: #3f51b5;\n            background: none;\n        }\n        \n        .wk-success-message {\n        }\n        \n        .wk-success-message__title {\n            font-weight: 500;\n            margin-bottom: 10px;\n        }\n        \n        .wk-success-message__description {\n            margin-bottom: 10px;\n        }\n        \n        .wk-success-message__description b {\n            font-weight: 500;\n        }\n\n        .wk-form-button.wk-form-button--cancel:hover {\n            background-color: hsla(0,0%,62%,.2);\n        }\n        \n        .wk-success-message.wk-password-reset-success {\n            min-height: 205px;\n            display: flex;\n            justify-content: center;\n            flex-direction: column;\n        }\n        \n       \n        \n        .wk-form-field.wk-form-field--checkbox .wk-form-field__label {\n            position: relative;\n            padding-left: 30px;     \n            line-height: 20px;\n            font-size: 14px;     \n        } \n        \n        .wk-form-field.wk-form-field--checkbox input {\n            position: absolute;\n            opacity: 0;\n            cursor: pointer;\n            height: 0;\n            width: 0;\n        }\n        \n        .wk-form-field .wk-form-field__checkmark {\n            position: absolute;\n            top: 0;\n            left: 0;\n            height: 18px;\n            width: 18px;\n            background-color: none;\n            border: 2px solid #333;\n            box-sizing: border-box;\n            border-radius: 2px;\n        }\n        \n        .wk-form-field.wk-form-field--checkbox input:checked ~ .wk-form-field__checkmark {\n            background-color: #3f51b5;\n            border-color: #3f51b5;\n        }\n        \n        .wk-form-field__checkmark:after {\n            content: \"\";\n            position: absolute;\n            display: none;\n        }\n        \n        .wk-form-field input:checked ~ .wk-form-field__checkmark:after {\n            display: block;\n        }\n        \n        .wk-form-field .wk-form-field__checkmark:after {\n            left: 5px;\n            top: 2px;\n            width: 3px;\n            height: 7px;\n            border: solid white;\n            border-width: 0 2px 2px 0;\n            -webkit-transform: rotate(45deg);\n            -ms-transform: rotate(45deg);\n            transform: rotate(45deg);\n        }\n";
-exports.LIBRARY_STYLES = LIBRARY_STYLES;
+exports.POPUP_UI_LIBRARY_STYLES = exports.INLINE_UI_LIBRARY_STYLES = void 0;
+var POPUP_UI_LIBRARY_STYLES = "\n        .wallkit-modal-wrapper {\n            z-index: 100;\n            position: fixed;\n            top: 0;\n            left: 0;\n            right: 0;\n            bottom: 0;\n            background: rgba(18, 18, 20, 0.9);\n            display: flex;\n            align-items: center;\n            justify-content: flex-start;\n            flex-direction: column;\n            overflow-y: auto;\n            padding: 70px 15px 20px;\n        }\n\n        .wallkit-modal-wrapper__content {\n            background-color: #fff;\n            flex-shrink: 0;\n            position: relative;\n            box-sizing: border-box;\n            overflow: hidden;\n        }\n        \n        @media screen and (max-width: 500px) {\n            .wallkit-modal-wrapper__content {\n                width: 100%;\n                min-width: auto!important;\n            }\n        }\n\n        .wallkit-modal-wrapper__close-btn {\n            position: absolute;\n            right: 10px;\n            top: 10px;\n            cursor: pointer;\n            color: #000;\n            font-size: 37px;\n            width: 37px;\n            height: 37px;\n            text-align: center;\n            line-height: 34px;\n        }\n\n        .wallkit-modal-wrapper .wk-frame {\n            transition: all 0.3s linear 0s;\n            max-width: 100%;\n            border: none;\n        }\n\n        .wallkit-auth-modal {\n            z-index: 999;\n        }\n\n        .wallkit-auth-modal .wallkit-modal-wrapper__content {\n            padding: 20px;\n        }\n\n        .wallkit-auth-modal .wallkit-auth-modal__title {\n            font-family: Roboto, sans-serif;\n            text-align: center;\n        }\n        \n        .wk-auth-form {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .wk-form-field {\n            display: flex;\n            flex-direction: column;\n            font-family: Oxygen, sans-serif;\n            margin-bottom: 10px;\n        }\n\n        .wk-form-field .wk-form-field__label {\n            font-weight: 500;\n            color: #333;\n            margin-bottom: 5px;\n        }\n\n        .wk-form-field .wk-form-field__input-wrapper {\n            margin-bottom: 5px;\n            position: relative;\n        }\n        \n        .wk-eye-toggle {\n            background: url(https://www.gstatic.com/images/icons/material/system/1x/visibility_black_24dp.png);\n            width: 24px;\n            height: 24px;\n        }\n        \n        .wk-form-field__field-description {\n            font-size: 11px;\n            color: #989898;\n        }\n        \n        .wk-eye-toggle.wk-eye-toggled {\n            background: url(https://www.gstatic.com/images/icons/material/system/1x/visibility_off_black_24dp.png);\n        }\n        \n        .wk-form-field__field-affix {\n            position: absolute;\n            right: 5px;\n            top: 0;\n            bottom: 0;\n        }\n        \n        .wk-form-field .wk-form-field__input {\n            border-radius: 0;\n            border: 0;\n            border-bottom: 1px solid #ccc;\n            padding: 5px;\n            box-sizing: border-box;\n            width: 100%;\n        }\n        \n        .wk-field-list {\n            list-style-type: circle;\n            padding-left: 12px;\n            margin-top: 1px;\n        }\n\n        .wk-form-field .wk-form-field__input:focus {\n            border-bottom: 1px solid #3f51b5;\n            outline: none;\n        }\n\n        .wk-form-field .wk-form-field__message {\n            font-size: 12px;\n        }\n\n        .wk-auth-form-button {\n            background-color: #db4437;\n            direction: ltr;\n            font-weight: 500;\n            height: auto;\n            line-height: normal;\n            max-width: 220px;\n            min-height: 40px;\n            padding: 8px 16px;\n            text-align: left;\n            width: 100%;\n            box-sizing: border-box;\n            box-shadow: 0 2px 2px 0 rgba(0,0,0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.20), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n            border-radius: 2px;\n            font-family: \"Roboto\",\"Helvetica\",\"Arial\",sans-serif;\n            margin: 0 auto 15px;\n            cursor: pointer;\n        }\n        \n        .wk-auth-form-button:focus,\n        .wk-auth-form-button:active,{\n            background-color: #5b6abe;\n        }\n\n        .wk-form-field.wk-form-field--invalid .wk-form-field__input {\n            border-bottom: 1px solid #dd2c00;\n        }\n        \n        .wk-form-field.wk-form-field--checkbox.wk-form-field--invalid .wk-form-field__checkmark {\n            border-color: #dd2c00;\n        }\n\n        .wk-form-field.wk-form-field--valid .wk-form-field__input {\n            border-bottom: 1px solid green;\n        }\n\n        .wk-form-field.wk-form-field--invalid .wk-form-field__message {\n            color: #dd2c00;\n        }\n\n        .wk-form-field.wk-form-field--valid .wk-form-field__message {\n            color: green;\n        }\n\n        .wk-form .wk-form__link {\n            font-size: 14px;\n            color: #3170f3;\n            text-decoration: underline;\n        }\n\n        .wk-form {\n            font-family: Oxygen, sans-serif;\n        }\n        \n        .wk-form-header {\n            margin-bottom: 10px;\n        }\n\n        .wk-form .wk-form__footer {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n        }\n        \n        .wk-form .wk-form__footer.wk-form__footer--right {\n            justify-content: flex-end;\n        }\n\n        .wk-form .wk-form__sub-footer {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            margin-bottom: 20px;\n        }\n\n        .wk-form__reset-password {\n            text-align: right;\n        }\n\n        .wk-form-result {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n        }\n\n        .wk-form-button {\n            border: none;\n            border-radius: 2px;\n            background-color: #3f51b5;\n            color: #fff;\n            position: relative;\n            height: 36px;\n            margin: 0;\n            min-width: 64px;\n            padding: 0 16px;\n            display: inline-block;\n            font-family: \"Roboto\", \"Helvetica\", \"Arial\", sans-serif;\n            font-size: 14px;\n            font-weight: 500;\n            text-transform: uppercase;\n            letter-spacing: 0;\n            overflow: hidden;\n            will-change: box-shadow;\n            transition: box-shadow .2s cubic-bezier(0.4, 0, 1, 1),background-color .2s cubic-bezier(0.4, 0, 0.2, 1),color .2s cubic-bezier(0.4, 0, 0.2, 1);\n            outline: none;\n            cursor: pointer;\n            text-decoration: none;\n            text-align: center;\n            line-height: 36px;\n            vertical-align: middle;\n        }\n\n        .wk-form__error {\n            display: none;\n            margin: 10px 0;\n            border: 1px solid #f5c6cb;\n            border-radius: 5px;\n            color: #721c24;\n            background-color: #f8d7da;\n            line-height: 21px;\n            padding: 10px;\n        }\n\n        .wk-form__error.wk-form__error--show {\n            display: block;\n        }\n\n        .wk-form-button.wk-form-button--cancel {\n            margin-left: auto;\n            margin-right: 10px;\n            color: #3f51b5;\n            background: none;\n        }\n        \n        .wk-success-message {\n        }\n        \n        .wk-success-message__title {\n            font-weight: 500;\n            margin-bottom: 10px;\n        }\n        \n        .wk-success-message__description {\n            margin-bottom: 10px;\n        }\n        \n        .wk-success-message__description b {\n            font-weight: 500;\n        }\n\n        .wk-form-button.wk-form-button--cancel:hover {\n            background-color: hsla(0,0%,62%,.2);\n        }\n        \n        .wk-success-message.wk-password-reset-success {\n            min-height: 205px;\n            display: flex;\n            justify-content: center;\n            flex-direction: column;\n        }\n        \n       \n        \n        .wk-form-field.wk-form-field--checkbox .wk-form-field__label {\n            position: relative;\n            padding-left: 30px;     \n            line-height: 20px;\n            font-size: 14px;     \n        } \n        \n        .wk-form-field.wk-form-field--checkbox input {\n            position: absolute;\n            opacity: 0;\n            cursor: pointer;\n            height: 0;\n            width: 0;\n        }\n        \n        .wk-form-field .wk-form-field__checkmark {\n            position: absolute;\n            top: 0;\n            left: 0;\n            height: 18px;\n            width: 18px;\n            background-color: none;\n            border: 2px solid #333;\n            box-sizing: border-box;\n            border-radius: 2px;\n        }\n        \n        .wk-form-field.wk-form-field--checkbox input:checked ~ .wk-form-field__checkmark {\n            background-color: #3f51b5;\n            border-color: #3f51b5;\n        }\n        \n        .wk-form-field__checkmark:after {\n            content: \"\";\n            position: absolute;\n            display: none;\n        }\n        \n        .wk-form-field input:checked ~ .wk-form-field__checkmark:after {\n            display: block;\n        }\n        \n        .wk-form-field .wk-form-field__checkmark:after {\n            left: 5px;\n            top: 2px;\n            width: 3px;\n            height: 7px;\n            border: solid white;\n            border-width: 0 2px 2px 0;\n            -webkit-transform: rotate(45deg);\n            -ms-transform: rotate(45deg);\n            transform: rotate(45deg);\n        }\n";
+exports.POPUP_UI_LIBRARY_STYLES = POPUP_UI_LIBRARY_STYLES;
+var INLINE_UI_LIBRARY_STYLES = "\n        .wallkit-modal-wrapper {\n            display: flex;\n            align-items: center;\n            justify-content: flex-start;\n            flex-direction: column;\n        }\n\n        .wallkit-modal-wrapper__content {\n            background-color: #fff;\n            flex-shrink: 0;\n            position: relative;\n            box-sizing: border-box;\n            overflow: hidden;\n        }\n        \n        @media screen and (max-width: 500px) {\n            .wallkit-modal-wrapper__content {\n                width: 100%;\n                min-width: auto!important;\n            }\n        }\n\n        .wallkit-modal-wrapper__close-btn {\n            position: absolute;\n            right: 10px;\n            top: 10px;\n            cursor: pointer;\n            color: #000;\n            font-size: 37px;\n            width: 37px;\n            height: 37px;\n            text-align: center;\n            line-height: 34px;\n        }\n\n        .wallkit-modal-wrapper .wk-frame {\n            transition: all 0.3s linear 0s;\n            max-width: 100%;\n            border: none;\n        }\n\n        .wallkit-auth-modal {\n            z-index: 999;\n        }\n\n        .wallkit-auth-modal .wallkit-modal-wrapper__content {\n            padding: 20px;\n        }\n\n        .wallkit-auth-modal .wallkit-auth-modal__title {\n            font-family: Roboto, sans-serif;\n            text-align: center;\n        }\n        \n        .wk-auth-form {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .wk-form-field {\n            display: flex;\n            flex-direction: column;\n            font-family: Oxygen, sans-serif;\n            margin-bottom: 10px;\n        }\n\n        .wk-form-field .wk-form-field__label {\n            font-weight: 500;\n            color: #333;\n            margin-bottom: 5px;\n        }\n\n        .wk-form-field .wk-form-field__input-wrapper {\n            margin-bottom: 5px;\n            position: relative;\n        }\n        \n        .wk-eye-toggle {\n            background: url(https://www.gstatic.com/images/icons/material/system/1x/visibility_black_24dp.png);\n            width: 24px;\n            height: 24px;\n        }\n        \n        .wk-form-field__field-description {\n            font-size: 11px;\n            color: #989898;\n        }\n        \n        .wk-eye-toggle.wk-eye-toggled {\n            background: url(https://www.gstatic.com/images/icons/material/system/1x/visibility_off_black_24dp.png);\n        }\n        \n        .wk-form-field__field-affix {\n            position: absolute;\n            right: 5px;\n            top: 0;\n            bottom: 0;\n        }\n        \n        .wk-form-field .wk-form-field__input {\n            border-radius: 0;\n            border: 0;\n            border-bottom: 1px solid #ccc;\n            padding: 5px;\n            box-sizing: border-box;\n            width: 100%;\n        }\n        \n        .wk-field-list {\n            list-style-type: circle;\n            padding-left: 12px;\n            margin-top: 1px;\n        }\n\n        .wk-form-field .wk-form-field__input:focus {\n            border-bottom: 1px solid #3f51b5;\n            outline: none;\n        }\n\n        .wk-form-field .wk-form-field__message {\n            font-size: 12px;\n        }\n\n        .wk-auth-form-button {\n            background-color: #db4437;\n            direction: ltr;\n            font-weight: 500;\n            height: auto;\n            line-height: normal;\n            max-width: 220px;\n            min-height: 40px;\n            padding: 8px 16px;\n            text-align: left;\n            width: 100%;\n            box-sizing: border-box;\n            box-shadow: 0 2px 2px 0 rgba(0,0,0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.20), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n            border-radius: 2px;\n            font-family: \"Roboto\",\"Helvetica\",\"Arial\",sans-serif;\n            margin: 0 auto 15px;\n            cursor: pointer;\n        }\n        \n        .wk-auth-form-button:focus,\n        .wk-auth-form-button:active,{\n            background-color: #5b6abe;\n        }\n\n        .wk-form-field.wk-form-field--invalid .wk-form-field__input {\n            border-bottom: 1px solid #dd2c00;\n        }\n        \n        .wk-form-field.wk-form-field--checkbox.wk-form-field--invalid .wk-form-field__checkmark {\n            border-color: #dd2c00;\n        }\n\n        .wk-form-field.wk-form-field--valid .wk-form-field__input {\n            border-bottom: 1px solid green;\n        }\n\n        .wk-form-field.wk-form-field--invalid .wk-form-field__message {\n            color: #dd2c00;\n        }\n\n        .wk-form-field.wk-form-field--valid .wk-form-field__message {\n            color: green;\n        }\n\n        .wk-form .wk-form__link {\n            font-size: 14px;\n            color: #3170f3;\n            text-decoration: underline;\n        }\n\n        .wk-form {\n            font-family: Oxygen, sans-serif;\n        }\n        \n        .wk-form-header {\n            margin-bottom: 10px;\n        }\n\n        .wk-form .wk-form__footer {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n        }\n        \n        .wk-form .wk-form__footer.wk-form__footer--right {\n            justify-content: flex-end;\n        }\n\n        .wk-form .wk-form__sub-footer {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            margin-bottom: 20px;\n        }\n\n        .wk-form__reset-password {\n            text-align: right;\n        }\n\n        .wk-form-result {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n        }\n\n        .wk-form-button {\n            border: none;\n            border-radius: 2px;\n            background-color: #3f51b5;\n            color: #fff;\n            position: relative;\n            height: 36px;\n            margin: 0;\n            min-width: 64px;\n            padding: 0 16px;\n            display: inline-block;\n            font-family: \"Roboto\", \"Helvetica\", \"Arial\", sans-serif;\n            font-size: 14px;\n            font-weight: 500;\n            text-transform: uppercase;\n            letter-spacing: 0;\n            overflow: hidden;\n            will-change: box-shadow;\n            transition: box-shadow .2s cubic-bezier(0.4, 0, 1, 1),background-color .2s cubic-bezier(0.4, 0, 0.2, 1),color .2s cubic-bezier(0.4, 0, 0.2, 1);\n            outline: none;\n            cursor: pointer;\n            text-decoration: none;\n            text-align: center;\n            line-height: 36px;\n            vertical-align: middle;\n        }\n\n        .wk-form__error {\n            display: none;\n            margin: 10px 0;\n            border: 1px solid #f5c6cb;\n            border-radius: 5px;\n            color: #721c24;\n            background-color: #f8d7da;\n            line-height: 21px;\n            padding: 10px;\n        }\n\n        .wk-form__error.wk-form__error--show {\n            display: block;\n        }\n\n        .wk-form-button.wk-form-button--cancel {\n            margin-left: auto;\n            margin-right: 10px;\n            color: #3f51b5;\n            background: none;\n        }\n        \n        .wk-success-message {\n        }\n        \n        .wk-success-message__title {\n            font-weight: 500;\n            margin-bottom: 10px;\n        }\n        \n        .wk-success-message__description {\n            margin-bottom: 10px;\n        }\n        \n        .wk-success-message__description b {\n            font-weight: 500;\n        }\n\n        .wk-form-button.wk-form-button--cancel:hover {\n            background-color: hsla(0,0%,62%,.2);\n        }\n        \n        .wk-success-message.wk-password-reset-success {\n            min-height: 205px;\n            display: flex;\n            justify-content: center;\n            flex-direction: column;\n        }\n        \n       \n        \n        .wk-form-field.wk-form-field--checkbox .wk-form-field__label {\n            position: relative;\n            padding-left: 30px;     \n            line-height: 20px;\n            font-size: 14px;     \n        } \n        \n        .wk-form-field.wk-form-field--checkbox input {\n            position: absolute;\n            opacity: 0;\n            cursor: pointer;\n            height: 0;\n            width: 0;\n        }\n        \n        .wk-form-field .wk-form-field__checkmark {\n            position: absolute;\n            top: 0;\n            left: 0;\n            height: 18px;\n            width: 18px;\n            background-color: none;\n            border: 2px solid #333;\n            box-sizing: border-box;\n            border-radius: 2px;\n        }\n        \n        .wk-form-field.wk-form-field--checkbox input:checked ~ .wk-form-field__checkmark {\n            background-color: #3f51b5;\n            border-color: #3f51b5;\n        }\n        \n        .wk-form-field__checkmark:after {\n            content: \"\";\n            position: absolute;\n            display: none;\n        }\n        \n        .wk-form-field input:checked ~ .wk-form-field__checkmark:after {\n            display: block;\n        }\n        \n        .wk-form-field .wk-form-field__checkmark:after {\n            left: 5px;\n            top: 2px;\n            width: 3px;\n            height: 7px;\n            border: solid white;\n            border-width: 0 2px 2px 0;\n            -webkit-transform: rotate(45deg);\n            -ms-transform: rotate(45deg);\n            transform: rotate(45deg);\n        }\n";
+exports.INLINE_UI_LIBRARY_STYLES = INLINE_UI_LIBRARY_STYLES;
 
 /***/ }),
 
-/***/ 9066:
+/***/ "./src/configs/constants.js":
+/*!**********************************!*\
+  !*** ./src/configs/constants.js ***!
+  \**********************************/
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -42,14 +50,10 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.WALLKIT_USER_MANAGER_MODAL_FORM_PLACEHOLDER_ID = exports.WALLKIT_TOKEN_NAME = exports.WALLKIT_POPUP_URL = exports.WALLKIT_POPUP_DEV_URL = exports.WALLKIT_MODAL_WRAPPER_CLASSNAME = exports.WALLKIT_MODAL_MIN_WIDTH = exports.WALLKIT_MODAL_MIN_HEIGHT = exports.WALLKIT_MODAL_MAX_WIDTH = exports.WALLKIT_MODAL_CONTENT_CLASSNAME = exports.WALLKIT_MODAL_CLOSE_BTN_CLASSNAME = exports.WALLKIT_FRAME_ID = exports.WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID = exports.WALLKIT_FIREBASE_UI_PLACEHOLDER_ID = exports.WALLKIT_FIREBASE_CONFIG = exports.WALLKIT_DEV_FIREBASE_CONFIG = exports.WALLKIT_CDN_URL = exports.WALLKIT_CDN_ASSETS_URL = exports.WALLKIT_AUTH_FORM_PLACEHOLDER_ID = exports.TRIGGER_GOOGLE_BUTTON_TITLE_SELECTOR = exports.TRIGGER_EMAIL_BUTTON_TITLE_SELECTOR = exports.TRIGGER_EMAIL_BUTTON_CLASS_NAME = exports.TRIGGER_EMAILLINK_BUTTON_TITLE_SELECTOR = exports.TRIGGER_EMAILLINK_BUTTON_CLASS_NAME = exports.TRIGGER_BUTTON_CLASS_NAME = exports.FIREBASE_TOKEN_NAME = exports.ALLOWED_ORIGINS = void 0;
 // Popups
-// export const WALLKIT_POPUP_URL = 'https://wallkit.net/popups';
 var WALLKIT_POPUP_URL = 'https://popups.wallkit.net';
 // export const WALLKIT_POPUP_URL = 'http://127.0.0.1:8000/popups';
-// export const WALLKIT_POPUP_DEV_URL = 'https://dev.wallkit.net/popups';
 exports.WALLKIT_POPUP_URL = WALLKIT_POPUP_URL;
 var WALLKIT_POPUP_DEV_URL = 'https://popups.dev.wallkit.net';
-// export const WALLKIT_POPUP_DEV_URL = 'http://192.168.0.105:8000';
-// export const WALLKIT_POPUP_DEV_URL = 'https://wallkit-landing.com/popups';
 // export const WALLKIT_POPUP_DEV_URL = 'http://127.0.0.1:8000/popups';
 
 // Assets
@@ -60,7 +64,7 @@ var WALLKIT_CDN_ASSETS_URL = WALLKIT_CDN_URL + '/assets';
 
 // Safety
 exports.WALLKIT_CDN_ASSETS_URL = WALLKIT_CDN_ASSETS_URL;
-var ALLOWED_ORIGINS = [document.location.origin, 'http://127.0.0.1:8000', 'https://wallkit.net', 'https://dev.wallkit.net', 'https://demo.wallkit.net', 'https://wallkit-landing.com', 'https://popups.wallkit.net', 'https://popups.dev.wallkit.net'];
+var ALLOWED_ORIGINS = [document.location.origin, 'http://127.0.0.1:8000', 'https://popups.wallkit.net', 'https://popups.dev.wallkit.net'];
 
 // Markup
 exports.ALLOWED_ORIGINS = ALLOWED_ORIGINS;
@@ -129,7 +133,10 @@ exports.FIREBASE_TOKEN_NAME = FIREBASE_TOKEN_NAME;
 
 /***/ }),
 
-/***/ 8006:
+/***/ "./src/configs/languages.js":
+/*!**********************************!*\
+  !*** ./src/configs/languages.js ***!
+  \**********************************/
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -144,19 +151,22 @@ exports.FB_AVAILABLE_LANGUAGES = FB_AVAILABLE_LANGUAGES;
 
 /***/ }),
 
-/***/ 542:
+/***/ "./src/handlers/Error.js":
+/*!*******************************!*\
+  !*** ./src/handlers/Error.js ***!
+  \*******************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(5656);
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports["default"] = exports.ERRORS_TYPES = exports.DEFAULT_ERROR_MESSAGES = void 0;
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
-var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js"));
 var ERRORS_TYPES = {
   DOM_ERROR: 'DOM_ERROR',
   ARGUMENT_ERROR: 'ARGUMENT_ERROR'
@@ -210,35 +220,41 @@ exports["default"] = Error;
 
 /***/ }),
 
-/***/ 6004:
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(5656);
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 var _exportNames = {};
 exports["default"] = void 0;
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(366));
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
-var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
-var _authentication = _interopRequireDefault(__webpack_require__(7484));
-var _modal = _interopRequireDefault(__webpack_require__(9269));
-var _frame = _interopRequireDefault(__webpack_require__(8967));
-var _sdk = _interopRequireDefault(__webpack_require__(4753));
-var _events = _interopRequireDefault(__webpack_require__(9889));
-var _analytics = _interopRequireDefault(__webpack_require__(7343));
-var _content = _interopRequireDefault(__webpack_require__(8390));
-var _call = _interopRequireDefault(__webpack_require__(5613));
-var _user = _interopRequireDefault(__webpack_require__(4442));
-var _styles = __webpack_require__(2350);
-var _DOM = __webpack_require__(2909);
-var _payments = __webpack_require__(8672);
-var _crawlers = __webpack_require__(7857);
-var _constants = __webpack_require__(9066);
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js"));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js"));
+var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js"));
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js"));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js"));
+var _authentication = _interopRequireDefault(__webpack_require__(/*! ./managers/authentication */ "./src/managers/authentication/index.js"));
+var _modal = _interopRequireDefault(__webpack_require__(/*! ./managers/modal */ "./src/managers/modal/index.js"));
+var _frame = _interopRequireDefault(__webpack_require__(/*! ./managers/frame */ "./src/managers/frame/index.js"));
+var _sdk = _interopRequireDefault(__webpack_require__(/*! ./managers/sdk */ "./src/managers/sdk/index.js"));
+var _events = _interopRequireDefault(__webpack_require__(/*! ./managers/events */ "./src/managers/events/index.js"));
+var _analytics = _interopRequireDefault(__webpack_require__(/*! ./managers/analytics */ "./src/managers/analytics/index.js"));
+var _content = _interopRequireDefault(__webpack_require__(/*! ./managers/content */ "./src/managers/content/index.js"));
+var _call = _interopRequireDefault(__webpack_require__(/*! ./managers/call */ "./src/managers/call/index.js"));
+var _user = _interopRequireDefault(__webpack_require__(/*! ./managers/user */ "./src/managers/user/index.js"));
+var _styles = __webpack_require__(/*! ./assets/styles */ "./src/assets/styles.js");
+var _DOM = __webpack_require__(/*! ./utils/DOM */ "./src/utils/DOM.js");
+var _payments = __webpack_require__(/*! ./utils/payments */ "./src/utils/payments.js");
+var _crawlers = __webpack_require__(/*! ./utils/crawlers */ "./src/utils/crawlers.js");
+var _constants = __webpack_require__(/*! ./configs/constants */ "./src/configs/constants.js");
 Object.keys(_constants).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
@@ -250,7 +266,7 @@ Object.keys(_constants).forEach(function (key) {
     }
   });
 });
-var _eventsName = __webpack_require__(6073);
+var _eventsName = __webpack_require__(/*! ./managers/events/events-name */ "./src/managers/events/events-name.js");
 Object.keys(_eventsName).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
@@ -262,7 +278,7 @@ Object.keys(_eventsName).forEach(function (key) {
     }
   });
 });
-var _url = __webpack_require__(5234);
+var _url = __webpack_require__(/*! ./utils/url */ "./src/utils/url.js");
 var _eventsListener, _insertStyles, _recogniseURLIncomeParams;
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -271,35 +287,88 @@ function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollect
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
 window.WallkitIntegration = (_eventsListener = /*#__PURE__*/new WeakSet(), _insertStyles = /*#__PURE__*/new WeakSet(), _recogniseURLIncomeParams = /*#__PURE__*/new WeakSet(), /*#__PURE__*/function () {
   function WallkitIntegration(options) {
-    var _options$prevent_exec,
+    var _options$analytics$pa,
+      _options$analytics,
+      _options$call$use,
+      _options$call,
+      _options$ui$type,
+      _options$ui,
+      _options$prevent_exec,
       _this = this;
     (0, _classCallCheck2["default"])(this, WallkitIntegration);
     _classPrivateMethodInitSpec(this, _recogniseURLIncomeParams);
     _classPrivateMethodInitSpec(this, _insertStyles);
     _classPrivateMethodInitSpec(this, _eventsListener);
-    this.config = options;
+    this.managersStatuses = {
+      analytics: {
+        isEnabled: (_options$analytics$pa = options === null || options === void 0 ? void 0 : (_options$analytics = options.analytics) === null || _options$analytics === void 0 ? void 0 : _options$analytics.parseUTM) !== null && _options$analytics$pa !== void 0 ? _options$analytics$pa : false,
+        isReady: false
+      },
+      authentication: {
+        isEnabled: true,
+        isReady: false
+      },
+      call: {
+        isEnabled: (_options$call$use = options === null || options === void 0 ? void 0 : (_options$call = options.call) === null || _options$call === void 0 ? void 0 : _options$call.use) !== null && _options$call$use !== void 0 ? _options$call$use : false,
+        isReady: false
+      },
+      content: {
+        isEnabled: true,
+        isReady: false
+      },
+      events: {
+        isEnabled: true,
+        isReady: false
+      },
+      frame: {
+        isEnabled: true,
+        isReady: false
+      },
+      localization: {
+        isEnabled: false,
+        isReady: false
+      },
+      modal: {
+        isEnabled: true,
+        isReady: false
+      },
+      sdk: {
+        isEnabled: true,
+        isReady: false
+      },
+      user: {
+        isEnabled: true,
+        isReady: false
+      }
+    };
     this.events = new _events["default"]();
+    this.managersStatuses.events.isReady = true;
+    this.config = options;
+    this.uiType = (_options$ui$type = options === null || options === void 0 ? void 0 : (_options$ui = options.ui) === null || _options$ui === void 0 ? void 0 : _options$ui.type) !== null && _options$ui$type !== void 0 ? _options$ui$type : 'popup';
     this.content = _content["default"];
+    this.managersStatuses.content.isReady = true;
     var preventExecutionForCrawlers = (_options$prevent_exec = options === null || options === void 0 ? void 0 : options.prevent_execution_for_crawlers) !== null && _options$prevent_exec !== void 0 ? _options$prevent_exec : true;
     if (preventExecutionForCrawlers && (0, _crawlers.isCrawler)()) {
       return;
     }
     this.frame = new _frame["default"](_objectSpread(_objectSpread({}, options), {}, {
       onReady: function onReady() {
-        return _this.popup.toggleLoader(false);
+        _this.popup.toggleLoader(false);
+        _this.managersStatuses.frame.isReady = true;
       }
     }));
     this.popup = new _modal["default"]({
       resourceFrame: this.frame,
       initialLoader: true,
       onReady: function onReady(modal) {
-        modal.openByHash();
+        _this.managersStatuses.modal.isReady = true;
       },
       onClose: function onClose() {
         _this.events.notify(_eventsName.FRAME_MODAL_CLOSED, {
           name: _this.frame.currentFrameName
         });
-      }
+      },
+      ui: options === null || options === void 0 ? void 0 : options.ui
     });
     this.sdk = new _sdk["default"](_objectSpread(_objectSpread({}, options), {}, {
       onLoaded: function onLoaded() {
@@ -316,17 +385,41 @@ window.WallkitIntegration = (_eventsListener = /*#__PURE__*/new WeakSet(), _inse
           reCaptcha: reCaptcha
         }));
         _this.analytics = new _analytics["default"](options === null || options === void 0 ? void 0 : options.analytics);
-        _this.call = new _call["default"](_this.popup, _this.config);
+        _this.managersStatuses.analytics.isReady = true;
+        _this.call = new _call["default"](_this.popup, _this.config, function () {
+          _this.managersStatuses.call.isReady = true;
+        });
         _this.init();
         _this.userManager = new _user["default"]({
           customizeForms: forms || false,
           popup: _this.popup,
-          authentication: _this.authentication
+          authentication: _this.authentication,
+          ui: options === null || options === void 0 ? void 0 : options.ui
         });
+        _this.managersStatuses.user.isReady = true;
+        _this.managersStatuses.sdk.isReady = true;
       }
     }));
+    this.checkAlreadyDefinedCallbacks();
   }
   (0, _createClass2["default"])(WallkitIntegration, [{
+    key: "checkAlreadyDefinedCallbacks",
+    value: function checkAlreadyDefinedCallbacks() {
+      var _this2 = this;
+      if (Array.isArray(window.wk) && window.wk.length > 0) {
+        window.wk.forEach(function (_ref2) {
+          var _ref3 = (0, _slicedToArray2["default"])(_ref2, 3),
+            event = _ref3[0],
+            callback = _ref3[1],
+            options = _ref3[2];
+          if (typeof event !== 'string' || typeof callback !== 'function') {
+            return;
+          }
+          _this2.on(event, callback, options);
+        });
+      }
+    }
+  }, {
     key: "modal",
     value: function modal(name, params) {
       this.popup.open(name, params);
@@ -348,38 +441,67 @@ window.WallkitIntegration = (_eventsListener = /*#__PURE__*/new WeakSet(), _inse
     }
   }, {
     key: "init",
-    value: function init() {
-      var _this$config, _this$config$call;
-      _classPrivateMethodGet(this, _insertStyles, _insertStyles2).call(this);
-      this.popup.init();
-      if (this.config.auth.defaultInit !== false) {
-        this.authentication.init();
+    value: function () {
+      var _init = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
+        var _this$config, _this$config$call;
+        return _regenerator["default"].wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              _classPrivateMethodGet(this, _insertStyles, _insertStyles2).call(this);
+              this.popup.init();
+              if (this.config.auth.defaultInit !== false) {
+                this.authentication.init();
+              }
+              this.analytics.init();
+              _classPrivateMethodGet(this, _eventsListener, _eventsListener2).call(this);
+              _classPrivateMethodGet(this, _recogniseURLIncomeParams, _recogniseURLIncomeParams2).call(this);
+              if (this.config.onInit) {
+                this.config.onInit(this);
+              }
+              if (!((_this$config = this.config) !== null && _this$config !== void 0 && (_this$config$call = _this$config.call) !== null && _this$config$call !== void 0 && _this$config$call.use)) {
+                _context.next = 10;
+                break;
+              }
+              _context.next = 10;
+              return this.call.init();
+            case 10:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee, this);
+      }));
+      function init() {
+        return _init.apply(this, arguments);
       }
-      this.analytics.init();
-      _classPrivateMethodGet(this, _eventsListener, _eventsListener2).call(this);
-      _classPrivateMethodGet(this, _recogniseURLIncomeParams, _recogniseURLIncomeParams2).call(this);
-      if (this.config.onInit) {
-        this.config.onInit(this);
+      return init;
+    }()
+  }, {
+    key: "push",
+    value: function push(_ref4) {
+      var _ref5 = (0, _slicedToArray2["default"])(_ref4, 3),
+        event = _ref5[0],
+        callback = _ref5[1],
+        options = _ref5[2];
+      if (typeof event !== 'string' || typeof callback !== 'function') {
+        return;
       }
-      if ((_this$config = this.config) !== null && _this$config !== void 0 && (_this$config$call = _this$config.call) !== null && _this$config$call !== void 0 && _this$config$call.use) {
-        this.call.init();
-      }
+      this.events.subscribe(event, callback, options);
     }
   }]);
   return WallkitIntegration;
 }());
 function _eventsListener2() {
-  var _this2 = this;
+  var _this3 = this;
   this.events.subscribe(_eventsName.MODAL_OPEN, function (name) {
-    _this2.modal(name);
+    _this3.modal(name);
   });
   window.addEventListener('message', function (event) {
     var _event$data = event.data,
       value = _event$data.value,
       name = _event$data.name,
       origin = event.origin;
-    _this2.events.notify(name, value);
-    _this2.events.notify(_eventsName.FRAME_MESSAGE, {
+    _this3.events.notify(name, value);
+    _this3.events.notify(_eventsName.FRAME_MESSAGE, {
       name: name,
       value: value
     });
@@ -387,48 +509,48 @@ function _eventsListener2() {
       if (_constants.ALLOWED_ORIGINS.includes(origin) && name) {
         switch (name) {
           case "wk-event-modals-ready":
-            if (_this2.authentication.isAuthenticated()) {
-              _this2.frame.sendEvent("wk-event-applepay-ready", (0, _payments.isApplePayAvailable)());
+            if (_this3.authentication.isAuthenticated()) {
+              _this3.frame.sendEvent("wk-event-applepay-ready", (0, _payments.isApplePayAvailable)());
             } else {
-              _this2.frame.sendEvent("wk-event-get-token", _this2.config.public_key);
+              _this3.frame.sendEvent("wk-event-get-token", _this3.config.public_key);
             }
             break;
           case "wk-event-resize":
             if (value.width !== 0 && value.height !== 0) {
-              _this2.popup.resize(value.width, value.height);
+              _this3.popup.resize(value.width, value.height);
             }
             break;
           case "show-firebase-auth":
             var redirect = value;
-            _this2.popup.hide();
-            _this2.events.subscribe(_eventsName.SUCCESS_AUTH, function () {
+            _this3.popup.hide();
+            _this3.events.subscribe(_eventsName.SUCCESS_AUTH, function () {
               if (typeof redirect === "string") {
-                _this2.popup.open(redirect);
+                _this3.popup.open(redirect);
               }
             }, {
               once: true
             });
-            _this2.authentication.show();
-            _this2.frame.openFrame('');
+            _this3.authentication.show();
+            _this3.frame.openFrame('');
             break;
           case "wk-event-close-modal":
-            _this2.popup.hide();
+            _this3.popup.hide();
             break;
           case "wk-event-reload-page":
-            _this2.popup.hide();
+            _this3.popup.hide();
             location.reload();
             break;
           case "wk-event-storage-available":
             if (!value) {
-              _this2.authentication.dispatchTokens();
+              _this3.authentication.dispatchTokens();
             }
             break;
           case "wk-event-close-on-wrapper":
-            _this2.popup.closeOutside = value;
+            _this3.popup.closeOutside = value;
             break;
           case "wk-firebase-change-password":
-            _this2.popup.hide();
-            _this2.userManager.showChangePassword();
+            _this3.popup.hide();
+            _this3.userManager.showChangePassword();
             break;
         }
       }
@@ -436,10 +558,71 @@ function _eventsListener2() {
       console.log('ERROR', error);
     }
   });
+  this.events.subscribe(_eventsName.FIREBASE_READY, function (params) {
+    _this3.managersStatuses.authentication.isReady = true;
+  });
+  var loadingInPercent = 0;
+  var wkReady = setInterval(function () {
+    var dif = [];
+    for (var manager in _this3.managersStatuses) {
+      if (_this3.managersStatuses[manager].isEnabled && !_this3.managersStatuses[manager].isReady) {
+        dif.push(_objectSpread({
+          manager: manager
+        }, _this3.managersStatuses[manager]));
+      }
+    }
+    var currentLoadingInPercent = Math.round((Object.keys(_this3.managersStatuses).length - dif.length) / Object.keys(_this3.managersStatuses).length * 100);
+    if (currentLoadingInPercent !== loadingInPercent) {
+      console.log("WIL is loading... ".concat(currentLoadingInPercent, "%"), dif);
+      loadingInPercent = currentLoadingInPercent;
+    }
+    if (dif.length === 0) {
+      console.log('WIL is ready...');
+      clearInterval(wkReady);
+      _this3.events.notify('ready', true);
+    }
+  }, 100);
+  this.on(_eventsName.READY, /*#__PURE__*/(0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2() {
+    var isOpenAuthRouting, modal;
+    return _regenerator["default"].wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.next = 2;
+          return _this3.authentication.handleAuthRouting();
+        case 2:
+          isOpenAuthRouting = _context2.sent;
+          if (!isOpenAuthRouting) {
+            _context2.next = 5;
+            break;
+          }
+          return _context2.abrupt("return");
+        case 5:
+          if (_this3.uiType === 'popup') {
+            _this3.popup.openByHash();
+          } else {
+            modal = (0, _url.parseModalHashURL)();
+            if (modal) {
+              _this3.popup.open(modal.name, modal.params);
+            } else {
+              if (_this3.authentication.isAuthenticated()) {
+                _this3.popup.open('account-settings');
+              } else {
+                _this3.popup.open('sign-in');
+              }
+            }
+          }
+        case 6:
+        case "end":
+          return _context2.stop();
+      }
+    }, _callee2);
+  })), {
+    once: true
+  });
 }
 function _insertStyles2() {
   var styles = (0, _DOM.createElement)('style');
-  styles.innerHTML = _styles.LIBRARY_STYLES;
+  styles.innerHTML = this.uiType === 'popup' ? _styles.POPUP_UI_LIBRARY_STYLES : _styles.INLINE_UI_LIBRARY_STYLES;
   (0, _DOM.injectInHead)(styles);
 }
 function _recogniseURLIncomeParams2() {
@@ -454,25 +637,28 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 7343:
+/***/ "./src/managers/analytics/index.js":
+/*!*****************************************!*\
+  !*** ./src/managers/analytics/index.js ***!
+  \*****************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(5656);
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports["default"] = void 0;
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
-var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
-var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(5194));
-var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(8478));
-var _sdk2 = _interopRequireDefault(__webpack_require__(4753));
-var _authentication2 = _interopRequireDefault(__webpack_require__(7484));
-var _events2 = _interopRequireDefault(__webpack_require__(9889));
-var _eventsName = __webpack_require__(6073);
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js"));
+var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldGet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldGet.js"));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldSet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldSet.js"));
+var _sdk2 = _interopRequireDefault(__webpack_require__(/*! ../sdk */ "./src/managers/sdk/index.js"));
+var _authentication2 = _interopRequireDefault(__webpack_require__(/*! ../authentication */ "./src/managers/authentication/index.js"));
+var _events2 = _interopRequireDefault(__webpack_require__(/*! ../events */ "./src/managers/events/index.js"));
+var _eventsName = __webpack_require__(/*! ../events/events-name */ "./src/managers/events/events-name.js");
 function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
 function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
 var _config = /*#__PURE__*/new WeakMap();
@@ -554,28 +740,31 @@ exports["default"] = Analytics;
 
 /***/ }),
 
-/***/ 3378:
+/***/ "./src/managers/authentication/ReCaptcha.js":
+/*!**************************************************!*\
+  !*** ./src/managers/authentication/ReCaptcha.js ***!
+  \**************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(5656);
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports["default"] = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(8047));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(7240));
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
-var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
-var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(5194));
-var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(8478));
-var _eventsName = _interopRequireDefault(__webpack_require__(6073));
-var _DOM = __webpack_require__(2909);
-var _loaders = __webpack_require__(1758);
-var _sdk2 = _interopRequireDefault(__webpack_require__(4753));
-var _events = _interopRequireDefault(__webpack_require__(9889));
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js"));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js"));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js"));
+var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldGet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldGet.js"));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldSet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldSet.js"));
+var _eventsName = _interopRequireDefault(__webpack_require__(/*! ../events/events-name */ "./src/managers/events/events-name.js"));
+var _DOM = __webpack_require__(/*! ../../utils/DOM */ "./src/utils/DOM.js");
+var _loaders = __webpack_require__(/*! ../../utils/loaders */ "./src/utils/loaders.js");
+var _sdk2 = _interopRequireDefault(__webpack_require__(/*! ../sdk */ "./src/managers/sdk/index.js"));
+var _events = _interopRequireDefault(__webpack_require__(/*! ../events */ "./src/managers/events/index.js"));
 function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
 function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
 function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
@@ -652,7 +841,7 @@ var ReCaptchaFirebase = /*#__PURE__*/function () {
                 onload: function onload() {
                   _this.loaded = true;
                   _this.grecaptcha = window.grecaptcha;
-                  _this.events.notify(_eventsName["default"].RECAPTCHA_LOADED, true);
+                  _this.events.notify(_eventsName["default"].local.RECAPTCHA_LOADED, true);
                   Promise.resolve(true);
                 }
               }];
@@ -705,7 +894,7 @@ var ReCaptchaFirebase = /*#__PURE__*/function () {
             case 0:
               try {
                 this.valid = false;
-                if (this.grecaptcha) {
+                if (this.grecaptcha && typeof this.grecaptcha.reset === 'function') {
                   this.grecaptcha.reset();
                 }
                 handleCaptchaState = function handleCaptchaState() {
@@ -735,6 +924,7 @@ var ReCaptchaFirebase = /*#__PURE__*/function () {
                   var submitBtn = document.querySelector('.firebaseui-id-page-sign-in .firebaseui-id-submit');
                   var cancelBtn = document.querySelector('.firebaseui-id-page-sign-in .firebaseui-id-secondary-link');
                   if (emailField) {
+                    emailField.setAttribute("autocomplete", "off");
                     emailField.addEventListener('input', function () {
                       handleCaptchaState();
                     });
@@ -766,6 +956,7 @@ var ReCaptchaFirebase = /*#__PURE__*/function () {
                       handleCaptchaState();
                     };
                   }
+                  emailField.setAttribute("autocomplete", "off");
                   emailField.addEventListener('input', function () {
                     if (!_this2.valid) {
                       emailField.blur();
@@ -774,7 +965,9 @@ var ReCaptchaFirebase = /*#__PURE__*/function () {
                   });
                 }
               } catch (error) {
-                this.authentication.firebase.reset();
+                if (typeof this.authentication.firebase.reset === 'function') {
+                  this.authentication.firebase.reset();
+                }
                 console.error('error', error);
               }
             case 1:
@@ -869,24 +1062,27 @@ function _onRecaptchaAuth2(token) {
 
 /***/ }),
 
-/***/ 526:
+/***/ "./src/managers/authentication/Token.js":
+/*!**********************************************!*\
+  !*** ./src/managers/authentication/Token.js ***!
+  \**********************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(5656);
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports["default"] = void 0;
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
-var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
-var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(5194));
-var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(8478));
-var _localStorage = _interopRequireDefault(__webpack_require__(347));
-var _cookie = __webpack_require__(5048);
-var _url = __webpack_require__(5234);
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js"));
+var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldGet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldGet.js"));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldSet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldSet.js"));
+var _localStorage = _interopRequireDefault(__webpack_require__(/*! ../../utils/local-storage */ "./src/utils/local-storage.js"));
+var _cookie = __webpack_require__(/*! ../../utils/cookie */ "./src/utils/cookie.js");
+var _url = __webpack_require__(/*! ../../utils/url */ "./src/utils/url.js");
 function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
 function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
 var _slug = /*#__PURE__*/new WeakMap();
@@ -958,32 +1154,35 @@ exports["default"] = Token;
 
 /***/ }),
 
-/***/ 5298:
+/***/ "./src/managers/authentication/firebase/Firebase.js":
+/*!**********************************************************!*\
+  !*** ./src/managers/authentication/firebase/Firebase.js ***!
+  \**********************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(5656);
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports["default"] = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(8047));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(7240));
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(366));
-var _typeof2 = _interopRequireDefault(__webpack_require__(2125));
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
-var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
-var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(5194));
-var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(8478));
-var _loaders = __webpack_require__(1758);
-var _DOM = __webpack_require__(2909);
-var _constants = __webpack_require__(9066);
-var _localization = __webpack_require__(7761);
-var _events = _interopRequireDefault(__webpack_require__(9889));
-var _eventsName = __webpack_require__(6073);
-var _lodash = _interopRequireDefault(__webpack_require__(5828));
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js"));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js"));
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js"));
+var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ "./node_modules/@babel/runtime/helpers/typeof.js"));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js"));
+var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldGet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldGet.js"));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldSet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldSet.js"));
+var _loaders = __webpack_require__(/*! ../../../utils/loaders */ "./src/utils/loaders.js");
+var _DOM = __webpack_require__(/*! ../../../utils/DOM */ "./src/utils/DOM.js");
+var _constants = __webpack_require__(/*! ../../../configs/constants */ "./src/configs/constants.js");
+var _localization = __webpack_require__(/*! ../../localization */ "./src/managers/localization/index.js");
+var _events = _interopRequireDefault(__webpack_require__(/*! ../../events */ "./src/managers/events/index.js"));
+var _eventsName = __webpack_require__(/*! ../../events/events-name */ "./src/managers/events/events-name.js");
+var _lodash = _interopRequireDefault(__webpack_require__(/*! lodash.isempty */ "./node_modules/lodash.isempty/index.js"));
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
@@ -1642,39 +1841,42 @@ function _firebaseInitApp2(config) {
 
 /***/ }),
 
-/***/ 7484:
+/***/ "./src/managers/authentication/index.js":
+/*!**********************************************!*\
+  !*** ./src/managers/authentication/index.js ***!
+  \**********************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(5656);
-var _typeof3 = __webpack_require__(2125);
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+var _typeof3 = __webpack_require__(/*! @babel/runtime/helpers/typeof */ "./node_modules/@babel/runtime/helpers/typeof.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports["default"] = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(8047));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(7240));
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(366));
-var _typeof2 = _interopRequireDefault(__webpack_require__(2125));
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
-var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
-var _classPrivateFieldGet11 = _interopRequireDefault(__webpack_require__(5194));
-var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(8478));
-var _modal = _interopRequireDefault(__webpack_require__(9269));
-var _Firebase = _interopRequireDefault(__webpack_require__(5298));
-var _constants = __webpack_require__(9066);
-var _eventsName = _interopRequireWildcard(__webpack_require__(6073));
-var _events = _interopRequireDefault(__webpack_require__(9889));
-var _frame = _interopRequireDefault(__webpack_require__(8967));
-var _sdk = _interopRequireDefault(__webpack_require__(4753));
-var _Token = _interopRequireDefault(__webpack_require__(526));
-var _ReCaptcha = _interopRequireDefault(__webpack_require__(3378));
-var _AuthForm = __webpack_require__(8031);
-var _DOM = __webpack_require__(2909);
-var _url = __webpack_require__(5234);
-var _lodash = _interopRequireDefault(__webpack_require__(5828));
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js"));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js"));
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js"));
+var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ "./node_modules/@babel/runtime/helpers/typeof.js"));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js"));
+var _classPrivateFieldGet13 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldGet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldGet.js"));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldSet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldSet.js"));
+var _modal = _interopRequireDefault(__webpack_require__(/*! ../modal */ "./src/managers/modal/index.js"));
+var _Firebase = _interopRequireDefault(__webpack_require__(/*! ./firebase/Firebase */ "./src/managers/authentication/firebase/Firebase.js"));
+var _constants = __webpack_require__(/*! ../../configs/constants */ "./src/configs/constants.js");
+var _eventsName = _interopRequireWildcard(__webpack_require__(/*! ../events/events-name */ "./src/managers/events/events-name.js"));
+var _events = _interopRequireDefault(__webpack_require__(/*! ../events */ "./src/managers/events/index.js"));
+var _frame = _interopRequireDefault(__webpack_require__(/*! ../frame */ "./src/managers/frame/index.js"));
+var _sdk = _interopRequireDefault(__webpack_require__(/*! ../sdk */ "./src/managers/sdk/index.js"));
+var _Token = _interopRequireDefault(__webpack_require__(/*! ./Token */ "./src/managers/authentication/Token.js"));
+var _ReCaptcha = _interopRequireDefault(__webpack_require__(/*! ./ReCaptcha */ "./src/managers/authentication/ReCaptcha.js"));
+var _AuthForm = __webpack_require__(/*! ../form/forms/AuthForm */ "./src/managers/form/forms/AuthForm.js");
+var _DOM = __webpack_require__(/*! ../../utils/DOM */ "./src/utils/DOM.js");
+var _url = __webpack_require__(/*! ../../utils/url */ "./src/utils/url.js");
+var _lodash = _interopRequireDefault(__webpack_require__(/*! lodash.isempty */ "./node_modules/lodash.isempty/index.js"));
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof3(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -1762,7 +1964,7 @@ var Authentication = /*#__PURE__*/function () {
         }
       }
       this.firebase = new _Firebase["default"](config);
-      if (options.firebase.genuineForm === false && (0, _classPrivateFieldGet11["default"])(this, _isEmailProvider)) {
+      if (options.firebase.genuineForm === false && (0, _classPrivateFieldGet13["default"])(this, _isEmailProvider)) {
         this.initAuthForm();
       }
     }
@@ -1779,7 +1981,12 @@ var Authentication = /*#__PURE__*/function () {
     key: "isAuthenticated",
     value: function isAuthenticated() {
       if (this.sdk) {
-        return !!(this.sdk.methods.isAuthenticated() || this.token.get() || this.firebaseToken.get());
+        var _classPrivateFieldGet2;
+        if (!!((_classPrivateFieldGet2 = (0, _classPrivateFieldGet13["default"])(this, _options)) !== null && _classPrivateFieldGet2 !== void 0 && _classPrivateFieldGet2.firebase)) {
+          return !!(this.sdk.methods.isAuthenticated() && this.token.get() && this.firebaseToken.get());
+        } else {
+          return !!(this.sdk.methods.isAuthenticated() && this.token.get());
+        }
       } else {
         return !!this.token.get();
       }
@@ -1799,9 +2006,7 @@ var Authentication = /*#__PURE__*/function () {
         if (!(0, _lodash["default"])(error.message)) {
           _this2.authForm.loginForm.setFormError(error.message, error.code || false);
         }
-        if (!(0, _lodash["default"])(_this2.reCaptcha) && _this2.reCaptcha.enabled && !(0, _lodash["default"])(_this2.reCaptcha.grecaptcha)) {
-          _this2.reCaptcha.grecaptcha.reset();
-        }
+        _this2.reCaptcha.grecaptcha.reset();
       });
     }
   }, {
@@ -1814,9 +2019,7 @@ var Authentication = /*#__PURE__*/function () {
         if (!(0, _lodash["default"])(error.message)) {
           _this3.authForm.signUpForm.setFormError(error.message, error.code || false);
         }
-        if (!(0, _lodash["default"])(_this3.reCaptcha) && _this3.reCaptcha.enabled && !(0, _lodash["default"])(_this3.reCaptcha.grecaptcha)) {
-          _this3.reCaptcha.grecaptcha.reset();
-        }
+        _this3.reCaptcha.grecaptcha.reset();
       });
     }
   }, {
@@ -1835,14 +2038,14 @@ var Authentication = /*#__PURE__*/function () {
     key: "initAuthForm",
     value: function initAuthForm() {
       var _this5 = this;
-      var _ref = (0, _classPrivateFieldGet11["default"])(this, _options).firebase || {},
+      var _ref = (0, _classPrivateFieldGet13["default"])(this, _options).firebase || {},
         tosURL = _ref.tosURL,
         privacyPolicyURL = _ref.privacyPolicyURL,
         termsOfService = _ref.termsOfService,
         providers = _ref.providers,
         passwordSignInIgnoreValidation = _ref.passwordSignInIgnoreValidation,
         authOnPasswordReset = _ref.authOnPasswordReset;
-      var _ref2 = (0, _classPrivateFieldGet11["default"])(this, _options).auth || {},
+      var _ref2 = (0, _classPrivateFieldGet13["default"])(this, _options).auth || {},
         signUp = _ref2.signUp,
         defaultForm = _ref2.defaultForm,
         forms = _ref2.forms;
@@ -1959,7 +2162,7 @@ var Authentication = /*#__PURE__*/function () {
                 case 0:
                   _context3.prev = 0;
                   _this5.toggleFormLoader(true);
-                  if (!((0, _classPrivateFieldGet11["default"])(_this5, _options).firebase.genuinePasswordReset === false)) {
+                  if (!((0, _classPrivateFieldGet13["default"])(_this5, _options).firebase.genuinePasswordReset === false)) {
                     _context3.next = 10;
                     break;
                   }
@@ -2017,11 +2220,11 @@ var Authentication = /*#__PURE__*/function () {
                   _context4.prev = 0;
                   _this5.toggleFormLoader(true);
                   _context4.next = 4;
-                  return _this5.firebase.sendNewPasswordResetPassword(data.new_password, (0, _classPrivateFieldGet11["default"])(_this5, _oobCode));
+                  return _this5.firebase.sendNewPasswordResetPassword(data.new_password, (0, _classPrivateFieldGet13["default"])(_this5, _oobCode));
                 case 4:
                   success = _context4.sent;
                   if (success) {
-                    _authOnPasswordReset = (0, _classPrivateFieldGet11["default"])(_this5, _options).firebase.authOnPasswordReset;
+                    _authOnPasswordReset = (0, _classPrivateFieldGet13["default"])(_this5, _options).firebase.authOnPasswordReset;
                     _this5.authForm.showSuccessPasswordReset();
                     if (_authOnPasswordReset) {
                       _this5.handleLogin({
@@ -2061,7 +2264,7 @@ var Authentication = /*#__PURE__*/function () {
           _this5.authForm.reset();
         },
         getShowAuthFormSlug: function getShowAuthFormSlug() {
-          return (0, _classPrivateFieldGet11["default"])(_this5, _showAuthFormSlug);
+          return (0, _classPrivateFieldGet13["default"])(_this5, _showAuthFormSlug);
         }
       });
     }
@@ -2153,13 +2356,13 @@ var Authentication = /*#__PURE__*/function () {
   }, {
     key: "getDefaultAuthenticationFormContent",
     value: function getDefaultAuthenticationFormContent() {
-      var _classPrivateFieldGet2, _classPrivateFieldGet3;
-      return "<div>\n                    <div id=\"authorization-error\"></div>\n                    <h2 class=\"wallkit-auth-modal__title\">".concat((_classPrivateFieldGet2 = (_classPrivateFieldGet3 = (0, _classPrivateFieldGet11["default"])(this, _options)) === null || _classPrivateFieldGet3 === void 0 ? void 0 : _classPrivateFieldGet3.modalTitle) !== null && _classPrivateFieldGet2 !== void 0 ? _classPrivateFieldGet2 : 'Sign In', "</h2>\n                    <div ").concat((0, _classPrivateFieldGet11["default"])(this, _authPlaceholderElementSelectorType), "=\"").concat((0, _classPrivateFieldGet11["default"])(this, _authPlaceholderElementSelector).substring(1), "\"></div>\n                </div>");
+      var _classPrivateFieldGet3, _classPrivateFieldGet4;
+      return "<div>\n                    <div id=\"authorization-error\"></div>\n                    <h2 class=\"wallkit-auth-modal__title\">".concat((_classPrivateFieldGet3 = (_classPrivateFieldGet4 = (0, _classPrivateFieldGet13["default"])(this, _options)) === null || _classPrivateFieldGet4 === void 0 ? void 0 : _classPrivateFieldGet4.modalTitle) !== null && _classPrivateFieldGet3 !== void 0 ? _classPrivateFieldGet3 : 'Sign In', "</h2>\n                    <div ").concat((0, _classPrivateFieldGet13["default"])(this, _authPlaceholderElementSelectorType), "=\"").concat((0, _classPrivateFieldGet13["default"])(this, _authPlaceholderElementSelector).substring(1), "\"></div>\n                </div>");
     }
   }, {
     key: "attachFormPlaceholders",
     value: function attachFormPlaceholders() {
-      var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : (0, _classPrivateFieldGet11["default"])(this, _authPlaceholderElementSelector);
+      var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : (0, _classPrivateFieldGet13["default"])(this, _authPlaceholderElementSelector);
       var placeholders = "<div id=\"".concat(_constants.WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID, "\"></div>\n                            <div id=\"").concat(_constants.WALLKIT_FIREBASE_UI_PLACEHOLDER_ID, "\"></div>");
       var targetElement = document.querySelector(selector);
       if (targetElement) {
@@ -2169,11 +2372,11 @@ var Authentication = /*#__PURE__*/function () {
   }, {
     key: "render",
     value: function render() {
-      if ((0, _classPrivateFieldGet11["default"])(this, _options).auth.renderType === 'selector') {
-        var placeholder = document.querySelector((0, _classPrivateFieldGet11["default"])(this, _options).auth.selector);
+      if ((0, _classPrivateFieldGet13["default"])(this, _options).auth.renderType === 'selector') {
+        var placeholder = document.querySelector((0, _classPrivateFieldGet13["default"])(this, _options).auth.selector);
         if (placeholder) {
-          var _classPrivateFieldGet4;
-          placeholder.insertAdjacentHTML('beforeend', ((_classPrivateFieldGet4 = (0, _classPrivateFieldGet11["default"])(this, _options)) === null || _classPrivateFieldGet4 === void 0 ? void 0 : _classPrivateFieldGet4.content) || this.getDefaultAuthenticationFormContent());
+          var _classPrivateFieldGet5;
+          placeholder.insertAdjacentHTML('beforeend', ((_classPrivateFieldGet5 = (0, _classPrivateFieldGet13["default"])(this, _options)) === null || _classPrivateFieldGet5 === void 0 ? void 0 : _classPrivateFieldGet5.content) || this.getDefaultAuthenticationFormContent());
         }
       } else {
         this.modal = _classPrivateMethodGet(this, _createModal, _createModal2).call(this);
@@ -2189,7 +2392,7 @@ var Authentication = /*#__PURE__*/function () {
           while (1) switch (_context6.prev = _context6.next) {
             case 0:
               (0, _classPrivateFieldSet2["default"])(this, _showAuthFormSlug, authFormSlug !== null && authFormSlug !== void 0 ? authFormSlug : '');
-              if ((0, _classPrivateFieldGet11["default"])(this, _options).firebase.genuineForm === false) {
+              if ((0, _classPrivateFieldGet13["default"])(this, _options).firebase.genuineForm === false) {
                 if (this.authForm) {
                   this.authForm.defaultForm = authFormSlug;
                   if (!this.authForm.triggerButton || !this.authForm.triggerButton.isVisible) {
@@ -2258,18 +2461,27 @@ var Authentication = /*#__PURE__*/function () {
       var _this9 = this;
       try {
         var _this$authForm;
-        if ((0, _classPrivateFieldGet11["default"])(this, _options).firebase.genuineForm !== false) {
+        if ((0, _classPrivateFieldGet13["default"])(this, _options).firebase.genuineForm !== false) {
           if (this.reCaptcha.enabled && this.reCaptcha.loaded) {
-            this.reCaptcha.initCaptchaProcess();
-          } else if (!this.reCaptcha.loaded) {
+            this.reCaptcha.initCaptchaProcess().then(function () {
+              _this9.events.notify(_eventsName["default"].local.FIREBASE_READY, true);
+            });
+          } else if (!this.reCaptcha.loaded && this.reCaptcha.enabled) {
             this.events.subscribe(_eventsName["default"].local.RECAPTCHA_LOADED, function () {
-              _this9.reCaptcha.initCaptchaProcess();
+              _this9.reCaptcha.initCaptchaProcess().then(function () {
+                _this9.events.notify(_eventsName["default"].local.FIREBASE_READY, true);
+              });
             }, {
               once: true
             });
+          } else if (!this.reCaptcha.enabled) {
+            this.events.notify(_eventsName["default"].local.FIREBASE_READY, true);
           }
         } else if ((_this$authForm = this.authForm) !== null && _this$authForm !== void 0 && _this$authForm.triggerButton) {
           this.authForm.triggerButton.events.notify(_eventsName.FIREBASE_UI_SHOWN, true);
+          this.events.notify(_eventsName["default"].local.FIREBASE_READY, true);
+        } else {
+          this.events.notify(_eventsName["default"].local.FIREBASE_READY, true);
         }
         this.toggleFormLoader(false);
       } catch (e) {
@@ -2307,7 +2519,7 @@ var Authentication = /*#__PURE__*/function () {
       if (this.firebase.genuineForm === false && reset) {
         this.authForm.reset();
       }
-      if (!(0, _lodash["default"])(this.reCaptcha) && this.reCaptcha.enabled && !(0, _lodash["default"])(this.reCaptcha.grecaptcha)) {
+      if (this.reCaptcha.enabled) {
         this.reCaptcha.grecaptcha.reset();
       }
     }
@@ -2342,10 +2554,8 @@ var Authentication = /*#__PURE__*/function () {
             case 12:
               if (this.reCaptcha.loaded) {
                 this.resetAuthProcess();
-                if (!(0, _lodash["default"])(this.reCaptcha) && this.reCaptcha.enabled && !(0, _lodash["default"])(this.reCaptcha.grecaptcha)) {
-                  this.reCaptcha.grecaptcha.reset();
-                }
-                if ((0, _classPrivateFieldGet11["default"])(this, _options).firebase.genuineForm !== false) {
+                this.reCaptcha.grecaptcha.reset();
+                if ((0, _classPrivateFieldGet13["default"])(this, _options).firebase.genuineForm !== false) {
                   this.reCaptcha.initCaptchaProcess();
                 }
               }
@@ -2599,12 +2809,41 @@ var Authentication = /*#__PURE__*/function () {
       }
     }
   }, {
+    key: "handleAuthRouting",
+    value: function () {
+      var _handleAuthRouting = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee11() {
+        var isOpenResetPassword, isOpenAuthWithLink, isOpenModalAfterAuthWithCustomToken;
+        return _regenerator["default"].wrap(function _callee11$(_context11) {
+          while (1) switch (_context11.prev = _context11.next) {
+            case 0:
+              isOpenResetPassword = _classPrivateMethodGet(this, _checkIfResetPasswordURL, _checkIfResetPasswordURL2).call(this);
+              _context11.next = 3;
+              return _classPrivateMethodGet(this, _checkIfAuthEmailLinkURL, _checkIfAuthEmailLinkURL2).call(this);
+            case 3:
+              isOpenAuthWithLink = _context11.sent;
+              _context11.next = 6;
+              return _classPrivateMethodGet(this, _checkCustomToken, _checkCustomToken2).call(this);
+            case 6:
+              isOpenModalAfterAuthWithCustomToken = _context11.sent;
+              return _context11.abrupt("return", isOpenResetPassword || isOpenAuthWithLink || isOpenModalAfterAuthWithCustomToken);
+            case 8:
+            case "end":
+              return _context11.stop();
+          }
+        }, _callee11, this);
+      }));
+      function handleAuthRouting() {
+        return _handleAuthRouting.apply(this, arguments);
+      }
+      return handleAuthRouting;
+    }()
+  }, {
     key: "init",
     value: function init() {
-      var _classPrivateFieldGet5;
-      if (!!((_classPrivateFieldGet5 = (0, _classPrivateFieldGet11["default"])(this, _options)) !== null && _classPrivateFieldGet5 !== void 0 && _classPrivateFieldGet5.firebase)) {
+      var _classPrivateFieldGet6;
+      if (!!((_classPrivateFieldGet6 = (0, _classPrivateFieldGet13["default"])(this, _options)) !== null && _classPrivateFieldGet6 !== void 0 && _classPrivateFieldGet6.firebase)) {
         // Render recaptcha before the firebase init if not custom FB form
-        if ((0, _classPrivateFieldGet11["default"])(this, _options).firebase.genuineForm !== false) {
+        if ((0, _classPrivateFieldGet13["default"])(this, _options).firebase.genuineForm !== false) {
           if (this.reCaptcha.enabled) {
             if (!this.isAuthenticated()) {
               this.reCaptcha.init();
@@ -2619,21 +2858,18 @@ var Authentication = /*#__PURE__*/function () {
         }
       }
       _classPrivateMethodGet(this, _initListeners, _initListeners2).call(this);
-      _classPrivateMethodGet(this, _checkIfResetPasswordURL, _checkIfResetPasswordURL2).call(this);
-      _classPrivateMethodGet(this, _checkIfAuthEmailLinkURL, _checkIfAuthEmailLinkURL2).call(this);
-      _classPrivateMethodGet(this, _checkCustomToken, _checkCustomToken2).call(this);
     }
   }]);
   return Authentication;
 }();
 exports["default"] = Authentication;
 function _get_authPlaceholderElementSelector() {
-  var _classPrivateFieldGet6, _classPrivateFieldGet7, _classPrivateFieldGet8, _classPrivateFieldGet9;
-  var selector = (_classPrivateFieldGet6 = (_classPrivateFieldGet7 = (0, _classPrivateFieldGet11["default"])(this, _options)) === null || _classPrivateFieldGet7 === void 0 ? void 0 : (_classPrivateFieldGet8 = _classPrivateFieldGet7.auth) === null || _classPrivateFieldGet8 === void 0 ? void 0 : (_classPrivateFieldGet9 = _classPrivateFieldGet8.firebase) === null || _classPrivateFieldGet9 === void 0 ? void 0 : _classPrivateFieldGet9.elementSelector) !== null && _classPrivateFieldGet6 !== void 0 ? _classPrivateFieldGet6 : "#".concat(_constants.WALLKIT_AUTH_FORM_PLACEHOLDER_ID);
+  var _classPrivateFieldGet7, _classPrivateFieldGet8, _classPrivateFieldGet9, _classPrivateFieldGet10;
+  var selector = (_classPrivateFieldGet7 = (_classPrivateFieldGet8 = (0, _classPrivateFieldGet13["default"])(this, _options)) === null || _classPrivateFieldGet8 === void 0 ? void 0 : (_classPrivateFieldGet9 = _classPrivateFieldGet8.auth) === null || _classPrivateFieldGet9 === void 0 ? void 0 : (_classPrivateFieldGet10 = _classPrivateFieldGet9.firebase) === null || _classPrivateFieldGet10 === void 0 ? void 0 : _classPrivateFieldGet10.elementSelector) !== null && _classPrivateFieldGet7 !== void 0 ? _classPrivateFieldGet7 : "#".concat(_constants.WALLKIT_AUTH_FORM_PLACEHOLDER_ID);
   return (0, _DOM.normalizeSelector)(selector);
 }
 function _get_authPlaceholderElementSelectorType() {
-  switch ((0, _classPrivateFieldGet11["default"])(this, _authPlaceholderElementSelector).charAt(0)) {
+  switch ((0, _classPrivateFieldGet13["default"])(this, _authPlaceholderElementSelector).charAt(0)) {
     case '#':
       return 'id';
     case '.':
@@ -2642,7 +2878,7 @@ function _get_authPlaceholderElementSelectorType() {
   return 'id';
 }
 function _get_isEmailProvider() {
-  var providers = (0, _classPrivateFieldGet11["default"])(this, _options).firebase.providers;
+  var providers = (0, _classPrivateFieldGet13["default"])(this, _options).firebase.providers;
   if ((0, _lodash["default"])(providers)) return false;
   if (!Array.isArray(providers)) return false;
   var _iterator = _createForOfIteratorHelper(providers),
@@ -2661,12 +2897,13 @@ function _get_isEmailProvider() {
   return false;
 }
 function _createModal2() {
-  var _classPrivateFieldGet10;
+  var _classPrivateFieldGet11, _classPrivateFieldGet12;
   return new _modal["default"]({
     modalName: 'auth-modal',
-    content: ((_classPrivateFieldGet10 = (0, _classPrivateFieldGet11["default"])(this, _options)) === null || _classPrivateFieldGet10 === void 0 ? void 0 : _classPrivateFieldGet10.content) || this.getDefaultAuthenticationFormContent(),
+    content: ((_classPrivateFieldGet11 = (0, _classPrivateFieldGet13["default"])(this, _options)) === null || _classPrivateFieldGet11 === void 0 ? void 0 : _classPrivateFieldGet11.content) || this.getDefaultAuthenticationFormContent(),
     className: 'wallkit-auth-modal',
-    initialLoader: true
+    initialLoader: true,
+    ui: (_classPrivateFieldGet12 = (0, _classPrivateFieldGet13["default"])(this, _options)) === null || _classPrivateFieldGet12 === void 0 ? void 0 : _classPrivateFieldGet12.ui
   });
 }
 function _initListeners2() {
@@ -2729,37 +2966,42 @@ function _checkIfResetPasswordURL2() {
   if (oobCode) {
     this.showResetPassword(oobCode);
     (0, _url.resetHash)();
+    return true;
   }
+  return false;
 }
 function _checkIfAuthEmailLinkURL2() {
   return _checkIfAuthEmailLinkURL3.apply(this, arguments);
 }
 function _checkIfAuthEmailLinkURL3() {
-  _checkIfAuthEmailLinkURL3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee11() {
+  _checkIfAuthEmailLinkURL3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee12() {
     var authData, _ref5, oobcode, email, resJson;
-    return _regenerator["default"].wrap(function _callee11$(_context11) {
-      while (1) switch (_context11.prev = _context11.next) {
+    return _regenerator["default"].wrap(function _callee12$(_context12) {
+      while (1) switch (_context12.prev = _context12.next) {
         case 0:
           authData = (0, _url.parseAuthEmailLinkOobCodeHash)();
           _ref5 = authData || {}, oobcode = _ref5.oobcode, email = _ref5.email;
           if (!(!(0, _lodash["default"])(oobcode) && !(0, _lodash["default"])(email))) {
-            _context11.next = 8;
+            _context12.next = 9;
             break;
           }
           (0, _url.resetHash)();
-          _context11.next = 6;
+          _context12.next = 6;
           return this.firebase.authEmailLink(oobcode, email);
         case 6:
-          resJson = _context11.sent;
+          resJson = _context12.sent;
           this.onSuccessAuth({
             operationType: "signIn",
             token: resJson.idToken
           });
-        case 8:
+          return _context12.abrupt("return", true);
+        case 9:
+          return _context12.abrupt("return", false);
+        case 10:
         case "end":
-          return _context11.stop();
+          return _context12.stop();
       }
-    }, _callee11, this);
+    }, _callee12, this);
   }));
   return _checkIfAuthEmailLinkURL3.apply(this, arguments);
 }
@@ -2768,39 +3010,32 @@ function _checkCustomToken2() {
 }
 function _checkCustomToken3() {
   _checkCustomToken3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee13() {
-    var _this11 = this;
+    var customFirebaseToken, wallkitToken, popupSlug;
     return _regenerator["default"].wrap(function _callee13$(_context13) {
       while (1) switch (_context13.prev = _context13.next) {
         case 0:
-          this.firebase.events.subscribe(_eventsName.FIREBASE_INIT, /*#__PURE__*/(0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee12() {
-            var customFirebaseToken, wallkitToken, popupSlug;
-            return _regenerator["default"].wrap(function _callee12$(_context12) {
-              while (1) switch (_context12.prev = _context12.next) {
-                case 0:
-                  _this11.checkFirebaseInit();
-                  customFirebaseToken = (0, _url.getUrlParamByKey)('custom-firebase-token');
-                  wallkitToken = (0, _url.getUrlParamByKey)('wallkit-token');
-                  popupSlug = (0, _url.getUrlParamByKey)('popup-slug');
-                  if (!(customFirebaseToken && wallkitToken)) {
-                    _context12.next = 9;
-                    break;
-                  }
-                  window.history.replaceState({}, document.title, window.location.pathname);
-                  _context12.next = 8;
-                  return _this11.authWithCustomToken(customFirebaseToken, wallkitToken);
-                case 8:
-                  if (popupSlug) {
-                    _this11.events.notify(_eventsName.MODAL_OPEN, popupSlug);
-                  }
-                case 9:
-                case "end":
-                  return _context12.stop();
-              }
-            }, _callee12);
-          })), {
-            once: true
-          });
-        case 1:
+          // this.firebase.events.subscribe(FIREBASE_INIT, async () => {
+          this.checkFirebaseInit();
+          customFirebaseToken = (0, _url.getUrlParamByKey)('custom-firebase-token');
+          wallkitToken = (0, _url.getUrlParamByKey)('wallkit-token');
+          popupSlug = (0, _url.getUrlParamByKey)('popup-slug');
+          if (!(customFirebaseToken && wallkitToken)) {
+            _context13.next = 11;
+            break;
+          }
+          window.history.replaceState({}, document.title, window.location.pathname);
+          _context13.next = 8;
+          return this.authWithCustomToken(customFirebaseToken, wallkitToken);
+        case 8:
+          if (!popupSlug) {
+            _context13.next = 11;
+            break;
+          }
+          this.events.notify(_eventsName.MODAL_OPEN, popupSlug);
+          return _context13.abrupt("return", true);
+        case 11:
+          return _context13.abrupt("return", false);
+        case 12:
         case "end":
           return _context13.stop();
       }
@@ -2811,24 +3046,29 @@ function _checkCustomToken3() {
 
 /***/ }),
 
-/***/ 5613:
+/***/ "./src/managers/call/index.js":
+/*!************************************!*\
+  !*** ./src/managers/call/index.js ***!
+  \************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(5656);
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports["default"] = void 0;
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
-var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
-var _classPrivateFieldGet5 = _interopRequireDefault(__webpack_require__(5194));
-var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(8478));
-var _events2 = _interopRequireDefault(__webpack_require__(9889));
-var _eventsName = _interopRequireDefault(__webpack_require__(6073));
-var _sdk2 = _interopRequireDefault(__webpack_require__(4753));
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js"));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js"));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js"));
+var _classPrivateFieldGet5 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldGet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldGet.js"));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldSet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldSet.js"));
+var _events2 = _interopRequireDefault(__webpack_require__(/*! ../events */ "./src/managers/events/index.js"));
+var _eventsName = _interopRequireDefault(__webpack_require__(/*! ../events/events-name */ "./src/managers/events/events-name.js"));
+var _sdk2 = _interopRequireDefault(__webpack_require__(/*! ../sdk */ "./src/managers/sdk/index.js"));
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
@@ -2844,6 +3084,7 @@ var _classForHandleClick = /*#__PURE__*/new WeakMap();
 var _classThatReactOnTheUsersStatus = /*#__PURE__*/new WeakMap();
 var _classThatReactOnTheUsersPlans = /*#__PURE__*/new WeakMap();
 var _classThatReactOnTheUsersEvents = /*#__PURE__*/new WeakMap();
+var _onReady = /*#__PURE__*/new WeakMap();
 var _isDebug = /*#__PURE__*/new WeakSet();
 var _initWkListeners = /*#__PURE__*/new WeakSet();
 var _initUIListeners = /*#__PURE__*/new WeakSet();
@@ -2854,7 +3095,7 @@ var _debugElementsThatReactToTheUsersStatus = /*#__PURE__*/new WeakSet();
 var _debugElementsThatReactToTheUsersPlans = /*#__PURE__*/new WeakSet();
 var _debugElementsThatReactToTheUsersEvents = /*#__PURE__*/new WeakSet();
 var Call = /*#__PURE__*/function () {
-  function Call(popup, config) {
+  function Call(popup, config, onReady) {
     var _config$call$classFor, _config$call, _config$call$classTha, _config$call2, _config$call$classTha2, _config$call3, _config$call$classTha3, _config$call4;
     (0, _classCallCheck2["default"])(this, Call);
     _classPrivateMethodInitSpec(this, _debugElementsThatReactToTheUsersEvents);
@@ -2898,6 +3139,10 @@ var Call = /*#__PURE__*/function () {
       writable: true,
       value: void 0
     });
+    _classPrivateFieldInitSpec(this, _onReady, {
+      writable: true,
+      value: void 0
+    });
     (0, _classPrivateFieldSet2["default"])(this, _popup, popup);
     (0, _classPrivateFieldSet2["default"])(this, _config, config);
     (0, _classPrivateFieldSet2["default"])(this, _events, new _events2["default"]());
@@ -2906,6 +3151,7 @@ var Call = /*#__PURE__*/function () {
     (0, _classPrivateFieldSet2["default"])(this, _classThatReactOnTheUsersStatus, (_config$call$classTha = config === null || config === void 0 ? void 0 : (_config$call2 = config.call) === null || _config$call2 === void 0 ? void 0 : _config$call2.classThatReactOnTheUsersStatus) !== null && _config$call$classTha !== void 0 ? _config$call$classTha : 'wk-call-status-user');
     (0, _classPrivateFieldSet2["default"])(this, _classThatReactOnTheUsersPlans, (_config$call$classTha2 = config === null || config === void 0 ? void 0 : (_config$call3 = config.call) === null || _config$call3 === void 0 ? void 0 : _config$call3.classThatReactOnTheUsersPlans) !== null && _config$call$classTha2 !== void 0 ? _config$call$classTha2 : 'wk-call-status-plans');
     (0, _classPrivateFieldSet2["default"])(this, _classThatReactOnTheUsersEvents, (_config$call$classTha3 = config === null || config === void 0 ? void 0 : (_config$call4 = config.call) === null || _config$call4 === void 0 ? void 0 : _config$call4.classThatReactOnTheUsersEvents) !== null && _config$call$classTha3 !== void 0 ? _config$call$classTha3 : 'wk-call-status-events');
+    (0, _classPrivateFieldSet2["default"])(this, _onReady, onReady);
   }
   (0, _createClass2["default"])(Call, [{
     key: "getUserStatus",
@@ -3008,10 +3254,9 @@ var Call = /*#__PURE__*/function () {
     key: "getWallkitUserData",
     value: function getWallkitUserData() {
       var _this = this;
-      (0, _classPrivateFieldGet5["default"])(this, _sdk).client.get({
+      return (0, _classPrivateFieldGet5["default"])(this, _sdk).client.get({
         path: "/user"
       }).then(function (response) {
-        console.log(response);
         _this.setAllDataWkStatusesInDOMElements(response);
       })["catch"](function (error) {
         console.log('WK Call ERROR:', error);
@@ -3074,24 +3319,48 @@ var Call = /*#__PURE__*/function () {
     }
   }, {
     key: "init",
-    value: function init() {
-      if (_classPrivateMethodGet(this, _isDebug, _isDebug2).call(this)) {
+    value: function () {
+      var _init = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
         var _classPrivateFieldGet2;
-        console.log('Init Wallkit Call with config: ', (_classPrivateFieldGet2 = (0, _classPrivateFieldGet5["default"])(this, _config)) === null || _classPrivateFieldGet2 === void 0 ? void 0 : _classPrivateFieldGet2.call);
-        _classPrivateMethodGet(this, _debugUserStatus, _debugUserStatus2).call(this);
-        _classPrivateMethodGet(this, _debugElementsClickingOnWhichOpensPopups, _debugElementsClickingOnWhichOpensPopups2).call(this);
-        _classPrivateMethodGet(this, _debugElementsThatReactToTheUsersStatus, _debugElementsThatReactToTheUsersStatus2).call(this);
-        _classPrivateMethodGet(this, _debugElementsThatReactToTheUsersPlans, _debugElementsThatReactToTheUsersPlans2).call(this);
-        _classPrivateMethodGet(this, _debugElementsThatReactToTheUsersEvents, _debugElementsThatReactToTheUsersEvents2).call(this);
+        return _regenerator["default"].wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              if (_classPrivateMethodGet(this, _isDebug, _isDebug2).call(this)) {
+                console.log('Init Wallkit Call with config: ', (_classPrivateFieldGet2 = (0, _classPrivateFieldGet5["default"])(this, _config)) === null || _classPrivateFieldGet2 === void 0 ? void 0 : _classPrivateFieldGet2.call);
+                _classPrivateMethodGet(this, _debugUserStatus, _debugUserStatus2).call(this);
+                _classPrivateMethodGet(this, _debugElementsClickingOnWhichOpensPopups, _debugElementsClickingOnWhichOpensPopups2).call(this);
+                _classPrivateMethodGet(this, _debugElementsThatReactToTheUsersStatus, _debugElementsThatReactToTheUsersStatus2).call(this);
+                _classPrivateMethodGet(this, _debugElementsThatReactToTheUsersPlans, _debugElementsThatReactToTheUsersPlans2).call(this);
+                _classPrivateMethodGet(this, _debugElementsThatReactToTheUsersEvents, _debugElementsThatReactToTheUsersEvents2).call(this);
+              }
+              _classPrivateMethodGet(this, _initWkListeners, _initWkListeners2).call(this);
+              _classPrivateMethodGet(this, _initUIListeners, _initUIListeners2).call(this);
+              if (!(0, _classPrivateFieldGet5["default"])(this, _sdk).methods.isAuthenticated()) {
+                _context.next = 8;
+                break;
+              }
+              _context.next = 6;
+              return this.getWallkitUserData();
+            case 6:
+              _context.next = 9;
+              break;
+            case 8:
+              this.setAllDataWkStatusesInDOMElements();
+            case 9:
+              if ((0, _classPrivateFieldGet5["default"])(this, _onReady)) {
+                (0, _classPrivateFieldGet5["default"])(this, _onReady).call(this);
+              }
+            case 10:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee, this);
+      }));
+      function init() {
+        return _init.apply(this, arguments);
       }
-      _classPrivateMethodGet(this, _initWkListeners, _initWkListeners2).call(this);
-      _classPrivateMethodGet(this, _initUIListeners, _initUIListeners2).call(this);
-      if ((0, _classPrivateFieldGet5["default"])(this, _sdk).methods.isAuthenticated()) {
-        this.getWallkitUserData();
-      } else {
-        this.setAllDataWkStatusesInDOMElements();
-      }
-    }
+      return init;
+    }()
   }]);
   return Call;
 }();
@@ -3275,26 +3544,29 @@ function _debugElementsThatReactToTheUsersEvents2() {
 
 /***/ }),
 
-/***/ 8390:
+/***/ "./src/managers/content/index.js":
+/*!***************************************!*\
+  !*** ./src/managers/content/index.js ***!
+  \***************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(5656);
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports["default"] = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(8047));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(7240));
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
-var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
-var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(5194));
-var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(8478));
-var _sdk = _interopRequireDefault(__webpack_require__(4753));
-var _events2 = _interopRequireDefault(__webpack_require__(9889));
-var _eventsName = __webpack_require__(6073);
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js"));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js"));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js"));
+var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldGet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldGet.js"));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldSet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldSet.js"));
+var _sdk = _interopRequireDefault(__webpack_require__(/*! ../sdk */ "./src/managers/sdk/index.js"));
+var _events2 = _interopRequireDefault(__webpack_require__(/*! ../events */ "./src/managers/events/index.js"));
+var _eventsName = __webpack_require__(/*! ../events/events-name */ "./src/managers/events/events-name.js");
 function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
 function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
 function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
@@ -3486,7 +3758,10 @@ function _formatCheckAccessRequestPath2(id, params) {
 
 /***/ }),
 
-/***/ 6073:
+/***/ "./src/managers/events/events-name.js":
+/*!********************************************!*\
+  !*** ./src/managers/events/events-name.js ***!
+  \********************************************/
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -3495,7 +3770,7 @@ function _formatCheckAccessRequestPath2(id, params) {
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports["default"] = exports.WALLKIT_SDK_LOADED = exports.WALLKIT_LOGOUT = exports.WALLKIT_FRAME_ROUTE_CHANGE = exports.WALLKIT_FRAME_READY = exports.WALLKIT_FIREBASE_TOKEN = exports.WALLKIT_EVENT_USER = exports.WALLKIT_EVENT_TOKEN = exports.WALLKIT_EVENT_REGISTRATION = exports.WALLKIT_EVENT_ONE_TAP_SIGN_IN = exports.WALLKIT_EVENT_GET_TOKEN = exports.WALLKIT_EVENT_FIREBASE_TOKEN = exports.WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN = exports.WALLKIT_EVENT_EXTERNAL_PROVIDER_TOKEN = exports.WALLKIT_EVENT_CHANGE_LANGUAGE = exports.WALLKIT_EVENT_AUTH = exports.WALLKIT_CHANGE_FRAME = exports.TICKETS_TOKEN_AUTH_SUCCESS = exports.SUCCESS_FIREBASE_AUTH = exports.SUCCESS_AUTH = exports.RECAPTCHA_VALIDATION_SUCCESS = exports.RECAPTCHA_VALIDATION_FAILED = exports.RECAPTCHA_LOADED = exports.PRE_SIGN_IN = exports.MODAL_OPEN = exports.MODAL_CREATED = exports.MODAL_CLOSED = exports.LOGOUT = exports.FRAME_MOUNTED = exports.FRAME_MODAL_CLOSED = exports.FRAME_MESSAGE = exports.FRAME_CREATED = exports.FIREBASE_UI_SHOWN = exports.FIREBASE_LOADED = exports.FIREBASE_INIT = exports.EXTERNAL_PROVIDER_TOKEN_AUTH_SUCCESS = exports.DEFAULT_AUTH_FORM_SLUG_UPDATED = exports.CHECK_USER_ACCESS = exports.AUTH_MODAL_CLOSED = void 0;
+exports["default"] = exports.WALLKIT_SDK_LOADED = exports.WALLKIT_LOGOUT = exports.WALLKIT_FRAME_ROUTE_CHANGE = exports.WALLKIT_FRAME_READY = exports.WALLKIT_FIREBASE_TOKEN = exports.WALLKIT_EVENT_USER = exports.WALLKIT_EVENT_TOKEN = exports.WALLKIT_EVENT_REGISTRATION = exports.WALLKIT_EVENT_ONE_TAP_SIGN_IN = exports.WALLKIT_EVENT_GET_TOKEN = exports.WALLKIT_EVENT_FIREBASE_TOKEN = exports.WALLKIT_EVENT_FIREBASE_CUSTOM_TOKEN = exports.WALLKIT_EVENT_EXTERNAL_PROVIDER_TOKEN = exports.WALLKIT_EVENT_CHANGE_LANGUAGE = exports.WALLKIT_EVENT_AUTH = exports.WALLKIT_CHANGE_FRAME = exports.TICKETS_TOKEN_AUTH_SUCCESS = exports.SUCCESS_FIREBASE_AUTH = exports.SUCCESS_AUTH = exports.RECAPTCHA_VALIDATION_SUCCESS = exports.RECAPTCHA_VALIDATION_FAILED = exports.RECAPTCHA_LOADED = exports.READY = exports.PRE_SIGN_IN = exports.MODAL_OPEN = exports.MODAL_CREATED = exports.MODAL_CLOSED = exports.LOGOUT = exports.FRAME_MOUNTED = exports.FRAME_MODAL_CLOSED = exports.FRAME_MESSAGE = exports.FRAME_CREATED = exports.FIREBASE_UI_SHOWN = exports.FIREBASE_READY = exports.FIREBASE_LOADED = exports.FIREBASE_INIT = exports.EXTERNAL_PROVIDER_TOKEN_AUTH_SUCCESS = exports.DEFAULT_AUTH_FORM_SLUG_UPDATED = exports.CHECK_USER_ACCESS = exports.AUTH_MODAL_CLOSED = void 0;
 // Local Events Names
 var FRAME_CREATED = 'frame-created';
 exports.FRAME_CREATED = FRAME_CREATED;
@@ -3542,9 +3817,13 @@ exports.LOGOUT = LOGOUT;
 var DEFAULT_AUTH_FORM_SLUG_UPDATED = 'default-auth-form-slug-updated';
 exports.DEFAULT_AUTH_FORM_SLUG_UPDATED = DEFAULT_AUTH_FORM_SLUG_UPDATED;
 var MODAL_OPEN = 'modal-open';
+exports.MODAL_OPEN = MODAL_OPEN;
+var READY = 'ready';
+exports.READY = READY;
+var FIREBASE_READY = 'firebase-ready';
 
 // Wallkit Events Names
-exports.MODAL_OPEN = MODAL_OPEN;
+exports.FIREBASE_READY = FIREBASE_READY;
 var WALLKIT_CHANGE_FRAME = 'wk-event-modal';
 exports.WALLKIT_CHANGE_FRAME = WALLKIT_CHANGE_FRAME;
 var WALLKIT_LOGOUT = 'wk-event-logout';
@@ -3595,7 +3874,9 @@ var _default = {
     EXTERNAL_PROVIDER_TOKEN_AUTH_SUCCESS: EXTERNAL_PROVIDER_TOKEN_AUTH_SUCCESS,
     DEFAULT_AUTH_FORM_SLUG_UPDATED: DEFAULT_AUTH_FORM_SLUG_UPDATED,
     LOGOUT: LOGOUT,
-    MODAL_OPEN: MODAL_OPEN
+    MODAL_OPEN: MODAL_OPEN,
+    READY: READY,
+    FIREBASE_READY: FIREBASE_READY
   },
   wallkit: {
     FRAME_CREATED: FRAME_CREATED,
@@ -3619,21 +3900,24 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 9889:
+/***/ "./src/managers/events/index.js":
+/*!**************************************!*\
+  !*** ./src/managers/events/index.js ***!
+  \**************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(5656);
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports["default"] = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(8047));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(7240));
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
-var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js"));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js"));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js"));
 var Events = /*#__PURE__*/function () {
   function Events() {
     (0, _classCallCheck2["default"])(this, Events);
@@ -3728,28 +4012,31 @@ exports["default"] = Events;
 
 /***/ }),
 
-/***/ 447:
+/***/ "./src/managers/form/buttons/TriggerButton.js":
+/*!****************************************************!*\
+  !*** ./src/managers/form/buttons/TriggerButton.js ***!
+  \****************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(5656);
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.TriggerButton = void 0;
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
-var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
-var _classPrivateFieldGet5 = _interopRequireDefault(__webpack_require__(5194));
-var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(8478));
-var _DOM = __webpack_require__(2909);
-var _events = _interopRequireDefault(__webpack_require__(9889));
-var _eventsName = __webpack_require__(6073);
-var _AuthForm = __webpack_require__(8031);
-var _constants = __webpack_require__(9066);
-var _lodash = _interopRequireDefault(__webpack_require__(5828));
-var _lodash2 = _interopRequireDefault(__webpack_require__(4174));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js"));
+var _classPrivateFieldGet5 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldGet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldGet.js"));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldSet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldSet.js"));
+var _DOM = __webpack_require__(/*! ../../../utils/DOM */ "./src/utils/DOM.js");
+var _events = _interopRequireDefault(__webpack_require__(/*! ../../events */ "./src/managers/events/index.js"));
+var _eventsName = __webpack_require__(/*! ../../events/events-name */ "./src/managers/events/events-name.js");
+var _AuthForm = __webpack_require__(/*! ../forms/AuthForm */ "./src/managers/form/forms/AuthForm.js");
+var _constants = __webpack_require__(/*! ../../../configs/constants */ "./src/configs/constants.js");
+var _lodash = _interopRequireDefault(__webpack_require__(/*! lodash.isempty */ "./node_modules/lodash.isempty/index.js"));
+var _lodash2 = _interopRequireDefault(__webpack_require__(/*! lodash.get */ "./node_modules/lodash.get/index.js"));
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
@@ -4052,25 +4339,28 @@ function _changeAuthButtonsTitle2(authNew, authOld) {
 
 /***/ }),
 
-/***/ 4195:
+/***/ "./src/managers/form/field/CheckBoxField.js":
+/*!**************************************************!*\
+  !*** ./src/managers/form/field/CheckBoxField.js ***!
+  \**************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(5656);
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.CheckBoxField = void 0;
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
-var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
-var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(1185));
-var _inherits2 = _interopRequireDefault(__webpack_require__(7964));
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(8442));
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(7474));
-var _index = __webpack_require__(4751);
-var _DOM = __webpack_require__(2909);
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js"));
+var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js"));
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js"));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js"));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js"));
+var _index = __webpack_require__(/*! ./index */ "./src/managers/form/field/index.js");
+var _DOM = __webpack_require__(/*! ../../../utils/DOM */ "./src/utils/DOM.js");
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2["default"])(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2["default"])(this, result); }; }
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 var CheckBoxField = /*#__PURE__*/function (_FormField) {
@@ -4120,27 +4410,30 @@ exports.CheckBoxField = CheckBoxField;
 
 /***/ }),
 
-/***/ 4386:
+/***/ "./src/managers/form/field/PasswordField.js":
+/*!**************************************************!*\
+  !*** ./src/managers/form/field/PasswordField.js ***!
+  \**************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(5656);
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.PasswordField = void 0;
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
-var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
-var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(1185));
-var _get2 = _interopRequireDefault(__webpack_require__(4560));
-var _inherits2 = _interopRequireDefault(__webpack_require__(7964));
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(8442));
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(7474));
-var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(5194));
-var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(8478));
-var _index = __webpack_require__(4751);
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js"));
+var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js"));
+var _get2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/get */ "./node_modules/@babel/runtime/helpers/get.js"));
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js"));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js"));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js"));
+var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldGet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldGet.js"));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldSet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldSet.js"));
+var _index = __webpack_require__(/*! ./index */ "./src/managers/form/field/index.js");
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2["default"])(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2["default"])(this, result); }; }
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
@@ -4309,23 +4602,26 @@ function _testPassword2(password) {
 
 /***/ }),
 
-/***/ 4751:
+/***/ "./src/managers/form/field/index.js":
+/*!******************************************!*\
+  !*** ./src/managers/form/field/index.js ***!
+  \******************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(5656);
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.FormField = void 0;
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
-var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
-var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(5194));
-var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(8478));
-var _DOM = __webpack_require__(2909);
-var _lodash = _interopRequireDefault(__webpack_require__(5828));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js"));
+var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldGet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldGet.js"));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldSet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldSet.js"));
+var _DOM = __webpack_require__(/*! ../../../utils/DOM */ "./src/utils/DOM.js");
+var _lodash = _interopRequireDefault(__webpack_require__(/*! lodash.isempty */ "./node_modules/lodash.isempty/index.js"));
 function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
 function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
 var _errorMessageRequired = /*#__PURE__*/new WeakMap();
@@ -4485,8 +4781,8 @@ var FormField = /*#__PURE__*/function () {
     key: "createInput",
     value: function createInput(options) {
       return (0, _DOM.createElement)('input', {
-        className: options.className || "wk-form-field__input ".concat(options.name || ''),
-        id: options.id || false,
+        className: 'wk-form-field__input',
+        id: options.id || options.name,
         attributes: {
           name: options.name,
           type: options.type || 'text',
@@ -4577,31 +4873,34 @@ exports.FormField = FormField;
 
 /***/ }),
 
-/***/ 8031:
+/***/ "./src/managers/form/forms/AuthForm.js":
+/*!*********************************************!*\
+  !*** ./src/managers/form/forms/AuthForm.js ***!
+  \*********************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(5656);
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.SIGN_UP_FORM_SLUG = exports.SIGN_IN_FORM_SLUG = exports.RESET_PASSWORD_FORM_SLUG = exports.FORGOT_PASSWORD_FORM_SLUG = exports.EMAIL_LINK_FORM_SLUG = exports.AuthForm = void 0;
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(366));
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
-var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
-var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(5194));
-var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(8478));
-var _DOM = __webpack_require__(2909);
-var _TriggerButton = __webpack_require__(447);
-var _LoginForm = __webpack_require__(4138);
-var _SignUpForm = __webpack_require__(8955);
-var _ForgotPasswordForm = __webpack_require__(7486);
-var _ResetPasswordForm = __webpack_require__(2217);
-var _EmailLinkForm = __webpack_require__(2511);
-var _eventsName = __webpack_require__(6073);
-var _lodash = _interopRequireDefault(__webpack_require__(5828));
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js"));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js"));
+var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldGet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldGet.js"));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldSet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldSet.js"));
+var _DOM = __webpack_require__(/*! ../../../utils/DOM */ "./src/utils/DOM.js");
+var _TriggerButton = __webpack_require__(/*! ../buttons/TriggerButton */ "./src/managers/form/buttons/TriggerButton.js");
+var _LoginForm = __webpack_require__(/*! ./LoginForm */ "./src/managers/form/forms/LoginForm.js");
+var _SignUpForm = __webpack_require__(/*! ./SignUpForm */ "./src/managers/form/forms/SignUpForm.js");
+var _ForgotPasswordForm = __webpack_require__(/*! ./ForgotPasswordForm */ "./src/managers/form/forms/ForgotPasswordForm.js");
+var _ResetPasswordForm = __webpack_require__(/*! ./ResetPasswordForm */ "./src/managers/form/forms/ResetPasswordForm.js");
+var _EmailLinkForm = __webpack_require__(/*! ./EmailLinkForm */ "./src/managers/form/forms/EmailLinkForm.js");
+var _eventsName = __webpack_require__(/*! ../../events/events-name */ "./src/managers/events/events-name.js");
+var _lodash = _interopRequireDefault(__webpack_require__(/*! lodash.isempty */ "./node_modules/lodash.isempty/index.js"));
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
@@ -4648,7 +4947,6 @@ var AuthForm = /*#__PURE__*/function () {
       signInMessages = signIn.messages;
     }
     this.loginForm = new _LoginForm.LoginForm(selector, _objectSpread(_objectSpread({
-      className: 'wk-form-login',
       cancelBtn: options.triggerButton !== false,
       signUp: (_options$signUp = options.signUp) !== null && _options$signUp !== void 0 ? _options$signUp : true,
       passwordSignInIgnoreValidation: options.passwordSignInIgnoreValidation || false
@@ -4684,7 +4982,6 @@ var AuthForm = /*#__PURE__*/function () {
     }
     if (options.signUp === true) {
       this.signUpForm = new _SignUpForm.SignupForm(selector, _objectSpread(_objectSpread({
-        className: 'wk-form-signup',
         cancelBtn: options.triggerButton !== false,
         termsOfService: options.termsOfService
       }, signUp || {}), {}, {
@@ -4716,7 +5013,6 @@ var AuthForm = /*#__PURE__*/function () {
       emailLinkMessages = emailLink.messages;
     }
     this.emailLinkForm = new _EmailLinkForm.EmailLinkForm(selector, _objectSpread(_objectSpread({
-      className: 'wk-form-email-link',
       cancelBtn: options.triggerButton !== false,
       signUp: (_options$signUp2 = options.signUp) !== null && _options$signUp2 !== void 0 ? _options$signUp2 : true
     }, emailLink || {}), {}, {
@@ -4758,9 +5054,7 @@ var AuthForm = /*#__PURE__*/function () {
     if (!(0, _lodash["default"])(forgotPassword) && !(0, _lodash["default"])(forgotPassword.messages)) {
       forgotPasswordMessages = forgotPassword.messages;
     }
-    this.forgotPasswordForm = new _ForgotPasswordForm.ForgotPasswordForm(selector, _objectSpread(_objectSpread({
-      className: 'wk-form-forgot-password'
-    }, forgotPassword || {}), {}, {
+    this.forgotPasswordForm = new _ForgotPasswordForm.ForgotPasswordForm(selector, _objectSpread(_objectSpread({}, forgotPassword || {}), {}, {
       messages: _objectSpread(_objectSpread({}, messages || {}), forgotPasswordMessages),
       onSubmit: function onSubmit(data) {
         if (options.onPasswordForgot) {
@@ -4782,9 +5076,7 @@ var AuthForm = /*#__PURE__*/function () {
     if (!(0, _lodash["default"])(resetPassword) && !(0, _lodash["default"])(resetPassword.messages)) {
       resetPasswordMessages = resetPassword.messages;
     }
-    this.resetPasswordForm = new _ResetPasswordForm.ResetPasswordForm(selector, _objectSpread(_objectSpread({
-      className: 'wk-form-reset-password'
-    }, resetPassword || {}), {}, {
+    this.resetPasswordForm = new _ResetPasswordForm.ResetPasswordForm(selector, _objectSpread(_objectSpread({}, resetPassword || {}), {}, {
       messages: _objectSpread(_objectSpread({}, messages || {}), resetPasswordMessages),
       onSubmit: function onSubmit(data) {
         if (options.onPasswordReset) {
@@ -4978,28 +5270,31 @@ exports.AuthForm = AuthForm;
 
 /***/ }),
 
-/***/ 8445:
+/***/ "./src/managers/form/forms/ChangePasswordForm.js":
+/*!*******************************************************!*\
+  !*** ./src/managers/form/forms/ChangePasswordForm.js ***!
+  \*******************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(5656);
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.ChangePasswordForm = void 0;
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
-var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
-var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(1185));
-var _inherits2 = _interopRequireDefault(__webpack_require__(7964));
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(8442));
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(7474));
-var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(5194));
-var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(8478));
-var _DOM = __webpack_require__(2909);
-var _index = __webpack_require__(9356);
-var _PasswordField = __webpack_require__(4386);
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js"));
+var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js"));
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js"));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js"));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js"));
+var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldGet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldGet.js"));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldSet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldSet.js"));
+var _DOM = __webpack_require__(/*! ../../../utils/DOM */ "./src/utils/DOM.js");
+var _index = __webpack_require__(/*! ../index */ "./src/managers/form/index.js");
+var _PasswordField = __webpack_require__(/*! ../field/PasswordField.js */ "./src/managers/form/field/PasswordField.js");
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2["default"])(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2["default"])(this, result); }; }
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
@@ -5128,26 +5423,29 @@ exports.ChangePasswordForm = ChangePasswordForm;
 
 /***/ }),
 
-/***/ 2511:
+/***/ "./src/managers/form/forms/EmailLinkForm.js":
+/*!**************************************************!*\
+  !*** ./src/managers/form/forms/EmailLinkForm.js ***!
+  \**************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(5656);
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.EmailLinkForm = void 0;
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
-var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
-var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(1185));
-var _inherits2 = _interopRequireDefault(__webpack_require__(7964));
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(8442));
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(7474));
-var _DOM = __webpack_require__(2909);
-var _index = __webpack_require__(9356);
-var _field = __webpack_require__(4751);
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js"));
+var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js"));
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js"));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js"));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js"));
+var _DOM = __webpack_require__(/*! ../../../utils/DOM */ "./src/utils/DOM.js");
+var _index = __webpack_require__(/*! ../index */ "./src/managers/form/index.js");
+var _field = __webpack_require__(/*! ../field */ "./src/managers/form/field/index.js");
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2["default"])(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2["default"])(this, result); }; }
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 var EmailLinkForm = /*#__PURE__*/function (_Form) {
@@ -5217,25 +5515,28 @@ exports.EmailLinkForm = EmailLinkForm;
 
 /***/ }),
 
-/***/ 7486:
+/***/ "./src/managers/form/forms/ForgotPasswordForm.js":
+/*!*******************************************************!*\
+  !*** ./src/managers/form/forms/ForgotPasswordForm.js ***!
+  \*******************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(5656);
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.ForgotPasswordForm = void 0;
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
-var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
-var _inherits2 = _interopRequireDefault(__webpack_require__(7964));
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(8442));
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(7474));
-var _DOM = __webpack_require__(2909);
-var _index = __webpack_require__(9356);
-var _field = __webpack_require__(4751);
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js"));
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js"));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js"));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js"));
+var _DOM = __webpack_require__(/*! ../../../utils/DOM */ "./src/utils/DOM.js");
+var _index = __webpack_require__(/*! ../index */ "./src/managers/form/index.js");
+var _field = __webpack_require__(/*! ../field */ "./src/managers/form/field/index.js");
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2["default"])(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2["default"])(this, result); }; }
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 var ForgotPasswordForm = /*#__PURE__*/function (_Form) {
@@ -5280,27 +5581,30 @@ exports.ForgotPasswordForm = ForgotPasswordForm;
 
 /***/ }),
 
-/***/ 4138:
+/***/ "./src/managers/form/forms/LoginForm.js":
+/*!**********************************************!*\
+  !*** ./src/managers/form/forms/LoginForm.js ***!
+  \**********************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(5656);
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.LoginForm = void 0;
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
-var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
-var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(1185));
-var _inherits2 = _interopRequireDefault(__webpack_require__(7964));
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(8442));
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(7474));
-var _DOM = __webpack_require__(2909);
-var _index = __webpack_require__(9356);
-var _field = __webpack_require__(4751);
-var _PasswordField = __webpack_require__(4386);
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js"));
+var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js"));
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js"));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js"));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js"));
+var _DOM = __webpack_require__(/*! ../../../utils/DOM */ "./src/utils/DOM.js");
+var _index = __webpack_require__(/*! ../index */ "./src/managers/form/index.js");
+var _field = __webpack_require__(/*! ../field */ "./src/managers/form/field/index.js");
+var _PasswordField = __webpack_require__(/*! ../field/PasswordField.js */ "./src/managers/form/field/PasswordField.js");
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2["default"])(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2["default"])(this, result); }; }
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 var LoginForm = /*#__PURE__*/function (_Form) {
@@ -5389,25 +5693,28 @@ exports.LoginForm = LoginForm;
 
 /***/ }),
 
-/***/ 2217:
+/***/ "./src/managers/form/forms/ResetPasswordForm.js":
+/*!******************************************************!*\
+  !*** ./src/managers/form/forms/ResetPasswordForm.js ***!
+  \******************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(5656);
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.ResetPasswordForm = void 0;
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
-var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
-var _inherits2 = _interopRequireDefault(__webpack_require__(7964));
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(8442));
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(7474));
-var _DOM = __webpack_require__(2909);
-var _index = __webpack_require__(9356);
-var _PasswordField = __webpack_require__(4386);
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js"));
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js"));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js"));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js"));
+var _DOM = __webpack_require__(/*! ../../../utils/DOM */ "./src/utils/DOM.js");
+var _index = __webpack_require__(/*! ../index */ "./src/managers/form/index.js");
+var _PasswordField = __webpack_require__(/*! ../field/PasswordField */ "./src/managers/form/field/PasswordField.js");
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2["default"])(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2["default"])(this, result); }; }
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 var ResetPasswordForm = /*#__PURE__*/function (_Form) {
@@ -5454,29 +5761,32 @@ exports.ResetPasswordForm = ResetPasswordForm;
 
 /***/ }),
 
-/***/ 8955:
+/***/ "./src/managers/form/forms/SignUpForm.js":
+/*!***********************************************!*\
+  !*** ./src/managers/form/forms/SignUpForm.js ***!
+  \***********************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(5656);
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.SignupForm = void 0;
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(366));
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
-var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
-var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(1185));
-var _inherits2 = _interopRequireDefault(__webpack_require__(7964));
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(8442));
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(7474));
-var _DOM = __webpack_require__(2909);
-var _index = __webpack_require__(9356);
-var _field = __webpack_require__(4751);
-var _PasswordField = __webpack_require__(4386);
-var _CheckBoxField = __webpack_require__(4195);
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js"));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js"));
+var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js"));
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js"));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js"));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js"));
+var _DOM = __webpack_require__(/*! ../../../utils/DOM */ "./src/utils/DOM.js");
+var _index = __webpack_require__(/*! ../index */ "./src/managers/form/index.js");
+var _field = __webpack_require__(/*! ../field */ "./src/managers/form/field/index.js");
+var _PasswordField = __webpack_require__(/*! ../field/PasswordField.js */ "./src/managers/form/field/PasswordField.js");
+var _CheckBoxField = __webpack_require__(/*! ../field/CheckBoxField.js */ "./src/managers/form/field/CheckBoxField.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2["default"])(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2["default"])(this, result); }; }
@@ -5621,28 +5931,31 @@ function _isTosEnabled2(options) {
 
 /***/ }),
 
-/***/ 9356:
+/***/ "./src/managers/form/index.js":
+/*!************************************!*\
+  !*** ./src/managers/form/index.js ***!
+  \************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(5656);
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.Form = void 0;
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
-var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
-var _DOM = __webpack_require__(2909);
-var _lodash = _interopRequireDefault(__webpack_require__(5828));
-var _lodash2 = _interopRequireDefault(__webpack_require__(4174));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js"));
+var _DOM = __webpack_require__(/*! ../../utils/DOM */ "./src/utils/DOM.js");
+var _lodash = _interopRequireDefault(__webpack_require__(/*! lodash.isempty */ "./node_modules/lodash.isempty/index.js"));
+var _lodash2 = _interopRequireDefault(__webpack_require__(/*! lodash.get */ "./node_modules/lodash.get/index.js"));
 var Form = /*#__PURE__*/function () {
   function Form(targetElementSelector, options) {
     (0, _classCallCheck2["default"])(this, Form);
     this.targetElementSelector = targetElementSelector;
     this.formWrapper = (0, _DOM.createElement)('div', {
-      className: "wk-form".concat(!(0, _lodash["default"])(options.className) ? ' ' + options.className : '')
+      className: 'wk-form'
     });
     this.submitBtn = (0, _DOM.createElement)('button', {
       className: 'wk-form-button',
@@ -5841,23 +6154,26 @@ exports.Form = Form;
 
 /***/ }),
 
-/***/ 8967:
+/***/ "./src/managers/frame/index.js":
+/*!*************************************!*\
+  !*** ./src/managers/frame/index.js ***!
+  \*************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(5656);
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports["default"] = void 0;
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
-var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
-var _DOM = __webpack_require__(2909);
-var _constants = __webpack_require__(9066);
-var _eventsName = __webpack_require__(6073);
-var _events = _interopRequireDefault(__webpack_require__(9889));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js"));
+var _DOM = __webpack_require__(/*! ../../utils/DOM */ "./src/utils/DOM.js");
+var _constants = __webpack_require__(/*! ../../configs/constants */ "./src/configs/constants.js");
+var _eventsName = __webpack_require__(/*! ../events/events-name */ "./src/managers/events/events-name.js");
+var _events = _interopRequireDefault(__webpack_require__(/*! ../events */ "./src/managers/events/index.js"));
 function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
 function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
@@ -5988,24 +6304,27 @@ function _listeners2() {
 
 /***/ }),
 
-/***/ 7761:
+/***/ "./src/managers/localization/index.js":
+/*!********************************************!*\
+  !*** ./src/managers/localization/index.js ***!
+  \********************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(5656);
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.Localization = void 0;
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
-var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
-var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(5194));
-var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(8478));
-var _languages = __webpack_require__(8006);
-var _eventsName = __webpack_require__(6073);
-var _events2 = _interopRequireDefault(__webpack_require__(9889));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js"));
+var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldGet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldGet.js"));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldSet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldSet.js"));
+var _languages = __webpack_require__(/*! ../../configs/languages */ "./src/configs/languages.js");
+var _eventsName = __webpack_require__(/*! ../events/events-name */ "./src/managers/events/events-name.js");
+var _events2 = _interopRequireDefault(__webpack_require__(/*! ../events */ "./src/managers/events/index.js"));
 function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
 function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
 var _events = /*#__PURE__*/new WeakMap();
@@ -6044,26 +6363,29 @@ exports.Localization = Localization;
 
 /***/ }),
 
-/***/ 9269:
+/***/ "./src/managers/modal/index.js":
+/*!*************************************!*\
+  !*** ./src/managers/modal/index.js ***!
+  \*************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(5656);
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports["default"] = void 0;
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(366));
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
-var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
-var _constants = __webpack_require__(9066);
-var _DOM = _interopRequireDefault(__webpack_require__(2909));
-var _loaders = __webpack_require__(1758);
-var _url = __webpack_require__(5234);
-var _events = _interopRequireDefault(__webpack_require__(9889));
-var _eventsName = __webpack_require__(6073);
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js"));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js"));
+var _constants = __webpack_require__(/*! ../../configs/constants */ "./src/configs/constants.js");
+var _DOM = _interopRequireDefault(__webpack_require__(/*! ../../utils/DOM */ "./src/utils/DOM.js"));
+var _loaders = __webpack_require__(/*! ../../utils/loaders */ "./src/utils/loaders.js");
+var _url = __webpack_require__(/*! ../../utils/url */ "./src/utils/url.js");
+var _events = _interopRequireDefault(__webpack_require__(/*! ../events */ "./src/managers/events/index.js"));
+var _eventsName = __webpack_require__(/*! ../events/events-name */ "./src/managers/events/events-name.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
@@ -6220,6 +6542,8 @@ function _createCloseBtn2() {
 }
 function _createWrapper2() {
   var _this$options3,
+    _this$options5,
+    _this$options5$ui,
     _this = this;
   var modalClassName = _constants.WALLKIT_MODAL_WRAPPER_CLASSNAME;
   if ((_this$options3 = this.options) !== null && _this$options3 !== void 0 && _this$options3.className) {
@@ -6232,13 +6556,15 @@ function _createWrapper2() {
     },
     className: modalClassName
   });
-  this.modalWrapper.addEventListener('click', function (event) {
-    if (event.target.id === _this.modalWrapper.id) {
-      if (_this.closeOutside) {
-        _this.hide();
+  if (((_this$options5 = this.options) === null || _this$options5 === void 0 ? void 0 : (_this$options5$ui = _this$options5.ui) === null || _this$options5$ui === void 0 ? void 0 : _this$options5$ui.type) !== 'inline') {
+    this.modalWrapper.addEventListener('click', function (event) {
+      if (event.target.id === _this.modalWrapper.id) {
+        if (_this.closeOutside) {
+          _this.hide();
+        }
       }
-    }
-  });
+    });
+  }
   return this.modalWrapper;
 }
 function _createContent2() {
@@ -6251,26 +6577,34 @@ function _createContent2() {
   return this.modalContent;
 }
 function _createLoader2() {
-  var _this$options5;
+  var _this$options6;
   this.loaderElement = _classPrivateMethodGet(this, _createElement, _createElement2).call(this, 'div', 'wallkit-modal-spinner', {
     className: 'wallkit-spinner',
     styles: {
-      display: (_this$options5 = this.options) !== null && _this$options5 !== void 0 && _this$options5.initialLoader ? 'flex' : 'none'
+      display: (_this$options6 = this.options) !== null && _this$options6 !== void 0 && _this$options6.initialLoader ? 'flex' : 'none'
     }
   });
   this.loaderElement.insertAdjacentHTML('beforeend', '<div class="wallkit-spinner__container">' + '<div class="cube1"></div>' + '<div class="cube2"></div>' + '</div>');
 }
 function _completeModal2() {
+  var _this$options7, _this$options7$ui, _this$options8, _this$options8$ui;
   _classPrivateMethodGet(this, _loadAssets, _loadAssets2).call(this);
   this.modalWrapper.appendChild(this.modalContent);
   this.modalContent.appendChild(this.loaderElement);
-  this.modalContent.appendChild(_classPrivateMethodGet(this, _createCloseBtn, _createCloseBtn2).call(this));
+  if (((_this$options7 = this.options) === null || _this$options7 === void 0 ? void 0 : (_this$options7$ui = _this$options7.ui) === null || _this$options7$ui === void 0 ? void 0 : _this$options7$ui.type) !== 'inline') {
+    this.modalContent.appendChild(_classPrivateMethodGet(this, _createCloseBtn, _createCloseBtn2).call(this));
+  }
   if (this.modalFrame) {
     this.insertContent(this.modalFrame.init());
   } else if (this.modalContent) {
     this.insertContent(this.content);
   }
-  return _DOM["default"].injectInBody(this.modalWrapper);
+  if (((_this$options8 = this.options) === null || _this$options8 === void 0 ? void 0 : (_this$options8$ui = _this$options8.ui) === null || _this$options8$ui === void 0 ? void 0 : _this$options8$ui.type) !== 'inline') {
+    return _DOM["default"].injectInBody(this.modalWrapper);
+  } else {
+    var _this$options9, _this$options9$ui;
+    return _DOM["default"].injectInElement((_this$options9 = this.options) === null || _this$options9 === void 0 ? void 0 : (_this$options9$ui = _this$options9.ui) === null || _this$options9$ui === void 0 ? void 0 : _this$options9$ui.selector, this.modalWrapper);
+  }
 }
 function _loadAssets2() {
   (0, _loaders.loadWallkitAsset)('css', '1.0', 'spinner');
@@ -6278,25 +6612,28 @@ function _loadAssets2() {
 
 /***/ }),
 
-/***/ 4753:
+/***/ "./src/managers/sdk/index.js":
+/*!***********************************!*\
+  !*** ./src/managers/sdk/index.js ***!
+  \***********************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(5656);
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports["default"] = void 0;
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
-var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
-var _classPrivateFieldGet6 = _interopRequireDefault(__webpack_require__(5194));
-var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(8478));
-var _DOM = __webpack_require__(2909);
-var _constants = __webpack_require__(9066);
-var _eventsName = __webpack_require__(6073);
-var _events2 = _interopRequireDefault(__webpack_require__(9889));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js"));
+var _classPrivateFieldGet6 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldGet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldGet.js"));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldSet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldSet.js"));
+var _DOM = __webpack_require__(/*! ../../utils/DOM */ "./src/utils/DOM.js");
+var _constants = __webpack_require__(/*! ../../configs/constants */ "./src/configs/constants.js");
+var _eventsName = __webpack_require__(/*! ../events/events-name */ "./src/managers/events/events-name.js");
+var _events2 = _interopRequireDefault(__webpack_require__(/*! ../events */ "./src/managers/events/index.js"));
 function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
 function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
 var _options = /*#__PURE__*/new WeakMap();
@@ -6341,7 +6678,6 @@ var SDK = /*#__PURE__*/function () {
       default:
         (0, _classPrivateFieldSet2["default"])(this, _apiUrl, 'https://api.wallkit.net/api/v1');
     }
-    console.log('this.#apiUrl', (0, _classPrivateFieldGet6["default"])(this, _apiUrl), options);
     if (window.Wallkit) {
       this.onLoad();
     } else {
@@ -6393,28 +6729,31 @@ exports["default"] = SDK;
 
 /***/ }),
 
-/***/ 4442:
+/***/ "./src/managers/user/index.js":
+/*!************************************!*\
+  !*** ./src/managers/user/index.js ***!
+  \************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(5656);
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports["default"] = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(8047));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(7240));
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(366));
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
-var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
-var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(5194));
-var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(8478));
-var _modal = _interopRequireDefault(__webpack_require__(9269));
-var _ChangePasswordForm = __webpack_require__(8445);
-var _constants = __webpack_require__(9066);
-var _lodash = _interopRequireDefault(__webpack_require__(5828));
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js"));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js"));
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js"));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js"));
+var _classPrivateFieldGet2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldGet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldGet.js"));
+var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classPrivateFieldSet */ "./node_modules/@babel/runtime/helpers/classPrivateFieldSet.js"));
+var _modal = _interopRequireDefault(__webpack_require__(/*! ../modal */ "./src/managers/modal/index.js"));
+var _ChangePasswordForm = __webpack_require__(/*! ../form/forms/ChangePasswordForm */ "./src/managers/form/forms/ChangePasswordForm.js");
+var _constants = __webpack_require__(/*! ../../configs/constants */ "./src/configs/constants.js");
+var _lodash = _interopRequireDefault(__webpack_require__(/*! lodash.isempty */ "./node_modules/lodash.isempty/index.js"));
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
@@ -6473,7 +6812,8 @@ function _initModal2(options) {
     modalName: options.name || 'user-manager-modal',
     content: options.content || this.getDefaultUserManagerModalContent(),
     className: options.className || 'wallkit-auth-modal',
-    initialLoader: options.loader || false
+    initialLoader: options.loader || false,
+    ui: options === null || options === void 0 ? void 0 : options.ui
   });
   this.modal.init();
   this.modal.modalWrapper.addEventListener('click', function (event) {
@@ -6571,18 +6911,21 @@ function _successChangePasswordForm2() {
 
 /***/ }),
 
-/***/ 2909:
+/***/ "./src/utils/DOM.js":
+/*!**************************!*\
+  !*** ./src/utils/DOM.js ***!
+  \**************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _typeof = __webpack_require__(2125);
+var _typeof = __webpack_require__(/*! @babel/runtime/helpers/typeof */ "./node_modules/@babel/runtime/helpers/typeof.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.normalizeSelector = exports.loadCSS = exports.isMobile = exports.isDocumentAvailable = exports.insertScript = exports.insertAfter = exports.injectInHead = exports.injectInBody = exports["default"] = exports.createElement = exports.checkIfElementExists = void 0;
-var _Error = _interopRequireWildcard(__webpack_require__(542));
+exports.normalizeSelector = exports.loadCSS = exports.isMobile = exports.isDocumentAvailable = exports.insertScript = exports.insertAfter = exports.injectInHead = exports.injectInElement = exports.injectInBody = exports["default"] = exports.createElement = exports.checkIfElementExists = void 0;
+var _Error = _interopRequireWildcard(__webpack_require__(/*! ../handlers/Error.js */ "./src/handlers/Error.js"));
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 var isDocumentAvailable = function isDocumentAvailable() {
@@ -6645,6 +6988,14 @@ var injectInBody = function injectInBody(element) {
   return document.body.appendChild(element);
 };
 exports.injectInBody = injectInBody;
+var injectInElement = function injectInElement(querySelector, element) {
+  if (!isDocumentAvailable()) return _Error["default"].handleError('Document is not available', _Error.ERRORS_TYPES.DOM_ERROR);
+  if (!element) return _Error["default"].checkRequiredArgument(element, 'element');
+  var wrapper = document.querySelector(querySelector);
+  if (!wrapper) return _Error["default"].checkRequiredArgument(wrapper, 'wrapper');
+  return wrapper.appendChild(element);
+};
+exports.injectInElement = injectInElement;
 var injectInHead = function injectInHead(element) {
   if (!isDocumentAvailable()) return _Error["default"].handleError('Document is not available', _Error.ERRORS_TYPES.DOM_ERROR);
   if (!element) return _Error["default"].checkRequiredArgument(element, 'element');
@@ -6705,24 +7056,28 @@ var _default = {
   loadCSS: loadCSS,
   insertScript: insertScript,
   isMobile: isMobile,
-  normalizeSelector: normalizeSelector
+  normalizeSelector: normalizeSelector,
+  injectInElement: injectInElement
 };
 exports["default"] = _default;
 
 /***/ }),
 
-/***/ 5048:
+/***/ "./src/utils/cookie.js":
+/*!*****************************!*\
+  !*** ./src/utils/cookie.js ***!
+  \*****************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(5656);
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.setCookie = exports.removeCookie = exports["default"] = void 0;
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(366));
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js"));
 var setCookie = function setCookie(name, value, options) {
   if (!name || !value) {
     return;
@@ -6769,7 +7124,10 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 7857:
+/***/ "./src/utils/crawlers.js":
+/*!*******************************!*\
+  !*** ./src/utils/crawlers.js ***!
+  \*******************************/
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -6786,7 +7144,10 @@ exports.isCrawler = isCrawler;
 
 /***/ }),
 
-/***/ 1758:
+/***/ "./src/utils/loaders.js":
+/*!******************************!*\
+  !*** ./src/utils/loaders.js ***!
+  \******************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -6796,8 +7157,8 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.loadWallkitAsset = exports.loadScripts = exports["default"] = void 0;
-var _DOM = __webpack_require__(2909);
-var _constants = __webpack_require__(9066);
+var _DOM = __webpack_require__(/*! ./DOM */ "./src/utils/DOM.js");
+var _constants = __webpack_require__(/*! ../configs/constants */ "./src/configs/constants.js");
 var loadWallkitAsset = function loadWallkitAsset(type, version, name) {
   var min = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
   switch (type) {
@@ -6831,7 +7192,10 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 347:
+/***/ "./src/utils/local-storage.js":
+/*!************************************!*\
+  !*** ./src/utils/local-storage.js ***!
+  \************************************/
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -6868,7 +7232,10 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 8672:
+/***/ "./src/utils/payments.js":
+/*!*******************************!*\
+  !*** ./src/utils/payments.js ***!
+  \*******************************/
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -6894,19 +7261,22 @@ exports.isApplePayAvailable = isApplePayAvailable;
 
 /***/ }),
 
-/***/ 5234:
+/***/ "./src/utils/url.js":
+/*!**************************!*\
+  !*** ./src/utils/url.js ***!
+  \**************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(5656);
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.resetSearchParams = exports.resetHash = exports.parseUrlToShowAuthModal = exports.parseResetPasswordOobCodeHash = exports.parseModalHashURL = exports.parseAuthTokenHash = exports.parseAuthEmailLinkOobCodeHash = exports.getUrlParamByKey = exports.getParentDomain = exports.getDomainWithoutSubdomain = void 0;
-var _typeof2 = _interopRequireDefault(__webpack_require__(2125));
-var _lodash = _interopRequireDefault(__webpack_require__(5828));
+var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ "./node_modules/@babel/runtime/helpers/typeof.js"));
+var _lodash = _interopRequireDefault(__webpack_require__(/*! lodash.isempty */ "./node_modules/lodash.isempty/index.js"));
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
@@ -7035,7 +7405,10 @@ exports.getUrlParamByKey = getUrlParamByKey;
 
 /***/ }),
 
-/***/ 4174:
+/***/ "./node_modules/lodash.get/index.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash.get/index.js ***!
+  \******************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /**
@@ -7973,7 +8346,10 @@ module.exports = get;
 
 /***/ }),
 
-/***/ 5828:
+/***/ "./node_modules/lodash.isempty/index.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash.isempty/index.js ***!
+  \**********************************************/
 /***/ ((module, exports, __webpack_require__) => {
 
 /* module decorator */ module = __webpack_require__.nmd(module);
@@ -8563,7 +8939,38 @@ module.exports = isEmpty;
 
 /***/ }),
 
-/***/ 1185:
+/***/ "./node_modules/@babel/runtime/helpers/arrayLikeToArray.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayLikeToArray.js ***!
+  \*****************************************************************/
+/***/ ((module) => {
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+  return arr2;
+}
+module.exports = _arrayLikeToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/arrayWithHoles.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayWithHoles.js ***!
+  \***************************************************************/
+/***/ ((module) => {
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+module.exports = _arrayWithHoles, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/assertThisInitialized.js ***!
+  \**********************************************************************/
 /***/ ((module) => {
 
 function _assertThisInitialized(self) {
@@ -8576,7 +8983,10 @@ module.exports = _assertThisInitialized, module.exports.__esModule = true, modul
 
 /***/ }),
 
-/***/ 7240:
+/***/ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/asyncToGenerator.js ***!
+  \*****************************************************************/
 /***/ ((module) => {
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
@@ -8613,7 +9023,10 @@ module.exports = _asyncToGenerator, module.exports.__esModule = true, module.exp
 
 /***/ }),
 
-/***/ 4869:
+/***/ "./node_modules/@babel/runtime/helpers/classApplyDescriptorGet.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/classApplyDescriptorGet.js ***!
+  \************************************************************************/
 /***/ ((module) => {
 
 function _classApplyDescriptorGet(receiver, descriptor) {
@@ -8626,7 +9039,10 @@ module.exports = _classApplyDescriptorGet, module.exports.__esModule = true, mod
 
 /***/ }),
 
-/***/ 9194:
+/***/ "./node_modules/@babel/runtime/helpers/classApplyDescriptorSet.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/classApplyDescriptorSet.js ***!
+  \************************************************************************/
 /***/ ((module) => {
 
 function _classApplyDescriptorSet(receiver, descriptor, value) {
@@ -8643,7 +9059,10 @@ module.exports = _classApplyDescriptorSet, module.exports.__esModule = true, mod
 
 /***/ }),
 
-/***/ 3298:
+/***/ "./node_modules/@babel/runtime/helpers/classCallCheck.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/classCallCheck.js ***!
+  \***************************************************************/
 /***/ ((module) => {
 
 function _classCallCheck(instance, Constructor) {
@@ -8655,7 +9074,10 @@ module.exports = _classCallCheck, module.exports.__esModule = true, module.expor
 
 /***/ }),
 
-/***/ 4578:
+/***/ "./node_modules/@babel/runtime/helpers/classExtractFieldDescriptor.js":
+/*!****************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/classExtractFieldDescriptor.js ***!
+  \****************************************************************************/
 /***/ ((module) => {
 
 function _classExtractFieldDescriptor(receiver, privateMap, action) {
@@ -8668,11 +9090,14 @@ module.exports = _classExtractFieldDescriptor, module.exports.__esModule = true,
 
 /***/ }),
 
-/***/ 5194:
+/***/ "./node_modules/@babel/runtime/helpers/classPrivateFieldGet.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/classPrivateFieldGet.js ***!
+  \*********************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-var classApplyDescriptorGet = __webpack_require__(4869);
-var classExtractFieldDescriptor = __webpack_require__(4578);
+var classApplyDescriptorGet = __webpack_require__(/*! ./classApplyDescriptorGet.js */ "./node_modules/@babel/runtime/helpers/classApplyDescriptorGet.js");
+var classExtractFieldDescriptor = __webpack_require__(/*! ./classExtractFieldDescriptor.js */ "./node_modules/@babel/runtime/helpers/classExtractFieldDescriptor.js");
 function _classPrivateFieldGet(receiver, privateMap) {
   var descriptor = classExtractFieldDescriptor(receiver, privateMap, "get");
   return classApplyDescriptorGet(receiver, descriptor);
@@ -8681,11 +9106,14 @@ module.exports = _classPrivateFieldGet, module.exports.__esModule = true, module
 
 /***/ }),
 
-/***/ 8478:
+/***/ "./node_modules/@babel/runtime/helpers/classPrivateFieldSet.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/classPrivateFieldSet.js ***!
+  \*********************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-var classApplyDescriptorSet = __webpack_require__(9194);
-var classExtractFieldDescriptor = __webpack_require__(4578);
+var classApplyDescriptorSet = __webpack_require__(/*! ./classApplyDescriptorSet.js */ "./node_modules/@babel/runtime/helpers/classApplyDescriptorSet.js");
+var classExtractFieldDescriptor = __webpack_require__(/*! ./classExtractFieldDescriptor.js */ "./node_modules/@babel/runtime/helpers/classExtractFieldDescriptor.js");
 function _classPrivateFieldSet(receiver, privateMap, value) {
   var descriptor = classExtractFieldDescriptor(receiver, privateMap, "set");
   classApplyDescriptorSet(receiver, descriptor, value);
@@ -8695,10 +9123,13 @@ module.exports = _classPrivateFieldSet, module.exports.__esModule = true, module
 
 /***/ }),
 
-/***/ 1795:
+/***/ "./node_modules/@babel/runtime/helpers/createClass.js":
+/*!************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/createClass.js ***!
+  \************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-var toPropertyKey = __webpack_require__(4573);
+var toPropertyKey = __webpack_require__(/*! ./toPropertyKey.js */ "./node_modules/@babel/runtime/helpers/toPropertyKey.js");
 function _defineProperties(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
@@ -8720,10 +9151,13 @@ module.exports = _createClass, module.exports.__esModule = true, module.exports[
 
 /***/ }),
 
-/***/ 366:
+/***/ "./node_modules/@babel/runtime/helpers/defineProperty.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/defineProperty.js ***!
+  \***************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-var toPropertyKey = __webpack_require__(4573);
+var toPropertyKey = __webpack_require__(/*! ./toPropertyKey.js */ "./node_modules/@babel/runtime/helpers/toPropertyKey.js");
 function _defineProperty(obj, key, value) {
   key = toPropertyKey(key);
   if (key in obj) {
@@ -8742,10 +9176,13 @@ module.exports = _defineProperty, module.exports.__esModule = true, module.expor
 
 /***/ }),
 
-/***/ 4560:
+/***/ "./node_modules/@babel/runtime/helpers/get.js":
+/*!****************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/get.js ***!
+  \****************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-var superPropBase = __webpack_require__(93);
+var superPropBase = __webpack_require__(/*! ./superPropBase.js */ "./node_modules/@babel/runtime/helpers/superPropBase.js");
 function _get() {
   if (typeof Reflect !== "undefined" && Reflect.get) {
     module.exports = _get = Reflect.get.bind(), module.exports.__esModule = true, module.exports["default"] = module.exports;
@@ -8766,7 +9203,10 @@ module.exports = _get, module.exports.__esModule = true, module.exports["default
 
 /***/ }),
 
-/***/ 7474:
+/***/ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/getPrototypeOf.js ***!
+  \***************************************************************/
 /***/ ((module) => {
 
 function _getPrototypeOf(o) {
@@ -8779,10 +9219,13 @@ module.exports = _getPrototypeOf, module.exports.__esModule = true, module.expor
 
 /***/ }),
 
-/***/ 7964:
+/***/ "./node_modules/@babel/runtime/helpers/inherits.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/inherits.js ***!
+  \*********************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-var setPrototypeOf = __webpack_require__(3903);
+var setPrototypeOf = __webpack_require__(/*! ./setPrototypeOf.js */ "./node_modules/@babel/runtime/helpers/setPrototypeOf.js");
 function _inherits(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function");
@@ -8803,7 +9246,10 @@ module.exports = _inherits, module.exports.__esModule = true, module.exports["de
 
 /***/ }),
 
-/***/ 5656:
+/***/ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/interopRequireDefault.js ***!
+  \**********************************************************************/
 /***/ ((module) => {
 
 function _interopRequireDefault(obj) {
@@ -8815,11 +9261,64 @@ module.exports = _interopRequireDefault, module.exports.__esModule = true, modul
 
 /***/ }),
 
-/***/ 8442:
+/***/ "./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js ***!
+  \*********************************************************************/
+/***/ ((module) => {
+
+function _iterableToArrayLimit(arr, i) {
+  var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"];
+  if (null != _i) {
+    var _s,
+      _e,
+      _x,
+      _r,
+      _arr = [],
+      _n = !0,
+      _d = !1;
+    try {
+      if (_x = (_i = _i.call(arr)).next, 0 === i) {
+        if (Object(_i) !== _i) return;
+        _n = !1;
+      } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0);
+    } catch (err) {
+      _d = !0, _e = err;
+    } finally {
+      try {
+        if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return;
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+    return _arr;
+  }
+}
+module.exports = _iterableToArrayLimit, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/nonIterableRest.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/nonIterableRest.js ***!
+  \****************************************************************/
+/***/ ((module) => {
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+module.exports = _nonIterableRest, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js ***!
+  \**************************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-var _typeof = (__webpack_require__(2125)["default"]);
-var assertThisInitialized = __webpack_require__(1185);
+var _typeof = (__webpack_require__(/*! ./typeof.js */ "./node_modules/@babel/runtime/helpers/typeof.js")["default"]);
+var assertThisInitialized = __webpack_require__(/*! ./assertThisInitialized.js */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js");
 function _possibleConstructorReturn(self, call) {
   if (call && (_typeof(call) === "object" || typeof call === "function")) {
     return call;
@@ -8832,10 +9331,13 @@ module.exports = _possibleConstructorReturn, module.exports.__esModule = true, m
 
 /***/ }),
 
-/***/ 3333:
+/***/ "./node_modules/@babel/runtime/helpers/regeneratorRuntime.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/regeneratorRuntime.js ***!
+  \*******************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-var _typeof = (__webpack_require__(2125)["default"]);
+var _typeof = (__webpack_require__(/*! ./typeof.js */ "./node_modules/@babel/runtime/helpers/typeof.js")["default"]);
 function _regeneratorRuntime() {
   "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
   module.exports = _regeneratorRuntime = function _regeneratorRuntime() {
@@ -9142,7 +9644,10 @@ module.exports = _regeneratorRuntime, module.exports.__esModule = true, module.e
 
 /***/ }),
 
-/***/ 3903:
+/***/ "./node_modules/@babel/runtime/helpers/setPrototypeOf.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/setPrototypeOf.js ***!
+  \***************************************************************/
 /***/ ((module) => {
 
 function _setPrototypeOf(o, p) {
@@ -9156,10 +9661,30 @@ module.exports = _setPrototypeOf, module.exports.__esModule = true, module.expor
 
 /***/ }),
 
-/***/ 93:
+/***/ "./node_modules/@babel/runtime/helpers/slicedToArray.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/slicedToArray.js ***!
+  \**************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-var getPrototypeOf = __webpack_require__(7474);
+var arrayWithHoles = __webpack_require__(/*! ./arrayWithHoles.js */ "./node_modules/@babel/runtime/helpers/arrayWithHoles.js");
+var iterableToArrayLimit = __webpack_require__(/*! ./iterableToArrayLimit.js */ "./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js");
+var unsupportedIterableToArray = __webpack_require__(/*! ./unsupportedIterableToArray.js */ "./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js");
+var nonIterableRest = __webpack_require__(/*! ./nonIterableRest.js */ "./node_modules/@babel/runtime/helpers/nonIterableRest.js");
+function _slicedToArray(arr, i) {
+  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
+}
+module.exports = _slicedToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/superPropBase.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/superPropBase.js ***!
+  \**************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var getPrototypeOf = __webpack_require__(/*! ./getPrototypeOf.js */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
 function _superPropBase(object, property) {
   while (!Object.prototype.hasOwnProperty.call(object, property)) {
     object = getPrototypeOf(object);
@@ -9171,10 +9696,13 @@ module.exports = _superPropBase, module.exports.__esModule = true, module.export
 
 /***/ }),
 
-/***/ 577:
+/***/ "./node_modules/@babel/runtime/helpers/toPrimitive.js":
+/*!************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/toPrimitive.js ***!
+  \************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-var _typeof = (__webpack_require__(2125)["default"]);
+var _typeof = (__webpack_require__(/*! ./typeof.js */ "./node_modules/@babel/runtime/helpers/typeof.js")["default"]);
 function _toPrimitive(input, hint) {
   if (_typeof(input) !== "object" || input === null) return input;
   var prim = input[Symbol.toPrimitive];
@@ -9189,11 +9717,14 @@ module.exports = _toPrimitive, module.exports.__esModule = true, module.exports[
 
 /***/ }),
 
-/***/ 4573:
+/***/ "./node_modules/@babel/runtime/helpers/toPropertyKey.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/toPropertyKey.js ***!
+  \**************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-var _typeof = (__webpack_require__(2125)["default"]);
-var toPrimitive = __webpack_require__(577);
+var _typeof = (__webpack_require__(/*! ./typeof.js */ "./node_modules/@babel/runtime/helpers/typeof.js")["default"]);
+var toPrimitive = __webpack_require__(/*! ./toPrimitive.js */ "./node_modules/@babel/runtime/helpers/toPrimitive.js");
 function _toPropertyKey(arg) {
   var key = toPrimitive(arg, "string");
   return _typeof(key) === "symbol" ? key : String(key);
@@ -9202,7 +9733,10 @@ module.exports = _toPropertyKey, module.exports.__esModule = true, module.export
 
 /***/ }),
 
-/***/ 2125:
+/***/ "./node_modules/@babel/runtime/helpers/typeof.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/typeof.js ***!
+  \*******************************************************/
 /***/ ((module) => {
 
 function _typeof(obj) {
@@ -9218,12 +9752,34 @@ module.exports = _typeof, module.exports.__esModule = true, module.exports["defa
 
 /***/ }),
 
-/***/ 8047:
+/***/ "./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js ***!
+  \***************************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray.js */ "./node_modules/@babel/runtime/helpers/arrayLikeToArray.js");
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
+}
+module.exports = _unsupportedIterableToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/regenerator/index.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
+  \**********************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 // TODO(Babel 8): Remove this file.
 
-var runtime = __webpack_require__(3333)();
+var runtime = __webpack_require__(/*! ../helpers/regeneratorRuntime */ "./node_modules/@babel/runtime/helpers/regeneratorRuntime.js")();
 module.exports = runtime;
 
 // Copied from https://github.com/facebook/regenerator/blob/main/packages/runtime/runtime.js#L736=
@@ -9296,7 +9852,7 @@ try {
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	var __webpack_exports__ = __webpack_require__(6004);
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/index.js");
 /******/ 	
 /******/ 	return __webpack_exports__;
 /******/ })()

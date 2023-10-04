@@ -60,7 +60,7 @@ export default class ReCaptchaFirebase {
                     onload: () => {
                         this.loaded = true;
                         this.grecaptcha = window.grecaptcha;
-                        this.events.notify(EventsNames.RECAPTCHA_LOADED, true);
+                        this.events.notify(EventsNames.local.RECAPTCHA_LOADED, true);
 
                         Promise.resolve(true);
                     }
@@ -122,7 +122,7 @@ export default class ReCaptchaFirebase {
         try {
             this.valid = false;
 
-            if (this.grecaptcha) {
+            if (this.grecaptcha && typeof this.grecaptcha.reset === 'function') {
                 this.grecaptcha.reset();
             }
 
@@ -153,6 +153,8 @@ export default class ReCaptchaFirebase {
                 const cancelBtn = document.querySelector('.firebaseui-id-page-sign-in .firebaseui-id-secondary-link');
 
                 if (emailField) {
+                    emailField.setAttribute( "autocomplete", "off" );
+
                     emailField.addEventListener('input', () => {
                         handleCaptchaState();
                     });
@@ -190,6 +192,8 @@ export default class ReCaptchaFirebase {
                     }
                 }
 
+                emailField.setAttribute( "autocomplete", "off" );
+
                 emailField.addEventListener('input', () => {
                     if (!this.valid) {
                         emailField.blur();
@@ -198,7 +202,9 @@ export default class ReCaptchaFirebase {
                 });
             }
         } catch (error) {
-            this.authentication.firebase.reset();
+            if (typeof this.authentication.firebase.reset === 'function') {
+                this.authentication.firebase.reset();
+            }
             console.error('error', error);
         }
     }
