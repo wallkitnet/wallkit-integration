@@ -109,7 +109,7 @@ export default class Authentication {
             if(!!this.#options?.firebase){
                 return !!(this.sdk.methods.isAuthenticated() && this.token.get() && this.firebaseToken.get());
             } else {
-                return !!(this.sdk.methods.isAuthenticated() && this.token.get());
+                return !!(this.sdk.methods.isAuthenticated() || this.token.get());
             }
         } else {
             return !!this.token.get();
