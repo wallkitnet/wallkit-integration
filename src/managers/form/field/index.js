@@ -148,8 +148,8 @@ export class FormField {
 
     createInput (options) {
         return createElement('input', {
-            className: 'wk-form-field__input',
-            id: options.id || options.name,
+            className: options.className || `wk-form-field__input ${options.name || ''}`,
+            id: options.id || false,
             attributes: {
                 name: options.name,
                 type: options.type || 'text',

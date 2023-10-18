@@ -7,7 +7,7 @@ export class Form {
         this.targetElementSelector = targetElementSelector;
 
         this.formWrapper = createElement('div', {
-            className: 'wk-form'
+            className: `wk-form${!isEmpty(options.className) ? ' '+options.className : ''}`
         });
 
         this.submitBtn = createElement('button', {
