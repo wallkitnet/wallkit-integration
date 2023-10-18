@@ -34,6 +34,8 @@ export const TRIGGER_GOOGLE_BUTTON_TITLE_SELECTOR = '#firebase-ui-placeholder .f
 export const TRIGGER_EMAIL_BUTTON_CLASS_NAME = 'wk-auth-form-button wk-auth-form-button-email';
 export const TRIGGER_EMAILLINK_BUTTON_CLASS_NAME = 'wk-auth-form-button wk-auth-form-button-emaillink';
 export const TRIGGER_BUTTON_CLASS_NAME = 'wk-auth-form-button';
+export const AUTH_DEFAULT_ERROR_MESSAGE = 'Something went wrong';
+export const AUTH_DEFAULT_ERROR_CODE = 'something_went_wrong';
 
 // Authentication
 export const WALLKIT_FIREBASE_CONFIG = {
