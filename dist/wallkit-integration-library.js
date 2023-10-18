@@ -1,7 +1,7 @@
 /*!
  * Package name: wallkit-integration-lib.
  * Package description: Wallkit Integration Library. Library to manipulate with Wallkit System: Paywall, Modals, Authentication, SDK..
- * Package version: 3.0.30.
+ * Package version: 3.0.31.
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -4410,7 +4410,7 @@ var PasswordField = /*#__PURE__*/function (_FormField) {
   (0, _inherits2["default"])(PasswordField, _FormField);
   var _super = _createSuper(PasswordField);
   function PasswordField(options) {
-    var _options$ignoreValida;
+    var _options$ignoreValida, _options$testStrength;
     var _this;
     (0, _classCallCheck2["default"])(this, PasswordField);
     _this = _super.call(this, options);
@@ -4460,6 +4460,7 @@ var PasswordField = /*#__PURE__*/function (_FormField) {
       _this.insertDescription(passwordHintDescription || (0, _classPrivateFieldGet2["default"])((0, _assertThisInitialized2["default"])(_this), _hintDescription));
     }
     _this.ignoreValidation = (_options$ignoreValida = options.ignoreValidation) !== null && _options$ignoreValida !== void 0 ? _options$ignoreValida : false;
+    _this.testStrength = (_options$testStrength = options.testStrength) !== null && _options$testStrength !== void 0 ? _options$testStrength : false;
     return _this;
   }
   (0, _createClass2["default"])(PasswordField, [{
@@ -4517,6 +4518,11 @@ function _testPasswordRule2(value, regex, errorMessage) {
 }
 function _testPassword2(password) {
   if (this.ignoreValidation) {
+    return {
+      valid: true
+    };
+  }
+  if (!this.testStrength) {
     return {
       valid: true
     };
@@ -5276,6 +5282,7 @@ var ChangePasswordForm = /*#__PURE__*/function (_Form) {
       dataSlug: 'old_password',
       name: 'wk-old-password',
       ignoreValidation: true,
+      testStrength: false,
       passwordHint: false,
       label: 'Old Password',
       type: 'password',
@@ -5296,6 +5303,7 @@ var ChangePasswordForm = /*#__PURE__*/function (_Form) {
       dataSlug: 'new_password',
       name: 'wk-new-password',
       ignoreValidation: false,
+      testStrength: true,
       passwordHint: true,
       label: 'New Password',
       type: 'password',
@@ -5320,6 +5328,7 @@ var ChangePasswordForm = /*#__PURE__*/function (_Form) {
       dataSlug: 'new_password_confirm',
       name: 'wk-new-password-confirm',
       ignoreValidation: false,
+      testStrength: true,
       passwordHint: false,
       label: 'New Password Confirmation',
       type: 'password',
@@ -5575,6 +5584,7 @@ var LoginForm = /*#__PURE__*/function (_Form) {
       dataSlug: 'password',
       name: 'wk-fb-password',
       ignoreValidation: options.passwordSignInIgnoreValidation || false,
+      testStrength: false,
       label: 'Password',
       type: 'password',
       messages: options.messages || {},
@@ -5672,6 +5682,7 @@ var ResetPasswordForm = /*#__PURE__*/function (_Form) {
       dataSlug: 'new_password',
       name: 'wk-new-password',
       ignoreValidation: false,
+      testStrength: true,
       passwordHint: true,
       label: 'New Password',
       type: 'password',
@@ -5771,6 +5782,7 @@ var SignupForm = /*#__PURE__*/function (_Form) {
       dataSlug: 'password',
       name: 'wk-fb-password',
       ignoreValidation: false,
+      testStrength: true,
       passwordHint: true,
       label: 'Password',
       type: 'password',

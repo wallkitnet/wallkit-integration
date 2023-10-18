@@ -32,6 +32,7 @@ export class PasswordField extends FormField {
         }
 
         this.ignoreValidation = options.ignoreValidation ?? false;
+        this.testStrength = options.testStrength ?? false;
     }
 
     togglePasswordVisibility () {
@@ -76,6 +77,11 @@ export class PasswordField extends FormField {
           return {
             valid: true
           };
+        }
+        if (!this.testStrength) {
+            return {
+                valid: true
+            };
         }
         const { passwordRuleLength, passwordRuleUppercase, passwordRuleLowercase, passwordRuleDigit , passwordRuleSpecial } = this.#options.messages || {};
         const rules = [

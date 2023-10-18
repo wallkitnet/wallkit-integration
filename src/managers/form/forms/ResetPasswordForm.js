@@ -15,6 +15,7 @@ export class ResetPasswordForm extends Form {
             dataSlug: 'new_password',
             name: 'wk-new-password',
             ignoreValidation: false,
+            testStrength: true,
             passwordHint: true,
             label: 'New Password',
             type: 'password',
