@@ -1,7 +1,7 @@
 /*!
  * Package name: wallkit-integration-lib.
  * Package description: Wallkit Integration Library. Library to manipulate with Wallkit System: Paywall, Modals, Authentication, SDK..
- * Package version: 3.0.31.
+ * Package version: 3.0.30.
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -1976,7 +1976,9 @@ var Authentication = /*#__PURE__*/function () {
         if (!(0, _lodash["default"])(error.message)) {
           _this2.authForm.loginForm.setFormError(error.message, error.code || false);
         }
-        _this2.reCaptcha.grecaptcha.reset();
+        if (!(0, _lodash["default"])(_this2.reCaptcha) && _this2.reCaptcha.enabled && !(0, _lodash["default"])(_this2.reCaptcha.grecaptcha)) {
+          _this2.reCaptcha.grecaptcha.reset();
+        }
       });
     }
   }, {
@@ -1989,7 +1991,9 @@ var Authentication = /*#__PURE__*/function () {
         if (!(0, _lodash["default"])(error.message)) {
           _this3.authForm.signUpForm.setFormError(error.message, error.code || false);
         }
-        _this3.reCaptcha.grecaptcha.reset();
+        if (!(0, _lodash["default"])(_this3.reCaptcha) && _this3.reCaptcha.enabled && !(0, _lodash["default"])(_this3.reCaptcha.grecaptcha)) {
+          _this3.reCaptcha.grecaptcha.reset();
+        }
       });
     }
   }, {
@@ -2489,7 +2493,7 @@ var Authentication = /*#__PURE__*/function () {
       if (this.firebase.genuineForm === false && reset) {
         this.authForm.reset();
       }
-      if (this.reCaptcha.enabled) {
+      if (!(0, _lodash["default"])(this.reCaptcha) && this.reCaptcha.enabled && !(0, _lodash["default"])(this.reCaptcha.grecaptcha)) {
         this.reCaptcha.grecaptcha.reset();
       }
     }
@@ -2524,7 +2528,9 @@ var Authentication = /*#__PURE__*/function () {
             case 12:
               if (this.reCaptcha.loaded) {
                 this.resetAuthProcess();
-                this.reCaptcha.grecaptcha.reset();
+                if (!(0, _lodash["default"])(this.reCaptcha) && this.reCaptcha.enabled && !(0, _lodash["default"])(this.reCaptcha.grecaptcha)) {
+                  this.reCaptcha.grecaptcha.reset();
+                }
                 if ((0, _classPrivateFieldGet13["default"])(this, _options).firebase.genuineForm !== false) {
                   this.reCaptcha.initCaptchaProcess();
                 }
@@ -4404,7 +4410,7 @@ var PasswordField = /*#__PURE__*/function (_FormField) {
   (0, _inherits2["default"])(PasswordField, _FormField);
   var _super = _createSuper(PasswordField);
   function PasswordField(options) {
-    var _options$ignoreValida, _options$testStrength;
+    var _options$ignoreValida;
     var _this;
     (0, _classCallCheck2["default"])(this, PasswordField);
     _this = _super.call(this, options);
@@ -4454,7 +4460,6 @@ var PasswordField = /*#__PURE__*/function (_FormField) {
       _this.insertDescription(passwordHintDescription || (0, _classPrivateFieldGet2["default"])((0, _assertThisInitialized2["default"])(_this), _hintDescription));
     }
     _this.ignoreValidation = (_options$ignoreValida = options.ignoreValidation) !== null && _options$ignoreValida !== void 0 ? _options$ignoreValida : false;
-    _this.testStrength = (_options$testStrength = options.testStrength) !== null && _options$testStrength !== void 0 ? _options$testStrength : false;
     return _this;
   }
   (0, _createClass2["default"])(PasswordField, [{
@@ -4512,11 +4517,6 @@ function _testPasswordRule2(value, regex, errorMessage) {
 }
 function _testPassword2(password) {
   if (this.ignoreValidation) {
-    return {
-      valid: true
-    };
-  }
-  if (!this.testStrength) {
     return {
       valid: true
     };
@@ -4733,8 +4733,8 @@ var FormField = /*#__PURE__*/function () {
     key: "createInput",
     value: function createInput(options) {
       return (0, _DOM.createElement)('input', {
-        className: 'wk-form-field__input',
-        id: options.id || options.name,
+        className: options.className || "wk-form-field__input ".concat(options.name || ''),
+        id: options.id || false,
         attributes: {
           name: options.name,
           type: options.type || 'text',
@@ -4896,6 +4896,7 @@ var AuthForm = /*#__PURE__*/function () {
       signInMessages = signIn.messages;
     }
     this.loginForm = new _LoginForm.LoginForm(selector, _objectSpread(_objectSpread({
+      className: 'wk-form-login',
       cancelBtn: options.triggerButton !== false,
       signUp: (_options$signUp = options.signUp) !== null && _options$signUp !== void 0 ? _options$signUp : true,
       passwordSignInIgnoreValidation: options.passwordSignInIgnoreValidation || false
@@ -4931,6 +4932,7 @@ var AuthForm = /*#__PURE__*/function () {
     }
     if (options.signUp === true) {
       this.signUpForm = new _SignUpForm.SignupForm(selector, _objectSpread(_objectSpread({
+        className: 'wk-form-signup',
         cancelBtn: options.triggerButton !== false,
         termsOfService: options.termsOfService
       }, signUp || {}), {}, {
@@ -4962,6 +4964,7 @@ var AuthForm = /*#__PURE__*/function () {
       emailLinkMessages = emailLink.messages;
     }
     this.emailLinkForm = new _EmailLinkForm.EmailLinkForm(selector, _objectSpread(_objectSpread({
+      className: 'wk-form-email-link',
       cancelBtn: options.triggerButton !== false,
       signUp: (_options$signUp2 = options.signUp) !== null && _options$signUp2 !== void 0 ? _options$signUp2 : true
     }, emailLink || {}), {}, {
@@ -5003,7 +5006,9 @@ var AuthForm = /*#__PURE__*/function () {
     if (!(0, _lodash["default"])(forgotPassword) && !(0, _lodash["default"])(forgotPassword.messages)) {
       forgotPasswordMessages = forgotPassword.messages;
     }
-    this.forgotPasswordForm = new _ForgotPasswordForm.ForgotPasswordForm(selector, _objectSpread(_objectSpread({}, forgotPassword || {}), {}, {
+    this.forgotPasswordForm = new _ForgotPasswordForm.ForgotPasswordForm(selector, _objectSpread(_objectSpread({
+      className: 'wk-form-forgot-password'
+    }, forgotPassword || {}), {}, {
       messages: _objectSpread(_objectSpread({}, messages || {}), forgotPasswordMessages),
       onSubmit: function onSubmit(data) {
         if (options.onPasswordForgot) {
@@ -5025,7 +5030,9 @@ var AuthForm = /*#__PURE__*/function () {
     if (!(0, _lodash["default"])(resetPassword) && !(0, _lodash["default"])(resetPassword.messages)) {
       resetPasswordMessages = resetPassword.messages;
     }
-    this.resetPasswordForm = new _ResetPasswordForm.ResetPasswordForm(selector, _objectSpread(_objectSpread({}, resetPassword || {}), {}, {
+    this.resetPasswordForm = new _ResetPasswordForm.ResetPasswordForm(selector, _objectSpread(_objectSpread({
+      className: 'wk-form-reset-password'
+    }, resetPassword || {}), {}, {
       messages: _objectSpread(_objectSpread({}, messages || {}), resetPasswordMessages),
       onSubmit: function onSubmit(data) {
         if (options.onPasswordReset) {
@@ -5269,7 +5276,6 @@ var ChangePasswordForm = /*#__PURE__*/function (_Form) {
       dataSlug: 'old_password',
       name: 'wk-old-password',
       ignoreValidation: true,
-      testStrength: false,
       passwordHint: false,
       label: 'Old Password',
       type: 'password',
@@ -5290,7 +5296,6 @@ var ChangePasswordForm = /*#__PURE__*/function (_Form) {
       dataSlug: 'new_password',
       name: 'wk-new-password',
       ignoreValidation: false,
-      testStrength: true,
       passwordHint: true,
       label: 'New Password',
       type: 'password',
@@ -5315,7 +5320,6 @@ var ChangePasswordForm = /*#__PURE__*/function (_Form) {
       dataSlug: 'new_password_confirm',
       name: 'wk-new-password-confirm',
       ignoreValidation: false,
-      testStrength: true,
       passwordHint: false,
       label: 'New Password Confirmation',
       type: 'password',
@@ -5571,7 +5575,6 @@ var LoginForm = /*#__PURE__*/function (_Form) {
       dataSlug: 'password',
       name: 'wk-fb-password',
       ignoreValidation: options.passwordSignInIgnoreValidation || false,
-      testStrength: false,
       label: 'Password',
       type: 'password',
       messages: options.messages || {},
@@ -5669,7 +5672,6 @@ var ResetPasswordForm = /*#__PURE__*/function (_Form) {
       dataSlug: 'new_password',
       name: 'wk-new-password',
       ignoreValidation: false,
-      testStrength: true,
       passwordHint: true,
       label: 'New Password',
       type: 'password',
@@ -5769,7 +5771,6 @@ var SignupForm = /*#__PURE__*/function (_Form) {
       dataSlug: 'password',
       name: 'wk-fb-password',
       ignoreValidation: false,
-      testStrength: true,
       passwordHint: true,
       label: 'Password',
       type: 'password',
@@ -5889,7 +5890,7 @@ var Form = /*#__PURE__*/function () {
     (0, _classCallCheck2["default"])(this, Form);
     this.targetElementSelector = targetElementSelector;
     this.formWrapper = (0, _DOM.createElement)('div', {
-      className: 'wk-form'
+      className: "wk-form".concat(!(0, _lodash["default"])(options.className) ? ' ' + options.className : '')
     });
     this.submitBtn = (0, _DOM.createElement)('button', {
       className: 'wk-form-button',
