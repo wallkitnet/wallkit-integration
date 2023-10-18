@@ -5820,6 +5820,7 @@ var SignupForm = /*#__PURE__*/function (_Form) {
       _this.tosField = new _CheckBoxField.CheckBoxField({
         dataSlug: 'agreement',
         name: 'wk-fb-agreement',
+        id: 'wk-fb-agreement',
         required: true,
         label: _this.getTosAcceptLabel(_options.termsOfService),
         type: 'checkbox',
