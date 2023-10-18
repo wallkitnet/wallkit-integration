@@ -1955,7 +1955,7 @@ var Authentication = /*#__PURE__*/function () {
         if (!!((_classPrivateFieldGet2 = (0, _classPrivateFieldGet13["default"])(this, _options)) !== null && _classPrivateFieldGet2 !== void 0 && _classPrivateFieldGet2.firebase)) {
           return !!(this.sdk.methods.isAuthenticated() && this.token.get() && this.firebaseToken.get());
         } else {
-          return !!(this.sdk.methods.isAuthenticated() && this.token.get());
+          return !!(this.sdk.methods.isAuthenticated() || this.token.get());
         }
       } else {
         return !!this.token.get();
