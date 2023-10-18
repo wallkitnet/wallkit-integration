@@ -52,6 +52,7 @@ export class SignupForm extends Form {
           this.tosField = new CheckBoxField({
             dataSlug: 'agreement',
             name: 'wk-fb-agreement',
+            id: 'wk-fb-agreement',
             required: true,
             label: this.getTosAcceptLabel(options.termsOfService),
             type: 'checkbox',
