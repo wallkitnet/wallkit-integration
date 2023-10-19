@@ -16,8 +16,8 @@ import isEmpty from "lodash.isempty";
 
 export default class Firebase {
     #mode;
-    #isGoogleOneTapShow=false;
-    #firebaseuiCredentialHelper = false;
+    #isGoogleOneTapShow = false;
+    #firebaseuiCredentialHelper = null;
 
     constructor(options) {
         this.events = new Events();

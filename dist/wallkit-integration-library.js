@@ -1189,7 +1189,7 @@ var Firebase = /*#__PURE__*/function () {
     });
     _classPrivateFieldInitSpec(this, _firebaseuiCredentialHelper, {
       writable: true,
-      value: false
+      value: null
     });
     this.events = new _events["default"]();
     this.firebaseUiConfig = null;
