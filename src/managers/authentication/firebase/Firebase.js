@@ -229,7 +229,7 @@ export default class Firebase {
             tosUrl,
             privacyPolicyUrl
         };
-        this.#checkCredentialHelper();
+        this.#configureCredentialHelper();
 
         this.firebaseui = firebaseuiInstance;
         this.startFirebaseUi(this.elementPlaceholder, this.firebaseUiConfig);
@@ -239,24 +239,20 @@ export default class Firebase {
         return true;
     }
 
-    #checkCredentialHelper() {
-        this.firebaseUiConfig.credentialHelper = this.#getCredentialHelper();
-    }
-
-    #getCredentialHelper() {
+    #configureCredentialHelper() {
         if (!this.#firebaseuiCredentialHelper) {
             this.#firebaseuiCredentialHelper = this.firebaseui.auth.CredentialHelper;
         }
         if (this.#isGoogleOneTapShow) {
-            return this.#firebaseuiCredentialHelper.GOOGLE_YOLO;
+            this.firebaseUiConfig.credentialHelper = this.#firebaseuiCredentialHelper.GOOGLE_YOLO;
         } else {
-            return this.#firebaseuiCredentialHelper.NONE;
+            this.firebaseUiConfig.credentialHelper = this.#firebaseuiCredentialHelper.NONE;
         }
     }
 
     reset() {
         if (this.firebaseui) {
-            this.#checkCredentialHelper();
+            this.#configureCredentialHelper();
             this.firebaseui.reset();
             this.startFirebaseUi();
         }

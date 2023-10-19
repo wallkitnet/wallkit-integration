@@ -1169,14 +1169,12 @@ var _getElementPlaceholder = /*#__PURE__*/new WeakSet();
 var _loadFirebase = /*#__PURE__*/new WeakSet();
 var _authStateChanged = /*#__PURE__*/new WeakSet();
 var _firebaseInitApp = /*#__PURE__*/new WeakSet();
-var _checkCredentialHelper = /*#__PURE__*/new WeakSet();
-var _getCredentialHelper = /*#__PURE__*/new WeakSet();
+var _configureCredentialHelper = /*#__PURE__*/new WeakSet();
 var Firebase = /*#__PURE__*/function () {
   function Firebase(_options) {
     var _options$captchaKey, _options$genuineForm, _options$onSuccessAut, _options$onAuthStateC, _options$uiShown;
     (0, _classCallCheck2["default"])(this, Firebase);
-    _classPrivateMethodInitSpec(this, _getCredentialHelper);
-    _classPrivateMethodInitSpec(this, _checkCredentialHelper);
+    _classPrivateMethodInitSpec(this, _configureCredentialHelper);
     _classPrivateMethodInitSpec(this, _firebaseInitApp);
     _classPrivateMethodInitSpec(this, _authStateChanged);
     _classPrivateMethodInitSpec(this, _loadFirebase);
@@ -1312,7 +1310,7 @@ var Firebase = /*#__PURE__*/function () {
                 tosUrl: tosUrl,
                 privacyPolicyUrl: privacyPolicyUrl
               };
-              _classPrivateMethodGet(this, _checkCredentialHelper, _checkCredentialHelper2).call(this);
+              _classPrivateMethodGet(this, _configureCredentialHelper, _configureCredentialHelper2).call(this);
               this.firebaseui = firebaseuiInstance;
               this.startFirebaseUi(this.elementPlaceholder, this.firebaseUiConfig);
               this.firebase.auth().onAuthStateChanged(_classPrivateMethodGet(this, _authStateChanged, _authStateChanged2).bind(this));
@@ -1332,7 +1330,7 @@ var Firebase = /*#__PURE__*/function () {
     key: "reset",
     value: function reset() {
       if (this.firebaseui) {
-        _classPrivateMethodGet(this, _checkCredentialHelper, _checkCredentialHelper2).call(this);
+        _classPrivateMethodGet(this, _configureCredentialHelper, _configureCredentialHelper2).call(this);
         this.firebaseui.reset();
         this.startFirebaseUi();
       }
@@ -1831,17 +1829,14 @@ function _firebaseInitApp2(config) {
   }
   return this.firebase;
 }
-function _checkCredentialHelper2() {
-  this.firebaseUiConfig.credentialHelper = _classPrivateMethodGet(this, _getCredentialHelper, _getCredentialHelper2).call(this);
-}
-function _getCredentialHelper2() {
+function _configureCredentialHelper2() {
   if (!(0, _classPrivateFieldGet2["default"])(this, _firebaseuiCredentialHelper)) {
     (0, _classPrivateFieldSet2["default"])(this, _firebaseuiCredentialHelper, this.firebaseui.auth.CredentialHelper);
   }
   if ((0, _classPrivateFieldGet2["default"])(this, _isGoogleOneTapShow)) {
-    return (0, _classPrivateFieldGet2["default"])(this, _firebaseuiCredentialHelper).GOOGLE_YOLO;
+    this.firebaseUiConfig.credentialHelper = (0, _classPrivateFieldGet2["default"])(this, _firebaseuiCredentialHelper).GOOGLE_YOLO;
   } else {
-    return (0, _classPrivateFieldGet2["default"])(this, _firebaseuiCredentialHelper).NONE;
+    this.firebaseUiConfig.credentialHelper = (0, _classPrivateFieldGet2["default"])(this, _firebaseuiCredentialHelper).NONE;
   }
 }
 
