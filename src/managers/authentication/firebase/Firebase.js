@@ -16,6 +16,8 @@ import isEmpty from "lodash.isempty";
 
 export default class Firebase {
     #mode;
+    #isGoogleOneTapShow=false;
+    #firebaseuiCredentialHelper = false;
 
     constructor(options) {
         this.events = new Events();
@@ -62,6 +64,10 @@ export default class Firebase {
             'microsoft': 'microsoft.com'
         }
     };
+
+    set isGoogleOneTapShow (value) {
+        this.#isGoogleOneTapShow = !!value;
+    }
 
     hideAuthForm () {
         const element = document.querySelector(this.elementPlaceholder);
@@ -220,10 +226,10 @@ export default class Firebase {
             },
             signInFlow: 'popup',
             signInOptions: this.formatSelectedProviders(providers),
-            credentialHelper: this.firebaseui.auth.CredentialHelper.GOOGLE_YOLO,
             tosUrl,
             privacyPolicyUrl
         };
+        this.#checkCredentialHelper();
 
         this.firebaseui = firebaseuiInstance;
         this.startFirebaseUi(this.elementPlaceholder, this.firebaseUiConfig);
@@ -233,10 +239,26 @@ export default class Firebase {
         return true;
     }
 
+    #checkCredentialHelper() {
+        this.firebaseUiConfig.credentialHelper = this.#getCredentialHelper();
+    }
+
+    #getCredentialHelper() {
+        if (!this.#firebaseuiCredentialHelper) {
+            this.#firebaseuiCredentialHelper = this.firebaseui.auth.CredentialHelper;
+        }
+        if (this.#isGoogleOneTapShow) {
+            return this.#firebaseuiCredentialHelper.GOOGLE_YOLO;
+        } else {
+            return this.#firebaseuiCredentialHelper.NONE;
+        }
+    }
+
     reset() {
         if (this.firebaseui) {
+            this.#checkCredentialHelper();
             this.firebaseui.reset();
-            this.firebaseui.start(this.elementPlaceholder);
+            this.startFirebaseUi();
         }
     }
 
