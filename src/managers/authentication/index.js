@@ -545,6 +545,7 @@ export default class Authentication {
     }
 
     resetAuthProcess (reset = true) {
+      this.firebase.isGoogleOneTapShow = !this.isAuthenticated();
       this.firebase.reset();
       this.firebase.showAuthForm();
 
@@ -810,6 +811,7 @@ export default class Authentication {
             }
 
             this.render();
+            this.firebase.isGoogleOneTapShow = !this.isAuthenticated();
             this.firebase.init();
 
             if (this.authForm) {

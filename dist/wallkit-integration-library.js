@@ -1,7 +1,7 @@
 /*!
  * Package name: wallkit-integration-lib.
  * Package description: Wallkit Integration Library. Library to manipulate with Wallkit System: Paywall, Modals, Authentication, SDK..
- * Package version: 3.0.31.
+ * Package version: 3.0.32.
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -1163,14 +1163,18 @@ function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedec
 function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
 var _mode = /*#__PURE__*/new WeakMap();
+var _isGoogleOneTapShow = /*#__PURE__*/new WeakMap();
+var _firebaseuiCredentialHelper = /*#__PURE__*/new WeakMap();
 var _getElementPlaceholder = /*#__PURE__*/new WeakSet();
 var _loadFirebase = /*#__PURE__*/new WeakSet();
 var _authStateChanged = /*#__PURE__*/new WeakSet();
 var _firebaseInitApp = /*#__PURE__*/new WeakSet();
+var _configureCredentialHelper = /*#__PURE__*/new WeakSet();
 var Firebase = /*#__PURE__*/function () {
   function Firebase(_options) {
     var _options$captchaKey, _options$genuineForm, _options$onSuccessAut, _options$onAuthStateC, _options$uiShown;
     (0, _classCallCheck2["default"])(this, Firebase);
+    _classPrivateMethodInitSpec(this, _configureCredentialHelper);
     _classPrivateMethodInitSpec(this, _firebaseInitApp);
     _classPrivateMethodInitSpec(this, _authStateChanged);
     _classPrivateMethodInitSpec(this, _loadFirebase);
@@ -1178,6 +1182,14 @@ var Firebase = /*#__PURE__*/function () {
     _classPrivateFieldInitSpec(this, _mode, {
       writable: true,
       value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _isGoogleOneTapShow, {
+      writable: true,
+      value: false
+    });
+    _classPrivateFieldInitSpec(this, _firebaseuiCredentialHelper, {
+      writable: true,
+      value: null
     });
     this.events = new _events["default"]();
     this.firebaseUiConfig = null;
@@ -1209,6 +1221,11 @@ var Firebase = /*#__PURE__*/function () {
         'apple': 'apple.com',
         'microsoft': 'microsoft.com'
       };
+    }
+  }, {
+    key: "isGoogleOneTapShow",
+    set: function set(value) {
+      (0, _classPrivateFieldSet2["default"])(this, _isGoogleOneTapShow, !!value);
     }
   }, {
     key: "hideAuthForm",
@@ -1290,15 +1307,15 @@ var Firebase = /*#__PURE__*/function () {
                 },
                 signInFlow: 'popup',
                 signInOptions: this.formatSelectedProviders(providers),
-                credentialHelper: this.firebaseui.auth.CredentialHelper.GOOGLE_YOLO,
                 tosUrl: tosUrl,
                 privacyPolicyUrl: privacyPolicyUrl
               };
+              _classPrivateMethodGet(this, _configureCredentialHelper, _configureCredentialHelper2).call(this);
               this.firebaseui = firebaseuiInstance;
               this.startFirebaseUi(this.elementPlaceholder, this.firebaseUiConfig);
               this.firebase.auth().onAuthStateChanged(_classPrivateMethodGet(this, _authStateChanged, _authStateChanged2).bind(this));
               return _context.abrupt("return", true);
-            case 9:
+            case 10:
             case "end":
               return _context.stop();
           }
@@ -1313,8 +1330,9 @@ var Firebase = /*#__PURE__*/function () {
     key: "reset",
     value: function reset() {
       if (this.firebaseui) {
+        _classPrivateMethodGet(this, _configureCredentialHelper, _configureCredentialHelper2).call(this);
         this.firebaseui.reset();
-        this.firebaseui.start(this.elementPlaceholder);
+        this.startFirebaseUi();
       }
     }
   }, {
@@ -1810,6 +1828,16 @@ function _firebaseInitApp2(config) {
     this.firebase.initializeApp(config !== null && config !== void 0 ? config : defaultConfig);
   }
   return this.firebase;
+}
+function _configureCredentialHelper2() {
+  if (!(0, _classPrivateFieldGet2["default"])(this, _firebaseuiCredentialHelper)) {
+    (0, _classPrivateFieldSet2["default"])(this, _firebaseuiCredentialHelper, this.firebaseui.auth.CredentialHelper);
+  }
+  if ((0, _classPrivateFieldGet2["default"])(this, _isGoogleOneTapShow)) {
+    this.firebaseUiConfig.credentialHelper = (0, _classPrivateFieldGet2["default"])(this, _firebaseuiCredentialHelper).GOOGLE_YOLO;
+  } else {
+    this.firebaseUiConfig.credentialHelper = (0, _classPrivateFieldGet2["default"])(this, _firebaseuiCredentialHelper).NONE;
+  }
 }
 
 /***/ }),
@@ -2488,6 +2516,7 @@ var Authentication = /*#__PURE__*/function () {
     key: "resetAuthProcess",
     value: function resetAuthProcess() {
       var reset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+      this.firebase.isGoogleOneTapShow = !this.isAuthenticated();
       this.firebase.reset();
       this.firebase.showAuthForm();
       if (this.firebase.genuineForm === false && reset) {
@@ -2827,6 +2856,7 @@ var Authentication = /*#__PURE__*/function () {
           }
         }
         this.render();
+        this.firebase.isGoogleOneTapShow = !this.isAuthenticated();
         this.firebase.init();
         if (this.authForm) {
           this.authForm.render();
