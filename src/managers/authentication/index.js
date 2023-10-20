@@ -1,13 +1,11 @@
 import Modal from '../modal';
 import Firebase from "./firebase/Firebase";
 import {
-    WALLKIT_FIREBASE_UI_PLACEHOLDER_ID,
-    WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID,
-    WALLKIT_TOKEN_NAME,
-    FIREBASE_TOKEN_NAME,
-    WALLKIT_AUTH_FORM_PLACEHOLDER_ID,
-    AUTH_DEFAULT_ERROR_MESSAGE,
-    AUTH_DEFAULT_ERROR_CODE
+  WALLKIT_FIREBASE_UI_PLACEHOLDER_ID,
+  WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID,
+  WALLKIT_TOKEN_NAME,
+  FIREBASE_TOKEN_NAME,
+  WALLKIT_AUTH_FORM_PLACEHOLDER_ID
 } from "../../configs/constants";
 import EventsNames, {
     FIREBASE_INIT,
@@ -30,16 +28,11 @@ import {
     parseCustomTokenHash, getUrlParamByKey
 } from "../../utils/url";
 import isEmpty from "lodash.isempty";
-import {isStringJson} from "../../utils/helper";
 
 export default class Authentication {
     #options;
     #oobCode = '';
     #showAuthFormSlug = '';
-
-    #errorMessages = {
-        'INVALID_LOGIN_CREDENTIALS' : 'Invalid login credentials'
-    };
 
     constructor(options) {
         if (!!Authentication.instance) {
@@ -134,16 +127,7 @@ export default class Authentication {
         .then(() => {})
         .catch((error) => {
           if (!isEmpty(error.message)) {
-            if (error.code === 'auth/internal-error' && isStringJson(error.message)) {
-              const errorObj = JSON.parse(error.message);
-              if (!isEmpty(errorObj.error)) {
-                this.authForm.loginForm.setFormError(this.#errorMessages[errorObj.error.message] ?? errorObj.error.message, errorObj.error.code || false);
-              } else {
-                this.authForm.loginForm.setFormError(AUTH_DEFAULT_ERROR_MESSAGE, AUTH_DEFAULT_ERROR_CODE);
-              }
-            } else {
-              this.authForm.loginForm.setFormError(error.message, error.code || false);
-            }
+            this.authForm.loginForm.setFormError(error.message, error.code || false);
           }
           if (!isEmpty(this.reCaptcha) && this.reCaptcha.enabled && !isEmpty(this.reCaptcha.grecaptcha)) {
               this.reCaptcha.grecaptcha.reset();
