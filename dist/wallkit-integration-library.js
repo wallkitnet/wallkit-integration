@@ -1,7 +1,7 @@
 /*!
  * Package name: wallkit-integration-lib.
  * Package description: Wallkit Integration Library. Library to manipulate with Wallkit System: Paywall, Modals, Authentication, SDK..
- * Package version: 3.0.32.
+ * Package version: 3.0.33.
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -42,7 +42,7 @@ exports.INLINE_UI_LIBRARY_STYLES = INLINE_UI_LIBRARY_STYLES;
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.WALLKIT_USER_MANAGER_MODAL_FORM_PLACEHOLDER_ID = exports.WALLKIT_TOKEN_NAME = exports.WALLKIT_POPUP_URL = exports.WALLKIT_POPUP_DEV_URL = exports.WALLKIT_MODAL_WRAPPER_CLASSNAME = exports.WALLKIT_MODAL_MIN_WIDTH = exports.WALLKIT_MODAL_MIN_HEIGHT = exports.WALLKIT_MODAL_MAX_WIDTH = exports.WALLKIT_MODAL_CONTENT_CLASSNAME = exports.WALLKIT_MODAL_CLOSE_BTN_CLASSNAME = exports.WALLKIT_FRAME_ID = exports.WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID = exports.WALLKIT_FIREBASE_UI_PLACEHOLDER_ID = exports.WALLKIT_FIREBASE_CONFIG = exports.WALLKIT_DEV_FIREBASE_CONFIG = exports.WALLKIT_CDN_URL = exports.WALLKIT_CDN_ASSETS_URL = exports.WALLKIT_AUTH_FORM_PLACEHOLDER_ID = exports.TRIGGER_GOOGLE_BUTTON_TITLE_SELECTOR = exports.TRIGGER_EMAIL_BUTTON_TITLE_SELECTOR = exports.TRIGGER_EMAIL_BUTTON_CLASS_NAME = exports.TRIGGER_EMAILLINK_BUTTON_TITLE_SELECTOR = exports.TRIGGER_EMAILLINK_BUTTON_CLASS_NAME = exports.TRIGGER_BUTTON_CLASS_NAME = exports.FIREBASE_TOKEN_NAME = exports.ALLOWED_ORIGINS = void 0;
+exports.WALLKIT_USER_MANAGER_MODAL_FORM_PLACEHOLDER_ID = exports.WALLKIT_TOKEN_NAME = exports.WALLKIT_POPUP_URL = exports.WALLKIT_POPUP_DEV_URL = exports.WALLKIT_MODAL_WRAPPER_CLASSNAME = exports.WALLKIT_MODAL_MIN_WIDTH = exports.WALLKIT_MODAL_MIN_HEIGHT = exports.WALLKIT_MODAL_MAX_WIDTH = exports.WALLKIT_MODAL_CONTENT_CLASSNAME = exports.WALLKIT_MODAL_CLOSE_BTN_CLASSNAME = exports.WALLKIT_FRAME_ID = exports.WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID = exports.WALLKIT_FIREBASE_UI_PLACEHOLDER_ID = exports.WALLKIT_FIREBASE_CONFIG = exports.WALLKIT_DEV_FIREBASE_CONFIG = exports.WALLKIT_CDN_URL = exports.WALLKIT_CDN_ASSETS_URL = exports.WALLKIT_AUTH_FORM_PLACEHOLDER_ID = exports.TRIGGER_GOOGLE_BUTTON_TITLE_SELECTOR = exports.TRIGGER_EMAIL_BUTTON_TITLE_SELECTOR = exports.TRIGGER_EMAIL_BUTTON_CLASS_NAME = exports.TRIGGER_EMAILLINK_BUTTON_TITLE_SELECTOR = exports.TRIGGER_EMAILLINK_BUTTON_CLASS_NAME = exports.TRIGGER_BUTTON_CLASS_NAME = exports.FIREBASE_TOKEN_NAME = exports.ERROR_MESSAGES = exports.AUTH_DEFAULT_ERROR_MESSAGE = exports.AUTH_DEFAULT_ERROR_CODE = exports.ALLOWED_ORIGINS = void 0;
 // Popups
 var WALLKIT_POPUP_URL = 'https://popups.wallkit.net';
 // export const WALLKIT_POPUP_URL = 'http://127.0.0.1:8000/popups';
@@ -95,9 +95,13 @@ exports.TRIGGER_EMAIL_BUTTON_CLASS_NAME = TRIGGER_EMAIL_BUTTON_CLASS_NAME;
 var TRIGGER_EMAILLINK_BUTTON_CLASS_NAME = 'wk-auth-form-button wk-auth-form-button-emaillink';
 exports.TRIGGER_EMAILLINK_BUTTON_CLASS_NAME = TRIGGER_EMAILLINK_BUTTON_CLASS_NAME;
 var TRIGGER_BUTTON_CLASS_NAME = 'wk-auth-form-button';
+exports.TRIGGER_BUTTON_CLASS_NAME = TRIGGER_BUTTON_CLASS_NAME;
+var AUTH_DEFAULT_ERROR_MESSAGE = 'Something went wrong';
+exports.AUTH_DEFAULT_ERROR_MESSAGE = AUTH_DEFAULT_ERROR_MESSAGE;
+var AUTH_DEFAULT_ERROR_CODE = false;
 
 // Authentication
-exports.TRIGGER_BUTTON_CLASS_NAME = TRIGGER_BUTTON_CLASS_NAME;
+exports.AUTH_DEFAULT_ERROR_CODE = AUTH_DEFAULT_ERROR_CODE;
 var WALLKIT_FIREBASE_CONFIG = {
   apiKey: "AIzaSyAoRdxZIlUE0HInqtzDid6rNxluhs5nCqg",
   authDomain: "wallkit-production.firebaseapp.com",
@@ -124,6 +128,10 @@ var WALLKIT_TOKEN_NAME = 'wk-token';
 exports.WALLKIT_TOKEN_NAME = WALLKIT_TOKEN_NAME;
 var FIREBASE_TOKEN_NAME = 'firebase-token';
 exports.FIREBASE_TOKEN_NAME = FIREBASE_TOKEN_NAME;
+var ERROR_MESSAGES = {
+  'INVALID_LOGIN_CREDENTIALS': 'Invalid login credentials'
+};
+exports.ERROR_MESSAGES = ERROR_MESSAGES;
 
 /***/ }),
 
@@ -5928,6 +5936,7 @@ var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
 var _DOM = __webpack_require__(2909);
 var _lodash = _interopRequireDefault(__webpack_require__(5828));
 var _lodash2 = _interopRequireDefault(__webpack_require__(4174));
+var _helper = __webpack_require__(5639);
 var Form = /*#__PURE__*/function () {
   function Form(targetElementSelector, options) {
     (0, _classCallCheck2["default"])(this, Form);
@@ -5967,14 +5976,17 @@ var Form = /*#__PURE__*/function () {
   }, {
     key: "setFormError",
     value: function setFormError(error, errorCode) {
+      var _parseErrorMessage = (0, _helper.parseErrorMessage)(error, errorCode),
+        erMessage = _parseErrorMessage.erMessage,
+        erCcode = _parseErrorMessage.erCcode;
       var errorMessage = false;
-      if (!(0, _lodash["default"])(this.options.messages)) {
-        errorMessage = (0, _lodash2["default"])(this.options.messages, errorCode, false);
+      if (!(0, _lodash["default"])(this.options.messages) && !(0, _lodash["default"])(erCcode)) {
+        errorMessage = (0, _lodash2["default"])(this.options.messages, erCcode, false);
       }
-      this.formErrorPlaceholder.innerText = errorMessage || error;
+      this.formErrorPlaceholder.innerText = errorMessage || erMessage;
       this.formErrorPlaceholder.classList.add('wk-form__error--show');
-      if (!(0, _lodash["default"])(errorCode)) {
-        this.formErrorPlaceholder.dataset.errorCode = errorCode;
+      if (!(0, _lodash["default"])(erCcode)) {
+        this.formErrorPlaceholder.dataset.errorCode = erCcode;
       }
     }
   }, {
@@ -7095,6 +7107,50 @@ var isCrawler = function isCrawler() {
   return /bot|googlebot|crawler|spider|robot|crawling|facebookexternalhit|facebookcatalog/i.test(navigator.userAgent);
 };
 exports.isCrawler = isCrawler;
+
+/***/ }),
+
+/***/ 5639:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(5656);
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.parseErrorMessage = exports.isStringJson = void 0;
+var _constants = __webpack_require__(9066);
+var _lodash = _interopRequireDefault(__webpack_require__(5828));
+var isStringJson = function isStringJson(str) {
+  try {
+    JSON.parse(str);
+  } catch (e) {
+    return false;
+  }
+  return true;
+};
+exports.isStringJson = isStringJson;
+var parseErrorMessage = function parseErrorMessage(errorMessage, errorCode) {
+  var erMessage = _constants.AUTH_DEFAULT_ERROR_MESSAGE;
+  var erCode = _constants.AUTH_DEFAULT_ERROR_CODE;
+  if (isStringJson(errorMessage)) {
+    var errorObj = JSON.parse(errorMessage);
+    if (!(0, _lodash["default"])(errorObj.error)) {
+      erMessage = _constants.ERROR_MESSAGES[errorObj.error.message] || errorObj.error.message;
+      erCode = errorObj.error.code || erCode;
+    }
+  } else {
+    erMessage = errorMessage;
+    erCode = errorCode || erCode;
+  }
+  return {
+    erMessage: erMessage,
+    erCode: erCode
+  };
+};
+exports.parseErrorMessage = parseErrorMessage;
 
 /***/ }),
 

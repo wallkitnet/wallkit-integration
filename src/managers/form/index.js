@@ -1,6 +1,7 @@
 import { createElement } from "../../utils/DOM";
 import isEmpty from "lodash.isempty";
 import get from 'lodash.get';
+import {parseErrorMessage} from "../../utils/helper";
 
 export class Form {
     constructor(targetElementSelector, options) {
@@ -42,14 +43,15 @@ export class Form {
     }
 
     setFormError (error, errorCode) {
+        const {erMessage, erCcode} = parseErrorMessage(error, errorCode);
         let errorMessage = false;
-        if (!isEmpty(this.options.messages)) {
-            errorMessage = get(this.options.messages, errorCode, false);
+        if (!isEmpty(this.options.messages) && !isEmpty(erCcode)) {
+            errorMessage = get(this.options.messages, erCcode, false);
         }
-        this.formErrorPlaceholder.innerText = errorMessage || error;
+        this.formErrorPlaceholder.innerText = errorMessage || erMessage;
         this.formErrorPlaceholder.classList.add('wk-form__error--show');
-        if (!isEmpty(errorCode)) {
-            this.formErrorPlaceholder.dataset.errorCode = errorCode;
+        if (!isEmpty(erCcode)) {
+            this.formErrorPlaceholder.dataset.errorCode = erCcode;
         }
     }
 
