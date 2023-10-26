@@ -8,15 +8,17 @@ export class EmailLinkForm extends Form {
         super(targetElementSelector, options);
 
         this.options = options;
-        this.options.title = options.title || 'Sign in with email';
-        this.options.footer = this.getFormFooter() || options.footer;
+        const { title, footer, messages, onCancel, fieldLabels } = options;
+        const { email: fieldLabelEmail } = fieldLabels;
+        this.options.title = title || 'Sign in with email';
+        this.options.footer = this.getFormFooter() || footer;
 
         this.emailField = new FormField({
             name: 'wk-fb-email',
             dataSlug: 'email',
-            label: 'Email',
+            label: fieldLabelEmail || 'Email',
             type: 'email',
-            messages: options.messages || {},
+            messages: messages || {},
             onEnter: () => {
               this.submitForm();
             }
@@ -28,8 +30,8 @@ export class EmailLinkForm extends Form {
 
         this.init();
 
-        if (options.onCancel) {
-            this.cancelBtn.addEventListener('click', options.onCancel.bind(this));
+        if (onCancel) {
+            this.cancelBtn.addEventListener('click', onCancel.bind(this));
         }
     }
 

@@ -4928,6 +4928,7 @@ var AuthForm = /*#__PURE__*/function () {
     // });
     var _ref = options.customizeAuthForms || {},
       messages = _ref.messages,
+      fieldLabels = _ref.fieldLabels,
       signIn = _ref.signIn,
       signUp = _ref.signUp,
       emailLink = _ref.emailLink,
@@ -4939,6 +4940,10 @@ var AuthForm = /*#__PURE__*/function () {
     if (!(0, _lodash["default"])(signIn) && !(0, _lodash["default"])(signIn.messages)) {
       signInMessages = signIn.messages;
     }
+    var signInFieldLabels = {};
+    if (!(0, _lodash["default"])(signIn) && !(0, _lodash["default"])(signIn.fieldLabels)) {
+      signInFieldLabels = signIn.fieldLabels;
+    }
     this.loginForm = new _LoginForm.LoginForm(selector, _objectSpread(_objectSpread({
       className: 'wk-form-login',
       cancelBtn: options.triggerButton !== false,
@@ -4946,6 +4951,7 @@ var AuthForm = /*#__PURE__*/function () {
       passwordSignInIgnoreValidation: options.passwordSignInIgnoreValidation || false
     }, signIn || {}), {}, {
       messages: _objectSpread(_objectSpread({}, messages || {}), signInMessages),
+      fieldLabels: _objectSpread(_objectSpread({}, fieldLabels || {}), signInFieldLabels),
       onSubmit: function onSubmit(data) {
         if (options.onLogin) {
           options.onLogin(data);
@@ -4974,6 +4980,10 @@ var AuthForm = /*#__PURE__*/function () {
     if (!(0, _lodash["default"])(signUp) && !(0, _lodash["default"])(signUp.messages)) {
       signUpMessages = signUp.messages;
     }
+    var signUpFieldLabels = {};
+    if (!(0, _lodash["default"])(signUp) && !(0, _lodash["default"])(signUp.fieldLabels)) {
+      signUpFieldLabels = signUp.fieldLabels;
+    }
     if (options.signUp === true) {
       this.signUpForm = new _SignUpForm.SignupForm(selector, _objectSpread(_objectSpread({
         className: 'wk-form-signup',
@@ -4981,6 +4991,7 @@ var AuthForm = /*#__PURE__*/function () {
         termsOfService: options.termsOfService
       }, signUp || {}), {}, {
         messages: _objectSpread(_objectSpread({}, messages || {}), signUpMessages),
+        fieldLabels: _objectSpread(_objectSpread({}, fieldLabels || {}), signUpFieldLabels),
         onSubmit: function onSubmit(data) {
           if (options.onSignUp) {
             options.onSignUp(data);
@@ -5007,12 +5018,17 @@ var AuthForm = /*#__PURE__*/function () {
     if (!(0, _lodash["default"])(emailLink) && !(0, _lodash["default"])(emailLink.messages)) {
       emailLinkMessages = emailLink.messages;
     }
+    var emailLinkFieldLabels = {};
+    if (!(0, _lodash["default"])(emailLink) && !(0, _lodash["default"])(emailLink.fieldLabels)) {
+      emailLinkFieldLabels = emailLink.fieldLabels;
+    }
     this.emailLinkForm = new _EmailLinkForm.EmailLinkForm(selector, _objectSpread(_objectSpread({
       className: 'wk-form-email-link',
       cancelBtn: options.triggerButton !== false,
       signUp: (_options$signUp2 = options.signUp) !== null && _options$signUp2 !== void 0 ? _options$signUp2 : true
     }, emailLink || {}), {}, {
       messages: _objectSpread(_objectSpread({}, messages || {}), emailLinkMessages),
+      fieldLabels: _objectSpread(_objectSpread({}, fieldLabels || {}), emailLinkFieldLabels),
       onSubmit: function onSubmit(data) {
         if (options.onGetEmailLink) {
           options.onGetEmailLink(data);
@@ -5050,10 +5066,15 @@ var AuthForm = /*#__PURE__*/function () {
     if (!(0, _lodash["default"])(forgotPassword) && !(0, _lodash["default"])(forgotPassword.messages)) {
       forgotPasswordMessages = forgotPassword.messages;
     }
+    var forgotPasswordFieldLabels = {};
+    if (!(0, _lodash["default"])(forgotPassword) && !(0, _lodash["default"])(forgotPassword.fieldLabels)) {
+      forgotPasswordFieldLabels = forgotPassword.fieldLabels;
+    }
     this.forgotPasswordForm = new _ForgotPasswordForm.ForgotPasswordForm(selector, _objectSpread(_objectSpread({
       className: 'wk-form-forgot-password'
     }, forgotPassword || {}), {}, {
       messages: _objectSpread(_objectSpread({}, messages || {}), forgotPasswordMessages),
+      fieldLabels: _objectSpread(_objectSpread({}, fieldLabels || {}), forgotPasswordFieldLabels),
       onSubmit: function onSubmit(data) {
         if (options.onPasswordForgot) {
           options.onPasswordForgot(data);
@@ -5074,10 +5095,15 @@ var AuthForm = /*#__PURE__*/function () {
     if (!(0, _lodash["default"])(resetPassword) && !(0, _lodash["default"])(resetPassword.messages)) {
       resetPasswordMessages = resetPassword.messages;
     }
+    var resetPasswordFieldLabels = {};
+    if (!(0, _lodash["default"])(resetPassword) && !(0, _lodash["default"])(resetPassword.fieldLabels)) {
+      resetPasswordFieldLabels = resetPassword.fieldLabels;
+    }
     this.resetPasswordForm = new _ResetPasswordForm.ResetPasswordForm(selector, _objectSpread(_objectSpread({
       className: 'wk-form-reset-password'
     }, resetPassword || {}), {}, {
       messages: _objectSpread(_objectSpread({}, messages || {}), resetPasswordMessages),
+      fieldLabels: _objectSpread(_objectSpread({}, fieldLabels || {}), resetPasswordFieldLabels),
       onSubmit: function onSubmit(data) {
         if (options.onPasswordReset) {
           options.onPasswordReset(data);
@@ -5453,22 +5479,28 @@ var EmailLinkForm = /*#__PURE__*/function (_Form) {
     (0, _classCallCheck2["default"])(this, EmailLinkForm);
     _this = _super.call(this, targetElementSelector, options);
     _this.options = options;
-    _this.options.title = options.title || 'Sign in with email';
-    _this.options.footer = _this.getFormFooter() || options.footer;
+    var title = options.title,
+      footer = options.footer,
+      messages = options.messages,
+      onCancel = options.onCancel,
+      fieldLabels = options.fieldLabels;
+    var fieldLabelEmail = fieldLabels.email;
+    _this.options.title = title || 'Sign in with email';
+    _this.options.footer = _this.getFormFooter() || footer;
     _this.emailField = new _field.FormField({
       name: 'wk-fb-email',
       dataSlug: 'email',
-      label: 'Email',
+      label: fieldLabelEmail || 'Email',
       type: 'email',
-      messages: options.messages || {},
+      messages: messages || {},
       onEnter: function onEnter() {
         _this.submitForm();
       }
     });
     _this.fields = [_this.emailField];
     _this.init();
-    if (options.onCancel) {
-      _this.cancelBtn.addEventListener('click', options.onCancel.bind((0, _assertThisInitialized2["default"])(_this)));
+    if (onCancel) {
+      _this.cancelBtn.addEventListener('click', onCancel.bind((0, _assertThisInitialized2["default"])(_this)));
     }
     return _this;
   }
@@ -5541,14 +5573,19 @@ var ForgotPasswordForm = /*#__PURE__*/function (_Form) {
     (0, _classCallCheck2["default"])(this, ForgotPasswordForm);
     _this = _super.call(this, targetElementSelector, options);
     _this.options = options;
-    _this.options.title = options.title || 'Reset Password';
-    _this.options.footer = _this.getFormFooter() || options.footer;
+    var title = options.title,
+      footer = options.footer,
+      messages = options.messages,
+      fieldLabels = options.fieldLabels;
+    var fieldLabelEmail = fieldLabels.email;
+    _this.options.title = title || 'Reset Password';
+    _this.options.footer = _this.getFormFooter() || footer;
     _this.emailField = new _field.FormField({
       name: 'wk-fb-email',
       dataSlug: 'email',
-      label: 'Email',
+      label: fieldLabelEmail || 'Email',
       type: 'email',
-      messages: options.messages || {},
+      messages: messages || {},
       onEnter: function onEnter() {
         _this.submitForm();
       }
@@ -5606,14 +5643,22 @@ var LoginForm = /*#__PURE__*/function (_Form) {
     (0, _classCallCheck2["default"])(this, LoginForm);
     _this = _super.call(this, targetElementSelector, options);
     _this.options = options;
-    _this.options.title = options.title || 'Sign in with email';
-    _this.options.footer = _this.getFormFooter() || options.footer;
+    var title = options.title,
+      footer = options.footer,
+      messages = options.messages,
+      passwordSignInIgnoreValidation = options.passwordSignInIgnoreValidation,
+      onCancel = options.onCancel,
+      fieldLabels = options.fieldLabels;
+    var fieldLabelEmail = fieldLabels.email,
+      fieldLabelPassword = fieldLabels.password;
+    _this.options.title = title || 'Sign in with email';
+    _this.options.footer = _this.getFormFooter() || footer;
     _this.emailField = new _field.FormField({
       dataSlug: 'email',
       name: 'wk-fb-email',
-      label: 'Email',
+      label: fieldLabelEmail || 'Email',
       type: 'email',
-      messages: options.messages || {},
+      messages: messages || {},
       onEnter: function onEnter() {
         _this.passwordField.focus();
       }
@@ -5621,19 +5666,19 @@ var LoginForm = /*#__PURE__*/function (_Form) {
     _this.passwordField = new _PasswordField.PasswordField({
       dataSlug: 'password',
       name: 'wk-fb-password',
-      ignoreValidation: options.passwordSignInIgnoreValidation || false,
+      ignoreValidation: passwordSignInIgnoreValidation || false,
       testStrength: false,
-      label: 'Password',
+      label: fieldLabelPassword || 'Password',
       type: 'password',
-      messages: options.messages || {},
+      messages: messages || {},
       onEnter: function onEnter() {
         _this.submitForm();
       }
     });
     _this.fields = [_this.emailField, _this.passwordField];
     _this.init();
-    if (options.onCancel) {
-      _this.cancelBtn.addEventListener('click', options.onCancel.bind((0, _assertThisInitialized2["default"])(_this)));
+    if (onCancel) {
+      _this.cancelBtn.addEventListener('click', onCancel.bind((0, _assertThisInitialized2["default"])(_this)));
     }
     return _this;
   }
@@ -5714,17 +5759,22 @@ var ResetPasswordForm = /*#__PURE__*/function (_Form) {
     (0, _classCallCheck2["default"])(this, ResetPasswordForm);
     _this = _super.call(this, targetElementSelector, options);
     _this.options = options;
-    _this.options.title = options.title || 'Reset Password';
-    _this.options.footer = _this.getFormFooter() || options.footer;
+    var title = options.title,
+      footer = options.footer,
+      messages = options.messages,
+      fieldLabels = options.fieldLabels;
+    var fieldLabelPassword = fieldLabels.password;
+    _this.options.title = title || 'Reset Password';
+    _this.options.footer = _this.getFormFooter() || footer;
     _this.newPasswordField = new _PasswordField.PasswordField({
       dataSlug: 'new_password',
       name: 'wk-new-password',
       ignoreValidation: false,
       testStrength: true,
       passwordHint: true,
-      label: 'New Password',
+      label: fieldLabelPassword || 'New Password',
       type: 'password',
-      messages: options.messages || {},
+      messages: messages || {},
       onEnter: function onEnter() {
         _this.submitForm();
       }
@@ -5781,27 +5831,33 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
 function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
-var _defaultTermsOfServiceOption = /*#__PURE__*/new WeakSet();
 var _isTosEnabled = /*#__PURE__*/new WeakSet();
 var SignupForm = /*#__PURE__*/function (_Form) {
   (0, _inherits2["default"])(SignupForm, _Form);
   var _super = _createSuper(SignupForm);
-  function SignupForm(targetElementSelector, _options) {
+  function SignupForm(targetElementSelector, options) {
     var _this;
     (0, _classCallCheck2["default"])(this, SignupForm);
-    _this = _super.call(this, targetElementSelector, _options);
+    _this = _super.call(this, targetElementSelector, options);
     _classPrivateMethodInitSpec((0, _assertThisInitialized2["default"])(_this), _isTosEnabled);
-    _classPrivateMethodInitSpec((0, _assertThisInitialized2["default"])(_this), _defaultTermsOfServiceOption);
-    _this.options = _options;
-    _this.options.title = _options.title || 'Sign Up';
-    _this.options.footer = _this.getFormFooter() || _options.footer;
-    _this.options.termsOfService.termsOfService = _classPrivateMethodGet((0, _assertThisInitialized2["default"])(_this), _defaultTermsOfServiceOption, _defaultTermsOfServiceOption2).call((0, _assertThisInitialized2["default"])(_this), _this.options.termsOfService.termsOfService);
+    _this.options = options;
+    var title = options.title,
+      footer = options.footer,
+      termsOfService = options.termsOfService,
+      messages = options.messages,
+      onCancel = options.onCancel,
+      fieldLabels = options.fieldLabels;
+    var fieldLabelEmail = fieldLabels.email,
+      fieldLabelName = fieldLabels.name,
+      fieldLabelPassword = fieldLabels.password;
+    _this.options.title = title || 'Sign Up';
+    _this.options.footer = _this.getFormFooter() || footer;
     _this.emailField = new _field.FormField({
       dataSlug: 'email',
       name: 'wk-fb-email',
-      label: 'Email',
+      label: fieldLabelEmail || 'Email',
       type: 'email',
-      messages: _options.messages || {},
+      messages: messages || {},
       onEnter: function onEnter() {
         _this.nameField.focus();
       }
@@ -5809,9 +5865,9 @@ var SignupForm = /*#__PURE__*/function (_Form) {
     _this.nameField = new _field.FormField({
       dataSlug: 'name',
       name: 'wk-fb-name',
-      label: 'Name',
+      label: fieldLabelName || 'Name',
       type: 'text',
-      messages: _options.messages || {},
+      messages: messages || {},
       onEnter: function onEnter() {
         _this.passwordField.focus();
       }
@@ -5822,25 +5878,25 @@ var SignupForm = /*#__PURE__*/function (_Form) {
       ignoreValidation: false,
       testStrength: true,
       passwordHint: true,
-      label: 'Password',
+      label: fieldLabelPassword || 'Password',
       type: 'password',
-      messages: _options.messages || {},
+      messages: messages || {},
       onEnter: function onEnter() {
         _this.submitForm();
       }
     });
-    var _ref = _options.messages || {},
+    var _ref = messages || {},
       tosRequired = _ref.tosRequired,
       required = _ref.required;
-    if (_classPrivateMethodGet((0, _assertThisInitialized2["default"])(_this), _isTosEnabled, _isTosEnabled2).call((0, _assertThisInitialized2["default"])(_this), _options)) {
+    if (_classPrivateMethodGet((0, _assertThisInitialized2["default"])(_this), _isTosEnabled, _isTosEnabled2).call((0, _assertThisInitialized2["default"])(_this), termsOfService)) {
       _this.tosField = new _CheckBoxField.CheckBoxField({
         dataSlug: 'agreement',
         name: 'wk-fb-agreement',
         id: 'wk-fb-agreement',
         required: true,
-        label: _this.getTosAcceptLabel(_options.termsOfService),
+        label: _this.getTosAcceptLabel(termsOfService),
         type: 'checkbox',
-        messages: _objectSpread(_objectSpread({}, _options.messages || {}), {
+        messages: _objectSpread(_objectSpread({}, messages || {}), {
           required: tosRequired || required || false
         })
       });
@@ -5850,8 +5906,8 @@ var SignupForm = /*#__PURE__*/function (_Form) {
       _this.fields.push(_this.tosField);
     }
     _this.init();
-    if (_options.onCancel) {
-      _this.cancelBtn.addEventListener('click', _options.onCancel.bind((0, _assertThisInitialized2["default"])(_this)));
+    if (onCancel) {
+      _this.cancelBtn.addEventListener('click', onCancel.bind((0, _assertThisInitialized2["default"])(_this)));
     }
     return _this;
   }
@@ -5905,17 +5961,11 @@ var SignupForm = /*#__PURE__*/function (_Form) {
   return SignupForm;
 }(_index.Form);
 exports.SignupForm = SignupForm;
-function _defaultTermsOfServiceOption2(termsOfService) {
-  if (typeof termsOfService === "undefined" || typeof termsOfService !== "string" && typeof termsOfService !== "boolean") {
-    termsOfService = true;
-  }
-  return termsOfService;
-}
-function _isTosEnabled2(options) {
-  if (!options.termsOfService.termsOfService) {
+function _isTosEnabled2(termsOptions) {
+  if (!termsOptions.termsOfService) {
     return false;
   }
-  return !!options.termsOfService.termsOfService && typeof options.termsOfService.termsOfService === "string" || !!options.termsOfService.tosURL || !!options.termsOfService.privacyPolicyURL;
+  return !!termsOptions.termsOfService && typeof termsOptions.termsOfService === "string" || !!termsOptions.tosURL || !!termsOptions.privacyPolicyURL;
 }
 
 /***/ }),
