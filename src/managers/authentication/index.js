@@ -129,7 +129,9 @@ export default class Authentication {
           if (!isEmpty(error.message)) {
             this.authForm.loginForm.setFormError(error.message, error.code || false);
           }
-          this.reCaptcha.grecaptcha.reset();
+          if (!isEmpty(this.reCaptcha) && this.reCaptcha.enabled && !isEmpty(this.reCaptcha.grecaptcha)) {
+              this.reCaptcha.grecaptcha.reset();
+          }
         });
     }
 
@@ -142,7 +144,9 @@ export default class Authentication {
           if (!isEmpty(error.message)) {
             this.authForm.signUpForm.setFormError(error.message, error.code || false);
           }
-          this.reCaptcha.grecaptcha.reset();
+          if (!isEmpty(this.reCaptcha) && this.reCaptcha.enabled && !isEmpty(this.reCaptcha.grecaptcha)) {
+            this.reCaptcha.grecaptcha.reset();
+          }
         });
     }
 
@@ -541,6 +545,7 @@ export default class Authentication {
     }
 
     resetAuthProcess (reset = true) {
+      this.firebase.isGoogleOneTapShow = !this.isAuthenticated();
       this.firebase.reset();
       this.firebase.showAuthForm();
 
@@ -548,7 +553,7 @@ export default class Authentication {
         this.authForm.reset();
       }
 
-      if (this.reCaptcha.enabled) {
+      if (!isEmpty(this.reCaptcha) && this.reCaptcha.enabled && !isEmpty(this.reCaptcha.grecaptcha)) {
         this.reCaptcha.grecaptcha.reset();
       }
     }
@@ -565,7 +570,9 @@ export default class Authentication {
             await this.reCaptcha.init();
           } else if (this.reCaptcha.loaded) {
             this.resetAuthProcess();
-            this.reCaptcha.grecaptcha.reset();
+            if (!isEmpty(this.reCaptcha) && this.reCaptcha.enabled && !isEmpty(this.reCaptcha.grecaptcha)) {
+              this.reCaptcha.grecaptcha.reset();
+            }
 
             if (this.#options.firebase.genuineForm !== false) {
               this.reCaptcha.initCaptchaProcess();
@@ -804,6 +811,7 @@ export default class Authentication {
             }
 
             this.render();
+            this.firebase.isGoogleOneTapShow = !this.isAuthenticated();
             this.firebase.init();
 
             if (this.authForm) {

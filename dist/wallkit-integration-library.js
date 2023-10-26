@@ -1,7 +1,7 @@
 /*!
  * Package name: wallkit-integration-lib.
  * Package description: Wallkit Integration Library. Library to manipulate with Wallkit System: Paywall, Modals, Authentication, SDK..
- * Package version: 3.0.29.
+ * Package version: 3.0.33.
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -26,7 +26,7 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.POPUP_UI_LIBRARY_STYLES = exports.INLINE_UI_LIBRARY_STYLES = void 0;
-var POPUP_UI_LIBRARY_STYLES = "\n        .wallkit-modal-wrapper {\n            z-index: 100;\n            position: fixed;\n            top: 0;\n            left: 0;\n            right: 0;\n            bottom: 0;\n            background: rgba(18, 18, 20, 0.9);\n            display: flex;\n            align-items: center;\n            justify-content: flex-start;\n            flex-direction: column;\n            overflow-y: auto;\n            padding: 70px 15px 20px;\n        }\n\n        .wallkit-modal-wrapper__content {\n            background-color: #fff;\n            flex-shrink: 0;\n            position: relative;\n            box-sizing: border-box;\n            overflow: hidden;\n            font-family: Roboto, sans-serif;\n        }\n        \n        @media screen and (max-width: 500px) {\n            .wallkit-modal-wrapper__content {\n                width: 100%;\n                min-width: auto!important;\n            }\n        }\n\n        .wallkit-modal-wrapper__close-btn {\n            position: absolute;\n            right: 10px;\n            top: 10px;\n            cursor: pointer;\n            color: #000;\n            font-size: 37px;\n            width: 37px;\n            height: 37px;\n            text-align: center;\n            line-height: 34px;\n        }\n\n        .wallkit-modal-wrapper .wk-frame {\n            transition: all 0.3s linear 0s;\n            max-width: 100%;\n            border: none;\n        }\n\n        .wallkit-auth-modal {\n            z-index: 999;\n        }\n\n        .wallkit-auth-modal .wallkit-modal-wrapper__content {\n            padding: 20px;\n        }\n\n        .wallkit-auth-modal .wallkit-auth-modal__title {\n            font-family: Roboto, sans-serif;\n            text-align: center;\n        }\n        \n        .wk-auth-form {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .wk-form-field {\n            display: flex;\n            flex-direction: column;\n            font-family: Oxygen, sans-serif;\n            margin-bottom: 10px;\n        }\n\n        .wk-form-field .wk-form-field__label {\n            font-weight: 500;\n            color: #333;\n            margin-bottom: 5px;\n        }\n\n        .wk-form-field .wk-form-field__input-wrapper {\n            margin-bottom: 5px;\n            position: relative;\n        }\n        \n        .wk-eye-toggle {\n            background: url(https://www.gstatic.com/images/icons/material/system/1x/visibility_black_24dp.png);\n            width: 24px;\n            height: 24px;\n        }\n        \n        .wk-form-field__field-description {\n            font-size: 11px;\n            color: #989898;\n        }\n        \n        .wk-eye-toggle.wk-eye-toggled {\n            background: url(https://www.gstatic.com/images/icons/material/system/1x/visibility_off_black_24dp.png);\n        }\n        \n        .wk-form-field__field-affix {\n            position: absolute;\n            right: 5px;\n            top: 0;\n            bottom: 0;\n        }\n        \n        .wk-form-field .wk-form-field__input {\n            border-radius: 0;\n            border: 0;\n            border-bottom: 1px solid #ccc;\n            padding: 5px;\n            box-sizing: border-box;\n            width: 100%;\n        }\n        \n        .wk-field-list {\n            list-style-type: circle;\n            padding-left: 12px;\n            margin-top: 1px;\n        }\n\n        .wk-form-field .wk-form-field__input:focus {\n            border-bottom: 1px solid #3f51b5;\n            outline: none;\n        }\n\n        .wk-form-field .wk-form-field__message {\n            font-size: 12px;\n        }\n\n        .wk-auth-form-button {\n            background-color: #db4437;\n            direction: ltr;\n            font-weight: 500;\n            height: auto;\n            line-height: normal;\n            max-width: 220px;\n            min-height: 40px;\n            padding: 8px 16px;\n            text-align: left;\n            width: 100%;\n            box-sizing: border-box;\n            box-shadow: 0 2px 2px 0 rgba(0,0,0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.20), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n            border-radius: 2px;\n            font-family: \"Roboto\",\"Helvetica\",\"Arial\",sans-serif;\n            margin: 0 auto 15px;\n            cursor: pointer;\n        }\n        \n        .wk-auth-form-button:focus,\n        .wk-auth-form-button:active,{\n            background-color: #5b6abe;\n        }\n\n        .wk-form-field.wk-form-field--invalid .wk-form-field__input {\n            border-bottom: 1px solid #dd2c00;\n        }\n        \n        .wk-form-field.wk-form-field--checkbox.wk-form-field--invalid .wk-form-field__checkmark {\n            border-color: #dd2c00;\n        }\n\n        .wk-form-field.wk-form-field--valid .wk-form-field__input {\n            border-bottom: 1px solid green;\n        }\n\n        .wk-form-field.wk-form-field--invalid .wk-form-field__message {\n            color: #dd2c00;\n        }\n\n        .wk-form-field.wk-form-field--valid .wk-form-field__message {\n            color: green;\n        }\n\n        .wk-form .wk-form__link {\n            font-size: 14px;\n            color: #3170f3;\n            text-decoration: underline;\n        }\n\n        .wk-form {\n            font-family: Oxygen, sans-serif;\n        }\n        \n        .wk-form-header {\n            margin-bottom: 10px;\n        }\n\n        .wk-form .wk-form__footer {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n        }\n        \n        .wk-form .wk-form__footer.wk-form__footer--right {\n            justify-content: flex-end;\n        }\n\n        .wk-form .wk-form__sub-footer {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            margin-bottom: 20px;\n        }\n\n        .wk-form__reset-password {\n            text-align: right;\n        }\n\n        .wk-form-result {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n        }\n\n        .wk-form-button {\n            border: none;\n            border-radius: 2px;\n            background-color: #3f51b5;\n            color: #fff;\n            position: relative;\n            height: 36px;\n            margin: 0;\n            min-width: 64px;\n            padding: 0 16px;\n            display: inline-block;\n            font-family: \"Roboto\", \"Helvetica\", \"Arial\", sans-serif;\n            font-size: 14px;\n            font-weight: 500;\n            text-transform: uppercase;\n            letter-spacing: 0;\n            overflow: hidden;\n            will-change: box-shadow;\n            transition: box-shadow .2s cubic-bezier(0.4, 0, 1, 1),background-color .2s cubic-bezier(0.4, 0, 0.2, 1),color .2s cubic-bezier(0.4, 0, 0.2, 1);\n            outline: none;\n            cursor: pointer;\n            text-decoration: none;\n            text-align: center;\n            line-height: 36px;\n            vertical-align: middle;\n        }\n\n        .wk-form__error {\n            display: none;\n            margin: 10px 0;\n            border: 1px solid #f5c6cb;\n            border-radius: 5px;\n            color: #721c24;\n            background-color: #f8d7da;\n            line-height: 21px;\n            padding: 10px;\n        }\n\n        .wk-form__error.wk-form__error--show {\n            display: block;\n        }\n\n        .wk-form-button.wk-form-button--cancel {\n            margin-left: auto;\n            margin-right: 10px;\n            color: #3f51b5;\n            background: none;\n        }\n        \n        .wk-success-message {\n        }\n        \n        .wk-success-message__title {\n            font-weight: 500;\n            margin-bottom: 10px;\n        }\n        \n        .wk-success-message__description {\n            margin-bottom: 10px;\n        }\n        \n        .wk-success-message__description b {\n            font-weight: 500;\n        }\n\n        .wk-form-button.wk-form-button--cancel:hover {\n            background-color: hsla(0,0%,62%,.2);\n        }\n        \n        .wk-success-message.wk-password-reset-success {\n            min-height: 205px;\n            display: flex;\n            justify-content: center;\n            flex-direction: column;\n        }\n        \n       \n        \n        .wk-form-field.wk-form-field--checkbox .wk-form-field__label {\n            position: relative;\n            padding-left: 30px;     \n            line-height: 20px;\n            font-size: 14px;     \n        } \n        \n        .wk-form-field.wk-form-field--checkbox input {\n            position: absolute;\n            opacity: 0;\n            cursor: pointer;\n            height: 0;\n            width: 0;\n        }\n        \n        .wk-form-field .wk-form-field__checkmark {\n            position: absolute;\n            top: 0;\n            left: 0;\n            height: 18px;\n            width: 18px;\n            background-color: none;\n            border: 2px solid #333;\n            box-sizing: border-box;\n            border-radius: 2px;\n        }\n        \n        .wk-form-field.wk-form-field--checkbox input:checked ~ .wk-form-field__checkmark {\n            background-color: #3f51b5;\n            border-color: #3f51b5;\n        }\n        \n        .wk-form-field__checkmark:after {\n            content: \"\";\n            position: absolute;\n            display: none;\n        }\n        \n        .wk-form-field input:checked ~ .wk-form-field__checkmark:after {\n            display: block;\n        }\n        \n        .wk-form-field .wk-form-field__checkmark:after {\n            left: 5px;\n            top: 2px;\n            width: 3px;\n            height: 7px;\n            border: solid white;\n            border-width: 0 2px 2px 0;\n            -webkit-transform: rotate(45deg);\n            -ms-transform: rotate(45deg);\n            transform: rotate(45deg);\n        }\n        \n        .wallkit-modal-error {\n            border: 1px solid #f1aeb5;\n            border-radius: 5px;\n            padding: 10px;\n            width: calc(100% - 50px);\n            background-color: #f8d7da;\n            color: #58151c;\n            font-family: \"Roboto\", \"Helvetica\", \"Arial\", sans-serif;\n        }\n        \n        .wallkit-modal-success {\n            border: 1px solid #a3cfbb;\n            border-radius: 5px;\n            padding: 10px;\n            width: 100%;\n            background-color: #d1e7dd;\n            color: #0a3622;\n            font-family: \"Roboto\", \"Helvetica\", \"Arial\", sans-serif;\n        }\n        \n        .wallkit-email-confirmation-modal {\n          text-align: center;\n        }\n";
+var POPUP_UI_LIBRARY_STYLES = "\n        .wallkit-modal-wrapper {\n            z-index: 100;\n            position: fixed;\n            top: 0;\n            left: 0;\n            right: 0;\n            bottom: 0;\n            background: rgba(18, 18, 20, 0.9);\n            display: flex;\n            align-items: center;\n            justify-content: flex-start;\n            flex-direction: column;\n            overflow-y: auto;\n            padding: 70px 15px 20px;\n        }\n\n        .wallkit-modal-wrapper__content {\n            background-color: #fff;\n            flex-shrink: 0;\n            position: relative;\n            box-sizing: border-box;\n            overflow: hidden;\n        }\n        \n        @media screen and (max-width: 500px) {\n            .wallkit-modal-wrapper__content {\n                width: 100%;\n                min-width: auto!important;\n            }\n        }\n\n        .wallkit-modal-wrapper__close-btn {\n            position: absolute;\n            right: 10px;\n            top: 10px;\n            cursor: pointer;\n            color: #000;\n            font-size: 37px;\n            width: 37px;\n            height: 37px;\n            text-align: center;\n            line-height: 34px;\n        }\n\n        .wallkit-modal-wrapper .wk-frame {\n            transition: all 0.3s linear 0s;\n            max-width: 100%;\n            border: none;\n        }\n\n        .wallkit-auth-modal {\n            z-index: 999;\n        }\n\n        .wallkit-auth-modal .wallkit-modal-wrapper__content {\n            padding: 20px;\n        }\n\n        .wallkit-auth-modal .wallkit-auth-modal__title {\n            font-family: Roboto, sans-serif;\n            text-align: center;\n        }\n        \n        .wk-auth-form {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .wk-form-field {\n            display: flex;\n            flex-direction: column;\n            font-family: Oxygen, sans-serif;\n            margin-bottom: 10px;\n        }\n\n        .wk-form-field .wk-form-field__label {\n            font-weight: 500;\n            color: #333;\n            margin-bottom: 5px;\n        }\n\n        .wk-form-field .wk-form-field__input-wrapper {\n            margin-bottom: 5px;\n            position: relative;\n        }\n        \n        .wk-eye-toggle {\n            background: url(https://www.gstatic.com/images/icons/material/system/1x/visibility_black_24dp.png);\n            width: 24px;\n            height: 24px;\n        }\n        \n        .wk-form-field__field-description {\n            font-size: 11px;\n            color: #989898;\n        }\n        \n        .wk-eye-toggle.wk-eye-toggled {\n            background: url(https://www.gstatic.com/images/icons/material/system/1x/visibility_off_black_24dp.png);\n        }\n        \n        .wk-form-field__field-affix {\n            position: absolute;\n            right: 5px;\n            top: 0;\n            bottom: 0;\n        }\n        \n        .wk-form-field .wk-form-field__input {\n            border-radius: 0;\n            border: 0;\n            border-bottom: 1px solid #ccc;\n            padding: 5px;\n            box-sizing: border-box;\n            width: 100%;\n        }\n        \n        .wk-field-list {\n            list-style-type: circle;\n            padding-left: 12px;\n            margin-top: 1px;\n        }\n\n        .wk-form-field .wk-form-field__input:focus {\n            border-bottom: 1px solid #3f51b5;\n            outline: none;\n        }\n\n        .wk-form-field .wk-form-field__message {\n            font-size: 12px;\n        }\n\n        .wk-auth-form-button {\n            background-color: #db4437;\n            direction: ltr;\n            font-weight: 500;\n            height: auto;\n            line-height: normal;\n            max-width: 220px;\n            min-height: 40px;\n            padding: 8px 16px;\n            text-align: left;\n            width: 100%;\n            box-sizing: border-box;\n            box-shadow: 0 2px 2px 0 rgba(0,0,0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.20), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n            border-radius: 2px;\n            font-family: \"Roboto\",\"Helvetica\",\"Arial\",sans-serif;\n            margin: 0 auto 15px;\n            cursor: pointer;\n        }\n        \n        .wk-auth-form-button:focus,\n        .wk-auth-form-button:active,{\n            background-color: #5b6abe;\n        }\n\n        .wk-form-field.wk-form-field--invalid .wk-form-field__input {\n            border-bottom: 1px solid #dd2c00;\n        }\n        \n        .wk-form-field.wk-form-field--checkbox.wk-form-field--invalid .wk-form-field__checkmark {\n            border-color: #dd2c00;\n        }\n\n        .wk-form-field.wk-form-field--valid .wk-form-field__input {\n            border-bottom: 1px solid green;\n        }\n\n        .wk-form-field.wk-form-field--invalid .wk-form-field__message {\n            color: #dd2c00;\n        }\n\n        .wk-form-field.wk-form-field--valid .wk-form-field__message {\n            color: green;\n        }\n\n        .wk-form .wk-form__link {\n            font-size: 14px;\n            color: #3170f3;\n            text-decoration: underline;\n        }\n\n        .wk-form {\n            font-family: Oxygen, sans-serif;\n        }\n        \n        .wk-form-header {\n            margin-bottom: 10px;\n        }\n\n        .wk-form .wk-form__footer {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n        }\n        \n        .wk-form .wk-form__footer.wk-form__footer--right {\n            justify-content: flex-end;\n        }\n\n        .wk-form .wk-form__sub-footer {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            margin-bottom: 20px;\n        }\n\n        .wk-form__reset-password {\n            text-align: right;\n        }\n\n        .wk-form-result {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n        }\n\n        .wk-form-button {\n            border: none;\n            border-radius: 2px;\n            background-color: #3f51b5;\n            color: #fff;\n            position: relative;\n            height: 36px;\n            margin: 0;\n            min-width: 64px;\n            padding: 0 16px;\n            display: inline-block;\n            font-family: \"Roboto\", \"Helvetica\", \"Arial\", sans-serif;\n            font-size: 14px;\n            font-weight: 500;\n            text-transform: uppercase;\n            letter-spacing: 0;\n            overflow: hidden;\n            will-change: box-shadow;\n            transition: box-shadow .2s cubic-bezier(0.4, 0, 1, 1),background-color .2s cubic-bezier(0.4, 0, 0.2, 1),color .2s cubic-bezier(0.4, 0, 0.2, 1);\n            outline: none;\n            cursor: pointer;\n            text-decoration: none;\n            text-align: center;\n            line-height: 36px;\n            vertical-align: middle;\n        }\n\n        .wk-form__error {\n            display: none;\n            margin: 10px 0;\n            border: 1px solid #f5c6cb;\n            border-radius: 5px;\n            color: #721c24;\n            background-color: #f8d7da;\n            line-height: 21px;\n            padding: 10px;\n        }\n\n        .wk-form__error.wk-form__error--show {\n            display: block;\n        }\n\n        .wk-form-button.wk-form-button--cancel {\n            margin-left: auto;\n            margin-right: 10px;\n            color: #3f51b5;\n            background: none;\n        }\n        \n        .wk-success-message {\n        }\n        \n        .wk-success-message__title {\n            font-weight: 500;\n            margin-bottom: 10px;\n        }\n        \n        .wk-success-message__description {\n            margin-bottom: 10px;\n        }\n        \n        .wk-success-message__description b {\n            font-weight: 500;\n        }\n\n        .wk-form-button.wk-form-button--cancel:hover {\n            background-color: hsla(0,0%,62%,.2);\n        }\n        \n        .wk-success-message.wk-password-reset-success {\n            min-height: 205px;\n            display: flex;\n            justify-content: center;\n            flex-direction: column;\n        }\n        \n       \n        \n        .wk-form-field.wk-form-field--checkbox .wk-form-field__label {\n            position: relative;\n            padding-left: 30px;     \n            line-height: 20px;\n            font-size: 14px;     \n        } \n        \n        .wk-form-field.wk-form-field--checkbox input {\n            position: absolute;\n            opacity: 0;\n            cursor: pointer;\n            height: 0;\n            width: 0;\n        }\n        \n        .wk-form-field .wk-form-field__checkmark {\n            position: absolute;\n            top: 0;\n            left: 0;\n            height: 18px;\n            width: 18px;\n            background-color: none;\n            border: 2px solid #333;\n            box-sizing: border-box;\n            border-radius: 2px;\n        }\n        \n        .wk-form-field.wk-form-field--checkbox input:checked ~ .wk-form-field__checkmark {\n            background-color: #3f51b5;\n            border-color: #3f51b5;\n        }\n        \n        .wk-form-field__checkmark:after {\n            content: \"\";\n            position: absolute;\n            display: none;\n        }\n        \n        .wk-form-field input:checked ~ .wk-form-field__checkmark:after {\n            display: block;\n        }\n        \n        .wk-form-field .wk-form-field__checkmark:after {\n            left: 5px;\n            top: 2px;\n            width: 3px;\n            height: 7px;\n            border: solid white;\n            border-width: 0 2px 2px 0;\n            -webkit-transform: rotate(45deg);\n            -ms-transform: rotate(45deg);\n            transform: rotate(45deg);\n        }\n";
 exports.POPUP_UI_LIBRARY_STYLES = POPUP_UI_LIBRARY_STYLES;
 var INLINE_UI_LIBRARY_STYLES = "\n        .wallkit-modal-wrapper {\n            display: flex;\n            align-items: center;\n            justify-content: flex-start;\n            flex-direction: column;\n        }\n\n        .wallkit-modal-wrapper__content {\n            background-color: #fff;\n            flex-shrink: 0;\n            position: relative;\n            box-sizing: border-box;\n            overflow: hidden;\n        }\n        \n        @media screen and (max-width: 500px) {\n            .wallkit-modal-wrapper__content {\n                width: 100%;\n                min-width: auto!important;\n            }\n        }\n\n        .wallkit-modal-wrapper__close-btn {\n            position: absolute;\n            right: 10px;\n            top: 10px;\n            cursor: pointer;\n            color: #000;\n            font-size: 37px;\n            width: 37px;\n            height: 37px;\n            text-align: center;\n            line-height: 34px;\n        }\n\n        .wallkit-modal-wrapper .wk-frame {\n            transition: all 0.3s linear 0s;\n            max-width: 100%;\n            border: none;\n        }\n\n        .wallkit-auth-modal {\n            z-index: 999;\n        }\n\n        .wallkit-auth-modal .wallkit-modal-wrapper__content {\n            padding: 20px;\n        }\n\n        .wallkit-auth-modal .wallkit-auth-modal__title {\n            font-family: Roboto, sans-serif;\n            text-align: center;\n        }\n        \n        .wk-auth-form {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .wk-form-field {\n            display: flex;\n            flex-direction: column;\n            font-family: Oxygen, sans-serif;\n            margin-bottom: 10px;\n        }\n\n        .wk-form-field .wk-form-field__label {\n            font-weight: 500;\n            color: #333;\n            margin-bottom: 5px;\n        }\n\n        .wk-form-field .wk-form-field__input-wrapper {\n            margin-bottom: 5px;\n            position: relative;\n        }\n        \n        .wk-eye-toggle {\n            background: url(https://www.gstatic.com/images/icons/material/system/1x/visibility_black_24dp.png);\n            width: 24px;\n            height: 24px;\n        }\n        \n        .wk-form-field__field-description {\n            font-size: 11px;\n            color: #989898;\n        }\n        \n        .wk-eye-toggle.wk-eye-toggled {\n            background: url(https://www.gstatic.com/images/icons/material/system/1x/visibility_off_black_24dp.png);\n        }\n        \n        .wk-form-field__field-affix {\n            position: absolute;\n            right: 5px;\n            top: 0;\n            bottom: 0;\n        }\n        \n        .wk-form-field .wk-form-field__input {\n            border-radius: 0;\n            border: 0;\n            border-bottom: 1px solid #ccc;\n            padding: 5px;\n            box-sizing: border-box;\n            width: 100%;\n        }\n        \n        .wk-field-list {\n            list-style-type: circle;\n            padding-left: 12px;\n            margin-top: 1px;\n        }\n\n        .wk-form-field .wk-form-field__input:focus {\n            border-bottom: 1px solid #3f51b5;\n            outline: none;\n        }\n\n        .wk-form-field .wk-form-field__message {\n            font-size: 12px;\n        }\n\n        .wk-auth-form-button {\n            background-color: #db4437;\n            direction: ltr;\n            font-weight: 500;\n            height: auto;\n            line-height: normal;\n            max-width: 220px;\n            min-height: 40px;\n            padding: 8px 16px;\n            text-align: left;\n            width: 100%;\n            box-sizing: border-box;\n            box-shadow: 0 2px 2px 0 rgba(0,0,0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.20), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n            border-radius: 2px;\n            font-family: \"Roboto\",\"Helvetica\",\"Arial\",sans-serif;\n            margin: 0 auto 15px;\n            cursor: pointer;\n        }\n        \n        .wk-auth-form-button:focus,\n        .wk-auth-form-button:active,{\n            background-color: #5b6abe;\n        }\n\n        .wk-form-field.wk-form-field--invalid .wk-form-field__input {\n            border-bottom: 1px solid #dd2c00;\n        }\n        \n        .wk-form-field.wk-form-field--checkbox.wk-form-field--invalid .wk-form-field__checkmark {\n            border-color: #dd2c00;\n        }\n\n        .wk-form-field.wk-form-field--valid .wk-form-field__input {\n            border-bottom: 1px solid green;\n        }\n\n        .wk-form-field.wk-form-field--invalid .wk-form-field__message {\n            color: #dd2c00;\n        }\n\n        .wk-form-field.wk-form-field--valid .wk-form-field__message {\n            color: green;\n        }\n\n        .wk-form .wk-form__link {\n            font-size: 14px;\n            color: #3170f3;\n            text-decoration: underline;\n        }\n\n        .wk-form {\n            font-family: Oxygen, sans-serif;\n        }\n        \n        .wk-form-header {\n            margin-bottom: 10px;\n        }\n\n        .wk-form .wk-form__footer {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n        }\n        \n        .wk-form .wk-form__footer.wk-form__footer--right {\n            justify-content: flex-end;\n        }\n\n        .wk-form .wk-form__sub-footer {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            margin-bottom: 20px;\n        }\n\n        .wk-form__reset-password {\n            text-align: right;\n        }\n\n        .wk-form-result {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n        }\n\n        .wk-form-button {\n            border: none;\n            border-radius: 2px;\n            background-color: #3f51b5;\n            color: #fff;\n            position: relative;\n            height: 36px;\n            margin: 0;\n            min-width: 64px;\n            padding: 0 16px;\n            display: inline-block;\n            font-family: \"Roboto\", \"Helvetica\", \"Arial\", sans-serif;\n            font-size: 14px;\n            font-weight: 500;\n            text-transform: uppercase;\n            letter-spacing: 0;\n            overflow: hidden;\n            will-change: box-shadow;\n            transition: box-shadow .2s cubic-bezier(0.4, 0, 1, 1),background-color .2s cubic-bezier(0.4, 0, 0.2, 1),color .2s cubic-bezier(0.4, 0, 0.2, 1);\n            outline: none;\n            cursor: pointer;\n            text-decoration: none;\n            text-align: center;\n            line-height: 36px;\n            vertical-align: middle;\n        }\n\n        .wk-form__error {\n            display: none;\n            margin: 10px 0;\n            border: 1px solid #f5c6cb;\n            border-radius: 5px;\n            color: #721c24;\n            background-color: #f8d7da;\n            line-height: 21px;\n            padding: 10px;\n        }\n\n        .wk-form__error.wk-form__error--show {\n            display: block;\n        }\n\n        .wk-form-button.wk-form-button--cancel {\n            margin-left: auto;\n            margin-right: 10px;\n            color: #3f51b5;\n            background: none;\n        }\n        \n        .wk-success-message {\n        }\n        \n        .wk-success-message__title {\n            font-weight: 500;\n            margin-bottom: 10px;\n        }\n        \n        .wk-success-message__description {\n            margin-bottom: 10px;\n        }\n        \n        .wk-success-message__description b {\n            font-weight: 500;\n        }\n\n        .wk-form-button.wk-form-button--cancel:hover {\n            background-color: hsla(0,0%,62%,.2);\n        }\n        \n        .wk-success-message.wk-password-reset-success {\n            min-height: 205px;\n            display: flex;\n            justify-content: center;\n            flex-direction: column;\n        }\n        \n       \n        \n        .wk-form-field.wk-form-field--checkbox .wk-form-field__label {\n            position: relative;\n            padding-left: 30px;     \n            line-height: 20px;\n            font-size: 14px;     \n        } \n        \n        .wk-form-field.wk-form-field--checkbox input {\n            position: absolute;\n            opacity: 0;\n            cursor: pointer;\n            height: 0;\n            width: 0;\n        }\n        \n        .wk-form-field .wk-form-field__checkmark {\n            position: absolute;\n            top: 0;\n            left: 0;\n            height: 18px;\n            width: 18px;\n            background-color: none;\n            border: 2px solid #333;\n            box-sizing: border-box;\n            border-radius: 2px;\n        }\n        \n        .wk-form-field.wk-form-field--checkbox input:checked ~ .wk-form-field__checkmark {\n            background-color: #3f51b5;\n            border-color: #3f51b5;\n        }\n        \n        .wk-form-field__checkmark:after {\n            content: \"\";\n            position: absolute;\n            display: none;\n        }\n        \n        .wk-form-field input:checked ~ .wk-form-field__checkmark:after {\n            display: block;\n        }\n        \n        .wk-form-field .wk-form-field__checkmark:after {\n            left: 5px;\n            top: 2px;\n            width: 3px;\n            height: 7px;\n            border: solid white;\n            border-width: 0 2px 2px 0;\n            -webkit-transform: rotate(45deg);\n            -ms-transform: rotate(45deg);\n            transform: rotate(45deg);\n        }\n";
 exports.INLINE_UI_LIBRARY_STYLES = INLINE_UI_LIBRARY_STYLES;
@@ -42,7 +42,7 @@ exports.INLINE_UI_LIBRARY_STYLES = INLINE_UI_LIBRARY_STYLES;
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.WALLKIT_USER_MANAGER_MODAL_FORM_PLACEHOLDER_ID = exports.WALLKIT_TOKEN_NAME = exports.WALLKIT_POPUP_URL = exports.WALLKIT_POPUP_DEV_URL = exports.WALLKIT_MODAL_WRAPPER_CLASSNAME = exports.WALLKIT_MODAL_MIN_WIDTH = exports.WALLKIT_MODAL_MIN_HEIGHT = exports.WALLKIT_MODAL_MAX_WIDTH = exports.WALLKIT_MODAL_CONTENT_CLASSNAME = exports.WALLKIT_MODAL_CLOSE_BTN_CLASSNAME = exports.WALLKIT_FRAME_ID = exports.WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID = exports.WALLKIT_FIREBASE_UI_PLACEHOLDER_ID = exports.WALLKIT_FIREBASE_CONFIG = exports.WALLKIT_DEV_FIREBASE_CONFIG = exports.WALLKIT_CDN_URL = exports.WALLKIT_CDN_ASSETS_URL = exports.WALLKIT_AUTH_FORM_PLACEHOLDER_ID = exports.TRIGGER_GOOGLE_BUTTON_TITLE_SELECTOR = exports.TRIGGER_EMAIL_BUTTON_TITLE_SELECTOR = exports.TRIGGER_EMAIL_BUTTON_CLASS_NAME = exports.TRIGGER_EMAILLINK_BUTTON_TITLE_SELECTOR = exports.TRIGGER_EMAILLINK_BUTTON_CLASS_NAME = exports.TRIGGER_BUTTON_CLASS_NAME = exports.FIREBASE_TOKEN_NAME = exports.ALLOWED_ORIGINS = void 0;
+exports.WALLKIT_USER_MANAGER_MODAL_FORM_PLACEHOLDER_ID = exports.WALLKIT_TOKEN_NAME = exports.WALLKIT_POPUP_URL = exports.WALLKIT_POPUP_DEV_URL = exports.WALLKIT_MODAL_WRAPPER_CLASSNAME = exports.WALLKIT_MODAL_MIN_WIDTH = exports.WALLKIT_MODAL_MIN_HEIGHT = exports.WALLKIT_MODAL_MAX_WIDTH = exports.WALLKIT_MODAL_CONTENT_CLASSNAME = exports.WALLKIT_MODAL_CLOSE_BTN_CLASSNAME = exports.WALLKIT_FRAME_ID = exports.WALLKIT_FIREBASE_WK_FORM_PLACEHOLDER_ID = exports.WALLKIT_FIREBASE_UI_PLACEHOLDER_ID = exports.WALLKIT_FIREBASE_CONFIG = exports.WALLKIT_DEV_FIREBASE_CONFIG = exports.WALLKIT_CDN_URL = exports.WALLKIT_CDN_ASSETS_URL = exports.WALLKIT_AUTH_FORM_PLACEHOLDER_ID = exports.TRIGGER_GOOGLE_BUTTON_TITLE_SELECTOR = exports.TRIGGER_EMAIL_BUTTON_TITLE_SELECTOR = exports.TRIGGER_EMAIL_BUTTON_CLASS_NAME = exports.TRIGGER_EMAILLINK_BUTTON_TITLE_SELECTOR = exports.TRIGGER_EMAILLINK_BUTTON_CLASS_NAME = exports.TRIGGER_BUTTON_CLASS_NAME = exports.FIREBASE_TOKEN_NAME = exports.ERROR_MESSAGES = exports.AUTH_DEFAULT_ERROR_MESSAGE = exports.AUTH_DEFAULT_ERROR_CODE = exports.ALLOWED_ORIGINS = void 0;
 // Popups
 var WALLKIT_POPUP_URL = 'https://popups.wallkit.net';
 // export const WALLKIT_POPUP_URL = 'http://127.0.0.1:8000/popups';
@@ -95,9 +95,13 @@ exports.TRIGGER_EMAIL_BUTTON_CLASS_NAME = TRIGGER_EMAIL_BUTTON_CLASS_NAME;
 var TRIGGER_EMAILLINK_BUTTON_CLASS_NAME = 'wk-auth-form-button wk-auth-form-button-emaillink';
 exports.TRIGGER_EMAILLINK_BUTTON_CLASS_NAME = TRIGGER_EMAILLINK_BUTTON_CLASS_NAME;
 var TRIGGER_BUTTON_CLASS_NAME = 'wk-auth-form-button';
+exports.TRIGGER_BUTTON_CLASS_NAME = TRIGGER_BUTTON_CLASS_NAME;
+var AUTH_DEFAULT_ERROR_MESSAGE = 'Something went wrong';
+exports.AUTH_DEFAULT_ERROR_MESSAGE = AUTH_DEFAULT_ERROR_MESSAGE;
+var AUTH_DEFAULT_ERROR_CODE = false;
 
 // Authentication
-exports.TRIGGER_BUTTON_CLASS_NAME = TRIGGER_BUTTON_CLASS_NAME;
+exports.AUTH_DEFAULT_ERROR_CODE = AUTH_DEFAULT_ERROR_CODE;
 var WALLKIT_FIREBASE_CONFIG = {
   apiKey: "AIzaSyAoRdxZIlUE0HInqtzDid6rNxluhs5nCqg",
   authDomain: "wallkit-production.firebaseapp.com",
@@ -124,6 +128,10 @@ var WALLKIT_TOKEN_NAME = 'wk-token';
 exports.WALLKIT_TOKEN_NAME = WALLKIT_TOKEN_NAME;
 var FIREBASE_TOKEN_NAME = 'firebase-token';
 exports.FIREBASE_TOKEN_NAME = FIREBASE_TOKEN_NAME;
+var ERROR_MESSAGES = {
+  'INVALID_LOGIN_CREDENTIALS': 'Invalid login credentials'
+};
+exports.ERROR_MESSAGES = ERROR_MESSAGES;
 
 /***/ }),
 
@@ -537,13 +545,6 @@ function _eventsListener2() {
             _this3.popup.hide();
             _this3.userManager.showChangePassword();
             break;
-          case "wk-event-confirmation-required":
-            if (value.popup === 'plans') {
-              _this3.frame.openFrame('account-settings');
-              _this3.authentication.confirmation.showEmailConfirmationModal();
-              _this3.popup.hide();
-            }
-            break;
         }
       }
     } catch (error) {
@@ -621,11 +622,6 @@ function _recogniseURLIncomeParams2() {
   var ticketPassAuthToken = (0, _url.parseAuthTokenHash)();
   if (ticketPassAuthToken) {
     this.authentication.handleTicketsToken(ticketPassAuthToken);
-    (0, _url.resetHash)();
-  }
-  var confirmToken = (0, _url.parseConfirmTokenHash)();
-  if (confirmToken) {
-    this.authentication.confirmation.confirmUserEmail(confirmToken);
     (0, _url.resetHash)();
   }
 }
@@ -1175,14 +1171,18 @@ function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedec
 function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
 var _mode = /*#__PURE__*/new WeakMap();
+var _isGoogleOneTapShow = /*#__PURE__*/new WeakMap();
+var _firebaseuiCredentialHelper = /*#__PURE__*/new WeakMap();
 var _getElementPlaceholder = /*#__PURE__*/new WeakSet();
 var _loadFirebase = /*#__PURE__*/new WeakSet();
 var _authStateChanged = /*#__PURE__*/new WeakSet();
 var _firebaseInitApp = /*#__PURE__*/new WeakSet();
+var _configureCredentialHelper = /*#__PURE__*/new WeakSet();
 var Firebase = /*#__PURE__*/function () {
   function Firebase(_options) {
     var _options$captchaKey, _options$genuineForm, _options$onSuccessAut, _options$onAuthStateC, _options$uiShown;
     (0, _classCallCheck2["default"])(this, Firebase);
+    _classPrivateMethodInitSpec(this, _configureCredentialHelper);
     _classPrivateMethodInitSpec(this, _firebaseInitApp);
     _classPrivateMethodInitSpec(this, _authStateChanged);
     _classPrivateMethodInitSpec(this, _loadFirebase);
@@ -1190,6 +1190,14 @@ var Firebase = /*#__PURE__*/function () {
     _classPrivateFieldInitSpec(this, _mode, {
       writable: true,
       value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _isGoogleOneTapShow, {
+      writable: true,
+      value: false
+    });
+    _classPrivateFieldInitSpec(this, _firebaseuiCredentialHelper, {
+      writable: true,
+      value: null
     });
     this.events = new _events["default"]();
     this.firebaseUiConfig = null;
@@ -1221,6 +1229,11 @@ var Firebase = /*#__PURE__*/function () {
         'apple': 'apple.com',
         'microsoft': 'microsoft.com'
       };
+    }
+  }, {
+    key: "isGoogleOneTapShow",
+    set: function set(value) {
+      (0, _classPrivateFieldSet2["default"])(this, _isGoogleOneTapShow, !!value);
     }
   }, {
     key: "hideAuthForm",
@@ -1302,15 +1315,15 @@ var Firebase = /*#__PURE__*/function () {
                 },
                 signInFlow: 'popup',
                 signInOptions: this.formatSelectedProviders(providers),
-                credentialHelper: this.firebaseui.auth.CredentialHelper.GOOGLE_YOLO,
                 tosUrl: tosUrl,
                 privacyPolicyUrl: privacyPolicyUrl
               };
+              _classPrivateMethodGet(this, _configureCredentialHelper, _configureCredentialHelper2).call(this);
               this.firebaseui = firebaseuiInstance;
               this.startFirebaseUi(this.elementPlaceholder, this.firebaseUiConfig);
               this.firebase.auth().onAuthStateChanged(_classPrivateMethodGet(this, _authStateChanged, _authStateChanged2).bind(this));
               return _context.abrupt("return", true);
-            case 9:
+            case 10:
             case "end":
               return _context.stop();
           }
@@ -1325,8 +1338,9 @@ var Firebase = /*#__PURE__*/function () {
     key: "reset",
     value: function reset() {
       if (this.firebaseui) {
+        _classPrivateMethodGet(this, _configureCredentialHelper, _configureCredentialHelper2).call(this);
         this.firebaseui.reset();
-        this.firebaseui.start(this.elementPlaceholder);
+        this.startFirebaseUi();
       }
     }
   }, {
@@ -1823,6 +1837,16 @@ function _firebaseInitApp2(config) {
   }
   return this.firebase;
 }
+function _configureCredentialHelper2() {
+  if (!(0, _classPrivateFieldGet2["default"])(this, _firebaseuiCredentialHelper)) {
+    (0, _classPrivateFieldSet2["default"])(this, _firebaseuiCredentialHelper, this.firebaseui.auth.CredentialHelper);
+  }
+  if ((0, _classPrivateFieldGet2["default"])(this, _isGoogleOneTapShow)) {
+    this.firebaseUiConfig.credentialHelper = (0, _classPrivateFieldGet2["default"])(this, _firebaseuiCredentialHelper).GOOGLE_YOLO;
+  } else {
+    this.firebaseUiConfig.credentialHelper = (0, _classPrivateFieldGet2["default"])(this, _firebaseuiCredentialHelper).NONE;
+  }
+}
 
 /***/ }),
 
@@ -1967,7 +1991,7 @@ var Authentication = /*#__PURE__*/function () {
         if (!!((_classPrivateFieldGet2 = (0, _classPrivateFieldGet13["default"])(this, _options)) !== null && _classPrivateFieldGet2 !== void 0 && _classPrivateFieldGet2.firebase)) {
           return !!(this.sdk.methods.isAuthenticated() && this.token.get() && this.firebaseToken.get());
         } else {
-          return !!(this.sdk.methods.isAuthenticated() && this.token.get());
+          return !!(this.sdk.methods.isAuthenticated() || this.token.get());
         }
       } else {
         return !!this.token.get();
@@ -1988,7 +2012,9 @@ var Authentication = /*#__PURE__*/function () {
         if (!(0, _lodash["default"])(error.message)) {
           _this2.authForm.loginForm.setFormError(error.message, error.code || false);
         }
-        _this2.reCaptcha.grecaptcha.reset();
+        if (!(0, _lodash["default"])(_this2.reCaptcha) && _this2.reCaptcha.enabled && !(0, _lodash["default"])(_this2.reCaptcha.grecaptcha)) {
+          _this2.reCaptcha.grecaptcha.reset();
+        }
       });
     }
   }, {
@@ -2001,7 +2027,9 @@ var Authentication = /*#__PURE__*/function () {
         if (!(0, _lodash["default"])(error.message)) {
           _this3.authForm.signUpForm.setFormError(error.message, error.code || false);
         }
-        _this3.reCaptcha.grecaptcha.reset();
+        if (!(0, _lodash["default"])(_this3.reCaptcha) && _this3.reCaptcha.enabled && !(0, _lodash["default"])(_this3.reCaptcha.grecaptcha)) {
+          _this3.reCaptcha.grecaptcha.reset();
+        }
       });
     }
   }, {
@@ -2496,12 +2524,13 @@ var Authentication = /*#__PURE__*/function () {
     key: "resetAuthProcess",
     value: function resetAuthProcess() {
       var reset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+      this.firebase.isGoogleOneTapShow = !this.isAuthenticated();
       this.firebase.reset();
       this.firebase.showAuthForm();
       if (this.firebase.genuineForm === false && reset) {
         this.authForm.reset();
       }
-      if (this.reCaptcha.enabled) {
+      if (!(0, _lodash["default"])(this.reCaptcha) && this.reCaptcha.enabled && !(0, _lodash["default"])(this.reCaptcha.grecaptcha)) {
         this.reCaptcha.grecaptcha.reset();
       }
     }
@@ -2536,7 +2565,9 @@ var Authentication = /*#__PURE__*/function () {
             case 12:
               if (this.reCaptcha.loaded) {
                 this.resetAuthProcess();
-                this.reCaptcha.grecaptcha.reset();
+                if (!(0, _lodash["default"])(this.reCaptcha) && this.reCaptcha.enabled && !(0, _lodash["default"])(this.reCaptcha.grecaptcha)) {
+                  this.reCaptcha.grecaptcha.reset();
+                }
                 if ((0, _classPrivateFieldGet13["default"])(this, _options).firebase.genuineForm !== false) {
                   this.reCaptcha.initCaptchaProcess();
                 }
@@ -2833,6 +2864,7 @@ var Authentication = /*#__PURE__*/function () {
           }
         }
         this.render();
+        this.firebase.isGoogleOneTapShow = !this.isAuthenticated();
         this.firebase.init();
         if (this.authForm) {
           this.authForm.render();
@@ -3535,7 +3567,6 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports["default"] = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(8047));
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(366));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(7240));
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(3298));
 var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
@@ -3544,8 +3575,6 @@ var _classPrivateFieldSet2 = _interopRequireDefault(__webpack_require__(8478));
 var _sdk = _interopRequireDefault(__webpack_require__(4753));
 var _events2 = _interopRequireDefault(__webpack_require__(9889));
 var _eventsName = __webpack_require__(6073);
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
 function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
 function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
@@ -3694,31 +3723,18 @@ var Content = /*#__PURE__*/function () {
       return this.sdk.client.get({
         path: "/user/content-access-details/".concat(contentId)
       }).then(function (response) {
-        var _response$content_ter, _response$content_ter2, _response$content_typ, _response$content_typ2;
-        _this2.accessCount = 0;
-        _this2.accessCountLimit = 0;
-        var checkDone = false;
-        _this2.accessDetails = _objectSpread({}, response || false);
-        if (response !== null && response !== void 0 && (_response$content_ter = response.content_terms) !== null && _response$content_ter !== void 0 && (_response$content_ter2 = _response$content_ter.items) !== null && _response$content_ter2 !== void 0 && _response$content_ter2.length) {
-          if (!response.content_terms.exclude) {
-            _this2.accessCount = response.content_terms.usedLimitInPeriod;
-            _this2.accessCountLimit = response.content_terms.accessLimit;
-          } else {
-            checkDone = true;
-          }
-        }
-        if (response !== null && response !== void 0 && (_response$content_typ = response.content_types) !== null && _response$content_typ !== void 0 && (_response$content_typ2 = _response$content_typ.items) !== null && _response$content_typ2 !== void 0 && _response$content_typ2.length && !checkDone) {
-          if (!response.content_types.exclude) {
-            _this2.accessCount = response.content_terms.usedLimitInPeriod < _this2.accessCount ? response.content_terms.usedLimitInPeriod : _this2.accessCount;
-            _this2.accessCountLimit = response.content_terms.accessLimit < _this2.accessCountLimit ? response.content_terms.accessLimit : _this2.accessCountLimit;
-          } else {
-            _this2.accessCount = 0;
-            _this2.accessCountLimit = 0;
-          }
+        if (response) {
+          var terms = response.content_terms;
+          _this2.accessCount = terms.usedLimitInPeriod;
+          _this2.accessCountLimit = terms.accessLimit;
+          return {
+            accessCount: _this2.accessCount,
+            accessCountLimit: _this2.accessCountLimit
+          };
         }
         return {
-          accessCount: _this2.accessCount,
-          accessCountLimit: _this2.accessCountLimit
+          accessCount: 0,
+          accessCountLimit: 0
         };
       })["catch"](function (error) {
         return error;
@@ -4912,6 +4928,7 @@ var AuthForm = /*#__PURE__*/function () {
     // });
     var _ref = options.customizeAuthForms || {},
       messages = _ref.messages,
+      fieldLabels = _ref.fieldLabels,
       signIn = _ref.signIn,
       signUp = _ref.signUp,
       emailLink = _ref.emailLink,
@@ -4923,6 +4940,10 @@ var AuthForm = /*#__PURE__*/function () {
     if (!(0, _lodash["default"])(signIn) && !(0, _lodash["default"])(signIn.messages)) {
       signInMessages = signIn.messages;
     }
+    var signInFieldLabels = {};
+    if (!(0, _lodash["default"])(signIn) && !(0, _lodash["default"])(signIn.fieldLabels)) {
+      signInFieldLabels = signIn.fieldLabels;
+    }
     this.loginForm = new _LoginForm.LoginForm(selector, _objectSpread(_objectSpread({
       className: 'wk-form-login',
       cancelBtn: options.triggerButton !== false,
@@ -4930,6 +4951,7 @@ var AuthForm = /*#__PURE__*/function () {
       passwordSignInIgnoreValidation: options.passwordSignInIgnoreValidation || false
     }, signIn || {}), {}, {
       messages: _objectSpread(_objectSpread({}, messages || {}), signInMessages),
+      fieldLabels: _objectSpread(_objectSpread({}, fieldLabels || {}), signInFieldLabels),
       onSubmit: function onSubmit(data) {
         if (options.onLogin) {
           options.onLogin(data);
@@ -4958,6 +4980,10 @@ var AuthForm = /*#__PURE__*/function () {
     if (!(0, _lodash["default"])(signUp) && !(0, _lodash["default"])(signUp.messages)) {
       signUpMessages = signUp.messages;
     }
+    var signUpFieldLabels = {};
+    if (!(0, _lodash["default"])(signUp) && !(0, _lodash["default"])(signUp.fieldLabels)) {
+      signUpFieldLabels = signUp.fieldLabels;
+    }
     if (options.signUp === true) {
       this.signUpForm = new _SignUpForm.SignupForm(selector, _objectSpread(_objectSpread({
         className: 'wk-form-signup',
@@ -4965,6 +4991,7 @@ var AuthForm = /*#__PURE__*/function () {
         termsOfService: options.termsOfService
       }, signUp || {}), {}, {
         messages: _objectSpread(_objectSpread({}, messages || {}), signUpMessages),
+        fieldLabels: _objectSpread(_objectSpread({}, fieldLabels || {}), signUpFieldLabels),
         onSubmit: function onSubmit(data) {
           if (options.onSignUp) {
             options.onSignUp(data);
@@ -4991,12 +5018,17 @@ var AuthForm = /*#__PURE__*/function () {
     if (!(0, _lodash["default"])(emailLink) && !(0, _lodash["default"])(emailLink.messages)) {
       emailLinkMessages = emailLink.messages;
     }
+    var emailLinkFieldLabels = {};
+    if (!(0, _lodash["default"])(emailLink) && !(0, _lodash["default"])(emailLink.fieldLabels)) {
+      emailLinkFieldLabels = emailLink.fieldLabels;
+    }
     this.emailLinkForm = new _EmailLinkForm.EmailLinkForm(selector, _objectSpread(_objectSpread({
       className: 'wk-form-email-link',
       cancelBtn: options.triggerButton !== false,
       signUp: (_options$signUp2 = options.signUp) !== null && _options$signUp2 !== void 0 ? _options$signUp2 : true
     }, emailLink || {}), {}, {
       messages: _objectSpread(_objectSpread({}, messages || {}), emailLinkMessages),
+      fieldLabels: _objectSpread(_objectSpread({}, fieldLabels || {}), emailLinkFieldLabels),
       onSubmit: function onSubmit(data) {
         if (options.onGetEmailLink) {
           options.onGetEmailLink(data);
@@ -5034,10 +5066,15 @@ var AuthForm = /*#__PURE__*/function () {
     if (!(0, _lodash["default"])(forgotPassword) && !(0, _lodash["default"])(forgotPassword.messages)) {
       forgotPasswordMessages = forgotPassword.messages;
     }
+    var forgotPasswordFieldLabels = {};
+    if (!(0, _lodash["default"])(forgotPassword) && !(0, _lodash["default"])(forgotPassword.fieldLabels)) {
+      forgotPasswordFieldLabels = forgotPassword.fieldLabels;
+    }
     this.forgotPasswordForm = new _ForgotPasswordForm.ForgotPasswordForm(selector, _objectSpread(_objectSpread({
       className: 'wk-form-forgot-password'
     }, forgotPassword || {}), {}, {
       messages: _objectSpread(_objectSpread({}, messages || {}), forgotPasswordMessages),
+      fieldLabels: _objectSpread(_objectSpread({}, fieldLabels || {}), forgotPasswordFieldLabels),
       onSubmit: function onSubmit(data) {
         if (options.onPasswordForgot) {
           options.onPasswordForgot(data);
@@ -5058,10 +5095,15 @@ var AuthForm = /*#__PURE__*/function () {
     if (!(0, _lodash["default"])(resetPassword) && !(0, _lodash["default"])(resetPassword.messages)) {
       resetPasswordMessages = resetPassword.messages;
     }
+    var resetPasswordFieldLabels = {};
+    if (!(0, _lodash["default"])(resetPassword) && !(0, _lodash["default"])(resetPassword.fieldLabels)) {
+      resetPasswordFieldLabels = resetPassword.fieldLabels;
+    }
     this.resetPasswordForm = new _ResetPasswordForm.ResetPasswordForm(selector, _objectSpread(_objectSpread({
       className: 'wk-form-reset-password'
     }, resetPassword || {}), {}, {
       messages: _objectSpread(_objectSpread({}, messages || {}), resetPasswordMessages),
+      fieldLabels: _objectSpread(_objectSpread({}, fieldLabels || {}), resetPasswordFieldLabels),
       onSubmit: function onSubmit(data) {
         if (options.onPasswordReset) {
           options.onPasswordReset(data);
@@ -5437,22 +5479,28 @@ var EmailLinkForm = /*#__PURE__*/function (_Form) {
     (0, _classCallCheck2["default"])(this, EmailLinkForm);
     _this = _super.call(this, targetElementSelector, options);
     _this.options = options;
-    _this.options.title = options.title || 'Sign in with email';
-    _this.options.footer = _this.getFormFooter() || options.footer;
+    var title = options.title,
+      footer = options.footer,
+      messages = options.messages,
+      onCancel = options.onCancel,
+      fieldLabels = options.fieldLabels;
+    var fieldLabelEmail = fieldLabels.email;
+    _this.options.title = title || 'Sign in with email';
+    _this.options.footer = _this.getFormFooter() || footer;
     _this.emailField = new _field.FormField({
       name: 'wk-fb-email',
       dataSlug: 'email',
-      label: 'Email',
+      label: fieldLabelEmail || 'Email',
       type: 'email',
-      messages: options.messages || {},
+      messages: messages || {},
       onEnter: function onEnter() {
         _this.submitForm();
       }
     });
     _this.fields = [_this.emailField];
     _this.init();
-    if (options.onCancel) {
-      _this.cancelBtn.addEventListener('click', options.onCancel.bind((0, _assertThisInitialized2["default"])(_this)));
+    if (onCancel) {
+      _this.cancelBtn.addEventListener('click', onCancel.bind((0, _assertThisInitialized2["default"])(_this)));
     }
     return _this;
   }
@@ -5525,14 +5573,19 @@ var ForgotPasswordForm = /*#__PURE__*/function (_Form) {
     (0, _classCallCheck2["default"])(this, ForgotPasswordForm);
     _this = _super.call(this, targetElementSelector, options);
     _this.options = options;
-    _this.options.title = options.title || 'Reset Password';
-    _this.options.footer = _this.getFormFooter() || options.footer;
+    var title = options.title,
+      footer = options.footer,
+      messages = options.messages,
+      fieldLabels = options.fieldLabels;
+    var fieldLabelEmail = fieldLabels.email;
+    _this.options.title = title || 'Reset Password';
+    _this.options.footer = _this.getFormFooter() || footer;
     _this.emailField = new _field.FormField({
       name: 'wk-fb-email',
       dataSlug: 'email',
-      label: 'Email',
+      label: fieldLabelEmail || 'Email',
       type: 'email',
-      messages: options.messages || {},
+      messages: messages || {},
       onEnter: function onEnter() {
         _this.submitForm();
       }
@@ -5590,14 +5643,22 @@ var LoginForm = /*#__PURE__*/function (_Form) {
     (0, _classCallCheck2["default"])(this, LoginForm);
     _this = _super.call(this, targetElementSelector, options);
     _this.options = options;
-    _this.options.title = options.title || 'Sign in with email';
-    _this.options.footer = _this.getFormFooter() || options.footer;
+    var title = options.title,
+      footer = options.footer,
+      messages = options.messages,
+      passwordSignInIgnoreValidation = options.passwordSignInIgnoreValidation,
+      onCancel = options.onCancel,
+      fieldLabels = options.fieldLabels;
+    var fieldLabelEmail = fieldLabels.email,
+      fieldLabelPassword = fieldLabels.password;
+    _this.options.title = title || 'Sign in with email';
+    _this.options.footer = _this.getFormFooter() || footer;
     _this.emailField = new _field.FormField({
       dataSlug: 'email',
       name: 'wk-fb-email',
-      label: 'Email',
+      label: fieldLabelEmail || 'Email',
       type: 'email',
-      messages: options.messages || {},
+      messages: messages || {},
       onEnter: function onEnter() {
         _this.passwordField.focus();
       }
@@ -5605,19 +5666,19 @@ var LoginForm = /*#__PURE__*/function (_Form) {
     _this.passwordField = new _PasswordField.PasswordField({
       dataSlug: 'password',
       name: 'wk-fb-password',
-      ignoreValidation: options.passwordSignInIgnoreValidation || false,
+      ignoreValidation: passwordSignInIgnoreValidation || false,
       testStrength: false,
-      label: 'Password',
+      label: fieldLabelPassword || 'Password',
       type: 'password',
-      messages: options.messages || {},
+      messages: messages || {},
       onEnter: function onEnter() {
         _this.submitForm();
       }
     });
     _this.fields = [_this.emailField, _this.passwordField];
     _this.init();
-    if (options.onCancel) {
-      _this.cancelBtn.addEventListener('click', options.onCancel.bind((0, _assertThisInitialized2["default"])(_this)));
+    if (onCancel) {
+      _this.cancelBtn.addEventListener('click', onCancel.bind((0, _assertThisInitialized2["default"])(_this)));
     }
     return _this;
   }
@@ -5698,17 +5759,22 @@ var ResetPasswordForm = /*#__PURE__*/function (_Form) {
     (0, _classCallCheck2["default"])(this, ResetPasswordForm);
     _this = _super.call(this, targetElementSelector, options);
     _this.options = options;
-    _this.options.title = options.title || 'Reset Password';
-    _this.options.footer = _this.getFormFooter() || options.footer;
+    var title = options.title,
+      footer = options.footer,
+      messages = options.messages,
+      fieldLabels = options.fieldLabels;
+    var fieldLabelPassword = fieldLabels.password;
+    _this.options.title = title || 'Reset Password';
+    _this.options.footer = _this.getFormFooter() || footer;
     _this.newPasswordField = new _PasswordField.PasswordField({
       dataSlug: 'new_password',
       name: 'wk-new-password',
       ignoreValidation: false,
       testStrength: true,
       passwordHint: true,
-      label: 'New Password',
+      label: fieldLabelPassword || 'New Password',
       type: 'password',
-      messages: options.messages || {},
+      messages: messages || {},
       onEnter: function onEnter() {
         _this.submitForm();
       }
@@ -5765,27 +5831,33 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
 function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
-var _defaultTermsOfServiceOption = /*#__PURE__*/new WeakSet();
 var _isTosEnabled = /*#__PURE__*/new WeakSet();
 var SignupForm = /*#__PURE__*/function (_Form) {
   (0, _inherits2["default"])(SignupForm, _Form);
   var _super = _createSuper(SignupForm);
-  function SignupForm(targetElementSelector, _options) {
+  function SignupForm(targetElementSelector, options) {
     var _this;
     (0, _classCallCheck2["default"])(this, SignupForm);
-    _this = _super.call(this, targetElementSelector, _options);
+    _this = _super.call(this, targetElementSelector, options);
     _classPrivateMethodInitSpec((0, _assertThisInitialized2["default"])(_this), _isTosEnabled);
-    _classPrivateMethodInitSpec((0, _assertThisInitialized2["default"])(_this), _defaultTermsOfServiceOption);
-    _this.options = _options;
-    _this.options.title = _options.title || 'Sign Up';
-    _this.options.footer = _this.getFormFooter() || _options.footer;
-    _this.options.termsOfService.termsOfService = _classPrivateMethodGet((0, _assertThisInitialized2["default"])(_this), _defaultTermsOfServiceOption, _defaultTermsOfServiceOption2).call((0, _assertThisInitialized2["default"])(_this), _this.options.termsOfService.termsOfService);
+    _this.options = options;
+    var title = options.title,
+      footer = options.footer,
+      termsOfService = options.termsOfService,
+      messages = options.messages,
+      onCancel = options.onCancel,
+      fieldLabels = options.fieldLabels;
+    var fieldLabelEmail = fieldLabels.email,
+      fieldLabelName = fieldLabels.name,
+      fieldLabelPassword = fieldLabels.password;
+    _this.options.title = title || 'Sign Up';
+    _this.options.footer = _this.getFormFooter() || footer;
     _this.emailField = new _field.FormField({
       dataSlug: 'email',
       name: 'wk-fb-email',
-      label: 'Email',
+      label: fieldLabelEmail || 'Email',
       type: 'email',
-      messages: _options.messages || {},
+      messages: messages || {},
       onEnter: function onEnter() {
         _this.nameField.focus();
       }
@@ -5793,9 +5865,9 @@ var SignupForm = /*#__PURE__*/function (_Form) {
     _this.nameField = new _field.FormField({
       dataSlug: 'name',
       name: 'wk-fb-name',
-      label: 'Name',
+      label: fieldLabelName || 'Name',
       type: 'text',
-      messages: _options.messages || {},
+      messages: messages || {},
       onEnter: function onEnter() {
         _this.passwordField.focus();
       }
@@ -5806,24 +5878,25 @@ var SignupForm = /*#__PURE__*/function (_Form) {
       ignoreValidation: false,
       testStrength: true,
       passwordHint: true,
-      label: 'Password',
+      label: fieldLabelPassword || 'Password',
       type: 'password',
-      messages: _options.messages || {},
+      messages: messages || {},
       onEnter: function onEnter() {
         _this.submitForm();
       }
     });
-    var _ref = _options.messages || {},
+    var _ref = messages || {},
       tosRequired = _ref.tosRequired,
       required = _ref.required;
-    if (_classPrivateMethodGet((0, _assertThisInitialized2["default"])(_this), _isTosEnabled, _isTosEnabled2).call((0, _assertThisInitialized2["default"])(_this), _options)) {
+    if (_classPrivateMethodGet((0, _assertThisInitialized2["default"])(_this), _isTosEnabled, _isTosEnabled2).call((0, _assertThisInitialized2["default"])(_this), termsOfService)) {
       _this.tosField = new _CheckBoxField.CheckBoxField({
         dataSlug: 'agreement',
         name: 'wk-fb-agreement',
+        id: 'wk-fb-agreement',
         required: true,
-        label: _this.getTosAcceptLabel(_options.termsOfService),
+        label: _this.getTosAcceptLabel(termsOfService),
         type: 'checkbox',
-        messages: _objectSpread(_objectSpread({}, _options.messages || {}), {
+        messages: _objectSpread(_objectSpread({}, messages || {}), {
           required: tosRequired || required || false
         })
       });
@@ -5833,8 +5906,8 @@ var SignupForm = /*#__PURE__*/function (_Form) {
       _this.fields.push(_this.tosField);
     }
     _this.init();
-    if (_options.onCancel) {
-      _this.cancelBtn.addEventListener('click', _options.onCancel.bind((0, _assertThisInitialized2["default"])(_this)));
+    if (onCancel) {
+      _this.cancelBtn.addEventListener('click', onCancel.bind((0, _assertThisInitialized2["default"])(_this)));
     }
     return _this;
   }
@@ -5888,17 +5961,11 @@ var SignupForm = /*#__PURE__*/function (_Form) {
   return SignupForm;
 }(_index.Form);
 exports.SignupForm = SignupForm;
-function _defaultTermsOfServiceOption2(termsOfService) {
-  if (typeof termsOfService === "undefined" || typeof termsOfService !== "string" && typeof termsOfService !== "boolean") {
-    termsOfService = true;
-  }
-  return termsOfService;
-}
-function _isTosEnabled2(options) {
-  if (!options.termsOfService.termsOfService) {
+function _isTosEnabled2(termsOptions) {
+  if (!termsOptions.termsOfService) {
     return false;
   }
-  return !!options.termsOfService.termsOfService && typeof options.termsOfService.termsOfService === "string" || !!options.termsOfService.tosURL || !!options.termsOfService.privacyPolicyURL;
+  return !!termsOptions.termsOfService && typeof termsOptions.termsOfService === "string" || !!termsOptions.tosURL || !!termsOptions.privacyPolicyURL;
 }
 
 /***/ }),
@@ -5919,6 +5986,7 @@ var _createClass2 = _interopRequireDefault(__webpack_require__(1795));
 var _DOM = __webpack_require__(2909);
 var _lodash = _interopRequireDefault(__webpack_require__(5828));
 var _lodash2 = _interopRequireDefault(__webpack_require__(4174));
+var _helper = __webpack_require__(5639);
 var Form = /*#__PURE__*/function () {
   function Form(targetElementSelector, options) {
     (0, _classCallCheck2["default"])(this, Form);
@@ -5958,14 +6026,17 @@ var Form = /*#__PURE__*/function () {
   }, {
     key: "setFormError",
     value: function setFormError(error, errorCode) {
+      var _parseErrorMessage = (0, _helper.parseErrorMessage)(error, errorCode),
+        erMessage = _parseErrorMessage.erMessage,
+        erCcode = _parseErrorMessage.erCcode;
       var errorMessage = false;
-      if (!(0, _lodash["default"])(this.options.messages)) {
-        errorMessage = (0, _lodash2["default"])(this.options.messages, errorCode, false);
+      if (!(0, _lodash["default"])(this.options.messages) && !(0, _lodash["default"])(erCcode)) {
+        errorMessage = (0, _lodash2["default"])(this.options.messages, erCcode, false);
       }
-      this.formErrorPlaceholder.innerText = errorMessage || error;
+      this.formErrorPlaceholder.innerText = errorMessage || erMessage;
       this.formErrorPlaceholder.classList.add('wk-form__error--show');
-      if (!(0, _lodash["default"])(errorCode)) {
-        this.formErrorPlaceholder.dataset.errorCode = errorCode;
+      if (!(0, _lodash["default"])(erCcode)) {
+        this.formErrorPlaceholder.dataset.errorCode = erCcode;
       }
     }
   }, {
@@ -6461,11 +6532,6 @@ var Modal = /*#__PURE__*/function () {
       if ((_this$options = this.options) !== null && _this$options !== void 0 && _this$options.onReady) {
         this.options.onReady(this);
       }
-    }
-  }, {
-    key: "setError",
-    value: function setError(error) {
-      this.modalContent.insertAdjacentHTML('afterbegin', "<div class=\"wallkit-modal-error\">".concat(error, "</div>"));
     }
   }, {
     key: "init",
@@ -7094,6 +7160,50 @@ exports.isCrawler = isCrawler;
 
 /***/ }),
 
+/***/ 5639:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(5656);
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.parseErrorMessage = exports.isStringJson = void 0;
+var _constants = __webpack_require__(9066);
+var _lodash = _interopRequireDefault(__webpack_require__(5828));
+var isStringJson = function isStringJson(str) {
+  try {
+    JSON.parse(str);
+  } catch (e) {
+    return false;
+  }
+  return true;
+};
+exports.isStringJson = isStringJson;
+var parseErrorMessage = function parseErrorMessage(errorMessage, errorCode) {
+  var erMessage = _constants.AUTH_DEFAULT_ERROR_MESSAGE;
+  var erCode = _constants.AUTH_DEFAULT_ERROR_CODE;
+  if (isStringJson(errorMessage)) {
+    var errorObj = JSON.parse(errorMessage);
+    if (!(0, _lodash["default"])(errorObj.error)) {
+      erMessage = _constants.ERROR_MESSAGES[errorObj.error.message] || errorObj.error.message;
+      erCode = errorObj.error.code || erCode;
+    }
+  } else {
+    erMessage = errorMessage;
+    erCode = errorCode || erCode;
+  }
+  return {
+    erMessage: erMessage,
+    erCode: erCode
+  };
+};
+exports.parseErrorMessage = parseErrorMessage;
+
+/***/ }),
+
 /***/ 1758:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
@@ -7212,7 +7322,7 @@ var _interopRequireDefault = __webpack_require__(5656);
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.resetSearchParams = exports.resetHash = exports.parseUrlToShowAuthModal = exports.parseResetPasswordOobCodeHash = exports.parseModalHashURL = exports.parseConfirmTokenHash = exports.parseAuthTokenHash = exports.parseAuthEmailLinkOobCodeHash = exports.getUrlParamByKey = exports.getParentDomain = exports.getDomainWithoutSubdomain = void 0;
+exports.resetSearchParams = exports.resetHash = exports.parseUrlToShowAuthModal = exports.parseResetPasswordOobCodeHash = exports.parseModalHashURL = exports.parseAuthTokenHash = exports.parseAuthEmailLinkOobCodeHash = exports.getUrlParamByKey = exports.getParentDomain = exports.getDomainWithoutSubdomain = void 0;
 var _typeof2 = _interopRequireDefault(__webpack_require__(2125));
 var _lodash = _interopRequireDefault(__webpack_require__(5828));
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -7251,18 +7361,6 @@ var parseAuthTokenHash = function parseAuthTokenHash() {
   return null;
 };
 exports.parseAuthTokenHash = parseAuthTokenHash;
-var parseConfirmTokenHash = function parseConfirmTokenHash() {
-  var hash = decodeURIComponent(window.location.hash);
-  if (hash !== null && hash !== void 0 && hash.includes('wk-confirm-email')) {
-    var splitHash = hash.split('=');
-    var token = splitHash === null || splitHash === void 0 ? void 0 : splitHash[1];
-    if (token) {
-      return token;
-    }
-  }
-  return null;
-};
-exports.parseConfirmTokenHash = parseConfirmTokenHash;
 var resetHash = function resetHash() {
   window.location.hash = '';
   var path = window.location.href.replace('#', '');

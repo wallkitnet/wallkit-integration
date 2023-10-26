@@ -34,6 +34,8 @@ export const TRIGGER_GOOGLE_BUTTON_TITLE_SELECTOR = '#firebase-ui-placeholder .f
 export const TRIGGER_EMAIL_BUTTON_CLASS_NAME = 'wk-auth-form-button wk-auth-form-button-email';
 export const TRIGGER_EMAILLINK_BUTTON_CLASS_NAME = 'wk-auth-form-button wk-auth-form-button-emaillink';
 export const TRIGGER_BUTTON_CLASS_NAME = 'wk-auth-form-button';
+export const AUTH_DEFAULT_ERROR_MESSAGE = 'Something went wrong';
+export const AUTH_DEFAULT_ERROR_CODE = false;
 
 // Authentication
 export const WALLKIT_FIREBASE_CONFIG = {
@@ -58,3 +60,7 @@ export const WALLKIT_DEV_FIREBASE_CONFIG = {
 };
 export const WALLKIT_TOKEN_NAME = 'wk-token';
 export const FIREBASE_TOKEN_NAME = 'firebase-token';
+
+export const ERROR_MESSAGES = {
+    'INVALID_LOGIN_CREDENTIALS' : 'Invalid login credentials'
+};
