@@ -513,7 +513,16 @@ function _eventsListener2() {
               _this3.popup.resize(value.width, value.height);
             }
             break;
+          case "show-firebase-sign-in":
+            _this3.authSlug = 'sign-in';
+          case "show-firebase-sign-up":
+            if (typeof _this3.authSlug === "undefined") {
+              _this3.authSlug = 'sign-up';
+            }
           case "show-firebase-auth":
+            if (typeof _this3.authSlug === "undefined") {
+              _this3.authSlug = '';
+            }
             var redirect = value;
             _this3.popup.hide();
             _this3.events.subscribe(_eventsName.SUCCESS_AUTH, function () {
@@ -523,8 +532,9 @@ function _eventsListener2() {
             }, {
               once: true
             });
-            _this3.authentication.show();
+            _this3.authentication.show(_this3.authSlug);
             _this3.frame.openFrame('');
+            _this3.authSlug = undefined;
             break;
           case "wk-event-close-modal":
             _this3.popup.hide();
