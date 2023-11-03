@@ -9,15 +9,17 @@ export class LoginForm extends Form {
         super(targetElementSelector, options);
 
         this.options = options;
-        this.options.title = options.title || 'Sign in with email';
-        this.options.footer = this.getFormFooter() || options.footer;
+        const { title, footer, messages, passwordSignInIgnoreValidation, onCancel, fieldLabels } = options;
+        const { email: fieldLabelEmail, password: fieldLabelPassword } = fieldLabels;
+        this.options.title = title || 'Sign in with email';
+        this.options.footer = this.getFormFooter() || footer;
 
         this.emailField = new FormField({
             dataSlug: 'email',
             name: 'wk-fb-email',
-            label: 'Email',
+            label: fieldLabelEmail || 'Email',
             type: 'email',
-            messages: options.messages || {},
+            messages: messages || {},
             onEnter: () => {
               this.passwordField.focus();
             }
@@ -26,11 +28,11 @@ export class LoginForm extends Form {
         this.passwordField = new PasswordField({
             dataSlug: 'password',
             name: 'wk-fb-password',
-            ignoreValidation: options.passwordSignInIgnoreValidation || false,
+            ignoreValidation: passwordSignInIgnoreValidation || false,
             testStrength: false,
-            label: 'Password',
+            label: fieldLabelPassword || 'Password',
             type: 'password',
-            messages: options.messages || {},
+            messages: messages || {},
             onEnter: () => {
               this.submitForm();
             }
@@ -43,8 +45,8 @@ export class LoginForm extends Form {
 
         this.init();
 
-        if (options.onCancel) {
-            this.cancelBtn.addEventListener('click', options.onCancel.bind(this));
+        if (onCancel) {
+            this.cancelBtn.addEventListener('click', onCancel.bind(this));
         }
     }
 

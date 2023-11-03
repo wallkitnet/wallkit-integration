@@ -8,15 +8,17 @@ export class ForgotPasswordForm extends Form {
         super(targetElementSelector, options);
 
         this.options = options;
-        this.options.title = options.title || 'Reset Password';
-        this.options.footer = this.getFormFooter() || options.footer;
+        const { title, footer, messages, fieldLabels } = options;
+        const { email: fieldLabelEmail } = fieldLabels;
+        this.options.title = title || 'Reset Password';
+        this.options.footer = this.getFormFooter() || footer;
 
         this.emailField = new FormField({
             name: 'wk-fb-email',
             dataSlug: 'email',
-            label: 'Email',
+            label: fieldLabelEmail || 'Email',
             type: 'email',
-            messages: options.messages || {},
+            messages: messages || {},
             onEnter: () => {
               this.submitForm();
             }

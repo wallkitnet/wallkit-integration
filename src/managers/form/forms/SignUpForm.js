@@ -10,28 +10,29 @@ export class SignupForm extends Form {
         super(targetElementSelector, options);
 
         this.options = options;
-        this.options.title = options.title || 'Sign Up';
-        this.options.footer = this.getFormFooter() || options.footer;
-        this.options.termsOfService.termsOfService = this.#defaultTermsOfServiceOption(this.options.termsOfService.termsOfService);
+        const { title, footer, termsOfService, messages, onCancel, fieldLabels } = options;
+        const { email: fieldLabelEmail, name: fieldLabelName, password: fieldLabelPassword } = fieldLabels;
+        this.options.title = title || 'Sign Up';
+        this.options.footer = this.getFormFooter() || footer;
 
         this.emailField = new FormField({
             dataSlug: 'email',
             name: 'wk-fb-email',
-            label: 'Email',
+            label: fieldLabelEmail || 'Email',
             type: 'email',
-            messages: options.messages || {},
+            messages: messages || {},
             onEnter: () => {
-              this.nameField.focus();
+                this.nameField.focus();
             }
         });
         this.nameField = new FormField({
             dataSlug: 'name',
             name: 'wk-fb-name',
-            label: 'Name',
+            label: fieldLabelName || 'Name',
             type: 'text',
-            messages: options.messages || {},
+            messages: messages || {},
             onEnter: () => {
-              this.passwordField.focus();
+                this.passwordField.focus();
             }
         });
         this.passwordField = new PasswordField({
@@ -40,27 +41,27 @@ export class SignupForm extends Form {
             ignoreValidation: false,
             testStrength: true,
             passwordHint: true,
-            label: 'Password',
+            label: fieldLabelPassword || 'Password',
             type: 'password',
-            messages: options.messages || {},
+            messages: messages || {},
             onEnter: () => {
-              this.submitForm();
+                this.submitForm();
             }
         });
-        const {tosRequired, required} = options.messages || {};
-        if (this.#isTosEnabled(options)) {
-          this.tosField = new CheckBoxField({
-            dataSlug: 'agreement',
-            name: 'wk-fb-agreement',
-            id: 'wk-fb-agreement',
-            required: true,
-            label: this.getTosAcceptLabel(options.termsOfService),
-            type: 'checkbox',
-            messages: {
-                ...(options.messages || {}),
-                ...{required: tosRequired || required || false}
+        const {tosRequired, required} = messages || {};
+        if (this.#isTosEnabled(termsOfService)) {
+            this.tosField = new CheckBoxField({
+                dataSlug: 'agreement',
+                name: 'wk-fb-agreement',
+                id: 'wk-fb-agreement',
+                required: true,
+                label: this.getTosAcceptLabel(termsOfService),
+                type: 'checkbox',
+                messages: {
+                    ...(messages || {}),
+                    ...{required: tosRequired || required || false}
                 },
-          });
+            });
         }
 
         this.fields = [
@@ -70,22 +71,14 @@ export class SignupForm extends Form {
         ];
 
         if (this.tosField) {
-          this.fields.push(this.tosField);
+            this.fields.push(this.tosField);
         }
 
         this.init();
 
-        if (options.onCancel) {
-            this.cancelBtn.addEventListener('click', options.onCancel.bind(this));
+        if (onCancel) {
+            this.cancelBtn.addEventListener('click', onCancel.bind(this));
         }
-    }
-
-    #defaultTermsOfServiceOption(termsOfService) {
-        if (typeof termsOfService === "undefined" ||
-            ( typeof termsOfService !== "string" && typeof termsOfService !== "boolean" ) ) {
-            termsOfService = true
-        }
-        return termsOfService;
     }
 
     getFormFooter () {
@@ -115,14 +108,14 @@ export class SignupForm extends Form {
         return formFooter;
     }
 
-    #isTosEnabled (options) {
-      if (!options.termsOfService.termsOfService) {
+    #isTosEnabled (termsOptions) {
+      if (!termsOptions.termsOfService) {
         return false;
       }
 
-      return (!!options.termsOfService.termsOfService && typeof options.termsOfService.termsOfService === "string") ||
-        !!options.termsOfService.tosURL ||
-        !!options.termsOfService.privacyPolicyURL;
+      return (!!termsOptions.termsOfService && typeof termsOptions.termsOfService === "string") ||
+        !!termsOptions.tosURL ||
+        !!termsOptions.privacyPolicyURL;
     }
 
     getTosAcceptLabel (termsOptions) {
