@@ -193,7 +193,16 @@ window.WallkitIntegration = class WallkitIntegration {
 
                             break;
 
+                        case "show-firebase-sign-in":
+                            this.authSlug = 'sign-in';
+                        case "show-firebase-sign-up":
+                            if (typeof this.authSlug === "undefined") {
+                                this.authSlug = 'sign-up';
+                            }
                         case "show-firebase-auth":
+                            if (typeof this.authSlug === "undefined") {
+                                this.authSlug = '';
+                            }
                             const redirect = value;
                             this.popup.hide();
                             this.events.subscribe(SUCCESS_AUTH, () => {
@@ -201,8 +210,9 @@ window.WallkitIntegration = class WallkitIntegration {
                                     this.popup.open(redirect);
                                 }
                             }, { once: true });
-                            this.authentication.show();
+                            this.authentication.show(this.authSlug);
                             this.frame.openFrame('');
+                            this.authSlug = undefined;
                             break;
 
                         case "wk-event-close-modal" :
