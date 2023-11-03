@@ -25,12 +25,16 @@ export class AuthForm {
         // this.wrapper = createElement('div', {
         //     id: 'wk-auth-form'
         // });
-        const { messages, signIn, signUp, emailLink, forgotPassword, resetPassword } = options.customizeAuthForms || {};
+        const { messages, fieldLabels, signIn, signUp, emailLink, forgotPassword, resetPassword } = options.customizeAuthForms || {};
 
         /** LoginForm */
         let signInMessages = {};
         if (!isEmpty(signIn) && !isEmpty(signIn.messages)) {
             signInMessages = signIn.messages;
+        }
+        let signInFieldLabels = {};
+        if (!isEmpty(signIn) && !isEmpty(signIn.fieldLabels)) {
+            signInFieldLabels = signIn.fieldLabels;
         }
         this.loginForm = new LoginForm(selector, {
             className: 'wk-form-login',
@@ -41,6 +45,10 @@ export class AuthForm {
             messages: {
                 ...(messages || {}),
                 ...signInMessages
+            },
+            fieldLabels: {
+                ...(fieldLabels || {}),
+                ...signInFieldLabels
             },
             onSubmit: (data) => {
                 if (options.onLogin) {
@@ -72,6 +80,10 @@ export class AuthForm {
         if (!isEmpty(signUp) && !isEmpty(signUp.messages)) {
             signUpMessages = signUp.messages;
         }
+        let signUpFieldLabels = {};
+        if (!isEmpty(signUp) && !isEmpty(signUp.fieldLabels)) {
+            signUpFieldLabels = signUp.fieldLabels;
+        }
         if (options.signUp === true) {
             this.signUpForm = new SignupForm(selector, {
                 className: 'wk-form-signup',
@@ -81,6 +93,10 @@ export class AuthForm {
                 messages: {
                     ...(messages || {}),
                     ...signUpMessages
+                },
+                fieldLabels: {
+                    ...(fieldLabels || {}),
+                    ...signUpFieldLabels
                 },
                 onSubmit: (data) => {
                     if (options.onSignUp) {
@@ -109,6 +125,10 @@ export class AuthForm {
         if (!isEmpty(emailLink) && !isEmpty(emailLink.messages)) {
             emailLinkMessages = emailLink.messages;
         }
+        let emailLinkFieldLabels = {};
+        if (!isEmpty(emailLink) && !isEmpty(emailLink.fieldLabels)) {
+            emailLinkFieldLabels = emailLink.fieldLabels;
+        }
         this.emailLinkForm = new EmailLinkForm(selector, {
             className: 'wk-form-email-link',
             cancelBtn: options.triggerButton !== false,
@@ -117,6 +137,10 @@ export class AuthForm {
             messages: {
                 ...(messages || {}),
                 ...emailLinkMessages
+            },
+            fieldLabels: {
+                ...(fieldLabels || {}),
+                ...emailLinkFieldLabels
             },
             onSubmit: (data) => {
                 if (options.onGetEmailLink) {
@@ -157,12 +181,20 @@ export class AuthForm {
         if (!isEmpty(forgotPassword) && !isEmpty(forgotPassword.messages)) {
             forgotPasswordMessages = forgotPassword.messages;
         }
+        let forgotPasswordFieldLabels = {};
+        if (!isEmpty(forgotPassword) && !isEmpty(forgotPassword.fieldLabels)) {
+            forgotPasswordFieldLabels = forgotPassword.fieldLabels;
+        }
         this.forgotPasswordForm = new ForgotPasswordForm(selector, {
             className: 'wk-form-forgot-password',
             ...(forgotPassword || {}),
             messages: {
                 ...(messages || {}),
                 ...forgotPasswordMessages
+            },
+            fieldLabels: {
+                ...(fieldLabels || {}),
+                ...forgotPasswordFieldLabels
             },
             onSubmit: (data) => {
                 if (options.onPasswordForgot) {
@@ -186,12 +218,20 @@ export class AuthForm {
         if (!isEmpty(resetPassword) && !isEmpty(resetPassword.messages)) {
             resetPasswordMessages = resetPassword.messages;
         }
+        let resetPasswordFieldLabels = {};
+        if (!isEmpty(resetPassword) && !isEmpty(resetPassword.fieldLabels)) {
+            resetPasswordFieldLabels = resetPassword.fieldLabels;
+        }
         this.resetPasswordForm = new ResetPasswordForm(selector, {
             className: 'wk-form-reset-password',
             ...(resetPassword || {}),
             messages: {
                 ...(messages || {}),
                 ...resetPasswordMessages
+            },
+            fieldLabels: {
+                ...(fieldLabels || {}),
+                ...resetPasswordFieldLabels
             },
             onSubmit: (data) => {
                 if (options.onPasswordReset) {
