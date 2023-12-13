@@ -467,6 +467,10 @@ export default class Authentication {
 
             } else if (!this.reCaptcha.loaded && this.reCaptcha.enabled) {
 
+              if (this.isAuthenticated()) {
+                this.events.notify(EventsNames.local.FIREBASE_READY, true);
+              }
+
               this.events.subscribe(EventsNames.local.RECAPTCHA_LOADED, () => {
                 this.reCaptcha.initCaptchaProcess().then(() => {
                     this.events.notify(EventsNames.local.FIREBASE_READY, true);
