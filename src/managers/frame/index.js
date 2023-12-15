@@ -40,7 +40,8 @@ export default class Frame {
                 allowtransparency: 'true',
                 frameborder: '0',
                 width: WALLKIT_MODAL_MIN_WIDTH,
-                height: WALLKIT_MODAL_MIN_HEIGHT
+                height: WALLKIT_MODAL_MIN_HEIGHT,
+                allow: 'payment *'
             }
         });
         this.frameElement.setAttribute("src", this.getFrameURL);
