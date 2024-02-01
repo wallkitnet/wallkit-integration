@@ -2,6 +2,7 @@ import { createElement } from "../../utils/DOM";
 import isEmpty from "lodash.isempty";
 import get from 'lodash.get';
 import {parseErrorMessage} from "../../utils/helper";
+import debug from "../../utils/debug";
 
 export class Form {
     constructor(targetElementSelector, options) {
@@ -34,7 +35,7 @@ export class Form {
                 placeholderElement.appendChild(this.getFormElement());
             }
         } catch (e) {
-            console.log('FORM RENDER ERROR:', e);
+            debug.log('FORM RENDER ERROR:', e);
         }
     }
 

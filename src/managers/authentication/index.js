@@ -28,6 +28,7 @@ import {
     parseCustomTokenHash, getUrlParamByKey
 } from "../../utils/url";
 import isEmpty from "lodash.isempty";
+import debug from "../../utils/debug";
 
 export default class Authentication {
     #options;
@@ -155,7 +156,7 @@ export default class Authentication {
         this.reCaptcha.grecaptcha.execute().then(() => {
           this.modal.toggleLoader(true);
         }).catch((error) => {
-          console.log('EXECUTE RECAPTCHA ERROR:', error);
+          debug.log('EXECUTE RECAPTCHA ERROR:', error);
         });
       })
     }
@@ -358,7 +359,7 @@ export default class Authentication {
                 this.sdk.methods.subscribeLocalEvent('user', userEventCallback);
             });
         } catch (error) {
-            console.log('error', error);
+            debug.log('error', error);
             this.removeTokens();
             throw error;
         }
@@ -594,7 +595,7 @@ export default class Authentication {
 
         this.resetAuthProcess();
       } catch (e) {
-        console.log('ERROR:', e);
+        debug.log('ERROR:', e);
         this.resetAuthProcess();
       }
     }
@@ -630,7 +631,7 @@ export default class Authentication {
 
             return false;
         } catch (error) {
-            console.error(error);
+            debug.log(error);
             return error;
         }
     }
@@ -645,7 +646,7 @@ export default class Authentication {
 
             const userCredential = await this.firebase.authWithCustomToken(customFirebaseToken);
 
-            console.log('authWithCustomToken -> userCredential', userCredential);
+            debug.log('authWithCustomToken -> userCredential', userCredential);
 
             if (!userCredential) {
                 return false;
@@ -653,7 +654,7 @@ export default class Authentication {
 
             const firebaseToken = await userCredential.user.getIdToken();
 
-            console.log('authWithCustomToken -> firebaseToken', firebaseToken);
+            debug.log('authWithCustomToken -> firebaseToken', firebaseToken);
 
             this.updateFirebaseToken(firebaseToken);
             this.setToken(wallkitToken);
@@ -666,8 +667,8 @@ export default class Authentication {
             return true;
 
         } catch (error) {
-            console.log('authWithCustomToken -> error', error)
-            console.error(error);
+            debug.log('authWithCustomToken -> error', error)
+            debug.log(error);
             return false;
         }
     }
@@ -702,7 +703,7 @@ export default class Authentication {
             return true;
 
         } catch (error) {
-            console.error(error);
+            debug.log(error);
             return error;
         }
     }

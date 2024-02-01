@@ -1,6 +1,7 @@
 import Events from "../events";
 import EventsNames from "../events/events-name";
 import SDK from "../sdk";
+import debug from "../../utils/debug";
 
 export default class Call {
     #popup;
@@ -25,10 +26,6 @@ export default class Call {
         this.#onReady = onReady;
     }
 
-    #isDebug() {
-        return !!this.#config?.call?.debug;
-    }
-
     #initWkListeners() {
         this.#events.subscribe(EventsNames.local.FRAME_MESSAGE, ({name, _}) => {
             switch (name) {
@@ -39,21 +36,19 @@ export default class Call {
         });
 
         this.#events.subscribe(EventsNames.local.SUCCESS_AUTH, (value) => {
-            if (this.#isDebug()) {
-                console.log('subscribe ventsNames.local.SUCCESS_AUTH', value);
-            }
+            debug.log('subscribe ventsNames.local.SUCCESS_AUTH', value);
+
             this.getWallkitUserData();
         });
 
         this.#events.subscribe(EventsNames.local.LOGOUT, () => {
-          this.setAllDataWkStatusesInDOMElements();
-          this.#setDataWkHasAccessInBody(false);
+            this.setAllDataWkStatusesInDOMElements();
+            this.#setDataWkHasAccessInBody(false);
         });
 
         this.#events.subscribe(EventsNames.local.CHECK_USER_ACCESS, (value) => {
-            if (this.#isDebug()) {
-                console.log('subscribe ventsNames.local.CHECK_USER_ACCESS', value);
-            }
+            debug.log('subscribe ventsNames.local.CHECK_USER_ACCESS', value);
+
             this.#setDataWkHasAccessInBody(value);
         });
     }
@@ -69,10 +64,8 @@ export default class Call {
 
                 try {
 
-                    if (this.#isDebug()) {
-                        console.log('Click on element: ', e.target);
-                        console.log(`Does element have class ${this.#classForHandleClick}: ${e.target.classList.contains(this.#classForHandleClick)}`);
-                    }
+                    debug.log('Click on element: ', e.target);
+                    debug.log(`Does element have class ${this.#classForHandleClick}: ${e.target.classList.contains(this.#classForHandleClick)}`);
 
                     // skip if target element has no class `${this.#classForHandleClick}`
                     if (!e.target.classList.contains(`${this.#classForHandleClick}`)) return;
@@ -81,10 +74,8 @@ export default class Call {
                     const classes = Array.from(e.target.classList);
                     const slugAndParamStr = classes.find(className => className.startsWith('wk–'));
 
-                    if (this.#isDebug()) {
-                        console.log('Popup\'s slug and params: ', slugAndParamStr);
-                        console.log('Exit if slug and param === "undefined"');
-                    }
+                    debug.log('Popup\'s slug and params: ', slugAndParamStr);
+                    debug.log('Exit if slug and param === "undefined"');
 
                     // skip if we have no popup slug
                     if (typeof slugAndParamStr === "undefined") return;
@@ -93,16 +84,13 @@ export default class Call {
                     const popupSlug = slugAndParamArr[1];
                     const popupParams = slugAndParamArr[2];
 
-                    if (this.#isDebug()) {
-                        console.log('Popup\'s slug: ', popupSlug);
-                        console.log('Popup\'s params: ', popupParams);
-                    }
+                    debug.log('Popup\'s slug: ', popupSlug);
+                    debug.log('Popup\'s params: ', popupParams);
 
                     // open popup without params
                     if (typeof popupSlug !== "undefined" && typeof popupParams === "undefined") {
-                        if (this.#isDebug()) {
-                            console.log('Open popup without params. Only with slug: ', popupSlug);
-                        }
+                        debug.log('Open popup without params. Only with slug: ', popupSlug);
+
                         this.#popup.open(popupSlug);
                         e.preventDefault();
                         return;
@@ -113,10 +101,8 @@ export default class Call {
                     let key = popupParamsArr[0];
                     const value = popupParamsArr[1];
 
-                    if (this.#isDebug()) {
-                        console.log('Popup\'s param key: ', key);
-                        console.log('Popup\'s param value: ', value);
-                    }
+                    debug.log('Popup\'s param key: ', key);
+                    debug.log('Popup\'s param value: ', value);
 
                     //open popup with params
                     if (typeof key !== "undefined" && typeof value !== "undefined") {
@@ -130,15 +116,13 @@ export default class Call {
                         const params = JSON.stringify({item_type: key, item_key: value});
                         const path = `${popupSlug}?[${params}]`
 
-                        if (this.#isDebug()) {
-                            console.log('Open popup with params: ', path);
-                        }
+                        debug.log('Open popup with params: ', path);
 
                         this.#popup.open(path);
                         e.preventDefault();
                     }
                 } catch (error) {
-                    console.log('WK Call ERROR:', error);
+                    debug.log('WK Call ERROR:', error);
                 }
             }
         );
@@ -155,14 +139,12 @@ export default class Call {
     }
 
     setDataWkStatusUserInDOMElements() {
-        if (this.#isDebug()) {
-            console.log(`Set user status: "${this.getUserStatus()}" for elements:`);
-        }
+        debug.log(`Set user status: "${this.getUserStatus()}" for elements:`);
+
         // find all elements with class `${this.#classThatReactOnTheUsersStatus}`
         for (const element of document.querySelectorAll(`.${this.#classThatReactOnTheUsersStatus}`)) {
-            if (this.#isDebug()) {
-                console.log(element);
-            }
+            debug.log(element);
+
             element.dataset.wkCallStatusUser = this.getUserStatus();
         }
     }
@@ -175,14 +157,12 @@ export default class Call {
             plans = subscriptions.map((s) => s.plan.slug).join(' ');
         }
 
-        if (this.#isDebug()) {
-            console.log(`Set plans status: "${plans}" for elements:`);
-        }
+        debug.log(`Set plans status: "${plans}" for elements:`);
+
         // find all elements with class `${this.#classThatReactOnTheUsersPlans}`
         for (const element of document.querySelectorAll(`.${this.#classThatReactOnTheUsersPlans}`)) {
-            if (this.#isDebug()) {
-                console.log(element);
-            }
+            debug.log(element);
+
             element.dataset.wkCallStatusPlans = plans;
         }
     }
@@ -195,22 +175,19 @@ export default class Call {
             events = assigned_tickets.map((s) => s.ti_event.slug).join(' ');
         }
 
-        if (this.#isDebug()) {
-            console.log(`Set events status: "${events}" for elements:`);
-        }
+        debug.log(`Set events status: "${events}" for elements:`);
+
         // find all elements with class `${this.#classThatReactOnTheUsersEvents}`
         for (const element of document.querySelectorAll(`.${this.#classThatReactOnTheUsersEvents}`)) {
-            if (this.#isDebug()) {
-                console.log(element);
-            }
+            debug.log(element);
+
             element.dataset.wkCallStatusEvents = events;
         }
     }
 
     #setDataWkHasAccessInBody(value) {
-        if (this.#isDebug()) {
-            console.log(`Set user has access data "${value}" in body element.`);
-        }
+        debug.log(`Set user has access data "${value}" in body element.`);
+
         document.body.dataset.wkCallUserHasAccess = value;
     }
 
@@ -220,73 +197,74 @@ export default class Call {
                 this.setAllDataWkStatusesInDOMElements(response);
             })
             .catch((error) => {
-                console.log('WK Call ERROR:', error);
+                debug.log('WK Call ERROR:', error);
                 this.setAllDataWkStatusesInDOMElements();
             });
     }
 
     removeAllDataWkStatuses() {
-        if (this.#isDebug()) {
-            console.log(`Remove all wallkit statuses from all DOM Elements.`);
-            console.log('Remove data-wk-call-user-has-access from body element.');
-        }
+        debug.log(`Remove all wallkit statuses from all DOM Elements.`);
+        debug.log('Remove data-wk-call-user-has-access from body element.');
+
         delete document.body.dataset.wkCallUserHasAccess;
 
         for (const element of document.querySelectorAll(`.${this.#classThatReactOnTheUsersStatus}`)) {
-            if (this.#isDebug()) {
-                console.log('Remove data-wk-call-status-user from element:', element);
-            }
+            debug.log('Remove data-wk-call-status-user from element:', element);
+
             delete element.dataset.wkCallStatusUser;
         }
         for (const element of document.querySelectorAll(`.${this.#classThatReactOnTheUsersPlans}`)) {
-            if (this.#isDebug()) {
-                console.log('Remove data-wk-call-status-plans from element:', element);
-            }
+            debug.log('Remove data-wk-call-status-plans from element:', element);
+
             delete element.dataset.wkCallStatusPlans;
         }
         for (const element of document.querySelectorAll(`.${this.#classThatReactOnTheUsersEvents}`)) {
-            if (this.#isDebug()) {
-                console.log('Remove data-wk-call-status-events from element:', element);
-            }
+            debug.log('Remove data-wk-call-status-events from element:', element);
+
             delete element.dataset.wkCallStatusEvents;
         }
     }
 
     #debugUserStatus() {
-        console.log(`User status: `, this.getUserStatus());
+        debug.log(`User status: `, this.getUserStatus());
     }
 
     #debugElementsClickingOnWhichOpensPopups() {
-        console.log('Elements, clicking on which opens popups:');
+        debug.log('Elements, clicking on which opens popups:');
+
         for (const element of document.querySelectorAll(`.${this.#classForHandleClick}`)) {
-            console.log(element);
+            debug.log(element);
         }
     }
 
     #debugElementsThatReactToTheUsersStatus() {
-        console.log('Elements that react to the user\'s status:');
+        debug.log('Elements that react to the user\'s status:');
+
         for (const element of document.querySelectorAll(`.${this.#classThatReactOnTheUsersStatus}`)) {
-            console.log(element);
+            debug.log(element);
         }
     }
 
     #debugElementsThatReactToTheUsersPlans() {
-        console.log('Elements that react to the user\'s plans:');
+        debug.log('Elements that react to the user\'s plans:');
+
         for (const element of document.querySelectorAll(`.${this.#classThatReactOnTheUsersPlans}`)) {
-            console.log(element);
+            debug.log(element);
         }
     }
 
     #debugElementsThatReactToTheUsersEvents() {
-        console.log('Elements that react to the user\'s events:');
+        debug.log('Elements that react to the user\'s events:');
+
         for (const element of document.querySelectorAll(`.${this.#classThatReactOnTheUsersEvents}`)) {
-            console.log(element);
+            debug.log(element);
         }
     }
 
     async init() {
-        if (this.#isDebug()) {
-            console.log('Init Wallkit Call with config: ', this.#config?.call);
+        debug.log('Init Wallkit Call with config: ', this.#config?.call);
+
+        if (debug.getDebugMode()) {
             this.#debugUserStatus();
             this.#debugElementsClickingOnWhichOpensPopups();
             this.#debugElementsThatReactToTheUsersStatus();

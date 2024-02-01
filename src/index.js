@@ -17,9 +17,11 @@ import { isCrawler } from './utils/crawlers';
 import { ALLOWED_ORIGINS } from './configs/constants';
 import { SUCCESS_AUTH, FRAME_MESSAGE, FRAME_MODAL_CLOSED, MODAL_OPEN, READY, FIREBASE_READY } from "./managers/events/events-name";
 import { parseAuthTokenHash, parseModalHashURL, resetHash, parseConfirmTokenHash } from "./utils/url";
+import debug  from "./utils/debug";
 
 window.WallkitIntegration = class WallkitIntegration {
     constructor(options) {
+        debug.setDebugMode(options?.debug)
 
         this.managersStatuses = {
             analytics: {
@@ -253,7 +255,7 @@ window.WallkitIntegration = class WallkitIntegration {
                     }
                 }
             } catch (error) {
-                console.log('ERROR', error);
+                debug.log('ERROR', error);
             }
         });
 
@@ -273,12 +275,12 @@ window.WallkitIntegration = class WallkitIntegration {
 
             const currentLoadingInPercent = Math.round((Object.keys(this.managersStatuses).length - dif.length) / Object.keys(this.managersStatuses).length * 100);
             if (currentLoadingInPercent !== loadingInPercent) {
-                console.log(`WIL is loading... ${currentLoadingInPercent}%`, dif);
+                debug.log(`WIL is loading... ${currentLoadingInPercent}%`, dif);
                 loadingInPercent = currentLoadingInPercent;
             }
 
             if (dif.length === 0) {
-                console.log('WIL is ready...')
+                debug.log('WIL is ready...')
                 clearInterval(wkReady);
                 this.events.notify('ready', true);
             }

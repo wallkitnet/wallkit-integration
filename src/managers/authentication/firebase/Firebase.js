@@ -13,6 +13,7 @@ import {
     FIREBASE_UI_SHOWN
 } from "../../events/events-name";
 import isEmpty from "lodash.isempty";
+import debug from "../../../utils/debug";
 
 export default class Firebase {
     #mode;
@@ -311,7 +312,7 @@ export default class Firebase {
                 }
             }
         } catch (e) {
-            console.log('ERROR:', e);
+            debug.log('ERROR:', e);
         }
     }
 

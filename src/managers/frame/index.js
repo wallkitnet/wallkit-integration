@@ -28,7 +28,8 @@ export default class Frame {
     get getFrameURL() {
         const host = this.options.mode === 'dev' ? WALLKIT_POPUP_DEV_URL : WALLKIT_POPUP_URL;
         const lang = this.options.lang ?? 'en';
-        return `${ host }?PUBLIC_KEY=${ this.options.public_key }&version=${ this.options.version }&lang=${lang}`;
+        const debug = this.options.debug ?? false;
+        return `${ host }?PUBLIC_KEY=${ this.options.public_key }&version=${ this.options.version }&lang=${lang}&debug=${debug}`;
     }
 
     createFrame() {
