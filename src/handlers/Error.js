@@ -1,4 +1,4 @@
-
+import debug from '../utils/debug';
 export const ERRORS_TYPES = {
     DOM_ERROR: 'DOM_ERROR',
     ARGUMENT_ERROR: 'ARGUMENT_ERROR'
@@ -26,11 +26,11 @@ export default class Error {
         if (error_type && this.isErrorRecognisable(error_type)) {
             const message = error ?? Error.getErrorTypeMessage(error_type);
             const errorMessage = `ERROR::${error_type}; ${message};`;
-            console.log(errorMessage);
+            debug.log(errorMessage);
             throw new Error(errorMessage);
         } else {
             const errorMessage = `ERROR::${error_type};`;
-            console.log(errorMessage);
+            debug.log(errorMessage);
             throw new Error(errorMessage);
         }
     }
