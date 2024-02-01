@@ -54,7 +54,8 @@ export default class SDK {
             window.Wallkit.init({
                 resource: this.#options.public_key,
                 api_url: this.#apiUrl,
-                subDomainCookie: this.#options.cookies?.subDomain ?? false
+                subDomainCookie: this.#options.cookies?.subDomain ?? false,
+                debug: this.#options?.debug ?? false
             });
             this.methods = window.Wallkit;
             this.client = window.Wallkit.client;

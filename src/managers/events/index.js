@@ -1,3 +1,5 @@
+import debug from '../../utils/debug';
+
 export default class Events {
     constructor() {
         if (!!Events.instance) {
@@ -48,7 +50,7 @@ export default class Events {
 
           return !!proceed;
         } catch (e) {
-          console.log('ERROR:', e);
+            debug.log('ERROR:', e);
         }
       }
 
