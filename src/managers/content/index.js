@@ -1,6 +1,6 @@
 import SDK from "../sdk";
 import Events from "../events";
-import {CHECK_USER_ACCESS} from "../events/events-name";
+import {CHECK_USER_ACCESS, CHECK_ACCESS} from "../events/events-name";
 
 export default class Content {
     #options;
@@ -91,10 +91,12 @@ export default class Content {
             }
 
             this.#events.notify(CHECK_USER_ACCESS, response.allow);
+            this.#events.notify(CHECK_ACCESS, response);
             return { allowed: response.allow, data: response };
         }).catch((error) => {
 
             this.#events.notify(CHECK_USER_ACCESS, false);
+            this.#events.notify(CHECK_ACCESS, error);
             return { allowed: false, error: error };
         })
     }
@@ -107,6 +109,7 @@ export default class Content {
             }
 
             this.#events.notify(CHECK_USER_ACCESS, response.allow);
+            this.#events.notify(CHECK_ACCESS, response);
             return { allowed: response.allow, data: response };
         } catch (error) {
             if (error.error === 'incorrect_content_key') {
@@ -114,6 +117,7 @@ export default class Content {
             }
 
             this.#events.notify(CHECK_USER_ACCESS, false);
+            this.#events.notify(CHECK_ACCESS, error);
             return { allowed: false, error: error };
         }
     }
