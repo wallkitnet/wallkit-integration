@@ -18,6 +18,7 @@ export const FIREBASE_LOADED = 'firebase-loaded';
 export const FIREBASE_INIT = 'firebase-init';
 export const FIREBASE_UI_SHOWN = 'firebase-ui-shown';
 export const CHECK_USER_ACCESS = 'check-user-access';
+export const CHECK_ACCESS = 'check-access';
 export const EXTERNAL_PROVIDER_TOKEN_AUTH_SUCCESS = 'external-provider-token-auth-success';
 export const LOGOUT = 'logout';
 export const DEFAULT_AUTH_FORM_SLUG_UPDATED = 'default-auth-form-slug-updated';
@@ -64,7 +65,8 @@ export default {
         LOGOUT,
         MODAL_OPEN,
         READY,
-        FIREBASE_READY
+        FIREBASE_READY,
+        CHECK_ACCESS
     },
     wallkit: {
         FRAME_CREATED,
