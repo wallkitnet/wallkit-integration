@@ -76,7 +76,7 @@ export class LoginForm extends Form {
 
         subFooter.appendChild(createElement('a', {
             className: 'wk-form__link wk-form__reset-password',
-            innerText: 'Forgot password',
+            innerText: this.options.forgotPasswordLinkTitle || 'Forgot password',
             id: 'auth-password-link',
             attributes: {
                 href: '#'
