@@ -49,6 +49,9 @@ export class Form {
         if (!isEmpty(this.options.messages) && !isEmpty(erCode)) {
             errorMessage = get(this.options.messages, erCode, false);
         }
+        if(!errorMessage && !isEmpty(this.options.errorStrings) && erMessage) {
+            errorMessage = get(this.options.errorStrings, erMessage, false);
+        }
         this.formErrorPlaceholder.innerText = errorMessage || erMessage;
         this.formErrorPlaceholder.classList.add('wk-form__error--show');
         if (!isEmpty(erCode)) {

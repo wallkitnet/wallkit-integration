@@ -128,7 +128,7 @@ export default class Authentication {
         .then(() => {})
         .catch((error) => {
           if (!isEmpty(error.message)) {
-            this.authForm.loginForm.setFormError(error.message, error.code || false);
+            this.authForm.loginForm.setFormError(error.message, error.code || error?.response?.error || false);
           }
           if (!isEmpty(this.reCaptcha) && this.reCaptcha.enabled && !isEmpty(this.reCaptcha.grecaptcha)) {
               this.reCaptcha.grecaptcha.reset();
@@ -143,7 +143,7 @@ export default class Authentication {
         })
         .catch((error) => {
           if (!isEmpty(error.message)) {
-            this.authForm.signUpForm.setFormError(error.message, error.code || false);
+            this.authForm.signUpForm.setFormError(error.message, error.code || error?.response?.error || false);
           }
           if (!isEmpty(this.reCaptcha) && this.reCaptcha.enabled && !isEmpty(this.reCaptcha.grecaptcha)) {
             this.reCaptcha.grecaptcha.reset();
@@ -233,7 +233,7 @@ export default class Authentication {
                         }
                     }).catch(error => {
                         if (!isEmpty(error.message)) {
-                            this.authForm.emailLinkForm.setFormError(error.message, error.code || false);
+                            this.authForm.emailLinkForm.setFormError(error.message, error.code || error?.response?.error || false);
                         }
                         this.toggleFormLoader(false);
                     });
@@ -241,7 +241,7 @@ export default class Authentication {
                     this.toggleFormLoader(false);
                 } catch (error) {
                     if (!isEmpty(error.message)) {
-                        this.authForm.emailLinkForm.setFormError(error.message, error.code || false);
+                        this.authForm.emailLinkForm.setFormError(error.message, error.code || error?.response?.error || false);
                     }
                     this.toggleFormLoader(false);
                 }
@@ -268,7 +268,7 @@ export default class Authentication {
                 this.toggleFormLoader(false);
               } catch (error) {
                 if (!isEmpty(error.message)) {
-                    this.authForm.forgotPasswordForm.setFormError(error.message, error.code || false);
+                    this.authForm.forgotPasswordForm.setFormError(error.message, error.code || error?.response?.error || false);
                 }
                 this.toggleFormLoader(false);
               }
@@ -294,7 +294,7 @@ export default class Authentication {
                     this.toggleFormLoader(false);
                 } catch (error) {
                     if (!isEmpty(error.message)) {
-                        this.authForm.resetPasswordForm.setFormError(error.message, error.code || false);
+                        this.authForm.resetPasswordForm.setFormError(error.message, error.code || error?.response?.error || false);
                     }
                     this.toggleFormLoader(false);
                 }
@@ -318,7 +318,7 @@ export default class Authentication {
         const handleAuthError = (error) => {
             this.resetAuthProcess(false);
             this.toggleFormLoader(false);
-            this.#setAuthorizationError(error?.message || 'Something went wrong!', error?.code || 'unknown-error');
+            this.#setAuthorizationError(error?.message || 'Something went wrong!', error?.code || error?.response?.error || 'unknown-error');
         }
 
         this.updateFirebaseToken(data.token);
