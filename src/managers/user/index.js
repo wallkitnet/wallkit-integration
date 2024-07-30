@@ -37,12 +37,20 @@ export default class UserManager {
             if (!isEmpty(changePassword) && !isEmpty(changePassword.messages)) {
                 changePasswordMessages = changePassword.messages;
             }
+            let changePasswordFieldLabels = {};
+            if (!isEmpty(changePassword) && !isEmpty(changePassword.fieldLabels)) {
+                changePasswordFieldLabels = changePassword.fieldLabels;
+            }
+
             this.changePasswordForm = new ChangePasswordForm(
                 `#${WALLKIT_USER_MANAGER_MODAL_FORM_PLACEHOLDER_ID}`, {
                     ...(changePassword || {}),
                     messages: {
                         ...(messages || {}),
                         ...changePasswordMessages
+                    },
+                    fieldLabels: {
+                        ...changePasswordFieldLabels
                     },
                     onCancel: () => {
                         this.cancelModalForm({
