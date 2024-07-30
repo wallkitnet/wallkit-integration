@@ -25,7 +25,7 @@ export class AuthForm {
         // this.wrapper = createElement('div', {
         //     id: 'wk-auth-form'
         // });
-        const { messages, fieldLabels, signIn, signUp, emailLink, forgotPassword, resetPassword } = options.customizeAuthForms || {};
+        const { messages, errorStrings, fieldLabels, signIn, signUp, emailLink, forgotPassword, resetPassword } = options.customizeAuthForms || {};
 
         /** LoginForm */
         let signInMessages = {};
@@ -45,6 +45,9 @@ export class AuthForm {
             messages: {
                 ...(messages || {}),
                 ...signInMessages
+            },
+            errorStrings: {
+                ...(errorStrings || {}),
             },
             fieldLabels: {
                 ...(fieldLabels || {}),
@@ -94,6 +97,9 @@ export class AuthForm {
                     ...(messages || {}),
                     ...signUpMessages
                 },
+                errorStrings: {
+                    ...(errorStrings || {}),
+                },
                 fieldLabels: {
                     ...(fieldLabels || {}),
                     ...signUpFieldLabels
@@ -137,6 +143,9 @@ export class AuthForm {
             messages: {
                 ...(messages || {}),
                 ...emailLinkMessages
+            },
+            errorStrings: {
+                ...(errorStrings || {}),
             },
             fieldLabels: {
                 ...(fieldLabels || {}),
@@ -192,6 +201,9 @@ export class AuthForm {
                 ...(messages || {}),
                 ...forgotPasswordMessages
             },
+            errorStrings: {
+                ...(errorStrings || {}),
+            },
             fieldLabels: {
                 ...(fieldLabels || {}),
                 ...forgotPasswordFieldLabels
@@ -228,6 +240,9 @@ export class AuthForm {
             messages: {
                 ...(messages || {}),
                 ...resetPasswordMessages
+            },
+            errorStrings: {
+                ...(errorStrings || {}),
             },
             fieldLabels: {
                 ...(fieldLabels || {}),

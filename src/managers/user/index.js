@@ -84,7 +84,7 @@ export default class UserManager {
     #setErrorMessageChangePasswordForm (error) {
         if (this.changePasswordForm) {
             if (!isEmpty(error.message)) {
-                this.changePasswordForm.setFormError(error.message, error.code || false);
+                this.changePasswordForm.setFormError(error.message, error.code || error?.response?.error || false);
             }
             if (this.modal) {
                 this.modal.toggleLoader(false);
