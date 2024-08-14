@@ -16,13 +16,15 @@ export class ChangePasswordForm extends Form {
 
         const { emptyPassword, newNotMatchOld, confirmationMatchNew } = options.messages || {};
 
+        const { oldPasswordLabel, newPasswordLabel, confirmPasswordLabel} = options.fieldLabels;
+
         this.oldPasswordField = new PasswordField({
             dataSlug: 'old_password',
             name: 'wk-old-password',
             ignoreValidation: true,
             testStrength: false,
             passwordHint: false,
-            label: 'Old Password',
+            label: oldPasswordLabel || 'Old Password',
             type: 'password',
             messages: options.messages || {},
             onEnter: () => {
@@ -45,7 +47,7 @@ export class ChangePasswordForm extends Form {
             ignoreValidation: false,
             testStrength: true,
             passwordHint: true,
-            label: 'New Password',
+            label: newPasswordLabel || 'New Password',
             type: 'password',
             messages: options.messages || {},
             relatedData: {
@@ -72,7 +74,7 @@ export class ChangePasswordForm extends Form {
             ignoreValidation: false,
             testStrength: true,
             passwordHint: false,
-            label: 'New Password Confirmation',
+            label: confirmPasswordLabel || 'New Password Confirmation',
             type: 'password',
             messages: options.messages || {},
             relatedData: {

@@ -44,15 +44,18 @@ export class Form {
     }
 
     setFormError (error, errorCode) {
-        const {erMessage, erCcode} = parseErrorMessage(error, errorCode);
+        const {erMessage, erCode} = parseErrorMessage(error, errorCode);
         let errorMessage = false;
-        if (!isEmpty(this.options.messages) && !isEmpty(erCcode)) {
-            errorMessage = get(this.options.messages, erCcode, false);
+        if (!isEmpty(this.options.messages) && !isEmpty(erCode)) {
+            errorMessage = get(this.options.messages, erCode, false);
+        }
+        if(!errorMessage && !isEmpty(this.options.errorStrings) && erMessage) {
+            errorMessage = get(this.options.errorStrings, erMessage, false);
         }
         this.formErrorPlaceholder.innerText = errorMessage || erMessage;
         this.formErrorPlaceholder.classList.add('wk-form__error--show');
-        if (!isEmpty(erCcode)) {
-            this.formErrorPlaceholder.dataset.errorCode = erCcode;
+        if (!isEmpty(erCode)) {
+            this.formErrorPlaceholder.dataset.errorCode = erCode;
         }
     }
 
