@@ -192,7 +192,7 @@ export default class Call {
     }
 
     getWallkitUserData() {
-        return this.#sdk.client.get({path: `/user`})
+        return this.#sdk.methods.getUser()
             .then((response) => {
                 this.setAllDataWkStatusesInDOMElements(response);
             })
