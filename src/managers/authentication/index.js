@@ -123,8 +123,10 @@ export default class Authentication {
         }
     }
 
-    handleLogin (data) {
-      this.firebase.signIn(data.email, data.password)
+    async handleLogin (data) {
+      this.modal.toggleLoader(true);
+      this.authForm.signUpForm.submitBtn.disabled = true;
+      await this.firebase.signIn(data.email, data.password)
         .then(() => {})
         .catch((error) => {
           if (!isEmpty(error.message)) {
@@ -134,10 +136,17 @@ export default class Authentication {
               this.reCaptcha.grecaptcha.reset();
           }
         });
+
+      setTimeout(() => {
+          this.modal.toggleLoader(false);
+          this.authForm.signUpForm.submitBtn.disabled = false;
+      }, 1000);
     }
 
-    handleSignUp (data) {
-      this.firebase.signUp(data.email, data.password)
+    async handleSignUp (data) {
+      this.modal.toggleLoader(true);
+      this.authForm.signUpForm.submitBtn.disabled = true;
+      await this.firebase.signUp(data.email, data.password)
         .then(() => {
           this.firebase.updateName(data.name);
         })
@@ -149,6 +158,11 @@ export default class Authentication {
             this.reCaptcha.grecaptcha.reset();
           }
         });
+
+        setTimeout(() => {
+            this.modal.toggleLoader(false);
+            this.authForm.signUpForm.submitBtn.disabled = false;
+        }, 1000);
     }
 
     executeRecaptcha () {
